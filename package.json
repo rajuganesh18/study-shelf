@@ -4,9 +4,11 @@
   "private": true,
   "description": "NCERT chapters for Class 9 and 10, rebuilt as interactive missions. Offline-first.",
   "scripts": {
+    "build": "node scripts/build.js",
+    "build:check": "node scripts/build.js --check",
     "fonts": "bash scripts/fetch-fonts.sh",
     "add:android": "cap add android",
-    "sync": "cap sync android",
+    "sync": "npm run build && cap sync android",
     "open:android": "cap open android",
     "run:android": "cap run android",
     "build:debug": "cd android && ./gradlew assembleDebug",

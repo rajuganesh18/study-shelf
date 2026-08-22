@@ -1,0 +1,7 @@
+/* ---------- library back bar ---------- */
+.backbar{display:inline-flex;align-items:center;margin-top:16px;text-decoration:none;color:var(--dim);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--rule);border-radius:20px;padding:7px 14px;transition:border-color .15s,color .15s}
+.backbar:hover{border-color:var(--a1);color:var(--a1)}
+.mast{padding:20px 0 26px}
+/*@include shared/shell.css*/
