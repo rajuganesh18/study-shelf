@@ -28,6 +28,7 @@ study-shelf/
     ├── cell-chapter.html
     ├── tissues-chapter.html
     ├── motion-chapter.html
+    ├── mixtures-chapter.html
     ├── manifest.webmanifest
     ├── service-worker.js
     ├── icons/                192, 512, maskable, 1024
@@ -125,7 +126,8 @@ Keys written:
   midnight where the reader is, not at 05:30 as a UTC date would in India
 - `nb.sum.<chapter-id>` — `{xp, coins, done, total}`, what the shelf rolls up
 - `nb.last` — the chapter the Continue card points at
-- `ch01Exploration`, `ch02Cell`, `ch03Tissues`, `ch04Motion` — full per-chapter state
+- `ch01Exploration`, `ch02Cell`, `ch03Tissues`, `ch04Motion`, `ch05Mixtures` —
+  full per-chapter state
 
 `Store.owns(key)` decides what belongs to the app: anything starting `nb.` or
 `ch` + a digit. Export, import and reset all go through it, so a chapter
@@ -154,11 +156,11 @@ Everything is driven by `CATALOG`, near the top of the `<script>` in
 without a `file` it renders as *Coming soon*.
 
 ```js
-{ n:5, t:'Exploring Mixtures and Their Separation',
-  id:'9-science-5', file:'mixtures-chapter.html' }
+{ n:6, t:'How Forces Affect Motion',
+  id:'9-science-6', file:'forces-chapter.html' }
 ```
 
-Then write `src/chapters/mixtures-chapter.html`. Copy the shape of an existing
+Then write `src/chapters/forces-chapter.html`. Copy the shape of an existing
 one: the head and stylesheet are two include markers around a `:root` line of
 chapter accent colours, and the `<script>` is
 
@@ -179,8 +181,8 @@ there so old caches are dropped, and run `npm run build`.
 
 ## 6 · What is and is not built
 
-4 of 86 catalogued chapters are playable: Class 9 Science chapters 1, 2, 3
-and 4. Everything else is catalogued and listed but marked *Coming soon*.
+5 of 86 catalogued chapters are playable: Class 9 Science chapters 1, 2, 3,
+4 and 5. Everything else is catalogued and listed but marked *Coming soon*.
 
 Chapter lists were sourced in August 2026. Class 9 uses the new NCF-SE 2023
 books (*Exploration*, *Ganita Manjari*); NCERT's advisory of 17 March 2026
