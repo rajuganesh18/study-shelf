@@ -1,10 +1,11 @@
 /* Offline cache. Bump VERSION whenever www/ changes. */
-const VERSION = 'shelf-v20260822b';
+const VERSION = 'shelf-v20260822c';
 const ASSETS = [
   "index.html",
   "exploration-chapter.html",
   "cell-chapter.html",
   "tissues-chapter.html",
+  "mixtures-chapter.html",
   "motion-chapter.html",
   "manifest.webmanifest",
   "icons/icon-192.png",
