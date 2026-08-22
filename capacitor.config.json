@@ -1,0 +1,26 @@
+{
+  "appId": "in.studyshelf.app",
+  "appName": "Study Shelf",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#0A0E1BFF",
+    "minWebViewVersion": 60
+  },
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 600,
+      "backgroundColor": "#0A0E1B",
+      "androidSplashResourceName": "splash",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "DARK",
+      "backgroundColor": "#0A0E1B",
+      "overlaysWebView": false
+    }
+  }
+}

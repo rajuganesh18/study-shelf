@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Tissues in Action — Class 9</title>
+<style>
+:root{
+  --ground:#0A0E1B; --plate:#141A2E; --plate2:#1B2340; --rule:#2A3350;
+  --ink:#F0EEE6; --dim:#8E9AC0; --silver:#AEC0DE;
+  --good:#4FC3A1; --bad:#E5484D; --gold:#F2B84C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.55;padding:0 16px 90px;overflow-x:hidden}
+.wrap{max-width:760px;margin:0 auto}
+canvas{display:block;width:100%}
+
+/* ---------- masthead ---------- */
+.mast{padding:38px 0 26px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.mast h1{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(40px,11vw,78px);line-height:.88;margin:12px 0 0;text-transform:uppercase}
+.mast h1 span{color:var(--a1)}
+
+/* ---------- HQ ---------- */
+.hq{background:var(--plate);border:1px solid var(--rule);border-radius:4px;padding:16px;margin-bottom:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.stat{background:var(--plate2);padding:10px 8px;text-align:center}
+.stat .k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.stat .v{font-family:"IBM Plex Mono",monospace;font-size:18px;margin-top:3px;font-variant-numeric:tabular-nums}
+.colony-row{display:flex;gap:14px;align-items:center}
+#colony{flex:none;width:96px;height:96px;border:1px solid var(--rule);border-radius:3px;background:var(--badge-bg)}
+.colony-txt h3{font-size:15px;font-weight:600}
+.colony-txt p{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);line-height:1.7;margin-top:3px}
+.bar{height:4px;background:var(--rule);border-radius:2px;margin-top:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--a1);width:0;transition:width .5s}
+
+.quests{margin-top:16px;border-top:1px solid var(--rule);padding-top:14px}
+.quests h4{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.quest{display:flex;align-items:center;gap:10px;font-size:13px;padding:5px 0}
+.tick{width:16px;height:16px;border:1px solid var(--rule);border-radius:3px;flex:none;font-size:11px;text-align:center;line-height:15px;color:var(--ground)}
+.quest.done .tick{background:var(--good);border-color:var(--good)}
+.quest.done span{color:var(--dim);text-decoration:line-through}
+.quest b{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--gold);font-weight:400;flex:none}
+
+/* ---------- missions ---------- */
+.sec{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:26px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+details.m{background:var(--plate);border:1px solid var(--rule);border-radius:4px;margin-bottom:10px;overflow:hidden}
+details.m[open]{border-color:#3A466B}
+summary{list-style:none;cursor:pointer;padding:14px 15px;display:flex;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+.mno{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--a1);flex:none;width:22px}
+.mt{flex:1;min-width:0}
+.mt b{display:block;font-size:15px;font-weight:600;line-height:1.3}
+.mt i{display:block;font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);margin-top:2px}
+.mstat{flex:none;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--dim);border:1px solid var(--rule);border-radius:20px;padding:3px 9px}
+details.m.done .mstat{color:var(--good);border-color:var(--good)}
+details.m.done .mno{color:var(--good)}
+.body{padding:2px 15px 18px;border-top:1px solid var(--rule)}
+.body>p{font-size:15px;margin:14px 0}
+.note{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.75;color:var(--dim)}
+.panel{background:var(--plate2);border:1px solid var(--rule);border-radius:3px;padding:14px;margin:14px 0}
+.curio{border-left:2px solid var(--rule);padding:2px 0 2px 12px;margin:16px 0 4px}
+.curio h5{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--a2);font-weight:400;margin-bottom:5px}
+
+/* ---------- controls ---------- */
+button{font-family:"IBM Plex Sans",sans-serif;background:none;color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:9px 14px;font-size:14px;cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+button:hover{border-color:var(--a1)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+.act{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.row{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:8px 13px}
+.chip.on{border-color:var(--a1);color:var(--a1)}
+.chip.right{border-color:var(--good);color:var(--good)}
+.chip.wrong{border-color:var(--bad);color:var(--bad)}
+.chip.gone{opacity:.25;pointer-events:none}
+.opts{display:flex;flex-direction:column;gap:8px;align-items:stretch;margin-top:4px}
+.opt{text-align:left}
+.opt.right{border-color:var(--good);color:var(--good)}
+.opt.wrong{border-color:var(--bad);color:var(--bad)}
+.why{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:12px;line-height:1.75;border-left:2px solid var(--a1);padding-left:12px;display:none}
+.why.show{display:block}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:none;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:1px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:1px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;margin-top:-7px;border-radius:50%;background:var(--a1)}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:var(--a1)}
+.knob{margin-bottom:6px}
+.knob label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;gap:10px}
+.knob label b{color:var(--ink);font-weight:400;text-align:right}
+select{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--plate);color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:8px 10px}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;margin-top:12px;overflow:hidden}
+.readout.two{grid-template-columns:repeat(2,1fr)}
+.rc{background:var(--plate2);padding:11px 12px}
+.rc .k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.rc .v{font-family:"IBM Plex Mono",monospace;font-size:14px;margin-top:4px;line-height:1.35}
+.score{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qrow{display:flex;gap:8px;align-items:center;margin-bottom:9px;font-size:13.5px}
+.qrow>span.t{flex:1}
+table.tick{width:100%;border-collapse:collapse;font-size:13px}
+table.tick th,table.tick td{border:1px solid var(--rule);padding:7px 6px;text-align:center}
+table.tick th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:400}
+table.tick td.lbl{text-align:left;font-size:12.5px}
+table.tick td.c{cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:15px;user-select:none}
+td.c.yes{color:var(--good)}td.c.no{color:var(--bad)}
+td.c.err{background:rgba(229,72,77,.18)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(80px);background:var(--plate2);border:1px solid var(--gold);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:13px;padding:11px 18px;border-radius:30px;opacity:0;transition:.35s;z-index:9;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hp{height:8px;background:var(--rule);border-radius:4px;overflow:hidden;margin:5px 0 12px}
+.hp i{display:block;height:100%;transition:width .4s}
+.tier{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--a2);margin-top:14px}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--rule);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}.readout{grid-template-columns:1fr}.readout.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+
+/* Local fonts. Run scripts/fetch-fonts.sh once to fill www/fonts, and the
+   app renders exactly as designed with no network. Until then the stacks
+   below fall back to system faces and everything still works.            */
+@font-face{font-family:Anton;src:url(fonts/Anton-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+
+/* ---------- chapter accents: parenchyma green and haemoglobin red, the chapter's own two tissue kingdoms ---------- */
+:root{ --a1:#8FBF3F; --a2:#D9434E; --badge-bg:#F4EFE6; }
+/* ---------- library back bar ---------- */
+.backbar{display:inline-flex;align-items:center;margin-top:16px;text-decoration:none;color:var(--dim);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--rule);border-radius:20px;padding:7px 14px;transition:border-color .15s,color .15s}
+.backbar:hover{border-color:var(--a1);color:var(--a1)}
+.mast{padding:20px 0 26px}
+
+html{-webkit-text-size-adjust:100%;overscroll-behavior-y:none;background:var(--ground)}
+body{padding-left:calc(16px + env(safe-area-inset-left));
+     padding-right:calc(16px + env(safe-area-inset-right));
+     padding-top:env(safe-area-inset-top);
+     padding-bottom:calc(90px + env(safe-area-inset-bottom));
+     -webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+button,summary,a{-webkit-touch-callout:none}
+input[type=range]{touch-action:pan-y}
+.toast{bottom:calc(22px + env(safe-area-inset-bottom))}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Science · Chapter 3</div>
+  <h1>Tissues<br><span>In action</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Why plants and animals are built differently</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="20" data-coin="10">
+  <summary><span class="mno">01</span><span class="mt"><b>Fixed in place, or free to move</b><i>Why plant and animal tissues differ</i></span><span class="mstat">20 XP</span></summary>
+  <div class="body">
+    <p>A mango tree and a mango-eating bat both need food, support and transport. One of them cannot walk anywhere to get any of it.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap each box to cycle it: blank → ✓ true of that group → ✗ not true of that group.</div>
+      <table class="tick" id="g1"></table>
+      <button class="act" id="g1check" style="margin-top:12px">Check table</button>
+      <div class="score" id="g1s"></div>
+    </div>
+    <p>Most plants are fixed in one place and need support to stay firm and upright, so plant cells have a <b>cell wall</b> that provides rigidity and strength. Without a rigid cell wall, animal cells can change shape easily, and that flexibility eventually helps make their bodies suitable for locomotion.</p>
+    <p>Their nutrition differs too. Animals have tissues that help them digest food obtained from different sources, while plants have tissues that help them use solar energy to synthesise food components through photosynthesis. Growth patterns differ as well, because the tissues responsible for growth differ in structure and function.</p>
+    <div class="curio">
+      <h5>Meet a scientist</h5>
+      <div class="note">B. G. L. Swamy was a renowned Indian botanist known for his contributions to plant morphology and anatomy. His book <i>Hasuru Honnu</i>, in Kannada, blends science, satire and culture, describing botanical excursions in the forests of the Western Ghats. It won the Kendra Sahitya Akademi Award in 1978.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Tissues for growth in plants</div>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="40" data-coin="25">
+  <summary><span class="mno">02</span><span class="mt"><b>Cut the root tip</b><i>Activity 3.1 · where growth in length comes from</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Two onion bulbs, two jars of water. On day 3, snip about 1 cm off the root tips of the bulb in Jar B. Then keep watching both.</p>
+    <div class="panel">
+      <canvas id="onionCv" height="250"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="onD">Day <b><span id="onDV">3</span></b></label>
+        <input id="onD" type="range" min="1" max="7" step="1" value="3">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Jar A · untouched</div><div class="v" id="onA">—</div></div>
+        <div class="rc"><div class="k">Jar B · tips cut on day 3</div><div class="v" id="onB">—</div></div>
+        <div class="rc"><div class="k">Difference</div><div class="v" id="onDiff" style="font-size:12.5px">—</div></div>
+      </div>
+      <div class="row"><button class="act" id="onRun">Run all seven days</button></div>
+      <div class="note" style="margin-top:11px">Drag to day 7. One line keeps climbing. The other stops dead the moment its tips are gone.</div>
+    </div>
+    <p>Roots in Jar A continue to grow in length. Roots in Jar B stop growing after the tips are cut. This shows that roots grow only from their tips, and that the tips consist of cells which divide continuously.</p>
+    <p>Growth like this requires actively dividing cells that together form a <b>meristematic tissue</b>. Plants have growth zones at the tips of their roots and shoots called the <b>apical meristems</b>, which help the plant grow in length. Plants grow in three ways: increase in <b>length</b>, increase in <b>girth</b>, and <b>regrowth</b> after cutting or grazing.</p>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="45" data-coin="25">
+  <summary><span class="mno">03</span><span class="mt"><b>Three ways a plant grows</b><i>Apical, lateral and intercalary meristem</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>A seedling becomes a tall tree. Stems become thicker with time. And grass grows back after the mower has been over it. Switch each one on.</p>
+    <div class="panel">
+      <canvas id="growCv" height="270"></canvas>
+      <div class="row">
+        <button class="act" id="grA">Grow in length</button>
+        <button class="act" id="grB">Grow in girth</button>
+        <button class="act" id="grC">Cut it, then wait</button>
+        <button class="act" id="grR">Reset</button>
+      </div>
+      <div class="note" id="grTxt" style="margin-top:12px;min-height:44px">—</div>
+    </div>
+    <p>The <b>apical meristem</b>, located at the root and shoot tips, increases length. The <b>lateral meristem</b>, arranged in a ring along the circumference of the stem, divides and produces new cells inside and outside in a concentric manner, increasing girth. The <b>intercalary meristem</b>, located at the base of the internode or just above the node, helps grasses and cut hedges regenerate.</p>
+    <p>The <b>node</b> is the point on a plant stem where branches or leaves arise. The part of stem between two nodes is called the <b>internode</b>. Together these three meristems account for growth in length, girth and branching in plants.</p>
+    <div class="curio">
+      <h5>From the chapter</h5>
+      <div class="note">If you have visited a timber yard or seen the cut trunk of a tree, you may have noticed ring-like patterns on the cut surface. These are annual growth rings. Some are wide and some narrow, reflecting favourable or unfavourable growth conditions in a particular year. Counting them lets scientists estimate the age of a tree.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="25" data-coin="10">
+  <summary><span class="mno">04</span><span class="mt"><b>Built for dividing</b><i>What a meristematic cell looks like</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>A cell that divides again and again all day cannot afford to be full of storage space. What would such a cell look like inside?</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">True or false for a meristematic cell.</div>
+      <div id="g4"></div>
+      <div class="score" id="g4s"></div>
+    </div>
+    <p>The cells of meristematic tissues are small, have thin cell walls, a large and prominent nucleus, and dense cytoplasm with many organelles. Vacuoles are generally absent and the cells are tightly packed with little or no intercellular space. These characteristics allow them continuous and rapid cell division.</p>
+    <div class="curio">
+      <h5>Pause and ponder</h5>
+      <div class="note">Why do you think the cells of meristematic tissues lack vacuoles?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="25" data-coin="10">
+  <summary><span class="mno">05</span><span class="mt"><b>Losing the ability to divide</b><i>Differentiation</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>New cells keep appearing behind a growing tip. Not all of them go on dividing. Put the stages in order, earliest first.</p>
+    <div class="panel">
+      <div class="chips" id="g5"></div>
+      <div class="score" id="g5s"></div>
+    </div>
+    <p>Due to continuous cell division, meristematic tissue adds new cells to the plant body. Some of the newly formed cells remain meristematic while others lose the ability to divide. Those that lose it undergo changes in structure and function and become <b>permanent tissues</b>, specialised to perform specific functions such as support, transport or storage.</p>
+    <p>This process, by which meristematic tissue becomes specialised to perform specific functions, is called <b>differentiation</b>.</p>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="30" data-coin="15">
+  <summary><span class="mno">06</span><span class="mt"><b>The outermost layer</b><i>Epidermis, cuticle, stomata, root hair</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>What protects a plant from mechanical injury, water loss, harmful microorganisms and extreme conditions? Match each part to the job it does.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a part, then tap its job.</div>
+      <div class="match"><div id="g6a"></div><div id="g6b"></div></div>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>The <b>epidermis</b> forms the outermost layer of the plant body. It consists of a tightly packed, single layer of flat and rectangular cells, covered with a waxy layer of cutin called <b>cuticle</b>. In plants living in very dry habitats the epidermis may be covered by a thick layer of cuticle to reduce water loss.</p>
+    <p>In roots, hair-like projections called <b>root hair</b> increase the surface area for absorption of water and minerals from the soil. In leaves, the epidermis contains pores called <b>stomata</b>, which apart from gaseous exchange help in transpiration — the evaporation of water vapour through stomata. Transpiration helps in water transportation by creating a transpiration pull in xylem, and also helps eliminate wastes.</p>
+    <div class="curio">
+      <h5>Pause and ponder</h5>
+      <div class="note">Why is a thick cuticle on the outer wall of epidermis advantageous for a plant living in the desert but disadvantageous for one living underwater? And what would happen if there were no stomata in the epidermis of the stem or leaves?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="45" data-coin="25">
+  <summary><span class="mno">07</span><span class="mt"><b>Bend, or break</b><i>Parenchyma · collenchyma · sclerenchyma</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Why does a fresh twig bend in the wind while a dry one snaps? Build the same stem three times, out of three different tissues, and push it over.</p>
+    <div class="panel">
+      <canvas id="bendCv" height="250"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="bnF">Force of the wind <b><span id="bnFV">55</span>%</b></label>
+        <input id="bnF" type="range" min="0" max="100" step="1" value="55">
+      </div>
+      <div class="row">
+        <button class="act chip on" id="bnP">Parenchyma</button>
+        <button class="act chip" id="bnC">Collenchyma</button>
+        <button class="act chip" id="bnS">Sclerenchyma</button>
+      </div>
+      <div class="note" id="bnTxt" style="margin-top:12px;min-height:46px">—</div>
+    </div>
+    <p><b>Parenchyma</b> consists of living cells with thin walls, loosely packed with intercellular spaces. It mainly stores food but also performs photosynthesis in the green parts of the plants. In aquatic plants, specialised parenchyma forms air spaces which help them float.</p>
+    <p><b>Collenchyma</b> consists of living cells with unevenly thickened corners due to <b>pectin</b> deposition, a chemical that gives flexibility like rubber. This tissue provides support and flexibility, allowing stems and tendrils to bend without breaking.</p>
+    <p><b>Sclerenchyma</b> cells have thick walls due to deposition of <b>lignin</b>, making them hard and strong and forming the woody structure. Most of these cells are dead. This tissue is found in stems, leaf veins, and hard coverings of seeds and nuts such as coconut husk and walnut shell.</p>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="35" data-coin="20">
+  <summary><span class="mno">08</span><span class="mt"><b>Fill the supporting-tissue table</b><i>Three simple permanent tissues compared</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>You have just felt the difference between the three. Now write it down as a table.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a box to cycle blank → ✓ → ✗.</div>
+      <table class="tick" id="g8"></table>
+      <button class="act" id="g8check" style="margin-top:12px">Check table</button>
+      <div class="score" id="g8s"></div>
+    </div>
+    <p>These three are the <b>simple permanent tissues</b>, made of only one type of cell. Permanent tissues can be simple, or complex when composed of more than one type of cell.</p>
+    <div class="curio">
+      <h5>Pause and ponder</h5>
+      <div class="note">You may have noticed that fibres of coconut husk are hard and brittle, whereas the leaf stalks of coriander are soft and flexible. Find out the reason.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="45" data-coin="25">
+  <summary><span class="mno">09</span><span class="mt"><b>Water up, food down</b><i>Xylem and phloem · complex permanent tissues</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>How does water reach the leaves of a tall tree? And how does food made in those leaves get down to the roots? Open each channel and watch.</p>
+    <div class="panel">
+      <canvas id="vascCv" height="270"></canvas>
+      <div class="row">
+        <button class="act" id="vxOn">Open the xylem</button>
+        <button class="act" id="vpOn">Open the phloem</button>
+        <button class="act" id="vRing">Strip the bark</button>
+      </div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Xylem</div><div class="v" id="vxTxt" style="font-size:12.5px">—</div></div>
+        <div class="rc"><div class="k">Phloem</div><div class="v" id="vpTxt" style="font-size:12.5px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px">Strip the bark and one of the two streams stops. Which one, and what happens to the roots?</div>
+    </div>
+    <p><b>Xylem</b> is the tissue that transports water and minerals from the roots to other parts of the plant, and also provides strength. It consists of <b>tracheids</b>, <b>vessels</b>, xylem parenchyma and xylem fibres. Tracheids and vessels are tubular and thick-walled. Xylem parenchyma are the only living component of xylem.</p>
+    <p>Unlike the xylem, <b>phloem</b> is mostly made up of living cells. It consists of <b>sieve tubes</b>, <b>companion cells</b>, phloem parenchyma and phloem fibres. Sieve tubes are long and tubular, joined end to end by perforated walls, and transport food from leaves to other parts of the plant. The cellular functions of sieve tube cells are regulated by companion cells, which are specialised parenchyma cells that monitor loading and unloading of sugars.</p>
+    <p>Together xylem and phloem are known as <b>complex permanent tissues</b>, because they are made up of different types of cells working together.</p>
+    <div class="curio">
+      <h5>Pause and ponder</h5>
+      <div class="note">Once water is absorbed by plant roots, it has to travel against gravity through xylem. How do the 'dead' cells of the xylem work together with the living cells of leaves at the top to keep the water moving?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="25" data-coin="10">
+  <summary><span class="mno">10</span><span class="mt"><b>Three tissue systems</b><i>Dermal, ground and vascular</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>In a plant body these tissues do not work alone. They are organised together into larger groups. Sort each one into the group it belongs to.</p>
+    <div class="panel">
+      <div id="g10"></div>
+      <div class="score" id="g10s"></div>
+    </div>
+    <p>The <b>dermal tissue system</b> forms the outer covering of the plant, protecting the inner parts and reducing water loss. The <b>ground tissue system</b> forms the main body of a plant between the dermal and conducting tissues, and includes parenchyma, collenchyma and sclerenchyma. The <b>vascular tissue system</b> consists of the conducting tissues — xylem and phloem.</p>
+    <div class="curio">
+      <h5>Ready to go beyond</h5>
+      <div class="note">In young plants, the outer protective layer is a single-layered epidermis. As plants grow older, some cells below the epidermis of the stem develop the ability to divide, act as lateral meristematic cells and form the cork cambium. Cork cells are dead, compactly arranged, and impermeable to water and gases. This forms the bark of the tree.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Animal tissues</div>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="35" data-coin="20">
+  <summary><span class="mno">11</span><span class="mt"><b>Five linings, five jobs</b><i>Epithelial tissues · Table 3.2</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Blink your eyes. Take a deep breath. Something is lining the surface in both cases, and its shape follows its job.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a structure, then tap where in the body you would find it doing that job.</div>
+      <div class="match"><div id="g11a"></div><div id="g11b"></div></div>
+      <div class="score" id="g11s"></div>
+    </div>
+    <p><b>Epithelial tissue</b> forms the outer covering of the body — the skin — and also lines internal organs such as the mouth, lungs, blood vessels and intestine. It is composed of closely packed cells with very little space between them. This structure prevents the entry of germs, reduces water loss, and helps in the absorption, secretion and movement of substances.</p>
+    <p>Different types of epithelial tissues are structurally adapted to perform different functions: exchange, protection, secretion, sensory functions and absorption.</p>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="35" data-coin="20">
+  <summary><span class="mno">12</span><span class="mt"><b>What holds you together</b><i>Connective tissues · Activity 3.3</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Touch your elbow gently. Press and fold your ear. Wiggle your fingers and feel your forearm. Each one tells you about a different tissue.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap what you feel, then tap the tissue responsible.</div>
+      <div class="match"><div id="g12a"></div><div id="g12b"></div></div>
+      <div class="score" id="g12s"></div>
+    </div>
+    <p>A tissue that connects and supports other tissues is called a <b>connective tissue</b>. Both blood and bones are connective tissues, yet blood is fluid while bone is hard. This difference is due to the <b>matrix</b>, which is watery, soft and jelly-like in blood but hard, solid and rigid in bones.</p>
+    <p>Bones have a rigid matrix containing calcium and phosphorus compounds. Cartilage has a soft, jelly-like matrix and provides flexibility and cushioning. <b>Tendons</b> connect muscles to bones, while <b>ligaments</b> connect bones to bones and prevent excessive movement.</p>
+    <p>The red colour of blood is due to <b>haemoglobin</b>, an iron-rich protein in the Red Blood Cells. RBCs live for about 4 months and are replaced regularly. Platelets help in blood clotting at the site of an injury. White Blood Cells collect at infected areas, causing pus formation and inflammation.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="35" data-coin="20">
+  <summary><span class="mno">13</span><span class="mt"><b>Three kinds of muscle</b><i>Skeletal, smooth and cardiac</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Clench and open your fist. You chose to do that. Your heart has been beating the whole time and you chose nothing.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a box to cycle blank → ✓ → ✗.</div>
+      <table class="tick" id="g13"></table>
+      <button class="act" id="g13check" style="margin-top:12px">Check table</button>
+      <div class="score" id="g13s"></div>
+    </div>
+    <p>Movements under our conscious control, such as running, writing or lifting objects, are called <b>voluntary movements</b> and are carried out by <b>skeletal muscles</b> attached to the skeleton. They are made of bundles of long, cylindrical cells called <b>muscle fibres</b>, which are unbranched, multinucleate and <b>striated</b>, showing light and dark bands.</p>
+    <p>Movements that occur automatically, such as the movement of food in the intestine, are <b>involuntary movements</b>. <b>Smooth muscles</b>, found in organs like the stomach and intestines, are spindle-shaped, have a single nucleus and lack striations. <b>Cardiac muscles</b> are found only in the heart; their fibres are cylindrical and branched with a single nucleus and faint striations, and they work tirelessly and rhythmically without fatigue.</p>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="30" data-coin="15">
+  <summary><span class="mno">14</span><span class="mt"><b>The message runner</b><i>Nervous tissue and the neuron</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>You pull your hand away from something hot before you have thought about it. Trace the path a message takes through one cell.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap the parts in the order a signal passes through them.</div>
+      <div class="chips" id="g14"></div>
+      <div class="score" id="g14s"></div>
+    </div>
+    <p>These actions are controlled by <b>nervous tissue</b>, which forms the body's control and coordination network. The brain acts as the control centre, coordinating activities, memory and responses across the body. Muscles, both voluntary and involuntary, cannot function independently — they receive instructions from the nervous tissue.</p>
+    <p>The cells of nervous tissue are called <b>neurons</b>, specialised to receive, process and transmit messages. Each neuron has three main parts: the <b>cell body</b>, which contains the nucleus and controls cell activities; <b>dendrites</b>, which receive signals from other neurons; and an <b>axon</b>, a long fibre that carries messages from the cell and ends at axon terminals, which transmit the messages to other cells.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Bones, joints and movement</div>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="35" data-coin="20">
+  <summary><span class="mno">15</span><span class="mt"><b>Which joint is that?</b><i>Ball and socket, hinge, pivot, fixed</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Circle your arm at the shoulder. Now try the same at the elbow. Shake your head 'no'. Now try to move a bone in your skull.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Choose the joint each movement needs.</div>
+      <div id="g15"></div>
+      <div class="score" id="g15s"></div>
+    </div>
+    <p>A <b>joint</b> is a junction between two or more bones. In the <b>ball and socket joint</b> the rounded top of the upper arm bone fits into a shallow hollow of the shoulder bone, allowing forward, backward, sideways and circular movements. In a <b>hinge joint</b>, like the elbow and knee, the bone bends and straightens in one direction only, like a door hinge.</p>
+    <p>A <b>pivot joint</b> connects the skull to the backbone and allows the head to move side to side like a doorknob turning in its socket. <b>Fixed joints</b> connect the flat bones of the skull, which means those bones cannot move — keeping the brain safe even when the body moves.</p>
+    <p>The <b>musculoskeletal system</b> is made up of bones, muscles, joints, cartilage, tendons and ligaments, and functions under the control of the nervous system. Muscles pull on bones to produce movement. Joints allow movement but cannot move the bones on their own.</p>
+    <div class="curio">
+      <h5>Bridging science and society</h5>
+      <div class="note">Yoga, described in ancient Indian texts, includes physical postures, breathing and meditation. Research shows it improves flexibility, posture and breathing, reduces stress, and helps prevent lifestyle diseases. Every year 21st June is observed as International Yoga Day. Correct posture, proper nutrition and regular exercise keep bones strong, muscles fit and joints flexible.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="80" data-coin="60">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, taken from the end of the chapter. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+
+<footer>NCERT Class 9 Science · Chapter 3</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   STORAGE — one adapter, used by the shelf and every chapter.
+   Picks the best backend available, in this order:
+     1. Capacitor Preferences  (native app: survives WebView clears)
+     2. localStorage           (browser / PWA)
+     3. window.storage         (preview host)
+     4. in-memory              (last resort, so nothing ever throws)
+   Everything is async, so swapping backends changes nothing upstream.
+   ============================================================ */
+const Store = (function(){
+  const MEM = {};
+  let mode = null, PREF = null;
+
+  async function init(){
+    if(mode) return mode;
+    try {
+      const cap = window.Capacitor;
+      const p = cap && cap.Plugins && cap.Plugins.Preferences;
+      if(p){ await p.get({ key:'__probe' }); PREF = p; return (mode = 'preferences'); }
+    } catch(e){}
+    try {
+      window.localStorage.setItem('__probe','1');
+      window.localStorage.removeItem('__probe');
+      return (mode = 'localstorage');
+    } catch(e){}
+    try { if(window.storage) return (mode = 'host'); } catch(e){}
+    return (mode = 'memory');
+  }
+
+  async function get(k){
+    const m = await init();
+    try {
+      if(m === 'preferences'){ const r = await PREF.get({ key:k }); return (r && r.value != null) ? JSON.parse(r.value) : null; }
+      if(m === 'localstorage'){ const v = window.localStorage.getItem(k); return v == null ? null : JSON.parse(v); }
+      if(m === 'host'){ const r = await window.storage.get(k); return r ? JSON.parse(r.value) : null; }
+    } catch(e){}
+    return MEM[k] !== undefined ? MEM[k] : null;
+  }
+
+  async function set(k, v){
+    const m = await init();
+    MEM[k] = v;
+    const s = JSON.stringify(v);
+    try {
+      if(m === 'preferences'){ await PREF.set({ key:k, value:s }); return true; }
+      if(m === 'localstorage'){ window.localStorage.setItem(k, s); return true; }
+      if(m === 'host'){ await window.storage.set(k, s); return true; }
+    } catch(e){}
+    return false;
+  }
+
+  async function remove(k){
+    const m = await init();
+    delete MEM[k];
+    try {
+      if(m === 'preferences'){ await PREF.remove({ key:k }); return; }
+      if(m === 'localstorage'){ window.localStorage.removeItem(k); return; }
+    } catch(e){}
+  }
+
+  async function keys(){
+    const m = await init();
+    try {
+      if(m === 'preferences'){ const r = await PREF.keys(); return (r && r.keys) || []; }
+      if(m === 'localstorage'){ return Object.keys(window.localStorage); }
+    } catch(e){}
+    return Object.keys(MEM);
+  }
+
+  return { get, set, remove, keys, mode: () => mode || 'unknown' };
+})();
+
+/* ============================================================
+   Chapter 3 — Tissues in Action
+   Progress metaphor: the chapter's own three meristems. XP makes
+   the stem taller (apical), thicker (lateral) and adds annual
+   rings — the same rings Fig. 3.4 asks students to count.
+   ============================================================ */
+const CH = {
+  id: '9-science-3',
+  key: 'ch03Tissues',
+  total: 16,
+  stages: [
+    { at:0,   h:0.10, r:1, name:'A seed',          d:'One dividing cell, and everything after it. Nothing specialised yet.' },
+    { at:60,  h:0.26, r:1, name:'A seedling',      d:'Apical meristem at the root and shoot tips. Growing in length.' },
+    { at:140, h:0.42, r:2, name:'A young shoot',   d:'Cells behind the tips stop dividing and start specialising.' },
+    { at:240, h:0.56, r:3, name:'A branched stem', d:'Intercalary meristem at the nodes. Cut it and it branches out.' },
+    { at:360, h:0.68, r:4, name:'Thickening up',   d:'Lateral meristem in a ring. Girth increasing, one ring a year.' },
+    { at:490, h:0.80, r:6, name:'A woody stem',    d:'Lignin in the walls. Xylem carries water up, phloem carries food down.' },
+    { at:640, h:0.92, r:8, name:'A whole plant',   d:'Dermal, ground and vascular tissue systems, working as one body.' }
+  ],
+  /* left: the sapling gaining height. right: T.S. of the stem gaining rings. */
+  paint(x, W, st, S){
+    const H = W;
+    x.fillStyle = '#F4EFE6'; x.fillRect(0,0,W,H);
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const h = st.h + (next ? (next.h-st.h)*frac : 0);
+    // soil
+    x.fillStyle = '#C8B79A'; x.fillRect(0, H-14, W, 14);
+    // stem
+    const bx = W*0.30, base = H-14, top = base - h*(H-22);
+    const th = 1.6 + st.r*0.7;
+    x.strokeStyle = '#6E8F3C'; x.lineWidth = th; x.lineCap='round';
+    x.beginPath(); x.moveTo(bx, base); x.lineTo(bx, top); x.stroke();
+    // leaves, one pair per ring, up the stem
+    x.fillStyle = '#8FBF3F';
+    for(let i=0;i<st.r;i++){
+      const y = base - (i+1)/(st.r+1)*(base-top);
+      const s = 4 + i*0.5, side = i%2 ? 1 : -1;
+      x.beginPath(); x.ellipse(bx + side*(s+th), y, s, s*0.45, side*0.5, 0, 7); x.fill();
+    }
+    x.lineCap='butt';
+    // T.S. of the stem, gaining one annual ring per stage
+    const cx = W*0.72, cy = H*0.46, R = Math.min(W*0.22, 20 + st.r*1.6);
+    x.fillStyle = '#E6D9BE'; x.beginPath(); x.arc(cx,cy,R,0,7); x.fill();
+    x.strokeStyle = 'rgba(110,143,60,.55)'; x.lineWidth = 1;
+    for(let i=1;i<=st.r;i++){ x.beginPath(); x.arc(cx,cy,R*i/(st.r+0.6),0,7); x.stroke(); }
+    x.strokeStyle = '#7A6242'; x.lineWidth = 1.4; x.beginPath(); x.arc(cx,cy,R,0,7); x.stroke();
+    x.fillStyle = '#5B6B85';
+    x.font = '500 8px "IBM Plex Mono",monospace';
+    x.textAlign = 'center'; x.textBaseline = 'top';
+    x.fillText(st.r + (st.r===1?' ring':' rings'), cx, cy+R+3);
+  }
+};
+
+/* ============================================================
+   SHARED ENGINE — identical across every chapter.
+   Chapter files supply CH (config) above and interactives below.
+   ============================================================ */
+
+/* persistence: see storage.js, concatenated above. */
+
+const TOTAL = CH.total;
+let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0, exploreToday:0, questsPaid:{} };
+
+const today = () => new Date().toISOString().slice(0,10);
+const yday  = () => new Date(Date.now()-864e5).toISOString().slice(0,10);
+
+let saveT;
+function save(){
+  clearTimeout(saveT);
+  saveT = setTimeout(()=>{
+    Store.set(CH.key, S);
+    // summary the library shell reads to roll progress up across chapters
+    Store.set('nb.sum.' + CH.id, {
+      xp: S.xp, coins: S.coins,
+      done: Object.keys(S.done).length, total: TOTAL,
+      updated: Date.now()
+    });
+    Store.set('nb.last', CH.id);
+  }, 400);
+}
+
+/* ---------- toast ---------- */
+const toastEl = document.getElementById('toast');
+let toastT;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(()=>toastEl.classList.remove('show'), 2200);
+}
+
+/* ---------- daily quests ---------- */
+const QUESTS = [
+  { id:'q1', text:'Finish 2 missions',            xp:40, hit:()=>S.missionsToday >= 2 },
+  { id:'q2', text:'Get one activity fully right', xp:30, hit:()=>S.perfectToday  >= 1 },
+  { id:'q3', text:'Try 3 interactive controls',   xp:20, hit:()=>S.exploreToday  >= 3 }
+];
+
+function ev(kind){
+  if(kind === 'mission')  S.missionsToday++;
+  if(kind === 'perfect')  S.perfectToday++;
+  if(kind === 'explore')  S.exploreToday++;
+  checkQuests(); save();
+}
+
+function checkQuests(){
+  QUESTS.forEach(q=>{
+    if(q.hit() && !S.questsPaid[q.id]){
+      S.questsPaid[q.id] = true;
+      S.xp += q.xp;
+      toast('Quest complete · +' + q.xp + ' XP');
+    }
+  });
+  renderHQ();
+}
+
+/* ---------- progress visual (chapter supplies stages + painter) ---------- */
+function stageOf(xp){ let s = CH.stages[0]; CH.stages.forEach(t=>{ if(xp >= t.at) s = t; }); return s; }
+
+function drawBadge(){
+  const cv = document.getElementById('colony');
+  if(!cv) return;
+  const r = window.devicePixelRatio || 1, W = 96;
+  cv.width = Math.round(96*r); cv.height = Math.round(96*r);
+  cv.style.width = '96px'; cv.style.height = '96px';
+  const x = cv.getContext('2d');
+  if(!x) return;
+  x.setTransform(r,0,0,r,0,0);
+  const st = stageOf(S.xp);
+  x.clearRect(0,0,W,W);
+  CH.paint(x, W, st, S);
+  document.getElementById('colName').textContent = st.name;
+  document.getElementById('colDesc').textContent = st.d;
+  const next = CH.stages[CH.stages.indexOf(st)+1];
+  const pct = next ? Math.min(100, ((S.xp-st.at)/(next.at-st.at))*100) : 100;
+  document.getElementById('colBar').style.width = pct + '%';
+}
+
+/* ---------- HQ ---------- */
+function renderHQ(){
+  document.getElementById('sXp').textContent = S.xp;
+  document.getElementById('sCoin').textContent = S.coins;
+  document.getElementById('sStreak').textContent = S.streak;
+  document.getElementById('sDone').textContent = Object.keys(S.done).length + '/' + TOTAL;
+  const list = document.getElementById('qList');
+  list.innerHTML = '';
+  QUESTS.forEach(q=>{
+    const paid = !!S.questsPaid[q.id];
+    const d = document.createElement('div');
+    d.className = 'quest' + (paid ? ' done' : '');
+    d.innerHTML = '<span class="tick">' + (paid ? '\u2713' : '') + '</span><span>' + q.text + '</span><b>+' + q.xp + ' XP</b>';
+    list.appendChild(d);
+  });
+  drawBadge();
+}
+
+/* ---------- mission completion ---------- */
+function complete(id){
+  const el = document.getElementById(id);
+  if(!el || S.done[id]) return;
+  S.done[id] = true;
+  const xp = +el.dataset.xp, coin = +el.dataset.coin;
+  S.xp += xp; S.coins += coin;
+  el.classList.add('done');
+  el.querySelector('.mstat').textContent = 'DONE';
+  toast('Mission complete \u00b7 +' + xp + ' XP \u00b7 +' + coin + ' coins');
+  ev('mission');
+  save(); renderHQ();
+}
+
+function markDone(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.add('done');
+  el.querySelector('.mstat').textContent = 'DONE';
+}
+
+/* ---------- single-question block (data-q + .why) ---------- */
+document.querySelectorAll('[data-q]').forEach(g=>{
+  g.addEventListener('click', e=>{
+    const btn = e.target.closest('button');
+    if(!btn || !g.contains(btn)) return;
+    if(g.dataset.answered) return;
+    g.dataset.answered = '1';
+    [...g.querySelectorAll('button')].forEach(b=>b.classList.remove('right','wrong'));
+    const ok = !!btn.dataset.ok;
+    btn.classList.add(ok ? 'right' : 'wrong');
+    if(!ok){ const k = g.querySelector('[data-ok]'); if(k) k.classList.add('right'); }
+    const why = g.parentElement.querySelector('.why');
+    if(why) why.classList.add('show');
+    if(ok) ev('perfect');
+    if(g.dataset.m) complete(g.dataset.m);
+  });
+});
+
+/* ---------- canvas helpers ---------- */
+function fit(cv, h){
+  const r = window.devicePixelRatio || 1, w = cv.clientWidth || 320;
+  cv.width  = Math.round(w*r);
+  cv.height = Math.round(h*r);
+  cv.style.height = h + 'px';        // without this the element renders h*dpr tall
+  const x = cv.getContext('2d');
+  if(!x) return null;
+  x.setTransform(r,0,0,r,0,0);
+  x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  return x;
+}
+const mono = (x,s,w) => x.font = (w||400) + ' ' + s + 'px "IBM Plex Mono",monospace';
+const sans = (x,s,w) => x.font = (w||400) + ' ' + s + 'px "IBM Plex Sans",sans-serif';
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function arrow(x, x1,y1, x2,y2, col, head){
+  head = head || 7;
+  x.strokeStyle = col; x.fillStyle = col; x.lineWidth = 2;
+  x.beginPath(); x.moveTo(x1,y1); x.lineTo(x2,y2); x.stroke();
+  const a = Math.atan2(y2-y1, x2-x1);
+  x.beginPath(); x.moveTo(x2,y2);
+  x.lineTo(x2-head*Math.cos(a-0.4), y2-head*Math.sin(a-0.4));
+  x.lineTo(x2-head*Math.cos(a+0.4), y2-head*Math.sin(a+0.4));
+  x.closePath(); x.fill();
+}
+
+/* ============================================================
+   REUSABLE GAME COMPONENTS
+   ============================================================ */
+const Q = {
+
+  /* --- tap-in-order: sequences, timelines, levels of organisation --- */
+  order(boxId, scoreId, items, mid, doneMsg){
+    const box = document.getElementById(boxId), sc = document.getElementById(scoreId);
+    if(!box) return;
+    let at = 0;
+    const n = items.length;
+    shuffle(items).forEach(t=>{
+      const b = document.createElement('button');
+      b.className = 'chip'; b.textContent = t;
+      b.onclick = ()=>{
+        if(b.classList.contains('gone')) return;
+        if(t === items[at]){
+          b.classList.add('right','gone'); at++;
+          sc.textContent = at + ' of ' + n + ' placed';
+          if(at === n){ sc.textContent = doneMsg || 'Correct order.'; ev('perfect'); complete(mid); }
+        } else {
+          b.classList.add('wrong');
+          setTimeout(()=>b.classList.remove('wrong'), 500);
+          sc.textContent = 'Not yet \u2014 what comes after ' + (at ? items[at-1].toLowerCase() : 'nothing') + '?';
+        }
+      };
+      box.appendChild(b);
+    });
+    sc.textContent = '0 of ' + n + ' placed';
+  },
+
+  /* --- two-column matching: term <-> function, part <-> job --- */
+  match(aId, bId, scoreId, pairs, mid, doneMsg){
+    const A = document.getElementById(aId), B = document.getElementById(bId), sc = document.getElementById(scoreId);
+    if(!A || !B) return;
+    let sel = null, n = 0;
+    function mk(parent, label, key, side){
+      const b = document.createElement('button');
+      b.className = 'chip';
+      b.style.cssText = 'width:100%;margin-bottom:7px;font-size:12.5px;text-align:left';
+      b.textContent = label; b.dataset.key = key; b.dataset.side = side;
+      parent.appendChild(b);
+    }
+    shuffle(pairs).forEach(p=>mk(A, p[0], p[0], 'a'));
+    shuffle(pairs).forEach(p=>mk(B, p[1], p[0], 'b'));
+    function click(e){
+      const b = e.target.closest('button');
+      if(!b || b.classList.contains('gone')) return;
+      if(!sel || sel.dataset.side === b.dataset.side){
+        if(sel) sel.classList.remove('on');
+        sel = b; b.classList.add('on'); return;
+      }
+      if(sel.dataset.key === b.dataset.key){
+        sel.classList.add('right','gone'); b.classList.add('right','gone'); sel = null; n++;
+        sc.textContent = n + ' of ' + pairs.length + ' matched';
+        if(n === pairs.length){ sc.textContent = doneMsg || 'All matched.'; ev('perfect'); complete(mid); }
+      } else {
+        const s = sel; b.classList.add('wrong'); s.classList.add('wrong');
+        setTimeout(()=>{ b.classList.remove('wrong'); s.classList.remove('wrong','on'); }, 500);
+        sel = null;
+      }
+    }
+    A.addEventListener('click', click); B.addEventListener('click', click);
+    sc.textContent = '0 of ' + pairs.length + ' matched';
+  },
+
+  /* --- choice rows: true/false misconception checks, and N-way sorters --- */
+  rows(boxId, scoreId, rows, choices, mid, doneMsg){
+    const box = document.getElementById(boxId), sc = document.getElementById(scoreId);
+    if(!box) return;
+    let n = 0, answered = 0;
+    rows.forEach(s=>{
+      const row = document.createElement('div');
+      row.className = 'qrow';
+      const txt = document.createElement('span'); txt.className = 't'; txt.textContent = s.t;
+      row.appendChild(txt);
+      const btns = choices.map((c,ci)=>{
+        const b = document.createElement('button');
+        b.className = 'chip'; b.textContent = c;
+        b.onclick = ()=>{
+          if(row.dataset.done) return;
+          row.dataset.done = '1'; answered++;
+          const ok = (ci === s.a);
+          b.classList.add(ok ? 'right' : 'wrong');
+          btns.forEach(o=>{ if(o !== b) o.classList.add('gone'); });
+          if(!ok) btns[s.a].classList.add('right');
+          if(ok) n++;
+          sc.textContent = n + ' of ' + rows.length + ' correct';
+          if(answered === rows.length){
+            if(n === rows.length){ sc.textContent = doneMsg || 'All correct.'; ev('perfect'); }
+            complete(mid);
+          }
+        };
+        row.appendChild(b); return b;
+      });
+      box.appendChild(row);
+    });
+    sc.textContent = '0 of ' + rows.length + ' correct';
+  },
+
+  /* --- tick grid: self-marking comparison tables straight from the chapter --- */
+  grid(tableId, checkId, scoreId, cfg){
+    const tbl = document.getElementById(tableId), sc = document.getElementById(scoreId);
+    if(!tbl) return;
+    const cols = cfg.cols, ROWS = cfg.rows, marks = cfg.marks || ['\u2713','\u2717'];
+    const nc = cols.length, cells = ROWS.length * nc;
+    const state = ROWS.map(()=>new Array(nc).fill(-1));
+    let html = '<tr><th style="text-align:left">' + cfg.head + '</th>';
+    cols.forEach(c=>html += '<th>' + c + '</th>');
+    html += '</tr>';
+    ROWS.forEach((r,ri)=>{
+      html += '<tr><td class="lbl">' + r.l + '</td>';
+      for(let c=0;c<nc;c++) html += '<td class="c" style="width:' + Math.floor(60/nc) + '%" data-r="' + ri + '" data-c="' + c + '"></td>';
+      html += '</tr>';
+    });
+    tbl.innerHTML = html;
+    tbl.addEventListener('click', e=>{
+      const td = e.target.closest('td.c'); if(!td) return;
+      const r = +td.dataset.r, c = +td.dataset.c;
+      state[r][c] = state[r][c] === -1 ? 1 : state[r][c] === 1 ? 0 : -1;
+      td.className = 'c ' + (state[r][c] === 1 ? 'yes' : state[r][c] === 0 ? 'no' : '');
+      td.textContent = state[r][c] === 1 ? marks[0] : state[r][c] === 0 ? marks[1] : '';
+      td.style.width = Math.floor(60/nc) + '%';
+    });
+    document.getElementById(checkId).onclick = ()=>{
+      let right = 0, filled = 0;
+      ROWS.forEach((r,ri)=>{
+        for(let c=0;c<nc;c++){
+          const td = tbl.querySelector('[data-r="'+ri+'"][data-c="'+c+'"]');
+          td.classList.remove('err');
+          if(state[ri][c] === -1) continue;
+          filled++;
+          if(state[ri][c] === r.a[c]) right++; else td.classList.add('err');
+        }
+      });
+      if(filled < cells){ sc.textContent = 'Fill all ' + cells + ' boxes first \u2014 ' + filled + ' done.'; return; }
+      sc.textContent = right + ' of ' + cells + ' correct.';
+      if(right === cells){
+        sc.textContent = cfg.doneMsg || (cells + ' of ' + cells + '.');
+        ev('perfect'); complete(cfg.mid);
+      }
+    };
+    sc.textContent = '';
+  },
+
+  /* --- value grid: same self-marking table, cells hold values not ticks --- */
+  vgrid(tableId, checkId, scoreId, cfg){
+    const tbl = document.getElementById(tableId), sc = document.getElementById(scoreId);
+    if(!tbl) return;
+    const cols = cfg.cols, ROWS = cfg.rows, nc = cols.length;
+    let cells = 0;
+    let html = '<tr><th style="text-align:left">' + cfg.head + '</th>';
+    cols.forEach(c=>html += '<th>' + c + '</th>');
+    html += '</tr>';
+    ROWS.forEach((r,ri)=>{
+      html += '<tr><td class="lbl">' + r.l + '</td>';
+      for(let c=0;c<nc;c++){
+        const given = r.given && r.given[c] !== undefined && r.given[c] !== null;
+        if(given){ html += '<td style="color:var(--dim)">' + r.given[c] + '</td>'; }
+        else {
+          cells++;
+          html += '<td><select data-r="' + ri + '" data-c="' + c + '"><option value="">\u2014</option>' +
+            cfg.options[c].map(o=>'<option value="' + o + '">' + o + '</option>').join('') + '</select></td>';
+        }
+      }
+      html += '</tr>';
+    });
+    tbl.innerHTML = html;
+    document.getElementById(checkId).onclick = ()=>{
+      let right = 0, filled = 0;
+      tbl.querySelectorAll('select').forEach(sel=>{
+        const r = +sel.dataset.r, c = +sel.dataset.c;
+        sel.style.borderColor = 'var(--rule)'; sel.style.color = 'var(--ink)';
+        if(!sel.value) return;
+        filled++;
+        if(sel.value === String(ROWS[r].a[c])){ right++; sel.style.borderColor = 'var(--good)'; sel.style.color = 'var(--good)'; }
+        else { sel.style.borderColor = 'var(--bad)'; sel.style.color = 'var(--bad)'; }
+      });
+      if(filled < cells){ sc.textContent = 'Fill all ' + cells + ' boxes first \u2014 ' + filled + ' done.'; return; }
+      sc.textContent = right + ' of ' + cells + ' correct.';
+      if(right === cells){
+        sc.textContent = cfg.doneMsg || (cells + ' of ' + cells + '.');
+        ev('perfect'); complete(cfg.mid);
+      }
+    };
+    sc.textContent = '';
+  },
+
+  /* --- choose-all-that-apply --- */
+  pick(boxId, checkId, scoreId, items, mid, doneMsg){
+    const box = document.getElementById(boxId), sc = document.getElementById(scoreId);
+    if(!box) return;
+    const picked = new Set();
+    items.forEach((it,i)=>{
+      const b = document.createElement('button');
+      b.className = 'chip'; b.textContent = it.t;
+      b.onclick = ()=>{
+        if(box.dataset.done) return;
+        if(picked.has(i)){ picked.delete(i); b.classList.remove('on'); }
+        else { picked.add(i); b.classList.add('on'); }
+        sc.textContent = picked.size + ' selected';
+      };
+      box.appendChild(b); it._b = b;
+    });
+    document.getElementById(checkId).onclick = ()=>{
+      if(box.dataset.done) return;
+      box.dataset.done = '1';
+      let right = 0;
+      items.forEach((it,i)=>{
+        const should = !!it.a, did = picked.has(i);
+        it._b.classList.remove('on');
+        if(should) it._b.classList.add(did ? 'right' : 'wrong');
+        else if(did) it._b.classList.add('wrong');
+        else it._b.classList.add('gone');
+        if(should === did) right++;
+      });
+      const perfect = right === items.length;
+      sc.textContent = perfect ? (doneMsg || 'All correct.') : (right + ' of ' + items.length + ' decided correctly.');
+      if(perfect) ev('perfect');
+      complete(mid);
+    };
+    sc.textContent = '0 selected';
+  },
+
+  /* --- boss battle: ten questions, health bars, difficulty ladder --- */
+  boss(QS, mid, winMsg){
+    let i = 0, bhp = 100, yhp = 100, live = false;
+    const qEl = document.getElementById('bossQ'), oEl = document.getElementById('bossOpts'),
+          wEl = document.getElementById('bossWhy'), tEl = document.getElementById('bossTier'),
+          startB = document.getElementById('bossStart');
+    if(!qEl) return;
+    function bars(){
+      document.getElementById('bossHp').style.width = bhp + '%';
+      document.getElementById('youHp').style.width = yhp + '%';
+      document.getElementById('bossHpTxt').textContent = 'Boss ' + bhp + '%';
+      document.getElementById('youHpTxt').textContent = yhp + '%';
+      document.getElementById('bossQn').textContent = 'Question ' + Math.min(i+1, QS.length) + ' of ' + QS.length;
+    }
+    function show(){
+      if(!live) return;
+      if(bhp <= 0){ finish(true);  return; }
+      if(yhp <= 0){ finish(false); return; }
+      if(i >= QS.length){ finish(bhp <= 0); return; }
+      const q = QS[i];
+      qEl.textContent = q.q;
+      tEl.textContent = q.t;
+      wEl.classList.remove('show'); oEl.innerHTML = '';
+      q.o.forEach((o,k)=>{
+        const b = document.createElement('button');
+        b.className = 'opt'; b.textContent = o;
+        b.onclick = ()=>{
+          [...oEl.children].forEach(c=>c.disabled = true);
+          const ok = k === q.a;
+          b.classList.add(ok ? 'right' : 'wrong');
+          if(!ok) oEl.children[q.a].classList.add('right');
+          if(ok) bhp = Math.max(0, bhp - 12); else yhp = Math.max(0, yhp - 20);
+          wEl.textContent = q.w; wEl.classList.add('show');
+          bars(); i++;
+          setTimeout(show, 2600);
+        };
+        oEl.appendChild(b);
+      });
+      bars();
+    }
+    function finish(won){
+      live = false; oEl.innerHTML = ''; tEl.textContent = '';
+      if(won){
+        qEl.textContent = 'Boss defeated. You have finished the chapter.';
+        wEl.textContent = winMsg; wEl.classList.add('show');
+        complete(mid); ev('perfect');
+        startB.style.display = 'none';
+      } else {
+        qEl.textContent = 'The boss won this round.';
+        wEl.textContent = 'Go back through the missions you are least sure of, then try again.';
+        wEl.classList.add('show');
+        startB.textContent = 'Try again'; startB.style.display = '';
+      }
+    }
+    startB.onclick = ()=>{
+      i = 0; bhp = 100; yhp = 100; live = true;
+      startB.style.display = 'none'; wEl.classList.remove('show');
+      show();
+    };
+    bars();
+  }
+};
+
+/* ============================================================
+   redraw on open / resize / fonts
+   ============================================================ */
+const REG = {}, AUTO = {};
+function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
+function auto(id, fn){ AUTO[id] = fn; }
+
+function redrawAll(){
+  Object.keys(REG).forEach(id=>{
+    const d = document.getElementById(id);
+    if(d && d.open) REG[id].forEach(f=>{ try { f(); } catch(e){ console.error(id, e); } });
+  });
+}
+
+document.querySelectorAll('details.m').forEach(d=>{
+  d.addEventListener('toggle', ()=>{
+    if(!d.open) return;
+    // double rAF, not setTimeout: clientWidth is 0 until the box has laid out
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      redrawAll();
+      if(AUTO[d.id] && !d.dataset.auto){
+        d.dataset.auto = '1';                 // auto-play once, no XP for the auto-run
+        setTimeout(()=>{ try { AUTO[d.id](); } catch(e){ console.error(e); } }, 450);
+      }
+    }));
+  });
+});
+let rzT;
+window.addEventListener('resize', ()=>{ clearTimeout(rzT); rzT = setTimeout(redrawAll, 120); });
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>setTimeout(redrawAll, 50));
+
+/* ---------- 30fps ticker for the live benches ---------- */
+const TICK = [];
+function tick(id, fn){ TICK.push([id, fn]); }
+setInterval(()=>{
+  TICK.forEach(([id,fn])=>{
+    const d = document.getElementById(id);
+    if(d && d.open){ try { fn(); } catch(e){} }
+  });
+}, 1000/30);
+
+/* ============================================================
+   Chapter 3 interactives
+   Bespoke canvases: onion root experiment (M2) · meristem bench (M3)
+                     bend bench (M7) · vascular transport (M9)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#8FBF3F', A2='#D9434E',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', BG='#10141F';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* ============================================================
+   M1 — plant vs animal tissue
+   ============================================================ */
+Q.grid('g1','g1check','g1s',{
+  head:'Feature', mid:'m1',
+  cols:['Plants','Animals'],
+  rows:[
+    {l:'Cells have a rigid cell wall',                        a:[1,0]},
+    {l:'Body is generally fixed in one place',                a:[1,0]},
+    {l:'Cells change shape easily, suiting locomotion',       a:[0,1]},
+    {l:'Has tissues for digesting food from other sources',   a:[0,1]},
+    {l:'Has tissues for making food using solar energy',      a:[1,0]},
+    {l:'Has distinct tissues for transporting food and water',a:[1,1]}
+  ],
+  doneMsg:'All twelve. The wall, the mode of nutrition and the growth pattern \u2014 the chapter\u2019s three differences.'
+});
+
+/* ============================================================
+   M2 — Activity 3.1: cut the root tips (Fig 3.2)
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('onionCv'), dS=document.getElementById('onD');
+  let playing=false, pd=1, award=false, sawEnd=false;
+  const lenA = d => [0,0.3,0.8,1.7,3.0,3.8,4.7,5.8][Math.round(d)];
+  const lenB = d => d<=3 ? lenA(d) : 1.7 + 0.05*(d-3);
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250, d=+dS.value;
+    bg(x,W,H);
+    // two jars
+    const jw=Math.min(70, W*0.20), tops=44;
+    [[W*0.16,'A',lenA(d),false],[W*0.40,'B',lenB(d),d>=3]].forEach(j=>{
+      const cx=j[0], L=j[2], cut=j[3];
+      x.strokeStyle=RULE; x.lineWidth=1.5;
+      x.strokeRect(cx-jw/2, tops, jw, H-tops-30);
+      x.fillStyle='rgba(143,191,63,.07)'; x.fillRect(cx-jw/2+2, tops+18, jw-4, H-tops-50);
+      // bulb
+      x.fillStyle='#B0567A';
+      x.beginPath(); x.ellipse(cx, tops+6, jw*0.34, 15, 0, 0, 7); x.fill();
+      // roots
+      x.strokeStyle=A1; x.lineWidth=1.6;
+      for(let k=0;k<7;k++){
+        const ox=cx-jw*0.26+k*(jw*0.52/6);
+        const rl=(L/6)*(H-tops-72)*(0.75+0.25*Math.sin(k*2.1));
+        x.beginPath(); x.moveTo(ox, tops+18);
+        x.bezierCurveTo(ox+3, tops+18+rl*0.5, ox-3, tops+18+rl*0.8, ox+(k%2?2:-2), tops+18+rl);
+        x.stroke();
+        if(cut){ x.strokeStyle=A2; x.lineWidth=1.4;
+          x.beginPath(); x.moveTo(ox-4, tops+18+rl); x.lineTo(ox+4, tops+18+rl); x.stroke();
+          x.strokeStyle=A1; x.lineWidth=1.6; }
+      }
+      mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('Jar '+j[1], cx, H-24);
+      mono(x,9); x.fillStyle=cut?A2:DIM;
+      x.fillText(cut?'tips cut':'untouched', cx, H-12);
+    });
+    // graph of Fig 3.2
+    const gx=W*0.58, gy=H-40, gw=W*0.36, gh=H-80;
+    x.strokeStyle='rgba(126,196,140,.16)'; x.lineWidth=1;
+    for(let i=0;i<=6;i++){ x.beginPath(); x.moveTo(gx+i*gw/6, gy-gh); x.lineTo(gx+i*gw/6, gy); x.stroke(); }
+    for(let i=0;i<=6;i++){ x.beginPath(); x.moveTo(gx, gy-i*gh/6); x.lineTo(gx+gw, gy-i*gh/6); x.stroke(); }
+    x.strokeStyle='#8FA6C9'; x.lineWidth=1.2;
+    x.beginPath(); x.moveTo(gx,gy-gh); x.lineTo(gx,gy); x.lineTo(gx+gw,gy); x.stroke();
+    const px=dd=>gx+((dd-1)/6)*gw, py=L=>gy-(L/6)*gh;
+    [[lenA,A1],[lenB,A2]].forEach(s=>{
+      x.strokeStyle=s[1]; x.lineWidth=2.2; x.beginPath();
+      for(let dd=1;dd<=d;dd++){ const yy=py(s[0](dd)); dd===1?x.moveTo(px(dd),yy):x.lineTo(px(dd),yy); }
+      x.stroke();
+      x.fillStyle=s[1]; x.beginPath(); x.arc(px(d),py(s[0](d)),3.2,0,7); x.fill();
+    });
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    x.fillText('days 1 \u2013 7', gx+gw/2, gy+5);
+    x.textAlign='left'; x.textBaseline='top';
+    x.fillStyle=A1; x.fillText('Jar A', gx+4, gy-gh-2);
+    x.fillStyle=A2; x.fillText('Jar B', gx+40, gy-gh-2);
+    document.getElementById('onDV').textContent=d;
+    document.getElementById('onA').textContent=lenA(d).toFixed(1)+' cm';
+    document.getElementById('onB').textContent=lenB(d).toFixed(1)+' cm';
+    const df=document.getElementById('onDiff');
+    if(d<3){ df.textContent='Both growing at the same rate'; df.style.color=DIM; }
+    else { df.textContent='Jar B has stopped \u2014 its tips are gone'; df.style.color=A2; }
+    if(d>=7) sawEnd=true;
+    if(sawEnd && award) complete('m2');
+  }
+  function play(user){ award=award||!!user; playing=true; pd=1; dS.value=1; }
+  if(dS){
+    dS.oninput=()=>{ playing=false; award=true; ev('explore'); draw(); };
+    document.getElementById('onRun').onclick=()=>play(true);
+  }
+  tick('m2',()=>{
+    if(playing){ pd+=0.05; if(pd>=7){ pd=7; playing=false; } dS.value=Math.round(pd); }
+    draw();
+  });
+  reg('m2',draw); auto('m2',()=>play(false));
+})();
+
+/* ============================================================
+   M3 — the three meristems
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('growCv');
+  let h=0.34, g=1.0, cut=false, regrow=0, used={};
+  const TXT={
+    a:'Apical meristem \u00b7 the tips of root and shoot divide, so the plant gains height. Cut the tip and this stops.',
+    b:'Lateral meristem \u00b7 a ring of dividing cells inside the stem adds new cells inwards and outwards, so girth increases. One annual ring per year.',
+    c:'Intercalary meristem \u00b7 at the base of the internode, just above the node. Mow the grass or trim the hedge and new branches push out from the nodes.',
+    r:'Reset. Three meristems, three different kinds of growth.'
+  };
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,270); if(!x) return;
+    const W=cv.clientWidth, H=270, cx=W*0.5, base=H-30;
+    bg(x,W,H);
+    x.fillStyle='#39301F'; x.fillRect(0,base,W,30);
+    const top=base-h*(H-60);
+    // stem
+    x.strokeStyle='#6E8F3C'; x.lineWidth=3+g*7; x.lineCap='round';
+    x.beginPath(); x.moveTo(cx,base); x.lineTo(cx,top); x.stroke();
+    // nodes
+    const nodes=3;
+    for(let i=1;i<=nodes;i++){
+      const y=base-(i/(nodes+1))*(base-top);
+      x.strokeStyle='#4E6A28'; x.lineWidth=1.5;
+      x.beginPath(); x.moveTo(cx-(3+g*4), y); x.lineTo(cx+(3+g*4), y); x.stroke();
+      const branch = cut ? Math.min(1,regrow)*26 : 8;
+      x.strokeStyle=A1; x.lineWidth=2;
+      [-1,1].forEach(s=>{
+        x.beginPath(); x.moveTo(cx+s*(3+g*4), y);
+        x.lineTo(cx+s*(3+g*4+branch), y-branch*0.6); x.stroke();
+        x.fillStyle=A1;
+        x.beginPath(); x.ellipse(cx+s*(3+g*4+branch), y-branch*0.6, 5+branch*0.12, 2.6+branch*0.06, s*0.5, 0, 7); x.fill();
+      });
+    }
+    // tip
+    if(!cut){
+      x.fillStyle=GOLD; x.beginPath(); x.arc(cx,top,5,0,7); x.fill();
+      mono(x,9,500); x.fillStyle=GOLD; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText('apical', cx+9, top);
+    } else {
+      x.strokeStyle=A2; x.lineWidth=2;
+      x.beginPath(); x.moveTo(cx-9,top); x.lineTo(cx+9,top); x.stroke();
+      mono(x,9,500); x.fillStyle=A2; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText('cut', cx+13, top);
+    }
+    // root, and the lateral ring shown as a cross-section
+    x.strokeStyle='#8A7550'; x.lineWidth=2.4; x.lineCap='round';
+    [-1,0,1].forEach(s=>{ x.beginPath(); x.moveTo(cx,base); x.lineTo(cx+s*22, base+22); x.stroke(); });
+    x.lineCap='butt';
+    const rx=W*0.86, ry=H*0.3, R=10+g*14;
+    x.fillStyle='#E6D9BE'; x.beginPath(); x.arc(rx,ry,R,0,7); x.fill();
+    x.strokeStyle=A1; x.lineWidth=1.2;
+    const rings=Math.max(1,Math.round((g-1)*4)+1);
+    for(let i=1;i<=rings;i++){ x.beginPath(); x.arc(rx,ry,R*i/(rings+0.5),0,7); x.stroke(); }
+    x.strokeStyle='#7A6242'; x.beginPath(); x.arc(rx,ry,R,0,7); x.stroke();
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    x.fillText('T.S. of stem', rx, ry+R+5);
+    x.fillText(rings+(rings===1?' ring':' rings'), rx, ry+R+17);
+  }
+  function say(k){ const t=document.getElementById('grTxt'); if(t) t.textContent=TXT[k]; }
+  function done(){ if(Object.keys(used).length>=3) complete('m3'); }
+  if(cv){
+    document.getElementById('grA').onclick=()=>{ if(cut) return; h=Math.min(0.88,h+0.16); used.a=1; ev('explore'); say('a'); done(); draw(); };
+    document.getElementById('grB').onclick=()=>{ g=Math.min(2.2,g+0.28); used.b=1; ev('explore'); say('b'); done(); draw(); };
+    document.getElementById('grC').onclick=()=>{ cut=true; regrow=0; used.c=1; ev('explore'); say('c'); done(); };
+    document.getElementById('grR').onclick=()=>{ h=0.34; g=1.0; cut=false; regrow=0; say('r'); draw(); };
+  }
+  tick('m3',()=>{ if(cut && regrow<1) regrow+=0.012; draw(); });
+  reg('m3',draw);
+  auto('m3',()=>{ h=Math.min(0.88,h+0.16); say('a'); });
+})();
+
+/* ============================================================
+   M4 — meristematic cell characteristics
+   ============================================================ */
+Q.rows('g4','g4s',[
+  {t:'The cells are small, with thin cell walls.',                 a:0},
+  {t:'Each cell has a large and prominent nucleus.',               a:0},
+  {t:'The cells are full of large vacuoles for storing food.',     a:1},
+  {t:'The cytoplasm is dense, with many organelles.',              a:0},
+  {t:'The cells are tightly packed, with little intercellular space.', a:0},
+  {t:'The cells are already specialised for one fixed job.',       a:1}
+], ['True','False'], 'm4',
+   'All six. Everything about the cell is arranged for dividing again, not for storing or specialising.');
+
+/* ============================================================
+   M5 — differentiation
+   ============================================================ */
+Q.order('g5','g5s',
+  ['Meristematic cell divides','Two new cells are formed','One keeps the ability to divide',
+   'The other loses that ability','It changes in structure and function','It becomes a permanent tissue'],
+  'm5', 'That last change of structure and function is differentiation.');
+
+/* ============================================================
+   M6 — epidermis and its parts
+   ============================================================ */
+Q.match('g6a','g6b','g6s',[
+  ['Epidermis',   'A tightly packed single layer covering the whole plant body'],
+  ['Cuticle',     'A waxy layer of cutin that cuts down water loss'],
+  ['Stomata',     'Pores for gaseous exchange and transpiration'],
+  ['Root hair',   'Increases surface area for absorbing water and minerals'],
+  ['Transpiration','Creates the pull that lifts water up the xylem']
+], 'm6', 'All five. One layer, doing protection, exchange and absorption at once.');
+
+/* ============================================================
+   M7 — bend or break
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('bendCv'), fS=document.getElementById('bnF');
+  let kind='p'; const tried={};
+  const K={
+    p:{name:'Parenchyma', give:1.0, snap:0, col:'#A9CF6B',
+       txt:'Living cells with thin walls, loosely packed with intercellular spaces. It gives way under load rather than supporting it. Its real job is storing food, and photosynthesis in the green parts.'},
+    c:{name:'Collenchyma', give:0.62, snap:0, col:'#5FA83C',
+       txt:'Living cells with unevenly thickened corners, due to pectin. Pectin gives flexibility like rubber, so the stem bends far and springs back. This is what lets a fresh twig survive a monsoon wind.'},
+    s:{name:'Sclerenchyma', give:0.10, snap:0.86, col:'#B98A4A',
+       txt:'Thick walls due to lignin, hard and strong, and most of the cells are dead. It hardly bends at all \u2014 and past a point it breaks instead. This is the woody tissue of coconut husk and walnut shell.'}
+  };
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250, base=H-34, cx=W*0.36, len=H-90;
+    const f=+fS.value/100, k=K[kind];
+    const broken = k.snap>0 && f>k.snap;
+    bg(x,W,H);
+    x.fillStyle='#39301F'; x.fillRect(0,base,W,34);
+    // wind arrows
+    for(let i=0;i<4;i++){
+      const y=base-len*0.35-i*17;
+      arrow(x, 8, y, 8+Math.max(6,f*46), y, 'rgba(143,191,63,.42)', 5);
+    }
+    // stem, bent by force x give
+    const bend=f*k.give;
+    x.strokeStyle=k.col; x.lineWidth=9; x.lineCap='round';
+    if(!broken){
+      x.beginPath(); x.moveTo(cx,base);
+      x.quadraticCurveTo(cx+bend*len*0.45, base-len*0.55, cx+bend*len*0.95, base-len*0.86);
+      x.stroke();
+      x.fillStyle=A1;
+      const tipx=cx+bend*len*0.95, tipy=base-len*0.86;
+      [[-1,0],[1,-8]].forEach(o=>{
+        x.beginPath(); x.ellipse(tipx+o[0]*11, tipy+o[1], 10, 4.4, o[0]*0.6, 0, 7); x.fill();
+      });
+    } else {
+      x.beginPath(); x.moveTo(cx,base); x.lineTo(cx+3, base-len*0.42); x.stroke();
+      x.save(); x.translate(cx+34, base-len*0.30); x.rotate(1.15);
+      x.beginPath(); x.moveTo(0,0); x.lineTo(len*0.5,0); x.stroke(); x.restore();
+      x.strokeStyle=A2; x.lineWidth=2;
+      x.beginPath(); x.moveTo(cx-9, base-len*0.44); x.lineTo(cx+15, base-len*0.40); x.stroke();
+      mono(x,11,500); x.fillStyle=A2; x.textAlign='left'; x.textBaseline='bottom';
+      x.fillText('snapped', cx+20, base-len*0.46);
+    }
+    x.lineCap='butt';
+    // cell structure inset
+    const ix=W*0.76, iy=H*0.30, s=13;
+    for(let r=0;r<3;r++) for(let c=0;c<3;c++){
+      const ox=ix+(c-1)*s, oy=iy+(r-1)*s;
+      x.fillStyle='rgba(143,191,63,.10)';
+      x.strokeStyle=k.col;
+      x.lineWidth = kind==='p' ? 1 : kind==='c' ? 1.6 : 3.4;
+      x.beginPath(); x.rect(ox-s/2+1, oy-s/2+1, s-2, s-2); x.fill(); x.stroke();
+      if(kind==='c'){ x.fillStyle=k.col; [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(q=>{
+        x.beginPath(); x.arc(ox+q[0]*(s/2-2), oy+q[1]*(s/2-2), 2.2, 0, 7); x.fill(); }); }
+      if(kind==='s'){ x.fillStyle='rgba(185,138,74,.5)'; x.fillRect(ox-s/2+2, oy-s/2+2, s-4, s-4); }
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(kind==='p'?'thin walls':kind==='c'?'thick corners':'thick lignified walls', ix, iy+s*1.9);
+    mono(x,11,500); x.fillStyle=k.col; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(k.name, 8, 8);
+    document.getElementById('bnFV').textContent=fS.value;
+    const t=document.getElementById('bnTxt');
+    t.textContent = broken ? k.txt+' Past about 85% force it has already broken.' : k.txt;
+  }
+  function pick(k,btn){
+    kind=k; tried[k]=1; ev('explore');
+    ['bnP','bnC','bnS'].forEach(id=>document.getElementById(id).classList.remove('on'));
+    btn.classList.add('on');
+    if(Object.keys(tried).length>=3){ ev('perfect'); complete('m7'); }
+    draw();
+  }
+  if(fS){
+    fS.oninput=()=>{ ev('explore'); draw(); };
+    document.getElementById('bnP').onclick=e=>pick('p',e.currentTarget);
+    document.getElementById('bnC').onclick=e=>pick('c',e.currentTarget);
+    document.getElementById('bnS').onclick=e=>pick('s',e.currentTarget);
+  }
+  reg('m7',draw);
+  auto('m7',()=>{ let v=0; const h=setInterval(()=>{ v+=4; fS.value=Math.min(80,v); draw(); if(v>=80) clearInterval(h); },40); });
+})();
+
+/* ============================================================
+   M8 — supporting tissue table
+   ============================================================ */
+Q.grid('g8','g8check','g8s',{
+  head:'Is this true of…', mid:'m8',
+  cols:['Parenchyma','Collenchyma','Sclerenchyma'],
+  rows:[
+    {l:'Cells are living',                        a:[1,1,0]},
+    {l:'Walls are thin all round',                a:[1,0,0]},
+    {l:'Corners thickened with pectin',           a:[0,1,0]},
+    {l:'Walls thickened with lignin',             a:[0,0,1]},
+    {l:'Has intercellular spaces',                a:[1,0,0]},
+    {l:'Found in coconut husk and walnut shell',  a:[0,0,1]}
+  ],
+  doneMsg:'All eighteen. Living and thin, living and flexible, dead and hard.'
+});
+
+/* ============================================================
+   M9 — xylem and phloem
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('vascCv');
+  let xOn=false, pOn=false, barked=false, t=0, used={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,270); if(!x) return;
+    const W=cv.clientWidth, H=270, cx=W*0.5, base=H-26, top=34;
+    bg(x,W,H);
+    x.fillStyle='#39301F'; x.fillRect(0,base,W,26);
+    // trunk
+    x.fillStyle='#3A3020'; x.fillRect(cx-26, top+16, 52, base-top-16);
+    // canopy
+    x.fillStyle='rgba(143,191,63,.28)';
+    x.beginPath(); x.ellipse(cx, top+10, W*0.22, 24, 0, 0, 7); x.fill();
+    // roots
+    x.strokeStyle='#8A7550'; x.lineWidth=3; x.lineCap='round';
+    [-1,1].forEach(s=>{ x.beginPath(); x.moveTo(cx,base); x.lineTo(cx+s*38, base+18); x.stroke(); });
+    x.lineCap='butt';
+    // the two channels
+    const xc=cx-13, pc=cx+13;
+    x.strokeStyle='rgba(76,155,232,.35)'; x.lineWidth=9;
+    x.beginPath(); x.moveTo(xc, base); x.lineTo(xc, top+18); x.stroke();
+    x.strokeStyle=barked?'rgba(217,67,78,.16)':'rgba(217,67,78,.35)';
+    x.beginPath(); x.moveTo(pc, top+18); x.lineTo(pc, base); x.stroke();
+    if(barked){
+      x.strokeStyle=A2; x.lineWidth=2;
+      x.beginPath(); x.moveTo(pc-11, base-58); x.lineTo(pc+11, base-46); x.stroke();
+      x.beginPath(); x.moveTo(pc-11, base-46); x.lineTo(pc+11, base-58); x.stroke();
+      mono(x,9,500); x.fillStyle=A2; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText('bark stripped', pc+16, base-52);
+    }
+    // particles
+    for(let k=0;k<7;k++){
+      if(xOn){
+        const u=((t*0.006)+k/7)%1;
+        x.fillStyle='#6FC0F5';
+        x.beginPath(); x.arc(xc, base-u*(base-top-18), 3, 0, 7); x.fill();
+      }
+      if(pOn && !barked){
+        const u=((t*0.005)+k/7)%1;
+        x.fillStyle='#E8757E';
+        x.beginPath(); x.arc(pc, top+18+u*(base-top-18), 3, 0, 7); x.fill();
+      }
+    }
+    mono(x,9,500); x.textAlign='center'; x.textBaseline='top';
+    x.fillStyle='#6FC0F5'; x.fillText('xylem \u2191', xc, base+4);
+    x.fillStyle='#E8757E'; x.fillText('phloem \u2193', pc+2, base+16);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('leaves make the food', 8, 8);
+    x.textBaseline='bottom';
+    x.fillText('roots absorb the water', 8, base-4);
+    document.getElementById('vxTxt').textContent = xOn
+      ? 'Water and minerals rising from root to leaf'
+      : 'Closed \u2014 nothing rising';
+    const p=document.getElementById('vpTxt');
+    if(barked){ p.textContent='Cut. Food cannot reach the roots.'; p.style.color=A2; }
+    else if(pOn){ p.textContent='Food moving from leaf down to root'; p.style.color=INK; }
+    else { p.textContent='Closed \u2014 nothing moving'; p.style.color=INK; }
+  }
+  function done(){ if(Object.keys(used).length>=3) complete('m9'); }
+  if(cv){
+    document.getElementById('vxOn').onclick=()=>{ xOn=!xOn; used.x=1; ev('explore'); done(); draw(); };
+    document.getElementById('vpOn').onclick=()=>{ pOn=!pOn; used.p=1; ev('explore'); done(); draw(); };
+    document.getElementById('vRing').onclick=()=>{ barked=!barked; used.b=1; ev('explore'); done(); draw(); };
+  }
+  tick('m9',()=>{ t++; draw(); });
+  reg('m9',draw); auto('m9',()=>{ xOn=true; pOn=true; });
+})();
+
+/* ============================================================
+   M10 — the three tissue systems
+   ============================================================ */
+Q.rows('g10','g10s',[
+  {t:'Epidermis and the cuticle covering it',        a:0},
+  {t:'Xylem',                                        a:2},
+  {t:'Parenchyma, collenchyma and sclerenchyma',     a:1},
+  {t:'Phloem',                                       a:2},
+  {t:'Cork, forming the bark of an older tree',      a:0}
+], ['Dermal','Ground','Vascular'], 'm10',
+   'All five placed. Outer covering, main body, and the conducting channels.');
+
+/* ============================================================
+   M11 — epithelial tissue (Table 3.2)
+   ============================================================ */
+Q.match('g11a','g11b','g11s',[
+  ['A single layer of thin, flat cells',                  'Lining of blood vessels and lungs, for rapid exchange'],
+  ['Many layers, outer cells flat and tightly packed',    'Skin, mouth and oesophagus, for protection'],
+  ['Cuboidal or columnar cells that release substances',  'Salivary glands, sweat glands and stomach lining'],
+  ['Receptor cells carrying hair-like cilia',             'Nostrils, taste buds and the inner ear'],
+  ['A single layer of tall, pillar-like cells',           'Lining of the small intestine, for absorption']
+], 'm11', 'All five. In every case the shape of the cell follows the job it has to do.');
+
+/* ============================================================
+   M12 — connective tissue (Activity 3.3)
+   ============================================================ */
+Q.match('g12a','g12b','g12s',[
+  ['Touch your elbow \u2014 hard and rigid',                  'Bone'],
+  ['Fold your ear \u2014 soft, flexible, springs back',       'Cartilage'],
+  ['Wiggle your fingers \u2014 the forearm moves too',        'Tendon'],
+  ['Raise your leg \u2014 the knee stops at a limit',         'Ligament'],
+  ['A cut oozes red, then clots',                        'Blood']
+], 'm12', 'All five. Same family of tissue, but the matrix changes from watery to rigid.');
+
+/* ============================================================
+   M13 — three kinds of muscle
+   ============================================================ */
+Q.grid('g13','g13check','g13s',{
+  head:'Is this true of…', mid:'m13',
+  cols:['Skeletal','Smooth','Cardiac'],
+  rows:[
+    {l:'Under conscious, voluntary control',   a:[1,0,0]},
+    {l:'Striated, showing light and dark bands', a:[1,0,1]},
+    {l:'Has many nuclei in one fibre',         a:[1,0,0]},
+    {l:'Fibres are branched',                  a:[0,0,1]},
+    {l:'Spindle-shaped cells',                 a:[0,1,0]},
+    {l:'Found only in the heart',              a:[0,0,1]}
+  ],
+  doneMsg:'All eighteen. Cardiac muscle is the odd one out \u2014 striated like skeletal, involuntary like smooth.'
+});
+
+/* ============================================================
+   M14 — the neuron
+   ============================================================ */
+Q.order('g14','g14s',
+  ['Dendrites','Cell body','Axon','Axon terminals','The next cell'],
+  'm14', 'That is the path: received, processed, carried along, handed on.');
+
+/* ============================================================
+   M15 — types of joint
+   ============================================================ */
+Q.rows('g15','g15s',[
+  {t:'Circling your whole arm at the shoulder',      a:0},
+  {t:'Bending and straightening the elbow',          a:1},
+  {t:'Shaking your head to say no',                  a:2},
+  {t:'Bending your knee',                            a:1},
+  {t:'The bones of the skull, which do not move',    a:3}
+], ['Ball and socket','Hinge','Pivot','Fixed'], 'm15',
+   'All five. The shape of the joint decides exactly how much freedom the bones get.');
+
+/* ============================================================
+   M16 — chapter boss (from Revise, Reflect, Refine)
+   ============================================================ */
+Q.boss([
+  { t:'Recall \u00b7 1 of 10',
+    q:'Meristematic tissues divide repeatedly. What property of their cells allows them to do this?',
+    o:['They have thick walls for protection','They contain large vacuoles that store nutrients',
+       'They have thin walls, dense cytoplasm and a large prominent nucleus','They are functionally differentiated cells'], a:2,
+    w:'Thin walls, dense cytoplasm packed with organelles, a large nucleus and almost no vacuole \u2014 everything arranged for rapid, continuous division.' },
+  { t:'Recall \u00b7 2 of 10',
+    q:'If a plant is unable to transport food from leaves to roots, which tissue is malfunctioning?',
+    o:['Xylem','Phloem','Epidermis','Sclerenchyma'], a:1,
+    w:'Phloem carries food from the leaves to the rest of the plant through sieve tubes. Xylem moves in the other direction, carrying water and minerals up from the roots.' },
+  { t:'Recall \u00b7 3 of 10',
+    q:'Which type of joint is involved when you bend your knees and ankles?',
+    o:['Ball and socket','Hinge','Pivot'], a:1,
+    w:'The knee bends and straightens in one direction only, like a door hinge. A small bone, the kneecap, protects the joint.' },
+  { t:'Understanding \u00b7 4 of 10',
+    q:'Why are the epithelial tissues that line an animal\u2019s internal organs usually only one or a few cells thick?',
+    o:['To store food efficiently','To provide maximum strength',
+       'To allow quick exchange of materials across them','To reduce friction'], a:2,
+    w:'A single thin layer is what lets gases and liquids diffuse rapidly \u2014 which is exactly why the lining of the lungs and blood vessels is built that way.' },
+  { t:'Understanding \u00b7 5 of 10',
+    q:'Assertion: epithelium is well suited for gas exchange in the lungs. Reason: it consists of multiple layers of tall cells that slow down diffusion. Which is correct?',
+    o:['Both are true and the reason explains the assertion','Both are true but the reason does not explain it',
+       'The assertion is true, but the reason is false','The assertion is false, but the reason is true'], a:2,
+    w:'The lungs are lined by a single layer of thin, flat cells, not multiple tall layers. The assertion holds; the reason states the opposite of the truth.' },
+  { t:'Understanding \u00b7 6 of 10',
+    q:'Assertion: tendons connect bone to bone and allow joint movement. Reason: tendons are made of tough connective tissue that transmits force from muscle to bone. Which is correct?',
+    o:['Both true, and the reason explains the assertion','The assertion is false, but the reason is true',
+       'Both are false','The assertion is true, but the reason is false'], a:1,
+    w:'Tendons connect muscle to bone, not bone to bone \u2014 that is a ligament. The reason correctly describes what a tendon does, so the reason is true while the assertion is false.' },
+  { t:'Application \u00b7 7 of 10',
+    q:'A young mango sapling\u2019s stem bends flexibly in monsoon winds and does not break. Which tissue is responsible, and what if it were replaced by sclerenchyma?',
+    o:['Collenchyma \u2014 the stem would become rigid and snap instead of bending',
+       'Parenchyma \u2014 the stem would grow faster',
+       'Sclerenchyma already \u2014 nothing would change'], a:0,
+    w:'Pectin-thickened corners give collenchyma flexibility like rubber. Swap in lignified sclerenchyma and the stem becomes hard and brittle \u2014 it would break rather than bend.' },
+  { t:'Application \u00b7 8 of 10',
+    q:'Coconut husk fibres make tough, fibrous mats. Which tissue gives that strength, and why could living parenchyma not do the same job?',
+    o:['Sclerenchyma \u2014 parenchyma has thin walls and no lignin',
+       'Collenchyma \u2014 parenchyma is too rigid',
+       'Phloem \u2014 parenchyma cannot conduct'], a:0,
+    w:'Sclerenchyma walls are thickened with lignin and most of the cells are dead, giving hardness and strength. Parenchyma is living, thin-walled and loosely packed \u2014 built for storage, not for load.' },
+  { t:'Reasoning \u00b7 9 of 10',
+    q:'Vibha claims meristematic cells are found only at the root and shoot apices. What is the best way for Neha to test that claim?',
+    o:['Accept it \u2014 the claim is correct',
+       'Ask how a stem thickens with age, and how mown grass grows back',
+       'Ask whether roots grow downwards'], a:1,
+    w:'Both questions expose the gap. Girth comes from lateral meristem in a ring inside the stem, and regrowth after mowing comes from intercalary meristem at the nodes \u2014 neither is at an apex.' },
+  { t:'Challenge \u00b7 10 of 10',
+    q:'An elephant strips the bark from a tree trunk. Which function is hampered first, and what happens if the damage goes deeper?',
+    o:['Water transport stops at once, because bark contains the xylem',
+       'Food transport to the roots stops, because phloem lies just under the bark; deeper damage would reach the xylem and cut off water too',
+       'Nothing \u2014 bark is dead tissue with no function'], a:1,
+    w:'Phloem sits close under the bark, so removing bark cuts the food supply travelling down to the roots. The xylem lies deeper, so only further damage would stop water and minerals rising.' }
+], 'm16', 'Meristems and permanent tissues, xylem and phloem, the four animal tissues, and the joints that let bones move.');
+
+/* ============================================================
+   boot — runs after chapter interactives have registered
+   ============================================================ */
+(async function(){
+  const saved = await Store.get(CH.key);
+  if(saved) S = Object.assign(S, saved);
+  const t = today();
+
+  /* the streak belongs to the app, not to one chapter: opening any
+     chapter on a given day counts once, for every chapter.          */
+  let g = await Store.get('nb.streak');
+  if(!g || typeof g !== 'object') g = { day:null, streak:0 };
+  if(g.day !== t){
+    g.streak = (g.day === yday()) ? (g.streak || 0) + 1 : 1;
+    g.day = t;
+    await Store.set('nb.streak', g);
+  }
+  S.streak = g.streak;
+
+  if(S.day !== t){
+    S.day = t; S.missionsToday = 0; S.perfectToday = 0; S.exploreToday = 0; S.questsPaid = {};
+  }
+  Object.keys(S.done).forEach(markDone);
+  renderHQ(); save();
+  requestAnimationFrame(()=>requestAnimationFrame(redrawAll));
+})();
+
+
+/* offline: the service worker precaches every page, icon and font */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('service-worker.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>

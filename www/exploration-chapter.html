@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Exploration: Entering the World of Secondary Science — Class 9</title>
+<style>
+:root{
+  --ground:#0A0E1B; --plate:#141A2E; --plate2:#1B2340; --rule:#2A3350;
+  --ink:#F0EEE6; --dim:#8E9AC0; --silver:#AEC0DE;
+  --good:#4FC3A1; --bad:#E5484D; --gold:#F2B84C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.55;padding:0 16px 90px;overflow-x:hidden}
+.wrap{max-width:760px;margin:0 auto}
+canvas{display:block;width:100%}
+
+/* ---------- masthead ---------- */
+.mast{padding:38px 0 26px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.mast h1{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(40px,11vw,78px);line-height:.88;margin:12px 0 0;text-transform:uppercase}
+.mast h1 span{color:var(--a1)}
+
+/* ---------- HQ ---------- */
+.hq{background:var(--plate);border:1px solid var(--rule);border-radius:4px;padding:16px;margin-bottom:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.stat{background:var(--plate2);padding:10px 8px;text-align:center}
+.stat .k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.stat .v{font-family:"IBM Plex Mono",monospace;font-size:18px;margin-top:3px;font-variant-numeric:tabular-nums}
+.colony-row{display:flex;gap:14px;align-items:center}
+#colony{flex:none;width:96px;height:96px;border:1px solid var(--rule);border-radius:3px;background:var(--badge-bg)}
+.colony-txt h3{font-size:15px;font-weight:600}
+.colony-txt p{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);line-height:1.7;margin-top:3px}
+.bar{height:4px;background:var(--rule);border-radius:2px;margin-top:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--a1);width:0;transition:width .5s}
+
+.quests{margin-top:16px;border-top:1px solid var(--rule);padding-top:14px}
+.quests h4{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.quest{display:flex;align-items:center;gap:10px;font-size:13px;padding:5px 0}
+.tick{width:16px;height:16px;border:1px solid var(--rule);border-radius:3px;flex:none;font-size:11px;text-align:center;line-height:15px;color:var(--ground)}
+.quest.done .tick{background:var(--good);border-color:var(--good)}
+.quest.done span{color:var(--dim);text-decoration:line-through}
+.quest b{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--gold);font-weight:400;flex:none}
+
+/* ---------- missions ---------- */
+.sec{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:26px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+details.m{background:var(--plate);border:1px solid var(--rule);border-radius:4px;margin-bottom:10px;overflow:hidden}
+details.m[open]{border-color:#3A466B}
+summary{list-style:none;cursor:pointer;padding:14px 15px;display:flex;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+.mno{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--a1);flex:none;width:22px}
+.mt{flex:1;min-width:0}
+.mt b{display:block;font-size:15px;font-weight:600;line-height:1.3}
+.mt i{display:block;font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);margin-top:2px}
+.mstat{flex:none;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--dim);border:1px solid var(--rule);border-radius:20px;padding:3px 9px}
+details.m.done .mstat{color:var(--good);border-color:var(--good)}
+details.m.done .mno{color:var(--good)}
+.body{padding:2px 15px 18px;border-top:1px solid var(--rule)}
+.body>p{font-size:15px;margin:14px 0}
+.note{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.75;color:var(--dim)}
+.panel{background:var(--plate2);border:1px solid var(--rule);border-radius:3px;padding:14px;margin:14px 0}
+.curio{border-left:2px solid var(--rule);padding:2px 0 2px 12px;margin:16px 0 4px}
+.curio h5{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--a2);font-weight:400;margin-bottom:5px}
+
+/* ---------- controls ---------- */
+button{font-family:"IBM Plex Sans",sans-serif;background:none;color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:9px 14px;font-size:14px;cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+button:hover{border-color:var(--a1)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+.act{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.row{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:8px 13px}
+.chip.on{border-color:var(--a1);color:var(--a1)}
+.chip.right{border-color:var(--good);color:var(--good)}
+.chip.wrong{border-color:var(--bad);color:var(--bad)}
+.chip.gone{opacity:.25;pointer-events:none}
+.opts{display:flex;flex-direction:column;gap:8px;align-items:stretch;margin-top:4px}
+.opt{text-align:left}
+.opt.right{border-color:var(--good);color:var(--good)}
+.opt.wrong{border-color:var(--bad);color:var(--bad)}
+.why{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:12px;line-height:1.75;border-left:2px solid var(--a1);padding-left:12px;display:none}
+.why.show{display:block}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:none;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:1px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:1px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;margin-top:-7px;border-radius:50%;background:var(--a1)}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:var(--a1)}
+.knob{margin-bottom:6px}
+.knob label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;gap:10px}
+.knob label b{color:var(--ink);font-weight:400;text-align:right}
+select{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--plate);color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:8px 10px}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;margin-top:12px;overflow:hidden}
+.readout.two{grid-template-columns:repeat(2,1fr)}
+.rc{background:var(--plate2);padding:11px 12px}
+.rc .k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.rc .v{font-family:"IBM Plex Mono",monospace;font-size:14px;margin-top:4px;line-height:1.35}
+.score{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qrow{display:flex;gap:8px;align-items:center;margin-bottom:9px;font-size:13.5px}
+.qrow>span.t{flex:1}
+table.tick{width:100%;border-collapse:collapse;font-size:13px}
+table.tick th,table.tick td{border:1px solid var(--rule);padding:7px 6px;text-align:center}
+table.tick th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:400}
+table.tick td.lbl{text-align:left;font-size:12.5px}
+table.tick td.c{cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:15px;user-select:none}
+td.c.yes{color:var(--good)}td.c.no{color:var(--bad)}
+td.c.err{background:rgba(229,72,77,.18)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(80px);background:var(--plate2);border:1px solid var(--gold);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:13px;padding:11px 18px;border-radius:30px;opacity:0;transition:.35s;z-index:9;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hp{height:8px;background:var(--rule);border-radius:4px;overflow:hidden;margin:5px 0 12px}
+.hp i{display:block;height:100%;transition:width .4s}
+.tier{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--a2);margin-top:14px}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--rule);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}.readout{grid-template-columns:1fr}.readout.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+
+/* Local fonts. Run scripts/fetch-fonts.sh once to fill www/fonts, and the
+   app renders exactly as designed with no network. Until then the stacks
+   below fall back to system faces and everything still works.            */
+@font-face{font-family:Anton;src:url(fonts/Anton-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+
+/* ---------- chapter accents: magnifying-glass lens cyan and compass-needle orange, the two instruments framing every page number ---------- */
+:root{ --a1:#4FD8E8; --a2:#F2703C; --badge-bg:#EAF4F5; }
+/* ---------- library back bar ---------- */
+.backbar{display:inline-flex;align-items:center;margin-top:16px;text-decoration:none;color:var(--dim);
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  border:1px solid var(--rule);border-radius:20px;padding:7px 14px;transition:border-color .15s,color .15s}
+.backbar:hover{border-color:var(--a1);color:var(--a1)}
+.mast{padding:20px 0 26px}
+
+html{-webkit-text-size-adjust:100%;overscroll-behavior-y:none;background:var(--ground)}
+body{padding-left:calc(16px + env(safe-area-inset-left));
+     padding-right:calc(16px + env(safe-area-inset-right));
+     padding-top:env(safe-area-inset-top);
+     padding-bottom:calc(90px + env(safe-area-inset-bottom));
+     -webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+button,summary,a{-webkit-touch-callout:none}
+input[type=range]{touch-action:pan-y}
+.toast{bottom:calc(22px + env(safe-area-inset-bottom))}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Science · Chapter 1</div>
+  <h1>Exploration<br><span>Entering secondary science</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/13</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Making a model</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="35" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>A cricket ball hit for six</b><i>Example 1.1 · what a model keeps and ignores</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Will the ball cross the boundary without hitting the ground first? Switch details on and off, hit the ball, and see which ones actually move the answer.</p>
+    <div class="panel">
+      <canvas id="sixCv" height="230"></canvas>
+      <div class="chips" id="sixOpts" style="margin-top:10px"></div>
+      <div class="row"><button class="act" id="sixHit">Hit it</button></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Carry</div><div class="v" id="sixD">—</div></div>
+        <div class="rc"><div class="k">Boundary at</div><div class="v" id="sixB">68 m</div></div>
+        <div class="rc"><div class="k">Result</div><div class="v" id="sixR" style="font-size:12.5px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="sixTxt">—</div>
+    </div>
+    <p>The natural world is complex, and studying it in full detail is often impossible. To make sense of this complexity, science uses <b>models</b> — simplified ways of looking at real systems that focus only on what is most important for a given question.</p>
+    <p>Building such models involves making assumptions and deliberately ignoring certain details. The brand of the bat, the colour of the ball and the amount of grass on the field make no difference. The mass of the ball, and the speed and direction in which it has been hit, are very important. Air resistance, spin and the stitching at the seam have smaller effects that can be ignored in a simple model. Remember that these choices are not mistakes; they are done on purpose.</p>
+    <div class="curio">
+      <h5>Meet a scientist</h5>
+      <div class="note">Science often begins by ignoring details. When physicist Meghnad Saha studied the light from stars, he did not try to model every atom, every reaction or every movement inside a star. Instead he treated the matter in the star as a hot gas, ignored many complex processes, and focused only on temperature, pressure and how atoms formed ions. That simplification allowed him to explain how the colour of stars is deeply connected to their temperature.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="25" data-coin="10">
+  <summary><span class="mno">02</span><span class="mt"><b>Cycling home from school</b><i>Activity 1.1 · let us model</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>You ride a bicycle home from school and want to work out how long it will take. Decide what to keep in and what to leave out.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Keep it, or ignore it?</div>
+      <div id="g2"></div>
+      <div class="score" id="g2s"></div>
+    </div>
+    <p>In physics a moving car may be represented as a single point; in chemistry, atoms and molecules are drawn as spheres and bonds; in biology, cells are shown as diagrams highlighting key parts; in earth science the Earth may be treated as a smooth sphere layered into distinct regions.</p>
+    <p>When studying the motion of a falling object, air resistance may be neglected to understand the basic effect of gravity. When studying how the heart pumps blood, many individual cells are ignored so that the organ can be understood as a functioning system. As models get more complex, we add extra details for greater accuracy.</p>
+  </div>
+</details>
+
+<div class="sec">Part 2 · The language science uses</div>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="30" data-coin="15">
+  <summary><span class="mno">03</span><span class="mt"><b>A shared set of shorthand</b><i>Quantities, symbols and units</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Scientists across the world need to compare results without arguing about words. Match each quantity to the symbol that stands for it.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a quantity, then tap its symbol and unit.</div>
+      <div class="match"><div id="g3a"></div><div id="g3b"></div></div>
+      <div class="score" id="g3s"></div>
+    </div>
+    <p>Many words we use in everyday life, such as force, work, cell or reaction, have specific meanings in science. These meanings are often very specific because scientific ideas must be communicated clearly and unambiguously.</p>
+    <p>To allow scientists across the world to describe observations, compare results and build ideas together, science uses a shared language of specific terms, <b>symbols</b> and units. Quantities such as mass, velocity, force and electric current are represented by symbols like m, v, F and I, each associated with a defined unit.</p>
+    <div class="curio">
+      <h5>Threads of curiosity</h5>
+      <div class="note">Why is the speed of light denoted by 'c'? Scientific symbols often come from history and international agreement, not from convenience. The speed of light is denoted c because it comes from the Latin word <i>celeritas</i>, meaning speed. Today the speed of light is one of the physical constants, defined to be exactly 299792458 m/s.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="40" data-coin="25">
+  <summary><span class="mno">04</span><span class="mt"><b>The flight that ran out of fuel</b><i>Why everyone agrees on a kilogram</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>A passenger aircraft needs 22,300 kg of fuel. The ground crew works out how many litres to load. Choose the number they multiply by.</p>
+    <div class="panel">
+      <canvas id="fuelCv" height="210"></canvas>
+      <div class="chips" style="margin-top:10px" id="fuelPick"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Litres loaded</div><div class="v" id="fuLoad">—</div></div>
+        <div class="rc"><div class="k">Litres actually needed</div><div class="v" id="fuNeed">—</div></div>
+        <div class="rc"><div class="k">Outcome</div><div class="v" id="fuOut" style="font-size:12.5px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="fuTxt">—</div>
+    </div>
+    <p>In a well-known incident a passenger aircraft ran out of fuel mid-flight due to a mix-up in units. The ground crew miscalculated the fuel required, since they used the density of fuel in pounds per litre rather than kilograms per litre. The aircraft was about 15,000 litres short and luckily could glide to an emergency landing, which damaged the aircraft though there were no casualties. Using standard <b>SI units</b> everywhere avoids conversions and errors.</p>
+    <div class="curio">
+      <h5>Threads of curiosity</h5>
+      <div class="note">When we buy rice or vegetables we expect a kilogram to mean the same amount everywhere. Imagine the confusion if we used different weights everywhere. Measurements are based on agreed international standards, not local objects or opinions. Standard units allow scientific results to be compared, and ensure fairness in daily life and trade.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="25" data-coin="10">
+  <summary><span class="mno">05</span><span class="mt"><b>An equation is a statement</b><i>Mathematics as a language for thinking</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>Learning to use mathematics in science does not mean memorising equations. Put the steps of the approach in the order the chapter recommends.</p>
+    <div class="panel">
+      <div class="chips" id="g5"></div>
+      <div class="score" id="g5s"></div>
+    </div>
+    <p>Mathematics in science is not meant to be a hurdle. It is a language that helps us think more clearly about the world. An equation is not just a calculation tool; it is a compact statement about how certain things are related. Describing motion using distance, time and velocity lets us answer questions about where an object will be at a later moment.</p>
+    <p>In the same way, mathematical expressions describe rates of chemical reactions, patterns of population growth, or changes in energy within a system. If you focus first on understanding the situation and the quantities involved, equations begin to feel less like obstacles and more like helpful guides.</p>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Laws, theories and predictions</div>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="30" data-coin="15">
+  <summary><span class="mno">06</span><span class="mt"><b>Law, theory or principle?</b><i>Three words with specific meanings</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>These three words get used loosely in ordinary speech. In science each one means something particular. Sort each example.</p>
+    <div class="panel">
+      <div id="g6"></div>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>A <b>law</b> usually describes a regular pattern observed in nature, often expressed using words or mathematical relationships — Newton's laws of motion explain the jerk felt when a bus stops suddenly. A <b>theory</b> goes a step further and provides an explanation of why those patterns occur, usually based on evidence gathered over time; the atomic theory explains how molecules are formed.</p>
+    <p><b>Principles</b> are broad ideas that help us make sense in a given situation, such as the principle of conservation of energy being applied when climbing up the stairs.</p>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="25" data-coin="10">
+  <summary><span class="mno">07</span><span class="mt"><b>A theory is not a guess</b><i>What makes science reliable</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>"It's just a theory." That sentence means something quite different inside science than it does outside it. Mark each statement.</p>
+    <div class="panel">
+      <div id="g7"></div>
+      <div class="score" id="g7s"></div>
+    </div>
+    <p>In science, a theory does not mean a guess or an untested idea. It is an explanation based on careful testing and critical examination. These ideas are always open to improvement and often change as new evidence becomes available. This is a key feature of science that makes it reliable.</p>
+    <p>Even the most successful scientific theories have limits and may fail when new conditions are explored or when measurements become more precise. Such failures are not a weakness of science; in fact they are its greatest strength. When predictions do not match observations, scientists do not reject ideas based on opinion or belief, but only on evidence. No scientific theory is ever final and none is beyond question.</p>
+    <div class="curio">
+      <h5>Threads of curiosity</h5>
+      <div class="note">A commonly circulated claim is that food should not be eaten during an eclipse because it becomes harmful. Disproof comes from asking simple scientific questions. An eclipse is just a play of shadows. What physical change occurs? Does temperature change significantly? Does food go bad if left in a shadow? You will conclude that no physical, chemical or biological mechanism supports such a claim.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="30" data-coin="15">
+  <summary><span class="mno">08</span><span class="mt"><b>Make it testable</b><i>Example 1.2 · checking a prediction</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Varsha tells Meghna, "It will rain this afternoon because the clouds look dark." Pick the questions that would turn that into something checkable.</p>
+    <div class="panel">
+      <div class="chips" id="g8"></div>
+      <button class="act" id="g8check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g8s"></div>
+    </div>
+    <p>Good scientific questions look for measurable evidence and past patterns. Questions with simple yes or no answers are usually not so useful.</p>
+    <p>One of the most remarkable strengths of science is its ability to make <b>predictions</b>. When laws, theories and models are well established, they allow us to anticipate what will happen under new or different conditions, before we can perform an experiment. These predictions are not guesses; they are reasoned expectations based on evidence and careful thinking. When predictions match observations, confidence in the underlying science grows. When they do not, scientists re-examine their assumptions, models or measurements.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="40" data-coin="25">
+  <summary><span class="mno">09</span><span class="mt"><b>Why forecasts go wrong</b><i>Tiny differences, grown large</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Two forecasts start from almost exactly the same reading. Set how big that difference is, and run them both forward.</p>
+    <div class="panel">
+      <canvas id="chaosCv" height="250"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="chD">Difference in the starting reading <b><span id="chDV">0.40</span>%</b></label>
+        <input id="chD" type="range" min="1" max="200" step="1" value="40">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Apart after 1 day</div><div class="v" id="chD1">—</div></div>
+        <div class="rc"><div class="k">Apart after 3 days</div><div class="v" id="chD3">—</div></div>
+        <div class="rc"><div class="k">Apart after 7 days</div><div class="v" id="chD7">—</div></div>
+      </div>
+      <div class="row"><button class="act" id="chRun">Run both forecasts</button></div>
+      <div class="note" style="margin-top:11px">Turn the difference down as far as it goes. The two lines still come apart — it only takes longer.</div>
+    </div>
+    <p>Weather depends on many changing factors, such as temperature, pressure, humidity and wind. Weather forecasts use measurements and models, but very tiny differences in conditions can grow over time and lead to something completely different. This is why forecasts are usually reliable for a few hours or even a few days, but less certain further into the future.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Estimating, and connecting</div>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="35" data-coin="20">
+  <summary><span class="mno">10</span><span class="mt"><b>How much air in a day?</b><i>Example 1.3 · reasoning to a rough answer</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>You cannot measure this directly. So build it up from two things you can guess at, and see whether the answer is sensible.</p>
+    <div class="panel">
+      <div class="grid2">
+        <div>
+          <div class="knob">
+            <label for="esB">Breaths a minute <b><span id="esBV">13</span></b></label>
+            <input id="esB" type="range" min="6" max="30" step="1" value="13">
+          </div>
+          <div class="knob">
+            <label for="esV">Volume of one breath <b><span id="esVV">0.5</span> L</b></label>
+            <input id="esV" type="range" min="1" max="20" step="1" value="5">
+          </div>
+        </div>
+        <div class="note" style="line-height:2.1">
+          minutes in a day = 60 × 24 = 1440<br>
+          breaths a day = <span id="esN">—</span><br>
+          litres a day = <b style="color:var(--a1);font-size:15px" id="esL">—</b>
+        </div>
+      </div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Cross-check · balloons</div><div class="v" id="esC" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Is the answer sensible?</div><div class="v" id="esS" style="font-size:12px">—</div></div>
+      </div>
+    </div>
+    <p>At rest we take about 12 to 15 breaths a minute, so roughly 18 to 22 thousand breaths a day. It takes about 4 or 5 breaths to fill a party balloon holding about 2 litres, so one breath is perhaps 0.5 litre. That gives about 10,000 litres of air a day.</p>
+    <p>A helpful strategy is to first understand the situation being studied, then identify the quantities that matter, and finally make a rough <b>estimate</b> to check whether an answer makes sense. Exact values are not always necessary. Learning to estimate helps you build intuition, detect errors, and develop confidence in your thinking. Science values careful reasoning perhaps much more than accurate calculations.</p>
+    <div class="curio">
+      <h5>Pause and ponder</h5>
+      <div class="note">Describe one situation where an approximate answer is good enough, and one where you would need a very exact value.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="25" data-coin="10">
+  <summary><span class="mno">11</span><span class="mt"><b>Rice for a family of four</b><i>Ready to go beyond · a second estimate</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>An adult needs about 2000 to 2500 kilocalories a day. Suppose it all came from rice, and 100 g of uncooked rice gives roughly 350 kcal.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Which answers are in a sensible range for one month for four people?</div>
+      <div class="chips" id="g11"></div>
+      <button class="act" id="g11check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g11s"></div>
+    </div>
+    <p>The aim is not to get an exact number, but to check whether the answer makes sense: 100 g for a month is clearly too little, while a few tonnes is far too much. Such estimation helps connect science to everyday questions about food and resources, and shows why approximate reasoning is an important scientific skill.</p>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="30" data-coin="15">
+  <summary><span class="mno">12</span><span class="mt"><b>How does a mask really work?</b><i>The natural world has no branches</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>A surgical mask looks like one simple object. Working out how it stops a virus takes more than one subject. Pick every branch involved.</p>
+    <div class="panel">
+      <div class="chips" id="g12"></div>
+      <button class="act" id="g12check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g12s"></div>
+    </div>
+    <p>Understanding how a mask works requires concepts from physics (particle motion and electrostatic attraction), chemistry (properties of polymer fibres), biology (size and behaviour of viruses), and mathematics (modelling airflow and filtration efficiency).</p>
+    <p>After Grade 10, if you decide to study science, it will be divided into branches like physics, chemistry, biology and earth science. However, the natural world does not have any such boundaries. These divisions are made by us only to help organise knowledge; they are not independent of each other. Most real-world problems today, such as understanding climate change, developing medicines, or designing sustainable technologies, require ideas from several disciplines together.</p>
+    <p>Science is not just a collection of facts, equations or experiments. It is a human activity shaped by curiosity, creativity, collaboration and careful questioning. It grows as people ask questions, test ideas, share results, and learn from mistakes.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="80" data-coin="60">
+  <summary><span class="mno">13</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, built from this chapter's own examples and activities. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+
+<footer>NCERT Class 9 Science · Chapter 1</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   STORAGE — one adapter, used by the shelf and every chapter.
+   Picks the best backend available, in this order:
+     1. Capacitor Preferences  (native app: survives WebView clears)
+     2. localStorage           (browser / PWA)
+     3. window.storage         (preview host)
+     4. in-memory              (last resort, so nothing ever throws)
+   Everything is async, so swapping backends changes nothing upstream.
+   ============================================================ */
+const Store = (function(){
+  const MEM = {};
+  let mode = null, PREF = null;
+
+  async function init(){
+    if(mode) return mode;
+    try {
+      const cap = window.Capacitor;
+      const p = cap && cap.Plugins && cap.Plugins.Preferences;
+      if(p){ await p.get({ key:'__probe' }); PREF = p; return (mode = 'preferences'); }
+    } catch(e){}
+    try {
+      window.localStorage.setItem('__probe','1');
+      window.localStorage.removeItem('__probe');
+      return (mode = 'localstorage');
+    } catch(e){}
+    try { if(window.storage) return (mode = 'host'); } catch(e){}
+    return (mode = 'memory');
+  }
+
+  async function get(k){
+    const m = await init();
+    try {
+      if(m === 'preferences'){ const r = await PREF.get({ key:k }); return (r && r.value != null) ? JSON.parse(r.value) : null; }
+      if(m === 'localstorage'){ const v = window.localStorage.getItem(k); return v == null ? null : JSON.parse(v); }
+      if(m === 'host'){ const r = await window.storage.get(k); return r ? JSON.parse(r.value) : null; }
+    } catch(e){}
+    return MEM[k] !== undefined ? MEM[k] : null;
+  }
+
+  async function set(k, v){
+    const m = await init();
+    MEM[k] = v;
+    const s = JSON.stringify(v);
+    try {
+      if(m === 'preferences'){ await PREF.set({ key:k, value:s }); return true; }
+      if(m === 'localstorage'){ window.localStorage.setItem(k, s); return true; }
+      if(m === 'host'){ await window.storage.set(k, s); return true; }
+    } catch(e){}
+    return false;
+  }
+
+  async function remove(k){
+    const m = await init();
+    delete MEM[k];
+    try {
+      if(m === 'preferences'){ await PREF.remove({ key:k }); return; }
+      if(m === 'localstorage'){ window.localStorage.removeItem(k); return; }
+    } catch(e){}
+  }
+
+  async function keys(){
+    const m = await init();
+    try {
+      if(m === 'preferences'){ const r = await PREF.keys(); return (r && r.keys) || []; }
+      if(m === 'localstorage'){ return Object.keys(window.localStorage); }
+    } catch(e){}
+    return Object.keys(MEM);
+  }
+
+  return { get, set, remove, keys, mode: () => mode || 'unknown' };
+})();
+
+/* ============================================================
+   Chapter 1 — Exploration: Entering the World of Secondary Science
+   Progress metaphor: the chapter's own framing device. Every page
+   number is ringed by a magnifying glass and a compass — evidence
+   and direction. XP sharpens the blurred field inside the lens and
+   swings the compass needle from wondering towards knowing.
+   ============================================================ */
+const CH = {
+  id: '9-science-1',
+  key: 'ch01Exploration',
+  total: 13,
+  stages: [
+    { at:0,   f:0.05, name:'Wondering',   d:'Something is out there. You cannot make out what yet.' },
+    { at:55,  f:0.22, name:'Observing',   d:'Looking closely, noticing what might otherwise be missed.' },
+    { at:120, f:0.38, name:'Measuring',   d:'Observations turn into numbers, with agreed units attached.' },
+    { at:200, f:0.55, name:'Modelling',   d:'Keep what matters, ignore the rest on purpose. A model appears.' },
+    { at:300, f:0.70, name:'Predicting',  d:'The model says what should happen next. Now go and check.' },
+    { at:410, f:0.85, name:'Testing',     d:'Prediction meets observation. Sometimes the model has to change.' },
+    { at:530, f:1.00, name:'Exploring',   d:'Evidence through the lens, curiosity for a compass. Ready for the rest.' }
+  ],
+  paint(x, W, st, S){
+    const H = W, cx = W*0.46, cy = H*0.44;
+    x.fillStyle = '#EAF4F5'; x.fillRect(0,0,W,H);
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+    const R = W*0.30;
+    // the field seen through the lens: scattered marks that sharpen as f grows
+    x.save();
+    x.beginPath(); x.arc(cx,cy,R,0,7); x.clip();
+    x.fillStyle = '#DCEEF0'; x.fillRect(cx-R,cy-R,R*2,R*2);
+    for(let i=0;i<26;i++){
+      const a = i*2.399, rr = R*(0.16 + ((i*37)%53)/53*0.78);
+      const px = cx + Math.cos(a)*rr*0.8, py = cy + Math.sin(a*1.31)*rr*0.8;
+      x.globalAlpha = 0.18 + f*0.62;
+      x.fillStyle = i%3 ? '#2F9AA8' : '#F2703C';
+      const s = (1-f)*3.6 + 0.9;              // blurred blobs shrink into crisp points
+      x.beginPath(); x.arc(px,py,s,0,7); x.fill();
+    }
+    x.globalAlpha = 1;
+    x.restore();
+    // lens rim and handle
+    x.strokeStyle = '#2F9AA8'; x.lineWidth = 3;
+    x.beginPath(); x.arc(cx,cy,R,0,7); x.stroke();
+    x.strokeStyle = '#7A6242'; x.lineWidth = 5; x.lineCap = 'round';
+    x.beginPath(); x.moveTo(cx+R*0.72, cy+R*0.72); x.lineTo(cx+R*1.5, cy+R*1.5); x.stroke();
+    x.lineCap = 'butt';
+    // compass needle, swinging from wandering to due north as f grows
+    const nx = W*0.845, ny = H*0.17, nr = W*0.11;
+    x.fillStyle = '#FFFFFF'; x.strokeStyle = '#B9C6CC'; x.lineWidth = 1.4;
+    x.beginPath(); x.arc(nx,ny,nr,0,7); x.fill(); x.stroke();
+    const ang = -Math.PI/2 + (1-f)*1.5*Math.sin(S.xp*0.7);
+    x.strokeStyle = '#F2703C'; x.lineWidth = 2.4;
+    x.beginPath(); x.moveTo(nx,ny); x.lineTo(nx+Math.cos(ang)*nr*0.78, ny+Math.sin(ang)*nr*0.78); x.stroke();
+    x.strokeStyle = '#9AA8B4'; x.lineWidth = 1.6;
+    x.beginPath(); x.moveTo(nx,ny); x.lineTo(nx-Math.cos(ang)*nr*0.5, ny-Math.sin(ang)*nr*0.5); x.stroke();
+  }
+};
+
+/* ============================================================
+   SHARED ENGINE — identical across every chapter.
+   Chapter files supply CH (config) above and interactives below.
+   ============================================================ */
+
+/* persistence: see storage.js, concatenated above. */
+
+const TOTAL = CH.total;
+let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0, exploreToday:0, questsPaid:{} };
+
+const today = () => new Date().toISOString().slice(0,10);
+const yday  = () => new Date(Date.now()-864e5).toISOString().slice(0,10);
+
+let saveT;
+function save(){
+  clearTimeout(saveT);
+  saveT = setTimeout(()=>{
+    Store.set(CH.key, S);
+    // summary the library shell reads to roll progress up across chapters
+    Store.set('nb.sum.' + CH.id, {
+      xp: S.xp, coins: S.coins,
+      done: Object.keys(S.done).length, total: TOTAL,
+      updated: Date.now()
+    });
+    Store.set('nb.last', CH.id);
+  }, 400);
+}
+
+/* ---------- toast ---------- */
+const toastEl = document.getElementById('toast');
+let toastT;
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(()=>toastEl.classList.remove('show'), 2200);
+}
+
+/* ---------- daily quests ---------- */
+const QUESTS = [
+  { id:'q1', text:'Finish 2 missions',            xp:40, hit:()=>S.missionsToday >= 2 },
+  { id:'q2', text:'Get one activity fully right', xp:30, hit:()=>S.perfectToday  >= 1 },
+  { id:'q3', text:'Try 3 interactive controls',   xp:20, hit:()=>S.exploreToday  >= 3 }
+];
+
+function ev(kind){
+  if(kind === 'mission')  S.missionsToday++;
+  if(kind === 'perfect')  S.perfectToday++;
+  if(kind === 'explore')  S.exploreToday++;
+  checkQuests(); save();
+}
+
+function checkQuests(){
+  QUESTS.forEach(q=>{
+    if(q.hit() && !S.questsPaid[q.id]){
+      S.questsPaid[q.id] = true;
+      S.xp += q.xp;
+      toast('Quest complete · +' + q.xp + ' XP');
+    }
+  });
+  renderHQ();
+}
+
+/* ---------- progress visual (chapter supplies stages + painter) ---------- */
+function stageOf(xp){ let s = CH.stages[0]; CH.stages.forEach(t=>{ if(xp >= t.at) s = t; }); return s; }
+
+function drawBadge(){
+  const cv = document.getElementById('colony');
+  if(!cv) return;
+  const r = window.devicePixelRatio || 1, W = 96;
+  cv.width = Math.round(96*r); cv.height = Math.round(96*r);
+  cv.style.width = '96px'; cv.style.height = '96px';
+  const x = cv.getContext('2d');
+  if(!x) return;
+  x.setTransform(r,0,0,r,0,0);
+  const st = stageOf(S.xp);
+  x.clearRect(0,0,W,W);
+  CH.paint(x, W, st, S);
+  document.getElementById('colName').textContent = st.name;
+  document.getElementById('colDesc').textContent = st.d;
+  const next = CH.stages[CH.stages.indexOf(st)+1];
+  const pct = next ? Math.min(100, ((S.xp-st.at)/(next.at-st.at))*100) : 100;
+  document.getElementById('colBar').style.width = pct + '%';
+}
+
+/* ---------- HQ ---------- */
+function renderHQ(){
+  document.getElementById('sXp').textContent = S.xp;
+  document.getElementById('sCoin').textContent = S.coins;
+  document.getElementById('sStreak').textContent = S.streak;
+  document.getElementById('sDone').textContent = Object.keys(S.done).length + '/' + TOTAL;
+  const list = document.getElementById('qList');
+  list.innerHTML = '';
+  QUESTS.forEach(q=>{
+    const paid = !!S.questsPaid[q.id];
+    const d = document.createElement('div');
+    d.className = 'quest' + (paid ? ' done' : '');
+    d.innerHTML = '<span class="tick">' + (paid ? '\u2713' : '') + '</span><span>' + q.text + '</span><b>+' + q.xp + ' XP</b>';
+    list.appendChild(d);
+  });
+  drawBadge();
+}
+
+/* ---------- mission completion ---------- */
+function complete(id){
+  const el = document.getElementById(id);
+  if(!el || S.done[id]) return;
+  S.done[id] = true;
+  const xp = +el.dataset.xp, coin = +el.dataset.coin;
+  S.xp += xp; S.coins += coin;
+  el.classList.add('done');
+  el.querySelector('.mstat').textContent = 'DONE';
+  toast('Mission complete \u00b7 +' + xp + ' XP \u00b7 +' + coin + ' coins');
+  ev('mission');
+  save(); renderHQ();
+}
+
+function markDone(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.add('done');
+  el.querySelector('.mstat').textContent = 'DONE';
+}
+
+/* ---------- single-question block (data-q + .why) ---------- */
+document.querySelectorAll('[data-q]').forEach(g=>{
+  g.addEventListener('click', e=>{
+    const btn = e.target.closest('button');
+    if(!btn || !g.contains(btn)) return;
+    if(g.dataset.answered) return;
+    g.dataset.answered = '1';
+    [...g.querySelectorAll('button')].forEach(b=>b.classList.remove('right','wrong'));
+    const ok = !!btn.dataset.ok;
+    btn.classList.add(ok ? 'right' : 'wrong');
+    if(!ok){ const k = g.querySelector('[data-ok]'); if(k) k.classList.add('right'); }
+    const why = g.parentElement.querySelector('.why');
+    if(why) why.classList.add('show');
+    if(ok) ev('perfect');
+    if(g.dataset.m) complete(g.dataset.m);
+  });
+});
+
+/* ---------- canvas helpers ---------- */
+function fit(cv, h){
+  const r = window.devicePixelRatio || 1, w = cv.clientWidth || 320;
+  cv.width  = Math.round(w*r);
+  cv.height = Math.round(h*r);
+  cv.style.height = h + 'px';        // without this the element renders h*dpr tall
+  const x = cv.getContext('2d');
+  if(!x) return null;
+  x.setTransform(r,0,0,r,0,0);
+  x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  return x;
+}
+const mono = (x,s,w) => x.font = (w||400) + ' ' + s + 'px "IBM Plex Mono",monospace';
+const sans = (x,s,w) => x.font = (w||400) + ' ' + s + 'px "IBM Plex Sans",sans-serif';
+function shuffle(a){ a = a.slice(); for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function arrow(x, x1,y1, x2,y2, col, head){
+  head = head || 7;
+  x.strokeStyle = col; x.fillStyle = col; x.lineWidth = 2;
+  x.beginPath(); x.moveTo(x1,y1); x.lineTo(x2,y2); x.stroke();
+  const a = Math.atan2(y2-y1, x2-x1);
+  x.beginPath(); x.moveTo(x2,y2);
+  x.lineTo(x2-head*Math.cos(a-0.4), y2-head*Math.sin(a-0.4));
+  x.lineTo(x2-head*Math.cos(a+0.4), y2-head*Math.sin(a+0.4));
+  x.closePath(); x.fill();
+}
+
+/* ============================================================
+   REUSABLE GAME COMPONENTS
+   ============================================================ */
+const Q = {
+
+  /* --- tap-in-order: sequences, timelines, levels of organisation --- */
+  order(boxId, scoreId, items, mid, doneMsg){
+    const box = document.getElementById(boxId), sc = document.getElementById(scoreId);
+    if(!box) return;
+    let at = 0;
+    const n = items.length;
+    shuffle(items).forEach(t=>{
+      const b = document.createElement('button');
+      b.className = 'chip'; b.textContent = t;
+      b.onclick = ()=>{
+        if(b.classList.contains('gone')) return;
+        if(t === items[at]){
+          b.classList.add('right','gone'); at++;
+          sc.textContent = at + ' of ' + n + ' placed';
+          if(at === n){ sc.textContent = doneMsg || 'Correct order.'; ev('perfect'); complete(mid); }
+        } else {
+          b.classList.add('wrong');
+          setTimeout(()=>b.classList.remove('wrong'), 500);
+          sc.textContent = 'Not yet \u2014 what comes after ' + (at ? items[at-1].toLowerCase() : 'nothing') + '?';
+        }
+      };
+      box.appendChild(b);
+    });
+    sc.textContent = '0 of ' + n + ' placed';
+  },
+
+  /* --- two-column matching: term <-> function, part <-> job --- */
+  match(aId, bId, scoreId, pairs, mid, doneMsg){
+    const A = document.getElementById(aId), B = document.getElementById(bId), sc = document.getElementById(scoreId);
+    if(!A || !B) return;
+    let sel = null, n = 0;
+    function mk(parent, label, key, side){
+      const b = document.createElement('button');
+      b.className = 'chip';
+      b.style.cssText = 'width:100%;margin-bottom:7px;font-size:12.5px;text-align:left';
+      b.textContent = label; b.dataset.key = key; b.dataset.side = side;
+      parent.appendChild(b);
+    }
+    shuffle(pairs).forEach(p=>mk(A, p[0], p[0], 'a'));
+    shuffle(pairs).forEach(p=>mk(B, p[1], p[0], 'b'));
+    function click(e){
+      const b = e.target.closest('button');
+      if(!b || b.classList.contains('gone')) return;
+      if(!sel || sel.dataset.side === b.dataset.side){
+        if(sel) sel.classList.remove('on');
+        sel = b; b.classList.add('on'); return;
+      }
+      if(sel.dataset.key === b.dataset.key){
+        sel.classList.add('right','gone'); b.classList.add('right','gone'); sel = null; n++;
+        sc.textContent = n + ' of ' + pairs.length + ' matched';
+        if(n === pairs.length){ sc.textContent = doneMsg || 'All matched.'; ev('perfect'); complete(mid); }
+      } else {
+        const s = sel; b.classList.add('wrong'); s.classList.add('wrong');
+        setTimeout(()=>{ b.classList.remove('wrong'); s.classList.remove('wrong','on'); }, 500);
+        sel = null;
+      }
+    }
+    A.addEventListener('click', click); B.addEventListener('click', click);
+    sc.textContent = '0 of ' + pairs.length + ' matched';
+  },
+
+  /* --- choice rows: true/false misconception checks, and N-way sorters --- */
+  rows(boxId, scoreId, rows, choices, mid, doneMsg){
+    const box = document.getElementById(boxId), sc = document.getElementById(scoreId);
+    if(!box) return;
+    let n = 0, answered = 0;
+    rows.forEach(s=>{
+      const row = document.createElement('div');
+      row.className = 'qrow';
+      const txt = document.createElement('span'); txt.className = 't'; txt.textContent = s.t;
+      row.appendChild(txt);
+      const btns = choices.map((c,ci)=>{
+        const b = document.createElement('button');
+        b.className = 'chip'; b.textContent = c;
+        b.onclick = ()=>{
+          if(row.dataset.done) return;
+          row.dataset.done = '1'; answered++;
+          const ok = (ci === s.a);
+          b.classList.add(ok ? 'right' : 'wrong');
+          btns.forEach(o=>{ if(o !== b) o.classList.add('gone'); });
+          if(!ok) btns[s.a].classList.add('right');
+          if(ok) n++;
+          sc.textContent = n + ' of ' + rows.length + ' correct';
+          if(answered === rows.length){
+            if(n === rows.length){ sc.textContent = doneMsg || 'All correct.'; ev('perfect'); }
+            complete(mid);
+          }
+        };
+        row.appendChild(b); return b;
+      });
+      box.appendChild(row);
+    });
+    sc.textContent = '0 of ' + rows.length + ' correct';
+  },
+
+  /* --- tick grid: self-marking comparison tables straight from the chapter --- */
+  grid(tableId, checkId, scoreId, cfg){
+    const tbl = document.getElementById(tableId), sc = document.getElementById(scoreId);
+    if(!tbl) return;
+    const cols = cfg.cols, ROWS = cfg.rows, marks = cfg.marks || ['\u2713','\u2717'];
+    const nc = cols.length, cells = ROWS.length * nc;
+    const state = ROWS.map(()=>new Array(nc).fill(-1));
+    let html = '<tr><th style="text-align:left">' + cfg.head + '</th>';
+    cols.forEach(c=>html += '<th>' + c + '</th>');
+    html += '</tr>';
+    ROWS.forEach((r,ri)=>{
+      html += '<tr><td class="lbl">' + r.l + '</td>';
+      for(let c=0;c<nc;c++) html += '<td class="c" style="width:' + Math.floor(60/nc) + '%" data-r="' + ri + '" data-c="' + c + '"></td>';
+      html += '</tr>';
+    });
+    tbl.innerHTML = html;
+    tbl.addEventListener('click', e=>{
+      const td = e.target.closest('td.c'); if(!td) return;
+      const r = +td.dataset.r, c = +td.dataset.c;
+      state[r][c] = state[r][c] === -1 ? 1 : state[r][c] === 1 ? 0 : -1;
+      td.className = 'c ' + (state[r][c] === 1 ? 'yes' : state[r][c] === 0 ? 'no' : '');
+      td.textContent = state[r][c] === 1 ? marks[0] : state[r][c] === 0 ? marks[1] : '';
+      td.style.width = Math.floor(60/nc) + '%';
+    });
+    document.getElementById(checkId).onclick = ()=>{
+      let right = 0, filled = 0;
+      ROWS.forEach((r,ri)=>{
+        for(let c=0;c<nc;c++){
+          const td = tbl.querySelector('[data-r="'+ri+'"][data-c="'+c+'"]');
+          td.classList.remove('err');
+          if(state[ri][c] === -1) continue;
+          filled++;
+          if(state[ri][c] === r.a[c]) right++; else td.classList.add('err');
+        }
+      });
+      if(filled < cells){ sc.textContent = 'Fill all ' + cells + ' boxes first \u2014 ' + filled + ' done.'; return; }
+      sc.textContent = right + ' of ' + cells + ' correct.';
+      if(right === cells){
+        sc.textContent = cfg.doneMsg || (cells + ' of ' + cells + '.');
+        ev('perfect'); complete(cfg.mid);
+      }
+    };
+    sc.textContent = '';
+  },
+
+  /* --- value grid: same self-marking table, cells hold values not ticks --- */
+  vgrid(tableId, checkId, scoreId, cfg){
+    const tbl = document.getElementById(tableId), sc = document.getElementById(scoreId);
+    if(!tbl) return;
+    const cols = cfg.cols, ROWS = cfg.rows, nc = cols.length;
+    let cells = 0;
+    let html = '<tr><th style="text-align:left">' + cfg.head + '</th>';
+    cols.forEach(c=>html += '<th>' + c + '</th>');
+    html += '</tr>';
+    ROWS.forEach((r,ri)=>{
+      html += '<tr><td class="lbl">' + r.l + '</td>';
+      for(let c=0;c<nc;c++){
+        const given = r.given && r.given[c] !== undefined && r.given[c] !== null;
+        if(given){ html += '<td style="color:var(--dim)">' + r.given[c] + '</td>'; }
+        else {
+          cells++;
+          html += '<td><select data-r="' + ri + '" data-c="' + c + '"><option value="">\u2014</option>' +
+            cfg.options[c].map(o=>'<option value="' + o + '">' + o + '</option>').join('') + '</select></td>';
+        }
+      }
+      html += '</tr>';
+    });
+    tbl.innerHTML = html;
+    document.getElementById(checkId).onclick = ()=>{
+      let right = 0, filled = 0;
+      tbl.querySelectorAll('select').forEach(sel=>{
+        const r = +sel.dataset.r, c = +sel.dataset.c;
+        sel.style.borderColor = 'var(--rule)'; sel.style.color = 'var(--ink)';
+        if(!sel.value) return;
+        filled++;
+        if(sel.value === String(ROWS[r].a[c])){ right++; sel.style.borderColor = 'var(--good)'; sel.style.color = 'var(--good)'; }
+        else { sel.style.borderColor = 'var(--bad)'; sel.style.color = 'var(--bad)'; }
+      });
+      if(filled < cells){ sc.textContent = 'Fill all ' + cells + ' boxes first \u2014 ' + filled + ' done.'; return; }
+      sc.textContent = right + ' of ' + cells + ' correct.';
+      if(right === cells){
+        sc.textContent = cfg.doneMsg || (cells + ' of ' + cells + '.');
+        ev('perfect'); complete(cfg.mid);
+      }
+    };
+    sc.textContent = '';
+  },
+
+  /* --- choose-all-that-apply --- */
+  pick(boxId, checkId, scoreId, items, mid, doneMsg){
+    const box = document.getElementById(boxId), sc = document.getElementById(scoreId);
+    if(!box) return;
+    const picked = new Set();
+    items.forEach((it,i)=>{
+      const b = document.createElement('button');
+      b.className = 'chip'; b.textContent = it.t;
+      b.onclick = ()=>{
+        if(box.dataset.done) return;
+        if(picked.has(i)){ picked.delete(i); b.classList.remove('on'); }
+        else { picked.add(i); b.classList.add('on'); }
+        sc.textContent = picked.size + ' selected';
+      };
+      box.appendChild(b); it._b = b;
+    });
+    document.getElementById(checkId).onclick = ()=>{
+      if(box.dataset.done) return;
+      box.dataset.done = '1';
+      let right = 0;
+      items.forEach((it,i)=>{
+        const should = !!it.a, did = picked.has(i);
+        it._b.classList.remove('on');
+        if(should) it._b.classList.add(did ? 'right' : 'wrong');
+        else if(did) it._b.classList.add('wrong');
+        else it._b.classList.add('gone');
+        if(should === did) right++;
+      });
+      const perfect = right === items.length;
+      sc.textContent = perfect ? (doneMsg || 'All correct.') : (right + ' of ' + items.length + ' decided correctly.');
+      if(perfect) ev('perfect');
+      complete(mid);
+    };
+    sc.textContent = '0 selected';
+  },
+
+  /* --- boss battle: ten questions, health bars, difficulty ladder --- */
+  boss(QS, mid, winMsg){
+    let i = 0, bhp = 100, yhp = 100, live = false;
+    const qEl = document.getElementById('bossQ'), oEl = document.getElementById('bossOpts'),
+          wEl = document.getElementById('bossWhy'), tEl = document.getElementById('bossTier'),
+          startB = document.getElementById('bossStart');
+    if(!qEl) return;
+    function bars(){
+      document.getElementById('bossHp').style.width = bhp + '%';
+      document.getElementById('youHp').style.width = yhp + '%';
+      document.getElementById('bossHpTxt').textContent = 'Boss ' + bhp + '%';
+      document.getElementById('youHpTxt').textContent = yhp + '%';
+      document.getElementById('bossQn').textContent = 'Question ' + Math.min(i+1, QS.length) + ' of ' + QS.length;
+    }
+    function show(){
+      if(!live) return;
+      if(bhp <= 0){ finish(true);  return; }
+      if(yhp <= 0){ finish(false); return; }
+      if(i >= QS.length){ finish(bhp <= 0); return; }
+      const q = QS[i];
+      qEl.textContent = q.q;
+      tEl.textContent = q.t;
+      wEl.classList.remove('show'); oEl.innerHTML = '';
+      q.o.forEach((o,k)=>{
+        const b = document.createElement('button');
+        b.className = 'opt'; b.textContent = o;
+        b.onclick = ()=>{
+          [...oEl.children].forEach(c=>c.disabled = true);
+          const ok = k === q.a;
+          b.classList.add(ok ? 'right' : 'wrong');
+          if(!ok) oEl.children[q.a].classList.add('right');
+          if(ok) bhp = Math.max(0, bhp - 12); else yhp = Math.max(0, yhp - 20);
+          wEl.textContent = q.w; wEl.classList.add('show');
+          bars(); i++;
+          setTimeout(show, 2600);
+        };
+        oEl.appendChild(b);
+      });
+      bars();
+    }
+    function finish(won){
+      live = false; oEl.innerHTML = ''; tEl.textContent = '';
+      if(won){
+        qEl.textContent = 'Boss defeated. You have finished the chapter.';
+        wEl.textContent = winMsg; wEl.classList.add('show');
+        complete(mid); ev('perfect');
+        startB.style.display = 'none';
+      } else {
+        qEl.textContent = 'The boss won this round.';
+        wEl.textContent = 'Go back through the missions you are least sure of, then try again.';
+        wEl.classList.add('show');
+        startB.textContent = 'Try again'; startB.style.display = '';
+      }
+    }
+    startB.onclick = ()=>{
+      i = 0; bhp = 100; yhp = 100; live = true;
+      startB.style.display = 'none'; wEl.classList.remove('show');
+      show();
+    };
+    bars();
+  }
+};
+
+/* ============================================================
+   redraw on open / resize / fonts
+   ============================================================ */
+const REG = {}, AUTO = {};
+function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
+function auto(id, fn){ AUTO[id] = fn; }
+
+function redrawAll(){
+  Object.keys(REG).forEach(id=>{
+    const d = document.getElementById(id);
+    if(d && d.open) REG[id].forEach(f=>{ try { f(); } catch(e){ console.error(id, e); } });
+  });
+}
+
+document.querySelectorAll('details.m').forEach(d=>{
+  d.addEventListener('toggle', ()=>{
+    if(!d.open) return;
+    // double rAF, not setTimeout: clientWidth is 0 until the box has laid out
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      redrawAll();
+      if(AUTO[d.id] && !d.dataset.auto){
+        d.dataset.auto = '1';                 // auto-play once, no XP for the auto-run
+        setTimeout(()=>{ try { AUTO[d.id](); } catch(e){ console.error(e); } }, 450);
+      }
+    }));
+  });
+});
+let rzT;
+window.addEventListener('resize', ()=>{ clearTimeout(rzT); rzT = setTimeout(redrawAll, 120); });
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>setTimeout(redrawAll, 50));
+
+/* ---------- 30fps ticker for the live benches ---------- */
+const TICK = [];
+function tick(id, fn){ TICK.push([id, fn]); }
+setInterval(()=>{
+  TICK.forEach(([id,fn])=>{
+    const d = document.getElementById(id);
+    if(d && d.open){ try { fn(); } catch(e){} }
+  });
+}, 1000/30);
+
+/* ============================================================
+   Chapter 1 interactives
+   Bespoke canvases: cricket model (M1) · fuel loading (M4)
+                     forecast divergence (M9)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#4FD8E8', A2='#F2703C',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', BG='#10141F';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* ============================================================
+   M1 — a cricket ball hit for six
+   Some toggles bend the curve. Some do nothing at all. That is
+   the whole point of the mission, and the page cannot show it.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('sixCv'), box=document.getElementById('sixOpts');
+  const BOUND=68;
+  const F=[
+    {k:'mass',  t:'Mass of the ball',        on:true,  matters:true,  eff:-0.00,  note:'Mass matters \u2014 it decides how much the same hit accelerates the ball.'},
+    {k:'speed', t:'Speed and direction of the hit', on:true, matters:true, eff:0, note:'Speed and direction of the hit are the two things the answer depends on most.'},
+    {k:'air',   t:'Air resistance',          on:false, matters:'small', eff:-7.5, note:'Air resistance has a smaller effect. Include it and the carry drops a few metres.'},
+    {k:'spin',  t:'Spin of the ball',        on:false, matters:'small', eff:-2.4, note:'Spin has a small effect on the carry \u2014 usually safe to ignore in a simple model.'},
+    {k:'seam',  t:'Stitching at the seam',   on:false, matters:'small', eff:-1.1, note:'The seam stitching has a very small effect. Ignore it.'},
+    {k:'brand', t:'Brand of the bat',        on:false, matters:false, eff:0,     note:'Brand of the bat: no effect at all on the physics. Leave it out.'},
+    {k:'col',   t:'Colour of the ball',      on:false, matters:false, eff:0,     note:'Colour of the ball: no effect at all. Leave it out.'},
+    {k:'grass', t:'Grass on the outfield',   on:false, matters:false, eff:0,     note:'Grass on the outfield changes nothing about whether the ball crosses the rope in the air.'}
+  ];
+  let flying=false, ft=0, carry=0, touched={}, award=false;
+  function computeCarry(){
+    let d=74;
+    F.forEach(f=>{ if(f.on) d+=f.eff; });
+    return d;
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,230); if(!x) return;
+    const W=cv.clientWidth, H=230, ground=H-30, L=22, R=W-14;
+    const span=100;
+    const px=m=>L+(m/span)*(R-L);
+    bg(x,W,H);
+    x.fillStyle='#1C2A1C'; x.fillRect(0,ground,W,30);
+    // boundary rope
+    x.strokeStyle=A2; x.lineWidth=2;
+    x.beginPath(); x.moveTo(px(BOUND),ground-8); x.lineTo(px(BOUND),ground+10); x.stroke();
+    mono(x,9,500); x.fillStyle=A2; x.textAlign='center'; x.textBaseline='top';
+    x.fillText('rope', px(BOUND), ground+13);
+    // trajectory
+    const d=computeCarry();
+    const traj = u => { const xx=u*d; return [px(xx), ground - Math.sin(Math.PI*u)*(H-96)*(d/80)]; };
+    x.strokeStyle='rgba(79,216,232,.4)'; x.lineWidth=2; x.setLineDash([4,4]);
+    x.beginPath();
+    for(let u=0;u<=1.001;u+=0.02){ const p=traj(u); u?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]); }
+    x.stroke(); x.setLineDash([]);
+    // ball
+    const u = flying ? Math.min(1,ft) : 0;
+    const p = traj(u);
+    x.fillStyle=BAD; x.beginPath(); x.arc(p[0],p[1],5.5,0,7); x.fill();
+    // batter
+    x.strokeStyle=INK; x.lineWidth=2;
+    x.beginPath(); x.arc(px(0), ground-24, 4, 0, 7); x.stroke();
+    x.beginPath(); x.moveTo(px(0),ground-20); x.lineTo(px(0),ground-8);
+    x.moveTo(px(0)-6,ground); x.lineTo(px(0),ground-8); x.lineTo(px(0)+6,ground); x.stroke();
+    mono(x,10,500); x.fillStyle=A1; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('carry '+d.toFixed(1)+' m', 8, 8);
+    document.getElementById('sixD').textContent=d.toFixed(1)+' m';
+    const r=document.getElementById('sixR');
+    if(d>=BOUND){ r.textContent='Six \u2014 clears the rope'; r.style.color=GOOD; }
+    else { r.textContent='Caught inside the rope'; r.style.color=BAD; }
+    carry=d;
+  }
+  function build(){
+    F.forEach(f=>{
+      const b=document.createElement('button');
+      b.className='chip'+(f.on?' on':'');
+      b.textContent=f.t;
+      b.onclick=()=>{
+        f.on=!f.on; b.classList.toggle('on', f.on);
+        touched[f.k]=1; award=true; ev('explore');
+        document.getElementById('sixTxt').textContent=f.note;
+        if(Object.keys(touched).length>=4){ ev('perfect'); complete('m1'); }
+        draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('sixTxt').textContent='Toggle a detail and watch the dotted curve. Some of these move it. Four of them do nothing whatsoever.';
+  }
+  function hit(user){ award=award||!!user; flying=true; ft=0; }
+  if(cv){
+    build();
+    document.getElementById('sixHit').onclick=()=>{ hit(true); ev('explore'); };
+    document.getElementById('sixB').textContent=BOUND+' m';
+  }
+  tick('m1',()=>{ if(flying){ ft+=0.02; if(ft>=1.35){ flying=false; ft=0; } } draw(); });
+  reg('m1',draw); auto('m1',()=>hit(false));
+})();
+
+/* ============================================================
+   M2 — Activity 1.1, what to keep and what to ignore
+   ============================================================ */
+Q.rows('g2','g2s',[
+  {t:'The distance from school to your home',        a:0},
+  {t:'Your usual cycling speed',                     a:0},
+  {t:'The colour of your bicycle',                   a:1},
+  {t:'How many traffic signals you must stop at',    a:0},
+  {t:'The name of your school',                      a:1},
+  {t:'Whether the road runs uphill or downhill',     a:0},
+  {t:'What you had for breakfast',                   a:1}
+], ['Keep it','Ignore it'], 'm2',
+   'All seven. Ignoring the rest is not carelessness \u2014 it is what makes the model usable.');
+
+/* ============================================================
+   M3 — quantities, symbols and units
+   ============================================================ */
+Q.match('g3a','g3b','g3s',[
+  ['Mass',             'm  \u00b7  kilogram (kg)'],
+  ['Velocity',         'v  \u00b7  metre per second (m/s)'],
+  ['Force',            'F  \u00b7  newton (N)'],
+  ['Electric current', 'I  \u00b7  ampere (A)'],
+  ['Speed of light',   'c  \u00b7  from Latin celeritas']
+], 'm3', 'All five. The symbols come from history and agreement, not from convenience.');
+
+/* ============================================================
+   M4 — the fuel miscalculation
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('fuelCv'), box=document.getElementById('fuelPick');
+  const NEED_KG=22300, DENS_KG=0.803, DENS_LB=1.77;
+  const NEED_L=NEED_KG/DENS_KG;
+  let choice=null, tried={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,210); if(!x) return;
+    const W=cv.clientWidth, H=210;
+    bg(x,W,H);
+    const loaded = choice===null ? 0 : (choice==='kg' ? NEED_L : NEED_KG/DENS_LB);
+    const frac = Math.min(1, loaded/NEED_L);
+    // tank
+    const tx=18, ty=44, tw=W-36, th=54;
+    x.strokeStyle=RULE; x.lineWidth=1.5; x.strokeRect(tx,ty,tw,th);
+    x.fillStyle= frac<0.85 ? 'rgba(242,112,60,.34)' : 'rgba(79,216,232,.30)';
+    x.fillRect(tx+1.5, ty+1.5, (tw-3)*frac, th-3);
+    x.strokeStyle=A1; x.setLineDash([5,4]); x.lineWidth=1.6;
+    x.beginPath(); x.moveTo(tx+tw*1.0, ty-6); x.lineTo(tx+tw*1.0, ty+th+6); x.stroke(); x.setLineDash([]);
+    mono(x,9,500); x.fillStyle=A1; x.textAlign='right'; x.textBaseline='bottom';
+    x.fillText('needed', tx+tw, ty-9);
+    mono(x,10,500); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText(loaded?Math.round(loaded).toLocaleString('en-IN')+' L':'\u2014', tx+8, ty+th/2);
+    // the flight path
+    const gy=H-24;
+    x.strokeStyle=RULE; x.lineWidth=1.4;
+    x.beginPath(); x.moveTo(18,gy); x.lineTo(W-18,gy); x.stroke();
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('take-off', 18, gy+5);
+    x.textAlign='right'; x.fillText('destination', W-18, gy+5);
+    const reach = 18 + (W-36)*Math.min(1,frac);
+    x.strokeStyle= frac<0.85 ? A2 : A1; x.lineWidth=2.4;
+    x.beginPath();
+    for(let i=0;i<=40;i++){
+      const u=i/40, px=18+(W-36)*u*Math.min(1,frac), py=gy-36*Math.sin(Math.PI*Math.min(1,u));
+      i?x.lineTo(px,py):x.moveTo(px,py);
+    }
+    x.stroke();
+    x.fillStyle= frac<0.85 ? A2 : A1;
+    x.beginPath(); x.arc(reach, gy-36*Math.sin(Math.PI*1), 4.5, 0, 7); x.fill();
+    if(choice && frac<0.85){
+      x.strokeStyle=A2; x.lineWidth=2;
+      x.beginPath(); x.moveTo(reach-6,gy-10); x.lineTo(reach+6,gy+2);
+      x.moveTo(reach-6,gy+2); x.lineTo(reach+6,gy-10); x.stroke();
+    }
+    document.getElementById('fuLoad').textContent = loaded ? Math.round(loaded).toLocaleString('en-IN')+' L' : '\u2014';
+    document.getElementById('fuNeed').textContent = Math.round(NEED_L).toLocaleString('en-IN')+' L';
+    const o=document.getElementById('fuOut');
+    if(!choice){ o.textContent='Pick a density above'; o.style.color=DIM; }
+    else if(frac>=0.85){ o.textContent='Lands normally'; o.style.color=GOOD; }
+    else { o.textContent='Runs dry mid-flight, about '+Math.round(NEED_L-loaded).toLocaleString('en-IN')+' L short'; o.style.color=BAD; }
+  }
+  if(cv){
+    [['kg','0.803 kg per litre'],['lb','1.77 lb per litre']].forEach(c=>{
+      const b=document.createElement('button');
+      b.className='chip'; b.textContent=c[1];
+      b.onclick=()=>{
+        choice=c[0]; tried[c[0]]=1; ev('explore');
+        [...box.children].forEach(k=>k.classList.remove('on'));
+        b.classList.add('on');
+        document.getElementById('fuTxt').textContent = c[0]==='kg'
+          ? 'Kilograms per litre is the SI-consistent figure. 22,300 \u00f7 0.803 gives about 27,800 litres and the aircraft lands normally.'
+          : 'Pounds per litre. The number looks bigger, so it seems like plenty of fuel \u2014 but a pound is far lighter than a kilogram, so far too few litres go in. This is the mistake the real ground crew made.';
+        if(Object.keys(tried).length>=2){ ev('perfect'); complete('m4'); }
+        draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('fuTxt').textContent='Two densities, two answers. Try both.';
+  }
+  reg('m4',draw);
+})();
+
+/* ============================================================
+   M5 — how to use mathematics in science
+   ============================================================ */
+Q.order('g5','g5s',
+  ['Understand the situation first','Identify the quantities that matter',
+   'Find the relationship between them','Reason carefully with it','Check the answer makes sense'],
+  'm5', 'That is the order the chapter recommends. Memorising the equation is nowhere in it.');
+
+/* ============================================================
+   M6 — law, theory or principle
+   ============================================================ */
+Q.rows('g6','g6s',[
+  {t:'Newton\u2019s laws of motion, explaining the jerk when a bus stops', a:0},
+  {t:'The atomic theory, explaining how molecules are formed',        a:1},
+  {t:'Conservation of energy, applied when climbing the stairs',      a:2},
+  {t:'A regular pattern observed in nature, written as a relationship', a:0},
+  {t:'An explanation of why a pattern occurs, built on evidence',     a:1}
+], ['Law','Theory','Principle'], 'm6',
+   'All five. A law says what happens, a theory says why, a principle is the broad idea you carry across situations.');
+
+/* ============================================================
+   M7 — what a theory actually is
+   ============================================================ */
+Q.rows('g7','g7s',[
+  {t:'In science, a theory is a guess that has not been tested yet.',        a:1},
+  {t:'A theory is an explanation based on careful testing and examination.', a:0},
+  {t:'A scientific theory can change as new evidence becomes available.',    a:0},
+  {t:'A theory failing under new conditions is a weakness of science.',      a:1},
+  {t:'Scientists reject ideas on evidence, not on opinion or belief.',       a:0},
+  {t:'Once enough evidence is gathered, a theory becomes final and beyond question.', a:1}
+], ['True','False'], 'm7',
+   'All six. Openness to being corrected by nature is exactly what makes science reliable.');
+
+/* ============================================================
+   M8 — turning a prediction into a testable one
+   ============================================================ */
+Q.pick('g8','g8check','g8s',[
+  {t:'What was the sky like the last time it rained here?', a:1},
+  {t:'What is the humidity today?',                          a:1},
+  {t:'Was humidity above 80 per cent last time it rained?',  a:1},
+  {t:'What is today\u2019s wind speed and direction?',       a:1},
+  {t:'Is the temperature dropping the way it did before recent rains?', a:1},
+  {t:'Do the clouds look dark to you as well?',              a:0},
+  {t:'Do you think it will rain, yes or no?',                a:0},
+  {t:'Have you got a good feeling about it?',                a:0}
+], 'm8', 'Right. Measurable evidence and past patterns \u2014 not yes-or-no questions and not opinions.');
+
+/* ============================================================
+   M9 — why forecasts go wrong
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('chaosCv'), dS=document.getElementById('chD');
+  let running=false, t=0, award=false, sawEnd=false;
+  const DAYS=7;
+  /* two runs of the same simple model, from slightly different starts.
+     the gap between them grows roughly exponentially with time.        */
+  function series(seed){
+    const pts=[]; let v=seed;
+    for(let i=0;i<=DAYS*12;i++){
+      const d=i/12;
+      v = seed + 0.30*Math.sin(d*2.1) + 0.18*Math.sin(d*5.3+seed*40) + (seed-0.5)*Math.pow(2.15,d)*0.5;
+      pts.push([d,v]);
+    }
+    return pts;
+  }
+  function gapAt(day, eps){ return Math.min(2.4, eps*Math.pow(2.15,day)); }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250, L=42, R=W-14, T=18, B=32;
+    const eps=(+dS.value)/100/2;
+    const px=d=>L+(d/DAYS)*(R-L), py=v=>((T+H-B)/2)-(v/3)*((H-T-B)/2);
+    bg(x,W,H);
+    x.strokeStyle='rgba(79,216,232,.12)'; x.lineWidth=1;
+    for(let d=0;d<=DAYS;d++){ x.beginPath(); x.moveTo(px(d),T); x.lineTo(px(d),H-B); x.stroke(); }
+    x.strokeStyle='#8FA6C9'; x.lineWidth=1.3;
+    x.beginPath(); x.moveTo(L,T); x.lineTo(L,H-B); x.lineTo(R,H-B); x.stroke();
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    for(let d=0;d<=DAYS;d++) x.fillText('day '+d, px(d), H-B+6);
+    const upto = running ? Math.min(DAYS, t) : DAYS;
+    [[0,A1,'forecast A'],[1,A2,'forecast B']].forEach(s=>{
+      x.strokeStyle=s[1]; x.lineWidth=2.2; x.beginPath();
+      for(let i=0;i<=upto*12;i++){
+        const d=i/12;
+        const base = 0.30*Math.sin(d*2.1)+0.18*Math.sin(d*5.3);
+        const v = base + (s[0]? gapAt(d,eps) : 0);
+        i?x.lineTo(px(d),py(v)):x.moveTo(px(d),py(v));
+      }
+      x.stroke();
+      mono(x,9,500); x.fillStyle=s[1]; x.textAlign='left'; x.textBaseline='top';
+      x.fillText(s[2], L+6, T+2+s[0]*13);
+    });
+    document.getElementById('chDV').textContent=(+dS.value/100).toFixed(2);
+    [[1,'chD1'],[3,'chD3'],[7,'chD7']].forEach(k=>{
+      const g=gapAt(k[0],eps);
+      const el=document.getElementById(k[1]);
+      el.textContent=(g*40).toFixed(1)+'%';
+      el.style.color = g*40>50 ? A2 : g*40>12 ? GOLD : INK;
+    });
+    if(upto>=DAYS) sawEnd=true;
+    if(sawEnd && award) complete('m9');
+  }
+  function run(user){ award=award||!!user; running=true; t=0; }
+  if(dS){
+    dS.oninput=()=>{ ev('explore'); award=true; draw(); };
+    document.getElementById('chRun').onclick=()=>run(true);
+  }
+  tick('m9',()=>{ if(running){ t+=0.12; if(t>=DAYS){ t=DAYS; running=false; } } draw(); });
+  reg('m9',draw); auto('m9',()=>run(false));
+})();
+
+/* ============================================================
+   M10 — estimating a day's worth of breathing
+   ============================================================ */
+(function(){
+  const bS=document.getElementById('esB'), vS=document.getElementById('esV');
+  let n=0;
+  function draw(){
+    if(!bS) return;
+    const b=+bS.value, v=(+vS.value)/10;
+    const breaths=b*1440, litres=breaths*v;
+    document.getElementById('esBV').textContent=b;
+    document.getElementById('esVV').textContent=v.toFixed(1);
+    document.getElementById('esN').textContent=Math.round(breaths).toLocaleString('en-IN');
+    document.getElementById('esL').textContent=Math.round(litres).toLocaleString('en-IN')+' L';
+    document.getElementById('esC').textContent='3 balloons a minute \u00d7 2 L \u00d7 1440 = 8,640 L';
+    const s=document.getElementById('esS');
+    if(litres>=6000 && litres<=16000){ s.textContent='In the right range \u2014 about ten thousand litres'; s.style.color=GOOD; }
+    else if(litres<6000){ s.textContent='Low \u2014 check your breaths a minute'; s.style.color=GOLD; }
+    else { s.textContent='High \u2014 that would be hard breathing all day'; s.style.color=A2; }
+  }
+  function onIn(){ n++; if(n===1) ev('explore'); if(n>=4) complete('m10'); draw(); }
+  if(bS){ bS.oninput=onIn; vS.oninput=onIn; draw(); }
+})();
+
+/* ============================================================
+   M11 — rice for a family of four
+   ============================================================ */
+Q.pick('g11','g11check','g11s',[
+  {t:'100 g for the month', a:0},
+  {t:'about 25 kg',         a:1},
+  {t:'about 80 kg',         a:1},
+  {t:'about 3 tonnes',      a:0},
+  {t:'about 5 g',           a:0}
+], 'm11', 'Right. Four people at roughly 2500 kcal is about 2 kg of rice a day, so tens of kilograms a month \u2014 not grams, and not tonnes.');
+
+/* ============================================================
+   M12 — which branches a mask involves
+   ============================================================ */
+Q.pick('g12','g12check','g12s',[
+  {t:'Physics \u00b7 particle motion and electrostatic attraction', a:1},
+  {t:'Chemistry \u00b7 properties of polymer fibres',               a:1},
+  {t:'Biology \u00b7 size and behaviour of viruses',                a:1},
+  {t:'Mathematics \u00b7 modelling airflow and filtration',         a:1},
+  {t:'None \u2014 a mask is just a piece of cloth',                 a:0}
+], 'm12', 'All four branches at once. The natural world does not have the boundaries our subjects do.');
+
+/* ============================================================
+   M13 — chapter boss
+   This chapter has no Revise, Reflect, Refine section, so every
+   question is anchored to a named example, activity or sidebar.
+   ============================================================ */
+Q.boss([
+  { t:'Recall \u00b7 1 of 10',
+    q:'Why does science use models?',
+    o:['Because the natural world is complex and studying it in full detail is often impossible',
+       'Because models are always more accurate than reality',
+       'Because scientists are not allowed to study real systems'], a:0,
+    w:'A model is a simplified way of looking at a real system that focuses only on what is most important for a given question.' },
+  { t:'Recall \u00b7 2 of 10',
+    q:'Why is the speed of light denoted by the symbol c?',
+    o:['It stands for "constant"','From the Latin word celeritas, meaning speed','It was the third symbol left unused'], a:1,
+    w:'Scientific symbols often come from history and international agreement rather than convenience. Today the speed of light is defined to be exactly 299792458 m/s.' },
+  { t:'Recall \u00b7 3 of 10',
+    q:'In science, what does the word "theory" mean?',
+    o:['A guess that has not yet been tested',
+       'An explanation based on careful testing and critical examination',
+       'A rule that can never be questioned again'], a:1,
+    w:'A theory explains why an observed pattern occurs. It is built on evidence, and it stays open to improvement as new evidence arrives.' },
+  { t:'Understanding \u00b7 4 of 10',
+    q:'In Example 1.1, which detail can safely be ignored when modelling whether a cricket ball crosses the boundary?',
+    o:['The mass of the ball','The speed and direction of the hit','The amount of grass on the field'], a:2,
+    w:'The grass makes no difference to whether the ball crosses the rope in the air. Mass, speed and direction are the details the answer actually depends on.' },
+  { t:'Understanding \u00b7 5 of 10',
+    q:'What is the difference between a law and a theory?',
+    o:['A law describes a regular pattern; a theory explains why that pattern occurs',
+       'A law is proved; a theory is only guessed at',
+       'They mean the same thing in science'], a:0,
+    w:'Newton\u2019s laws describe how motion behaves. The atomic theory goes further and explains why molecules form as they do.' },
+  { t:'Understanding \u00b7 6 of 10',
+    q:'Meghna wants to make Varsha\u2019s rain prediction scientifically testable. Which question helps most?',
+    o:['Do the clouds look dark to you too?',
+       'Was the humidity above 80 per cent the last time it rained?',
+       'Do you think it will rain, yes or no?'], a:1,
+    w:'Good scientific questions look for measurable evidence and past patterns. Questions with simple yes or no answers are usually not so useful.' },
+  { t:'Application \u00b7 7 of 10',
+    q:'Using Example 1.3, roughly how many litres of air does a person breathe in one day at rest?',
+    o:['About 100 litres','About 1,000 litres','About 10,000 litres'], a:2,
+    w:'About 20 thousand breaths a day at roughly 0.5 litre each gives about 10,000 litres. The balloon cross-check gives about 8,640 litres \u2014 close enough for an estimate.' },
+  { t:'Application \u00b7 8 of 10',
+    q:'A ground crew works out fuel in litres using pounds per litre instead of kilograms per litre. What happens?',
+    o:['Far too little fuel goes in, because a pound is much lighter than a kilogram',
+       'Far too much fuel goes in and the aircraft is overweight',
+       'Nothing \u2014 the two units are close enough'], a:0,
+    w:'This is the real incident in the chapter. The aircraft ended up about 15,000 litres short and had to glide to an emergency landing. Using SI units everywhere avoids exactly this.' },
+  { t:'Reasoning \u00b7 9 of 10',
+    q:'A well-established theory fails when measurements become more precise. What does that tell you about science?',
+    o:['Science is unreliable and its results cannot be trusted',
+       'The failure is a strength \u2014 ideas are corrected by evidence, and no theory is ever final',
+       'The measurement must have been wrong, since theories cannot fail'], a:1,
+    w:'When predictions do not match observations, scientists re-examine their assumptions, models or measurements. That openness to being corrected by nature is what has allowed science to help us understand the world.' },
+  { t:'Challenge \u00b7 10 of 10',
+    q:'Why is understanding how a surgical mask works not a question for one branch of science alone?',
+    o:['Because masks are too complicated to model at all',
+       'Because it needs particle motion, polymer fibres, virus behaviour and airflow modelling together',
+       'Because biology alone cannot be trusted'], a:1,
+    w:'Physics, chemistry, biology and mathematics are all involved. The divisions between branches are made by us to organise knowledge \u2014 the natural world has no such boundaries.' }
+], 'm13', 'Models and what they ignore, units and symbols, laws and theories, prediction, estimation, and why the branches of science are not separate.');
+
+/* ============================================================
+   boot — runs after chapter interactives have registered
+   ============================================================ */
+(async function(){
+  const saved = await Store.get(CH.key);
+  if(saved) S = Object.assign(S, saved);
+  const t = today();
+
+  /* the streak belongs to the app, not to one chapter: opening any
+     chapter on a given day counts once, for every chapter.          */
+  let g = await Store.get('nb.streak');
+  if(!g || typeof g !== 'object') g = { day:null, streak:0 };
+  if(g.day !== t){
+    g.streak = (g.day === yday()) ? (g.streak || 0) + 1 : 1;
+    g.day = t;
+    await Store.set('nb.streak', g);
+  }
+  S.streak = g.streak;
+
+  if(S.day !== t){
+    S.day = t; S.missionsToday = 0; S.perfectToday = 0; S.exploreToday = 0; S.questsPaid = {};
+  }
+  Object.keys(S.done).forEach(markDone);
+  renderHQ(); save();
+  requestAnimationFrame(()=>requestAnimationFrame(redrawAll));
+})();
+
+
+/* offline: the service worker precaches every page, icon and font */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('service-worker.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>

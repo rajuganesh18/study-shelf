@@ -1,0 +1,4 @@
+Anton and IBM Plex are distributed under the SIL Open Font License 1.1.
+Full licence: https://scripts.sil.org/OFL
+Anton     — https://fonts.google.com/specimen/Anton
+IBM Plex  — https://github.com/IBM/plex

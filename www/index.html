@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>The Study Shelf</title>
+<style>
+:root{
+  --ground:#0A0E1B; --plate:#141A2E; --plate2:#1B2340; --rule:#2A3350;
+  --ink:#F0EEE6; --dim:#8E9AC0; --silver:#AEC0DE;
+  --good:#4FC3A1; --bad:#E5484D; --gold:#F2B84C;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;line-height:1.55;padding:0 16px 90px;overflow-x:hidden}
+.wrap{max-width:760px;margin:0 auto}
+canvas{display:block;width:100%}
+
+/* ---------- masthead ---------- */
+.mast{padding:38px 0 26px}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
+.mast h1{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:clamp(40px,11vw,78px);line-height:.88;margin:12px 0 0;text-transform:uppercase}
+.mast h1 span{color:var(--a1)}
+
+/* ---------- HQ ---------- */
+.hq{background:var(--plate);border:1px solid var(--rule);border-radius:4px;padding:16px;margin-bottom:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden;margin-bottom:16px}
+.stat{background:var(--plate2);padding:10px 8px;text-align:center}
+.stat .k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.stat .v{font-family:"IBM Plex Mono",monospace;font-size:18px;margin-top:3px;font-variant-numeric:tabular-nums}
+.colony-row{display:flex;gap:14px;align-items:center}
+#colony{flex:none;width:96px;height:96px;border:1px solid var(--rule);border-radius:3px;background:var(--badge-bg)}
+.colony-txt h3{font-size:15px;font-weight:600}
+.colony-txt p{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);line-height:1.7;margin-top:3px}
+.bar{height:4px;background:var(--rule);border-radius:2px;margin-top:9px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--a1);width:0;transition:width .5s}
+
+.quests{margin-top:16px;border-top:1px solid var(--rule);padding-top:14px}
+.quests h4{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+.quest{display:flex;align-items:center;gap:10px;font-size:13px;padding:5px 0}
+.tick{width:16px;height:16px;border:1px solid var(--rule);border-radius:3px;flex:none;font-size:11px;text-align:center;line-height:15px;color:var(--ground)}
+.quest.done .tick{background:var(--good);border-color:var(--good)}
+.quest.done span{color:var(--dim);text-decoration:line-through}
+.quest b{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--gold);font-weight:400;flex:none}
+
+/* ---------- missions ---------- */
+.sec{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:26px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+details.m{background:var(--plate);border:1px solid var(--rule);border-radius:4px;margin-bottom:10px;overflow:hidden}
+details.m[open]{border-color:#3A466B}
+summary{list-style:none;cursor:pointer;padding:14px 15px;display:flex;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+.mno{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--a1);flex:none;width:22px}
+.mt{flex:1;min-width:0}
+.mt b{display:block;font-size:15px;font-weight:600;line-height:1.3}
+.mt i{display:block;font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);margin-top:2px}
+.mstat{flex:none;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;color:var(--dim);border:1px solid var(--rule);border-radius:20px;padding:3px 9px}
+details.m.done .mstat{color:var(--good);border-color:var(--good)}
+details.m.done .mno{color:var(--good)}
+.body{padding:2px 15px 18px;border-top:1px solid var(--rule)}
+.body>p{font-size:15px;margin:14px 0}
+.note{font-family:"IBM Plex Mono",monospace;font-size:12px;line-height:1.75;color:var(--dim)}
+.panel{background:var(--plate2);border:1px solid var(--rule);border-radius:3px;padding:14px;margin:14px 0}
+.curio{border-left:2px solid var(--rule);padding:2px 0 2px 12px;margin:16px 0 4px}
+.curio h5{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--a2);font-weight:400;margin-bottom:5px}
+
+/* ---------- controls ---------- */
+button{font-family:"IBM Plex Sans",sans-serif;background:none;color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:9px 14px;font-size:14px;cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+button:hover{border-color:var(--a1)}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+.act{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.row{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:8px 13px}
+.chip.on{border-color:var(--a1);color:var(--a1)}
+.chip.right{border-color:var(--good);color:var(--good)}
+.chip.wrong{border-color:var(--bad);color:var(--bad)}
+.chip.gone{opacity:.25;pointer-events:none}
+.opts{display:flex;flex-direction:column;gap:8px;align-items:stretch;margin-top:4px}
+.opt{text-align:left}
+.opt.right{border-color:var(--good);color:var(--good)}
+.opt.wrong{border-color:var(--bad);color:var(--bad)}
+.why{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:12px;line-height:1.75;border-left:2px solid var(--a1);padding-left:12px;display:none}
+.why.show{display:block}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:26px;background:none;cursor:pointer;display:block}
+input[type=range]::-webkit-slider-runnable-track{height:1px;background:var(--rule)}
+input[type=range]::-moz-range-track{height:1px;background:var(--rule)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:15px;height:15px;margin-top:-7px;border-radius:50%;background:var(--a1)}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;border:none;border-radius:50%;background:var(--a1)}
+.knob{margin-bottom:6px}
+.knob label{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;gap:10px}
+.knob label b{color:var(--ink);font-weight:400;text-align:right}
+select{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--plate);color:var(--ink);border:1px solid var(--rule);border-radius:3px;padding:8px 10px}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;margin-top:12px;overflow:hidden}
+.readout.two{grid-template-columns:repeat(2,1fr)}
+.rc{background:var(--plate2);padding:11px 12px}
+.rc .k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.rc .v{font-family:"IBM Plex Mono",monospace;font-size:14px;margin-top:4px;line-height:1.35}
+.score{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qrow{display:flex;gap:8px;align-items:center;margin-bottom:9px;font-size:13.5px}
+.qrow>span.t{flex:1}
+table.tick{width:100%;border-collapse:collapse;font-size:13px}
+table.tick th,table.tick td{border:1px solid var(--rule);padding:7px 6px;text-align:center}
+table.tick th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:400}
+table.tick td.lbl{text-align:left;font-size:12.5px}
+table.tick td.c{cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:15px;user-select:none}
+td.c.yes{color:var(--good)}td.c.no{color:var(--bad)}
+td.c.err{background:rgba(229,72,77,.18)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(80px);background:var(--plate2);border:1px solid var(--gold);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:13px;padding:11px 18px;border-radius:30px;opacity:0;transition:.35s;z-index:9;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.hp{height:8px;background:var(--rule);border-radius:4px;overflow:hidden;margin:5px 0 12px}
+.hp i{display:block;height:100%;transition:width .4s}
+.tier{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--a2);margin-top:14px}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--rule);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+@media (max-width:560px){.grid2{grid-template-columns:1fr}.readout{grid-template-columns:1fr}.readout.two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+
+/* Local fonts. Run scripts/fetch-fonts.sh once to fill www/fonts, and the
+   app renders exactly as designed with no network. Until then the stacks
+   below fall back to system faces and everything still works.            */
+@font-face{font-family:Anton;src:url(fonts/Anton-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"IBM Plex Sans";src:url(fonts/IBMPlexSans-SemiBold.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-Regular.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url(fonts/IBMPlexMono-Medium.woff2) format("woff2");font-weight:500;font-display:swap}
+
+:root{ --a1:#8A7CF0; --a2:#5FD0C8; --badge-bg:#EDEAF6; }
+/* ---------- shell ---------- */
+.tabs{display:flex;gap:8px;margin:24px 0 12px}
+.tab{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px}
+.tab.on{border-color:var(--a1);color:var(--a1)}
+
+.search{margin:0 0 18px}
+.search input{width:100%;font-family:"IBM Plex Sans",sans-serif;font-size:14px;color:var(--ink);
+  background:var(--plate);border:1px solid var(--rule);border-radius:3px;padding:11px 13px}
+.search input::placeholder{color:var(--dim)}
+
+.cont{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;
+  background:var(--plate);border:1px solid var(--rule);border-radius:4px;padding:14px 15px;margin-bottom:14px;
+  transition:border-color .15s}
+.cont:hover{border-color:var(--a1)}
+.cont .ct{flex:1;min-width:0}
+.cont .k{font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--a1)}
+.cont b{display:block;font-size:15px;font-weight:600;margin-top:4px;line-height:1.3}
+.cont i{display:block;font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);margin-top:3px}
+.cont .go{flex:none;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--rule);border-radius:20px;padding:6px 12px}
+
+.subs{display:grid;grid-template-columns:1fr;gap:10px}
+.sub{display:block;width:100%;text-align:left;background:var(--plate);border:1px solid var(--rule);
+  border-radius:4px;padding:15px;cursor:pointer}
+.sub:hover{border-color:var(--c)}
+.srow{display:flex;align-items:center;gap:9px}
+.srow .dot{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+.srow b{font-size:16px;font-weight:600}
+.srow .cnt{margin-left:auto;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--dim)}
+.sub .book{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--c);margin-top:6px}
+.sub .snote{font-size:13px;color:var(--dim);margin-top:6px;line-height:1.5}
+
+.back{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);border-radius:20px;padding:7px 14px;margin-bottom:16px}
+.shead{border-left:3px solid var(--c);padding-left:12px;margin-bottom:14px}
+.shead h2{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:30px;text-transform:uppercase;line-height:1}
+.shead .book{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--c);margin-top:5px}
+.warn{font-family:"IBM Plex Mono",monospace;font-size:11.5px;line-height:1.75;color:var(--gold);
+  border:1px solid rgba(242,184,76,.35);background:rgba(242,184,76,.07);border-radius:3px;padding:11px 13px;margin-bottom:16px}
+
+.chaps{display:flex;flex-direction:column;gap:7px}
+.chap{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;
+  background:var(--plate);border:1px solid var(--rule);border-radius:4px;padding:12px 14px}
+a.chap{transition:border-color .15s}
+a.chap:hover{border-color:var(--c)}
+.chap .cn{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);flex:none;width:22px}
+a.chap .cn{color:var(--c)}
+.chap .ct{flex:1;min-width:0}
+.chap .ct b{display:block;font-size:14.5px;font-weight:600;line-height:1.35}
+.chap .ct i{display:block;font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--dim);margin-top:3px}
+.chap .where{display:block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);margin-bottom:3px}
+.chap:not(.live) .ct b{color:var(--dim);font-weight:400}
+.tag{flex:none;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);border:1px solid var(--rule);border-radius:20px;padding:4px 9px}
+.tag.ready{color:var(--c);border-color:var(--c)}
+.tag.live{color:var(--gold);border-color:var(--gold)}
+.tag.done{color:var(--good);border-color:var(--good)}
+.empty{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--dim);padding:24px 0}
+#colony{background:#EDEAF6}
+@media (min-width:560px){ .subs{grid-template-columns:1fr 1fr} }
+
+details.data{background:var(--plate);border:1px solid var(--rule);border-radius:4px;margin-top:34px;overflow:hidden}
+details.data summary{list-style:none;cursor:pointer;padding:14px 15px;font-family:"IBM Plex Mono",monospace;
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+details.data summary::-webkit-details-marker{display:none}
+details.data[open] summary{border-bottom:1px solid var(--rule);color:var(--a1)}
+.dbody{padding:14px 15px 16px}
+
+
+html{-webkit-text-size-adjust:100%;overscroll-behavior-y:none;background:var(--ground)}
+body{padding-left:calc(16px + env(safe-area-inset-left));
+     padding-right:calc(16px + env(safe-area-inset-right));
+     padding-top:env(safe-area-inset-top);
+     padding-bottom:calc(90px + env(safe-area-inset-bottom));
+     -webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+button,summary,a{-webkit-touch-callout:none}
+input[type=range]{touch-action:pan-y}
+.toast{bottom:calc(22px + env(safe-area-inset-bottom))}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="mast">
+  <div class="eyebrow">NCERT · Interactive chapters</div>
+  <h1>The<br><span>Study Shelf</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Chapters</div><div class="v" id="sDone">0/0</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="lvName">Getting started</h3>
+      <p id="lvDesc">Open any chapter marked Ready and start earning XP.</p>
+      <div class="bar"><i id="lvBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<div id="contWrap"></div>
+
+<div class="tabs" id="tabs"></div>
+<div class="note" id="clsNote" style="margin:-4px 0 16px"></div>
+
+<div class="search">
+  <input id="q" type="search" placeholder="Search every chapter…" autocomplete="off" spellcheck="false">
+</div>
+
+<div id="view"></div>
+
+<details class="data">
+  <summary>Progress &amp; data</summary>
+  <div class="dbody">
+    <div class="note">Progress is stored on this device only. Storage backend in use: <b id="dMode">…</b>. Export a copy before changing phones.</div>
+    <div class="row" style="justify-content:flex-start">
+      <button class="act" id="dExport">Export progress</button>
+      <button class="act" id="dImportBtn">Import a backup</button>
+      <button class="act" id="dReset">Reset all progress</button>
+    </div>
+    <input id="dImport" type="file" accept="application/json,.json" hidden>
+    <div class="note" id="dMsg" style="margin-top:10px;min-height:20px"></div>
+  </div>
+</details>
+
+<footer>Offline · Progress saved on this device</footer>
+
+</div>
+<script>
+/* ============================================================
+   STORAGE — one adapter, used by the shelf and every chapter.
+   Picks the best backend available, in this order:
+     1. Capacitor Preferences  (native app: survives WebView clears)
+     2. localStorage           (browser / PWA)
+     3. window.storage         (preview host)
+     4. in-memory              (last resort, so nothing ever throws)
+   Everything is async, so swapping backends changes nothing upstream.
+   ============================================================ */
+const Store = (function(){
+  const MEM = {};
+  let mode = null, PREF = null;
+
+  async function init(){
+    if(mode) return mode;
+    try {
+      const cap = window.Capacitor;
+      const p = cap && cap.Plugins && cap.Plugins.Preferences;
+      if(p){ await p.get({ key:'__probe' }); PREF = p; return (mode = 'preferences'); }
+    } catch(e){}
+    try {
+      window.localStorage.setItem('__probe','1');
+      window.localStorage.removeItem('__probe');
+      return (mode = 'localstorage');
+    } catch(e){}
+    try { if(window.storage) return (mode = 'host'); } catch(e){}
+    return (mode = 'memory');
+  }
+
+  async function get(k){
+    const m = await init();
+    try {
+      if(m === 'preferences'){ const r = await PREF.get({ key:k }); return (r && r.value != null) ? JSON.parse(r.value) : null; }
+      if(m === 'localstorage'){ const v = window.localStorage.getItem(k); return v == null ? null : JSON.parse(v); }
+      if(m === 'host'){ const r = await window.storage.get(k); return r ? JSON.parse(r.value) : null; }
+    } catch(e){}
+    return MEM[k] !== undefined ? MEM[k] : null;
+  }
+
+  async function set(k, v){
+    const m = await init();
+    MEM[k] = v;
+    const s = JSON.stringify(v);
+    try {
+      if(m === 'preferences'){ await PREF.set({ key:k, value:s }); return true; }
+      if(m === 'localstorage'){ window.localStorage.setItem(k, s); return true; }
+      if(m === 'host'){ await window.storage.set(k, s); return true; }
+    } catch(e){}
+    return false;
+  }
+
+  async function remove(k){
+    const m = await init();
+    delete MEM[k];
+    try {
+      if(m === 'preferences'){ await PREF.remove({ key:k }); return; }
+      if(m === 'localstorage'){ window.localStorage.removeItem(k); return; }
+    } catch(e){}
+  }
+
+  async function keys(){
+    const m = await init();
+    try {
+      if(m === 'preferences'){ const r = await PREF.keys(); return (r && r.keys) || []; }
+      if(m === 'localstorage'){ return Object.keys(window.localStorage); }
+    } catch(e){}
+    return Object.keys(MEM);
+  }
+
+  return { get, set, remove, keys, mode: () => mode || 'unknown' };
+})();
+
+/* ============================================================
+   CATALOG — the only file to edit when a chapter ships.
+   Give a chapter a `file` and an `id` and it becomes playable;
+   without a file it renders as Coming soon.
+
+   Sourced August 2026. Class 9 moved to the new NCF-SE 2023
+   books for 2026-27 (Exploration, Ganita Manjari). NCERT's
+   advisory of 17 March 2026 deferred new Class 10 and 11 books
+   to 2027-28, so Class 10 stays on the current rationalised
+   textbooks. Verify against the copy your school actually uses.
+   ============================================================ */
+const CATALOG = [
+{
+  cls:'9', label:'Class 9',
+  note:'New NCF-SE 2023 textbooks, in use from the 2026-27 session.',
+  subjects:[
+    {
+      key:'science', name:'Science', book:'Exploration', colour:'#4C9BE8',
+      note:'Physics, chemistry, biology and earth science woven into one book.',
+      parts:[{ name:null, chapters:[
+        {n:1,  t:'Exploration: Entering the World of Secondary Science', id:'9-science-1', file:'exploration-chapter.html'},
+        {n:2,  t:'Cell: The Building Block of Life'},
+        {n:3,  t:'Tissues in Action',                                    id:'9-science-3', file:'tissues-chapter.html'},
+        {n:4,  t:'Describing Motion Around Us',                          id:'9-science-4', file:'motion-chapter.html'},
+        {n:5,  t:'Exploring Mixtures and Their Separation'},
+        {n:6,  t:'How Forces Affect Motion'},
+        {n:7,  t:'Work, Energy and Simple Machines'},
+        {n:8,  t:'Journey Inside the Atom'},
+        {n:9,  t:'Atomic Foundations of Matter'},
+        {n:10, t:'Sound Waves: Characteristics and Applications'},
+        {n:11, t:'Reproduction: How Life Continues'},
+        {n:12, t:'Patterns in Life: Diversity and Classification'},
+        {n:13, t:'Earth as a System: Energy, Matter and Life'}
+      ]}]
+    },
+    {
+      key:'maths', name:'Maths', book:'Ganita Manjari, Part 1', colour:'#B98BF5',
+      note:'Eight redesigned chapters. Part 2 is not out yet.',
+      parts:[{ name:null, chapters:[
+        {n:1, t:'Orienting Yourself: The Use of Coordinates'},
+        {n:2, t:'Introduction to Linear Polynomials'},
+        {n:3, t:'The World of Numbers'},
+        {n:4, t:'Exploring Algebraic Identities'},
+        {n:5, t:"I'm Up and Down, and Round and Round"},
+        {n:6, t:'Measuring Space: Perimeter and Area'},
+        {n:7, t:'The Mathematics of Maybe: Introduction to Probability'},
+        {n:8, t:'Predicting What Comes Next: Exploring Sequences and Progressions'}
+      ]}]
+    },
+    {
+      key:'social', name:'Social Science', book:'Understanding Society: India and Beyond', colour:'#F2803C',
+      note:'Four old books replaced by one integrated volume of 16 themes.',
+      warn:'Chapter titles are provisional. Part 2 had not been released when this catalog was written, and sources still disagree on the book\u2019s final title. Check your school copy and edit CATALOG.',
+      parts:[
+        { name:'Part 1', chapters:[
+          {n:1, t:'Chapter 1', pending:1},
+          {n:2, t:'Chapter 2', hint:'plate tectonics and boundary types', pending:1},
+          {n:3, t:'Chapter 3', hint:'the atmosphere and monsoon mechanics', pending:1},
+          {n:4, t:'Chapter 4', hint:'dating the past; the Sindhu-Sarasvati civilisation', pending:1},
+          {n:5, t:'Chapter 5', pending:1},
+          {n:6, t:'Chapter 6', pending:1},
+          {n:7, t:'Chapter 7', pending:1},
+          {n:8, t:'Chapter 8', pending:1},
+          {n:9, t:'Chapter 9', hint:'demand, supply and everyday economics', pending:1}
+        ]},
+        { name:'Part 2', chapters:[
+          {n:10,t:'Chapter 10',pending:1},{n:11,t:'Chapter 11',pending:1},{n:12,t:'Chapter 12',pending:1},
+          {n:13,t:'Chapter 13',pending:1},{n:14,t:'Chapter 14',pending:1},{n:15,t:'Chapter 15',pending:1},
+          {n:16,t:'Chapter 16',pending:1}
+        ]}
+      ]
+    }
+  ]
+},
+{
+  cls:'10', label:'Class 10',
+  note:'Current textbooks. NCERT deferred the new Class 10 books to 2027-28.',
+  subjects:[
+    {
+      key:'science', name:'Science', book:'Science, Class 10', colour:'#4C9BE8',
+      note:'Chemistry, biology and physics, in that order.',
+      parts:[{ name:null, chapters:[
+        {n:1,  t:'Chemical Reactions and Equations'},
+        {n:2,  t:'Acids, Bases and Salts'},
+        {n:3,  t:'Metals and Non-metals'},
+        {n:4,  t:'Carbon and its Compounds'},
+        {n:5,  t:'Life Processes'},
+        {n:6,  t:'Control and Coordination'},
+        {n:7,  t:'How do Organisms Reproduce?'},
+        {n:8,  t:'Heredity'},
+        {n:9,  t:'Light: Reflection and Refraction'},
+        {n:10, t:'The Human Eye and the Colourful World'},
+        {n:11, t:'Electricity'},
+        {n:12, t:'Magnetic Effects of Electric Current'},
+        {n:13, t:'Our Environment'}
+      ]}]
+    },
+    {
+      key:'maths', name:'Maths', book:'Mathematics, Class 10', colour:'#B98BF5',
+      note:'Fourteen chapters, algebra through probability.',
+      parts:[{ name:null, chapters:[
+        {n:1,  t:'Real Numbers'},
+        {n:2,  t:'Polynomials'},
+        {n:3,  t:'Pair of Linear Equations in Two Variables'},
+        {n:4,  t:'Quadratic Equations'},
+        {n:5,  t:'Arithmetic Progressions'},
+        {n:6,  t:'Triangles'},
+        {n:7,  t:'Coordinate Geometry'},
+        {n:8,  t:'Introduction to Trigonometry'},
+        {n:9,  t:'Some Applications of Trigonometry'},
+        {n:10, t:'Circles'},
+        {n:11, t:'Areas Related to Circles'},
+        {n:12, t:'Surface Areas and Volumes'},
+        {n:13, t:'Statistics'},
+        {n:14, t:'Probability'}
+      ]}]
+    },
+    {
+      key:'social', name:'Social Science', book:'Four books', colour:'#F2803C',
+      note:'History, Geography, Political Science and Economics, still separate at Class 10.',
+      parts:[
+        { name:'History \u00b7 India and the Contemporary World II', chapters:[
+          {n:1, t:'The Rise of Nationalism in Europe'},
+          {n:2, t:'Nationalism in India'},
+          {n:3, t:'The Making of a Global World'},
+          {n:4, t:'The Age of Industrialisation'},
+          {n:5, t:'Print Culture and the Modern World'}
+        ]},
+        { name:'Geography \u00b7 Contemporary India II', chapters:[
+          {n:1, t:'Resources and Development'},
+          {n:2, t:'Forest and Wildlife Resources'},
+          {n:3, t:'Water Resources'},
+          {n:4, t:'Agriculture'},
+          {n:5, t:'Minerals and Energy Resources'},
+          {n:6, t:'Manufacturing Industries'},
+          {n:7, t:'Lifelines of National Economy'}
+        ]},
+        { name:'Political Science \u00b7 Democratic Politics II', chapters:[
+          {n:1, t:'Power Sharing'},
+          {n:2, t:'Federalism'},
+          {n:3, t:'Gender, Religion and Caste'},
+          {n:4, t:'Political Parties'},
+          {n:5, t:'Outcomes of Democracy'}
+        ]},
+        { name:'Economics \u00b7 Understanding Economic Development', chapters:[
+          {n:1, t:'Development'},
+          {n:2, t:'Sectors of the Indian Economy'},
+          {n:3, t:'Money and Credit'},
+          {n:4, t:'Globalisation and the Indian Economy'},
+          {n:5, t:'Consumer Rights'}
+        ]}
+      ]
+    }
+  ]
+}
+];
+
+/* ============================================================
+   The Study Shelf — library shell
+   Reads the per-chapter summaries each chapter writes on save,
+   and rolls them up into one shelf-wide view.
+   ============================================================ */
+
+/* persistence: see storage.js, concatenated above. */
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+let SUM = {}, STREAK = 0, LAST = null;
+let cls = '9', openSubject = null;
+
+/* ---------- flatten the catalog once ---------- */
+const ALL = [];
+CATALOG.forEach(c => c.subjects.forEach(s => s.parts.forEach(p => p.chapters.forEach(ch => {
+  ALL.push({ cls:c.cls, clsLabel:c.label, subject:s, part:p, ch });
+}))));
+const PLAYABLE = ALL.filter(r => r.ch.file);
+
+/* ---------- level badge: a shelf that fills up ---------- */
+const LEVELS = [
+  { at:0,    name:'Getting started', d:'Open any chapter marked Ready and start earning XP.' },
+  { at:120,  name:'Warmed up',       d:'One chapter under way. The streak counts every day you open the app.' },
+  { at:320,  name:'Building a habit',d:'Daily quests reset every morning across every chapter.' },
+  { at:620,  name:'Half a shelf',    d:'Enough XP to have finished a chapter end to end.' },
+  { at:1000, name:'Shelf filling',   d:'More than one chapter beaten, boss and all.' },
+  { at:1600, name:'Well read',       d:'You are ahead of where the syllabus expects you to be.' },
+  { at:2400, name:'Whole shelf',     d:'Every chapter on the shelf, finished.' }
+];
+function levelOf(xp){ let l = LEVELS[0]; LEVELS.forEach(t => { if(xp >= t.at) l = t; }); return l; }
+
+function drawShelf(xp){
+  const cv = $('colony'); if(!cv) return;
+  const r = window.devicePixelRatio || 1, W = 96;
+  cv.width = Math.round(W*r); cv.height = Math.round(W*r);
+  cv.style.width = '96px'; cv.style.height = '96px';
+  const x = cv.getContext('2d'); if(!x) return;
+  x.setTransform(r,0,0,r,0,0);
+  x.clearRect(0,0,W,W);
+  x.fillStyle = '#EDEAF6'; x.fillRect(0,0,W,W);
+  const lv = levelOf(xp), i = LEVELS.indexOf(lv);
+  const next = LEVELS[i+1];
+  const frac = next ? Math.min(1,(xp-lv.at)/(next.at-lv.at)) : 1;
+  const filled = i + frac;                       // books on the shelf, fractional
+  // three shelves of six book slots
+  const cols = 6, rows = 3, slots = cols*rows;
+  const n = Math.round((filled/LEVELS.length)*slots);
+  const bw = (W-16)/cols, bh = 20;
+  for(let s=0; s<rows; s++){
+    const sy = 12 + s*26;
+    x.fillStyle = '#C4B69A'; x.fillRect(8, sy+bh, W-16, 3);
+    for(let c=0; c<cols; c++){
+      const k = s*cols + c;
+      if(k >= n) continue;
+      const h = bh - 2 - (k%3)*2.5, w = bw - 3.5;
+      x.fillStyle = ['#8A7CF0','#4C9BE8','#F2803C','#5FD0C8','#B98BF5'][k%5];
+      x.fillRect(8 + c*bw + 1.5, sy + (bh-h), w, h);
+      x.fillStyle = 'rgba(0,0,0,.14)';
+      x.fillRect(8 + c*bw + 1.5, sy + (bh-h) + 3, w, 1.5);
+    }
+  }
+  $('lvName').textContent = lv.name;
+  $('lvDesc').textContent = lv.d;
+  $('lvBar').style.width = (frac*100) + '%';
+}
+
+/* ---------- header rollup ---------- */
+function totals(){
+  let xp = 0, coins = 0, done = 0;
+  PLAYABLE.forEach(r => {
+    const s = SUM[r.ch.id];
+    if(!s) return;
+    xp += s.xp || 0; coins += s.coins || 0;
+    if(s.total && s.done >= s.total) done++;
+  });
+  return { xp, coins, done, total: PLAYABLE.length };
+}
+function renderHead(){
+  const t = totals();
+  $('sXp').textContent = t.xp;
+  $('sCoin').textContent = t.coins;
+  $('sStreak').textContent = STREAK;
+  $('sDone').textContent = t.done + '/' + t.total;
+  drawShelf(t.xp);
+}
+
+/* ---------- progress helpers ---------- */
+function chapProgress(ch){
+  if(!ch.file) return null;
+  const s = SUM[ch.id];
+  if(!s) return { started:false, pct:0, done:0, total:0, xp:0 };
+  return { started:true, pct: s.total ? Math.round(s.done/s.total*100) : 0,
+           done:s.done, total:s.total, xp:s.xp, finished: s.total && s.done >= s.total };
+}
+function subjectStats(sub){
+  let chapters = 0, ready = 0, pct = 0;
+  sub.parts.forEach(p => p.chapters.forEach(ch => {
+    chapters++;
+    if(ch.file){ ready++; const pr = chapProgress(ch); pct += pr ? pr.pct : 0; }
+  }));
+  return { chapters, ready, pct: ready ? Math.round(pct/ready) : 0 };
+}
+
+/* ---------- continue card ---------- */
+function renderContinue(){
+  const wrap = $('contWrap');
+  const rec = PLAYABLE.find(r => r.ch.id === LAST);
+  if(!rec){ wrap.innerHTML = ''; return; }
+  const pr = chapProgress(rec.ch) || {};
+  wrap.innerHTML =
+    '<a class="cont" href="' + esc(rec.ch.file) + '">' +
+      '<div class="ct">' +
+        '<div class="k">Continue</div>' +
+        '<b>' + esc(rec.ch.t) + '</b>' +
+        '<i>' + esc(rec.clsLabel) + ' · ' + esc(rec.subject.name) + ' · Chapter ' + rec.ch.n +
+          (pr.total ? ' · ' + pr.done + ' of ' + pr.total + ' missions' : '') + '</i>' +
+        '<div class="bar"><i style="width:' + (pr.pct||0) + '%;background:' + rec.subject.colour + '"></i></div>' +
+      '</div><span class="go">Open</span></a>';
+}
+
+/* ---------- class tabs ---------- */
+function renderTabs(){
+  $('tabs').innerHTML = CATALOG.map(c =>
+    '<button class="tab' + (c.cls === cls ? ' on' : '') + '" data-cls="' + c.cls + '">' + esc(c.label) + '</button>'
+  ).join('');
+  $('tabs').querySelectorAll('.tab').forEach(b => b.onclick = () => {
+    cls = b.dataset.cls; openSubject = null; render();
+  });
+  const c = CATALOG.find(x => x.cls === cls);
+  $('clsNote').textContent = c ? c.note : '';
+}
+
+/* ---------- views ---------- */
+function subjectGrid(){
+  const c = CATALOG.find(x => x.cls === cls);
+  return '<div class="subs">' + c.subjects.map(s => {
+    const st = subjectStats(s);
+    return '<button class="sub" data-sub="' + s.key + '" style="--c:' + s.colour + '">' +
+      '<div class="srow"><span class="dot"></span><b>' + esc(s.name) + '</b>' +
+      '<span class="cnt">' + st.ready + ' of ' + st.chapters + ' ready</span></div>' +
+      '<div class="book">' + esc(s.book) + '</div>' +
+      '<div class="snote">' + esc(s.note) + '</div>' +
+      '<div class="bar"><i style="width:' + st.pct + '%;background:' + s.colour + '"></i></div>' +
+    '</button>';
+  }).join('') + '</div>';
+}
+
+function chapterList(sub){
+  let h = '<button class="back" id="backBtn">&#8249;&ensp;All subjects</button>' +
+    '<div class="shead" style="--c:' + sub.colour + '">' +
+      '<h2>' + esc(sub.name) + '</h2><div class="book">' + esc(sub.book) + '</div>' +
+    '</div>';
+  if(sub.warn) h += '<div class="warn">' + esc(sub.warn) + '</div>';
+  sub.parts.forEach(p => {
+    if(p.name) h += '<div class="sec">' + esc(p.name) + '</div>';
+    h += '<div class="chaps">' + p.chapters.map(ch => row(ch, sub)).join('') + '</div>';
+  });
+  return h;
+}
+
+function row(ch, sub){
+  const pr = chapProgress(ch);
+  const tag = !ch.file
+    ? '<span class="tag">' + (ch.pending ? 'Title pending' : 'Coming soon') + '</span>'
+    : pr && pr.finished ? '<span class="tag done">Finished</span>'
+    : pr && pr.started && pr.done ? '<span class="tag live">' + pr.done + '/' + pr.total + '</span>'
+    : '<span class="tag ready">Ready</span>';
+  const inner =
+    '<span class="cn">' + String(ch.n).padStart(2,'0') + '</span>' +
+    '<span class="ct"><b>' + esc(ch.t) + '</b>' +
+      (ch.hint ? '<i>' + esc(ch.hint) + '</i>' : '') +
+      (pr && pr.started && pr.done ? '<div class="bar"><i style="width:' + pr.pct + '%;background:' + sub.colour + '"></i></div>' : '') +
+    '</span>' + tag;
+  return ch.file
+    ? '<a class="chap live" href="' + esc(ch.file) + '" style="--c:' + sub.colour + '">' + inner + '</a>'
+    : '<div class="chap" style="--c:' + sub.colour + '">' + inner + '</div>';
+}
+
+function searchView(term){
+  const t = term.toLowerCase();
+  const hits = ALL.filter(r =>
+    r.ch.t.toLowerCase().includes(t) ||
+    r.subject.name.toLowerCase().includes(t) ||
+    r.subject.book.toLowerCase().includes(t) ||
+    (r.ch.hint || '').toLowerCase().includes(t)
+  ).slice(0, 40);
+  if(!hits.length) return '<div class="empty">Nothing matches &ldquo;' + esc(term) + '&rdquo;.</div>';
+  return '<div class="sec">' + hits.length + ' result' + (hits.length>1?'s':'') + '</div><div class="chaps">' +
+    hits.map(r => {
+      const pre = '<span class="where">' + esc(r.clsLabel) + ' · ' + esc(r.subject.name) + '</span>';
+      return row(r.ch, r.subject).replace('<span class="ct"><b>', '<span class="ct">' + pre + '<b>');
+    }).join('') + '</div>';
+}
+
+function render(){
+  renderTabs(); renderHead(); renderContinue();
+  const term = $('q').value.trim();
+  const v = $('view');
+  if(term){ v.innerHTML = searchView(term); return; }
+  const c = CATALOG.find(x => x.cls === cls);
+  const sub = openSubject && c.subjects.find(s => s.key === openSubject);
+  v.innerHTML = sub ? chapterList(sub) : subjectGrid();
+  if(sub){ $('backBtn').onclick = () => { openSubject = null; render(); }; }
+  else v.querySelectorAll('.sub').forEach(b => b.onclick = () => { openSubject = b.dataset.sub; render(); window.scrollTo(0,0); });
+}
+
+/* ---------- data panel: export, import, reset ---------- */
+async function collect(){
+  const all = await Store.keys();
+  const mine = all.filter(k => k.indexOf('nb.') === 0 || k.indexOf('ch0') === 0);
+  const out = {};
+  for(const k of mine) out[k] = await Store.get(k);
+  return { app:'study-shelf', version:1, exported:new Date().toISOString(), data:out };
+}
+function download(name, text){
+  const b = new Blob([text], {type:'application/json'});
+  const u = URL.createObjectURL(b);
+  const a = document.createElement('a');
+  a.href = u; a.download = name; document.body.appendChild(a); a.click();
+  a.remove(); setTimeout(()=>URL.revokeObjectURL(u), 1000);
+}
+function wireData(){
+  const st = $('dMode'); if(st) st.textContent = Store.mode();
+  $('dExport').onclick = async () => {
+    const p = await collect();
+    download('study-shelf-progress.json', JSON.stringify(p, null, 2));
+    $('dMsg').textContent = 'Exported ' + Object.keys(p.data).length + ' keys.';
+  };
+  $('dImportBtn').onclick = () => $('dImport').click();
+  $('dImport').onchange = async e => {
+    const f = e.target.files && e.target.files[0]; if(!f) return;
+    try {
+      const p = JSON.parse(await f.text());
+      if(!p || p.app !== 'study-shelf' || !p.data) throw new Error('not a Study Shelf export');
+      for(const k of Object.keys(p.data)) await Store.set(k, p.data[k]);
+      $('dMsg').textContent = 'Imported. Reloading…';
+      setTimeout(()=>location.reload(), 600);
+    } catch(err){ $('dMsg').textContent = 'Could not read that file: ' + err.message; }
+    e.target.value = '';
+  };
+  let armed = false;
+  $('dReset').onclick = async () => {
+    if(!armed){ armed = true; $('dReset').textContent = 'Tap again to erase everything'; 
+      $('dMsg').textContent = 'This clears all XP, coins and streaks on this device.';
+      setTimeout(()=>{ armed = false; $('dReset').textContent = 'Reset all progress'; }, 5000); return; }
+    const all = await Store.keys();
+    for(const k of all) if(k.indexOf('nb.') === 0 || k.indexOf('ch0') === 0) await Store.remove(k);
+    $('dMsg').textContent = 'Cleared. Reloading…';
+    setTimeout(()=>location.reload(), 600);
+  };
+}
+
+/* ---------- boot ---------- */
+$('q').addEventListener('input', render);
+
+(async function(){
+  const g = await Store.get('nb.streak');
+  STREAK = (g && g.streak) || 0;
+  LAST = await Store.get('nb.last');
+  for(const r of PLAYABLE){
+    const s = await Store.get('nb.sum.' + r.ch.id);
+    if(s) SUM[r.ch.id] = s;
+  }
+  render(); wireData();
+})();
+
+window.addEventListener('pageshow', () => { if(Object.keys(SUM).length || true) render(); });
+
+
+/* offline: the service worker precaches every page, icon and font */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('service-worker.js').catch(function(){});
+  });
+}
+</script>
+</body>
+</html>
