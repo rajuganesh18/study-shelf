@@ -15,15 +15,23 @@ mkdir -p "$DIR"
 
 UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36'
 
+missed=0
+
 grab () {                       # grab <css-url> <output-filename>
   local css out url
   css="$1"; out="$2"
-  # ask Google Fonts for the woff2 URL, then fetch the font itself
-  url=$(curl -sL -A "$UA" "$css" | grep -o 'https://[^)]*\.woff2' | head -1)
+  # Ask Google Fonts for the woff2 URL, then fetch the font itself.
+  # `|| true` matters: under `set -e -o pipefail` a grep that matches
+  # nothing returns 1, which would abort the whole script here and leave
+  # the remaining fonts undownloaded. A miss should skip one font, not
+  # the run — the app falls back to system faces and still works.
+  url=$(curl -sfL -A "$UA" "$css" | grep -o 'https://[^)]*\.woff2' | head -1) || true
   if [ -z "$url" ]; then
-    echo "  MISS  $out  (could not resolve a woff2 url)"; return 0
+    echo "  MISS  $out  (could not resolve a woff2 url)"; missed=$((missed+1)); return 0
   fi
-  curl -sL -o "$DIR/$out" "$url"
+  if ! curl -sfL -o "$DIR/$out" "$url"; then
+    echo "  MISS  $out  (download failed)"; rm -f "$DIR/$out"; missed=$((missed+1)); return 0
+  fi
   echo "  ok    $out  ($(du -h "$DIR/$out" | cut -f1))"
 }
 
@@ -41,5 +49,12 @@ Full licence: https://scripts.sil.org/OFL
 Anton     — https://fonts.google.com/specimen/Anton
 IBM Plex  — https://github.com/IBM/plex
 TXT
+
+if [ "$missed" -gt 0 ]; then
+  echo
+  echo "$missed font(s) could not be fetched. The app still works — the CSS falls"
+  echo "back to system faces — but the display type will not look as designed."
+  echo "Re-run this script when you have a working connection."
+fi
 
 echo "Done. Bump VERSION in www/service-worker.js so caches refresh."

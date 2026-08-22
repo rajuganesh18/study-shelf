@@ -9,10 +9,23 @@ study-shelf/
 ├── capacitor.config.json     app id, splash, status bar
 ├── RELEASE.md                APK + Play Store release guide
 ├── store/                    privacy policy, listing copy
-├── scripts/fetch-fonts.sh    run once, makes the app truly offline
-└── www/                      the whole app — plain static files
-    ├── index.html            the shelf: class → subject → chapter
+├── scripts/
+│   ├── build.js              src/ → www/ ; no dependencies
+│   └── fetch-fonts.sh        run once, makes the app truly offline
+├── src/                      what you edit
+│   ├── index.html            the shelf: class → subject → chapter
+│   ├── shared/               one copy of everything every page needs
+│   │   ├── base.css          the design system
+│   │   ├── chrome.css        back bar + safe-area insets
+│   │   ├── shell.css         safe-area insets alone (the shelf's share)
+│   │   ├── storage.js        the storage adapter
+│   │   ├── engine.js         XP, quests, missions, the reusable games
+│   │   └── boot.js           chapter start-up and the streak
+│   └── chapters/             one file per chapter: config, markup, interactives
+└── www/                      what ships — generated, plain static files
+    ├── index.html
     ├── exploration-chapter.html
+    ├── cell-chapter.html
     ├── tissues-chapter.html
     ├── motion-chapter.html
     ├── manifest.webmanifest
@@ -20,6 +33,20 @@ study-shelf/
     ├── icons/                192, 512, maskable, 1024
     └── fonts/                empty until you run fetch-fonts.sh
 ```
+
+**Edit `src/`, never `www/`.** `www/` is generated and committed, so serving it
+still needs no toolchain — but a hand edit there is lost on the next build.
+
+```bash
+npm run build          # src/ → www/
+npm run build:check    # fail if www/ is behind src/ ; good for CI
+```
+
+The build is one dependency-free Node script whose whole job is to paste shared
+files into the pages that include them. A page pulls one in with a marker on a
+line of its own — `/*@include shared/engine.js*/` inside a `<script>` or
+`<style>`, `<!--@include ...-->` inside markup. Nothing else is transformed:
+what you read in `src/` is what runs.
 
 ---
 
@@ -50,8 +77,9 @@ Needs Node 18+, a JDK 17, and Android Studio (or just the SDK + Gradle).
 cd study-shelf
 bash scripts/fetch-fonts.sh     # once — see §4
 npm install
+npm run build                   # src/ → www/
 npx cap add android             # generates android/ ; run once
-npx cap sync android            # copies www/ in ; run after every change
+npm run sync                    # builds, then copies www/ in ; after every change
 npx cap open android            # → Android Studio, press Run
 ```
 
@@ -92,10 +120,16 @@ backend available and everything above it is unchanged:
 
 Keys written:
 
-- `nb.streak` — `{day, streak}`, one daily streak shared by the whole app
+- `nb.streak` — `{day, streak}`, one daily streak shared by the whole app.
+  The day is the device's **local** calendar date, so the streak turns over at
+  midnight where the reader is, not at 05:30 as a UTC date would in India
 - `nb.sum.<chapter-id>` — `{xp, coins, done, total}`, what the shelf rolls up
 - `nb.last` — the chapter the Continue card points at
-- `ch01Exploration`, `ch03Tissues`, `ch04Motion` — full per-chapter state
+- `ch01Exploration`, `ch02Cell`, `ch03Tissues`, `ch04Motion` — full per-chapter state
+
+`Store.owns(key)` decides what belongs to the app: anything starting `nb.` or
+`ch` + a digit. Export, import and reset all go through it, so a chapter
+numbered 10 or higher is covered like any other.
 
 The shelf's **Progress & data** panel shows the live backend and can export
 all of it to JSON, import it back, or reset. Export before switching phones —
@@ -116,23 +150,37 @@ look the way it was designed.
 ## 5 · Adding a chapter
 
 Everything is driven by `CATALOG`, near the top of the `<script>` in
-`www/index.html`. Give a chapter a `file` and an `id` and it becomes playable;
+`src/index.html`. Give a chapter a `file` and an `id` and it becomes playable;
 without a `file` it renders as *Coming soon*.
 
 ```js
-{ n:2, t:'Cell: The Building Block of Life',
-  id:'9-science-2', file:'cell-chapter.html' }
+{ n:5, t:'Exploring Mixtures and Their Separation',
+  id:'9-science-5', file:'mixtures-chapter.html' }
 ```
 
-Then drop `cell-chapter.html` into `www/`, add it to `ASSETS` in
-`service-worker.js`, and bump `VERSION` there so old caches are dropped.
-The chapter's own `CH.id` must match the catalog `id` — that is the join
-the shelf uses to find its progress.
+Then write `src/chapters/mixtures-chapter.html`. Copy the shape of an existing
+one: the head and stylesheet are two include markers around a `:root` line of
+chapter accent colours, and the `<script>` is
+
+```
+/*@include shared/storage.js*/     the storage adapter
+const CH = { id, key, total, stages, paint }
+/*@include shared/engine.js*/      XP, quests, missions, the reusable games
+   … the chapter's own interactives, then reg()/auto() for its canvases …
+/*@include shared/boot.js*/        start-up and the streak
+```
+
+`CH.id` must match the catalog `id` — that is the join the shelf uses to find
+the chapter's progress. `CH.key` is where its own state lives and must start
+`ch` + the chapter number, so `Store.owns` picks it up.
+
+Finally add the file to `ASSETS` in `www/service-worker.js`, bump `VERSION`
+there so old caches are dropped, and run `npm run build`.
 
 ## 6 · What is and is not built
 
-3 of 86 catalogued chapters are playable: Class 9 Science chapters 1, 3 and 4.
-Everything else is catalogued and listed but marked *Coming soon*.
+4 of 86 catalogued chapters are playable: Class 9 Science chapters 1, 2, 3
+and 4. Everything else is catalogued and listed but marked *Coming soon*.
 
 Chapter lists were sourced in August 2026. Class 9 uses the new NCF-SE 2023
 books (*Exploration*, *Ganita Manjari*); NCERT's advisory of 17 March 2026

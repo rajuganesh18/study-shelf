@@ -1,0 +1,9 @@
+html{-webkit-text-size-adjust:100%;overscroll-behavior-y:none;background:var(--ground)}
+body{padding-left:calc(16px + env(safe-area-inset-left));
+     padding-right:calc(16px + env(safe-area-inset-right));
+     padding-top:env(safe-area-inset-top);
+     padding-bottom:calc(90px + env(safe-area-inset-bottom));
+     -webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+button,summary,a{-webkit-touch-callout:none}
+input[type=range]{touch-action:pan-y}
+.toast{bottom:calc(22px + env(safe-area-inset-bottom))}

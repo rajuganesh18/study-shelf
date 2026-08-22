@@ -37,12 +37,15 @@ Needs Node 18+, JDK 17, and the Android SDK (Android Studio is the easy way).
 cd study-shelf
 bash scripts/fetch-fonts.sh    # do this first — it changes files that get bundled
 npm install
+npm run build                  # src/ → www/
 npx cap add android            # generates android/ ; run once, ever
-npx cap sync android           # copies www/ into the native project
+npm run sync                   # builds, then copies www/ into the native project
 ```
 
-Re-run `npx cap sync android` after **every** change to `www/`. Forgetting this is
-the single most common "why didn't my change show up" moment.
+Re-run `npm run sync` after **every** change to `src/`. Forgetting this is the
+single most common "why didn't my change show up" moment. `npm run sync` builds
+first, so it cannot ship a `www/` that is behind `src/`; `npm run build:check`
+fails if the two have drifted, which is what you want in CI.
 
 ## 2 · Set the target API and version — required
 
