@@ -1414,6 +1414,7 @@ function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
       if(!seen[m]) seen[m]=1;
       if(Object.keys(seen).length>=3){
         document.getElementById('fTxt').textContent='A force can start motion, change direction, or change shape. All three effects demonstrated.';
+        complete('m1');
       }
     }
     draw();
@@ -1792,6 +1793,7 @@ Q.match('g8a','g8b','g8s',[
       seen[i]=1; ev('explore','graph-'+i);
       if(Object.keys(seen).length>=3){
         document.getElementById('graphTxt').textContent='At rest and constant velocity both have zero net force. Only the accelerating object has a net force acting on it.';
+        complete('m9');
       }
       draw();
     };
@@ -1988,6 +1990,7 @@ Q.vgrid('g11','g11check','g11s',{
     if(t>3)   seenLong=true;
     if(seenShort && seenLong){
       document.getElementById('catchTxt').textContent='Short stopping time → huge force. Long stopping time → gentle force. That is why fielders pull their hands back.';
+      complete('m12');
     }
     draw();
   }
@@ -2125,6 +2128,7 @@ Q.match('g14a','g14b','g14s',[
       seen[i]=1; ev('explore','eq-'+i);
       if(Object.keys(seen).length>=3){
         document.getElementById('eqTxt').textContent='The forces are always equal (third law). The accelerations differ because the masses differ (second law). Both laws working together.';
+        complete('m15');
       }
       upd();
     };

@@ -1610,6 +1610,7 @@ Q.order('g1','g1s',[
     document.getElementById('crtTxt').textContent=TXT[m];
     ev('explore','crt-'+m);
     if(!seen[m]) seen[m]=1;
+    if(Object.keys(seen).length>=3) complete('m2');
     draw();
   }
   const B=(id,m)=>{ const b=document.getElementById(id); if(b) b.onclick=()=>set(m); };

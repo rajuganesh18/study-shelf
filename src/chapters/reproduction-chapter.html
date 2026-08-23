@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Reproduction — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: magenta for the flower, green for the growth ---------- */
+:root{ --a1:#C75BB8; --a2:#69C77E; --badge-bg:#F8EAF6; }
+/*@include shared/chrome.css*/
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Science · Chapter 11</div>
+  <h1>Reproduction<br><span>How life continues</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96" aria-label="Chapter progress badge: a line of descent gaining generations and gaining variety"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · One parent is enough</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="35" data-coin="18">
+  <summary><span class="mno">01</span><span class="mt"><b>A plant from a piece of a plant</b><i>Section 11.1 · vegetative propagation</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>No seed, no flower, no second parent. Take the right piece of the right plant, put it in soil, and a whole new plant grows from it. Pick a piece and watch.</p>
+    <div class="panel">
+      <canvas id="vegCv" height="250" aria-label="A piece of a parent plant sprouting roots and shoots to become a new plant"></canvas>
+      <div class="row">
+        <button class="act" id="vegPotato">Potato eye</button>
+        <button class="act" id="vegGinger">Ginger rhizome</button>
+        <button class="act" id="vegMoney">Money plant node</button>
+      </div>
+      <div class="row">
+        <button class="act" id="vegCane">Sugarcane node</button>
+        <button class="act" id="vegLeaf">Bryophyllum leaf</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Part used</div><div class="v" id="vegPart" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Parents</div><div class="v" id="vegNew">—</div></div>
+        <div class="rc"><div class="k">Offspring</div><div class="v" id="vegGene" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="vegTxt" style="margin-top:12px;min-height:84px">Every one of these is a vegetative part — a stem, a root or a leaf. None of them is a seed.</div>
+    </div>
+    <p>New plants arising from the <b>vegetative parts</b> of a parent — its growing stems, roots and leaves — is <b>vegetative propagation</b>. Fleshy underground stems like potato and ginger sprout new plants without producing seeds; money plant and sugarcane stem cuttings grow into new plants; <i>Bryophyllum</i> leaves sprout tiny plantlets along their notched margins.</p>
+    <p>The key point is that only <b>one parent</b> is involved, so the offspring are <b>genetically identical</b> to it. They are <b>clones</b>. That is the defining feature of asexual reproduction, and everything that follows in this part is a variation on it.</p>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="40" data-coin="20">
+  <summary><span class="mno">02</span><span class="mt"><b>Cutting, grafting, layering</b><i>Activity 11.1 · how growers use it</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Gardeners and horticulturists have adapted the plant's own trick into three deliberate techniques. Step through each one.</p>
+    <div class="panel">
+      <canvas id="techCv" height="260" aria-label="The steps of taking a cutting, making a graft, and layering a twig"></canvas>
+      <div class="row">
+        <button class="act" id="techCut">Cutting</button>
+        <button class="act" id="techGraft">Grafting</button>
+        <button class="act" id="techLayer">Layering</button>
+      </div>
+      <div class="knob">
+        <label>Step <b id="techStepV">1 of 4</b></label>
+        <input type="range" id="techStep" min="1" max="4" value="1" aria-label="Step through the technique">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Technique</div><div class="v" id="techName" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Plants involved</div><div class="v" id="techUse">—</div></div>
+      </div>
+      <div class="note" id="techTxt" style="margin-top:12px;min-height:96px">Pick a technique, then drag the step slider through it.</div>
+    </div>
+    <p><b>Cutting</b> takes a length of shoot, strips the lower leaves, and plants it at about 45–60° in soil mixed with compost. <b>Grafting</b> joins a stem piece of one plant (the scion) into a slit cut in a healthy rooted plant of another variety (the stock), then binds the wound until it heals — one root system, another variety's shoot. <b>Layering</b> buries the middle of a flexible twig while it is still attached to the parent; after 10–15 days roots develop, and only then is the twig cut free.</p>
+    <div class="curio">
+      <h5>Why a banana farm is grown in a jar</h5>
+      <div class="note">Tissue culture takes cells from the shoot tip of a plant and grows thousands of identical plantlets on a nutrient medium. Farmers get mass-produced healthy plantlets, which helps eliminate virus-infected stock and raises yields. It is the same asexual principle, done at industrial scale.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="40" data-coin="20">
+  <summary><span class="mno">03</span><span class="mt"><b>Budding and spores</b><i>Activities 11.2 and 11.3 · yeast, hydra, mould</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Animals and fungi do it too. In yeast and hydra a small outgrowth swells on the parent's body and eventually breaks away; in moulds, a sac at the tip of a thread releases spores by the million.</p>
+    <div class="panel">
+      <canvas id="budCv" height="260" aria-label="A yeast cell budding, a hydra budding, and a mould releasing spores"></canvas>
+      <div class="row">
+        <button class="act" id="budYeast">Yeast</button>
+        <button class="act" id="budHydra">Hydra</button>
+        <button class="act" id="budMould">Bread mould</button>
+      </div>
+      <div class="knob">
+        <label>Temperature <b id="budTV">30 °C</b></label>
+        <input type="range" id="budT" min="0" max="45" value="30" aria-label="Temperature in degrees celsius">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Organism</div><div class="v" id="budOrg" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Method</div><div class="v" id="budMode" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Rate</div><div class="v" id="budRate">—</div></div>
+      </div>
+      <div class="note" id="budTxt" style="margin-top:12px;min-height:96px">Pick an organism, then move the temperature. Watch how fast the same process runs at 4 °C and at 30 °C.</div>
+    </div>
+    <p>In yeast, repeated cell division at one site produces a <b>bud</b> that enlarges and separates to live independently — this is <b>budding</b>. Hydra, a multicellular animal, does exactly the same, often with several buds on one parent at once. Moulds instead form <b>spores</b> inside a sac at the tip of a hypha (<i>Rhizopus</i>) or on a swollen vesicle (<i>Aspergillus</i>). Spores are light, usually single-celled, and drift on air currents until they find moisture and nutrients.</p>
+    <div class="curio">
+      <h5>Why the fridge works</h5>
+      <div class="note">Spores need warmth (25–35 °C) and moisture to grow. Lower temperatures slow or stop their reproduction, which is why we refrigerate perishable food. Before refrigerators became common about a hundred years ago, fresh food lasted one or two days.</div>
+    </div>
+    <p>For a long time people thought living things arose spontaneously from non-living matter. <b>Louis Pasteur</b> showed by experiment that new life always comes from pre-existing life — which gave us the germ theory of disease, strengthened the cell theory, and led to sterilising instruments.</p>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="35" data-coin="18">
+  <summary><span class="mno">04</span><span class="mt"><b>Which organism, which method?</b><i>Section 11.1 · sorting the asexual routes</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>All of these are asexual — one parent, identical offspring — but they get there by different routes.</p>
+    <div class="panel">
+      <div id="g4"></div>
+      <div class="score" id="g4s"></div>
+    </div>
+    <p>Whatever the route, the cell division behind all of it is <b>mitosis</b>: one cell becomes two daughter cells, each with the same number of chromosomes as the parent. That is why the offspring are clones. It is fast, and it lets a population grow quickly when conditions are favourable.</p>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Two parents, and the reason for them</div>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="45" data-coin="24">
+  <summary><span class="mno">05</span><span class="mt"><b>The count that does not double</b><i>Section 11.2 · what meiosis is for</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Two parents each contribute genetic material to the offspring. So if each generation received a full set from both parents, the chromosome number would double every generation. Switch meiosis off and watch what happens.</p>
+    <div class="panel">
+      <canvas id="meiCv" height="250" aria-label="Chromosome number across generations, with and without meiosis"></canvas>
+      <div class="row">
+        <button class="act" id="meiToggle">Switch meiosis off</button>
+      </div>
+      <div class="knob">
+        <label>Generations <b id="meiGV">1</b></label>
+        <input type="range" id="meiG" min="1" max="8" value="1" aria-label="Number of generations">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Parent cell</div><div class="v" id="meiPar">46</div></div>
+        <div class="rc"><div class="k">Each gamete</div><div class="v" id="meiGam">23</div></div>
+        <div class="rc"><div class="k">The zygote</div><div class="v" id="meiZyg">46</div></div>
+      </div>
+      <div class="note" id="meiTxt" style="margin-top:12px;min-height:96px">Humans have 23 pairs of chromosomes — 46 in total, one of each pair from each parent.</div>
+    </div>
+    <p><b>Meiosis</b> is a special type of cell division that forms <b>gametes</b>. It halves the chromosome number: a <b>diploid</b> parent cell (46 in humans) gives <b>haploid</b> daughter cells with 23. In animals the male gametes are <b>sperm</b> and the female gametes are <b>eggs</b>; in plants the <b>pollen grain</b> carries the male gametes to an <b>ovule</b>, which holds the female gamete.</p>
+    <p>During meiosis the two chromosomes of each pair separate, so every gamete receives exactly one chromosome from each pair. Two gametes fuse and the full count is restored. The number stays fixed generation after generation.</p>
+    <div class="opts" data-q>
+      <div class="note" style="margin-bottom:6px">A human zygote has just formed. How many chromosomes does it have?</div>
+      <button class="opt">23</button>
+      <button class="opt" data-ok="1">46</button>
+      <button class="opt">92</button>
+    </div>
+    <div class="why">The zygote is the fusion of two gametes carrying 23 each, so it has 46 — the same as every other body cell. It is the gametes, not the zygote, that carry the halved number.</div>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="45" data-coin="24">
+  <summary><span class="mno">06</span><span class="mt"><b>Why no two children are alike</b><i>Activity 11.4 · the bead experiment</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Take three pairs of beads in three colours. Each pair holds two contrasting versions of one character on the two chromatids of one chromosome. Pick one bead from each pair at random — that is a gamete. How many different gametes are possible?</p>
+    <div class="panel">
+      <canvas id="beadCv" height="250" aria-label="Pairs of contrasting beads, one picked from each pair to make a combination"></canvas>
+      <div class="row">
+        <button class="act" id="beadRoll">Make a gamete</button>
+      </div>
+      <div class="knob">
+        <label>Pairs of chromosomes <b id="beadNV">3</b></label>
+        <input type="range" id="beadN" min="1" max="23" value="3" aria-label="Number of chromosome pairs">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Pairs</div><div class="v" id="beadPairs">3</div></div>
+        <div class="rc"><div class="k">Possible gametes</div><div class="v" id="beadCombo">8</div></div>
+        <div class="rc"><div class="k">This one</div><div class="v" id="beadThis" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="beadTxt" style="margin-top:12px;min-height:84px">Three pairs give 2 × 2 × 2 = 8 possible combinations. Drag the slider up towards the real number of human chromosome pairs.</div>
+    </div>
+    <p>With three pairs of characters, eight combinations are possible. Humans have <b>23 pairs</b>, each carrying information for many characters — so the number of possible gametes runs into millions before you even consider that two such gametes then combine at random.</p>
+    <p>This random mixing is what makes children genetically different from their parents and from their siblings. Each of us receives a unique combination of chromosomes. That <b>variation</b> is the whole point: it helps some individuals cope better with changing environments, and over time it is what allows populations to adapt and evolve. Some people tolerate low oxygen at high altitudes; some digest milk in adulthood.</p>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="35" data-coin="18">
+  <summary><span class="mno">07</span><span class="mt"><b>Asexual against sexual</b><i>Sections 11.1 and 11.2 · the trade-off</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Neither method is better. They trade different things against each other. Tick where each statement is true.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap once for a tick, twice for a cross.</div>
+      <table class="tick" id="g7"></table>
+      <div class="row"><button class="act" id="g7check">Check my answers</button></div>
+      <div class="score" id="g7s"></div>
+    </div>
+    <p>Asexual reproduction is fast, needs no partner, and reliably reproduces a plant whose qualities you already like — which is exactly why a farmer propagating a high-yield mango uses grafting rather than seeds. The cost is that a whole field of clones shares a single set of weaknesses; one disease that defeats one plant defeats all of them.</p>
+  </div>
+</details>
+
+<div class="sec">Part 3 · The flower</div>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="45" data-coin="24">
+  <summary><span class="mno">08</span><span class="mt"><b>Parts of a flower</b><i>Activity 11.5 · Fig. 11.10 and 11.11</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Flowering plants — <b>angiosperms</b> — are the most diverse group of plants on Earth, and the flower is their reproductive organ. Cut one lengthwise and four whorls appear, from the outside in.</p>
+    <div class="panel">
+      <canvas id="flowCv" height="240" aria-label="A longitudinal section of a flower with its four whorls labelled"></canvas>
+      <div class="row">
+        <button class="act" id="flSepal">Sepal</button>
+        <button class="act" id="flPetal">Petal</button>
+        <button class="act" id="flStamen">Stamen</button>
+      </div>
+      <div class="row">
+        <button class="act" id="flPistil">Pistil</button>
+        <button class="act" id="flOvule">Ovule</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Part</div><div class="v" id="flName" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Whorl</div><div class="v" id="flWhorl" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Job</div><div class="v" id="flJob" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="flTxt" style="margin-top:12px;min-height:84px">Tap a part to light it up on the section. Work from the outside in — sepals first.</div>
+    </div>
+    <p>A complete flower has four parts. The <b>sepals</b> are the green covering of the outermost whorl, which protects the flower in the bud stage. The <b>petals</b> are the coloured projections. The <b>stamen</b> is the male part: a <b>filament</b> carrying an <b>anther</b>, which produces pollen grains containing the male gametes. The <b>pistil</b> is the female part, with three subparts — the <b>stigma</b> at the tip, often flat or sticky; the <b>style</b>, a thin tube; and the <b>ovary</b> at the base, containing <b>ovules</b>, each with an egg cell.</p>
+    <p>Not every flower has all four. Papaya bears male and female flowers on different trees; in some flowers the sepals and petals are fused. A flower missing its stamens cannot make pollen, and one missing its pistil cannot make seeds.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="45" data-coin="24">
+  <summary><span class="mno">09</span><span class="mt"><b>The muslin bag experiment</b><i>Activity 11.6 · five treatments on a pea plant</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Five flowers on one pea plant, treated five different ways. Some are wrapped in muslin so no pollen can reach them; some have their stamens removed so they make none of their own. Which ones become pods?</p>
+    <div class="panel">
+      <canvas id="bagCv" height="270" aria-label="Five pea flowers under five different pollination treatments"></canvas>
+      <div class="row">
+        <button class="act" id="bag1">1 · Bud, bagged</button>
+        <button class="act" id="bag2">2 · Bud, no stamens, bagged</button>
+      </div>
+      <div class="row">
+        <button class="act" id="bag3">3 · Flower, no stamens, bagged</button>
+        <button class="act" id="bag4">4 · Flower, bagged</button>
+      </div>
+      <div class="row">
+        <button class="act" id="bag5">5 · Flower, uncovered</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Treatment</div><div class="v" id="bagTreat" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Pollen reaches stigma</div><div class="v" id="bagPollen" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Fruit forms</div><div class="v" id="bagFruit">—</div></div>
+      </div>
+      <div class="note" id="bagTxt" style="margin-top:12px;min-height:96px">Work through all five. One of them fails, and the reason it fails is the whole point of the experiment.</div>
+    </div>
+    <p>Fruits form in every treatment <b>except</b> the one where the stamens were removed from the flower <b>bud</b> — before the flower ever opened, and so before any of its own pollen could be shed onto its own stigma. From that single failure we can infer that the transfer of pollen from anther to stigma is necessary for fruit formation. That transfer is <b>pollination</b>.</p>
+    <p>Pea flowers pollinate themselves inside the closed bud, which is why treatment 3 still sets fruit even though its stamens were removed and it was bagged: by the time the flower had opened, the job was already done.</p>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="30" data-coin="15">
+  <summary><span class="mno">10</span><span class="mt"><b>Pollen to zygote, in order</b><i>Section 11.2.5 · Fig. 11.14</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Once pollen reaches a compatible stigma, a chain of events follows. Put them in order.</p>
+    <div class="panel">
+      <div class="chips" id="g10"></div>
+      <div class="score" id="g10s"></div>
+    </div>
+    <p>The pollen grain germinates on the stigma and grows a <b>pollen tube</b> down through the style into the ovary. The male gamete travels through this tube and reaches the ovule, where it fuses with the egg cell. That fusion is <b>fertilisation</b>, and it marks the beginning of a new life. The fertilised egg is a <b>zygote</b>, which develops into an embryo.</p>
+    <p>Meanwhile the ovary enlarges into a <b>fruit</b> and the ovules inside it become <b>seeds</b>. Seeds are dispersed by wind, water or animals — the plumed seeds of madar and dandelion are shaped for wind. When water, air and temperature are favourable, the seed germinates into a new plant.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Getting the pollen across</div>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="45" data-coin="24">
+  <summary><span class="mno">11</span><span class="mt"><b>Who carries the pollen</b><i>Section 11.2.4 · pollination strategies</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>A flower cannot walk to another flower, so it hires an agent. Each agent demands a differently built flower. Switch between them and watch what changes.</p>
+    <div class="panel">
+      <canvas id="polCv" height="260" aria-label="Flowers built for wind, water, insect and bird pollination"></canvas>
+      <div class="row">
+        <button class="act" id="polWind">Wind</button>
+        <button class="act" id="polWater">Water</button>
+        <button class="act" id="polInsect">Insects</button>
+        <button class="act" id="polBird">Birds</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Agent</div><div class="v" id="polAgent" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Pollen grains</div><div class="v" id="polPollen" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Stigma</div><div class="v" id="polStigma" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="polTxt" style="margin-top:12px;min-height:96px">Wind, water, insects and birds are all <b>pollinators</b>. The flower is built around whichever one it depends on.</div>
+    </div>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a flower feature, then tap the agent it is built for.</div>
+      <div class="match"><div id="g11a"></div><div id="g11b"></div></div>
+      <div class="score" id="g11s"></div>
+    </div>
+    <p>Pollination is <b>self-pollination</b> when pollen reaches the stigma of the same flower or another flower of the same plant, and <b>cross-pollination</b> when it reaches a flower of a different plant of the same kind. Cross-pollination mixes genetic material from two individuals; self-pollination does not, so a plant that only ever self-pollinates loses genetic diversity generation by generation.</p>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="45" data-coin="24">
+  <summary><span class="mno">12</span><span class="mt"><b>How much pollen per seed</b><i>Activity 11.7 · Table 11.3</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Wind pollination and insect pollination both work, but they pay very different prices. Compare what each releases against what each gets back.</p>
+    <div class="panel">
+      <canvas id="ratCv" height="250" aria-label="Pollen released against seeds formed, for wind and insect pollination"></canvas>
+      <div class="row">
+        <button class="act" id="ratWind">Wind · maize, wheat</button>
+        <button class="act" id="ratInsect">Insect · sunflower</button>
+      </div>
+      <div class="knob">
+        <label>Within the observed range <b id="ratSV">middle</b></label>
+        <input type="range" id="ratS" min="0" max="100" value="50" aria-label="Position within the observed range">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Pollen released</div><div class="v" id="ratPollen" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Seeds formed</div><div class="v" id="ratSeeds">—</div></div>
+        <div class="rc"><div class="k">Pollen per seed</div><div class="v" id="ratPer" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="ratTxt" style="margin-top:12px;min-height:96px">Pick a strategy, then move through the range the studies observed.</div>
+    </div>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Work out each figure from Table 11.3.</div>
+      <table class="tick" id="g12"></table>
+      <div class="row"><button class="act" id="g12check">Check my answers</button></div>
+      <div class="score" id="g12s"></div>
+    </div>
+    <p>Wind pollination is enormously wasteful per grain — thousands of grains for every seed — because the wind has no idea where it is going. But pollen is cheap to make, and a plant that releases a million grains does not need a high success rate to succeed. Insect pollination is far more efficient per grain because the insect delivers the pollen to another flower of the same kind on purpose, but the plant pays for that service in nectar, scent and colour.</p>
+  </div>
+</details>
+
+<div class="sec">Part 5 · Animals, and how they hedge</div>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="45" data-coin="24">
+  <summary><span class="mno">13</span><span class="mt"><b>Outside the body, or inside</b><i>Sections 11.3 and 11.4 · Table 11.4</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Every animal faces the same two problems: get the gametes to meet, and keep the young alive long enough to reproduce in turn. There are two broad answers, and they trade numbers against protection.</p>
+    <div class="panel">
+      <canvas id="aniCv" height="260" aria-label="Eggs produced against survival of young, for fish, frog, lizard and bird"></canvas>
+      <div class="row">
+        <button class="act" id="aniFish">Fish</button>
+        <button class="act" id="aniFrog">Frog</button>
+        <button class="act" id="aniLizard">Lizard</button>
+        <button class="act" id="aniBird">Bird</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Fertilisation</div><div class="v" id="aniFert" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Eggs at a time</div><div class="v" id="aniEggs" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Survival of young</div><div class="v" id="aniSurv" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="aniTxt" style="margin-top:12px;min-height:96px">Work through all four and watch the two columns move in opposite directions.</div>
+    </div>
+    <div class="panel">
+      <p style="font-size:14.5px;margin:0 0 12px">Tick every statement that is true of <b>external</b> fertilisation.</p>
+      <div class="chips" id="g13"></div>
+      <div class="row"><button class="act" id="g13check">Check my answers</button></div>
+      <div class="score" id="g13s"></div>
+    </div>
+    <p>In many aquatic animals such as frogs and most fish, the female releases eggs into the water and the male releases sperm over them — <b>external fertilisation</b>. Enormous numbers are laid, and most are swept away or eaten. In reptiles, birds and mammals fertilisation happens inside the female's body — <b>internal fertilisation</b> — and the fertilised egg or embryo is far better protected, so far fewer are needed.</p>
+    <p>The yolk in an egg tells the same story. Fish, amphibians and insects put just enough yolk in each egg to produce a <b>larva</b>, which hatches and then feeds for itself — the caterpillar stage of a butterfly is exactly this, a feeding stage that accumulates nutrition before the transformation into an adult. Reptiles and birds pack enough yolk to nourish the embryo all the way to hatching. In mammals the zygote develops inside the female body, and the young are fed on milk after birth.</p>
+  </div>
+</details>
+
+<div class="sec">Part 6 · Reproduction in human beings</div>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="50" data-coin="26">
+  <summary><span class="mno">14</span><span class="mt"><b>The organs, and the cells they make</b><i>Sections 11.5.2 to 11.5.4 · Fig. 11.18, 11.19</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Reproductive organs mature at puberty and begin producing gametes — sperm in males, eggs in females. Step through the parts of each system and what each one does.</p>
+    <div class="panel">
+      <canvas id="humCv" height="250" aria-label="Schematic of the male and female reproductive systems with each part highlighted in turn"></canvas>
+      <div class="row">
+        <button class="act" id="humMale">Male system</button>
+        <button class="act" id="humFemale">Female system</button>
+      </div>
+      <div class="knob">
+        <label>Part <b id="humPV">1 of 5</b></label>
+        <input type="range" id="humP" min="1" max="5" value="1" aria-label="Step through the parts of the system">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Part</div><div class="v" id="humPart" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">What it does</div><div class="v" id="humJob" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Gamete</div><div class="v" id="humGamete" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="humTxt" style="margin-top:12px;min-height:96px">Pick a system, then step through its parts.</div>
+    </div>
+    <p>Sperm are produced in two oval organs called <b>testes</b>, held in a pouch of skin, the <b>scrotum</b>, which keeps them slightly cooler than the rest of the body — a requirement for sperm formation. Sperm travel through the <b>vas deferens</b>, which opens into the <b>urethra</b>. The <b>seminal vesicles</b> and <b>prostate</b> add fluids that nourish the sperm and keep them motile. The testes also produce a hormone that controls sperm production and the physical changes of puberty.</p>
+    <p>The female system has a pair of <b>ovaries</b>, which produce eggs and release hormones; a pair of <b>oviducts</b> or fallopian tubes connecting each ovary to the uterus; the <b>uterus</b>, a bag-like structure where a foetus develops; and the <b>cervix</b>, a narrow passage through which the uterus opens into the <b>vagina</b>.</p>
+    <p>The formation of gametes is called <b>gametogenesis</b>, and it happens in the testes and ovaries. Body cells have 46 chromosomes but gametes have only 23, so that a zygote formed by two of them has the same 46 as its parents. In males gametogenesis produces very large numbers of tiny motile sperm; in females it produces a single large egg with stored nutrients and no motility of its own. This asymmetry between male and female gametes holds across most of the animal kingdom.</p>
+    <div class="curio">
+      <h5>Who determines the sex of a baby</h5>
+      <div class="note">Every person has two sex chromosomes: females XX, males XY. The mother can only ever contribute an X. The father contributes either an X, giving XX, or a Y, giving XY. So it is the father's gamete that settles it — which is worth knowing, because the opposite belief has done a great deal of harm.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="50" data-coin="26">
+  <summary><span class="mno">15</span><span class="mt"><b>The monthly cycle</b><i>Sections 11.5.5 to 11.5.7 · Fig. 11.21</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>At birth a girl's ovaries already hold millions of immature eggs. From puberty onwards, usually one mature egg is released each month. Around it the uterus runs a repeating cycle of preparation. Drag through a typical 28-day cycle.</p>
+    <div class="panel">
+      <canvas id="cycCv" height="240" aria-label="The stages of a typical 28-day menstrual cycle, with the uterine lining thickening and shedding"></canvas>
+      <div class="knob">
+        <label>Day of the cycle <b id="cycDV">1</b></label>
+        <input type="range" id="cycD" min="1" max="28" value="1" aria-label="Day of the menstrual cycle">
+      </div>
+      <div class="row">
+        <button class="act" id="cycFert">The egg is fertilised</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Stage</div><div class="v" id="cycPhase" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Uterine lining</div><div class="v" id="cycLining" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">The egg</div><div class="v" id="cycEgg" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="cycTxt" style="margin-top:12px;min-height:110px">Days 1–5 the lining sheds; days 6–14 it rebuilds while an egg matures; around day 14 the egg is released; days 15–28 the lining thickens and waits.</div>
+    </div>
+    <p><b>Ovulation</b> is the release of a mature egg from an ovary, around day 14 of a typical cycle. The egg travels into the oviduct. If sperm are present, one may fuse with it there, forming a <b>zygote</b>. The zygote divides as it travels to the uterus and implants into the thickened lining, which is the beginning of pregnancy — and the reason the cycle stops during pregnancy, because the lining is now needed and is no longer shed.</p>
+    <p>If the egg is not fertilised it remains viable for about a day and then degenerates. The thickened lining is no longer needed, so it sheds, and this — along with some blood — leaves the body through the vagina. That is <b>menstruation</b>, usually lasting three to seven days. The whole cycle typically repeats every 21–35 days, often around 28, and begins at puberty between about 10 and 14 years, continuing until menopause at around 50.</p>
+    <div class="opts" data-q>
+      <div class="note" style="margin-bottom:6px">A student claims: “In humans, ovulation always happens on day 14 of the cycle.” Is the claim sound?</div>
+      <button class="opt">Yes — day 14 is fixed for everyone</button>
+      <button class="opt" data-ok="1">No — cycles run 21–35 days, so the day varies</button>
+      <button class="opt">No — ovulation happens on the first day</button>
+    </div>
+    <div class="why">Day 14 is the midpoint of a <i>typical</i> 28-day cycle, not a rule. Cycle length varies between people and between months for the same person, and cycles can be irregular — especially in the years just after they begin. The textbook's own figure says "typically every 21–35 days (often around 28)".</div>
+    <p>Pregnancy in humans lasts about nine months, divided into three <b>trimesters</b>. In the first, the fertilised egg develops into an embryo and the major organs begin forming; from about the ninth week it is called a <b>foetus</b>. In the second, the foetus grows stronger and its movements can usually be felt. In the third, it grows rapidly and gets ready for life outside. During childbirth, strong contractions of the uterus push the baby out through the birth canal.</p>
+    <div class="curio">
+      <h5>Menstruation is a sign of health</h5>
+      <div class="note">It is a sign of a healthy reproductive system, not something to be ashamed of. Use clean menstrual products and change them every four to six hours, or more often if the flow is heavy. Wash the genital area with water — soap can disrupt the natural bacterial balance — and wash hands with soap before and after changing a pad. Wrap used products in paper and bin them; never flush them.</div>
+    </div>
+    <p>Sexual maturity — sperm production in boys, menstrual cycles in girls — arrives gradually during adolescence, but <b>emotional maturity takes longer</b>. Being ready for adult decisions means being able to handle feelings, communicate clearly and think things through. Responsible choices at this stage help prevent unplanned pregnancies and <b>sexually transmitted infections</b> (STIs) such as gonorrhoea, herpes, syphilis, genital warts and HIV, some of which are not yet curable. Condoms reduce STI transmission and also help prevent pregnancy.</p>
+    <p>Contraceptive methods include barriers such as condoms; oral pills that alter hormones to change the release of eggs, though these can have side effects; and intra-uterine devices such as the copper-T, which may sometimes irritate the uterus. Surgical methods block the vas deferens or the fallopian tubes so that sperm and egg cannot meet. In India, <b>prenatal sex determination is prohibited by law</b>, because sex-selective abortion driven by a preference for a particular gender distorts the sex ratio of the whole society.</p>
+  </div>
+</details>
+
+<div class="sec">Part 7 · The boss</div>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="80" data-coin="60">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions from a potato eye to a human zygote. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+<footer>NCERT Class 9 Science · Chapter 11</footer>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- .wrap -->
+
+<script>
+/*@include shared/storage.js*/
+
+const CH = {
+  id: '9-science-11',
+  key: 'ch11Repro',
+  total: 16,
+  stages: [
+    { at:0,   f:0.00, name:'One cell, alone',      d:'A single organism, and no descendants yet. Every line of life on Earth starts here.' },
+    { at:70,  f:0.15, name:'It divides',           d:'Mitosis makes two daughter cells with the same chromosomes. Two individuals now, and they are identical.' },
+    { at:160, f:0.30, name:'A bud breaks away',    d:'An outgrowth on the parent enlarges and separates. Still one parent, still a clone — but the line is spreading.' },
+    { at:280, f:0.46, name:'Two gametes meet',     d:'Meiosis halves the count, two halves fuse, and for the first time a new individual has two parents.' },
+    { at:410, f:0.64, name:'The offspring differ', d:'Each gamete carried a different combination, so no two of these are the same. Variation has entered the line.' },
+    { at:530, f:0.84, name:'A generation on',      d:'They reproduce in turn, and the differences accumulate. This is what lets a population meet a changing world.' },
+    { at:640, f:1.00, name:'Life continues',       d:'The line has depth and it has variety. Not one long copy but a spreading, varying, surviving family.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+    x.fillStyle = '#F8EAF6'; x.fillRect(0,0,W,H);
+
+    /* A pedigree that gains generations as XP grows, and gains variety once
+       two parents are involved. Rows are deterministic, so the same XP always
+       paints the same badge. */
+    const rows = Math.max(1, Math.min(6, Math.floor(f*5.6) + 1));
+    const top = H*0.13, gap = rows > 1 ? (H*0.76)/(rows-1) : 0;
+    // how many individuals each generation holds
+    const nOf = r => [1,2,3,4,6,7][r];
+    const xsOf = (r,n) => {
+      const span = W*0.78 * Math.min(1, 0.34 + r*0.20);
+      const out = [];
+      for(let i=0;i<n;i++) out.push(W/2 + (n===1 ? 0 : (i/(n-1) - 0.5)*span));
+      return out;
+    };
+    // once row 3 is reached the line is sexual, so colour spreads between the accents
+    const hueMix = (r,i,n) => {
+      if(r < 3) return 0;                       // clones: all one colour
+      const spread = Math.min(1, (f-0.40)/0.50);
+      return (n===1 ? 0.5 : i/(n-1)) * spread;
+    };
+    const col = (t,a) => {
+      const c1 = [199,91,184], c2 = [105,199,126];
+      const c = c1.map((v,k)=>Math.round(v + (c2[k]-v)*t));
+      return 'rgba(' + c[0] + ',' + c[1] + ',' + c[2] + ',' + a + ')';
+    };
+
+    let prev = null;
+    for(let r=0;r<rows;r++){
+      const n = nOf(r), xs = xsOf(r,n), y = rows===1 ? H*0.50 : top + r*gap;
+      if(prev){                                   // lines back to the generation above
+        x.strokeStyle = 'rgba(90,70,95,.30)'; x.lineWidth = 1;
+        xs.forEach((px,i)=>{
+          const p = prev.xs[Math.min(prev.xs.length-1, Math.floor(i*prev.xs.length/n))];
+          x.beginPath(); x.moveTo(p, prev.y+3.4); x.lineTo(px, y-3.4); x.stroke();
+        });
+      }
+      xs.forEach((px,i)=>{
+        x.fillStyle = col(hueMix(r,i,n), 0.92);
+        x.beginPath(); x.arc(px, y, r===0 ? 5 : 4, 0, 7); x.fill();
+      });
+      prev = { xs:xs, y:y };
+    }
+
+    // the bud, on the stage where a bud is what is happening
+    if(f >= 0.28 && f < 0.46){
+      const y = top + gap*2;
+      x.fillStyle = col(0, 0.55);
+      x.beginPath(); x.arc(W/2 + W*0.20, y - 7, 2.6, 0, 7); x.fill();
+    }
+  }
+};
+
+/* ---------- shared palette for this chapter's canvases ---------- */
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#C75BB8', A2='#69C77E',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', BG='#10141F',
+      SOIL='#5E4630', LEAF='#69C77E', STEM='#8FBF6F';
+
+/*@include shared/engine.js*/
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* A simple plant: a stem from (bx,by) upward of height h, with n leaf pairs. */
+function plant(x, bx, by, h, leaves, rootLen, t){
+  x.strokeStyle=STEM; x.lineWidth=2.4; x.lineCap='round';
+  x.beginPath(); x.moveTo(bx,by); x.lineTo(bx, by-h); x.stroke();
+  for(let i=0;i<leaves;i++){
+    const ly = by - h*(0.35 + 0.62*i/Math.max(1,leaves-1||1));
+    const sway = Math.sin((t||0) + i)*2;
+    [-1,1].forEach(s=>{
+      x.fillStyle=LEAF;
+      x.beginPath();
+      x.ellipse(bx + s*9, ly + sway*0.3, 9, 3.6, s*0.42, 0, 7);
+      x.fill();
+    });
+  }
+  if(rootLen>0){
+    x.strokeStyle='rgba(200,175,150,.75)'; x.lineWidth=1.2;
+    [-1,0,1].forEach(s=>{
+      x.beginPath(); x.moveTo(bx,by);
+      x.quadraticCurveTo(bx + s*7, by + rootLen*0.6, bx + s*11, by + rootLen);
+      x.stroke();
+    });
+  }
+}
+
+/* A band of soil across the canvas. */
+function soil(x, W, y, H){
+  x.fillStyle=SOIL; x.fillRect(0, y, W, H-y);
+  x.strokeStyle='rgba(255,255,255,.10)'; x.lineWidth=1;
+  x.beginPath(); x.moveTo(0,y); x.lineTo(W,y); x.stroke();
+}
+
+/* ============================================================
+   M1 — a plant from a piece of a plant
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('vegCv');
+  if(!cv) return;
+  let pick=null, t=0; const seen={};
+  const P = {
+    vegPotato:{ n:'Potato eye', part:'a swollen underground stem (tuber)', ex:'Potato',
+      d:'A potato is not a root — it is a fleshy underground stem. Each "eye" is a node with a dormant bud, and each bud can sprout a whole new plant. Cut one potato into pieces with an eye each and you have several plants, all identical.' },
+    vegGinger:{ n:'Ginger rhizome', part:'a horizontal underground stem (rhizome)', ex:'Ginger',
+      d:'Ginger grows as a rhizome creeping sideways under the soil. Buds along it send shoots up and roots down, so one rhizome becomes a spreading clump — every stem of it the same plant, genetically.' },
+    vegMoney:{ n:'Money plant node', part:'a stem cutting with a node', ex:'Money plant',
+      d:'Cut a length of money plant stem so that it includes a node, stand it in water or soil, and roots grow from the node within days. It is the commonest houseplant demonstration of vegetative propagation there is.' },
+    vegCane:{ n:'Sugarcane node', part:'a stem cutting with a node', ex:'Sugarcane',
+      d:'Sugarcane is planted as stem cuttings, not seeds. Each piece carries nodes with buds; laid in a furrow and watered, every bud raises a new cane. An entire field can descend from a handful of parent plants.' },
+    vegLeaf:{ n:'Bryophyllum leaf', part:'a leaf margin', ex:'Bryophyllum',
+      d:'Bryophyllum is the odd one out: the new plants sprout from notches along the leaf margin. Tiny plantlets, complete with their own leaves and roots, drop off and take hold in the soil below.' }
+  };
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    const gy=H*0.74;
+    soil(x,W,gy,H);
+    if(!pick){
+      mono(x,10); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('pick a piece of a parent plant', W/2, H*0.42);
+      mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('no seed, no flower, no second parent', 8, 8);
+      return;
+    }
+    const p=P[pick], g=Math.min(1, t/2.6);           // 0 = just planted, 1 = grown
+    // the parent piece, sitting in the soil
+    x.fillStyle='#B98A5A';
+    if(pick==='vegLeaf'){
+      x.fillStyle=LEAF;
+      x.beginPath(); x.ellipse(W*0.26, gy-14, 26, 11, -0.18, 0, 7); x.fill();
+      // the notched margin, with plantlets appearing along it
+      for(let i=0;i<5;i++){
+        const px=W*0.26-20+i*10, py=gy-22;
+        x.fillStyle='rgba(255,255,255,.30)';
+        x.beginPath(); x.arc(px, gy-14+Math.sin(i)*5, 1.8, 0, 7); x.fill();
+        if(g>0.25) plant(x, px, py+6, 6+12*g, 2, 0, t+i);
+      }
+    } else if(pick==='vegPotato'){
+      x.beginPath(); x.ellipse(W*0.26, gy+16, 22, 14, 0, 0, 7); x.fill();
+      for(let i=0;i<3;i++){                            // the eyes
+        x.fillStyle='#6A4A2E';
+        x.beginPath(); x.arc(W*0.26-12+i*12, gy+10, 2.4, 0, 7); x.fill();
+      }
+    } else if(pick==='vegGinger'){
+      x.beginPath(); x.ellipse(W*0.26, gy+16, 26, 9, 0.10, 0, 7); x.fill();
+      x.beginPath(); x.ellipse(W*0.26+18, gy+22, 12, 7, 0.30, 0, 7); x.fill();
+    } else {                                           // a stem cutting, planted at an angle
+      x.strokeStyle='#B98A5A'; x.lineWidth=5; x.lineCap='round';
+      x.beginPath(); x.moveTo(W*0.20, gy+26); x.lineTo(W*0.30, gy-16); x.stroke();
+      x.fillStyle=GOLD;                                // the node
+      x.beginPath(); x.arc(W*0.275, gy-5, 3, 0, 7); x.fill();
+      mono(x,9); x.fillStyle=GOLD; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText('node', W*0.30+6, gy-5);
+    }
+    // the new plant it becomes
+    if(pick!=='vegLeaf' && g>0.05){
+      plant(x, W*0.62, gy, 24+68*g, Math.max(1, Math.round(4*g)), 20*g, t);
+      if(g>0.55){
+        arrow(x, W*0.38, gy-24, W*0.54, gy-24, A2, 7);
+        mono(x,9,500); x.fillStyle=A2; x.textAlign='center'; x.textBaseline='bottom';
+        x.fillText('becomes', W*0.46, gy-28);
+      }
+    }
+    mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(p.ex + ' · ' + (g>0.85?'a whole new plant':'growing'), W/2, 10);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('one parent · offspring genetically identical', 8, 26);
+  }
+  function upd(){
+    const p=P[pick];
+    document.getElementById('vegPart').textContent=p.part;
+    document.getElementById('vegNew').textContent='one';
+    document.getElementById('vegGene').textContent='a clone of the parent';
+    document.getElementById('vegTxt').textContent=p.d;
+    if(!seen[pick]){ seen[pick]=1;
+      if(Object.keys(seen).length>=3) complete('m1'); }
+    draw();
+  }
+  tick('m1', ()=>{ if(pick){ t+=0.033; } draw(); });
+  Object.keys(P).forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.onclick=()=>{ pick=id; t=0; ev('explore',id); upd(); };
+  });
+  draw(); reg('m1',draw);
+})();
+
+/* ============================================================
+   M2 — cutting, grafting, layering
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('techCv'), sl=document.getElementById('techStep');
+  if(!cv||!sl) return;
+  let mode=null; const seen={};
+  const T = {
+    techCut:{ n:'Cutting', use:'one plant',
+      steps:[
+        ['Choose a shoot','Cut an overgrown branch at the end of its growing season. Note the length, and count the nodes and internodes on the cutting.'],
+        ['Strip the lower half','Collect the cuttings in the morning and remove the leaves from the lower half, so the buried part cannot lose water through them.'],
+        ['Plant at an angle','Insert the cutting about half its length into soil mixed with compost, at roughly 45–60° to the surface.'],
+        ['Water and wait','Water regularly. Roots grow from the buried nodes and the cutting becomes an independent plant.']
+      ] },
+    techGraft:{ n:'Grafting', use:'two plants',
+      steps:[
+        ['Take a rooted plant A','Start with a healthy rooted plant — a wild rose, say. Its root system will feed everything that follows.'],
+        ['Cut a slit in its twig','Make a clean wound or slit on a twig of plant A. This is where the other variety will be joined.'],
+        ['Fit a stem of plant B','Take a healthy stem piece from another variety — a yellow or pink rose — and fit it into the slit so the cut surfaces meet.'],
+        ['Bind it and let it heal','Wrap the join with cotton cloth or film to keep pests out until it heals, and cut back the other branches of plant A so the graft gets the growth.']
+      ] },
+    techLayer:{ n:'Layering', use:'one plant',
+      steps:[
+        ['Pick a flexible twig','Choose a thin, flexible twig on a tree or shrub — a lemon works well. It stays attached to the parent throughout.'],
+        ['Bury its middle','Bend the twig down and bury its middle part under the soil surface, leaving the tip above ground.'],
+        ['Water and wait','Water regularly. New leaves appear on the buried section, and after 10–15 days roots develop from it.'],
+        ['Cut it free','Only once roots have formed, cut the twig from the parent plant. It is already a rooted plant and can grow on its own.']
+      ] }
+  };
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,260); if(!x) return;
+    const W=cv.clientWidth, H=260;
+    bg(x,W,H);
+    const gy=H*0.72;
+    soil(x,W,gy,H);
+    if(!mode){
+      mono(x,10); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('pick a technique', W/2, H*0.44);
+      return;
+    }
+    const s=+sl.value, m=T[mode];
+    if(mode==='techCut'){
+      const cx=W*0.5;
+      if(s===1){ plant(x, cx, gy, 92, 4, 16, 0);
+        x.strokeStyle=BAD; x.lineWidth=1.5; x.setLineDash([4,3]);
+        x.beginPath(); x.moveTo(cx-18, gy-52); x.lineTo(cx+18, gy-52); x.stroke(); x.setLineDash([]);
+        mono(x,9); x.fillStyle=BAD; x.textAlign='left'; x.textBaseline='bottom';
+        x.fillText('cut here', cx+21, gy-52);
+      } else if(s===2){
+        x.strokeStyle=STEM; x.lineWidth=2.4; x.lineCap='round';
+        x.beginPath(); x.moveTo(cx, gy-6); x.lineTo(cx, gy-56); x.stroke();
+        [0,1].forEach(i=>{ [-1,1].forEach(sd=>{
+          x.fillStyle=LEAF; x.beginPath();
+          x.ellipse(cx+sd*9, gy-40-i*13, 9, 3.6, sd*0.42, 0, 7); x.fill(); }); });
+        mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+        x.fillText('lower leaves removed', cx, gy-2);
+      } else {
+        const buried = s>=3;
+        x.strokeStyle=STEM; x.lineWidth=2.4; x.lineCap='round';
+        x.beginPath(); x.moveTo(cx-14, gy+22); x.lineTo(cx+10, gy-42); x.stroke();
+        [0,1].forEach(i=>{ [-1,1].forEach(sd=>{
+          x.fillStyle=LEAF; x.beginPath();
+          x.ellipse(cx+8+sd*9, gy-28-i*12, 9, 3.6, sd*0.42, 0, 7); x.fill(); }); });
+        if(buried && s===4){
+          x.strokeStyle='rgba(200,175,150,.8)'; x.lineWidth=1.2;
+          [-1,0,1].forEach(sd=>{ x.beginPath(); x.moveTo(cx-14, gy+22);
+            x.quadraticCurveTo(cx-14+sd*8, gy+30, cx-14+sd*13, gy+34); x.stroke(); });
+          mono(x,9); x.fillStyle=A2; x.textAlign='left'; x.textBaseline='middle';
+          x.fillText('roots from the buried nodes', cx+18, gy+26);
+        }
+        mono(x,9); x.fillStyle=GOLD; x.textAlign='right'; x.textBaseline='middle';
+        x.fillText('45–60°', cx-20, gy+4);
+      }
+    } else if(mode==='techGraft'){
+      const ax=W*0.34, bxp=W*0.68;
+      plant(x, ax, gy, s>=4 ? 58 : 74, s>=4 ? 1 : 3, 18, 0);
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('plant A · rooted', ax, gy+6);
+      if(s>=2){
+        x.strokeStyle=BAD; x.lineWidth=2;
+        x.beginPath(); x.moveTo(ax-5, gy-46); x.lineTo(ax+5, gy-52); x.stroke();
+        mono(x,9); x.fillStyle=BAD; x.textAlign='left'; x.textBaseline='bottom';
+        x.fillText('slit', ax+8, gy-46);
+      }
+      if(s===3){
+        x.strokeStyle=A1; x.lineWidth=2.6; x.lineCap='round';
+        x.beginPath(); x.moveTo(bxp, gy-30); x.lineTo(bxp-8, gy-64); x.stroke();
+        [-1,1].forEach(sd=>{ x.fillStyle=LEAF; x.beginPath();
+          x.ellipse(bxp-6+sd*8, gy-56, 8, 3.4, sd*0.42, 0, 7); x.fill(); });
+        mono(x,9); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='top';
+        x.fillText('plant B · a stem piece', bxp, gy-24);
+        arrow(x, bxp-22, gy-48, ax+14, gy-48, A1, 7);
+      }
+      if(s>=4){
+        x.strokeStyle=A1; x.lineWidth=2.6; x.lineCap='round';
+        x.beginPath(); x.moveTo(ax, gy-52); x.lineTo(ax+10, gy-88); x.stroke();
+        [0,1].forEach(i=>{ [-1,1].forEach(sd=>{
+          x.fillStyle=LEAF; x.beginPath();
+          x.ellipse(ax+8+sd*8, gy-70-i*12, 8, 3.4, sd*0.42, 0, 7); x.fill(); }); });
+        x.fillStyle='rgba(255,255,255,.30)';
+        x.fillRect(ax-7, gy-58, 15, 12);
+        mono(x,9); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='middle';
+        x.fillText('graft, wrapped', ax+16, gy-52);
+        mono(x,9); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='bottom';
+        x.fillText('B’s shoot', ax+10, gy-92);
+        mono(x,9); x.fillStyle=A2; x.textAlign='center'; x.textBaseline='top';
+        x.fillText('A’s roots', ax, gy+6);
+      }
+    } else {
+      const px=W*0.30;
+      plant(x, px, gy, 84, 3, 18, 0);
+      // the flexible twig arcing down into the soil and up again
+      x.strokeStyle=STEM; x.lineWidth=2.4; x.lineCap='round';
+      x.beginPath(); x.moveTo(px, gy-56);
+      if(s===1){ x.quadraticCurveTo(W*0.58, gy-72, W*0.80, gy-46); }
+      else { x.quadraticCurveTo(W*0.56, gy-20, W*0.66, gy+16);
+             x.stroke();
+             x.beginPath(); x.moveTo(W*0.66, gy+16);
+             x.quadraticCurveTo(W*0.76, gy+8, W*0.82, gy-30); }
+      x.stroke();
+      if(s>=2){
+        mono(x,9); x.fillStyle=GOLD; x.textAlign='center'; x.textBaseline='top';
+        x.fillText('buried, still attached', W*0.66, gy+22);
+      }
+      if(s>=3){
+        x.strokeStyle='rgba(200,175,150,.8)'; x.lineWidth=1.2;
+        [-1,0,1].forEach(sd=>{ x.beginPath(); x.moveTo(W*0.66, gy+16);
+          x.quadraticCurveTo(W*0.66+sd*8, gy+26, W*0.66+sd*13, gy+32); x.stroke(); });
+      }
+      if(s>=4){
+        x.strokeStyle=BAD; x.lineWidth=1.8; x.setLineDash([4,3]);
+        x.beginPath(); x.moveTo(W*0.44, gy-46); x.lineTo(W*0.44, gy-6); x.stroke(); x.setLineDash([]);
+        mono(x,9); x.fillStyle=BAD; x.textAlign='center'; x.textBaseline='bottom';
+        x.fillText('now cut it free', W*0.44, gy-50);
+      }
+    }
+    mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(m.n + ' · step ' + s + ' of 4', W/2, 10);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(m.steps[s-1][0].toLowerCase(), 8, 26);
+  }
+  function upd(){
+    const s=+sl.value;
+    document.getElementById('techStepV').textContent=s+' of 4';
+    if(!mode){ draw(); return; }
+    const m=T[mode];
+    document.getElementById('techName').textContent=m.n;
+    document.getElementById('techUse').textContent=m.use;
+    document.getElementById('techTxt').textContent=m.steps[s-1][1];
+    if(!seen[mode]){ seen[mode]=1;
+      if(Object.keys(seen).length>=3) complete('m2'); }
+    draw();
+  }
+  ['techCut','techGraft','techLayer'].forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.onclick=()=>{ mode=id; sl.value=1; ev('explore',id); upd(); };
+  });
+  sl.addEventListener('input',()=>{ ev('explore',sl.id); upd(); });
+  upd(); reg('m2',draw);
+})();
+
+/* ============================================================
+   M3 — budding and spores, and what temperature does to them
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('budCv'), sl=document.getElementById('budT');
+  if(!cv||!sl) return;
+  let org='budYeast', t=0; const seen={};
+  const O = {
+    budYeast:{ n:'Yeast', mode:'Budding',
+      d:'A pinch of yeast in warm sugar solution becomes active within an hour or two. Under the microscope, small round outgrowths — buds — appear on the parent cells. Each bud is produced by repeated cell division at one site, and each will break away as a new yeast cell.' },
+    budHydra:{ n:'Hydra', mode:'Budding',
+      d:'Hydra is multicellular, but it buds in exactly the same way: repeated cell division at one site on the body wall produces an outgrowth that enlarges, develops its own tentacles, and separates to live independently. One parent often carries several buds at once.' },
+    budMould:{ n:'Bread mould', mode:'Spore formation',
+      d:'Leave moistened bread in a warm dark chamber for three days and fuzzy patches appear. Under a microscope they are thread-like hyphae, each ending in a round sac. Inside the sac are spores — millions from a single colony, light enough to drift on air currents until they find moisture.' }
+  };
+  // Growth rate against temperature: near zero in the cold, best at 25–35 °C.
+  function rate(T){
+    if(T <= 4) return 0.02;
+    if(T >= 45) return 0.05;
+    const peak = 30, w = 15;
+    return Math.max(0.03, Math.exp(-Math.pow((T-peak)/w, 2)*1.9));
+  }
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,260); if(!x) return;
+    const W=cv.clientWidth, H=260;
+    bg(x,W,H);
+    const T=+sl.value, r=rate(T), cy=H*0.46;
+    const phase = (t*r*0.9) % 1;                    // one budding cycle
+    if(org==='budYeast'){
+      // a field of yeast cells, several mid-bud
+      for(let i=0;i<7;i++){
+        const px = W*0.16 + (i%4)*(W*0.22), py = cy - 40 + Math.floor(i/4)*66;
+        x.fillStyle='rgba(199,91,184,.28)'; x.strokeStyle=A1; x.lineWidth=1.6;
+        x.beginPath(); x.ellipse(px, py, 17, 14, 0, 0, 7); x.fill(); x.stroke();
+        x.fillStyle='rgba(240,238,230,.55)';
+        x.beginPath(); x.arc(px-4, py-3, 3.4, 0, 7); x.fill();   // the nucleus
+        const b = Math.max(0, Math.min(1, phase*1.6 - i*0.07));
+        if(b > 0.02){
+          const br = 3 + 8*b, bxp = px + 15 + br*0.55;
+          x.fillStyle='rgba(199,91,184,.28)'; x.strokeStyle=A1; x.lineWidth=1.4;
+          x.beginPath(); x.arc(bxp, py-5, br, 0, 7); x.fill(); x.stroke();
+          if(b > 0.85){
+            mono(x,8); x.fillStyle=GOLD; x.textAlign='center'; x.textBaseline='bottom';
+            x.fillText('separating', bxp, py-5-br-3);
+          }
+        }
+      }
+      mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('outgrowths on the parent cells · Fig. 11.6', 8, 8);
+    } else if(org==='budHydra'){
+      // the parent column, with buds down one side
+      const px=W*0.34;
+      x.strokeStyle=A2; x.lineWidth=8; x.lineCap='round';
+      x.beginPath(); x.moveTo(px, cy+66); x.lineTo(px, cy-44); x.stroke();
+      x.strokeStyle=A2; x.lineWidth=1.6;
+      for(let i=0;i<6;i++){                          // tentacles
+        const a=-Math.PI/2 + (i-2.5)*0.30;
+        x.beginPath(); x.moveTo(px, cy-46);
+        x.lineTo(px+Math.cos(a)*26, cy-46+Math.sin(a)*26); x.stroke();
+      }
+      [0,1].forEach(k=>{
+        const b = Math.max(0, Math.min(1, phase*1.5 - k*0.35));
+        if(b < 0.02) return;
+        const by = cy + 6 + k*34, len = 10 + 30*b, bxp = px + 4 + len;
+        x.strokeStyle=A2; x.lineWidth=5; x.lineCap='round';
+        x.beginPath(); x.moveTo(px+4, by); x.lineTo(bxp, by-len*0.35); x.stroke();
+        if(b > 0.45){
+          x.lineWidth=1.4;
+          for(let i=0;i<5;i++){
+            const a=-0.9 + (i-2)*0.28;
+            x.beginPath(); x.moveTo(bxp, by-len*0.35);
+            x.lineTo(bxp+Math.cos(a)*13, by-len*0.35+Math.sin(a)*13); x.stroke();
+          }
+        }
+        mono(x,9); x.fillStyle=GOLD; x.textAlign='left'; x.textBaseline='middle';
+        x.fillText(b>0.9?'ready to separate':'bud', bxp+16, by-len*0.35);
+      });
+      mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('several buds at once · Fig. 11.7', 8, 8);
+    } else {
+      // hyphae rising from bread, each with a sporangium that bursts
+      const gy=H*0.80;
+      x.fillStyle='#8A6F4B'; x.fillRect(0, gy, W, H-gy);
+      for(let i=0;i<5;i++){
+        const px=W*0.14 + i*(W*0.18), h=34 + (i%3)*13;
+        x.strokeStyle='rgba(200,180,150,.8)'; x.lineWidth=1.4;
+        x.beginPath(); x.moveTo(px, gy); x.lineTo(px, gy-h); x.stroke();
+        const burst = Math.max(0, Math.min(1, phase*1.4 - i*0.12));
+        x.fillStyle = burst>0.6 ? 'rgba(60,50,70,.55)' : '#3C3350';
+        x.beginPath(); x.arc(px, gy-h-6, 7 - 2*burst, 0, 7); x.fill();
+        if(burst > 0.35){                            // the spores drifting off
+          for(let k=0;k<9;k++){
+            const a=k*0.7 + i, d=(burst-0.35)*46;
+            x.fillStyle='rgba(240,238,230,'+(0.75*(1-burst*0.6))+')';
+            x.beginPath();
+            x.arc(px+Math.cos(a)*d*1.3, gy-h-6+Math.sin(a)*d*0.75 - d*0.35, 1.3, 0, 7);
+            x.fill();
+          }
+        }
+      }
+      mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('sacs at the tips of hyphae · Fig. 11.8', 8, 8);
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('moist bread', W/2, H-6);
+    }
+    // the temperature readout, always visible
+    const label = r < 0.12 ? 'almost stopped' : r < 0.45 ? 'slow' : r > 0.9 ? 'fastest' : 'growing';
+    mono(x,10,500);
+    x.fillStyle = r < 0.12 ? '#5B9BF0' : r > 0.9 ? GOOD : INK;
+    x.textAlign='right'; x.textBaseline='top';
+    x.fillText(T + ' °C · ' + label, W-8, 8);
+  }
+  function upd(){
+    const T=+sl.value, r=rate(T), o=O[org];
+    document.getElementById('budTV').textContent=T+' °C';
+    document.getElementById('budOrg').textContent=o.n;
+    document.getElementById('budMode').textContent=o.mode;
+    document.getElementById('budRate').textContent=Math.round(r*100)+'%';
+    document.getElementById('budTxt').textContent =
+      T <= 6 ? 'At ' + T + ' °C almost nothing happens. This is what a refrigerator does: it does not kill the spores or the yeast, it slows their reproduction to a crawl. ' + o.d
+      : T >= 42 ? 'At ' + T + ' °C it is too hot — the rate falls away again. The favourable band is 25–35 °C. ' + o.d
+      : o.d;
+    seen[org]=1;
+    // three organisms AND a temperature change — seen.temp must not count as one
+    const orgs=['budYeast','budHydra','budMould'].filter(k=>seen[k]).length;
+    if(orgs>=3 && seen.temp) complete('m3');
+    draw();
+  }
+  tick('m3', ()=>{ t+=0.033; draw(); });
+  ['budYeast','budHydra','budMould'].forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.onclick=()=>{ org=id; t=0; ev('explore',id); upd(); };
+  });
+  sl.addEventListener('input',()=>{ ev('explore',sl.id); seen.temp=1; upd(); });
+  upd(); reg('m3',draw);
+})();
+
+Q.rows('g4','g4s',[
+  {t:'A potato tuber sprouting from its eyes',                      a:0},
+  {t:'A Bryophyllum leaf growing plantlets on its margin',          a:0},
+  {t:'A yeast cell with a small round outgrowth',                   a:1},
+  {t:'A hydra carrying three outgrowths on its body wall',          a:1},
+  {t:'Rhizopus releasing millions of cells from a sac',             a:2},
+  {t:'Aspergillus, on a swollen vesicle at the tip of a hypha',     a:2},
+  {t:'A sugarcane node planted in a furrow',                        a:0},
+  {t:'Black patches spreading across a damp wall',                  a:2}
+], ['Vegetative propagation','Budding','Spore formation'], 'm4',
+   'All eight. Three different routes, one shared principle: a single parent, and offspring that are genetically identical to it.');
+
+/* ============================================================
+   M5 — the chromosome count that does not double
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('meiCv'), sl=document.getElementById('meiG');
+  if(!cv||!sl) return;
+  let meiosis=true; const seen={};
+  const counts = (g, on) => {
+    // with meiosis the count is fixed at 46; without it, it doubles each generation
+    const out=[];
+    for(let i=0;i<=g;i++) out.push(on ? 46 : 46*Math.pow(2,i));
+    return out;
+  };
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    const g=+sl.value, c=counts(g, meiosis);
+    const bx=40, bw=W-56, by=H*0.20, bh=H*0.58;
+    const top = meiosis ? 92 : Math.max(92, c[c.length-1]);
+    // the axis
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(bx, by); x.lineTo(bx, by+bh); x.lineTo(bx+bw, by+bh); x.stroke();
+    mono(x,9); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='middle';
+    x.fillText('46', bx-5, by+bh - (46/top)*bh);
+    x.strokeStyle='rgba(105,199,126,.35)'; x.setLineDash([3,3]);
+    x.beginPath(); x.moveTo(bx, by+bh-(46/top)*bh); x.lineTo(bx+bw, by+bh-(46/top)*bh); x.stroke();
+    x.setLineDash([]);
+    // one bar per generation
+    const n=c.length, w=Math.min(30, bw/n*0.62);
+    c.forEach((v,i)=>{
+      const px = bx + bw*((i+0.5)/n), h = Math.min(bh, (v/top)*bh);
+      x.fillStyle = meiosis ? 'rgba(105,199,126,.75)' : (i===0 ? 'rgba(105,199,126,.75)' : 'rgba(229,72,77,.72)');
+      x.fillRect(px-w/2, by+bh-h, w, h);
+      mono(x,9,500); x.fillStyle = v>46 ? BAD : INK;
+      x.textAlign='center'; x.textBaseline='bottom';
+      if(n <= 9) x.fillText(v > 9999 ? Math.round(v/1000)+'k' : String(v), px, by+bh-h-3);
+      mono(x,8); x.fillStyle=DIM; x.textBaseline='top';
+      if(n <= 9) x.fillText('G'+i, px, by+bh+4);
+    });
+    sans(x,15,600); x.fillStyle = meiosis ? GOOD : BAD;
+    x.textAlign='center'; x.textBaseline='top';
+    x.fillText(meiosis ? 'meiosis on · the count holds at 46'
+                       : 'meiosis off · the count doubles every generation', W/2, 8);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='bottom';
+    x.fillText('chromosomes per body cell', 8, H-6);
+  }
+  function upd(){
+    const g=+sl.value, c=counts(g, meiosis), last=c[c.length-1];
+    document.getElementById('meiGV').textContent=String(g);
+    document.getElementById('meiPar').textContent = meiosis ? '46' : String(46*Math.pow(2,Math.max(0,g-1)));
+    document.getElementById('meiGam').textContent = meiosis ? '23' : '46 (unhalved)';
+    document.getElementById('meiZyg').textContent = last > 99999 ? Math.round(last/1000)+'k' : String(last);
+    document.getElementById('meiTxt').textContent = meiosis
+      ? 'Each parent cell has 46 chromosomes — 23 pairs. Meiosis halves that to 23 in every gamete, so when two gametes fuse the zygote is back to 46. After ' + g + ' generation' + (g>1?'s':'') + ' the count is still 46, and it always will be.'
+      : 'Without meiosis each gamete would carry the full 46, so the zygote would have 92, and its children 184. After ' + g + ' generation' + (g>1?'s':'') + ' a body cell would hold ' + last + ' chromosomes. Nothing could survive that, which is why meiosis exists.';
+    seen[meiosis ? 'on' : 'off'] = 1;
+    // both states of the toggle, and a look along the generations
+    if(seen.on && seen.off && seen.slid) complete('m5');
+    draw();
+  }
+  const tg=document.getElementById('meiToggle');
+  if(tg) tg.onclick=()=>{
+    meiosis=!meiosis; ev('explore','meiToggle');
+    tg.textContent = meiosis ? 'Switch meiosis off' : 'Switch meiosis back on';
+    upd();
+  };
+  sl.addEventListener('input',()=>{ ev('explore',sl.id); seen.slid=1; upd(); });
+  upd(); reg('m5',draw);
+})();
+
+/* ============================================================
+   M6 — the bead activity: why no two children are alike
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('beadCv'), sl=document.getElementById('beadN');
+  if(!cv||!sl) return;
+  let drawn=null; const seen={};
+  const HUE = ['#69C77E','#5B9BF0','#E05579','#F2B84C','#C75BB8','#4FD8E8'];
+  const CHAR = [
+    ['blonde hair','black hair'], ['straight hair','curly hair'], ['brown eyes','black eyes'],
+    ['tall','short'], ['can roll the tongue','cannot'], ['attached earlobe','free earlobe']
+  ];
+  // 2^n, exact for n <= 23
+  const combos = n => Math.pow(2, n);
+  function roll(){
+    const n=+sl.value;
+    drawn = [];
+    for(let i=0;i<n;i++) drawn.push(Math.random() < 0.5 ? 0 : 1);
+  }
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    const n=+sl.value, show=Math.min(n, 6);
+    const bx=W*0.14, bw=W*0.72, py=H*0.30;
+    // the pairs, laid out across the top
+    for(let i=0;i<show;i++){
+      const px = bx + (show===1 ? bw/2 : bw*i/(show-1));
+      [0,1].forEach(k=>{
+        const cxp = px + (k?9:-9);
+        const chosen = drawn && drawn[i]===k;
+        x.fillStyle = HUE[i%HUE.length];
+        x.globalAlpha = chosen ? 1 : (drawn ? 0.22 : (k ? 0.62 : 0.92));
+        x.beginPath(); x.arc(cxp, py, 8, 0, 7); x.fill();
+        x.globalAlpha = 1;
+        if(chosen){
+          x.strokeStyle=INK; x.lineWidth=1.6;
+          x.beginPath(); x.arc(cxp, py, 11, 0, 7); x.stroke();
+        }
+      });
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('pair ' + (i+1), px, py-16);
+    }
+    if(n > show){
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('… and ' + (n-show) + ' more pair' + (n-show>1?'s':''), W/2, py+34);
+    }
+    // the gamete that was drawn
+    if(drawn){
+      const gy=H*0.72;
+      for(let i=0;i<show;i++){
+        const px = bx + (show===1 ? bw/2 : bw*i/(show-1));
+        x.strokeStyle='rgba(142,154,192,.35)'; x.lineWidth=1;
+        x.beginPath(); x.moveTo(px + (drawn[i]?9:-9), py+12);
+        x.lineTo(W/2 + (i-(show-1)/2)*20, gy-11); x.stroke();
+        x.fillStyle=HUE[i%HUE.length];
+        x.beginPath(); x.arc(W/2 + (i-(show-1)/2)*20, gy, 7, 0, 7); x.fill();
+      }
+      mono(x,10,500); x.fillStyle=GOLD; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('one gamete', W/2, gy+13);
+    } else {
+      mono(x,10); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('pick one bead from each pair', W/2, H*0.72);
+    }
+    mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(n + ' pair' + (n>1?'s':'') + ' · ' + fmtN(combos(n)) + ' possible gametes', W/2, 8);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='bottom';
+    x.fillText('two versions of each character, one per chromatid', 8, H-6);
+  }
+  function fmtN(v){
+    if(v < 1000) return String(v);
+    return Math.round(v).toLocaleString('en-IN');
+  }
+  function upd(){
+    const n=+sl.value;
+    document.getElementById('beadNV').textContent=String(n);
+    document.getElementById('beadPairs').textContent=String(n);
+    document.getElementById('beadCombo').textContent=fmtN(combos(n));
+    document.getElementById('beadThis').textContent = drawn
+      ? drawn.slice(0,3).map((k,i)=>CHAR[i%CHAR.length][k]).join(', ') + (n>3 ? ', …' : '')
+      : '—';
+    document.getElementById('beadTxt').textContent =
+      n===3 ? 'Three pairs give 2 × 2 × 2 = 8 possible combinations. Write yours down as “light green, light blue, light red” and compare it with a classmate’s.'
+      : n===1 ? 'One pair, two possible gametes. Every extra pair doubles the number.'
+      : n>=23 ? 'Twenty-three pairs — the real human number — give 2²³ = ' + fmtN(combos(23)) + ' possible gametes from one person, before the other parent’s gamete is even considered. That is why siblings differ.'
+      : n + ' pairs give 2' + supN(n) + ' = ' + fmtN(combos(n)) + ' possible combinations. Each extra pair doubles it.';
+    if(drawn) seen.rolled=1;
+    seen['n'+n]=1;
+    // a gamete drawn, and at least two different numbers of pairs tried
+    const ns=Object.keys(seen).filter(k=>k.charAt(0)==='n').length;
+    if(seen.rolled && ns>=2) complete('m6');
+    draw();
+  }
+  const SUP='⁰¹²³⁴⁵⁶⁷⁸⁹';
+  function supN(v){ return String(v).split('').map(d=>SUP[+d]).join(''); }
+  const b=document.getElementById('beadRoll');
+  if(b) b.onclick=()=>{ roll(); ev('explore','beadRoll'); upd(); };
+  sl.addEventListener('input',()=>{ if(drawn) roll(); ev('explore',sl.id); upd(); });
+  upd(); reg('m6',draw);
+})();
+
+Q.grid('g7','g7check','g7s',{
+  head:'True of this kind of reproduction?', mid:'m7',
+  cols:['Asexual','Sexual'],
+  rows:[
+    { l:'Needs only one parent',                              a:[1,0] },
+    { l:'Offspring are genetically identical to the parent',  a:[1,0] },
+    { l:'Involves meiosis and gametes',                       a:[0,1] },
+    { l:'Produces variation among the offspring',             a:[0,1] },
+    { l:'Faster, and good when conditions are favourable',    a:[1,0] },
+    { l:'Helps a population adapt to a changing environment', a:[0,1] },
+    { l:'A whole field of it shares the same weaknesses',     a:[1,0] },
+    { l:'The cell division behind it is mitosis',             a:[1,0] }
+  ],
+  doneMsg:'All sixteen. Asexual reproduction buys speed and reliability at the cost of variation; sexual reproduction buys variation at the cost of needing a partner and a great deal more machinery.'
+});
+
+/* ============================================================
+   M8 — the parts of a flower
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('flowCv');
+  if(!cv) return;
+  let lit=null; const seen={};
+  const F = {
+    flSepal:{ n:'Sepal', whorl:'outermost whorl', job:'protects the flower in bud',
+      d:'Sepals are the thin, flat, green covering of the outermost whorl. In the bud stage they wrap around all the other parts and protect them. Look at a flower bud and a bloom side by side and you can see what they were doing.' },
+    flPetal:{ n:'Petal', whorl:'second whorl', job:'attracts pollinators',
+      d:'The petals are the coloured projections — the most attractive part of the flower, and not by accident. Colour and scent are how an insect- or bird-pollinated flower advertises itself. Wind-pollinated flowers, which need no advertising, tend to have small dull petals or none at all.' },
+    flStamen:{ n:'Stamen', whorl:'the male part', job:'makes pollen',
+      d:'The stamen is the male part. It has two subparts: a thin FILAMENT holding up an ANTHER, and it is the anther that produces the pollen grains containing the male gametes.' },
+    flPistil:{ n:'Pistil', whorl:'the female part', job:'receives pollen, holds ovules',
+      d:'The pistil is the female part and has three subparts. The STIGMA sits at the tip and may be flat or sticky, to catch and hold pollen. The STYLE is a thin long tube connecting stigma to ovary. The OVARY is the swollen base.' },
+    flOvule:{ n:'Ovule', whorl:'inside the ovary', job:'holds the egg cell',
+      d:'Inside the ovary are the ovules, and each ovule holds an egg cell — the female gamete. After fertilisation each ovule becomes a seed, and the ovary around them becomes the fruit. Cut a tomato open and you are looking at an ovary with its seeds.' }
+  };
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,240); if(!x) return;
+    const W=cv.clientWidth, H=240;
+    bg(x,W,H);
+    const cx=W/2, base=H*0.86;
+    const on = k => lit===k ? 1 : (lit ? 0.22 : 0.85);
+    // the stalk
+    x.strokeStyle=STEM; x.lineWidth=3; x.lineCap='round';
+    x.beginPath(); x.moveTo(cx, base+18); x.lineTo(cx, base); x.stroke();
+    // sepals
+    x.globalAlpha=on('flSepal');
+    x.fillStyle='#4E9152';
+    [-1,1].forEach(s=>{
+      x.beginPath();
+      x.moveTo(cx, base);
+      x.quadraticCurveTo(cx + s*34, base-6, cx + s*40, base-30);
+      x.quadraticCurveTo(cx + s*20, base-14, cx, base);
+      x.fill();
+    });
+    x.globalAlpha=1;
+    // petals
+    x.globalAlpha=on('flPetal');
+    x.fillStyle=A1;
+    [-1,1].forEach(s=>{
+      x.beginPath();
+      x.moveTo(cx, base-4);
+      x.quadraticCurveTo(cx + s*62, base-34, cx + s*50, base-104);
+      x.quadraticCurveTo(cx + s*22, base-58, cx, base-4);
+      x.fill();
+    });
+    x.globalAlpha=1;
+    // the pistil, up the middle: ovary, style, stigma
+    x.globalAlpha=on('flPistil');
+    x.fillStyle='#B9D98A';
+    x.beginPath(); x.ellipse(cx, base-26, 17, 22, 0, 0, 7); x.fill();     // ovary
+    x.strokeStyle='#B9D98A'; x.lineWidth=4;
+    x.beginPath(); x.moveTo(cx, base-46); x.lineTo(cx, base-116); x.stroke();  // style
+    x.fillStyle=A1;
+    x.beginPath(); x.arc(cx-4, base-120, 5, 0, 7); x.fill();             // stigma
+    x.beginPath(); x.arc(cx+4, base-120, 5, 0, 7); x.fill();
+    x.globalAlpha=1;
+    // the ovules inside the ovary
+    x.globalAlpha=on('flOvule');
+    for(let i=0;i<4;i++){
+      x.fillStyle=GOLD;
+      x.beginPath(); x.arc(cx + (i%2?6:-6), base-34 + Math.floor(i/2)*13, 3.4, 0, 7); x.fill();
+    }
+    x.globalAlpha=1;
+    // stamens, either side of the pistil
+    x.globalAlpha=on('flStamen');
+    [-1,1].forEach(s=>{
+      x.strokeStyle='#C9D98A'; x.lineWidth=2;
+      x.beginPath(); x.moveTo(cx + s*8, base-40);
+      x.quadraticCurveTo(cx + s*26, base-84, cx + s*22, base-104); x.stroke();
+      x.fillStyle=GOLD;
+      x.beginPath(); x.ellipse(cx + s*22, base-108, 4.6, 7, s*0.2, 0, 7); x.fill();
+    });
+    x.globalAlpha=1;
+    // the label for whatever is lit
+    if(lit){
+      const f=F[lit];
+      const anchor = { flSepal:[cx+42,base-28], flPetal:[cx+50,base-96],
+                       flStamen:[cx+26,base-110], flPistil:[cx-6,base-122],
+                       flOvule:[cx+8,base-30] }[lit];
+      x.strokeStyle=INK; x.lineWidth=1;
+      x.beginPath(); x.moveTo(anchor[0], anchor[1]); x.lineTo(W-96, anchor[1]); x.stroke();
+      mono(x,10,500); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(f.n.toUpperCase(), W-92, anchor[1]);
+      // the subparts worth naming
+      if(lit==='flStamen'){
+        mono(x,9); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='middle';
+        x.fillText('anther', cx-30, base-108);
+        x.fillText('filament', cx-30, base-74);
+      }
+      if(lit==='flPistil'){
+        mono(x,9); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='middle';
+        x.fillText('stigma', cx-16, base-120);
+        x.fillText('style', cx-16, base-80);
+        x.fillText('ovary', cx-24, base-26);
+      }
+    } else {
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('a longitudinal section · Fig. 11.10', W/2, 8);
+    }
+  }
+  function upd(){
+    const f=F[lit];
+    document.getElementById('flName').textContent=f.n;
+    document.getElementById('flWhorl').textContent=f.whorl;
+    document.getElementById('flJob').textContent=f.job;
+    document.getElementById('flTxt').textContent=f.d;
+    if(!seen[lit]){ seen[lit]=1;
+      if(Object.keys(seen).length>=4) complete('m8'); }
+    draw();
+  }
+  Object.keys(F).forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.onclick=()=>{ lit = (lit===id ? null : id); ev('explore',id);
+      if(lit) upd(); else draw(); };
+  });
+  draw(); reg('m8',draw);
+})();
+
+/* ============================================================
+   M9 — the muslin bag experiment
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('bagCv');
+  if(!cv) return;
+  let pick=null; const seen={};
+  /* Pea flowers self-pollinate inside the closed bud. So the only treatment
+     that fails is the one whose stamens were removed while it was still a bud
+     AND which was then bagged against outside pollen. */
+  const B = {
+    bag1:{ n:'Flower bud, wrapped', bud:1, stamens:1, bagged:1,
+      why:'The bud still has its stamens, and a pea flower pollinates itself inside the closed bud. The bag keeps outside pollen away, but no outside pollen was needed.' },
+    bag2:{ n:'Flower bud, stamens removed, wrapped', bud:1, stamens:0, bagged:1,
+      why:'This is the one that fails, and it is the whole point of the experiment. The stamens were taken away before the flower opened, so it never made pollen of its own — and the bag stopped any arriving from outside. No pollen reached the stigma, and no fruit formed.' },
+    bag3:{ n:'Open flower, stamens removed, wrapped', bud:0, stamens:0, bagged:1,
+      why:'The stamens were removed only after the flower had opened — by which time it had already pollinated itself inside the bud. Removing them then was too late to prevent anything.' },
+    bag4:{ n:'Open flower, wrapped', bud:0, stamens:1, bagged:1,
+      why:'Stamens present and already shed onto its own stigma. The bag changes nothing.' },
+    bag5:{ n:'Open flower, uncovered', bud:0, stamens:1, bagged:0,
+      why:'The control. Nothing was done to it at all, and it sets fruit exactly as a pea flower normally does.' }
+  };
+  const fruits = b => !(b.bud && !b.stamens && b.bagged);
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,270); if(!x) return;
+    const W=cv.clientWidth, H=270;
+    bg(x,W,H);
+    const ids=['bag1','bag2','bag3','bag4','bag5'];
+    const cw=W/5, cy=H*0.42;
+    ids.forEach((id,i)=>{
+      const b=B[id], cx=cw*(i+0.5), on = pick===id;
+      x.globalAlpha = pick ? (on ? 1 : 0.26) : 0.9;
+      // the stalk
+      x.strokeStyle=STEM; x.lineWidth=2;
+      x.beginPath(); x.moveTo(cx, cy+40); x.lineTo(cx, cy+6); x.stroke();
+      // bud or open flower
+      if(b.bud){
+        x.fillStyle='#4E9152';
+        x.beginPath(); x.ellipse(cx, cy-6, 8, 15, 0, 0, 7); x.fill();
+      } else {
+        x.fillStyle=A1;
+        [-1,1].forEach(s=>{
+          x.beginPath();
+          x.moveTo(cx, cy+4);
+          x.quadraticCurveTo(cx + s*22, cy-6, cx + s*15, cy-26);
+          x.quadraticCurveTo(cx + s*6, cy-10, cx, cy+4);
+          x.fill();
+        });
+        x.fillStyle='#B9D98A';
+        x.beginPath(); x.ellipse(cx, cy-4, 5, 9, 0, 0, 7); x.fill();
+      }
+      // the stamens, or the gap where they were
+      if(b.stamens){
+        x.fillStyle=GOLD;
+        [-1,1].forEach(s=>{ x.beginPath(); x.arc(cx + s*7, cy-18, 2.6, 0, 7); x.fill(); });
+      } else {
+        x.strokeStyle=BAD; x.lineWidth=1.4;
+        [-1,1].forEach(s=>{
+          x.beginPath();
+          x.moveTo(cx + s*7 - 3, cy-21); x.lineTo(cx + s*7 + 3, cy-15);
+          x.moveTo(cx + s*7 + 3, cy-21); x.lineTo(cx + s*7 - 3, cy-15);
+          x.stroke();
+        });
+      }
+      // the muslin bag
+      if(b.bagged){
+        x.fillStyle='rgba(240,238,230,.16)'; x.strokeStyle='rgba(240,238,230,.45)';
+        x.lineWidth=1;
+        x.beginPath(); x.ellipse(cx, cy-8, 20, 30, 0, 0, 7); x.fill(); x.stroke();
+      }
+      // the verdict
+      const ok=fruits(b);
+      x.fillStyle = ok ? GOOD : BAD;
+      mono(x,13,500); x.textAlign='center'; x.textBaseline='top';
+      x.fillText(ok ? '✓' : '✗', cx, cy+46);
+      mono(x,8); x.fillStyle = ok ? GOOD : BAD;
+      x.fillText(ok ? 'pod' : 'no pod', cx, cy+62);
+      mono(x,9,500); x.fillStyle=DIM; x.textBaseline='bottom';
+      x.fillText(String(i+1), cx, cy-44);
+      x.globalAlpha=1;
+    });
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('five flowers, one pea plant · Table 11.2', 8, 8);
+    if(pick){
+      const b=B[pick];
+      mono(x,10,500); x.fillStyle = fruits(b) ? GOOD : BAD;
+      x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText(fruits(b) ? 'pollen reached the stigma' : 'no pollen ever reached the stigma', W/2, H-8);
+    }
+  }
+  function upd(){
+    const b=B[pick], ok=fruits(b);
+    document.getElementById('bagTreat').textContent=b.n;
+    document.getElementById('bagPollen').textContent = ok ? 'yes' : 'no';
+    document.getElementById('bagFruit').textContent = ok ? 'yes' : 'no';
+    document.getElementById('bagTxt').textContent=b.why;
+    if(!seen[pick]){ seen[pick]=1;
+      if(Object.keys(seen).length>=4) complete('m9'); }
+    draw();
+  }
+  Object.keys(B).forEach(id=>{
+    const btn=document.getElementById(id);
+    if(btn) btn.onclick=()=>{ pick=id; ev('explore',id); upd(); };
+  });
+  draw(); reg('m9',draw);
+})();
+
+Q.order('g10','g10s',
+  ['Pollen lands on the stigma','The pollen grain germinates','A pollen tube grows down the style',
+   'The male gamete reaches the ovule','It fuses with the egg cell — fertilisation',
+   'A zygote forms','The ovule becomes a seed and the ovary a fruit'],
+  'm10', 'That is the sequence. Note the order of the last two: fertilisation comes before the zygote, and the fruit only forms afterwards.');
+
+/* ============================================================
+   M11 — who carries the pollen
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('polCv');
+  if(!cv) return;
+  let agent=null, t=0; const seen={};
+  const A = {
+    polWind:{ n:'Wind', pollen:'light, small, feathery — and vast numbers', stigma:'long and feathery, to trap it',
+      ex:'wheat, maize, rice',
+      d:'Wind-pollinated flowers spend nothing on advertising. The pollen is light and small so it stays airborne, and it is produced in enormous numbers because the wind has no idea where it is going. The stigma is long and feathery, built to comb pollen out of moving air.' },
+    polWater:{ n:'Water', pollen:'carried on the current', stigma:'reaches the surface',
+      ex:'Vallisneria, Hydrilla',
+      d:'In aquatic plants such as Vallisneria and Hydrilla, pollination occurs through water, with currents carrying pollen from one flower to another. The plant does not choose the direction any more than a wind-pollinated one does.' },
+    polInsect:{ n:'Insects', pollen:'large, sticky or spiny', stigma:'sticky, to receive it',
+      ex:'sunflower, hibiscus, marigold',
+      d:'Insect-pollinated flowers are brightly coloured, produce nectar and give off fragrance — all of it to attract bees and butterflies. The pollen grains are large and sticky or spiny so they attach to the insect’s body, and the stigma is sticky to take them off again.' },
+    polBird:{ n:'Birds', pollen:'carried on beak and head feathers', stigma:'held where a feeding bird meets it',
+      ex:'coral tree, hibiscus',
+      d:'Some flowers, such as those of the coral tree and the hibiscus, are pollinated by birds — the Indian white-eye and sunbirds among them. The flower is shaped and positioned so that a bird reaching the nectar cannot help brushing the anthers and the stigma.' }
+  };
+  function drawFlower(x, cx, cy, style){
+    // a schematic flower, built the way its pollinator requires
+    x.strokeStyle=STEM; x.lineWidth=2;
+    x.beginPath(); x.moveTo(cx, cy+44); x.lineTo(cx, cy+8); x.stroke();
+    if(style==='drab'){
+      x.fillStyle='#8A9A6A';
+      [-1,1].forEach(s=>{ x.beginPath();
+        x.ellipse(cx + s*7, cy-2, 5, 11, s*0.3, 0, 7); x.fill(); });
+      // the long feathery stigma
+      x.strokeStyle=A1; x.lineWidth=1.4;
+      for(let i=0;i<7;i++){
+        const a=-Math.PI/2 + (i-3)*0.22;
+        x.beginPath(); x.moveTo(cx, cy-8);
+        x.lineTo(cx+Math.cos(a)*20, cy-8+Math.sin(a)*20); x.stroke();
+      }
+      mono(x,9); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('feathery stigma', cx, cy-32);
+    } else {
+      x.fillStyle=A1;
+      for(let i=0;i<6;i++){
+        const a=i*Math.PI/3;
+        x.beginPath();
+        x.ellipse(cx+Math.cos(a)*15, cy-6+Math.sin(a)*15, 11, 6, a, 0, 7);
+        x.fill();
+      }
+      x.fillStyle=GOLD;
+      x.beginPath(); x.arc(cx, cy-6, 7, 0, 7); x.fill();
+      mono(x,9); x.fillStyle=GOLD; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('nectar, colour, scent', cx, cy-30);
+    }
+  }
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,260); if(!x) return;
+    const W=cv.clientWidth, H=260;
+    bg(x,W,H);
+    if(!agent){
+      mono(x,10); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('pick a pollinator', W/2, H*0.48);
+      return;
+    }
+    const a=A[agent], cy=H*0.52;
+    const drab = agent==='polWind' || agent==='polWater';
+    drawFlower(x, W*0.24, cy, drab?'drab':'showy');
+    drawFlower(x, W*0.78, cy, drab?'drab':'showy');
+    // the carrier, crossing between them
+    const u = (t*0.35) % 1, px = W*0.24 + (W*0.54)*u;
+    if(agent==='polWind'){
+      for(let i=0;i<40;i++){
+        const s=(i*37)%100/100;
+        const gx = W*0.24 + (W*0.62)*((u + s) % 1);
+        const gy = cy - 26 + Math.sin(i*2.1 + t)*22;
+        x.fillStyle='rgba(242,184,76,.75)';
+        x.beginPath(); x.arc(gx, gy, 1.3, 0, 7); x.fill();
+      }
+      arrow(x, W*0.30, cy+62, W*0.72, cy+62, DIM, 7);
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('wind · most grains land nowhere useful', W/2, cy+58);
+    } else if(agent==='polWater'){
+      x.fillStyle='rgba(79,163,216,.13)'; x.fillRect(0, cy-46, W, 92);
+      x.strokeStyle='#4FA3D8'; x.lineWidth=1.2;
+      x.beginPath();
+      for(let i=0;i<=60;i++){
+        const gx=W*i/60, gy=cy-46+Math.sin(i*0.35 + t*1.4)*3;
+        i?x.lineTo(gx,gy):x.moveTo(gx,gy);
+      }
+      x.stroke();
+      for(let i=0;i<14;i++){
+        const s=(i*29)%100/100;
+        const gx = W*0.24 + (W*0.62)*((u + s) % 1);
+        x.fillStyle='rgba(242,184,76,.8)';
+        x.beginPath(); x.arc(gx, cy + Math.sin(i)*14, 2, 0, 7); x.fill();
+      }
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('the current carries it', W/2, cy+58);
+    } else if(agent==='polInsect'){
+      const by = cy - 26 + Math.sin(t*3)*7;
+      x.fillStyle='#3C4260';
+      x.beginPath(); x.ellipse(px, by, 7, 4, 0, 0, 7); x.fill();
+      x.fillStyle='rgba(240,238,230,.55)';
+      [-1,1].forEach(s=>{ x.beginPath();
+        x.ellipse(px, by + s*5, 6, 3.4, s*0.5 + Math.sin(t*14)*0.3, 0, 7); x.fill(); });
+      x.fillStyle=GOLD;                                       // pollen stuck to it
+      for(let i=0;i<5;i++){
+        x.beginPath(); x.arc(px-4+i*2, by+2, 1.2, 0, 7); x.fill();
+      }
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('the pollen is carried to a flower of the same kind', W/2, cy+58);
+    } else {
+      const by = cy - 30 + Math.sin(t*2)*5;
+      x.fillStyle='#3C4260';
+      x.beginPath(); x.ellipse(px, by, 12, 7, -0.2, 0, 7); x.fill();
+      x.beginPath(); x.moveTo(px+10, by-2); x.lineTo(px+24, by+1); x.lineTo(px+10, by+3);
+      x.closePath(); x.fill();                                 // the beak
+      x.fillStyle=GOLD;
+      for(let i=0;i<4;i++){ x.beginPath(); x.arc(px+12+i*3, by, 1.2, 0, 7); x.fill(); }
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('pollen on the beak and head feathers', W/2, cy+58);
+    }
+    mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(a.n + ' · ' + a.ex, W/2, 8);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('cross-pollination, between two plants', 8, 24);
+  }
+  function upd(){
+    const a=A[agent];
+    document.getElementById('polAgent').textContent=a.n;
+    document.getElementById('polPollen').textContent=a.pollen;
+    document.getElementById('polStigma').textContent=a.stigma;
+    document.getElementById('polTxt').textContent=a.d;
+    if(!seen[agent]){ seen[agent]=1;
+      if(Object.keys(seen).length>=3) complete('m11'); }
+    draw();
+  }
+  tick('m11', ()=>{ if(agent){ t+=0.033; draw(); } });
+  Object.keys(A).forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.onclick=()=>{ agent=id; ev('explore',id); upd(); };
+  });
+  draw(); reg('m11',draw);
+})();
+
+Q.match('g11a','g11b','g11s',[
+  ['Light, feathery pollen in huge numbers', 'Wind'],
+  ['A long, feathery stigma',                'Wind'],
+  ['Large, sticky or spiny pollen',          'Insects'],
+  ['Nectar and a strong fragrance',          'Insects'],
+  ['Bright petals and a sticky stigma',      'Insects'],
+  ['Pollen carried on a current',            'Water'],
+  ['Flowers of the coral tree',              'Birds'],
+  ['Visited by sunbirds and the white-eye',  'Birds']
+], 'm11',
+   'All eight. The flower is built around whichever agent it depends on — and you can often read the agent straight off the flower.');
+
+/* ============================================================
+   M12 — how much pollen per seed
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('ratCv'), sl=document.getElementById('ratS');
+  if(!cv||!sl) return;
+  let mode=null; const seen={};
+  /* Table 11.3, as published. */
+  const R = {
+    ratWind:{   n:'Wind · maize, wheat',  pollen:[500000,1000000], seeds:[50,200] },
+    ratInsect:{ n:'Insect · sunflower',   pollen:[20000,40000],    seeds:[800,1000] }
+  };
+  const lerp = (a,b,u) => a + (b-a)*u;
+  function figures(){
+    const r=R[mode], u=(+sl.value)/100;
+    const p=Math.round(lerp(r.pollen[0], r.pollen[1], u));
+    const s=Math.round(lerp(r.seeds[0],  r.seeds[1],  u));
+    return { p:p, s:s, per:p/s };
+  }
+  const fmt = v => Math.round(v).toLocaleString('en-IN');
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    if(!mode){
+      mono(x,10); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('pick a pollination strategy', W/2, H*0.48);
+      return;
+    }
+    const f=figures();
+    const bx=W*0.14, bw=W*0.72, by=H*0.30, bh=H*0.40;
+    /* Both bars on a log scale: the two quantities differ by four orders of
+       magnitude, and a linear axis would flatten the seed bar to nothing. */
+    const lg = v => Math.log10(Math.max(1,v));
+    const top = 6;                                    // 10^6 grains
+    const bar = (px, v, col, label, sub) => {
+      const h = (lg(v)/top)*bh;
+      x.fillStyle=col; x.fillRect(px-30, by+bh-h, 60, h);
+      mono(x,11,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText(fmt(v), px, by+bh-h-4);
+      mono(x,9); x.fillStyle=DIM; x.textBaseline='top';
+      x.fillText(label, px, by+bh+6);
+      if(sub){ x.fillStyle=DIM; x.fillText(sub, px, by+bh+18); }
+    };
+    // the decade grid, so the log scale is visible rather than implied
+    x.strokeStyle=RULE; x.lineWidth=1;
+    for(let d=0;d<=top;d++){
+      const y=by+bh-(d/top)*bh;
+      x.beginPath(); x.moveTo(bx-4, y); x.lineTo(bx+bw, y); x.stroke();
+      mono(x,8); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='middle';
+      x.fillText(d===0 ? '1' : '10' + supN(d), bx-7, y);
+    }
+    bar(bx+bw*0.26, f.p, 'rgba(242,184,76,.75)', 'pollen released', 'per flower');
+    bar(bx+bw*0.74, f.s, 'rgba(105,199,126,.78)', 'seeds formed', 'per flower');
+    sans(x,16,600); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(fmt(f.per) + ' grains per seed', W/2, 8);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='bottom';
+    x.fillText('a logarithmic scale · Table 11.3', 8, H-6);
+  }
+  const SUP='⁰¹²³⁴⁵⁶⁷⁸⁹';
+  function supN(v){ return String(v).split('').map(d=>SUP[+d]).join(''); }
+  function upd(){
+    const u=+sl.value;
+    document.getElementById('ratSV').textContent = u<25 ? 'low end' : u>75 ? 'high end' : 'middle';
+    if(!mode){ draw(); return; }
+    const f=figures();
+    document.getElementById('ratPollen').textContent=fmt(f.p);
+    document.getElementById('ratSeeds').textContent=fmt(f.s);
+    document.getElementById('ratPer').textContent=fmt(f.per)+' : 1';
+    document.getElementById('ratTxt').textContent = mode==='ratWind'
+      ? 'A wind-pollinated grass releases ' + fmt(f.p) + ' grains and gets ' + fmt(f.s) + ' seeds — about ' + fmt(f.per) + ' grains for every seed. Almost all of it lands somewhere useless. But pollen is cheap, and a strategy does not have to be efficient to work: it only has to work often enough.'
+      : 'A sunflower releases ' + fmt(f.p) + ' grains and gets ' + fmt(f.s) + ' seeds — about ' + fmt(f.per) + ' grains per seed, a hundred times better than the wind manages. The insect delivers the pollen deliberately. The plant pays for that service in nectar, colour and scent.';
+    if(!seen[mode]){ seen[mode]=1; }
+    if(seen.ratWind && seen.ratInsect) complete('m12');
+    draw();
+  }
+  ['ratWind','ratInsect'].forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.onclick=()=>{ mode=id; ev('explore',id); upd(); };
+  });
+  sl.addEventListener('input',()=>{ ev('explore',sl.id); upd(); });
+  upd(); reg('m12',draw);
+})();
+
+Q.vgrid('g12','g12check','g12s',{
+  head:'From Table 11.3', mid:'m12',
+  cols:['Answer'],
+  options:[['about 20 : 1','about 40 : 1','about 5,000 : 1','about 10,000 : 1',
+            'Wind','Insects','More seeds','More pollen']],
+  rows:[
+    {l:'A grass releasing 10,00,000 grains and setting 200 seeds — the ratio is', a:['about 5,000 : 1']},
+    {l:'A sunflower releasing 40,000 grains and setting 1,000 seeds — the ratio is', a:['about 40 : 1']},
+    {l:'Which strategy uses far more pollen per seed?',                            a:['Wind']},
+    {l:'Which strategy sets more seeds per flower?',                               a:['Insects']},
+    {l:'To make up for its low efficiency, a wind-pollinated plant produces',      a:['More pollen']}
+  ],
+  doneMsg:'All five. Wind pollination is thousands of grains per seed and insect pollination is tens — but a plant that can make a million grains cheaply does not need a good hit rate.'
+});
+
+/* ============================================================
+   M13 — outside the body, or inside
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('aniCv');
+  if(!cv) return;
+  let pick=null, t=0; const seen={};
+  /* Table 11.4, as published. */
+  const AN = {
+    aniFish:{   n:'Fish',   hab:'Water',      fert:'External', eggs:'100s – 1000s at a time', lo:100,  hi:1000,  surv:'Low',
+      d:'The female releases eggs into the water and the male releases sperm over them. Fertilisation happens outside both bodies. Many of the eggs are destroyed by currents or eaten, so a great many have to be laid.' },
+    aniFrog:{   n:'Frog',   hab:'Water/land', fert:'External', eggs:'5,000 – 50,000 at a time', lo:5000, hi:50000, surv:'Low',
+      d:'A frog lays up to fifty thousand eggs at a time, and the yolk in each is just enough to produce a tadpole. The tadpole then has to feed for itself. Survival of any individual egg is low, which is exactly why there are so many of them.' },
+    aniLizard:{ n:'Lizard', hab:'Land',       fert:'Internal', eggs:'2 – 20 at a time',        lo:2,    hi:20,    surv:'Moderate',
+      d:'Fertilisation happens inside the female’s body, and each egg is then laid with enough yolk to nourish the embryo all the way to hatching. Far better protected, so far fewer are needed.' },
+    aniBird:{   n:'Bird',   hab:'Water/land', fert:'Internal', eggs:'1 – 15 at a time',        lo:1,    hi:15,    surv:'Moderate to high',
+      d:'Internal fertilisation, a shelled egg with a full yolk supply, and then an extended period of feeding and care after hatching. One to fifteen eggs at a time is enough, because most of them make it.' }
+  };
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,260); if(!x) return;
+    const W=cv.clientWidth, H=260;
+    bg(x,W,H);
+    const ids=['aniFish','aniFrog','aniLizard','aniBird'];
+    const bx=W*0.13, bw=W*0.74, by=H*0.26, bh=H*0.46;
+    const lg = v => Math.log10(Math.max(1,v))/5;      // 1 to 100,000
+    // eggs laid, as a log bar; survival as a filled pip row
+    ids.forEach((id,i)=>{
+      const a=AN[id], px = bx + bw*((i+0.5)/4), on = pick===id;
+      x.globalAlpha = pick ? (on ? 1 : 0.28) : 0.85;
+      const h = lg(a.hi)*bh;
+      x.fillStyle = a.fert==='External' ? 'rgba(79,163,216,.75)' : 'rgba(199,91,184,.75)';
+      x.fillRect(px-20, by+bh-h, 40, h);
+      mono(x,9,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText(a.hi >= 1000 ? Math.round(a.hi/1000)+'k' : String(a.hi), px, by+bh-h-3);
+      mono(x,9); x.fillStyle=DIM; x.textBaseline='top';
+      x.fillText(a.n, px, by+bh+6);
+      // survival, as filled circles out of three
+      const s = a.surv==='Low' ? 1 : a.surv==='Moderate' ? 2 : 3;
+      for(let k=0;k<3;k++){
+        x.fillStyle = k < s ? GOOD : 'rgba(142,154,192,.28)';
+        x.beginPath(); x.arc(px-10+k*10, by+bh+26, 3.4, 0, 7); x.fill();
+      }
+      x.globalAlpha=1;
+    });
+    mono(x,9); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='top';
+    x.fillText('survival →', bx-6, by+bh+21);
+    x.textAlign='right'; x.textBaseline='middle';
+    x.fillText('eggs', bx-6, by+bh*0.5);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('eggs laid at a time, on a log scale · Table 11.4', 8, 8);
+    if(pick){
+      const a=AN[pick];
+      mono(x,11,500);
+      x.fillStyle = a.fert==='External' ? '#4FA3D8' : A1;
+      x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText(a.fert.toLowerCase() + ' fertilisation · ' + a.hab.toLowerCase(), W/2, H-8);
+    } else {
+      mono(x,10); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('pick an animal', W/2, H-8);
+    }
+  }
+  function upd(){
+    const a=AN[pick];
+    document.getElementById('aniFert').textContent=a.fert;
+    document.getElementById('aniEggs').textContent=a.eggs;
+    document.getElementById('aniSurv').textContent=a.surv;
+    document.getElementById('aniTxt').textContent=a.d;
+    if(!seen[pick]){ seen[pick]=1;
+      if(Object.keys(seen).length>=4) complete('m13'); }
+    draw();
+  }
+  Object.keys(AN).forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.onclick=()=>{ pick=id; ev('explore',id); upd(); };
+  });
+  draw(); reg('m13',draw);
+})();
+
+Q.pick('g13','g13check','g13s',[
+  { t:'The gametes meet outside the bodies of both parents',      a:1 },
+  { t:'It is common in aquatic animals such as frogs and fish',   a:1 },
+  { t:'Very large numbers of eggs are released',                  a:1 },
+  { t:'The fertilised egg is well protected',                     a:0 },
+  { t:'Survival of any one young is low',                         a:1 },
+  { t:'It is the method used by reptiles, birds and mammals',     a:0 },
+  { t:'It needs water for the gametes to travel through',         a:1 }
+], 'm13',
+   'All seven decided. External fertilisation needs water and pays for its exposure in numbers; internal fertilisation protects the embryo and can therefore afford to make very few.');
+
+/* ============================================================
+   M14 — the reproductive organs, and the cells they make
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('humCv'), sl=document.getElementById('humP');
+  if(!cv||!sl) return;
+  let sys=null; const seen={};
+  const SYS = {
+    humMale:{ n:'Male', gamete:'sperm · very small, millions, actively motile, no stored food',
+      parts:[
+        { n:'Testis',          job:'produces sperm, and a hormone',
+          d:'Sperm are produced in two oval-shaped organs called testes. They also produce a hormone that controls sperm production and causes the physical changes seen in boys during puberty.' },
+        { n:'Scrotum',         job:'holds the testes outside the body',
+          d:'The testes sit in a pouch of skin called the scrotum. This keeps them slightly cooler than normal body temperature, which is necessary for sperm formation — one of the few organs that has to be kept cool.' },
+        { n:'Vas deferens',    job:'carries sperm onward',
+          d:'From the testes, sperm travel along a long tube called the vas deferens, which ultimately opens into the urethra.' },
+        { n:'Seminal vesicle and prostate', job:'add nourishing fluid',
+          d:'These glands add fluids that nourish the sperm and help them remain active and able to move. Sperm alone would not get far.' },
+        { n:'Urethra',         job:'a common passage out',
+          d:'The urethra is a common passage for urine and for sperm. Each sperm has a head containing genetic material and a long tail that helps it swim towards the egg.' }
+      ] },
+    humFemale:{ n:'Female', gamete:'egg · large, few, non-motile, with stored nutrients',
+      parts:[
+        { n:'Ovary',           job:'produces eggs and hormones',
+          d:'A pair of ovaries produce the female germ cells — eggs — and also release hormones. The hormones bring about the changes of puberty.' },
+        { n:'Oviduct',         job:'carries the egg to the uterus',
+          d:'The oviducts, also called fallopian tubes, connect each ovary to the uterus. If sperm are present, fertilisation happens here rather than in the uterus.' },
+        { n:'Uterus',          job:'where a foetus develops',
+          d:'The uterus is a bag-like structure in which a foetus develops. Its inner lining thickens each month in preparation, and it is into this lining that a zygote implants.' },
+        { n:'Cervix',          job:'the narrow opening below',
+          d:'The uterus opens into the vagina through a narrow passage called the cervix.' },
+        { n:'Vagina',          job:'the passage to the outside',
+          d:'The vagina connects the cervix to the outside of the body. It is the passage through which a baby is delivered at childbirth.' }
+      ] }
+  };
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    if(!sys){
+      mono(x,10); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('pick a system', W/2, H*0.48);
+      return;
+    }
+    const s=SYS[sys], i=+sl.value - 1, cx=W*0.38, cy=H*0.46;
+    const lit = k => i===k ? A1 : 'rgba(142,154,192,.42)';
+    const wide = k => i===k ? 3.2 : 2;
+    /* Labels go in a column of their own with leader lines back to the part.
+       Placed beside the organs they collided with them. */
+    const LX = W-74;
+    const label = (k, name, ax, ay, ly) => {
+      const y = ly === undefined ? ay : ly;
+      x.strokeStyle = i===k ? A1 : 'rgba(142,154,192,.28)'; x.lineWidth=1;
+      x.beginPath(); x.moveTo(ax, ay);
+      x.lineTo(LX-18, y); x.lineTo(LX-5, y); x.stroke();
+      mono(x, 9, i===k ? 500 : 400); x.fillStyle = i===k ? A1 : DIM;
+      x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(name, LX, y);
+    };
+    if(sys==='humMale'){
+      // scrotum and the two testes
+      x.strokeStyle=lit(1); x.lineWidth=wide(1);
+      x.beginPath(); x.ellipse(cx, cy+58, 34, 26, 0, 0, 7); x.stroke();
+      [-1,1].forEach(sd=>{
+        x.fillStyle = i===0 ? A1 : 'rgba(142,154,192,.35)';
+        x.beginPath(); x.ellipse(cx + sd*15, cy+58, 11, 15, 0, 0, 7); x.fill();
+      });
+      // the two vas deferens, looping up
+      [-1,1].forEach(sd=>{
+        x.strokeStyle=lit(2); x.lineWidth=wide(2); x.lineCap='round';
+        x.beginPath(); x.moveTo(cx + sd*15, cy+42);
+        x.quadraticCurveTo(cx + sd*46, cy, cx + sd*16, cy-34);
+        x.stroke();
+      });
+      // the glands
+      [-1,1].forEach(sd=>{
+        x.fillStyle = i===3 ? A1 : 'rgba(142,154,192,.35)';
+        x.beginPath(); x.ellipse(cx + sd*24, cy-38, 10, 7, sd*0.4, 0, 7); x.fill();
+      });
+      x.fillStyle = i===3 ? A1 : 'rgba(142,154,192,.35)';
+      x.beginPath(); x.ellipse(cx, cy-20, 13, 9, 0, 0, 7); x.fill();
+      // the urethra, down the middle and out
+      x.strokeStyle=lit(4); x.lineWidth=wide(4);
+      x.beginPath(); x.moveTo(cx, cy-16);
+      x.quadraticCurveTo(cx, cy+18, cx-42, cy+30); x.stroke();
+      label(0, 'Testis',       cx+15, cy+58);
+      label(1, 'Scrotum',      cx+34, cy+80);
+      label(2, 'Vas deferens', cx+40, cy);
+      label(3, 'Glands',       cx+34, cy-38);
+      label(4, 'Urethra',      cx-30, cy+26);
+    } else {
+      // uterus: a rounded body narrowing to the cervix
+      x.strokeStyle=lit(2); x.lineWidth=wide(2); x.lineJoin='round';
+      x.beginPath();
+      x.moveTo(cx-24, cy-26);
+      x.bezierCurveTo(cx-30, cy+2, cx-16, cy+14, cx-8, cy+26);   // left wall down to the cervix
+      x.lineTo(cx+8, cy+26);
+      x.bezierCurveTo(cx+16, cy+14, cx+30, cy+2, cx+24, cy-26);  // right wall back up
+      x.quadraticCurveTo(cx, cy-12, cx-24, cy-26);               // the fundus, dipping in
+      x.closePath(); x.stroke();
+      // the two oviducts, curving out to the ovaries
+      [-1,1].forEach(sd=>{
+        x.strokeStyle=lit(1); x.lineWidth=wide(1); x.lineCap='round';
+        x.beginPath(); x.moveTo(cx + sd*22, cy-26);
+        x.quadraticCurveTo(cx + sd*54, cy-46, cx + sd*58, cy-16);
+        x.stroke();
+        x.fillStyle = i===0 ? A1 : 'rgba(142,154,192,.35)';
+        x.beginPath(); x.ellipse(cx + sd*60, cy-8, 11, 8, sd*0.3, 0, 7); x.fill();
+      });
+      // cervix and vagina
+      x.strokeStyle=lit(3); x.lineWidth=wide(3);
+      x.beginPath(); x.moveTo(cx-8, cy+26); x.lineTo(cx-7, cy+40);
+      x.moveTo(cx+8, cy+26); x.lineTo(cx+7, cy+40); x.stroke();
+      x.strokeStyle=lit(4); x.lineWidth=wide(4);
+      x.beginPath(); x.moveTo(cx-8, cy+40); x.lineTo(cx-11, cy+72);
+      x.moveTo(cx+8, cy+40); x.lineTo(cx+11, cy+72); x.stroke();
+      label(0, 'Ovary',   cx+71, cy-8,  cy-14);
+      label(1, 'Oviduct', cx+40, cy-40, cy-44);
+      label(2, 'Uterus',  cx+22, cy,    cy+14);
+      label(3, 'Cervix',  cx+8,  cy+33, cy+42);
+      label(4, 'Vagina',  cx+11, cy+58, cy+68);
+    }
+    mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(s.n + ' reproductive system · schematic', W/2, 8);
+    mono(x,9); x.fillStyle=A1; x.textAlign='left'; x.textBaseline='bottom';
+    x.fillText(s.parts[i].n.toLowerCase(), 8, H-6);
+  }
+  function upd(){
+    const i=+sl.value - 1;
+    document.getElementById('humPV').textContent=(i+1)+' of 5';
+    if(!sys){ draw(); return; }
+    const s=SYS[sys], p=s.parts[i];
+    document.getElementById('humPart').textContent=p.n;
+    document.getElementById('humJob').textContent=p.job;
+    document.getElementById('humGamete').textContent=s.gamete;
+    document.getElementById('humTxt').textContent=p.d;
+    seen[sys]=1;
+    if(seen.humMale && seen.humFemale && seen.stepped) complete('m14');
+    draw();
+  }
+  ['humMale','humFemale'].forEach(id=>{
+    const b=document.getElementById(id);
+    if(b) b.onclick=()=>{ sys=id; sl.value=1; ev('explore',id); upd(); };
+  });
+  sl.addEventListener('input',()=>{ ev('explore',sl.id); seen.stepped=1; upd(); });
+  upd(); reg('m14',draw);
+})();
+
+/* ============================================================
+   M15 — the monthly cycle
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('cycCv'), sl=document.getElementById('cycD');
+  if(!cv||!sl) return;
+  let fert=false; const seen={};
+  /* Fig. 11.21, as published: days 1–5 menstruation, 6–14 the lining rebuilds,
+     day 14 ovulation, 15–28 the lining thickens and then breaks down. */
+  function phase(d){
+    if(d <= 5)  return { n:'Menstruation',       lining:'shedding',
+      d:'Days 1–5. The thickened lining is not needed, so it sheds. This lining, along with some blood, leaves the body through the vagina. It usually lasts three to seven days.' };
+    if(d <= 13) return { n:'The lining rebuilds', lining:'rebuilding',
+      d:'Days 6–14. The uterine lining gradually rebuilds while an egg starts maturing in one of the ovaries.' };
+    if(d === 14) return { n:'Ovulation',         lining:'ready',
+      d:'Day 14. The ovary releases a mature egg — this is ovulation. The egg travels from the ovary into the oviduct, where fertilisation would happen if sperm were present.' };
+    return { n:'The lining thickens', lining:'thick, rich in blood vessels',
+      d:'Days 15–28. The lining becomes thicker and richer in blood vessels, ready to receive a zygote. If no fertilisation happens it starts breaking down around day 28, and the cycle repeats.' };
+  }
+  // how thick the lining is on a given day, 0 to 1
+  function thickness(d){
+    if(d <= 5)  return 0.85 - (d-1)/4*0.78;
+    if(d <= 14) return 0.07 + (d-5)/9*0.55;
+    return 0.62 + (d-14)/14*0.32;
+  }
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,240); if(!x) return;
+    const W=cv.clientWidth, H=240;
+    bg(x,W,H);
+    const d=+sl.value, p=phase(d);
+    // the uterus in section, with its lining drawn to thickness
+    const cx=W*0.27, cy=H*0.40, rw=40, rh=34;
+    x.strokeStyle='rgba(142,154,192,.55)'; x.lineWidth=2;
+    x.beginPath(); x.ellipse(cx, cy, rw, rh, 0, 0, 7); x.stroke();
+    const th = 3 + thickness(fert && d>14 ? 28 : d)*9;
+    x.strokeStyle = d<=5 ? BAD : A1; x.lineWidth=th;
+    x.beginPath(); x.ellipse(cx, cy, rw-th/2-1, rh-th/2-1, 0, 0, 7); x.stroke();
+    if(d<=5){                                       // the shedding
+      for(let i=0;i<9;i++){
+        const a=Math.PI*0.25 + i*0.09;
+        x.fillStyle='rgba(229,72,77,'+(0.7-i*0.05)+')';
+        x.beginPath();
+        x.arc(cx + Math.cos(a)*rw*0.4, cy + rh + 6 + i*4, 2.2, 0, 7); x.fill();
+      }
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    x.fillText('uterine lining', cx, cy+rh+((d<=5)?42:8));
+    // the ovary and the egg
+    const ox=W*0.68, oy=cy-22;
+    x.strokeStyle='rgba(142,154,192,.55)'; x.lineWidth=2;
+    x.beginPath(); x.ellipse(ox, oy, 20, 15, 0, 0, 7); x.stroke();
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText('ovary', ox, oy-19);
+    if(d >= 6 && d < 14){
+      const m=(d-6)/8;
+      x.fillStyle=GOLD; x.globalAlpha=0.4+0.6*m;
+      x.beginPath(); x.arc(ox, oy, 3+4*m, 0, 7); x.fill(); x.globalAlpha=1;
+      mono(x,9); x.fillStyle=GOLD; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText('egg maturing', ox+24, oy);
+    } else if(d >= 14){
+      const trav=Math.min(1, (d-14)/3);
+      const ex=ox - (ox-cx-rw*0.2)*trav, ey=oy + (cy-oy)*trav*0.6;
+      x.fillStyle = (fert && d>=15) ? A2 : GOLD;
+      x.beginPath(); x.arc(ex, ey, 7, 0, 7); x.fill();
+      if(fert && d>=15){
+        x.strokeStyle=A2; x.lineWidth=1.4;
+        x.beginPath(); x.arc(ex, ey, 11, 0, 7); x.stroke();
+      }
+      mono(x,9); x.fillStyle = (fert && d>=15) ? A2 : GOLD;
+      const cap = d===14 ? 'released' : (fert ? 'zygote' : (d>15 ? 'degenerates' : 'in the oviduct'));
+      // inside the uterus the label would sit on the lining, so put it alongside
+      if(ex < cx + rw*0.6){ x.textAlign='left'; x.textBaseline='middle'; x.fillText(cap, cx+rw+8, ey); }
+      else { x.textAlign='center'; x.textBaseline='top'; x.fillText(cap, ex, ey+11); }
+    }
+    // the 28-day track along the bottom
+    const tx=24, tw=W-42, ty=H-42;
+    const seg=[[1,5,'Menstruation','rgba(229,72,77,.55)'],
+               [6,13,'Lining rebuilds','rgba(142,154,192,.35)'],
+               [14,14,'Ovulation','rgba(242,184,76,.75)'],
+               [15,28,'Lining thickens','rgba(199,91,184,.45)']];
+    seg.forEach(s=>{
+      const x0=tx+tw*((s[0]-1)/28), x1=tx+tw*(s[1]/28);
+      x.fillStyle=s[3]; x.fillRect(x0, ty, x1-x0, 15);
+    });
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(tx, ty, tw, 15);
+    const px=tx+tw*((d-0.5)/28);
+    x.strokeStyle=INK; x.lineWidth=2;
+    x.beginPath(); x.moveTo(px, ty-6); x.lineTo(px, ty+21); x.stroke();
+    mono(x,9,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText('day ' + d, px, ty-8);
+    mono(x,8); x.fillStyle=DIM; x.textBaseline='top';
+    [1,5,14,28].forEach(k=>{ x.fillText(String(k), tx+tw*((k-0.5)/28), ty+18); });
+    mono(x,10,500);
+    x.fillStyle = fert && d>14 ? A2 : INK;
+    x.textAlign='center'; x.textBaseline='top';
+    x.fillText(fert && d>14 ? 'fertilised · the cycle stops here' : p.n, W/2, 8);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('a typical 28-day cycle · Fig. 11.21', 8, 24);
+  }
+  function upd(){
+    const d=+sl.value, p=phase(d);
+    document.getElementById('cycDV').textContent=String(d);
+    const stopped = fert && d>14;
+    document.getElementById('cycPhase').textContent = stopped ? 'pregnancy begins' : p.n;
+    document.getElementById('cycLining').textContent = stopped ? 'kept, not shed' : p.lining;
+    document.getElementById('cycEgg').textContent =
+      stopped ? 'a zygote, implanting'
+      : d < 6 ? 'the last one has gone'
+      : d < 14 ? 'maturing in the ovary'
+      : d === 14 ? 'just released'
+      : d <= 15 ? 'in the oviduct'
+      : 'degenerated';
+    document.getElementById('cycTxt').textContent = stopped
+      ? 'A sperm has fused with the egg in the oviduct, forming a zygote. It divides as it travels to the uterus and implants into the thickened lining, which marks the beginning of pregnancy. The lining is now needed, so it is not shed — and that is why menstruation stops during pregnancy.'
+      : p.d;
+    if(stopped) seen.fert = 1; else seen[p.n] = 1;
+    // three distinct states of the bench. A slider sweep need not land in
+    // days 6–13, and with fertilisation on it reaches fewer stages still,
+    // so the fertilised case counts as one of the three.
+    const PH = ['Menstruation','The lining rebuilds','Ovulation','The lining thickens'];
+    if(PH.filter(k=>seen[k]).length + (seen.fert ? 1 : 0) >= 3) complete('m15');
+    draw();
+  }
+  const fb=document.getElementById('cycFert');
+  if(fb) fb.onclick=()=>{
+    fert=!fert; ev('explore','cycFert');
+    fb.textContent = fert ? 'The egg is not fertilised' : 'The egg is fertilised';
+    if(fert && +sl.value <= 14) sl.value = 20;
+    upd();
+  };
+  sl.addEventListener('input',()=>{ ev('explore',sl.id); upd(); });
+  upd(); reg('m15',draw);
+})();
+
+Q.boss([
+  { t:'Warm-up · one parent',
+    q:'A farmer plants sugarcane from stem cuttings rather than from seed. What is true of the canes that grow?',
+    o:['They are genetically identical to the parent','They each carry a new mix of characters','They will not flower'], a:0,
+    w:'A stem cutting is vegetative propagation — one parent, mitosis, and offspring that are clones. That reliability is exactly why a grower chooses it: the new canes have the qualities of the plant they came from.' },
+  { t:'Warm-up · budding',
+    q:'Under the microscope a yeast cell shows a small round outgrowth. What is happening?',
+    o:['Fertilisation','Budding','Meiosis'], a:1,
+    w:'Repeated cell division at one site produces a bud, which enlarges and separates to live independently. Hydra — a multicellular animal — does exactly the same thing.' },
+  { t:'Spores',
+    q:'Why do we refrigerate perishable food?',
+    o:['Cold kills all spores outright','Cold slows or stops spore reproduction','Cold removes the moisture spores need'], a:1,
+    w:'Spores of mould need warmth of about 25–35 °C and moisture. Lower temperatures slow or stop their reproduction — they are not killed, just held back, which is why food eventually spoils in the fridge too.' },
+  { t:'Meiosis',
+    q:'Why must gametes have half the chromosome number of a body cell?',
+    o:['So they are small enough to move','So the zygote has the same number as its parents','So they can divide faster'], a:1,
+    w:'If each gamete carried the full 46, the zygote would have 92 and the next generation 184. Meiosis halves the count so that two gametes fusing restore exactly the number the species has always had.' },
+  { t:'Variation',
+    q:'With three pairs of contrasting characters, how many different gametes are possible?',
+    o:['3','6','8'], a:2,
+    w:'Two choices for each of three pairs: 2 × 2 × 2 = 8. With 23 pairs the figure runs to millions, which is why no two siblings are alike.' },
+  { t:'The flower',
+    q:'Which part produces the pollen grains?',
+    o:['The stigma','The anther','The ovary'], a:1,
+    w:'The anther, held up by the filament, together making the stamen — the male part. The stigma receives pollen, and the ovary holds the ovules.' },
+  { t:'Pollination',
+    q:'A flower’s anthers are removed before it matures. Later, pollen from another plant of the same species is dusted onto its stigma and seeds form. Which process has been ensured?',
+    o:['Self-pollination','Cross-pollination','Tissue culture'], a:1,
+    w:'Removing the anthers makes self-pollination impossible, so the pollen that arrived must have come from another plant of the same kind — cross-pollination. This is exactly the technique plant breeders use for artificial hybridisation.' },
+  { t:'Fertilisation',
+    q:'A pollen tube has grown down the style of a hibiscus and reached the ovule. What happens next?',
+    o:['Pollination','Fertilisation','Seed dispersal'], a:1,
+    w:'The male gamete travels down the tube and fuses with the egg cell in the ovule. That fusion is fertilisation. Pollination already happened when the grain landed on the stigma.' },
+  { t:'Animals',
+    q:'Why do animals with external fertilisation generally produce far more eggs than those with internal fertilisation?',
+    o:['Their eggs are smaller','Most are destroyed or eaten before they develop','They reproduce more often'], a:1,
+    w:'Eggs released into open water are exposed to currents and predators, so survival of any one of them is low. Internal fertilisation protects the embryo far better, so very few are needed.' },
+  { t:'Humans',
+    q:'Assertion: the zygote formed after fertilisation immediately attaches to the uterus wall. Reason: the uterus wall is always prepared to receive the zygote.',
+    o:['Both true, and the reason explains the assertion','Both true, but the reason does not explain it','Both are false'], a:2,
+    w:'Neither holds. The zygote forms in the oviduct and divides as it travels to the uterus, so attachment is not immediate. And the lining is not always ready — it is rebuilt each cycle and shed if no zygote arrives.' }
+], 'm16',
+   'Chapter cleared. From a potato eye to a human zygote: one parent gives you speed and copies, two parents give you variation — and variation is what lets life keep going when the world changes.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
