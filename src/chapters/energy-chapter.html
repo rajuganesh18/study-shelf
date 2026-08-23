@@ -704,11 +704,12 @@ function sack(x, cx, by, w, h){
       : n===1 && h>1 ? 'One bag '+h+' times as high: the same force over '+h+' times the distance — '+h+' times the work.'
       : n+' bags lifted '+h+' m is '+mult+' times the work of a single bag lifted one metre. Force and distance both multiply.';
     const k=n+'-'+h;
-    if(!seen[k]){ seen[k]=1; ev('explore');
+    if(!seen[k]){ seen[k]=1;
       if(Object.keys(seen).length>=4) complete('m1'); }
     draw();
   }
-  sN.addEventListener('input',upd); sH.addEventListener('input',upd);
+  sN.addEventListener('input',()=>{ ev('explore',sN.id); upd(); });
+  sH.addEventListener('input',()=>{ ev('explore',sH.id); upd(); });
   upd(); reg('m1',draw);
 })();
 
@@ -768,7 +769,8 @@ function sack(x, cx, by, w, h){
   function set(m){
     mode=m;
     document.getElementById('sgTxt').textContent = TXT[m];
-    if(!seen[m]){ seen[m]=1; ev('explore'); }
+    ev('explore','sg-'+m);
+    if(!seen[m]) seen[m]=1;
     draw();
   }
   const B=(id,m)=>{ const b=document.getElementById(id); if(b) b.onclick=()=>set(m); };
@@ -845,7 +847,8 @@ Q.rows('g2','g2s',[
     document.getElementById('arShape').textContent=s.name;
     document.getElementById('arW').textContent=s.W+' J';
     document.getElementById('arTxt').textContent=s.d;
-    if(!seen[m]){ seen[m]=1; ev('explore');
+    ev('explore','ar-'+m);
+    if(!seen[m]){ seen[m]=1;
       if(Object.keys(seen).length>=3){
         complete('m3');
         document.getElementById('arTxt').textContent = s.d +
@@ -933,9 +936,9 @@ Q.rows('g2','g2s',[
     draw();
   });
   const go=document.getElementById('carGo');
-  if(go) go.onclick=()=>{ reset(); run=true; step=1; t=0; ev('explore'); say(); };
+  if(go) go.onclick=()=>{ reset(); run=true; step=1; t=0; ev('explore','carGo'); say(); };
   const st=document.getElementById('carStep');
-  if(st) st.onclick=()=>{ run=false; ev('explore'); if(advance() && step===5) complete('m4'); };
+  if(st) st.onclick=()=>{ run=false; ev('explore','carStep'); if(advance() && step===5) complete('m4'); };
   const rs=document.getElementById('carReset');
   if(rs) rs.onclick=reset;
   say(); draw(); reg('m4',draw);
@@ -1011,11 +1014,12 @@ Q.match('g5a','g5b','g5s',[
       v===0 ? 'At rest an object has no kinetic energy at all, whatever its mass.'
       : 'At '+v+' m/s this '+m+' kg vehicle carries '+fmt(K)+'. Doubling the speed to '+(2*v)+' m/s would take it to '+fmt(0.5*m*4*v*v)+' — four times as much, because velocity is squared. Doubling the mass instead would only double it.';
     const k = (v>=30?'fast':v>=12?'mid':'slow') + (m>=1400?'-heavy':m>=700?'-mid':'-light');
-    if(!seen[k]){ seen[k]=1; ev('explore');
+    if(!seen[k]){ seen[k]=1;
       if(Object.keys(seen).length>=4) complete('m6'); }
     draw();
   }
-  sM.addEventListener('input',upd); sV.addEventListener('input',upd);
+  sM.addEventListener('input',()=>{ ev('explore',sM.id); upd(); });
+  sV.addEventListener('input',()=>{ ev('explore',sV.id); upd(); });
   upd(); reg('m6',draw);
 })();
 
@@ -1092,12 +1096,13 @@ Q.match('g5a','g5b','g5s',[
       document.getElementById('peDepth').textContent = (6+h*5).toFixed(0)+' units';
       document.getElementById('peTxt').textContent =
         'Dropped from '+h+' m with '+(2*10*h)+' J of stored energy. Deeper craters mean the ball was able to do more work on the sand — and the only thing that changed was its height.';
-      if(!seenDrop[h]){ seenDrop[h]=1; ev('explore');
+      ev('explore','peDrop');
+      if(!seenDrop[h]){ seenDrop[h]=1;
         if(Object.keys(seenDrop).length>=3) complete('m7'); }
     }
     draw();
   });
-  sH.addEventListener('input',upd);
+  sH.addEventListener('input',()=>{ ev('explore',sH.id); upd(); });
   const d=document.getElementById('peDrop');
   if(d) d.onclick=()=>{ if(!dropping){ dropping=true; dt=0; } };
   const c=document.getElementById('peClear');
@@ -1194,7 +1199,7 @@ Q.vgrid('g8','g8check','g8s',{
     t += 0.033;
     if(0.5*G*t*t >= H0){
       t=Math.sqrt(2*H0/G); run=false;
-      if(!landed){ landed=true; ev('explore'); complete('m9'); }
+      if(!landed){ landed=true; complete('m9'); }
       document.getElementById('fallTxt').textContent =
         'At the ground every joule of the '+TOT+' J is kinetic. Nothing was created and nothing lost — the potential energy was converted, one joule at a time.';
     } else {
@@ -1205,7 +1210,7 @@ Q.vgrid('g8','g8check','g8s',{
     nums(); draw();
   });
   const g=document.getElementById('fallGo');
-  if(g) g.onclick=()=>{ if(!run){ t=0; run=true; ev('explore'); } };
+  if(g) g.onclick=()=>{ if(!run){ t=0; run=true; ev('explore','fallGo'); } };
   const r=document.getElementById('fallReset');
   if(r) r.onclick=()=>{ run=false; t=0; nums(); draw();
     document.getElementById('fallTxt').textContent='At the top: all potential, no kinetic. Release it and follow the trade.'; };
@@ -1267,7 +1272,7 @@ Q.vgrid('g8','g8check','g8s',{
     document.getElementById('penPos').textContent = at;
     document.getElementById('penP').textContent = f>0.86?'max':f<0.16?'zero':'partial';
     document.getElementById('penK').textContent = f>0.86?'zero':f<0.16?'max':'partial';
-    if(at!=='between' && !seen[at]){ seen[at]=1; ev('explore');
+    if(at!=='between' && !seen[at]){ seen[at]=1;
       if(Object.keys(seen).length>=3) complete('m10'); }
     document.getElementById('penTxt').textContent =
       at==='Q' ? 'At Q the bob is at its lowest and its fastest. Potential energy is at a minimum, kinetic at a maximum — the swap is complete.'
@@ -1276,9 +1281,9 @@ Q.vgrid('g8','g8check','g8s',{
   }
   tick('m10', ()=>{ if(!run) return; t+=0.033; nums(); draw(); });
   const g=document.getElementById('penGo');
-  if(g) g.onclick=()=>{ if(!run){ t=0; run=true; ev('explore'); } };
+  if(g) g.onclick=()=>{ if(!run){ t=0; run=true; ev('explore','penGo'); } };
   const f=document.getElementById('penFric');
-  if(f) f.onclick=()=>{ fric=!fric; t=0; ev('explore'); nums(); draw();
+  if(f) f.onclick=()=>{ fric=!fric; t=0; ev('explore','penFric'); nums(); draw();
     if(fric) document.getElementById('penTxt').textContent='With friction at the support and air resistance, a little energy leaves the bob on every swing, so each rise is slightly lower than the last. This is why a real pendulum stops.'; };
   const r=document.getElementById('penReset');
   if(r) r.onclick=()=>{ run=false; t=0; nums(); draw(); };
@@ -1353,12 +1358,12 @@ Q.vgrid('g8','g8check','g8s',{
     draw();
   });
   const g=document.getElementById('slGo');
-  if(g) g.onclick=()=>{ if(!run){ p=[0,0,0]; run=true; ev('explore');
+  if(g) g.onclick=()=>{ if(!run){ p=[0,0,0]; run=true; ev('explore','slGo');
     KID.forEach(k=>document.getElementById(k.out).textContent='…'); } };
   const r=document.getElementById('slReset');
   if(r) r.onclick=()=>{ run=false; p=[0,0,0];
     KID.forEach(k=>document.getElementById(k.out).textContent='—'); draw(); };
-  sH.addEventListener('input',upd);
+  sH.addEventListener('input',()=>{ ev('explore',sH.id); upd(); });
   upd(); reg('m11',draw);
 })();
 
@@ -1415,7 +1420,8 @@ Q.vgrid('g8','g8check','g8s',{
       : t>=40 ? 'Strolling up over '+t+' s needs only '+Math.round(P)+' W. Exactly the same work is done; it is simply spread out.'
       : 'In '+t+' s the climb needs '+Math.round(P)+' W. The work stays at 1500 J — only the rate changes.';
     const k = t<=5?'fast':t>=40?'slow':'mid';
-    if(!seen[k]){ seen[k]=1; ev('explore');
+    ev('explore',sT.id);
+    if(!seen[k]){ seen[k]=1;
       if(Object.keys(seen).length>=3) complete('m12'); }
     draw();
   }
@@ -1499,7 +1505,8 @@ Q.vgrid('g8','g8check','g8s',{
     document.getElementById('pulTxt').textContent = m==='direct'
       ? 'Lifting straight up, your effort equals the whole weight — 100 N — and it has to be directed upward, which is awkward and gives you nothing to pull against.'
       : 'Over a fixed pulley the effort is still 100 N, so the mechanical advantage is 100 ÷ 100 = 1. Nothing is saved in force. What changes is the direction: you now pull downward and can use your own weight to help.';
-    if(!seen[m]){ seen[m]=1; ev('explore');
+    ev('explore','pul-'+m);
+    if(!seen[m]){ seen[m]=1;
       if(Object.keys(seen).length>=2) complete('m13'); }
     draw();
   }
@@ -1572,7 +1579,8 @@ Q.pick('g13','g13check','g13s',[
     document.getElementById('incTxt').textContent =
       'A '+Lm.toFixed(1)+' m ramp to the same 1 m height needs only '+Math.round(E)+' N instead of the '+MG+' N a straight lift would take — a mechanical advantage of '+MA.toFixed(1)+'. But you push through '+Lm.toFixed(1)+' m instead of 1 m, so the work is still '+(MG*HGT)+' J.';
     const k = Lm<=1.5?'steep':Lm>=4?'shallow':'mid';
-    if(!seen[k]){ seen[k]=1; ev('explore');
+    ev('explore',sL.id);
+    if(!seen[k]){ seen[k]=1;
       if(Object.keys(seen).length>=3) complete('m14'); }
     draw();
   }
@@ -1648,11 +1656,11 @@ Q.pick('g13','g13check','g13s',[
         ? 'The left side wins: '+Math.round(t.tA)+' against '+Math.round(t.tB)+'. Move the 15 kg child in, or the 30 kg child out.'
         : 'The right side wins: '+Math.round(t.tB)+' against '+Math.round(t.tA)+'. Move the 30 kg child in, or the 15 kg child out.';
     touched++;
-    if(touched===2) ev('explore');
-    if(bal && !solved){ solved=true; ev('explore'); complete('m15'); }
+    if(bal && !solved){ solved=true; complete('m15'); }
     draw();
   }
-  sA.addEventListener('input',upd); sB.addEventListener('input',upd);
+  sA.addEventListener('input',()=>{ ev('explore',sA.id); upd(); });
+  sB.addEventListener('input',()=>{ ev('explore',sB.id); upd(); });
   upd(); reg('m15',draw);
 })();
 

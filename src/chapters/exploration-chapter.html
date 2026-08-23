@@ -463,7 +463,7 @@ function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
       b.textContent=f.t;
       b.onclick=()=>{
         f.on=!f.on; b.classList.toggle('on', f.on);
-        touched[f.k]=1; award=true; ev('explore');
+        touched[f.k]=1; award=true; ev('explore','six-'+f.k);
         document.getElementById('sixTxt').textContent=f.note;
         if(Object.keys(touched).length>=4){ ev('perfect'); complete('m1'); }
         draw();
@@ -475,7 +475,7 @@ function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
   function hit(user){ award=award||!!user; flying=true; ft=0; }
   if(cv){
     build();
-    document.getElementById('sixHit').onclick=()=>{ hit(true); ev('explore'); };
+    document.getElementById('sixHit').onclick=()=>{ hit(true); ev('explore','sixHit'); };
     document.getElementById('sixB').textContent=BOUND+' m';
   }
   tick('m1',()=>{ if(flying){ ft+=0.02; if(ft>=1.35){ flying=false; ft=0; } } draw(); });
@@ -567,7 +567,7 @@ Q.match('g3a','g3b','g3s',[
       const b=document.createElement('button');
       b.className='chip'; b.textContent=c[1];
       b.onclick=()=>{
-        choice=c[0]; tried[c[0]]=1; ev('explore');
+        choice=c[0]; tried[c[0]]=1; ev('explore','m4-'+c[0]);
         [...box.children].forEach(k=>k.classList.remove('on'));
         b.classList.add('on');
         document.getElementById('fuTxt').textContent = c[0]==='kg'
@@ -687,7 +687,7 @@ Q.pick('g8','g8check','g8s',[
   }
   function run(user){ award=award||!!user; running=true; t=0; }
   if(dS){
-    dS.oninput=()=>{ ev('explore'); award=true; draw(); };
+    dS.oninput=()=>{ ev('explore',dS.id); award=true; draw(); };
     document.getElementById('chRun').onclick=()=>run(true);
   }
   tick('m9',()=>{ if(running){ t+=0.12; if(t>=DAYS){ t=DAYS; running=false; } } draw(); });
@@ -714,7 +714,8 @@ Q.pick('g8','g8check','g8s',[
     else if(litres<6000){ s.textContent='Low \u2014 check your breaths a minute'; s.style.color=GOLD; }
     else { s.textContent='High \u2014 that would be hard breathing all day'; s.style.color=A2; }
   }
-  function onIn(){ n++; if(n===1) ev('explore'); if(n>=4) complete('m10'); draw(); }
+  // two sliders share this handler, so credit whichever one was moved
+  function onIn(e){ n++; ev('explore',(e&&e.target&&e.target.id)||'m10'); if(n>=4) complete('m10'); draw(); }
   if(bS){ bS.oninput=onIn; vS.oninput=onIn; draw(); }
 })();
 

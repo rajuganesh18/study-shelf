@@ -674,7 +674,7 @@ let zoomTouched = 0;
 zoomEl.oninput = ()=>{
   drawField();
   zoomTouched++;
-  if(zoomTouched === 1) ev('explore');
+  ev('explore',zoomEl.id);
   if(zoomTouched === 25) complete('m2');
 };
 
@@ -784,8 +784,8 @@ zoomEl.oninput = ()=>{
       ' = <b style="color:var(--safranin);font-size:15px">' + m + '×</b><br>' +
       'A 200 µm onion cell would appear ' + m + ' times larger.';
   }
-  ep.onchange = ()=>{ mag(); ev('explore'); };
-  ob.onchange = ()=>{ mag(); ev('explore'); };
+  ep.onchange = ()=>{ mag(); ev('explore',ep.id); };
+  ob.onchange = ()=>{ mag(); ev('explore',ob.id); };
   mag(); build();
   window._drawScope = draw;
 })();
@@ -824,7 +824,7 @@ let miniTouched = 0;
 ['fd','nc'].forEach(id=>{
   document.getElementById(id).oninput = ()=>{
     drawMini(); miniTouched++;
-    if(miniTouched === 1) ev('explore');
+    ev('explore',id);
     if(miniTouched === 8) complete('m4');
   };
 });
@@ -994,7 +994,7 @@ extEl.oninput = ()=>{
   const v = +extEl.value;
   osmoSeen[v < 10 ? 'lo' : v > 10 ? 'hi' : 'eq'] = 1;
   osmoTouched++;
-  if(osmoTouched === 1) ev('explore');
+  ev('explore',extEl.id);
   if(Object.keys(osmoSeen).length === 3) complete('m6');
 };
 setInterval(()=>{ const d = document.getElementById('m6'); if(d && d.open) drawOsmo(); }, 1000/30);
@@ -1205,7 +1205,7 @@ function drawTrio(){
     b.onclick = ()=>{
       cur = i; seen[i] = 1; render();
       if(Object.keys(seen).length === STEPS.length) complete('m10');
-      if(Object.keys(seen).length === 2) ev('explore');
+      ev('explore','path-'+i);
     };
     btns.appendChild(b);
   });
@@ -1365,7 +1365,7 @@ function drawTrio(){
     requestAnimationFrame(loop);
   }
   let awarding = true;
-  document.getElementById('pathGo').onclick = ()=>{ awarding = true; t = 0; running = true; ev('explore'); loop(); };
+  document.getElementById('pathGo').onclick = ()=>{ awarding = true; t = 0; running = true; ev('explore','pathGo'); loop(); };
   window._playPath = ()=>{ awarding = false; t = 0; running = true; loop(); };
   window._drawPath = draw;
 })();
@@ -1417,7 +1417,7 @@ function drawTrio(){
       : 'The vacuole has lost most of its water. With no pressure holding them out, the cells go slack and the plant wilts.';
   }
   let n = 0;
-  sl.oninput = ()=>{ draw(); n++; if(n === 1) ev('explore'); if(n === 12) complete('m12'); };
+  sl.oninput = ()=>{ draw(); n++; ev('explore',sl.id); if(n === 12) complete('m12'); };
   window._drawWilt = draw;
 })();
 
@@ -1491,10 +1491,10 @@ function drawTrio(){
     }
     draw(); requestAnimationFrame(loop);
   }
-  document.getElementById('doMit').onclick = ()=>{ award = true; mode = 'mit'; t = 0; running = true; ev('explore'); loop(); };
+  document.getElementById('doMit').onclick = ()=>{ award = true; mode = 'mit'; t = 0; running = true; ev('explore','doMit'); loop(); };
   window._playDiv = ()=>{ award = false; mode = 'mit'; t = 0; running = true; loop(); };
-  document.getElementById('doMei').onclick = ()=>{ award = true; mode = 'mei'; t = 0; running = true; ev('explore'); loop(); };
-  chr.oninput = ()=>{ mode = null; t = 0; running = false; txt.textContent = ''; draw(); };
+  document.getElementById('doMei').onclick = ()=>{ award = true; mode = 'mei'; t = 0; running = true; ev('explore','doMei'); loop(); };
+  chr.oninput = ()=>{ ev('explore',chr.id); mode = null; t = 0; running = false; txt.textContent = ''; draw(); };
   window._drawDiv = draw;
 })();
 
@@ -1552,15 +1552,15 @@ function drawTrio(){
     mono(x,9); x.fillStyle = '#8E9AC0'; x.textAlign = 'left'; x.textBaseline = 'top';
     x.fillText('TISSUE BOUNDARY · ' + cells.length + ' CELLS', 8, 8);
   }
-  function run(m){
-    reset(); mode = m; ev('explore');
+  function run(m, user){
+    reset(); mode = m; if(user) ev('explore','cyc-'+m);
     txt.textContent = m === 'norm' ? 'Dividing — each cell needs empty space beside it.' : 'Dividing with no brake at all.';
     timer = setInterval(step, 90);
     if(m === 'canc') setTimeout(()=>complete('m14'), 4000);
   }
-  document.getElementById('growNorm').onclick  = ()=>run('norm');
+  document.getElementById('growNorm').onclick  = ()=>run('norm', true);
   window._playGrow = ()=>run('norm');
-  document.getElementById('growCanc').onclick  = ()=>run('canc');
+  document.getElementById('growCanc').onclick  = ()=>run('canc', true);
   document.getElementById('growReset').onclick = reset;
   reset();
   window._drawGrow = draw;
