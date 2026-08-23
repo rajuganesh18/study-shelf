@@ -676,7 +676,7 @@ function configOf(z){
       x.beginPath(); x.arc(W/2, 62, side*0.9, 0, 7); x.stroke();
     }
     mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
-    x.fillText('drawn to a clamped scale — the real thing shrinks far faster', 8, 8);
+    x.fillText('a clamped scale · the real thing shrinks far faster', 8, 8);
     mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
     x.fillText(fmt(m), W/2, 62+side/2+10);
   }
@@ -781,7 +781,7 @@ Q.order('g1','g1s',[
       x.fillText('undeflected', R-10, ty-9);
     }
     mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
-    x.fillText('gas at very low pressure · high voltage across the electrodes', 8, 8);
+    x.fillText('low-pressure gas · high voltage across it', 8, 8);
   }
   function set(m){
     mode=m;
@@ -1061,7 +1061,7 @@ Q.order('g1','g1s',[
       x.fillText('collapsed', cx, cy-R0-16);
     }
     mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
-    x.fillText('an accelerating charge radiates — and a circle is all acceleration', 8, 8);
+    x.fillText('a charge going in a circle is always accelerating', 8, 8);
   }
   function nums(){
     const frac=Math.max(0,1-t/3.2);
@@ -1145,7 +1145,7 @@ Q.pick('g5','g5check','g5s',[
     x.fillStyle=ELECTRON;
     x.beginPath(); x.arc(ex, ey, 6.5, 0, 7); x.fill();
     mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
-    x.fillText('in a shell the electron does not radiate — that is the whole rule', 8, 8);
+    x.fillText('in a shell the electron does not radiate', 8, 8);
   }
   tick('m6', ()=>{ if(flash>0) flash=Math.max(0, flash-0.03); draw(); });
   function go(i){
@@ -1454,7 +1454,7 @@ Q.rows('g12','g12s',[
       x.fillText(iso.note, cx, cy+R+40);
     });
     mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
-    x.fillText('same protons, same electrons — only the neutron count changes', 8, 8);
+    x.fillText('same protons · only the neutron count changes', 8, 8);
     mono(x,9); x.textAlign='left'; x.textBaseline='top';
     x.fillStyle=PROTON;  x.fillText('● proton', 8, H-20);
     x.fillStyle=NEUTRON; x.fillText('● neutron', 74, H-20);
@@ -1529,7 +1529,7 @@ Q.match('g13a','g13b','g13s',[
     mono(x,10,500); x.fillStyle=GOLD; x.textAlign='center'; x.textBaseline='bottom';
     x.fillText(weighted.toFixed(1)+' u', pos(weighted), ay-32);
     mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
-    x.fillText('the simple mean cannot move — it never looks at abundance', 8, 8);
+    x.fillText('the simple mean never looks at abundance', 8, 8);
   }
   function upd(){
     const p=+sl.value, q=100-p, weighted=(35*p+37*q)/100;

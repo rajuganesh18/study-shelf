@@ -1673,7 +1673,7 @@ Q.pick('g6','g6check','g6s',[
     mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
     x.fillText(m.pairs+' shared pair'+(m.pairs>1?'s':'')+' · '+m.bond+' bond', W/2, by+18);
     mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
-    x.fillText('blue dots are valence electrons; the middle pair belongs to both atoms', 8, 8);
+    x.fillText('blue dots are valence electrons · the pair is shared', 8, 8);
   }
   function set(k){
     pick=k;
@@ -2122,7 +2122,7 @@ Q.grid('g14','g14check','g14s',{
     x.fillText(c.ionic ? 'ionic — this is a FORMULA UNIT mass'
                        : 'covalent — this is a MOLECULAR mass', W/2, by+bh+32);
     mono(x,9); x.textAlign='left'; x.textBaseline='top';
-    x.fillText('bar widths are in proportion to each element’s share', 8, 8);
+    x.fillText('bar widths are in proportion to each share', 8, 8);
   }
   function upd(){
     const c=LIST[pick];
