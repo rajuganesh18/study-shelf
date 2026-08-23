@@ -620,13 +620,29 @@ function save(){
   saveT = setTimeout(()=>{
     Store.set(CH.key, S);
     // summary the library shell reads to roll progress up across chapters
+    const a = accuracy();
     Store.set('nb.sum.' + CH.id, {
       xp: S.xp, coins: S.coins,
       done: Object.keys(S.done).length, total: TOTAL,
+      right: a.right, wrong: a.wrong, accuracy: a.pct,
+      lastSeen: S.lastSeen || null,
       updated: Date.now()
     });
     Store.set('nb.last', CH.id);
   }, 400);
+}
+
+/* Right and wrong summed over every mission in this chapter. pct is null
+   until at least one question has been answered, so the shelf can tell
+   "no data yet" apart from "nothing correct". */
+function accuracy(){
+  let right = 0, wrong = 0;
+  Object.keys(S.done).forEach(k=>{
+    const r = S.done[k];
+    if(r && typeof r === 'object'){ right += r.right || 0; wrong += r.wrong || 0; }
+  });
+  const n = right + wrong;
+  return { right, wrong, pct: n ? Math.round(right / n * 100) : null };
 }
 
 /* ---------- toast ---------- */
@@ -711,18 +727,60 @@ function renderHQ(){
   drawBadge();
 }
 
+/* ---------- per-question outcomes ----------
+   Every Q component already works out whether a response was correct, to
+   colour the button. mark() is where it hands that judgement over, so the
+   record is built from the scoring that exists rather than a second copy of
+   it. complete() drains the tally into the mission's record. */
+const TALLY = {};
+function mark(mid, ok){
+  if(!BOOTED || !mid) return;
+  const t = TALLY[mid] = TALLY[mid] || { right:0, wrong:0 };
+  if(ok) t.right++; else t.wrong++;
+}
+function drain(mid){
+  const t = TALLY[mid] || { right:0, wrong:0 };
+  delete TALLY[mid];
+  return t;
+}
+
 /* ---------- mission completion ---------- */
 function complete(id){
   if(!BOOTED) return;                    // same reason as ev(): see BOOTED above
   const el = document.getElementById(id);
-  if(!el || S.done[id]) return;
-  S.done[id] = true;
+  if(!el) return;
+  if(S.done[id]) return revisit(id);     // finished already: record, pay nothing
+  const t = drain(id), now = Date.now();
+  S.done[id] = { at:now, last:now, tries:1, right:t.right, wrong:t.wrong };
+  S.lastSeen = now;
   const xp = +el.dataset.xp, coin = +el.dataset.coin;
   S.xp += xp; S.coins += coin;
   el.classList.add('done');
   el.querySelector('.mstat').textContent = 'DONE';
   toast('Mission complete \u00b7 +' + xp + ' XP \u00b7 +' + coin + ' coins');
   ev('mission');
+  save(); renderHQ();
+}
+
+/* A later pass at a mission that is already done. Records the attempt so
+   revision has something to read, and deliberately pays no XP or coins —
+   otherwise a finished mission becomes a tap-to-farm button.
+
+   The empty-tally guard is load-bearing. Several chapters call complete()
+   from inside a draw() that a 30fps tick() drives, so once the mission is
+   finished the call arrives thirty times a second. Without the guard each
+   one re-arms the 400ms debounce in save() and the chapter never persists
+   anything again. A real new attempt always leaves marks behind; a redraw
+   never does. */
+function revisit(id){
+  const r = S.done[id];
+  if(!r || typeof r !== 'object') return;
+  const t = drain(id);
+  if(!t.right && !t.wrong) return;
+  r.last = S.lastSeen = Date.now();
+  r.tries = (r.tries || 1) + 1;
+  r.right = (r.right || 0) + t.right;
+  r.wrong = (r.wrong || 0) + t.wrong;
   save(); renderHQ();
 }
 
@@ -747,6 +805,7 @@ document.querySelectorAll('[data-q]').forEach(g=>{
     const why = g.parentElement.querySelector('.why');
     if(why) why.classList.add('show');
     if(ok) ev('perfect');
+    mark(g.dataset.m, ok);
     if(g.dataset.m) complete(g.dataset.m);
   });
 });
@@ -793,6 +852,7 @@ const Q = {
       b.className = 'chip'; b.textContent = t;
       b.onclick = ()=>{
         if(b.classList.contains('gone')) return;
+        mark(mid, t === items[at]);
         if(t === items[at]){
           b.classList.add('right','gone'); at++;
           sc.textContent = at + ' of ' + n + ' placed';
@@ -829,6 +889,7 @@ const Q = {
         if(sel) sel.classList.remove('on');
         sel = b; b.classList.add('on'); return;
       }
+      mark(mid, sel.dataset.key === b.dataset.key);
       if(sel.dataset.key === b.dataset.key){
         sel.classList.add('right','gone'); b.classList.add('right','gone'); sel = null; n++;
         sc.textContent = n + ' of ' + pairs.length + ' matched';
@@ -860,6 +921,7 @@ const Q = {
           if(row.dataset.done) return;
           row.dataset.done = '1'; answered++;
           const ok = (ci === s.a);
+          mark(mid, ok);
           b.classList.add(ok ? 'right' : 'wrong');
           btns.forEach(o=>{ if(o !== b) o.classList.add('gone'); });
           if(!ok) btns[s.a].classList.add('right');
@@ -903,16 +965,20 @@ const Q = {
     });
     document.getElementById(checkId).onclick = ()=>{
       let right = 0, filled = 0;
+      const got = [];
       ROWS.forEach((r,ri)=>{
         for(let c=0;c<nc;c++){
           const td = tbl.querySelector('[data-r="'+ri+'"][data-c="'+c+'"]');
           td.classList.remove('err');
           if(state[ri][c] === -1) continue;
           filled++;
-          if(state[ri][c] === r.a[c]) right++; else td.classList.add('err');
+          const ok = state[ri][c] === r.a[c];
+          got.push(ok);
+          if(ok) right++; else td.classList.add('err');
         }
       });
       if(filled < cells){ sc.textContent = 'Fill all ' + cells + ' boxes first \u2014 ' + filled + ' done.'; return; }
+      got.forEach(ok=>mark(cfg.mid, ok));
       sc.textContent = right + ' of ' + cells + ' correct.';
       if(right === cells){
         sc.textContent = cfg.doneMsg || (cells + ' of ' + cells + '.');
@@ -947,15 +1013,19 @@ const Q = {
     tbl.innerHTML = html;
     document.getElementById(checkId).onclick = ()=>{
       let right = 0, filled = 0;
+      const got = [];
       tbl.querySelectorAll('select').forEach(sel=>{
         const r = +sel.dataset.r, c = +sel.dataset.c;
         sel.style.borderColor = 'var(--rule)'; sel.style.color = 'var(--ink)';
         if(!sel.value) return;
         filled++;
-        if(sel.value === String(ROWS[r].a[c])){ right++; sel.style.borderColor = 'var(--good)'; sel.style.color = 'var(--good)'; }
+        const ok = sel.value === String(ROWS[r].a[c]);
+        got.push(ok);
+        if(ok){ right++; sel.style.borderColor = 'var(--good)'; sel.style.color = 'var(--good)'; }
         else { sel.style.borderColor = 'var(--bad)'; sel.style.color = 'var(--bad)'; }
       });
       if(filled < cells){ sc.textContent = 'Fill all ' + cells + ' boxes first \u2014 ' + filled + ' done.'; return; }
+      got.forEach(ok=>mark(cfg.mid, ok));
       sc.textContent = right + ' of ' + cells + ' correct.';
       if(right === cells){
         sc.textContent = cfg.doneMsg || (cells + ' of ' + cells + '.');
@@ -992,6 +1062,7 @@ const Q = {
         else if(did) it._b.classList.add('wrong');
         else it._b.classList.add('gone');
         if(should === did) right++;
+        mark(mid, should === did);
       });
       const perfect = right === items.length;
       sc.textContent = perfect ? (doneMsg || 'All correct.') : (right + ' of ' + items.length + ' decided correctly.');
@@ -1030,6 +1101,7 @@ const Q = {
         b.onclick = ()=>{
           [...oEl.children].forEach(c=>c.disabled = true);
           const ok = k === q.a;
+          mark(mid, ok);
           b.classList.add(ok ? 'right' : 'wrong');
           if(!ok) oEl.children[q.a].classList.add('right');
           if(ok) bhp = Math.max(0, bhp - 12); else yhp = Math.max(0, yhp - 20);
@@ -1531,15 +1603,32 @@ Q.boss([
   if(saved) S = Object.assign(S, saved);
   const t = today();
 
+  /* Saves written before missions kept a record hold done:{m1:true}. Upgrade
+     them in place. XP and coins are separate fields and are never touched, so
+     nobody loses progress. at:0 means "finished, date unknown" — better than
+     stamping today's date on work done weeks ago and having revision believe
+     it — and right/wrong start empty rather than inventing a score that was
+     never recorded. */
+  Object.keys(S.done).forEach(k=>{
+    if(S.done[k] === true) S.done[k] = { at:0, last:0, tries:1, right:0, wrong:0 };
+  });
+
   /* the streak belongs to the app, not to one chapter: opening any
      chapter on a given day counts once, for every chapter.          */
   let g = await Store.get('nb.streak');
   if(!g || typeof g !== 'object') g = { day:null, streak:0 };
-  if(g.day !== t){
+  const rolled = (g.day !== t);
+  if(rolled){
     g.streak = (g.day === yday()) ? (g.streak || 0) + 1 : 1;
     g.day = t;
-    await Store.set('nb.streak', g);
   }
+  /* A rolling fortnight of the days a chapter was opened, so the shelf can
+     draw the week as days rather than as one number. Additive: an existing
+     save starts with an empty list and fills in from today. */
+  if(!Array.isArray(g.days)) g.days = [];
+  const newDay = g.days[g.days.length - 1] !== t;
+  if(newDay) g.days = g.days.concat(t).slice(-14);
+  if(rolled || newDay) await Store.set('nb.streak', g);
   S.streak = g.streak;
 
   if(S.day !== t){
