@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Atomic Foundations of Matter — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: the green of the chapter itself, and a rose for the negative ion ---------- */
+:root{ --a1:#3FA96B; --a2:#D96BA8; --badge-bg:#E8F3EA; }
+/*@include shared/chrome.css*/
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Science · Chapter 9</div>
+  <h1>Atoms<br><span>Combining into matter</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96" aria-label="Chapter progress badge: loose atoms organising into a crystal"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Nothing is lost</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="40" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>The balloon on the flask</b><i>Activities 9.1 and 9.2 · weigh it before and after</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Put a reaction on a balance and watch the reading. Dissolving salt in water changes nothing — that is a physical change. Vinegar and baking soda are a different matter: they fizz, and whether the balance agrees depends entirely on one detail.</p>
+    <div class="panel">
+      <canvas id="balCv" height="270" aria-label="A reaction on a weighing balance, run in an open flask and in a sealed one"></canvas>
+      <div class="row">
+        <button class="act" id="balSalt">Dissolve salt</button>
+        <button class="act" id="balOpen">Fizz, flask open</button>
+        <button class="act" id="balSeal">Fizz, balloon sealed on</button>
+        <button class="act" id="balReset">Reset</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Before</div><div class="v" id="balBefore">—</div></div>
+        <div class="rc"><div class="k">After</div><div class="v" id="balAfter">—</div></div>
+        <div class="rc"><div class="k">Difference</div><div class="v" id="balDiff">—</div></div>
+      </div>
+      <div class="note" id="balTxt" style="margin-top:12px;min-height:84px">Choose an experiment. Watch the balance reading before the change and after it.</div>
+    </div>
+    <p>The sealed flask is the honest one. In the open flask the carbon dioxide simply leaves, and the balance reports the loss — but the gas still exists, and it still has mass. Trap it and the reading does not move by a single milligram.</p>
+    <div class="curio">
+      <h5>Why the balloon has to stay on the pan</h5>
+      <div class="note">The book is insistent about leaving both the flask and the balloon on the balance throughout. Traces of baking soda cling to the inside of the balloon, and lifting it off to tip the powder in would take some of that mass away with it — producing a "loss" that has nothing to do with chemistry.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="35" data-coin="18">
+  <summary><span class="mno">02</span><span class="mt"><b>Is the law broken?</b><i>Section 9.1 · Lavoisier, 1789</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Matter can neither be created nor destroyed in a chemical reaction. That is the <b>Law of Conservation of Mass</b>, and every apparent exception turns out to be something entering or leaving the container unnoticed. Decide each case.</p>
+    <div class="panel">
+      <div id="g2"></div>
+      <div class="score" id="g2s"></div>
+    </div>
+    <div class="curio">
+      <h5>Lavoisier's own words</h5>
+      <div class="note">"…in every operation an equal quantity of matter exists both before and after the operation." Antoine Lavoisier is called the father of modern chemistry largely because he insisted on weighing everything, including the gases — which is exactly the discipline the balloon enforces.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="40" data-coin="20">
+  <summary><span class="mno">03</span><span class="mt"><b>Make the masses balance</b><i>Examples 9.1 and 9.2 · the arithmetic of conservation</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>If the total mass before equals the total mass after, then any one missing number can be worked out from the rest. Six of them here.</p>
+    <div class="panel">
+      <table class="tick" id="g3"></table>
+      <div class="row"><button class="act" id="g3check">Check my answers</button></div>
+      <div class="score" id="g3s"></div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Always the same recipe</div>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="40" data-coin="20">
+  <summary><span class="mno">04</span><span class="mt"><b>Water is always one to eight</b><i>Section 9.2 · the Law of Constant Proportions</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Purify water from a river, a borewell or the ocean, decompose it, and you always get hydrogen and oxygen in a mass ratio of <b>1 : 8</b>. Try to force a different ratio and see what happens to the leftovers.</p>
+    <div class="panel">
+      <canvas id="propCv" height="260" aria-label="Hydrogen and oxygen combining in a fixed ratio, with any excess left over"></canvas>
+      <div class="knob">
+        <label>Hydrogen supplied <b id="propHV">1 g</b></label>
+        <input type="range" id="propH" min="1" max="20" value="1" aria-label="Grams of hydrogen">
+      </div>
+      <div class="knob">
+        <label>Oxygen supplied <b id="propOV">8 g</b></label>
+        <input type="range" id="propO" min="1" max="80" value="8" aria-label="Grams of oxygen">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Water formed</div><div class="v" id="propW">9 g</div></div>
+        <div class="rc"><div class="k">Left over</div><div class="v" id="propLeft" style="font-size:12px">nothing</div></div>
+        <div class="rc"><div class="k">Ratio used</div><div class="v" id="propRatio">1 : 8</div></div>
+      </div>
+      <div class="note" id="propTxt" style="margin-top:12px;min-height:70px">One gram of hydrogen and eight of oxygen make nine grams of water with nothing to spare. Now try supplying too much of one of them.</div>
+    </div>
+    <p>Whichever element runs out first decides how much compound forms. The surplus of the other is simply left sitting there unreacted — it cannot force its way into the water, because the proportion is fixed.</p>
+    <div class="curio">
+      <h5>Cinnabar, and a very old ratio</h5>
+      <div class="note">The red pigment known in India as <i>hingula</i> and in Latin as cinnabar yields mercury and sulfur at about 86.22% and 13.78% by mass — and grinding the two together in that same ratio produces cinnabar again. Several civilisations found this independently, long before anyone could say why.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="35" data-coin="18">
+  <summary><span class="mno">05</span><span class="mt"><b>Working with fixed ratios</b><i>Example 9.3 and the Pause and Ponder questions</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Once you know a compound's mass ratio, every other quantity follows from it. Six to work out.</p>
+    <div class="panel">
+      <table class="tick" id="g5"></table>
+      <div class="row"><button class="act" id="g5check">Check my answers</button></div>
+      <div class="score" id="g5s"></div>
+    </div>
+    <div class="curio">
+      <h5>Why it does not apply to mixtures</h5>
+      <div class="note">Air is roughly a fifth oxygen — but only roughly, and it varies with place and altitude. A mixture has no fixed recipe, which is precisely what separates it from a compound. Two students who make copper oxide in the ratios 4:1 and 8:2 have in fact made the same compound: those ratios are equal.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="30" data-coin="15">
+  <summary><span class="mno">06</span><span class="mt"><b>Dalton's postulates</b><i>Section 9.3 · what he got right, and what he did not</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>In 1808 John Dalton explained both laws at once with a handful of assumptions about atoms. A <b>postulate</b> is a starting assumption, accepted without proof, from which everything else is reasoned.</p>
+    <div class="panel">
+      <p style="font-size:14.5px;margin:0 0 12px">Tick every statement that Dalton actually postulated.</p>
+      <div class="chips" id="g6"></div>
+      <div class="row"><button class="act" id="g6check">Check my answers</button></div>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>The theory explains the two laws neatly. Mass is conserved because atoms are merely rearranged, never created or destroyed. Proportions are fixed because a given compound always contains the same kinds of atoms in the same whole-number ratio.</p>
+    <div class="curio">
+      <h5>Two postulates that did not survive</h5>
+      <div class="note">Chapter 8 broke both of them. Atoms are <i>not</i> indivisible — they contain protons, neutrons and electrons. And atoms of one element are <i>not</i> all identical in mass, because isotopes exist. Dalton was wrong about the details and right about the consequences, which is a very common shape for a good scientific theory.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Sharing: the covalent bond</div>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="45" data-coin="25">
+  <summary><span class="mno">07</span><span class="mt"><b>Two atoms, one shared pair</b><i>Section 9.4.1A · molecules of elements</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>An atom short of a full outer shell can borrow rather than take. Two atoms that each contribute an electron to a shared pair are both counted as owning it — and both end up satisfied. Build each molecule and count the bonds.</p>
+    <div class="panel">
+      <canvas id="covCv" height="270" aria-label="Two atoms sharing electron pairs to form a molecule"></canvas>
+      <div class="row">
+        <button class="act" id="covH">Hydrogen H₂</button>
+        <button class="act" id="covCl">Chlorine Cl₂</button>
+        <button class="act" id="covO">Oxygen O₂</button>
+        <button class="act" id="covN">Nitrogen N₂</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Each atom needs</div><div class="v" id="covNeed">—</div></div>
+        <div class="rc"><div class="k">Pairs shared</div><div class="v" id="covPairs">—</div></div>
+        <div class="rc"><div class="k">Bond</div><div class="v" id="covBond" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="covTxt" style="margin-top:12px;min-height:84px">Pick a molecule. Watch how many electrons each atom is short of, and how many pairs they have to share to fix it.</div>
+    </div>
+    <p>One shared pair is a <b>single bond</b>, drawn as one line: H—H, Cl—Cl. Two shared pairs make a <b>double bond</b>, O=O. Three make a triple bond, as in nitrogen — which is why nitrogen gas is so hard to persuade into reacting with anything.</p>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="40" data-coin="20">
+  <summary><span class="mno">08</span><span class="mt"><b>Molecules of compounds</b><i>Section 9.4.1B · when the atoms differ</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Hydrogen needs one electron; chlorine needs one; so they share one pair and both are done. Oxygen needs two, and hydrogen can only offer one each — so it takes two hydrogen atoms. The formula falls straight out of the shortfalls.</p>
+    <div class="panel">
+      <canvas id="cmpCv" height="260" aria-label="Molecules of compounds built from atoms of different elements"></canvas>
+      <div class="row">
+        <button class="act" id="cmpHCl">HCl</button>
+        <button class="act" id="cmpH2O">H₂O</button>
+        <button class="act" id="cmpNH3">NH₃</button>
+        <button class="act" id="cmpCH4">CH₄</button>
+        <button class="act" id="cmpCO2">CO₂</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Central atom short by</div><div class="v" id="cmpNeed">—</div></div>
+        <div class="rc"><div class="k">Partners needed</div><div class="v" id="cmpN">—</div></div>
+        <div class="rc"><div class="k">Formula</div><div class="v" id="cmpF">—</div></div>
+      </div>
+      <div class="note" id="cmpTxt" style="margin-top:12px;min-height:84px">Choose a compound and see why it has the formula it does.</div>
+    </div>
+    <div class="curio">
+      <h5>Why neon does nothing</h5>
+      <div class="note">Neon already has eight electrons in its outermost shell. It has nothing to gain, nothing to give away and no reason to share — so it forms no bonds at all and drifts about as single atoms. Helium does the same with a full shell of two.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="35" data-coin="18">
+  <summary><span class="mno">09</span><span class="mt"><b>Naming covalent compounds</b><i>Section 9.4.1C · mono, di, tri, tetra</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Covalent names count the atoms. The first element keeps its name, the second ends in <b>-ide</b>, and prefixes say how many: mono- 1, di- 2, tri- 3, tetra- 4, penta- 5, hexa- 6. Mono- is dropped from the first element but kept on the second.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a formula, then tap its name.</div>
+      <div class="match"><div id="g9a"></div><div id="g9b"></div></div>
+      <div class="score" id="g9s"></div>
+    </div>
+    <p>Two spelling rules catch people out. If the prefix ends in <b>o</b> or <b>a</b> and the element starts with a vowel, the last vowel is dropped — carbon mon<b>o</b>xide, not monooxide; dinitrogen tetr<b>o</b>xide, not tetraoxide. If it ends in <b>i</b> it stays, for pronunciation: dioxide, trioxide.</p>
+    <div class="curio">
+      <h5>The ones nobody calls by their proper name</h5>
+      <div class="note">H₂O really ought to be dihydrogen monoxide, and NH₃ nitrogen trihydride. Everyone says water and ammonia instead. A few compounds were named long before the system existed and simply kept the names they had.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Giving and taking: the ionic bond</div>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="45" data-coin="25">
+  <summary><span class="mno">10</span><span class="mt"><b>One electron changes hands</b><i>Section 9.4.2 · how sodium chloride forms</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Sodium has one electron in its outer shell and would rather be rid of it. Chlorine is one short and would very much like it. Hand it over and watch what happens to the charges.</p>
+    <div class="panel">
+      <canvas id="ionCv" height="270" aria-label="Sodium transferring an electron to chlorine, forming a cation and an anion"></canvas>
+      <div class="row">
+        <button class="act" id="ionStep">Transfer the electron</button>
+        <button class="act" id="ionReset">Back to atoms</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Sodium</div><div class="v" id="ionNa" style="font-size:12px">11 p, 11 e · neutral</div></div>
+        <div class="rc"><div class="k">Chlorine</div><div class="v" id="ionCl" style="font-size:12px">17 p, 17 e · neutral</div></div>
+        <div class="rc"><div class="k">Holding them</div><div class="v" id="ionBond" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="ionTxt" style="margin-top:12px;min-height:84px">Both atoms start electrically neutral, with as many electrons as protons. Press transfer and count again.</div>
+    </div>
+    <p>Sodium keeps its 11 protons but is down to 10 electrons, so it now carries one unit of positive charge: the <b>cation</b> Na⁺. Chlorine has 17 protons and 18 electrons, so it carries one negative: the <b>anion</b> Cl⁻. Opposite charges attract, and that electrostatic pull is the <b>ionic bond</b>.</p>
+  </div>
+</details>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="35" data-coin="18">
+  <summary><span class="mno">11</span><span class="mt"><b>Not a molecule but a lattice</b><i>Fig. 9.14 · what a salt crystal really is</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>There is no such thing as one NaCl molecule sitting on its own. Each sodium ion is surrounded by six chloride ions and each chloride by six sodiums, repeating in every direction. Build it up and count the neighbours.</p>
+    <div class="panel">
+      <canvas id="latCv" height="270" aria-label="Sodium and chloride ions arranged in a repeating three-dimensional lattice"></canvas>
+      <div class="knob">
+        <label>Crystal size <b id="latNV">1 unit</b></label>
+        <input type="range" id="latN" min="1" max="4" value="1" aria-label="Size of the crystal">
+      </div>
+      <div class="row">
+        <button class="act" id="latPick">Highlight one ion's neighbours</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Ions drawn</div><div class="v" id="latIons">8</div></div>
+        <div class="rc"><div class="k">Nearest neighbours</div><div class="v" id="latNeigh">—</div></div>
+        <div class="rc"><div class="k">Simplest ratio</div><div class="v" id="latRatio">1 : 1</div></div>
+      </div>
+      <div class="note" id="latTxt" style="margin-top:12px;min-height:70px">Grow the crystal and watch the pattern repeat. However large it gets, there is one sodium for every chloride.</div>
+    </div>
+    <p>So NaCl is not a molecular formula at all — it is the <b>simplest whole-number ratio</b> of the ions in the lattice. That is why an ionic compound has a formula unit rather than a molecule, and why we speak of its formula unit mass rather than its molecular mass.</p>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="35" data-coin="18">
+  <summary><span class="mno">12</span><span class="mt"><b>Ions and their charges</b><i>Table 9.1 · the ones worth knowing by heart</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Metals form cations, non-metals form anions, and a <b>polyatomic ion</b> is a group of atoms carrying one charge between them. Match each to its formula.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap an ion, then tap its formula.</div>
+      <div class="match"><div id="g12a"></div><div id="g12b"></div></div>
+      <div class="score" id="g12s"></div>
+    </div>
+    <p>Some metals form more than one ion, and the name has to say which: iron is <b>ferrous</b> Fe²⁺ or <b>ferric</b> Fe³⁺, copper is <b>cuprous</b> Cu⁺ or <b>cupric</b> Cu²⁺. Note that polyatomic names generally do not end in -ide — sulfate, nitrate, carbonate, hydroxide, ammonium.</p>
+  </div>
+</details>
+
+<div class="sec">Part 5 · Writing it down</div>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="50" data-coin="30">
+  <summary><span class="mno">13</span><span class="mt"><b>The criss-cross</b><i>Section 9.5 · building a formula from two ions</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Write the cation first and the anion second, put the charges underneath, and swap the numbers diagonally. Divide by any common factor, and add brackets if more than one polyatomic ion is needed. Pick a pair and watch it happen.</p>
+    <div class="panel">
+      <canvas id="ccCv" height="230" aria-label="Two ion charges crossed over to give the formula of the compound"></canvas>
+      <div class="note" style="margin-bottom:6px">Cation</div>
+      <div class="chips" id="ccCat"></div>
+      <div class="note" style="margin:12px 0 6px">Anion</div>
+      <div class="chips" id="ccAn"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Crossed over</div><div class="v" id="ccRaw" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Simplified</div><div class="v" id="ccFormula">—</div></div>
+        <div class="rc"><div class="k">Name</div><div class="v" id="ccName" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="ccTxt" style="margin-top:12px;min-height:84px">Choose a cation and an anion. The formula is the ratio that makes the charges cancel exactly.</div>
+    </div>
+    <div class="curio">
+      <h5>When the brackets are needed</h5>
+      <div class="note">Magnesium hydroxide is Mg(OH)₂, not MgOH₂ — the subscript has to apply to the whole hydroxide group, not just the hydrogen. But aluminium hydroxide with one nitrate needs no brackets at all: brackets appear only when a polyatomic ion is taken more than once.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="40" data-coin="20">
+  <summary><span class="mno">14</span><span class="mt"><b>Telling them apart</b><i>Activity 9.4 · ionic against covalent</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Take camphor, common salt, copper sulfate, sugar and naphthalene. Try to dissolve each in water and in kerosene, then test whether it conducts. The results sort themselves into two clear groups.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tick where the statement is true of that kind of compound. Tap once for a tick, twice for a cross.</div>
+      <table class="tick" id="g14"></table>
+      <div class="row"><button class="act" id="g14check">Check my answers</button></div>
+      <div class="score" id="g14s"></div>
+    </div>
+    <p>Ionic solids do not conduct, because their ions are locked in the lattice and cannot move. Dissolve them and the ions come free, and the bulb lights. Covalent compounds mostly dissolve in kerosene and petrol rather than water, and give no ions at all — so no conduction either way.</p>
+    <div class="curio">
+      <h5>What about melting them?</h5>
+      <div class="note">Melting an ionic solid frees the ions just as dissolving does, so molten sodium chloride conducts too. It takes a great deal of heat to get there: the inter-ionic attraction is strong, which is why ionic compounds have high melting points and covalent ones generally have low ones.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="45" data-coin="25">
+  <summary><span class="mno">15</span><span class="mt"><b>Adding up the masses</b><i>Sections 9.7 and 9.8 · molecular and formula unit mass</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Once you have the formula, the mass is just addition: every atom in it, counted and totalled. Build a compound and watch the sum assemble itself.</p>
+    <div class="panel">
+      <canvas id="massCv" height="230" aria-label="The atomic masses in a formula added up"></canvas>
+      <div class="chips" id="massPick"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Formula</div><div class="v" id="massF">—</div></div>
+        <div class="rc"><div class="k">Working</div><div class="v" id="massWork" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Total</div><div class="v" id="massTot">—</div></div>
+      </div>
+      <div class="note" id="massTxt" style="margin-top:12px;min-height:70px">Pick a compound. Covalent compounds have a molecular mass; ionic ones have a formula unit mass, because they have no molecules.</div>
+    </div>
+    <div class="panel">
+      <table class="tick" id="g15"></table>
+      <div class="row"><button class="act" id="g15check">Check my answers</button></div>
+      <div class="score" id="g15s"></div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 6 · The boss</div>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="80" data-coin="60">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions from the two laws through to formula unit mass. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+<footer>NCERT Class 9 Science · Chapter 9</footer>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- .wrap -->
+
+<script>
+/*@include shared/storage.js*/
+
+/* ============================================================
+   Chapter 9 — Atomic Foundations of Matter
+   Progress metaphor: loose atoms organising themselves into a
+   crystal. The badge begins as a scatter of neutral atoms; as
+   XP grows they pair off into molecules, take on charge, and
+   finally settle into the repeating lattice of Fig. 9.14 —
+   which is the whole chapter in one picture.
+   ============================================================ */
+const CH = {
+  id: '9-science-9',
+  key: 'ch09Bonding',
+  total: 16,
+  stages: [
+    { at:0,   f:0.00, name:'Loose atoms',      d:'Separate atoms, drifting. Most are short of a full outer shell and none of them is content.' },
+    { at:60,  f:0.14, name:'The first bond',   d:'Two atoms share a pair of electrons. Neither has lost anything, and both now count as full.' },
+    { at:140, f:0.28, name:'Molecules',        d:'Sharing spreads. Hydrogen, oxygen and water — neutral units that can exist on their own.' },
+    { at:250, f:0.44, name:'Charge appears',   d:'Some atoms give an electron away instead of sharing. Protons and electrons no longer balance.' },
+    { at:370, f:0.62, name:'Opposites attract',d:'A cation and an anion pull together. The electrostatic grip between them is the ionic bond.' },
+    { at:470, f:0.80, name:'The pattern repeats',d:'Not one pair but millions, each ion ringed by six of the other kind. A lattice is forming.' },
+    { at:560, f:1.00, name:'A crystal',        d:'Sodium chloride: no molecules anywhere in it, just an endless repeating ratio of one to one.' }
+  ],
+  paint(x, W, st, S){
+    /* CH is defined above the shared engine, so paint() cannot borrow mono();
+       it carries its own one-line font setter instead. */
+    const mono2 = (c, size) => c.font = '500 ' + size + 'px "IBM Plex Mono",monospace';
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+    x.fillStyle = '#E8F3EA'; x.fillRect(0,0,W,H);
+
+    /* Sixteen particles move from a fixed scatter to a 4x4 lattice as f grows.
+       Nothing is random: the same XP always paints the same picture. */
+    const N = 4, pad = W*0.17, span = W - pad*2;
+    const ease = t => t*t*(3-2*t);
+    const k = ease(Math.min(1, Math.max(0, (f-0.10)/0.80)));
+    const P = [];
+    for(let i=0;i<N*N;i++){
+      const r = Math.floor(i/N), c = i%N;
+      const lx = pad + c*(span/(N-1)), ly = pad + r*(span/(N-1));
+      // deterministic scatter, seeded off the index
+      const a = (i*2.399), rad = W*0.30*((i%5)+2)/6;
+      const sx = W/2 + Math.cos(a)*rad, sy = H/2 + Math.sin(a)*rad*0.86;
+      P.push({ x: sx + (lx-sx)*k, y: sy + (ly-sy)*k, neg: (r+c)%2 === 1 });
+    }
+
+    // lattice lines, once the pattern is genuinely a pattern
+    if(f > 0.62){
+      const a = Math.min(0.55, (f-0.62)/0.20*0.55);
+      x.strokeStyle = 'rgba(63,169,107,' + a + ')'; x.lineWidth = 1;
+      for(let r=0;r<N;r++) for(let c=0;c<N;c++){
+        const p = P[r*N+c];
+        if(c<N-1){ const q = P[r*N+c+1]; x.beginPath(); x.moveTo(p.x,p.y); x.lineTo(q.x,q.y); x.stroke(); }
+        if(r<N-1){ const q = P[(r+1)*N+c]; x.beginPath(); x.moveTo(p.x,p.y); x.lineTo(q.x,q.y); x.stroke(); }
+      }
+    }
+
+    // shared pairs, while the atoms are still pairing off rather than stacking
+    if(f > 0.11 && f < 0.50){
+      const a = f < 0.20 ? (f-0.11)/0.09 : f > 0.42 ? (0.50-f)/0.08 : 1;
+      x.strokeStyle = 'rgba(47,58,99,' + (0.75*a) + ')'; x.lineWidth = 2;
+      const pairs = f < 0.24 ? [[5,6]] : [[5,6],[9,10],[1,2]];
+      pairs.forEach(pr=>{
+        const p = P[pr[0]], q = P[pr[1]];
+        x.beginPath(); x.moveTo(p.x,p.y); x.lineTo(q.x,q.y); x.stroke();
+        // the shared electrons themselves
+        x.fillStyle = 'rgba(47,58,99,' + (0.8*a) + ')';
+        const mx = (p.x+q.x)/2, my = (p.y+q.y)/2, dx = (q.y-p.y), dy = -(q.x-p.x);
+        const L = Math.hypot(dx,dy) || 1;
+        x.beginPath(); x.arc(mx + dx/L*2.6, my + dy/L*2.6, 1.7, 0, 7); x.fill();
+        x.beginPath(); x.arc(mx - dx/L*2.6, my - dy/L*2.6, 1.7, 0, 7); x.fill();
+      });
+    }
+
+    // the particles, taking on charge once electrons start changing hands
+    const charged = f > 0.40 ? Math.min(1,(f-0.40)/0.16) : 0;
+    P.forEach((p,i)=>{
+      const r = W*0.055 * (p.neg && charged ? 1.12 : 1);
+      if(charged > 0){
+        x.fillStyle = p.neg
+          ? 'rgba(217,107,168,' + (0.35 + 0.6*charged) + ')'
+          : 'rgba(63,169,107,'  + (0.35 + 0.6*charged) + ')';
+      } else {
+        x.fillStyle = '#9AA79E';
+      }
+      x.beginPath(); x.arc(p.x, p.y, r, 0, 7); x.fill();
+      if(charged > 0.55){
+        x.fillStyle = 'rgba(255,255,255,' + charged + ')';
+        mono2(x, Math.round(W*0.08));
+        x.textAlign='center'; x.textBaseline='middle';
+        x.fillText(p.neg ? '−' : '+', p.x, p.y + 0.5);
+      }
+    });
+
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ============================================================
+   Chapter 9 · Interactives
+   the balance (M1) · fixed proportions (M4)
+   sharing electrons (M7) · compound molecules (M8)
+   electron transfer (M10) · the lattice (M11)
+   the criss-cross (M13) · adding up masses (M15)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#3FA96B', A2='#D96BA8',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', BG='#10141F',
+      POS='#3FA96B', NEG='#D96BA8', SHARE='#8FD6FF';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* Atomic masses, to the values the chapter itself uses. */
+const AMU = { H:1, C:12, N:14, O:16, Na:23, Mg:24, Al:27, P:31, S:32, Cl:35.5,
+              K:39, Ca:40, Fe:56, Cu:63.5, Zn:65, Ag:108, Ba:137 };
+
+/* Draw an atom as a nucleus with its outer shell and valence electrons. */
+function shellAtom(x, cx, cy, r, sym, valence, col, extra){
+  x.strokeStyle = 'rgba(142,154,192,.45)'; x.lineWidth = 1;
+  x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke();
+  x.fillStyle = col || '#3A4260';
+  x.beginPath(); x.arc(cx, cy, r*0.34, 0, 7); x.fill();
+  sans(x, Math.max(9, r*0.36), 600); x.fillStyle = INK;
+  x.textAlign='center'; x.textBaseline='middle';
+  x.fillText(sym, cx, cy);
+  for(let i=0;i<valence;i++){
+    const a = -Math.PI/2 + i*(2*Math.PI/Math.max(valence,1));
+    x.fillStyle = SHARE;
+    x.beginPath(); x.arc(cx+Math.cos(a)*r, cy+Math.sin(a)*r, 2.8, 0, 7); x.fill();
+  }
+  if(extra){
+    mono(x,10,500); x.fillStyle = extra.col || DIM;
+    x.textAlign='center'; x.textBaseline='top';
+    x.fillText(extra.txt, cx, cy + r + 8);
+  }
+}
+
+/* ============================================================
+   M1 — the balance: physical change, open fizz, sealed fizz
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('balCv');
+  if(!cv) return;
+  const RUN={
+    salt:{ before:55.000, after:55.000, seal:false, gas:false,
+      txt:'Salt dissolving is a PHYSICAL change. The salt is still there, spread through the water rather than sitting at the bottom, and the balance does not move. The mass of the solution equals the mass of the water plus the mass of the salt.' },
+    open:{ before:22.140, after:21.238, seal:false, gas:true,
+      txt:'A brisk effervescence, and the reading drops by 0.902 g. Nothing has been destroyed: the carbon dioxide produced by the reaction has simply left the open flask and taken its mass with it. The balance is only weighing what is still on the pan.' },
+    seal:{ before:22.512, after:22.510, seal:true, gas:true,
+      txt:'The same reaction, but the balloon traps the carbon dioxide. The reading is unchanged — 0.002 g apart, which is the ±1 in the last digit that any balance carries. Nothing was created and nothing lost; it was only ever a matter of where the gas went.' }
+  };
+  let mode=null, t=0, run=false;
+  const seen={};
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,270); if(!x) return;
+    const W=cv.clientWidth, H=270;
+    bg(x,W,H);
+    const R = mode ? RUN[mode] : null;
+    const p = run ? Math.min(1, t) : (mode ? 1 : 0);
+    const cx=W*0.40, pan=H-92;
+    // the balance body and its display
+    x.fillStyle='#2A3350'; x.fillRect(cx-72, pan+10, 144, 40);
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(cx-72, pan+10, 144, 40);
+    x.fillStyle='#0E2A1C'; x.fillRect(cx-58, pan+18, 116, 24);
+    const reading = !R ? 0 : R.before + (R.after-R.before)*p;
+    mono(x,15,500); x.fillStyle='#5BE39B'; x.textAlign='right'; x.textBaseline='middle';
+    x.fillText(reading.toFixed(3)+' g', cx+52, pan+30);
+    // the pan
+    x.strokeStyle='#8E9AC0'; x.lineWidth=2;
+    x.beginPath(); x.moveTo(cx-56, pan); x.lineTo(cx+56, pan); x.stroke();
+    if(mode==='salt'){
+      // a beaker of water with salt dissolving into it
+      const bw=62, bh=54, bx=cx-bw/2, by=pan-bh;
+      x.strokeStyle='#5A6B78'; x.lineWidth=1.6; x.strokeRect(bx, by, bw, bh);
+      x.fillStyle='rgba(120,190,220,.20)'; x.fillRect(bx+1, by+bh*0.30, bw-2, bh*0.70-1);
+      for(let i=0;i<14;i++){
+        const a=(i*2.399);
+        const settle = 1-p;
+        const gx = bx+8 + ((i*13)%(bw-16));
+        const gy = by+bh-6 - settle*0 - (p)*((i*7)%(bh*0.55));
+        x.fillStyle = p<0.5 && i>7 ? '#EFE7D2' : 'rgba(239,231,210,'+(0.35+0.5*(1-p))+')';
+        x.beginPath(); x.arc(gx, p<0.15 ? by+bh-5 : gy, 2, 0, 7); x.fill();
+      }
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText(p<0.5?'salt on the bottom':'salt dissolved', cx, by-16);
+    } else if(mode){
+      // conical flask, with a balloon or an open mouth
+      const fb=pan, fw=76, neck=14;
+      x.strokeStyle='#5A6B78'; x.lineWidth=1.8;
+      x.beginPath();
+      x.moveTo(cx-neck/2, fb-78); x.lineTo(cx-fw/2, fb); x.lineTo(cx+fw/2, fb); x.lineTo(cx+neck/2, fb-78);
+      x.stroke();
+      x.fillStyle='rgba(217,164,65,.22)';
+      x.beginPath();
+      x.moveTo(cx-fw/2+3, fb-1); x.lineTo(cx+fw/2-3, fb-1);
+      x.lineTo(cx+fw*0.30, fb-28); x.lineTo(cx-fw*0.30, fb-28); x.closePath(); x.fill();
+      // fizzing
+      if(p>0.05){
+        for(let i=0;i<16;i++){
+          const ph=((i*0.13 + t*0.9)%1);
+          const bx2=cx-24+((i*11)%48);
+          const by2=fb-8-ph*66;
+          x.fillStyle='rgba(255,255,255,'+(0.5*(1-ph))+')';
+          x.beginPath(); x.arc(bx2, by2, 1.6+ph*1.4, 0, 7); x.fill();
+        }
+      }
+      if(R.seal){
+        // a balloon that inflates as the gas is trapped
+        const r=6+p*20;
+        x.fillStyle='rgba(63,169,107,.55)'; x.strokeStyle=A1; x.lineWidth=1.5;
+        x.beginPath(); x.ellipse(cx, fb-84-r*0.7, r*0.86, r, 0, 0, 7); x.fill(); x.stroke();
+        x.strokeStyle=A1; x.lineWidth=3;
+        x.beginPath(); x.moveTo(cx, fb-80); x.lineTo(cx, fb-74); x.stroke();
+        mono(x,9); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='bottom';
+        x.fillText('gas trapped', cx, fb-84-r*0.7-r-6);
+      } else if(p>0.05){
+        // gas leaving an open mouth
+        for(let i=0;i<7;i++){
+          const ph=((i*0.17 + t*0.55)%1);
+          x.fillStyle='rgba(229,72,77,'+(0.55*(1-ph))+')';
+          x.beginPath(); x.arc(cx+(i%3-1)*9, fb-84-ph*52, 2.4, 0, 7); x.fill();
+        }
+        mono(x,9); x.fillStyle=BAD; x.textAlign='center'; x.textBaseline='bottom';
+        x.fillText('gas escaping', cx, fb-142);
+      }
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(!mode ? 'choose an experiment below'
+      : mode==='salt' ? 'physical change · nothing enters or leaves'
+      : R.seal ? 'chemical change · closed system'
+               : 'chemical change · open system', 8, 8);
+  }
+  function nums(){
+    const R = mode ? RUN[mode] : null;
+    const p = run ? Math.min(1,t) : (mode?1:0);
+    document.getElementById('balBefore').textContent = R ? R.before.toFixed(3)+' g' : '—';
+    document.getElementById('balAfter').textContent  = R ? (R.before+(R.after-R.before)*p).toFixed(3)+' g' : '—';
+    const d = R ? (R.after-R.before)*p : 0;
+    const el = document.getElementById('balDiff');
+    el.textContent = R ? (d>=0?'+':'')+d.toFixed(3)+' g' : '—';
+    el.style.color = !R ? '' : Math.abs(R.after-R.before)>0.05 ? BAD : GOOD;
+  }
+  tick('m1', ()=>{ if(!run) return; t+=0.02; if(t>=1.4){ t=1.4; run=false; } nums(); draw(); });
+  function set(m){
+    mode=m; t=0; run=true;
+    document.getElementById('balTxt').textContent=RUN[m].txt;
+    ev('explore','bal-'+m);
+    if(!seen[m]){ seen[m]=1;
+      if(Object.keys(seen).length>=3) complete('m1'); }
+    nums(); draw();
+  }
+  const B=(id,m)=>{ const b=document.getElementById(id); if(b) b.onclick=()=>set(m); };
+  B('balSalt','salt'); B('balOpen','open'); B('balSeal','seal');
+  const r=document.getElementById('balReset');
+  if(r) r.onclick=()=>{ mode=null; t=0; run=false;
+    document.getElementById('balTxt').textContent='Choose an experiment. Watch the balance reading before the change and after it.';
+    nums(); draw(); };
+  nums(); draw(); reg('m1',draw);
+})();
+
+Q.rows('g2','g2s',[
+  {t:'10 g of ethanol burns away in an open beaker, leaving no residue',        a:1},
+  {t:'Vinegar and baking soda fizz in a flask sealed with a balloon',           a:0},
+  {t:'Sodium sulfate and barium chloride mix; a white solid appears',           a:0},
+  {t:'A magnesium ribbon is burnt and the white ash weighs more than the ribbon',a:1},
+  {t:'Water is boiled away in an open pan and the pan gets lighter',            a:1},
+  {t:'Sugar dissolves in water and the solution is weighed',                    a:0}
+], ['Mass is conserved','Something entered or left'], 'm2',
+   'All six. The law is never actually broken — every apparent loss is a gas leaving and every apparent gain is something from the air joining in. The magnesium ash is heavier because oxygen combined with it.');
+
+/* ============================================================
+   M3 — the arithmetic of conservation
+   ============================================================ */
+Q.vgrid('g3','g3check','g3s',{
+  head:'Work out the missing mass', mid:'m3',
+  cols:['Answer'],
+  options:[['0.72 g','1.76 g','2.2 g','4.44 g','6.92 g','8.8 g','16.2 g','18 g','44 g','180 g']],
+  rows:[
+    {l:'4.0 g calcium carbonate + 2.92 g acid react. Total mass of the products',      a:['6.92 g']},
+    {l:'They measure 1.76 g CO₂ and 4.44 g calcium chloride. The water formed is',      a:['0.72 g']},
+    {l:'12 g carbon burns in 32 g oxygen. The carbon dioxide formed is',                a:['44 g']},
+    {l:'On the same recipe, 2.4 g of carbon would give',                                a:['8.8 g']},
+    {l:'20 g hydrogen reacts fully with 160 g oxygen. The water formed is',             a:['180 g']},
+    {l:'5.3 g sodium carbonate + 6.0 g acetic acid give 0.9 g water and 8.2 g sodium acetate, so the CO₂ is', a:['2.2 g']}
+  ],
+  doneMsg:'All six. Add up what goes in, add up what comes out, and the two totals have to match.'
+});
+
+/* ============================================================
+   M4 — fixed proportions: what will not fit is left over
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('propCv'), sH=document.getElementById('propH'), sO=document.getElementById('propO');
+  if(!cv||!sH||!sO) return;
+  const seen={};
+  const calc = ()=>{
+    const h=+sH.value, o=+sO.value;
+    const units=Math.min(h, o/8);              // 1 g H needs 8 g O
+    return { h, o, water:units*9, leftH:h-units, leftO:o-units*8 };
+  };
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,260); if(!x) return;
+    const W=cv.clientWidth, H=260;
+    bg(x,W,H);
+    const c=calc(), MAX=88;
+    const bar=(lbl,val,col,y,cap)=>{
+      const bx=64, bw=W-84;
+      mono(x,10); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='middle';
+      x.fillText(lbl, bx-8, y+8);
+      x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(bx, y, bw, 16);
+      x.fillStyle=col; x.fillRect(bx+1, y+1, Math.max(0,(bw-2)*Math.min(1,val/cap)), 14);
+      mono(x,10,500); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(val.toFixed(val%1?1:0)+' g', bx+bw+6, y+8);
+    };
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('supplied', 8, 12);
+    bar('hydrogen', c.h, '#8FD6FF', 28, 20);
+    bar('oxygen',   c.o, A2,        56, MAX);
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(64, 84); x.lineTo(W-20, 84); x.stroke();
+    arrow(x, W/2, 90, W/2, 110, A1, 8);
+    mono(x,9); x.fillStyle=A1; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText('combine 1 : 8 by mass', W/2+12, 100);
+    bar('water', c.water, A1, 122, 99);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('left over, unreacted', 8, 156);
+    bar('hydrogen', c.leftH, 'rgba(143,214,255,.45)', 172, 20);
+    bar('oxygen',   c.leftO, 'rgba(217,107,168,.45)', 200, MAX);
+    // the verdict
+    mono(x,11,500); x.textAlign='center'; x.textBaseline='top';
+    const exact = c.leftH < 0.05 && c.leftO < 0.05;
+    x.fillStyle = exact ? GOOD : GOLD;
+    x.fillText(exact ? 'exact — nothing wasted' : 'one of them runs out first', W/2, H-24);
+  }
+  function upd(){
+    const c=calc();
+    document.getElementById('propHV').textContent=c.h+' g';
+    document.getElementById('propOV').textContent=c.o+' g';
+    document.getElementById('propW').textContent=c.water.toFixed(c.water%1?1:0)+' g';
+    document.getElementById('propLeft').textContent =
+      (c.leftH<0.05 && c.leftO<0.05) ? 'nothing'
+      : c.leftH>=0.05 ? c.leftH.toFixed(1)+' g hydrogen'
+      : c.leftO.toFixed(1)+' g oxygen';
+    document.getElementById('propRatio').textContent='1 : 8';
+    document.getElementById('propTxt').textContent =
+      (c.leftH<0.05 && c.leftO<0.05)
+        ? 'Exactly the right recipe: '+c.h+' g of hydrogen to '+c.o+' g of oxygen is 1 : 8, so every atom finds a partner and '+c.water.toFixed(0)+' g of water forms with nothing left behind.'
+      : c.leftH>=0.05
+        ? 'Too much hydrogen. Only '+(c.o/8).toFixed(1)+' g of it can react with the '+c.o+' g of oxygen available, so '+c.leftH.toFixed(1)+' g is left sitting there. The surplus cannot force its way in — the proportion is fixed at 1 : 8.'
+        : 'Too much oxygen. The '+c.h+' g of hydrogen can only take '+(c.h*8)+' g of it, leaving '+c.leftO.toFixed(1)+' g unreacted. Supplying more of an element does not make more compound.';
+    const k = (c.leftH<0.05 && c.leftO<0.05) ? 'exact' : c.leftH>=0.05 ? 'exH' : 'exO';
+    if(!seen[k]){ seen[k]=1;
+      if(Object.keys(seen).length>=3) complete('m4'); }
+    draw();
+  }
+  sH.addEventListener('input',()=>{ ev('explore',sH.id); upd(); });
+  sO.addEventListener('input',()=>{ ev('explore',sO.id); upd(); });
+  upd(); reg('m4',draw);
+})();
+
+Q.vgrid('g5','g5check','g5s',{
+  head:'Use the fixed ratio', mid:'m5',
+  cols:['Answer'],
+  options:[['9 g','12 g','20 g','23 g','30 g','35.5 g','46 g','71 g','142 g','160 g']],
+  rows:[
+    {l:'NaCl is 23 : 35.5 by mass. 46 g of sodium needs this much chlorine',        a:['71 g']},
+    {l:'A compound is 40% sulfur, 60% oxygen. With 20 g of sulfur, the oxygen is',  a:['30 g']},
+    {l:'Carbon monoxide is 3 : 4 by mass. 9 g of carbon takes this much oxygen',    a:['12 g']},
+    {l:'Water is 1 : 8 by mass. 20 g of hydrogen needs this much oxygen',           a:['160 g']},
+    {l:'Decomposing 9 g of pure water always gives this much oxygen',               a:['9 g']},
+    {l:'NaCl again: 71 g of chlorine reacts completely with this much sodium',      a:['46 g']}
+  ],
+  doneMsg:'All six. Fix the ratio and every other quantity follows — which is exactly what makes a compound a compound.'
+});
+
+Q.pick('g6','g6check','g6s',[
+  { t:'All matter is made of tiny particles called atoms',              a:1 },
+  { t:'Atoms cannot be created or destroyed in a chemical reaction',    a:1 },
+  { t:'Atoms of a given element are identical in mass',                 a:1 },
+  { t:'Atoms combine in simple whole-number ratios to form compounds',  a:1 },
+  { t:'Atoms contain protons, neutrons and electrons',                  a:0 },
+  { t:'Electrons occupy fixed shells around the nucleus',               a:0 }
+], 'm6',
+   'All six decided. The first four are Dalton’s, in 1808. The last two came a century later and are precisely what showed that his "indivisible" atom was not indivisible after all.');
+
+/* ============================================================
+   M7 — molecules of elements: sharing pairs
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('covCv');
+  if(!cv) return;
+  const MOL={
+    H: { sym:'H',  val:1, need:1, pairs:1, bond:'single', col:'#5A6B78',
+         txt:'Hydrogen has one electron and its K shell holds two, so each atom is one short. They share a single pair, and both then count two electrons. One shared pair is a SINGLE bond: H—H.' },
+    Cl:{ sym:'Cl', val:7, need:1, pairs:1, bond:'single', col:'#6FA84B',
+         txt:'Chlorine has seven electrons in its valence shell and needs one more for an octet. Two chlorine atoms share one pair, and each now counts eight. Another single bond: Cl—Cl.' },
+    O: { sym:'O',  val:6, need:2, pairs:2, bond:'double', col:'#D9534F',
+         txt:'Oxygen has six valence electrons and needs two. One shared pair is not enough for either atom, so they share TWO pairs — a double bond, written O=O.' },
+    N: { sym:'N',  val:5, need:3, pairs:3, bond:'triple', col:'#5B8FD9',
+         txt:'Nitrogen has five valence electrons and needs three. Three shared pairs make a triple bond, N≡N — and holding three pairs together is so stable that nitrogen gas is famously unreactive.' }
+  };
+  let pick=null; const seen={};
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,270); if(!x) return;
+    const W=cv.clientWidth, H=270;
+    bg(x,W,H);
+    if(!pick){
+      mono(x,11); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('choose a molecule below', W/2, H/2);
+      return;
+    }
+    const m=MOL[pick];
+    const r=Math.min(W*0.16, 46), gap=r*2.15;
+    const cy=H*0.42, cxA=W/2-gap/2, cxB=W/2+gap/2;
+    shellAtom(x, cxA, cy, r, m.sym, m.val, m.col);
+    shellAtom(x, cxB, cy, r, m.sym, m.val, m.col);
+    // the shared pairs, sitting between the two shells
+    for(let p=0;p<m.pairs;p++){
+      const off=(p-(m.pairs-1)/2)*9;
+      x.fillStyle=SHARE;
+      x.beginPath(); x.arc(W/2-4, cy+off, 3.1, 0, 7); x.fill();
+      x.beginPath(); x.arc(W/2+4, cy+off, 3.1, 0, 7); x.fill();
+    }
+    // the bond, drawn as lines the way a chemist would
+    const by=cy+r+34;
+    x.strokeStyle=INK; x.lineWidth=2;
+    for(let p=0;p<m.pairs;p++){
+      const off=(p-(m.pairs-1)/2)*5;
+      x.beginPath(); x.moveTo(W/2-16, by+off); x.lineTo(W/2+16, by+off); x.stroke();
+    }
+    sans(x,15,600); x.fillStyle=INK; x.textAlign='right'; x.textBaseline='middle';
+    x.fillText(m.sym, W/2-22, by);
+    x.textAlign='left';
+    x.fillText(m.sym, W/2+22, by);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(m.pairs+' shared pair'+(m.pairs>1?'s':'')+' · '+m.bond+' bond', W/2, by+18);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('blue dots are valence electrons; the middle pair belongs to both atoms', 8, 8);
+  }
+  function set(k){
+    pick=k;
+    const m=MOL[k];
+    document.getElementById('covNeed').textContent=m.need+' more';
+    document.getElementById('covPairs').textContent=m.pairs;
+    document.getElementById('covBond').textContent=m.bond;
+    document.getElementById('covTxt').textContent=m.txt;
+    ev('explore','cov-'+k);
+    if(!seen[k]){ seen[k]=1;
+      if(Object.keys(seen).length>=3) complete('m7'); }
+    draw();
+  }
+  [['covH','H'],['covCl','Cl'],['covO','O'],['covN','N']].forEach(b=>{
+    const el=document.getElementById(b[0]); if(el) el.onclick=()=>set(b[1]);
+  });
+  draw(); reg('m7',draw);
+})();
+
+/* ============================================================
+   M8 — molecules of compounds
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('cmpCv');
+  if(!cv) return;
+  const CMP={
+    HCl:{ centre:'Cl', cval:7, need:1, partner:'H', n:1, f:'HCl', dbl:false, col:'#6FA84B',
+      txt:'Chlorine needs one electron and hydrogen has exactly one to offer. They share a single pair and both are satisfied — one atom of each, so the formula is HCl.' },
+    H2O:{ centre:'O', cval:6, need:2, partner:'H', n:2, f:'H₂O', dbl:false, col:'#D9534F',
+      txt:'Oxygen needs two electrons, and each hydrogen can only supply one. So it takes TWO hydrogen atoms, each sharing a pair with the oxygen. That is why water is H₂O and not HO.' },
+    NH3:{ centre:'N', cval:5, need:3, partner:'H', n:3, f:'NH₃', dbl:false, col:'#5B8FD9',
+      txt:'Nitrogen is three electrons short, so it needs three hydrogen partners. Ammonia, NH₃ — properly speaking nitrogen trihydride, though nobody calls it that.' },
+    CH4:{ centre:'C', cval:4, need:4, partner:'H', n:4, f:'CH₄', dbl:false, col:'#3A4260',
+      txt:'Carbon has four valence electrons and needs four more, so it shares with four hydrogen atoms. Methane, CH₄ — the shape that underlies most of organic chemistry.' },
+    CO2:{ centre:'C', cval:4, need:4, partner:'O', n:2, f:'CO₂', dbl:true, col:'#3A4260',
+      txt:'Carbon needs four and each oxygen needs two, so carbon shares TWO pairs with each of two oxygens. Two double bonds: O=C=O, written CO₂.' }
+  };
+  let pick=null; const seen={};
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,260); if(!x) return;
+    const W=cv.clientWidth, H=260;
+    bg(x,W,H);
+    if(!pick){
+      mono(x,11); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('choose a compound below', W/2, H/2);
+      return;
+    }
+    const c=CMP[pick];
+    const cx=W/2, cy=H*0.44, R=Math.min(W*0.14, 40), r=R*0.56;
+    // the partner atoms, ringed around the central one
+    for(let i=0;i<c.n;i++){
+      const a = c.n===1 ? Math.PI : -Math.PI/2 + i*(2*Math.PI/c.n) + (c.n===2?Math.PI/2:0);
+      const px=cx+Math.cos(a)*(R+r+16), py=cy+Math.sin(a)*(R+r+16);
+      x.strokeStyle=INK; x.lineWidth = c.dbl ? 1.6 : 2;
+      if(c.dbl){
+        const dx=Math.sin(a)*2.6, dy=-Math.cos(a)*2.6;
+        x.beginPath(); x.moveTo(cx+Math.cos(a)*R+dx, cy+Math.sin(a)*R+dy);
+        x.lineTo(px-Math.cos(a)*r+dx, py-Math.sin(a)*r+dy); x.stroke();
+        x.beginPath(); x.moveTo(cx+Math.cos(a)*R-dx, cy+Math.sin(a)*R-dy);
+        x.lineTo(px-Math.cos(a)*r-dx, py-Math.sin(a)*r-dy); x.stroke();
+      } else {
+        x.beginPath(); x.moveTo(cx+Math.cos(a)*R, cy+Math.sin(a)*R);
+        x.lineTo(px-Math.cos(a)*r, py-Math.sin(a)*r); x.stroke();
+      }
+      shellAtom(x, px, py, r, c.partner, c.partner==='H'?1:6, c.partner==='H'?'#5A6B78':'#D9534F');
+    }
+    shellAtom(x, cx, cy, R, c.centre, c.cval, c.col);
+    sans(x,20,600); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(c.f, W/2, H-42);
+    mono(x,9); x.fillStyle=DIM; x.textBaseline='top';
+    x.fillText(c.dbl?'two double bonds':'single bonds throughout', W/2, H-18);
+    mono(x,9); x.textAlign='left';
+    x.fillText('lines are shared pairs', 8, 8);
+  }
+  function set(k){
+    pick=k;
+    const c=CMP[k];
+    document.getElementById('cmpNeed').textContent=c.need+' electron'+(c.need>1?'s':'');
+    document.getElementById('cmpN').textContent=c.n+' × '+c.partner;
+    document.getElementById('cmpF').textContent=c.f;
+    document.getElementById('cmpTxt').textContent=c.txt;
+    ev('explore','cmp-'+k);
+    if(!seen[k]){ seen[k]=1;
+      if(Object.keys(seen).length>=4) complete('m8'); }
+    draw();
+  }
+  [['cmpHCl','HCl'],['cmpH2O','H2O'],['cmpNH3','NH3'],['cmpCH4','CH4'],['cmpCO2','CO2']].forEach(b=>{
+    const el=document.getElementById(b[0]); if(el) el.onclick=()=>set(b[1]);
+  });
+  draw(); reg('m8',draw);
+})();
+
+Q.match('g9a','g9b','g9s',[
+  ['CO',    'Carbon monoxide'],
+  ['CO₂',   'Carbon dioxide'],
+  ['CS₂',   'Carbon disulfide'],
+  ['PCl₃',  'Phosphorus trichloride'],
+  ['SF₆',   'Sulfur hexafluoride'],
+  ['N₂O₄',  'Dinitrogen tetroxide'],
+  ['N₂O₅',  'Dinitrogen pentoxide'],
+  ['H₂S',   'Hydrogen sulfide']
+], 'm9',
+   'All eight. Note CO is monoxide and not monooxide, N₂O₄ is tetroxide and not tetraoxide — and H₂S takes no prefix on the hydrogen at all.');
+
+/* ============================================================
+   M10 — one electron changes hands
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('ionCv');
+  if(!cv) return;
+  let step=0, t=0, run=false;          // 0 atoms, 1 transferring, 2 ions bonded
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,270); if(!x) return;
+    const W=cv.clientWidth, H=270;
+    bg(x,W,H);
+    const p = run ? Math.min(1,t) : (step>=2?1:0);
+    const r=Math.min(W*0.15, 44);
+    const pull = step>=2 ? p*10 : 0;
+    const cxA=W*0.28+pull, cxB=W*0.72-pull, cy=H*0.42;
+    const naVal = step>=1 && p>0.5 ? 8 : 1;      // once given up, the full L shell shows
+    const clVal = step>=1 && p>0.5 ? 8 : 7;
+    shellAtom(x, cxA, cy, r, 'Na', naVal, '#C9A227',
+      { txt: step>=1&&p>0.5 ? 'Na⁺ · cation' : 'Na atom', col: step>=1&&p>0.5 ? POS : DIM });
+    shellAtom(x, cxB, cy, r, 'Cl', clVal, '#6FA84B',
+      { txt: step>=1&&p>0.5 ? 'Cl⁻ · anion' : 'Cl atom', col: step>=1&&p>0.5 ? NEG : DIM });
+    // the electron in flight
+    if(step>=1){
+      const ex = cxA+r + (cxB-r-(cxA+r))*Math.min(1,p*1.4);
+      x.fillStyle=SHARE;
+      x.beginPath(); x.arc(ex, cy, 4.2, 0, 7); x.fill();
+      if(p<0.9){
+        mono(x,9); x.fillStyle=SHARE; x.textAlign='center'; x.textBaseline='bottom';
+        x.fillText('one electron', ex, cy-10);
+      }
+    }
+    // the charges, and the attraction between them
+    if(step>=2 && p>0.5){
+      sans(x,18,600); x.fillStyle=POS; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('+', cxA, cy-r-14);
+      x.fillStyle=NEG;
+      x.fillText('−', cxB, cy-r-14);
+      const a=Math.min(1,(p-0.5)*2);
+      x.strokeStyle='rgba(242,184,76,'+(0.8*a)+')'; x.lineWidth=1.5; x.setLineDash([4,3]);
+      x.beginPath(); x.moveTo(cxA+r+4, cy); x.lineTo(cxB-r-4, cy); x.stroke(); x.setLineDash([]);
+      mono(x,10,500); x.fillStyle=GOLD; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('electrostatic attraction', W/2, cy+10);
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(step===0 ? 'two neutral atoms · electrons equal protons'
+             : step===1 ? 'sodium gives its single valence electron away'
+                        : 'a cation and an anion, held by their opposite charges', 8, 8);
+  }
+  function nums(){
+    const done = step>=1 && (run ? t>0.5 : true);
+    document.getElementById('ionNa').textContent = done ? '11 p, 10 e · charge +1' : '11 p, 11 e · neutral';
+    document.getElementById('ionCl').textContent = done ? '17 p, 18 e · charge −1' : '17 p, 17 e · neutral';
+    document.getElementById('ionBond').textContent = step>=2 ? 'the ionic bond' : '—';
+  }
+  tick('m10', ()=>{
+    if(!run) return;
+    t+=0.025;
+    if(t>=1){ t=1; run=false; if(step===1){ step=2; t=0; run=true; } }
+    nums(); draw();
+  });
+  const s=document.getElementById('ionStep');
+  if(s) s.onclick=()=>{
+    ev('explore','ionStep');
+    if(step===0){ step=1; t=0; run=true;
+      document.getElementById('ionTxt').textContent='Sodium hands its single valence electron to chlorine. Sodium keeps all 11 protons but is down to 10 electrons, so it is now Na⁺. Chlorine has 17 protons and 18 electrons, so it is Cl⁻ — and its outer shell is finally full.';
+      complete('m10');
+    }
+  };
+  const r=document.getElementById('ionReset');
+  if(r) r.onclick=()=>{ step=0; t=0; run=false;
+    document.getElementById('ionTxt').textContent='Both atoms start electrically neutral, with as many electrons as protons. Press transfer and count again.';
+    nums(); draw(); };
+  nums(); draw(); reg('m10',draw);
+})();
+
+/* ============================================================
+   M11 — the lattice: no molecules, only a ratio
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('latCv'), sl=document.getElementById('latN');
+  if(!cv||!sl) return;
+  let hi=false; const seen={};
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,270); if(!x) return;
+    const W=cv.clientWidth, H=270;
+    bg(x,W,H);
+    const n=+sl.value, s=n+1;                       // ions along each edge
+    const step=Math.min(30, (Math.min(W,H)*0.52)/s);
+    const cx=W/2, cy=H*0.46;
+    // an isometric projection, drawn back to front so the near ions overlap
+    const cells=[];
+    for(let i=0;i<s;i++) for(let j=0;j<s;j++) for(let k=0;k<s;k++){
+      const px = cx + (i-k)*step*0.87;
+      const py = cy + (i+k)*step*0.5 - j*step*0.92 - (s-1)*step*0.1;
+      cells.push({ px, py, i, j, k, neg:(i+j+k)%2===1, depth:i+j+k });
+    }
+    cells.sort((a,b)=>a.depth-b.depth);
+    const mid=Math.floor((s-1)/2);
+    const isCentre = c => c.i===mid && c.j===mid && c.k===mid;
+    const isNeighbour = c => Math.abs(c.i-mid)+Math.abs(c.j-mid)+Math.abs(c.k-mid)===1;
+    cells.forEach(c=>{
+      const r = step*0.36;
+      let col = c.neg ? NEG : POS, a = 1;
+      if(hi){
+        if(isCentre(c)) { col=GOLD; }
+        else if(isNeighbour(c)) { /* full colour */ }
+        else a = 0.16;
+      }
+      x.globalAlpha=a;
+      x.fillStyle=col;
+      x.beginPath(); x.arc(c.px, c.py, r, 0, 7); x.fill();
+      if(hi && (isCentre(c)||isNeighbour(c))){
+        x.strokeStyle='rgba(255,255,255,.55)'; x.lineWidth=1; x.stroke();
+      }
+      x.globalAlpha=1;
+    });
+    mono(x,9); x.textAlign='left'; x.textBaseline='top';
+    x.fillStyle=POS;  x.fillText('● Na⁺', 8, H-34);
+    x.fillStyle=NEG;  x.fillText('● Cl⁻', 58, H-34);
+    x.fillStyle=DIM;  x.fillText(hi ? 'one ion and its six nearest neighbours'
+                                    : 'every ion is ringed by six of the other kind', 8, H-18);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(s+' × '+s+' × '+s+' ions', 8, 8);
+  }
+  function upd(){
+    const n=+sl.value, s=n+1;
+    document.getElementById('latNV').textContent=n+(n>1?' units':' unit');
+    document.getElementById('latIons').textContent=s*s*s;
+    document.getElementById('latNeigh').textContent = hi ? '6' : '—';
+    document.getElementById('latRatio').textContent='1 : 1';
+    document.getElementById('latTxt').textContent = s<3
+      ? 'A small block already shows the alternation: no sodium ion is ever next to another sodium ion.'
+      : 'With '+(s*s*s)+' ions the pattern is unmistakable, and it would go on like this through a whole grain of salt — roughly a million million million ions in a crystal you could balance on a fingertip.';
+    if(!seen[n]){ seen[n]=1;
+      if(Object.keys(seen).length>=3 && hi) complete('m11'); }
+    draw();
+  }
+  sl.addEventListener('input',()=>{ ev('explore',sl.id); upd(); });
+  const b=document.getElementById('latPick');
+  if(b) b.onclick=()=>{
+    hi=!hi; ev('explore','latPick');
+    b.textContent = hi ? 'Show the whole crystal' : 'Highlight one ion’s neighbours';
+    if(hi) document.getElementById('latTxt').textContent='The gold ion has six nearest neighbours, all of the opposite charge — one above, one below, and four around it. There is no pair you could point to and call "a molecule of sodium chloride".';
+    if(Object.keys(seen).length>=3 && hi) complete('m11');
+    upd();
+  };
+  upd(); reg('m11',draw);
+})();
+
+Q.match('g12a','g12b','g12s',[
+  ['Ammonium',        'NH₄⁺'],
+  ['Hydroxide',       'OH⁻'],
+  ['Nitrate',         'NO₃⁻'],
+  ['Carbonate',       'CO₃²⁻'],
+  ['Sulfate',         'SO₄²⁻'],
+  ['Hydrogencarbonate','HCO₃⁻'],
+  ['Ferric iron',     'Fe³⁺'],
+  ['Cuprous copper',  'Cu⁺'],
+  ['Sulfide',         'S²⁻']
+], 'm12',
+   'All nine. Six of these are polyatomic — a group of atoms sharing one charge between them — and note that their names do not end in -ide.');
+
+/* ============================================================
+   M13 — the criss-cross
+   ============================================================ */
+const SUB = { 1:'', 2:'₂', 3:'₃', 4:'₄', 5:'₅', 6:'₆' };
+const CATIONS = [
+  { n:'Sodium',    f:'Na',  ch:1 }, { n:'Potassium', f:'K',   ch:1 },
+  { n:'Ammonium',  f:'NH₄', ch:1, poly:1 },
+  { n:'Calcium',   f:'Ca',  ch:2 }, { n:'Magnesium', f:'Mg',  ch:2 },
+  { n:'Zinc',      f:'Zn',  ch:2 }, { n:'Aluminium', f:'Al',  ch:3 },
+  { n:'Ferric',    f:'Fe',  ch:3 }
+];
+const ANIONS = [
+  { n:'chloride',  f:'Cl',  ch:1 }, { n:'oxide',     f:'O',   ch:2 },
+  { n:'sulfide',   f:'S',   ch:2 }, { n:'hydroxide', f:'OH',  ch:1, poly:1 },
+  { n:'nitrate',   f:'NO₃', ch:1, poly:1 },
+  { n:'carbonate', f:'CO₃', ch:2, poly:1 },
+  { n:'sulfate',   f:'SO₄', ch:2, poly:1 },
+  { n:'phosphate', f:'PO₄', ch:3, poly:1 }
+];
+function gcd(a,b){ return b ? gcd(b, a%b) : a; }
+/* Crossed over, then divided by any common factor, with brackets only where a
+   polyatomic ion is taken more than once — Mg(OH)2, but never (Cl)2. */
+function crissCross(c, a){
+  let nc = a.ch, na = c.ch;
+  const raw = { nc, na };
+  const g = gcd(nc, na);
+  nc /= g; na /= g;
+  const part = (ion, k) => k === 1 ? ion.f
+              : ion.poly ? '(' + ion.f + ')' + SUB[k]
+                         : ion.f + SUB[k];
+  return { raw, nc, na, text: part(c, nc) + part(a, na) };
+}
+
+(function(){
+  const cv=document.getElementById('ccCv'),
+        catBox=document.getElementById('ccCat'), anBox=document.getElementById('ccAn');
+  if(!cv||!catBox||!anBox) return;
+  let ci=0, ai=0; const seen={};
+  function chip(box, list, idx, onPick){
+    box.innerHTML='';
+    list.forEach((it,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===idx?' on':'');
+      b.textContent=it.f+' '+(it.ch)+(list===CATIONS?'+':'−');
+      b.onclick=()=>onPick(i);
+      box.appendChild(b);
+    });
+  }
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,230); if(!x) return;
+    const W=cv.clientWidth, H=230;
+    bg(x,W,H);
+    const c=CATIONS[ci], a=ANIONS[ai], r=crissCross(c,a);
+    const lx=W*0.30, rx=W*0.70, sy=52, chy=100;
+    // the two symbols
+    sans(x,22,600); x.fillStyle=POS; x.textAlign='center'; x.textBaseline='middle';
+    x.fillText(c.f, lx, sy);
+    x.fillStyle=NEG; x.fillText(a.f, rx, sy);
+    // their charges, written underneath as the book does
+    mono(x,14,500); x.fillStyle=POS; x.fillText(c.ch+'+', lx, chy);
+    x.fillStyle=NEG; x.fillText(a.ch+'−', rx, chy);
+    // the crossing arrows
+    arrow(x, lx+18, chy-6, rx-14, sy+14, 'rgba(242,184,76,.85)', 7);
+    arrow(x, rx-18, chy-6, lx+14, sy+14, 'rgba(242,184,76,.85)', 7);
+    // the result
+    sans(x,26,600); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='middle';
+    x.fillText(r.text, W/2, 168);
+    mono(x,9); x.fillStyle=DIM; x.textBaseline='top';
+    const simplified = r.raw.nc !== r.nc || r.raw.na !== r.na;
+    x.fillText(simplified
+      ? 'crossed to ' + c.f + SUB[r.raw.nc] + a.f + SUB[r.raw.na] + ', then divided by ' + gcd(r.raw.nc, r.raw.na)
+      : 'charges cancel: ' + r.nc + ' × ' + c.ch + '+ against ' + r.na + ' × ' + a.ch + '−',
+      W/2, 190);
+    mono(x,9); x.textAlign='left'; x.textBaseline='top';
+    x.fillText('cation first, anion second', 8, 8);
+  }
+  function upd(){
+    const c=CATIONS[ci], a=ANIONS[ai], r=crissCross(c,a);
+    document.getElementById('ccRaw').textContent = c.f+SUB[r.raw.nc]+a.f+SUB[r.raw.na];
+    document.getElementById('ccFormula').textContent = r.text;
+    document.getElementById('ccName').textContent = c.n+' '+a.n;
+    const brackets = r.text.indexOf('(') >= 0;
+    const simplified = r.raw.nc !== r.nc || r.raw.na !== r.na;
+    document.getElementById('ccTxt').textContent =
+      brackets ? 'Two or more '+a.n+' ions are needed, so the whole group goes in brackets before the subscript: '+r.text+'. Without them the subscript would wrongly apply to just the last atom.'
+      : simplified ? 'Crossing over gives '+c.f+SUB[r.raw.nc]+a.f+SUB[r.raw.na]+', but both subscripts share a factor of '+gcd(r.raw.nc,r.raw.na)+'. A formula is always the SIMPLEST whole-number ratio, so it reduces to '+r.text+'.'
+      : r.nc===1 && r.na===1 ? 'One of each: the '+c.ch+'+ and the '+a.ch+'− cancel exactly, so no subscripts are needed at all — '+r.text+'.'
+      : 'The charges have to balance overall. '+r.nc+' × '+c.ch+'+ against '+r.na+' × '+a.ch+'− comes to zero, giving '+r.text+'.';
+    chip(catBox, CATIONS, ci, i=>{ ci=i; ev('explore','ccCat'); mark2(); upd(); });
+    chip(anBox,  ANIONS,  ai, i=>{ ai=i; ev('explore','ccAn');  mark2(); upd(); });
+    draw();
+  }
+  function mark2(){
+    const c=CATIONS[ci], a=ANIONS[ai], r=crissCross(c,a);
+    const kind = r.text.indexOf('(')>=0 ? 'brackets'
+               : (r.raw.nc!==r.nc||r.raw.na!==r.na) ? 'reduced'
+               : (r.nc===1&&r.na===1) ? 'simple' : 'crossed';
+    seen[kind]=1;
+    if(Object.keys(seen).length>=3) complete('m13');
+  }
+  upd(); reg('m13',draw);
+})();
+
+/* ============================================================
+   M14 — ionic against covalent
+   ============================================================ */
+Q.grid('g14','g14check','g14s',{
+  head:'True of this kind of compound?', mid:'m14',
+  cols:['Ionic','Covalent'],
+  rows:[
+    { l:'Generally dissolves in water',            a:[1,0] },
+    { l:'Generally dissolves in kerosene or petrol',a:[0,1] },
+    { l:'Conducts electricity as a solid',         a:[0,0] },
+    { l:'Conducts when dissolved in water',        a:[1,0] },
+    { l:'Has a high melting point',                a:[1,0] },
+    { l:'Made of separate molecules',              a:[0,1] }
+  ],
+  doneMsg:'All twelve. Sodium chloride and copper sulfate on one side; camphor, sugar and naphthalene on the other.'
+});
+
+/* ============================================================
+   M15 — molecular mass and formula unit mass
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('massCv'), box=document.getElementById('massPick');
+  if(!cv||!box) return;
+  const LIST=[
+    { f:'H₂O',  ionic:0, parts:[['H',2],['O',1]] },
+    { f:'CO₂',  ionic:0, parts:[['C',1],['O',2]] },
+    { f:'CH₄',  ionic:0, parts:[['C',1],['H',4]] },
+    { f:'HNO₃', ionic:0, parts:[['H',1],['N',1],['O',3]] },
+    { f:'Na₂O', ionic:1, parts:[['Na',2],['O',1]] },
+    { f:'KCl',       ionic:1, parts:[['K',1],['Cl',1]] },
+    { f:'Mg(OH)₂', ionic:1, parts:[['Mg',1],['O',2],['H',2]] },
+    { f:'Ca(NO₃)₂', ionic:1, parts:[['Ca',1],['N',2],['O',6]] }
+  ];
+  let pick=0; const seen={};
+  const total = c => c.parts.reduce((s,p)=>s+AMU[p[0]]*p[1], 0);
+  const working = c => c.parts.map(p=>'('+AMU[p[0]]+'×'+p[1]+')').join(' + ');
+  function chips(){
+    box.innerHTML='';
+    LIST.forEach((c,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===pick?' on':'');
+      b.textContent=c.f;
+      b.onclick=()=>{ pick=i; ev('explore','mass-'+i); seen[c.ionic?'ionic':'cov']=1; upd(); };
+      box.appendChild(b);
+    });
+  }
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,230); if(!x) return;
+    const W=cv.clientWidth, H=230;
+    bg(x,W,H);
+    const c=LIST[pick], T=total(c);
+    // one stacked bar per element, so the total is visibly a sum
+    let acc=0;
+    const bx=24, bw=W-48, by=H*0.42, bh=30;
+    const COL=['#8FD6FF','#D9534F','#C9A227','#6FA84B','#B47CF0'];
+    c.parts.forEach((p,i)=>{
+      const m=AMU[p[0]]*p[1], w=bw*(m/T);
+      x.fillStyle=COL[i%COL.length];
+      x.fillRect(bx+acc, by, w, bh);
+      if(w>28){
+        mono(x,10,500); x.fillStyle='#12161F'; x.textAlign='center'; x.textBaseline='middle';
+        x.fillText(p[0]+(p[1]>1?'×'+p[1]:''), bx+acc+w/2, by+bh/2);
+      }
+      acc+=w;
+    });
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(bx, by, bw, bh);
+    sans(x,24,600); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText(c.f, W/2, by-16);
+    mono(x,11,500); x.fillStyle=A1; x.textBaseline='top';
+    x.fillText(T + ' u', W/2, by+bh+12);
+    mono(x,9); x.fillStyle=DIM;
+    x.fillText(c.ionic ? 'ionic — this is a FORMULA UNIT mass'
+                       : 'covalent — this is a MOLECULAR mass', W/2, by+bh+32);
+    mono(x,9); x.textAlign='left'; x.textBaseline='top';
+    x.fillText('bar widths are in proportion to each element’s share', 8, 8);
+  }
+  function upd(){
+    const c=LIST[pick];
+    document.getElementById('massF').textContent=c.f;
+    document.getElementById('massWork').textContent=working(c);
+    document.getElementById('massTot').textContent=total(c)+' u';
+    document.getElementById('massTxt').textContent = c.ionic
+      ? c.f+' is ionic, so it has no molecules at all — only a repeating lattice. The '+total(c)+' u is the mass of one FORMULA UNIT: the simplest whole-number ratio of its ions.'
+      : c.f+' is covalent and really does exist as separate molecules, so '+total(c)+' u is a genuine MOLECULAR mass. Add the atomic mass of every atom in the formula.';
+    chips(); draw();
+  }
+  upd(); reg('m15',draw);
+})();
+
+Q.vgrid('g15','g15check','g15s',{
+  head:'Add up the atomic masses', mid:'m15',
+  cols:['Answer'],
+  options:[['16 u','18 u','44 u','58 u','62 u','63 u','74.5 u','80 u','84 u','98 u','164 u']],
+  rows:[
+    {l:'Nitric acid HNO₃  (H 1, N 14, O 16)',                 a:['63 u']},
+    {l:'Methane CH₄  (C 12, H 1)',                            a:['16 u']},
+    {l:'Potassium chloride KCl  (K 39, Cl 35.5)',                  a:['74.5 u']},
+    {l:'Magnesium hydroxide Mg(OH)₂  (Mg 24, O 16, H 1)',      a:['58 u']},
+    {l:'Ammonium nitrate NH₄NO₃  (N 14, H 1, O 16)',      a:['80 u']},
+    {l:'Sodium hydrogencarbonate NaHCO₃  (Na 23, H 1, C 12, O 16)', a:['84 u']}
+  ],
+  doneMsg:'All six. The brackets matter: Mg(OH)₂ has two oxygens and two hydrogens, not one of each.'
+});
+
+/* ============================================================
+   M16 — the boss
+   ============================================================ */
+Q.boss([
+  { t:'Warm-up · conservation',
+    q:'Vinegar and baking soda are fizzed in an OPEN flask on a balance. The reading falls. Why?',
+    o:['Mass was destroyed in the reaction','Carbon dioxide escaped from the flask','The balance was faulty'], a:1,
+    w:'Nothing is destroyed. The gas produced simply leaves the open flask, taking its mass with it. Seal a balloon over the mouth and the reading does not change at all.' },
+  { t:'Warm-up · the laws',
+    q:'Water from a river, a borewell and the ocean is purified and decomposed. What do the hydrogen-to-oxygen mass ratios turn out to be?',
+    o:['Different for each source','Always 1 : 8','Always 8 : 1'], a:1,
+    w:'The Law of Constant Proportions: a compound contains the same elements in the same fixed mass ratio however it was made or wherever it came from. For water that ratio is 1 : 8.' },
+  { t:'Arithmetic',
+    q:'12 g of carbon burns completely in 32 g of oxygen. What mass of carbon dioxide forms?',
+    o:['20 g','44 g','32 g'], a:1,
+    w:'Mass is conserved, so the product weighs what the reactants weighed: 12 + 32 = 44 g. This is also why the molecular mass of CO₂ is 44 u.' },
+  { t:'Dalton',
+    q:'Which of Dalton’s postulates did later discoveries overturn?',
+    o:['That atoms combine in whole-number ratios','That atoms are indivisible','That atoms are rearranged, not destroyed'], a:1,
+    w:'Thomson, Rutherford and Chadwick found protons, neutrons and electrons inside the atom, and isotopes showed that atoms of one element are not all identical in mass either. The whole-number ratios survived.' },
+  { t:'Covalent bonding',
+    q:'Oxygen has six valence electrons. How do two oxygen atoms bond in O₂?',
+    o:['They share one pair — a single bond','They share two pairs — a double bond','One transfers two electrons to the other'], a:1,
+    w:'Each atom is two electrons short, and one shared pair would satisfy neither. Sharing two pairs gives both an octet: a double bond, written O=O.' },
+  { t:'Formulae from shortfalls',
+    q:'Nitrogen needs three electrons and hydrogen can offer one each. What is the formula of the compound?',
+    o:['NH₂','NH₃','N₃H'], a:1,
+    w:'Three hydrogen atoms, each sharing one pair with the nitrogen: NH₃, ammonia. The number of partners is set by how many electrons the central atom is short of.' },
+  { t:'Ions',
+    q:'A sodium atom has 11 protons and 11 electrons. After it loses one electron, what is it?',
+    o:['Na⁻, an anion','Na⁺, a cation','Still a neutral atom'], a:1,
+    w:'Eleven protons and now only ten electrons, so there is one unit of positive charge left over: the cation Na⁺. Losing a negative makes it positive.' },
+  { t:'The lattice',
+    q:'In a sodium chloride crystal, how many chloride ions surround each sodium ion?',
+    o:['One','Four','Six'], a:2,
+    w:'Six — one above, one below, and four around. There is no single Na–Cl pair you could call a molecule, which is why NaCl is a formula unit rather than a molecular formula.' },
+  { t:'Criss-cross',
+    q:'What is the formula of aluminium sulfate, from Al³⁺ and SO₄²⁻?',
+    o:['Al₂(SO₄)₃','Al₃(SO₄)₂','AlSO₄'], a:0,
+    w:'Cross the charges: two aluminium to three sulfate. The sulfate is taken three times, so it needs brackets — Al₂(SO₄)₃. Six positive charges against six negative.' },
+  { t:'Boss · properties and mass',
+    q:'A solid does not conduct electricity, but its solution in water does. What is it, and what is 74.5 u for KCl called?',
+    o:['Covalent; its molecular mass','Ionic; its formula unit mass','Ionic; its molecular mass'], a:1,
+    w:'Only ionic compounds behave like that: the ions are locked in the lattice as a solid and set free in solution. And because there are no molecules, 74.5 u is a formula unit mass, not a molecular mass.' }
+], 'm16',
+   'Chapter 9 finished. You can show that mass is conserved and explain the balloon, use a fixed mass ratio in both directions, say which of Dalton’s postulates survived, build a covalent molecule from electron shortfalls, follow an electron from sodium to chlorine, criss-cross any pair of ions into a formula, and add up a molecular or formula unit mass.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
