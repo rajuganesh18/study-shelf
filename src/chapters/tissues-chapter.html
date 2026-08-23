@@ -532,7 +532,7 @@ Q.grid('g1','g1check','g1s',{
   }
   function play(user){ award=award||!!user; playing=true; pd=1; dS.value=1; }
   if(dS){
-    dS.oninput=()=>{ playing=false; award=true; ev('explore'); draw(); };
+    dS.oninput=()=>{ playing=false; award=true; ev('explore',dS.id); draw(); };
     document.getElementById('onRun').onclick=()=>play(true);
   }
   tick('m2',()=>{
@@ -607,9 +607,9 @@ Q.grid('g1','g1check','g1s',{
   function say(k){ const t=document.getElementById('grTxt'); if(t) t.textContent=TXT[k]; }
   function done(){ if(Object.keys(used).length>=3) complete('m3'); }
   if(cv){
-    document.getElementById('grA').onclick=()=>{ if(cut) return; h=Math.min(0.88,h+0.16); used.a=1; ev('explore'); say('a'); done(); draw(); };
-    document.getElementById('grB').onclick=()=>{ g=Math.min(2.2,g+0.28); used.b=1; ev('explore'); say('b'); done(); draw(); };
-    document.getElementById('grC').onclick=()=>{ cut=true; regrow=0; used.c=1; ev('explore'); say('c'); done(); };
+    document.getElementById('grA').onclick=()=>{ if(cut) return; h=Math.min(0.88,h+0.16); used.a=1; ev('explore','grA'); say('a'); done(); draw(); };
+    document.getElementById('grB').onclick=()=>{ g=Math.min(2.2,g+0.28); used.b=1; ev('explore','grB'); say('b'); done(); draw(); };
+    document.getElementById('grC').onclick=()=>{ cut=true; regrow=0; used.c=1; ev('explore','grC'); say('c'); done(); };
     document.getElementById('grR').onclick=()=>{ h=0.34; g=1.0; cut=false; regrow=0; say('r'); draw(); };
   }
   tick('m3',()=>{ if(cut && regrow<1) regrow+=0.012; draw(); });
@@ -719,14 +719,14 @@ Q.match('g6a','g6b','g6s',[
     t.textContent = broken ? k.txt+' Past about 85% force it has already broken.' : k.txt;
   }
   function pick(k,btn){
-    kind=k; tried[k]=1; ev('explore');
+    kind=k; tried[k]=1; ev('explore','bend-'+k);
     ['bnP','bnC','bnS'].forEach(id=>document.getElementById(id).classList.remove('on'));
     btn.classList.add('on');
     if(Object.keys(tried).length>=3){ ev('perfect'); complete('m7'); }
     draw();
   }
   if(fS){
-    fS.oninput=()=>{ ev('explore'); draw(); };
+    fS.oninput=()=>{ ev('explore',fS.id); draw(); };
     document.getElementById('bnP').onclick=e=>pick('p',e.currentTarget);
     document.getElementById('bnC').onclick=e=>pick('c',e.currentTarget);
     document.getElementById('bnS').onclick=e=>pick('s',e.currentTarget);
@@ -816,9 +816,9 @@ Q.grid('g8','g8check','g8s',{
   }
   function done(){ if(Object.keys(used).length>=3) complete('m9'); }
   if(cv){
-    document.getElementById('vxOn').onclick=()=>{ xOn=!xOn; used.x=1; ev('explore'); done(); draw(); };
-    document.getElementById('vpOn').onclick=()=>{ pOn=!pOn; used.p=1; ev('explore'); done(); draw(); };
-    document.getElementById('vRing').onclick=()=>{ barked=!barked; used.b=1; ev('explore'); done(); draw(); };
+    document.getElementById('vxOn').onclick=()=>{ xOn=!xOn; used.x=1; ev('explore','vxOn'); done(); draw(); };
+    document.getElementById('vpOn').onclick=()=>{ pOn=!pOn; used.p=1; ev('explore','vpOn'); done(); draw(); };
+    document.getElementById('vRing').onclick=()=>{ barked=!barked; used.b=1; ev('explore','vRing'); done(); draw(); };
   }
   tick('m9',()=>{ t++; draw(); });
   reg('m9',draw); auto('m9',()=>{ xOn=true; pOn=true; });

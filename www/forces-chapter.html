@@ -737,7 +737,8 @@ const CH = {
 /* persistence: see storage.js, concatenated above. */
 
 const TOTAL = CH.total;
-let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0, exploreToday:0, questsPaid:{} };
+let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0,
+          exploreToday:0, exploreKeys:{}, questsPaid:{} };
 
 /* Local calendar dates, not UTC. toISOString() would roll the streak over
    at 05:30 in India rather than at midnight, so a session after midnight
@@ -802,11 +803,24 @@ const QUESTS = [
    out the daily exploration quest the moment it is opened. boot.js flips it. */
 let BOOTED = false;
 
-function ev(kind){
+function ev(kind, key){
   if(!BOOTED) return;
   if(kind === 'mission')  S.missionsToday++;
   if(kind === 'perfect')  S.perfectToday++;
-  if(kind === 'explore')  S.exploreToday++;
+  if(kind === 'explore'){
+    /* "Try 3 interactive controls" has to mean three controls. Counting raw
+       events made one slider worth twenty-one of them, so a drag finished the
+       quest on its own. Each control names itself and is credited once a day;
+       fiddling with the same one after that is free but earns nothing more.
+       A call that arrives with no key keeps the old behaviour, so a site
+       missed in the sweep degrades rather than going silent. */
+    if(key){
+      if(!S.exploreKeys) S.exploreKeys = {};
+      if(S.exploreKeys[key]) return;
+      S.exploreKeys[key] = 1;
+    }
+    S.exploreToday++;
+  }
   checkQuests(); save();
 }
 
@@ -881,6 +895,7 @@ function drain(mid){
 /* ---------- mission completion ---------- */
 function complete(id){
   if(!BOOTED) return;                    // same reason as ev(): see BOOTED above
+  if(AUTORUN[id]) return;                // a bench playing itself pays nothing
   const el = document.getElementById(id);
   if(!el) return;
   if(S.done[id]) return revisit(id);     // finished already: record, pay nothing
@@ -1273,7 +1288,7 @@ const Q = {
 /* ============================================================
    redraw on open / resize / fonts
    ============================================================ */
-const REG = {}, AUTO = {};
+const REG = {}, AUTO = {}, AUTORUN = {};
 function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
 function auto(id, fn){ AUTO[id] = fn; }
 
@@ -1292,6 +1307,16 @@ document.querySelectorAll('details.m').forEach(d=>{
       redrawAll();
       if(AUTO[d.id] && !d.dataset.auto){
         d.dataset.auto = '1';                 // auto-play once, no XP for the auto-run
+        /* and that promise is now enforced rather than merely stated. A bench
+           that finishes its own animation used to call complete() from the
+           ticker, so simply opening a mission could pay out its XP and coins —
+           Energy handed over 170 XP and three missions for no input at all.
+           The flag lifts the moment the reader touches this mission, so a
+           genuine tap on the same play button counts as it always did. */
+        AUTORUN[d.id] = true;
+        const touched = ()=>{ AUTORUN[d.id] = false; };
+        d.addEventListener('pointerdown', touched, { once:true });
+        d.addEventListener('input',       touched, { once:true });
         setTimeout(()=>{ try { AUTO[d.id](); } catch(e){ console.error(e); } }, 450);
       }
     }));
@@ -1385,7 +1410,8 @@ function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
       squeeze:'Changes shape — the lemon is deformed by the applied force.'};
     document.getElementById('fEffect').textContent=msgs[m];
     if(m!=='rest'){
-      if(!seen[m]){ seen[m]=1; ev('explore'); }
+      ev('explore','fx-'+m);
+      if(!seen[m]) seen[m]=1;
       if(Object.keys(seen).length>=3){
         document.getElementById('fTxt').textContent='A force can start motion, change direction, or change shape. All three effects demonstrated.';
       }
@@ -1465,8 +1491,8 @@ function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
     }
     draw();
   }
-  s1.addEventListener('input',upd);
-  s2.addEventListener('input',upd);
+  s1.addEventListener('input',()=>{ ev('explore',s1.id); upd(); });
+  s2.addEventListener('input',()=>{ ev('explore',s2.id); upd(); });
   upd();
   reg('m2',draw);
 })();
@@ -1618,7 +1644,7 @@ Q.match('g4a','g4b','g4s',[
       else {
         running=false;
         seen[surf]=1;
-        ev('explore');
+        ev('explore','surf-'+surf);
         if(Object.keys(seen).length>=4){
           complete('m5');
           document.getElementById('fricTxt').textContent='Less friction → more distance. Polished marble has the least friction and the coins travel furthest.';
@@ -1708,8 +1734,9 @@ Q.rows('g6','g6s',[
     document.getElementById('galV').textContent=fric<0.05?'Zero':fric<0.3?'Low':fric<0.6?'Medium':'High';
     document.getElementById('galDist').textContent=dist;
     document.getElementById('galSpeed').textContent=speed;
-    if(fric<0.05 && !hitZero){ hitZero=true; ev('explore'); }
-    if(fric>0.7 && !hitHigh){ hitHigh=true; ev('explore'); }
+    ev('explore',sl.id);                 // one slider, one control, once a day
+    if(fric<0.05) hitZero=true;
+    if(fric>0.7)  hitHigh=true;
     if(hitZero && hitHigh){
       complete('m7');
       document.getElementById('galTxt').textContent='At zero friction the object never stops — it moves at constant velocity forever. That insight became Newton\'s first law.';
@@ -1762,7 +1789,7 @@ Q.match('g8a','g8b','g8s',[
       mode=i;
       box.querySelectorAll('button').forEach(c=>c.classList.remove('on'));
       b.classList.add('on');
-      seen[i]=1; ev('explore');
+      seen[i]=1; ev('explore','graph-'+i);
       if(Object.keys(seen).length>=3){
         document.getElementById('graphTxt').textContent='At rest and constant velocity both have zero net force. Only the accelerating object has a net force acting on it.';
       }
@@ -1878,8 +1905,8 @@ Q.match('g8a','g8b','g8s',[
     }
     draw();
   }
-  sF.addEventListener('input',upd);
-  sM.addEventListener('input',upd);
+  sF.addEventListener('input',()=>{ ev('explore',sF.id); upd(); });
+  sM.addEventListener('input',()=>{ ev('explore',sM.id); upd(); });
   upd();
   reg('m10',draw);
 })();
@@ -1956,8 +1983,9 @@ Q.vgrid('g11','g11check','g11s',{
     document.getElementById('catchTV').textContent=t.toFixed(1)+' s';
     document.getElementById('catchA').textContent=a.toFixed(1)+' m s⁻²';
     document.getElementById('catchF').textContent=F.toFixed(1)+' N';
-    if(t<0.3 && !seenShort){ seenShort=true; ev('explore'); }
-    if(t>3 && !seenLong){ seenLong=true; ev('explore'); }
+    ev('explore',sl.id);
+    if(t<0.3) seenShort=true;
+    if(t>3)   seenLong=true;
     if(seenShort && seenLong){
       document.getElementById('catchTxt').textContent='Short stopping time → huge force. Long stopping time → gentle force. That is why fielders pull their hands back.';
     }
@@ -2048,7 +2076,7 @@ Q.vgrid('g11','g11check','g11s',{
     document.getElementById('ballDir').textContent='—';
     upd();
   };
-  sl.addEventListener('input',upd);
+  sl.addEventListener('input',()=>{ ev('explore',sl.id); upd(); });
   upd();
   reg('m13',draw);
 })();
@@ -2094,7 +2122,7 @@ Q.match('g14a','g14b','g14s',[
       mode=i;
       box.querySelectorAll('button').forEach(c=>c.classList.remove('on'));
       b.classList.add('on');
-      seen[i]=1; ev('explore');
+      seen[i]=1; ev('explore','eq-'+i);
       if(Object.keys(seen).length>=3){
         document.getElementById('eqTxt').textContent='The forces are always equal (third law). The accelerations differ because the masses differ (second law). Both laws working together.';
       }
@@ -2239,7 +2267,8 @@ Q.boss([
   S.streak = g.streak;
 
   if(S.day !== t){
-    S.day = t; S.missionsToday = 0; S.perfectToday = 0; S.exploreToday = 0; S.questsPaid = {};
+    S.day = t; S.missionsToday = 0; S.perfectToday = 0;
+    S.exploreToday = 0; S.exploreKeys = {}; S.questsPaid = {};
   }
   Object.keys(S.done).forEach(markDone);
   BOOTED = true;                       // from here on, taps count. see engine.js

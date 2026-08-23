@@ -791,7 +791,8 @@ const CH = {
 /* persistence: see storage.js, concatenated above. */
 
 const TOTAL = CH.total;
-let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0, exploreToday:0, questsPaid:{} };
+let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0,
+          exploreToday:0, exploreKeys:{}, questsPaid:{} };
 
 /* Local calendar dates, not UTC. toISOString() would roll the streak over
    at 05:30 in India rather than at midnight, so a session after midnight
@@ -856,11 +857,24 @@ const QUESTS = [
    out the daily exploration quest the moment it is opened. boot.js flips it. */
 let BOOTED = false;
 
-function ev(kind){
+function ev(kind, key){
   if(!BOOTED) return;
   if(kind === 'mission')  S.missionsToday++;
   if(kind === 'perfect')  S.perfectToday++;
-  if(kind === 'explore')  S.exploreToday++;
+  if(kind === 'explore'){
+    /* "Try 3 interactive controls" has to mean three controls. Counting raw
+       events made one slider worth twenty-one of them, so a drag finished the
+       quest on its own. Each control names itself and is credited once a day;
+       fiddling with the same one after that is free but earns nothing more.
+       A call that arrives with no key keeps the old behaviour, so a site
+       missed in the sweep degrades rather than going silent. */
+    if(key){
+      if(!S.exploreKeys) S.exploreKeys = {};
+      if(S.exploreKeys[key]) return;
+      S.exploreKeys[key] = 1;
+    }
+    S.exploreToday++;
+  }
   checkQuests(); save();
 }
 
@@ -935,6 +949,7 @@ function drain(mid){
 /* ---------- mission completion ---------- */
 function complete(id){
   if(!BOOTED) return;                    // same reason as ev(): see BOOTED above
+  if(AUTORUN[id]) return;                // a bench playing itself pays nothing
   const el = document.getElementById(id);
   if(!el) return;
   if(S.done[id]) return revisit(id);     // finished already: record, pay nothing
@@ -1327,7 +1342,7 @@ const Q = {
 /* ============================================================
    redraw on open / resize / fonts
    ============================================================ */
-const REG = {}, AUTO = {};
+const REG = {}, AUTO = {}, AUTORUN = {};
 function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
 function auto(id, fn){ AUTO[id] = fn; }
 
@@ -1346,6 +1361,16 @@ document.querySelectorAll('details.m').forEach(d=>{
       redrawAll();
       if(AUTO[d.id] && !d.dataset.auto){
         d.dataset.auto = '1';                 // auto-play once, no XP for the auto-run
+        /* and that promise is now enforced rather than merely stated. A bench
+           that finishes its own animation used to call complete() from the
+           ticker, so simply opening a mission could pay out its XP and coins —
+           Energy handed over 170 XP and three missions for no input at all.
+           The flag lifts the moment the reader touches this mission, so a
+           genuine tap on the same play button counts as it always did. */
+        AUTORUN[d.id] = true;
+        const touched = ()=>{ AUTORUN[d.id] = false; };
+        d.addEventListener('pointerdown', touched, { once:true });
+        d.addEventListener('input',       touched, { once:true });
         setTimeout(()=>{ try { AUTO[d.id](); } catch(e){ console.error(e); } }, 450);
       }
     }));
@@ -1486,17 +1511,17 @@ function configOf(z){
       : 'Cut number '+cuts+' leaves a single atom, about a ten-billionth of a metre across. Halve this and you no longer have the element at all — you have its pieces. Thirty-odd cuts is all it took.';
     draw();
   }
-  function bump(n){
+  function bump(n, key){
     const was=cuts;
     cuts=Math.min(31, cuts+n);
     if(cuts!==was){
-      ev('explore');
+      ev('explore',key);
       if(cuts>=30) complete('m1');
     }
     upd();
   }
-  const h=document.getElementById('cutHalf');   if(h) h.onclick=()=>bump(1);
-  const t=document.getElementById('cutTen');    if(t) t.onclick=()=>bump(10);
+  const h=document.getElementById('cutHalf');   if(h) h.onclick=()=>bump(1,'cutHalf');
+  const t=document.getElementById('cutTen');    if(t) t.onclick=()=>bump(10,'cutTen');
   const r=document.getElementById('cutReset');  if(r) r.onclick=()=>{ cuts=0; upd(); };
   upd(); reg('m1',draw);
 })();
@@ -1583,7 +1608,8 @@ Q.order('g1','g1s',[
     document.getElementById('crtConc').textContent =
       m==='off' ? '—' : m==='elec' ? 'negatively charged' : 'far lighter than atoms';
     document.getElementById('crtTxt').textContent=TXT[m];
-    if(!seen[m]){ seen[m]=1; ev('explore'); }
+    ev('explore','crt-'+m);
+    if(!seen[m]) seen[m]=1;
     draw();
   }
   const B=(id,m)=>{ const b=document.getElementById(id); if(b) b.onclick=()=>set(m); };
@@ -1717,16 +1743,16 @@ Q.order('g1','g1s',[
         : fired+' fired and '+pct+'% have gone straight through — the atom is mostly empty space. '+defl+' have deflected sharply. A particle that comes right back is rarer still, around one in twenty thousand, so keep firing: that one is the whole point.';
   }
   const one=document.getElementById('gfOne');
-  if(one) one.onclick=()=>{ ev('explore'); fire(1); };
+  if(one) one.onclick=()=>{ ev('explore','gfOne'); fire(1); };
   const many=document.getElementById('gfMany');
-  if(many) many.onclick=()=>{ ev('explore'); fire(250); };
+  if(many) many.onclick=()=>{ ev('explore','gfMany'); fire(250); };
   const tog=document.getElementById('gfModel');
   if(tog) tog.onclick=()=>{
     model = model==='ruth' ? 'thom' : 'ruth';
     if(model==='thom') sawThomson=true;
     tog.textContent = 'Foil: ' + (model==='ruth'?'Rutherford':'Thomson');
     tracks.length=0; fired=0; through=0; defl=0; back=0;
-    ev('explore'); nums(); draw();
+    ev('explore','gfModel'); nums(); draw();
     if(earned()) complete('m3');
   };
   const rs=document.getElementById('gfReset');
@@ -1798,7 +1824,8 @@ Q.order('g1','g1s',[
       : z<8000? 'Still almost nothing there. Everything inside that outline except the very centre is empty space with a handful of electrons in it.'
       : 'Magnified a hundred thousand times, the nucleus finally becomes visible. Every bit of the atom’s positive charge and almost all of its mass is inside that dot.';
     const k = z<10?'far':z<8000?'mid':'near';
-    if(!seen[k]){ seen[k]=1; ev('explore');
+    ev('explore',sl.id);
+    if(!seen[k]){ seen[k]=1;
       if(Object.keys(seen).length>=3) complete('m4'); }
     draw();
   }
@@ -1864,14 +1891,14 @@ Q.order('g1','g1s',[
     t+=0.02;
     if(t>=3.2){
       t=3.2; run=false;
-      if(!dead){ dead=true; ev('explore'); }
+      dead=true;                         // spGo already credited the control
       document.getElementById('spTxt').textContent =
         'The electron has reached the nucleus. On this model an atom would destroy itself in about ten nanoseconds — so all matter should have vanished the instant it formed. It plainly has not, so something in the model is wrong.';
     }
     nums(); draw();
   });
   const g=document.getElementById('spGo');
-  if(g) g.onclick=()=>{ if(!run && t<3.2){ run=true; ev('explore'); } };
+  if(g) g.onclick=()=>{ if(!run && t<3.2){ run=true; ev('explore','spGo'); } };
   const r=document.getElementById('spReset');
   if(r) r.onclick=()=>{ run=false; t=0; nums(); draw();
     document.getElementById('spTxt').textContent='The electron loses energy as it goes, so its orbit shrinks. Nothing in Rutherford’s model stops this.'; };
@@ -1949,7 +1976,8 @@ Q.pick('g5','g5check','g5s',[
     document.getElementById('shTxt').textContent = up
       ? 'Moving out from '+NAME[prev]+' to '+NAME[at]+', the electron must ABSORB energy — and not just any amount, but exactly the difference between the two levels. Anything less and the jump cannot happen at all.'
       : 'Falling in from '+NAME[prev]+' to '+NAME[at]+', the electron RELEASES exactly the difference between the two levels. This is where the light an atom emits comes from.';
-    if(!seen[i]){ seen[i]=1; ev('explore');
+    ev('explore','shell-'+i);
+    if(!seen[i]){ seen[i]=1;
       if(Object.keys(seen).length>=3) complete('m6'); }
     draw();
   }
@@ -2064,11 +2092,12 @@ Q.match('g8a','g8b','g8s',[
       : common ? e.name+', with '+p+' protons and '+n+' neutrons: mass number '+(p+n)+'. This is the commonest form of the element in nature.'
       : e.name+' still — the proton count decides that and nothing else. But with '+n+' neutrons instead of the usual '+e.n+', the mass number is '+(p+n)+' rather than '+(p+e.n)+'. You have built an isotope.';
     const k = p+'-'+(common?'common':'iso');
-    if(!seen[k]){ seen[k]=1; ev('explore');
+    if(!seen[k]){ seen[k]=1;
       if(Object.keys(seen).length>=5) complete('m9'); }
     draw();
   }
-  sP.addEventListener('input',upd); sN.addEventListener('input',upd);
+  sP.addEventListener('input',()=>{ ev('explore',sP.id); upd(); });
+  sN.addEventListener('input',()=>{ ev('explore',sN.id); upd(); });
   upd(); reg('m9',draw);
 })();
 
@@ -2157,7 +2186,8 @@ Q.vgrid('g10','g10check','g10s',{
       : full ? e.name+' has a complete outermost shell — '+cfg.join(', ')+'. There is nothing to gain, lose or share, which is why it barely reacts with anything. The next electron cannot squeeze in; it has to start a whole new shell.'
       : cfg.length>1 && outer===1 ? e.name+' is '+cfg.join(', ')+'. That lone outer electron is a long way from the nucleus and easily lost, which is what makes these metals so reactive.'
       : e.name+' is '+cfg.join(', ')+'. K filled first with 2, then L, and only once L was full could M begin — electrons never skip a shell.';
-    if(!seen[z]){ seen[z]=1; ev('explore');
+    ev('explore',sl.id);
+    if(!seen[z]){ seen[z]=1;
       if(Object.keys(seen).length>=8) complete('m11'); }
     draw();
   }
@@ -2253,7 +2283,8 @@ Q.rows('g12','g12s',[
     document.getElementById('isoTxt').textContent = w==='hyd'
       ? 'All three have one proton and one electron, so all three are hydrogen and all three behave the same chemically. Protium has no neutron at all, deuterium has one, tritium has two — and that is the entire difference between them.'
       : 'All three have six protons and six electrons, so all three are carbon. Carbon-14 has two neutrons more than carbon-12, which makes it unstable — and that instability is precisely what makes it useful for dating things.';
-    if(!seen[w]){ seen[w]=1; ev('explore');
+    ev('explore','iso-'+w);
+    if(!seen[w]){ seen[w]=1;
       if(Object.keys(seen).length>=2) complete('m13'); }
     draw();
   }
@@ -2329,7 +2360,8 @@ Q.match('g13a','g13b','g13s',[
       : p===50 ? 'At an even split the two means agree at 36 u. This is the only mixture for which the simple average is right, and nature does not supply it.'
       : 'With '+p+'% chlorine-35 the weighted mean is '+weighted.toFixed(1)+' u, while the simple mean is stuck at 36 u regardless. The gap between them is exactly the information that abundance carries.';
     const k = p===75?'real':p<50?'heavy':p>50?'light':'even';
-    if(!seen[k]){ seen[k]=1; ev('explore');
+    ev('explore',sl.id);
+    if(!seen[k]){ seen[k]=1;
       if(seen.real && Object.keys(seen).length>=3) complete('m14'); }
     draw();
   }
@@ -2434,7 +2466,8 @@ Q.boss([
   S.streak = g.streak;
 
   if(S.day !== t){
-    S.day = t; S.missionsToday = 0; S.perfectToday = 0; S.exploreToday = 0; S.questsPaid = {};
+    S.day = t; S.missionsToday = 0; S.perfectToday = 0;
+    S.exploreToday = 0; S.exploreKeys = {}; S.questsPaid = {};
   }
   Object.keys(S.done).forEach(markDone);
   BOOTED = true;                       // from here on, taps count. see engine.js

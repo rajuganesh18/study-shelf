@@ -751,7 +751,8 @@ const CH = {
 /* persistence: see storage.js, concatenated above. */
 
 const TOTAL = CH.total;
-let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0, exploreToday:0, questsPaid:{} };
+let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0,
+          exploreToday:0, exploreKeys:{}, questsPaid:{} };
 
 /* Local calendar dates, not UTC. toISOString() would roll the streak over
    at 05:30 in India rather than at midnight, so a session after midnight
@@ -816,11 +817,24 @@ const QUESTS = [
    out the daily exploration quest the moment it is opened. boot.js flips it. */
 let BOOTED = false;
 
-function ev(kind){
+function ev(kind, key){
   if(!BOOTED) return;
   if(kind === 'mission')  S.missionsToday++;
   if(kind === 'perfect')  S.perfectToday++;
-  if(kind === 'explore')  S.exploreToday++;
+  if(kind === 'explore'){
+    /* "Try 3 interactive controls" has to mean three controls. Counting raw
+       events made one slider worth twenty-one of them, so a drag finished the
+       quest on its own. Each control names itself and is credited once a day;
+       fiddling with the same one after that is free but earns nothing more.
+       A call that arrives with no key keeps the old behaviour, so a site
+       missed in the sweep degrades rather than going silent. */
+    if(key){
+      if(!S.exploreKeys) S.exploreKeys = {};
+      if(S.exploreKeys[key]) return;
+      S.exploreKeys[key] = 1;
+    }
+    S.exploreToday++;
+  }
   checkQuests(); save();
 }
 
@@ -895,6 +909,7 @@ function drain(mid){
 /* ---------- mission completion ---------- */
 function complete(id){
   if(!BOOTED) return;                    // same reason as ev(): see BOOTED above
+  if(AUTORUN[id]) return;                // a bench playing itself pays nothing
   const el = document.getElementById(id);
   if(!el) return;
   if(S.done[id]) return revisit(id);     // finished already: record, pay nothing
@@ -1287,7 +1302,7 @@ const Q = {
 /* ============================================================
    redraw on open / resize / fonts
    ============================================================ */
-const REG = {}, AUTO = {};
+const REG = {}, AUTO = {}, AUTORUN = {};
 function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
 function auto(id, fn){ AUTO[id] = fn; }
 
@@ -1306,6 +1321,16 @@ document.querySelectorAll('details.m').forEach(d=>{
       redrawAll();
       if(AUTO[d.id] && !d.dataset.auto){
         d.dataset.auto = '1';                 // auto-play once, no XP for the auto-run
+        /* and that promise is now enforced rather than merely stated. A bench
+           that finishes its own animation used to call complete() from the
+           ticker, so simply opening a mission could pay out its XP and coins —
+           Energy handed over 170 XP and three missions for no input at all.
+           The flag lifts the moment the reader touches this mission, so a
+           genuine tap on the same play button counts as it always did. */
+        AUTORUN[d.id] = true;
+        const touched = ()=>{ AUTORUN[d.id] = false; };
+        d.addEventListener('pointerdown', touched, { once:true });
+        d.addEventListener('input',       touched, { once:true });
         setTimeout(()=>{ try { AUTO[d.id](); } catch(e){ console.error(e); } }, 450);
       }
     }));
@@ -1428,7 +1453,7 @@ function beaker(x, bx, top, bw, bot){
   function set(m){
     mode=m;
     JAR.forEach(j=>{ const el=document.getElementById(OUT[j.k]); if(el) el.textContent=TXT[m][j.k]; });
-    if(m!=='stirred' && !done[m]){ done[m]=1; ev('explore'); }
+    if(m!=='stirred'){ ev('explore','lab-'+m); done[m]=1; }
     const n=Object.keys(done).length;
     const t=document.getElementById('labTxt');
     if(t){
@@ -1517,7 +1542,8 @@ function beaker(x, bx, top, bw, bot){
     document.getElementById('szEg').textContent=cl.eg;
     document.getElementById('szTyn').textContent=cl.tyn;
     document.getElementById('szTxt').textContent=cl.d;
-    if(!seen[cl.k]){ seen[cl.k]=1; ev('explore');
+    ev('explore',sl.id);
+    if(!seen[cl.k]){ seen[cl.k]=1;
       if(Object.keys(seen).length>=3){
         complete('m2');
         document.getElementById('szTxt').textContent =
@@ -1636,7 +1662,7 @@ Q.grid('g4','g4check','g4s',{
     document.getElementById('ccWork').textContent=n.a+' ÷ '+n.tot+' × 100';
     document.getElementById('ccOut').textContent=n.pct.toFixed(n.pct%1?1:0)+' '+m.label;
     document.getElementById('ccTxt').textContent=m.note;
-    if(!used[mode]){ used[mode]=1; ev('explore');
+    if(!used[mode]){ used[mode]=1;
       if(Object.keys(used).length>=3){
         complete('m5');
         document.getElementById('ccTxt').textContent = m.note +
@@ -1645,8 +1671,9 @@ Q.grid('g4','g4check','g4s',{
     }
     draw();
   }
-  function preset(md,a,b){ mode=md; s1.value=a; s2.value=b; sync(); }
-  s1.addEventListener('input',sync); s2.addEventListener('input',sync);
+  function preset(md,a,b){ ev('explore','cc-'+md); mode=md; s1.value=a; s2.value=b; sync(); }
+  s1.addEventListener('input',()=>{ ev('explore',s1.id); sync(); });
+  s2.addEventListener('input',()=>{ ev('explore',s2.id); sync(); });
   document.getElementById('ccEg1').onclick=()=>preset('mm',10,90);
   document.getElementById('ccEg2').onclick=()=>preset('mv',5,100);
   document.getElementById('ccEg3').onclick=()=>preset('vv',1,100);
@@ -1763,7 +1790,8 @@ Q.vgrid('g7','g7check','g7s',{
     document.getElementById('solTxt').textContent = drop>0.5
       ? 'Saturate 100 g of water at '+t+' °C and cool it to 25 °C, and only '+v25.toFixed(1)+' g can stay dissolved. The remaining '+drop.toFixed(1)+' g separates out as solid.'
       : 'This salt is nearly as soluble cold as hot, so cooling a saturated solution yields hardly any crystals. To recover it you would evaporate the water instead.';
-    if(!seen[pick]){ seen[pick]=1; ev('explore');
+    ev('explore',sl.id);
+    if(!seen[pick]){ seen[pick]=1;
       if(Object.keys(seen).length>=4) complete('m8');
     }
     draw();
@@ -1822,9 +1850,10 @@ Q.vgrid('g7','g7check','g7s',{
     document.getElementById('crysOut').textContent=(HOT-dissolved).toFixed(0)+' g';
     draw();
   }
-  function go(isSlow){
+  function go(isSlow, user){
     slow=isSlow; temp=60; target=40; run=true;
-    if(!ran[isSlow?'s':'f']){ ran[isSlow?'s':'f']=1; ev('explore'); }
+    if(user) ev('explore','cryst-'+(isSlow?'s':'f'));
+    ran[isSlow?'s':'f']=1;
     document.getElementById('crysTxt').textContent = isSlow
       ? 'Cooling slowly gives the particles time to come together, so they build large, shiny, well-shaped crystals.'
       : 'Cooling fast in ice water gives them no time to arrange, so you get many small, poorly formed crystals instead.';
@@ -1835,8 +1864,8 @@ Q.vgrid('g7','g7check','g7s',{
     }
     sync();
   }
-  document.getElementById('crysSlow').onclick=()=>go(true);
-  document.getElementById('crysFast').onclick=()=>go(false);
+  document.getElementById('crysSlow').onclick=()=>go(true, true);
+  document.getElementById('crysFast').onclick=()=>go(false, true);
   tick('m9',()=>{
     if(run){
       temp += (target-temp)*(slow?0.012:0.05);
@@ -1938,12 +1967,13 @@ Q.vgrid('g7','g7check','g7s',{
       : p.solid ? 'A liquid with a dissolved solid. The water boils off, condenses and is collected pure, while the salt stays behind in the flask — so distillation recovers both, which plain evaporation cannot.'
       : p.ok ? 'The boiling points differ by '+gap+' °C, comfortably more than 25 °C. The lower-boiling liquid vaporises well before the other, so simple distillation separates them.'
       : 'Only '+gap+' °C apart, less than the 25 °C simple distillation needs. Both vaporise together, so fractional distillation must be used instead.';
-    if(!tried[pick]){ tried[pick]=1; ev('explore');
+    ev('explore','dist-'+pick);
+    if(!tried[pick]){ tried[pick]=1;
       if(Object.keys(tried).length>=4) complete('m10');
     }
     draw();
   }
-  document.getElementById('distRun').onclick=()=>{ run=true; at=0; ev('explore'); };
+  document.getElementById('distRun').onclick=()=>{ run=true; at=0; ev('explore','distRun'); };
   tick('m10',()=>{ if(run){ at+=0.012; if(at>1.6){ at=1.6; } draw(); } });
   reg('m10',draw); auto('m10',()=>{ run=true; at=0; });
   sync();
@@ -2024,7 +2054,8 @@ Q.vgrid('g7','g7check','g7s',{
   }
   document.getElementById('chrRun').onclick=()=>{
     front=0; run=true;
-    if(!ran[pick]){ ran[pick]=1; ev('explore');
+    ev('explore','chr-'+pick);
+    if(!ran[pick]){ ran[pick]=1;
       if(Object.keys(ran).length>=2){
         complete('m11');
         document.getElementById('chrTxt').textContent = SAMP[pick].d +
@@ -2091,7 +2122,7 @@ Q.vgrid('g7','g7check','g7s',{
   }
   function say(m){ if(T) T.innerHTML=m; }
   function tap(want,msg,bad){
-    if(step===want){ step++; say(msg); ev('explore');
+    if(step===want){ step++; say(msg); ev('explore','funnel-'+want);
       if(step===3){ complete('m12'); say(msg+' Both liquids recovered, each in its own vessel.'); }
     } else { say(bad); }
     draw();
@@ -2177,7 +2208,7 @@ Q.vgrid('g7','g7check','g7s',{
     x.fillText('sand stays in the dish', 8, H-20);
   }
   document.getElementById('subRun').onclick=()=>{
-    run=true; ev('explore');
+    run=true; ev('explore','subRun');
     document.getElementById('subTxt').textContent =
       'The camphor goes straight from solid to vapour and deposits as a white solid on the cool inner wall of the funnel. It never becomes a liquid on the way.';
   };
@@ -2273,7 +2304,7 @@ Q.vgrid('g7','g7check','g7s',{
     document.getElementById('mudStage').textContent=s.n;
     document.getElementById('mudClear').textContent=s.clear+'%';
     document.getElementById('mudTxt').textContent=s.txt;
-    if(i>0) ev('explore');
+    if(i>0) ev('explore','mud-'+i);
     if(i===3) complete('m14');
     draw();
   }
@@ -2399,7 +2430,8 @@ Q.boss([
   S.streak = g.streak;
 
   if(S.day !== t){
-    S.day = t; S.missionsToday = 0; S.perfectToday = 0; S.exploreToday = 0; S.questsPaid = {};
+    S.day = t; S.missionsToday = 0; S.perfectToday = 0;
+    S.exploreToday = 0; S.exploreKeys = {}; S.questsPaid = {};
   }
   Object.keys(S.done).forEach(markDone);
   BOOTED = true;                       // from here on, taps count. see engine.js

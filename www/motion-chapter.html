@@ -806,7 +806,8 @@ const CH = {
 /* persistence: see storage.js, concatenated above. */
 
 const TOTAL = CH.total;
-let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0, exploreToday:0, questsPaid:{} };
+let S = { xp:0, coins:0, streak:0, day:null, done:{}, missionsToday:0, perfectToday:0,
+          exploreToday:0, exploreKeys:{}, questsPaid:{} };
 
 /* Local calendar dates, not UTC. toISOString() would roll the streak over
    at 05:30 in India rather than at midnight, so a session after midnight
@@ -871,11 +872,24 @@ const QUESTS = [
    out the daily exploration quest the moment it is opened. boot.js flips it. */
 let BOOTED = false;
 
-function ev(kind){
+function ev(kind, key){
   if(!BOOTED) return;
   if(kind === 'mission')  S.missionsToday++;
   if(kind === 'perfect')  S.perfectToday++;
-  if(kind === 'explore')  S.exploreToday++;
+  if(kind === 'explore'){
+    /* "Try 3 interactive controls" has to mean three controls. Counting raw
+       events made one slider worth twenty-one of them, so a drag finished the
+       quest on its own. Each control names itself and is credited once a day;
+       fiddling with the same one after that is free but earns nothing more.
+       A call that arrives with no key keeps the old behaviour, so a site
+       missed in the sweep degrades rather than going silent. */
+    if(key){
+      if(!S.exploreKeys) S.exploreKeys = {};
+      if(S.exploreKeys[key]) return;
+      S.exploreKeys[key] = 1;
+    }
+    S.exploreToday++;
+  }
   checkQuests(); save();
 }
 
@@ -950,6 +964,7 @@ function drain(mid){
 /* ---------- mission completion ---------- */
 function complete(id){
   if(!BOOTED) return;                    // same reason as ev(): see BOOTED above
+  if(AUTORUN[id]) return;                // a bench playing itself pays nothing
   const el = document.getElementById(id);
   if(!el) return;
   if(S.done[id]) return revisit(id);     // finished already: record, pay nothing
@@ -1342,7 +1357,7 @@ const Q = {
 /* ============================================================
    redraw on open / resize / fonts
    ============================================================ */
-const REG = {}, AUTO = {};
+const REG = {}, AUTO = {}, AUTORUN = {};
 function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
 function auto(id, fn){ AUTO[id] = fn; }
 
@@ -1361,6 +1376,16 @@ document.querySelectorAll('details.m').forEach(d=>{
       redrawAll();
       if(AUTO[d.id] && !d.dataset.auto){
         d.dataset.auto = '1';                 // auto-play once, no XP for the auto-run
+        /* and that promise is now enforced rather than merely stated. A bench
+           that finishes its own animation used to call complete() from the
+           ticker, so simply opening a mission could pay out its XP and coins —
+           Energy handed over 170 XP and three missions for no input at all.
+           The flag lifts the moment the reader touches this mission, so a
+           genuine tap on the same play button counts as it always did. */
+        AUTORUN[d.id] = true;
+        const touched = ()=>{ AUTORUN[d.id] = false; };
+        d.addEventListener('pointerdown', touched, { once:true });
+        d.addEventListener('input',       touched, { once:true });
         setTimeout(()=>{ try { AUTO[d.id](); } catch(e){ console.error(e); } }, 450);
       }
     }));
@@ -1471,8 +1496,8 @@ function paper(x, W, H, c){
     if(Object.keys(seen).length===3) complete('m1');
   }
   if(oS){
-    oS.oninput=()=>{ lastMove=Date.now(); draw(); ev('explore'); };
-    gS.oninput=()=>{ draw(); ev('explore'); };
+    oS.oninput=()=>{ lastMove=Date.now(); draw(); ev('explore',oS.id); };
+    gS.oninput=()=>{ draw(); ev('explore',gS.id); };
   }
   reg('m1',draw); tick('m1',draw);
 })();
@@ -1535,7 +1560,7 @@ function paper(x, W, H, c){
     playing=true; pt=0; tS.value=0;
   }
   if(tS){
-    tS.oninput=()=>{ playing=false; award=true; ev('explore'); draw(); };
+    tS.oninput=()=>{ playing=false; award=true; ev('explore',tS.id); draw(); };
     document.getElementById('tkRun').onclick=()=>play(true);
   }
   tick('m2',()=>{
@@ -1590,7 +1615,7 @@ function paper(x, W, H, c){
     x.fillText(goingUp?'going up':'coming down', 8, 6);
   }
   function play(){ anim=true; at=0; }
-  if(cv){ const b=document.getElementById('ballPlay'); if(b) b.onclick=()=>{ play(); ev('explore'); }; }
+  if(cv){ const b=document.getElementById('ballPlay'); if(b) b.onclick=()=>{ play(); ev('explore','ballPlay'); }; }
   tick('m3',()=>{ if(anim){ at+=0.008; if(at>=1){ at=0; } } draw(); });
   reg('m3',draw); auto('m3',play);
 
@@ -1684,7 +1709,7 @@ Q.grid('g5','g5check','g5s',{
   function onInput(){
     const u=+uS.value, v=+vS.value;
     seen[v>u?'up':v<u?'down':'flat']=1;
-    touched++; if(touched===1) ev('explore');
+    touched++; ev('explore','accel');
     if(Object.keys(seen).length===3) complete('m6');
     draw();
   }
@@ -1748,7 +1773,7 @@ Q.rows('g7','g7s',[
         return;
       }
       placed.push([t,s]);
-      if(placed.length===1) ev('explore');
+      ev('explore','placeDot');
       if(placed.length===7){ joined=true; ev('perfect'); complete('m8'); }
       draw();
     });
@@ -1809,7 +1834,7 @@ Q.rows('g7','g7s',[
     document.getElementById('shB').textContent=(fB(2*k+2)-fB(2*k)).toFixed(0)+' m';
   }
   if(kS){
-    kS.oninput=()=>{ seen[kS.value]=1; if(Object.keys(seen).length===1) ev('explore');
+    kS.oninput=()=>{ seen[kS.value]=1; ev('explore',kS.id);
       if(Object.keys(seen).length>=4) complete('m9'); draw(); };
   }
   reg('m9',draw);
@@ -1857,7 +1882,7 @@ Q.rows('g7','g7s',[
   }
   function onIn(){
     tried[aS.value+'-'+bS.value]=1;
-    if(Object.keys(tried).length===1) ev('explore');
+    ev('explore','slope');
     if(Object.keys(tried).length>=3){ ev('perfect'); complete('m10'); }
     draw();
   }
@@ -1912,7 +1937,8 @@ Q.rows('g7','g7s',[
     if(mode===0){ aS.value=10; bS.value=20; } else { aS.value=0; bS.value=6; }
     btn.textContent = mode ? 'Show a sloping line instead' : 'Show constant velocity instead';
   }
-  function onIn(){ ivals++; if(ivals===1) ev('explore'); if(ivals>=3 && Object.keys(seen).length===2) complete('m11'); draw(); }
+  // two sliders share this handler, so credit whichever one was moved
+  function onIn(e){ ivals++; ev('explore',(e&&e.target&&e.target.id)||'m11'); if(ivals>=3 && Object.keys(seen).length===2) complete('m11'); draw(); }
   if(aS){
     aS.oninput=onIn; bS.oninput=onIn;
     btn.onclick=()=>{ mode=1-mode; seen[mode]=1; retune(); onIn(); };
@@ -1942,7 +1968,7 @@ Q.rows('g7','g7s',[
     const vv=document.getElementById('keV');
     vv.style.color = v<0 ? A2 : INK;
   }
-  function onIn(){ n++; if(n===1) ev('explore'); if(n>=4) complete('m12'); draw(); }
+  function onIn(e){ n++; ev('explore',(e&&e.target&&e.target.id)||'m12'); if(n>=4) complete('m12'); draw(); }
   if(uS){ uS.oninput=onIn; aS.oninput=onIn; tS.oninput=onIn; draw(); }
 })();
 
@@ -2012,7 +2038,7 @@ Q.rows('g7','g7s',[
   }
   function run(user){ award=award||!!user; running=true; ct=0; }
   if(uS){
-    [uS,rS,aS,dS].forEach(s=>s.oninput=()=>{ ev('explore'); draw(); });
+    [uS,rS,aS,dS].forEach(s=>s.oninput=()=>{ ev('explore',s.id); draw(); });
     document.getElementById('bkGo').onclick=()=>{ run(true); };
   }
   tick('m13',()=>{
@@ -2095,9 +2121,9 @@ Q.rows('g14','g14s',[
     ac.style.color=A2;
   }
   if(nS){
-    nS.oninput=()=>{ if(+nS.value>=25) bigN=true; ev('explore'); if(bigN&&ringUsed) complete('m15'); draw(); };
+    nS.oninput=()=>{ if(+nS.value>=25) bigN=true; ev('explore',nS.id); if(bigN&&ringUsed) complete('m15'); draw(); };
     document.getElementById('ciRing').onclick=()=>{
-      free=true; ft=0; ringUsed=true; ev('explore');
+      free=true; ft=0; ringUsed=true; ev('explore','ciRing');
       if(bigN&&ringUsed) complete('m15');
     };
   }
@@ -2192,7 +2218,8 @@ Q.boss([
   S.streak = g.streak;
 
   if(S.day !== t){
-    S.day = t; S.missionsToday = 0; S.perfectToday = 0; S.exploreToday = 0; S.questsPaid = {};
+    S.day = t; S.missionsToday = 0; S.perfectToday = 0;
+    S.exploreToday = 0; S.exploreKeys = {}; S.questsPaid = {};
   }
   Object.keys(S.done).forEach(markDone);
   BOOTED = true;                       // from here on, taps count. see engine.js
