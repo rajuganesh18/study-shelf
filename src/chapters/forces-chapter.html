@@ -129,8 +129,8 @@
     <p>A box is being pushed across a table. Apart from the applied force, at least three other forces act on it. Can you identify all four?</p>
     <div class="panel">
       <canvas id="fbdCv" height="220"></canvas>
-      <div class="note" style="margin-bottom:6px">Tap each force to label it.</div>
-      <div id="g4"></div>
+      <div class="note" style="margin-bottom:11px">Tap a description, then tap the force it names.</div>
+      <div class="match"><div id="g4a"></div><div id="g4b"></div></div>
       <div class="score" id="g4s"></div>
     </div>
     <p>Every object near the Earth's surface has at least two forces on it: <b>gravity</b> (its weight, pulling it down) and the <b>normal force</b> from the surface it rests on, pushing it up. When you push the box, <b>friction</b> opposes the push. The box moves only if the push is larger than friction — an unbalanced net force.</p>
@@ -217,8 +217,7 @@
   <div class="body">
     <p>Newton's first law explains many everyday experiences. Match each situation to the correct explanation.</p>
     <div class="panel">
-      <div id="g8a" class="matchA"></div>
-      <div id="g8b" class="matchB"></div>
+      <div class="match"><div id="g8a"></div><div id="g8b"></div></div>
       <div class="score" id="g8s"></div>
     </div>
     <p>Inertia depends on mass: a heavier object resists change in motion more than a lighter one. That is why it is harder to push a loaded cart than an empty one, and why a fast-moving truck causes more damage than a bicycle at the same speed.</p>
@@ -359,8 +358,7 @@
   <div class="body">
     <p>Newton's third law: whenever one object exerts a force on a second object, the second object simultaneously exerts an equal and opposite force on the first. Match each action to its reaction.</p>
     <div class="panel">
-      <div id="g14a" class="matchA"></div>
-      <div id="g14b" class="matchB"></div>
+      <div class="match"><div id="g14a"></div><div id="g14b"></div></div>
       <div class="score" id="g14s"></div>
     </div>
     <p>The key point: the two forces in a Newton's third law pair act on <b>different objects</b>. They never cancel each other out, because they are not on the same object. If you push a wall, the wall pushes you — both forces exist, both are real, but they act on you and the wall separately.</p>
@@ -398,14 +396,20 @@
 <details class="m" id="m16" data-xp="50" data-coin="25">
   <summary><span class="mno">16</span><span class="mt"><b>Newton's three laws</b><i>10-question boss battle</i></span><span class="mstat">50 XP</span></summary>
   <div class="body">
-    <div class="panel boss">
-      <div class="bossBar"><span id="bossHpTxt">Boss 100%</span><div class="bossHpTrack"><i id="bossHp" style="width:100%"></i></div></div>
-      <div class="bossBar you"><span id="youHpTxt">You 100%</span><div class="bossHpTrack"><i id="youHp" style="width:100%"></i></div></div>
-      <div id="bossTier" class="note" style="margin:12px 0 6px">—</div>
-      <div id="bossQ" style="margin-bottom:12px">—</div>
-      <div id="bossOpts"></div>
-      <div id="bossWhy" class="why"></div>
-      <button class="act" id="bossStart">Begin</button>
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions on all three laws, built from this chapter's own activities. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
     </div>
   </div>
 </details>
@@ -728,7 +732,7 @@ Q.rows('g3','g3s',[
   draw();
   reg('m4',draw);
 })();
-Q.match('g4','g4s',[
+Q.match('g4a','g4b','g4s',[
   ['Pulls the box downward',             'Gravitational force (weight)'],
   ['Pushes the box upward from surface',  'Normal force'],
   ['Pushes the box forward',              'Applied force'],

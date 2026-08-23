@@ -49,7 +49,14 @@ const QUESTS = [
   { id:'q3', text:'Try 3 interactive controls',   xp:20, hit:()=>S.exploreToday  >= 3 }
 ];
 
+/* Nothing counts until boot has loaded the saved state. Chapter benches call
+   their own sync()/upd() once at startup to paint themselves, and those calls
+   go through the same code path a tap does — without this gate a chapter pays
+   out the daily exploration quest the moment it is opened. boot.js flips it. */
+let BOOTED = false;
+
 function ev(kind){
+  if(!BOOTED) return;
   if(kind === 'mission')  S.missionsToday++;
   if(kind === 'perfect')  S.perfectToday++;
   if(kind === 'explore')  S.exploreToday++;
@@ -109,6 +116,7 @@ function renderHQ(){
 
 /* ---------- mission completion ---------- */
 function complete(id){
+  if(!BOOTED) return;                    // same reason as ev(): see BOOTED above
   const el = document.getElementById(id);
   if(!el || S.done[id]) return;
   S.done[id] = true;

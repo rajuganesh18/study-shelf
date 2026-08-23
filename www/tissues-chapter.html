@@ -696,7 +696,14 @@ const QUESTS = [
   { id:'q3', text:'Try 3 interactive controls',   xp:20, hit:()=>S.exploreToday  >= 3 }
 ];
 
+/* Nothing counts until boot has loaded the saved state. Chapter benches call
+   their own sync()/upd() once at startup to paint themselves, and those calls
+   go through the same code path a tap does — without this gate a chapter pays
+   out the daily exploration quest the moment it is opened. boot.js flips it. */
+let BOOTED = false;
+
 function ev(kind){
+  if(!BOOTED) return;
   if(kind === 'mission')  S.missionsToday++;
   if(kind === 'perfect')  S.perfectToday++;
   if(kind === 'explore')  S.exploreToday++;
@@ -756,6 +763,7 @@ function renderHQ(){
 
 /* ---------- mission completion ---------- */
 function complete(id){
+  if(!BOOTED) return;                    // same reason as ev(): see BOOTED above
   const el = document.getElementById(id);
   if(!el || S.done[id]) return;
   S.done[id] = true;
@@ -1688,8 +1696,21 @@ Q.boss([
     S.day = t; S.missionsToday = 0; S.perfectToday = 0; S.exploreToday = 0; S.questsPaid = {};
   }
   Object.keys(S.done).forEach(markDone);
+  BOOTED = true;                       // from here on, taps count. see engine.js
   renderHQ(); save();
   requestAnimationFrame(()=>requestAnimationFrame(redrawAll));
+})();
+
+/* "All chapters" goes back to the list this chapter sits in, not to the shelf
+   root. CH.id already carries the class and subject, as in 9-science-5, so the
+   link needs no per-chapter editing. The plain index.html in the markup stays
+   as the fallback if this never runs. */
+(function(){
+  const back = document.querySelector('.backbar');
+  if(!back) return;
+  const p = String(CH.id || '').split('-');
+  if(p.length < 2 || !p[0] || !p[1]) return;
+  back.href = 'index.html?cls=' + encodeURIComponent(p[0]) + '&sub=' + encodeURIComponent(p[1]);
 })();
 
 

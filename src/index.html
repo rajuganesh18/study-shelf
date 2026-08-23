@@ -316,6 +316,25 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':
 let SUM = {}, STREAK = 0, LAST = null;
 let cls = '9', openSubject = null;
 
+/* A chapter's "All chapters" link comes back as index.html?cls=9&sub=science,
+   so the shelf reopens on the list that chapter sits in rather than on the
+   subject grid. Both values are checked against the catalog before use. */
+(function(){
+  const p = new URLSearchParams(location.search);
+  const c = CATALOG.find(x => x.cls === p.get('cls'));
+  if(!c) return;
+  cls = c.cls;
+  const s = c.subjects.find(x => x.key === p.get('sub'));
+  if(s) openSubject = s.key;
+})();
+
+/* Keep the address bar honest as the view changes, so a reload or a share
+   lands where the reader actually is. */
+function syncUrl(){
+  const q = openSubject ? '?cls=' + encodeURIComponent(cls) + '&sub=' + encodeURIComponent(openSubject) : '';
+  history.replaceState(null, '', location.pathname + q);
+}
+
 /* ---------- flatten the catalog once ---------- */
 const ALL = [];
 CATALOG.forEach(c => c.subjects.forEach(s => s.parts.forEach(p => p.chapters.forEach(ch => {
@@ -430,7 +449,7 @@ function renderTabs(){
     '<button class="tab' + (c.cls === cls ? ' on' : '') + '" data-cls="' + c.cls + '">' + esc(c.label) + '</button>'
   ).join('');
   $('tabs').querySelectorAll('.tab').forEach(b => b.onclick = () => {
-    cls = b.dataset.cls; openSubject = null; render();
+    cls = b.dataset.cls; openSubject = null; syncUrl(); render();
   });
   const c = CATALOG.find(x => x.cls === cls);
   $('clsNote').textContent = c ? c.note : '';
@@ -506,8 +525,8 @@ function render(){
   const c = CATALOG.find(x => x.cls === cls);
   const sub = openSubject && c.subjects.find(s => s.key === openSubject);
   v.innerHTML = sub ? chapterList(sub) : subjectGrid();
-  if(sub){ $('backBtn').onclick = () => { openSubject = null; render(); }; }
-  else v.querySelectorAll('.sub').forEach(b => b.onclick = () => { openSubject = b.dataset.sub; render(); window.scrollTo(0,0); });
+  if(sub){ $('backBtn').onclick = () => { openSubject = null; syncUrl(); render(); }; }
+  else v.querySelectorAll('.sub').forEach(b => b.onclick = () => { openSubject = b.dataset.sub; syncUrl(); render(); window.scrollTo(0,0); });
 }
 
 /* ---------- data panel: export, import, reset ---------- */
