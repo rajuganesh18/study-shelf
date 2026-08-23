@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Journey Inside the Atom — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: the orchid of the chapter itself, and a cold teal for particles ---------- */
+:root{ --a1:#B47CF0; --a2:#3FD0C0; --badge-bg:#F0E9FA; }
+/*@include shared/chrome.css*/
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Science · Chapter 8</div>
+  <h1>The Atom<br><span>And how we found out</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96" aria-label="Chapter progress badge: the model of the atom, improving as you learn"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Where the idea came from</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="30" data-coin="15">
+  <summary><span class="mno">01</span><span class="mt"><b>Cut it in half, and again</b><i>Section 8.1 · parmanu, atomos, and Dalton</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Take something ordinary and halve it. Halve the half. Keep going. Acharya Kanada asked where this ends, and so did Leucippus and Democritus, two thousand years ago and half a world apart. Try it.</p>
+    <div class="panel">
+      <canvas id="cutCv" height="230" aria-label="A piece of matter halved again and again, down to the size of an atom"></canvas>
+      <div class="row">
+        <button class="act" id="cutHalf">Cut it in half</button>
+        <button class="act" id="cutTen">Halve it ten times</button>
+        <button class="act" id="cutReset">Start again</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Cuts made</div><div class="v" id="cutN">0</div></div>
+        <div class="rc"><div class="k">Size now</div><div class="v" id="cutSize">10 cm</div></div>
+        <div class="rc"><div class="k">You have</div><div class="v" id="cutWhat" style="font-size:12px">a lump of matter</div></div>
+      </div>
+      <div class="note" id="cutTxt" style="margin-top:12px;min-height:70px">Start cutting. Each cut halves what is left. How many do you think it takes before there is nothing left to cut?</div>
+    </div>
+    <p>Kanada called the particle you finally reach a <b>parmanu</b>, too small for any sense to perceive, combining in twos and threes to build everything. Democritus called it <b>atomos</b> — Greek for <i>indivisible</i>. Both were reasoning, not experimenting. It was John Dalton, in <b>1808</b>, who turned the idea into a scientific theory built on measurements.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Put the first stretch of the story in order, oldest first.</div>
+      <div class="chips" id="g1"></div>
+      <div class="score" id="g1s"></div>
+    </div>
+    <div class="curio">
+      <h5>An idea before it was evidence</h5>
+      <div class="note">For most of its life the atom was philosophy, not physics. That matters: it is why the models in this chapter keep changing. Each one is the best picture that fitted the evidence available at the time, and each was replaced the moment better evidence arrived.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="35" data-coin="18">
+  <summary><span class="mno">02</span><span class="mt"><b>Thomson finds the electron</b><i>Section 8.2.1 · the cathode ray tube</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>In 1897 J. J. Thomson passed electricity through a gas at very low pressure and saw rays travel from the cathode to the anode. To find out what they were made of, he pushed them about with fields. Do the same.</p>
+    <div class="panel">
+      <canvas id="crtCv" height="230" aria-label="A cathode ray tube with the beam deflected by an electric or magnetic field"></canvas>
+      <div class="row">
+        <button class="act" id="crtOff">No field</button>
+        <button class="act" id="crtElec">Electric field</button>
+        <button class="act" id="crtMag">Magnetic field</button>
+      </div>
+      <div class="readout two">
+        <div class="rc"><div class="k">The beam</div><div class="v" id="crtDefl" style="font-size:12px">travels straight</div></div>
+        <div class="rc"><div class="k">So the rays are</div><div class="v" id="crtConc" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="crtTxt" style="margin-top:12px;min-height:70px">With no field the rays cross the tube in a straight line. Switch a field on and watch which way they bend.</div>
+    </div>
+    <p>The rays bend towards the positive plate, so they carry <b>negative</b> charge. Change the metal of the cathode, change the gas in the tube — the rays are identical every time. Whatever they are, every element contains them. Thomson had found the <b>electron</b>: a particle far lighter than any atom, and a piece of every atom there is.</p>
+    <div class="panel">
+      <p style="font-size:14.5px;margin:0 0 12px">Thomson now had a problem. Atoms are electrically neutral, but he had just shown they contain negative particles. What did he propose?</p>
+      <div class="opts" data-q data-m="m2">
+        <button class="opt">That the electrons sit in a ring outside the atom, and the neutrality is a coincidence.</button>
+        <button class="opt" data-ok="1">That the electrons are embedded throughout a sphere of positive charge, like seeds through a watermelon.</button>
+        <button class="opt">That every atom carries a tiny negative charge overall.</button>
+      </div>
+      <div class="why">Thomson's model, often called the plum pudding model: a ball of positive charge with the electrons dotted through it, the positive exactly cancelling the negative. It was the first serious attempt to explain how an atom holds both charges and still reads neutral from the outside.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 2 · The experiment that broke the model</div>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="50" data-coin="30">
+  <summary><span class="mno">03</span><span class="mt"><b>The gold foil experiment</b><i>Section 8.2.2 · Geiger and Marsden, 1911</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Fire alpha particles at a sheet of gold leaf and watch where they go. Thomson's model says the positive charge is spread thinly everywhere, so nothing should be able to turn a fast, heavy α-particle around. Test it, then switch the foil to Rutherford's model and test that.</p>
+    <div class="panel">
+      <canvas id="gfCv" height="260" aria-label="Alpha particles fired at gold foil, most passing through and a few deflecting"></canvas>
+      <div class="row">
+        <button class="act" id="gfOne">Fire one</button>
+        <button class="act" id="gfMany">Fire 250</button>
+        <button class="act" id="gfModel">Foil: Rutherford</button>
+        <button class="act" id="gfReset">Clear</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Fired</div><div class="v" id="gfFired">0</div></div>
+        <div class="rc"><div class="k">Straight through</div><div class="v" id="gfThrough">0</div></div>
+        <div class="rc"><div class="k">Deflected</div><div class="v" id="gfDefl">0</div></div>
+      </div>
+      <div class="readout two" style="margin-top:1px">
+        <div class="rc"><div class="k">Bounced back</div><div class="v" id="gfBack">0</div></div>
+        <div class="rc"><div class="k">Foil model</div><div class="v" id="gfWhich" style="font-size:12px">Rutherford</div></div>
+      </div>
+      <div class="note" id="gfTxt" style="margin-top:12px;min-height:84px">Keep firing. A bounce-back is rare — you may need a few hundred shots before you see one, which is exactly the problem Geiger and Marsden faced.</div>
+    </div>
+    <p>Almost everything goes straight through. A few particles turn sharply. Very occasionally one comes almost straight back. Rutherford said it was as astonishing as firing a shell at tissue paper and having it rebound at you — and the only way it can happen is if the atom's positive charge and nearly all its mass are packed into a <b>nucleus</b> far too small to hit often, with empty space everywhere else.</p>
+    <div class="curio">
+      <h5>Why the rare event is the whole result</h5>
+      <div class="note">The particles that pass straight through tell you the atom is mostly empty. Only the ones that come back tell you what is at the centre. A result that happens once in a few thousand tries carried more information than all the others put together — which is why it had to be counted, one scintillation at a time, in a darkened room.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="30" data-coin="15">
+  <summary><span class="mno">04</span><span class="mt"><b>How empty is an atom?</b><i>Section 8.2.2A · a cricket ground and a peppercorn</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>An atom is about 10⁻¹⁰ m across. Its nucleus is about 10⁻¹⁵ m. Those two numbers look similar written down and are nothing like each other in reality. Zoom in until you can see the nucleus at all.</p>
+    <div class="panel">
+      <canvas id="emptyCv" height="250" aria-label="Zooming in on an atom until the nucleus becomes visible"></canvas>
+      <div class="knob">
+        <label>Zoom <b id="emptyZV">×1</b></label>
+        <input type="range" id="emptyZ" min="0" max="100" value="0" aria-label="Zoom level">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Atom drawn as</div><div class="v" id="emptyAtom" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Nucleus is then</div><div class="v" id="emptyNuc" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Size ratio</div><div class="v" id="emptyRatio">100 000 : 1</div></div>
+      </div>
+      <div class="note" id="emptyTxt" style="margin-top:12px;min-height:70px">At this scale the nucleus is far too small to draw. Zoom in and keep going.</div>
+    </div>
+    <p>The nucleus is around one hundred thousand times smaller than the atom. Draw the atom the size of a cricket ground, about 100 m across, and the nucleus is a grain of black pepper on the pitch. Everything else — all the volume you think of as solid matter — is empty space with a few electrons in it.</p>
+    <div class="curio">
+      <h5>A million atoms thick</h5>
+      <div class="note">A page of this textbook is about 0.1 mm thick. Divide that by the diameter of one atom and you get roughly a million. The paper you can barely feel between finger and thumb is a stack of a million atoms.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="35" data-coin="18">
+  <summary><span class="mno">05</span><span class="mt"><b>Why this atom should collapse</b><i>Section 8.2.2B · the limit of Rutherford's model</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Rutherford's electrons circle the nucleus like planets round the Sun. But an electron moving in a circle is constantly changing direction, which means it is accelerating — and an accelerating charge radiates away its energy. Watch what that costs.</p>
+    <div class="panel">
+      <canvas id="spiralCv" height="250" aria-label="An electron spiralling into the nucleus as it radiates energy away"></canvas>
+      <div class="row">
+        <button class="act" id="spGo">Let it radiate</button>
+        <button class="act" id="spReset">Reset</button>
+      </div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Energy left</div><div class="v" id="spEnergy">100%</div></div>
+        <div class="rc"><div class="k">Time to collapse</div><div class="v" id="spTime" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="spTxt" style="margin-top:12px;min-height:70px">The electron loses energy as it goes, so its orbit shrinks. Nothing in Rutherford's model stops this.</div>
+    </div>
+    <p>If this really happened, every atom in the universe would have collapsed almost as soon as it formed — and matter would not exist. Atoms plainly do exist and are stable. So Rutherford's model, right about the nucleus, was missing something big.</p>
+    <div class="panel">
+      <p style="font-size:14.5px;margin:0 0 12px">Tick every statement that Rutherford's model could <b>not</b> account for.</p>
+      <div class="chips" id="g5"></div>
+      <div class="row"><button class="act" id="g5check">Check my answers</button></div>
+      <div class="score" id="g5s"></div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Bohr's answer</div>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="40" data-coin="20">
+  <summary><span class="mno">06</span><span class="mt"><b>Fixed shells</b><i>Section 8.2.3 · stationary states and energy levels</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>In 1913 Niels Bohr fixed the problem by adding a rule: electrons may only occupy certain orbits, and while an electron stays in one of them it does <b>not</b> radiate. Move the electron between shells and watch what that costs or releases.</p>
+    <div class="panel">
+      <canvas id="shellCv" height="260" aria-label="Electron shells K, L, M and N with an electron jumping between them"></canvas>
+      <div class="row">
+        <button class="act" id="shK">K · n=1</button>
+        <button class="act" id="shL">L · n=2</button>
+        <button class="act" id="shM">M · n=3</button>
+        <button class="act" id="shN">N · n=4</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Now in</div><div class="v" id="shWhere">K · n=1</div></div>
+        <div class="rc"><div class="k">Energy</div><div class="v" id="shEnergy" style="font-size:12px">lowest</div></div>
+        <div class="rc"><div class="k">The jump</div><div class="v" id="shJump" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="shTxt" style="margin-top:12px;min-height:70px">K is the shell closest to the nucleus and the lowest in energy. Send the electron outward and it must absorb energy; bring it inward and it releases the same amount.</div>
+    </div>
+    <p>The shells are labelled K, L, M, N… or numbered n = 1, 2, 3, 4. Energy rises as you move outward, and an electron may only ever hold one of these values — never anything in between. That single rule is what makes the atom stable, and it is why Bohr's model survived where Rutherford's could not.</p>
+    <div class="curio">
+      <h5>Why K, and not A?</h5>
+      <div class="note">The names come from early X-ray work. Charles Barkla labelled the first series of lines he saw K rather than A, deliberately leaving room in case a series was later found beneath it. None ever was — but the gap in the alphabet stayed, and Bohr took the same letters for the shells.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="35" data-coin="18">
+  <summary><span class="mno">07</span><span class="mt"><b>Three particles, three jobs</b><i>Table 8.1 · and Chadwick's neutron, 1932</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>A helium atom has two protons but weighs about four times a hydrogen atom, not twice. Something in the nucleus was adding mass without adding charge. In 1932 James Chadwick found it: the <b>neutron</b>, as heavy as a proton and electrically neutral.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tick the box where the row and the column agree. Tap once for a tick, twice for a cross.</div>
+      <table class="tick" id="g7"></table>
+      <div class="row"><button class="act" id="g7check">Check my answers</button></div>
+      <div class="score" id="g7s"></div>
+    </div>
+    <p>Protons and neutrons together are called <b>nucleons</b>, and they carry essentially all of an atom's mass. The electron is so light — about one two-thousandth of a proton — that it is simply ignored when mass is being counted.</p>
+    <div class="curio">
+      <h5>What stops the nucleus flying apart?</h5>
+      <div class="note">Every proton in a nucleus repels every other proton, because they all carry positive charge. Neutrons help by getting in between, spacing the protons out and adding to the strong nuclear force that binds the whole thing. That is why heavy atoms need proportionally more neutrons: iron has 26 protons to 30 neutrons, while uranium needs 146 neutrons to hold 92 protons together.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Naming and counting</div>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="30" data-coin="15">
+  <summary><span class="mno">08</span><span class="mt"><b>Symbols of the elements</b><i>Section 8.4 · the ones that come from Latin</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Dalton drew pictures for the elements. Berzelius replaced them in 1813 with letters taken from the element's Latin name, which is why a handful of symbols look nothing like the English word. These are the ones that catch people out.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap an element, then tap its symbol.</div>
+      <div class="match"><div id="g8a"></div><div id="g8b"></div></div>
+      <div class="score" id="g8s"></div>
+    </div>
+    <p>The rules are worth knowing: the first letter is always a capital and the second, if there is one, is always lower case — aluminium is Al, never AL. Some symbols take a letter from further into the name, like chlorine, Cl, and zinc, Zn. Today the names and symbols are approved internationally by IUPAC, so a chemist anywhere reads them the same way.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="45" data-coin="25">
+  <summary><span class="mno">09</span><span class="mt"><b>Atomic number and mass number</b><i>Sections 8.5 and 8.6 · Z, A and the notation</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Change what is in the nucleus and see what you have built. The proton count alone decides which element it is; add neutrons and you change its mass but not its identity.</p>
+    <div class="panel">
+      <canvas id="znCv" height="250" aria-label="A nucleus built from a chosen number of protons and neutrons"></canvas>
+      <div class="knob">
+        <label>Protons <b id="znPV">1</b></label>
+        <input type="range" id="znP" min="1" max="20" value="1" aria-label="Number of protons">
+      </div>
+      <div class="knob">
+        <label>Neutrons <b id="znNV">0</b></label>
+        <input type="range" id="znN" min="0" max="26" value="0" aria-label="Number of neutrons">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Atomic number Z</div><div class="v" id="znZ">1</div></div>
+        <div class="rc"><div class="k">Mass number A</div><div class="v" id="znA">1</div></div>
+        <div class="rc"><div class="k">Element</div><div class="v" id="znName" style="font-size:12px">Hydrogen</div></div>
+      </div>
+      <div class="note" id="znTxt" style="margin-top:12px;min-height:70px">Protium: one proton, no neutrons. The commonest atom in the universe.</div>
+    </div>
+    <p><b>Atomic number Z</b> is the number of protons, and it identifies the element — nothing else does. <b>Mass number A</b> is the number of protons plus neutrons, the total count of nucleons. Written together, the mass number goes above and the atomic number below, as in carbon-12.</p>
+    <div class="curio">
+      <h5>Where the electrons went</h5>
+      <div class="note">A neutral atom has as many electrons as protons, so the electron count is Z as well. They are left out of the mass number because they contribute almost nothing to the mass — a proton is roughly 1836 times heavier than an electron.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="45" data-coin="25">
+  <summary><span class="mno">10</span><span class="mt"><b>Work the numbers</b><i>Table 8.5 and the end-of-chapter questions</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Six atoms, each described by two of its numbers. Work out the third. Remember that in a neutral atom the electron count equals the proton count, and that A = p + n.</p>
+    <div class="panel">
+      <table class="tick" id="g10"></table>
+      <div class="row"><button class="act" id="g10check">Check my answers</button></div>
+      <div class="score" id="g10s"></div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 5 · Electrons in shells</div>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="45" data-coin="25">
+  <summary><span class="mno">11</span><span class="mt"><b>Build up an atom</b><i>Section 8.7 · the 2n² rule, element by element</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Add one electron at a time and watch where it has to go. A shell numbered n holds at most 2n² electrons — 2 in K, 8 in L, 18 in M — but no outermost shell ever holds more than 8, and a shell only starts filling once the one inside it is full.</p>
+    <div class="panel">
+      <canvas id="buCv" height="270" aria-label="Electrons filling the K, L and M shells for the first eighteen elements"></canvas>
+      <div class="knob">
+        <label>Atomic number <b id="buZV">1</b></label>
+        <input type="range" id="buZ" min="1" max="18" value="1" aria-label="Atomic number from 1 to 18">
+      </div>
+      <div class="row">
+        <button class="act" id="buPrev">Previous</button>
+        <button class="act" id="buNext">Next element</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Element</div><div class="v" id="buName" style="font-size:12px">Hydrogen · H</div></div>
+        <div class="rc"><div class="k">Configuration</div><div class="v" id="buConfig">1</div></div>
+        <div class="rc"><div class="k">Outermost shell</div><div class="v" id="buValence">1 electron</div></div>
+      </div>
+      <div class="note" id="buTxt" style="margin-top:12px;min-height:70px">Hydrogen's single electron goes into K, the shell nearest the nucleus and the lowest in energy.</div>
+    </div>
+    <p>The distribution of electrons across the shells is the atom's <b>electronic configuration</b>, and it is written innermost first: sodium is 2, 8, 1. Watch what happens at neon and at argon — the outermost shell reaches eight and the next electron has to start a whole new shell.</p>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="40" data-coin="20">
+  <summary><span class="mno">12</span><span class="mt"><b>Valency</b><i>Section 8.8 · what an atom will do to reach an octet</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>An outermost shell holding eight electrons is an <b>octet</b>, and an atom with one is stable and largely unreactive. Everything else is trying to get there — by losing electrons, gaining them, or sharing. The number involved is the atom's <b>valency</b>.</p>
+    <p>Fewer than four electrons in the valence shell and it is cheaper to lose them: sodium is 2, 8, 1, so it loses one and has a valency of 1. More than four and it is cheaper to gain: oxygen is 2, 6, so it gains two and its valency is 2. Exactly four, like carbon, and it shares — valency 4.</p>
+    <div class="panel">
+      <div id="g12"></div>
+      <div class="score" id="g12s"></div>
+    </div>
+    <div class="curio">
+      <h5>The elements that do nothing</h5>
+      <div class="note">Helium (2), neon (2, 8) and argon (2, 8, 8) already have full outermost shells, so they have nothing to gain, lose or share. Their valency is 0, and they were the last elements to be discovered precisely because they refuse to react with anything.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 6 · Isotopes and isobars</div>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="35" data-coin="18">
+  <summary><span class="mno">13</span><span class="mt"><b>Twin atoms</b><i>Section 8.9.1 · isotopes</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Dalton thought every atom of an element was identical. He was almost right. Atoms of one element always have the same number of protons — but they can differ in neutrons, and so in mass. These are <b>isotopes</b>.</p>
+    <div class="panel">
+      <canvas id="isoCv" height="240" aria-label="The isotopes of hydrogen and of carbon compared"></canvas>
+      <div class="row">
+        <button class="act" id="isoHyd">Hydrogen</button>
+        <button class="act" id="isoCar">Carbon</button>
+      </div>
+      <div class="note" id="isoTxt" style="margin-top:12px;min-height:84px">Choose an element to see its isotopes side by side. Count the protons in each, then count the neutrons.</div>
+    </div>
+    <p>All three hydrogen isotopes have one proton and one electron. Because chemistry is governed almost entirely by the electrons, isotopes of an element behave the same chemically — they differ in physical properties like melting and boiling point, and in whether they are radioactive.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">That difference makes certain isotopes extremely useful. Match each to what it is used for.</div>
+      <div class="match"><div id="g13a"></div><div id="g13b"></div></div>
+      <div class="score" id="g13s"></div>
+    </div>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="40" data-coin="20">
+  <summary><span class="mno">14</span><span class="mt"><b>Average atomic mass</b><i>Section 8.9.1A · why chlorine is 35.5</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Chlorine comes in two isotopes, of mass 35 u and 37 u. So what is the mass of "a chlorine atom"? Take the plain average of 35 and 37 and you get 36 — but nature does not supply them in equal numbers. Slide the abundance and watch the two answers separate.</p>
+    <div class="panel">
+      <canvas id="avgCv" height="250" aria-label="The mass of chlorine as a simple average and as an abundance-weighted average"></canvas>
+      <div class="knob">
+        <label>Share that is chlorine-35 <b id="avgPV">75%</b></label>
+        <input type="range" id="avgP" min="0" max="100" value="75" aria-label="Percentage of chlorine-35">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Simple mean</div><div class="v" id="avgSimple">36 u</div></div>
+        <div class="rc"><div class="k">Weighted mean</div><div class="v" id="avgWeighted">35.5 u</div></div>
+        <div class="rc"><div class="k">Working</div><div class="v" id="avgWork" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="avgTxt" style="margin-top:12px;min-height:70px">The simple mean never moves, because it ignores how common each isotope actually is. The weighted mean follows the abundance.</div>
+    </div>
+    <p>Chlorine-35 makes up about 75% of natural chlorine and chlorine-37 about 25%, so the <b>weighted average atomic mass</b> is (35 × 75/100) + (37 × 25/100) = 35.5 u. No single chlorine atom weighs 35.5 u — take a million of them and you get roughly 750 000 of one and 250 000 of the other.</p>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="35" data-coin="18">
+  <summary><span class="mno">15</span><span class="mt"><b>Isotopes, isobars or neither?</b><i>Section 8.9.2 · telling the pairs apart</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Two atoms with the <b>same atomic number</b> and different mass numbers are <b>isotopes</b> — same element, different neutron count. Two atoms with the <b>same mass number</b> and different atomic numbers are <b>isobars</b> — different elements that happen to have the same total of nucleons.</p>
+    <div class="panel">
+      <div id="g15"></div>
+      <div class="score" id="g15s"></div>
+    </div>
+    <div class="curio">
+      <h5>The story does not end here</h5>
+      <div class="note">Bohr's neat orbits turned out not to be right either. Electrons do not follow fixed paths; the modern model describes clouds of probability, regions where an electron is likely to be rather than places it definitely is. That is the model on the far right of the badge above — and it will not be the last one.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 7 · The boss</div>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="80" data-coin="60">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions across the whole journey, from Dalton's sphere to the electron cloud. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+<footer>NCERT Class 9 Science · Chapter 8</footer>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- .wrap -->
+
+<script>
+/*@include shared/storage.js*/
+
+/* ============================================================
+   Chapter 8 — Journey Inside the Atom
+   Progress metaphor: the model of the atom itself, improving.
+   The badge starts as Dalton's featureless sphere and is
+   replaced, stage by stage, exactly as the science was —
+   plum pudding, then a nucleus, then unstable orbits, then
+   Bohr's fixed shells, and finally the modern electron cloud.
+   Fig. 8.16 of the chapter, turned into a progress bar.
+   ============================================================ */
+const CH = {
+  id: '9-science-8',
+  key: 'ch08Atom',
+  total: 16,
+  stages: [
+    { at:0,   f:0.00, name:'A solid sphere',      d:'Dalton’s atom: the smallest thing there is, featureless and indivisible. It held for a century.' },
+    { at:60,  f:0.14, name:'Something inside',    d:'Radioactivity gives it away. Atoms emit particles, so they cannot be indivisible after all.' },
+    { at:140, f:0.28, name:'Plums in the pudding',d:'Thomson finds the electron and dots them through a sphere of positive charge. Neutral at last, and testable.' },
+    { at:250, f:0.44, name:'A nucleus appears',   d:'One α-particle comes back. All the positive charge and nearly all the mass sit in a tiny centre.' },
+    { at:370, f:0.62, name:'Orbits, but unstable',d:'Electrons circle like planets — and should radiate away their energy and spiral in. Atoms would not exist.' },
+    { at:470, f:0.80, name:'Fixed shells',        d:'Bohr allows only certain orbits, and forbids radiating inside them. The atom is stable at last.' },
+    { at:560, f:1.00, name:'The electron cloud',  d:'Even Bohr was not final. Electrons have no fixed path, only regions where they are likely to be.' }
+  ],
+  paint(x, W, st, S){
+    const H = W, cx = W/2, cy = H/2;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+    x.fillStyle = '#F0E9FA'; x.fillRect(0,0,W,H);
+
+    const R = W*0.34;
+    const dot = (a, r, rad, col) => {
+      x.fillStyle = col;
+      x.beginPath(); x.arc(cx + Math.cos(a)*r, cy + Math.sin(a)*r, rad, 0, 7); x.fill();
+    };
+
+    if(f < 0.21){
+      // Dalton: a featureless sphere. Faint speckles once radioactivity hints otherwise.
+      const g = x.createRadialGradient(cx-R*0.3, cy-R*0.3, R*0.1, cx, cy, R);
+      g.addColorStop(0,'#B9B3C4'); g.addColorStop(1,'#7C7488');
+      x.fillStyle = g;
+      x.beginPath(); x.arc(cx, cy, R, 0, 7); x.fill();
+      if(f > 0.07){
+        const a = (f-0.07)/0.14;
+        x.strokeStyle = 'rgba(180,124,240,' + (a*0.9) + ')'; x.lineWidth = 1.5;
+        for(let i=0;i<4;i++){
+          const ang = i*1.4 + 0.4;
+          x.beginPath();
+          x.moveTo(cx + Math.cos(ang)*R*0.5, cy + Math.sin(ang)*R*0.5);
+          x.lineTo(cx + Math.cos(ang)*(R + 12*a), cy + Math.sin(ang)*(R + 12*a));
+          x.stroke();
+        }
+      }
+    } else if(f < 0.37){
+      // Thomson: electrons embedded through a positive sphere
+      x.fillStyle = '#D9536B';
+      x.beginPath(); x.arc(cx, cy, R, 0, 7); x.fill();
+      x.fillStyle = 'rgba(255,255,255,.16)';
+      x.beginPath(); x.arc(cx-R*0.32, cy-R*0.32, R*0.42, 0, 7); x.fill();
+      for(let i=0;i<8;i++) dot(i*0.9+0.3, R*(0.28 + (i%3)*0.24), 3.4, '#2F3A63');
+    } else if(f < 0.70){
+      // Rutherford: a tiny dense nucleus, mostly empty, electrons out on wide orbits
+      const em = Math.min(1,(f-0.37)/0.14);
+      x.strokeStyle = 'rgba(124,116,136,' + (0.30*em) + ')'; x.lineWidth = 1;
+      x.beginPath(); x.arc(cx, cy, R, 0, 7); x.stroke();
+      x.fillStyle = '#2F3A63';
+      x.beginPath(); x.arc(cx, cy, W*0.045, 0, 7); x.fill();
+      // orbits, tilted, with the spiral hinted once instability is the point
+      const spiral = f > 0.55 ? (f-0.55)/0.15 : 0;
+      for(let i=0;i<3;i++){
+        const ang = i*Math.PI/3;
+        x.save(); x.translate(cx,cy); x.rotate(ang);
+        x.strokeStyle = 'rgba(180,124,240,.65)'; x.lineWidth = 1.3;
+        x.beginPath(); x.ellipse(0, 0, R*0.86, R*0.30, 0, 0, 7); x.stroke();
+        x.fillStyle = '#3FD0C0';
+        const er = R*0.86 * (1 - spiral*0.55);
+        x.beginPath(); x.arc(er*Math.cos(i*2.1), R*0.30*Math.sin(i*2.1), 3.4, 0, 7); x.fill();
+        x.restore();
+      }
+      if(spiral > 0){
+        x.strokeStyle = 'rgba(229,72,77,' + (spiral*0.8) + ')'; x.lineWidth = 1.2;
+        x.beginPath();
+        for(let t=0;t<7;t+=0.12){
+          const rr = R*0.8*(1 - t/7);
+          const px = cx + Math.cos(t*2)*rr, py = cy + Math.sin(t*2)*rr;
+          t===0 ? x.moveTo(px,py) : x.lineTo(px,py);
+        }
+        x.stroke();
+      }
+    } else if(f < 0.93){
+      // Bohr: fixed concentric shells, each carrying electrons
+      x.fillStyle = '#2F3A63';
+      x.beginPath(); x.arc(cx, cy, W*0.055, 0, 7); x.fill();
+      const shells = [R*0.42, R*0.70, R*0.96], counts = [2, 8, 6];
+      shells.forEach((r,i)=>{
+        x.strokeStyle = 'rgba(180,124,240,.75)'; x.lineWidth = 1.2;
+        x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke();
+        const n = counts[i], grown = Math.min(n, Math.round(n * Math.min(1,(f-0.70)/0.20)) + (i?0:n));
+        for(let k=0;k<Math.min(n,grown);k++) dot(k*(2*Math.PI/n) + i*0.5, r, 3.2, '#3FD0C0');
+      });
+    } else {
+      // the modern model: a probability cloud, densest near the nucleus
+      const g = x.createRadialGradient(cx, cy, W*0.03, cx, cy, R*1.04);
+      g.addColorStop(0,   'rgba(180,124,240,.95)');
+      g.addColorStop(0.35,'rgba(180,124,240,.42)');
+      g.addColorStop(0.7, 'rgba(63,208,192,.20)');
+      g.addColorStop(1,   'rgba(63,208,192,0)');
+      x.fillStyle = g;
+      x.beginPath(); x.arc(cx, cy, R*1.04, 0, 7); x.fill();
+      // speckle, to read as probability rather than a solid ball
+      for(let i=0;i<70;i++){
+        const a = i*2.399, rr = R*Math.sqrt((i%23)/23)*0.98;
+        x.fillStyle = 'rgba(47,58,99,' + (0.42*(1-rr/R)) + ')';
+        x.beginPath(); x.arc(cx+Math.cos(a)*rr, cy+Math.sin(a)*rr, 1.5, 0, 7); x.fill();
+      }
+      x.fillStyle = '#2F3A63';
+      x.beginPath(); x.arc(cx, cy, W*0.038, 0, 7); x.fill();
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ============================================================
+   Chapter 8 · Interactives
+   halving matter (M1) · cathode ray tube (M2)
+   gold foil simulation (M3) · atom-to-nucleus scale (M4)
+   the spiralling electron (M5) · Bohr shells (M6)
+   nucleus builder (M9) · shell filling (M11)
+   isotopes (M13) · average atomic mass (M14)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#B47CF0', A2='#3FD0C0',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', BG='#10141F',
+      PROTON='#E0574E', NEUTRON='#7C8AA8', ELECTRON='#3FD0C0';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* The first twenty elements, with the neutron count of the commonest isotope.
+   Shared by the nucleus builder (M9) and the shell-filling bench (M11). */
+const ELEMENTS = [
+  {z:1,  sym:'H',  name:'Hydrogen',  n:0},  {z:2,  sym:'He', name:'Helium',    n:2},
+  {z:3,  sym:'Li', name:'Lithium',   n:4},  {z:4,  sym:'Be', name:'Beryllium', n:5},
+  {z:5,  sym:'B',  name:'Boron',     n:6},  {z:6,  sym:'C',  name:'Carbon',    n:6},
+  {z:7,  sym:'N',  name:'Nitrogen',  n:7},  {z:8,  sym:'O',  name:'Oxygen',    n:8},
+  {z:9,  sym:'F',  name:'Fluorine',  n:10}, {z:10, sym:'Ne', name:'Neon',      n:10},
+  {z:11, sym:'Na', name:'Sodium',    n:12}, {z:12, sym:'Mg', name:'Magnesium', n:12},
+  {z:13, sym:'Al', name:'Aluminium', n:14}, {z:14, sym:'Si', name:'Silicon',   n:14},
+  {z:15, sym:'P',  name:'Phosphorus',n:16}, {z:16, sym:'S',  name:'Sulfur',    n:16},
+  {z:17, sym:'Cl', name:'Chlorine',  n:18}, {z:18, sym:'Ar', name:'Argon',     n:22},
+  {z:19, sym:'K',  name:'Potassium', n:20}, {z:20, sym:'Ca', name:'Calcium',   n:20}
+];
+
+/* Bohr and Bury: a shell numbered n takes at most 2n squared, no outermost
+   shell ever takes more than eight, and a shell only begins once the one
+   inside it is full. Over the range this chapter uses — hydrogen to calcium —
+   those three rules collapse to the caps below, which reproduce Table 8.4
+   exactly. Beyond calcium the M shell really does go on to 18 and this would
+   need the general rule; the chapter does not go there. */
+function configOf(z){
+  const caps = [2, 8, 8, 2];              // K, L, M, N as far as Z = 20
+  const sh = [];
+  let left = z;
+  for(let i = 0; i < caps.length && left > 0; i++){
+    const take = Math.min(left, caps[i]);
+    sh.push(take);
+    left -= take;
+  }
+  return sh;
+}
+
+
+/* ============================================================
+   M1 — halving a piece of matter until nothing is left to halve
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('cutCv');
+  if(!cv) return;
+  const START=0.1;                      // 10 cm, in metres
+  let cuts=0;
+  const size = () => START/Math.pow(2,cuts);
+  function fmt(m){
+    if(m>=0.01)  return (m*100).toFixed(m>=0.05?0:2)+' cm';
+    if(m>=1e-3)  return (m*1000).toFixed(1)+' mm';
+    if(m>=1e-6)  return (m*1e6).toFixed(1)+' µm';
+    if(m>=1e-9)  return (m*1e9).toFixed(2)+' nm';
+    return (m*1e12).toFixed(1)+' pm';
+  }
+  function what(m){
+    if(m>=0.01)   return 'a lump of matter';
+    if(m>=1e-3)   return 'a crumb';
+    if(m>=1e-4)   return 'a grain of dust';
+    if(m>=1e-5)   return 'the width of a hair';
+    if(m>=1e-6)   return 'a bacterium';
+    if(m>=1e-8)   return 'a virus';
+    if(m>=3e-10)  return 'a small molecule';
+    return 'a single atom';
+  }
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,230); if(!x) return;
+    const W=cv.clientWidth, H=230;
+    bg(x,W,H);
+    // a log ruler from 10 cm down to 0.1 nm
+    const L=44, R=W-16, y=H-52;
+    const lo=Math.log10(1e-10), hi=Math.log10(START);
+    const pos = m => L + (Math.log10(m)-lo)/(hi-lo)*(R-L);
+    x.strokeStyle=RULE; x.lineWidth=1.5;
+    x.beginPath(); x.moveTo(L,y); x.lineTo(R,y); x.stroke();
+    [[1e-1,'10 cm'],[1e-3,'1 mm'],[1e-6,'1 µm'],[1e-9,'1 nm'],[1e-10,'atom']].forEach(t=>{
+      const px=pos(t[0]);
+      x.strokeStyle='rgba(142,154,192,.4)';
+      x.beginPath(); x.moveTo(px,y-5); x.lineTo(px,y+5); x.stroke();
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText(t[1], px, y+9);
+    });
+    // the marker, and the piece itself drawn to a clamped size
+    const m=size(), px=Math.min(R,Math.max(L,pos(m)));
+    x.fillStyle=A1; x.beginPath(); x.arc(px, y, 5, 0, 7); x.fill();
+    const side=Math.max(3, 74*Math.pow(0.86, cuts));
+    x.fillStyle = cuts>=30 ? A2 : '#C9A227';
+    x.fillRect(W/2-side/2, 62-side/2, side, side);
+    if(cuts>=30){
+      x.strokeStyle=A2; x.lineWidth=1;
+      x.beginPath(); x.arc(W/2, 62, side*0.9, 0, 7); x.stroke();
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('drawn to a clamped scale — the real thing shrinks far faster', 8, 8);
+    mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(fmt(m), W/2, 62+side/2+10);
+  }
+  function upd(){
+    const m=size();
+    document.getElementById('cutN').textContent=cuts;
+    document.getElementById('cutSize').textContent=fmt(m);
+    document.getElementById('cutWhat').textContent=what(m);
+    document.getElementById('cutTxt').textContent =
+      cuts===0  ? 'Start cutting. Each cut halves what is left. How many do you think it takes before there is nothing left to cut?'
+      : cuts<10 ? 'Still plainly a piece of something. Halving feels like it could go on for ever — which is exactly what Kanada and Democritus disagreed about.'
+      : cuts<20 ? 'Now below anything you could see. Twenty halvings have taken 10 cm down to '+fmt(m)+', and there is no sign of a limit yet.'
+      : cuts<30 ? 'Down among molecules. A few more halvings and the question stops being philosophical.'
+      : 'Cut number '+cuts+' leaves a single atom, about a ten-billionth of a metre across. Halve this and you no longer have the element at all — you have its pieces. Thirty-odd cuts is all it took.';
+    draw();
+  }
+  function bump(n){
+    const was=cuts;
+    cuts=Math.min(31, cuts+n);
+    if(cuts!==was){
+      ev('explore');
+      if(cuts>=30) complete('m1');
+    }
+    upd();
+  }
+  const h=document.getElementById('cutHalf');   if(h) h.onclick=()=>bump(1);
+  const t=document.getElementById('cutTen');    if(t) t.onclick=()=>bump(10);
+  const r=document.getElementById('cutReset');  if(r) r.onclick=()=>{ cuts=0; upd(); };
+  upd(); reg('m1',draw);
+})();
+
+Q.order('g1','g1s',[
+  'Kanada and Democritus imagine an indivisible particle',
+  'Dalton makes it a scientific theory (1808)',
+  'Radioactivity shows atoms are divisible after all',
+  'Thomson finds the electron (1897)'
+], 'm1', 'In order. Two thousand years of argument, then ninety years of evidence.');
+
+/* ============================================================
+   M2 — the cathode ray tube
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('crtCv');
+  if(!cv) return;
+  let mode='off'; const seen={};
+  const TXT={
+    off:'With no field applied the rays run dead straight from the cathode to the anode and strike the far end of the tube. On their own they tell you nothing about what they are made of.',
+    elec:'Switch on an electric field and the beam swings towards the POSITIVE plate. Only something carrying negative charge does that — so the rays are streams of negatively charged particles, not light.',
+    mag:'A magnetic field bends the beam too, and by how much it bends Thomson could work out that these particles are far lighter than any whole atom — around two thousand times lighter than a hydrogen atom.'
+  };
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,230); if(!x) return;
+    const W=cv.clientWidth, H=230;
+    bg(x,W,H);
+    const ty=H*0.55, th=64, L=34, R=W-24;
+    // the tube
+    x.strokeStyle='#5A6B78'; x.lineWidth=2;
+    x.beginPath(); x.roundRect ? x.roundRect(L, ty-th/2, R-L, th, 10) : x.rect(L, ty-th/2, R-L, th);
+    x.stroke();
+    x.fillStyle='rgba(63,208,192,.05)';
+    x.fill();
+    // electrodes
+    x.fillStyle=BAD; x.fillRect(L-6, ty-14, 8, 28);
+    mono(x,9); x.fillStyle=BAD; x.textAlign='center'; x.textBaseline='top';
+    x.fillText('cathode −', L+12, ty+th/2+6);
+    x.fillStyle=A2; x.fillRect(R-2, ty-14, 8, 28);
+    x.fillStyle=A2; x.textAlign='center';
+    x.fillText('anode +', R-16, ty+th/2+6);
+    // the plates or magnet, when a field is on
+    if(mode==='elec'){
+      x.fillStyle=A2; x.fillRect(W*0.46, ty-th/2-16, 46, 6);
+      x.fillStyle=BAD; x.fillRect(W*0.46, ty+th/2+10, 46, 6);
+      mono(x,10,500); x.fillStyle=A2; x.textAlign='left'; x.textBaseline='bottom';
+      x.fillText('+ plate', W*0.46, ty-th/2-20);
+      x.fillStyle=BAD; x.textBaseline='top';
+      x.fillText('− plate', W*0.46, ty+th/2+20);
+    } else if(mode==='mag'){
+      mono(x,11,500); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText('N', W*0.49, ty-th/2-8);
+      x.textBaseline='top';
+      x.fillText('S', W*0.49, ty+th/2+8);
+    }
+    // the beam
+    const bend = mode==='off' ? 0 : mode==='elec' ? -20 : 15;
+    x.strokeStyle=A1; x.lineWidth=2.5;
+    x.beginPath();
+    for(let i=0;i<=40;i++){
+      const t=i/40, bx=L+2+(R-L-4)*t;
+      const drift = t<0.45 ? 0 : bend*Math.pow((t-0.45)/0.55, 2);
+      const by=ty+drift;
+      i?x.lineTo(bx,by):x.moveTo(bx,by);
+    }
+    x.stroke();
+    // where it lands
+    x.fillStyle=A1;
+    x.beginPath(); x.arc(R-4, ty+bend, 4.5, 0, 7); x.fill();
+    if(mode!=='off'){
+      x.strokeStyle='rgba(180,124,240,.35)'; x.lineWidth=1; x.setLineDash([4,4]);
+      x.beginPath(); x.moveTo(L+2, ty); x.lineTo(R-4, ty); x.stroke(); x.setLineDash([]);
+      mono(x,9); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='middle';
+      x.fillText('undeflected', R-10, ty-9);
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('gas at very low pressure · high voltage across the electrodes', 8, 8);
+  }
+  function set(m){
+    mode=m;
+    document.getElementById('crtDefl').textContent =
+      m==='off' ? 'travels straight' : m==='elec' ? 'bends to the + plate' : 'bends across the field';
+    document.getElementById('crtConc').textContent =
+      m==='off' ? '—' : m==='elec' ? 'negatively charged' : 'far lighter than atoms';
+    document.getElementById('crtTxt').textContent=TXT[m];
+    if(!seen[m]){ seen[m]=1; ev('explore'); }
+    draw();
+  }
+  const B=(id,m)=>{ const b=document.getElementById(id); if(b) b.onclick=()=>set(m); };
+  B('crtOff','off'); B('crtElec','elec'); B('crtMag','mag');
+  draw(); reg('m2',draw);
+})();
+
+/* ============================================================
+   M3 — the gold foil experiment, fired one particle at a time
+
+   Each shot picks a random impact parameter b: how far off-centre
+   it passes the nearest nucleus. Rutherford scattering turns a
+   small b into a large deflection, so the rare near-misses are the
+   ones that come back. The nucleus is tiny compared with the atom,
+   so small b is correspondingly rare — which is why a bounce-back
+   takes hundreds of shots to see, exactly as it did in 1911.
+   Under Thomson's model the charge is spread through the whole
+   atom and nothing can turn a particle round at all.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('gfCv');
+  if(!cv) return;
+  let model='ruth', fired=0, through=0, defl=0, back=0;
+  let sawBack=false, sawDefl=false, sawThomson=false, ruthFired=0;
+  /* A back-scatter is genuinely about 1 in 20 000, so it cannot be the gate.
+     Seeing the pattern and comparing the two models is the lesson; catching
+     one that comes back is the reward for keeping at it. */
+  const earned = () => sawThomson && sawDefl && (sawBack || ruthFired >= 1500);
+  const tracks=[];                       // recent paths, for drawing
+
+  /* The deflection angle for one shot, in radians.
+     b is drawn uniformly over the area a particle can cross, so
+     small impact parameters are rare in the right proportion. */
+  function shoot(){
+    const u = Math.random();
+    const b = Math.sqrt(u);              // uniform over area => sqrt for radius
+    if(model === 'thom'){
+      // a charge spread through the whole atom can only nudge it
+      return (Math.random()-0.5) * 0.06;
+    }
+    // Rutherford: tan(theta/2) proportional to 1/b
+    const K = 0.006;                     // sets how close you must pass
+    const theta = 2*Math.atan(K/Math.max(b, 1e-4));
+    return theta * (Math.random()<0.5 ? -1 : 1);
+  }
+  function classify(t){
+    const d = Math.abs(t)*180/Math.PI;
+    return d > 90 ? 'back' : d > 10 ? 'defl' : 'thru';
+  }
+  function fire(n){
+    for(let i=0;i<n;i++){
+      const t = shoot(), k = classify(t);
+      fired++;
+      if(k==='back'){ back++; if(model==='ruth') sawBack=true; }
+      else if(k==='defl'){ defl++; if(model==='ruth') sawDefl=true; }
+      else through++;
+      if(model==='ruth') ruthFired++;
+      tracks.push({ t, k, y:Math.random(), age:0 });
+      if(tracks.length>60) tracks.shift();
+    }
+    nums(); draw();
+    if(earned()) complete('m3');
+  }
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,260); if(!x) return;
+    const W=cv.clientWidth, H=260;
+    bg(x,W,H);
+    const fx=W*0.52, top=26, bot=H-30;
+    // the source
+    x.fillStyle='#3A4260'; x.fillRect(6, H/2-16, 22, 32);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('α source', 6, H/2+20);
+    // the foil, drawn as the model under test
+    if(model==='ruth'){
+      x.strokeStyle='rgba(201,162,39,.5)'; x.lineWidth=1;
+      for(let r=0;r<7;r++) for(let c=0;c<2;c++){
+        const ax=fx-8+c*17, ay=top+12+r*((bot-top-24)/6);
+        x.beginPath(); x.arc(ax, ay, 8, 0, 7); x.stroke();
+        x.fillStyle=PROTON;
+        x.beginPath(); x.arc(ax, ay, 1.6, 0, 7); x.fill();
+      }
+    } else {
+      x.fillStyle='rgba(217,83,107,.30)';
+      x.fillRect(fx-14, top, 30, bot-top);
+      x.fillStyle='rgba(47,58,99,.85)';
+      for(let i=0;i<22;i++){
+        x.beginPath();
+        x.arc(fx-10+(i*7)%26, top+8+((i*37)%(bot-top-16)), 1.8, 0, 7); x.fill();
+      }
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(model==='ruth'?'gold foil · nuclei':'gold foil · spread charge', fx+2, bot+6);
+    // the tracks
+    tracks.forEach((tr,i)=>{
+      const a=0.16 + 0.84*(i/tracks.length);
+      const y=top+18+tr.y*(bot-top-36);
+      const col = tr.k==='back' ? BAD : tr.k==='defl' ? GOLD : 'rgba(63,208,192,.85)';
+      x.strokeStyle = tr.k==='thru' ? 'rgba(63,208,192,'+(a*0.5)+')' : col;
+      x.lineWidth = tr.k==='thru' ? 1 : 1.8;
+      x.beginPath(); x.moveTo(30, H/2); x.lineTo(fx-4, y); x.stroke();
+      // the outgoing leg, turned by the scattering angle
+      const inA = Math.atan2(y-H/2, fx-4-30);
+      const out = inA + tr.t;
+      const len = 130;
+      x.beginPath(); x.moveTo(fx-4, y);
+      x.lineTo(fx-4+Math.cos(out)*len, y+Math.sin(out)*len);
+      x.stroke();
+    });
+    // the detector arc
+    x.strokeStyle='rgba(142,154,192,.25)'; x.lineWidth=1; x.setLineDash([3,4]);
+    x.beginPath(); x.arc(fx, H/2, Math.min(W*0.42, H*0.46), 0, 7); x.stroke(); x.setLineDash([]);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(model==='ruth'
+      ? 'Rutherford: all the charge in a tiny nucleus'
+      : 'Thomson: charge spread evenly through the atom', 8, 8);
+  }
+  function nums(){
+    document.getElementById('gfFired').textContent=fired;
+    document.getElementById('gfThrough').textContent=through;
+    document.getElementById('gfDefl').textContent=defl;
+    document.getElementById('gfBack').textContent=back;
+    document.getElementById('gfWhich').textContent = model==='ruth'?'Rutherford':'Thomson';
+    const pct = fired ? (100*through/fired).toFixed(1) : '—';
+    document.getElementById('gfTxt').textContent =
+      !fired ? 'Keep firing. A bounce-back is rare — you may need a few hundred shots before you see one, which is exactly the problem Geiger and Marsden faced.'
+      : model==='thom'
+        ? 'Thomson’s foil after '+fired+' shots: '+pct+'% straight through, '+defl+' deflected, and '+back+' bounced back. Spread the positive charge thinly and nothing in the foil is concentrated enough to turn an α-particle round. This is what the experiment was expected to show.'
+      : back
+        ? fired+' fired, '+pct+'% straight through, '+defl+' deflected sharply and '+back+' turned back the way they came. That last number is the discovery: something tiny, dense and positive is sitting in there. Now switch the foil to Thomson’s model and fire again.'
+        : fired+' fired and '+pct+'% have gone straight through — the atom is mostly empty space. '+defl+' have deflected sharply. A particle that comes right back is rarer still, around one in twenty thousand, so keep firing: that one is the whole point.';
+  }
+  const one=document.getElementById('gfOne');
+  if(one) one.onclick=()=>{ ev('explore'); fire(1); };
+  const many=document.getElementById('gfMany');
+  if(many) many.onclick=()=>{ ev('explore'); fire(250); };
+  const tog=document.getElementById('gfModel');
+  if(tog) tog.onclick=()=>{
+    model = model==='ruth' ? 'thom' : 'ruth';
+    if(model==='thom') sawThomson=true;
+    tog.textContent = 'Foil: ' + (model==='ruth'?'Rutherford':'Thomson');
+    tracks.length=0; fired=0; through=0; defl=0; back=0;
+    ev('explore'); nums(); draw();
+    if(earned()) complete('m3');
+  };
+  const rs=document.getElementById('gfReset');
+  if(rs) rs.onclick=()=>{ tracks.length=0; fired=0; through=0; defl=0; back=0; nums(); draw(); };
+  nums(); draw(); reg('m3',draw);
+  /* exposed so the test harness can check the statistics without clicking */
+  window.__gf = { shoot:()=>shoot(), classify, setModel:m=>{model=m;} };
+})();
+
+/* ============================================================
+   M4 — the atom against its nucleus
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('emptyCv'), sl=document.getElementById('emptyZ');
+  if(!cv||!sl) return;
+  const seen={};
+  const zoom = () => Math.pow(10, (+sl.value)/100*5);      // 1 to 100 000
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    const z=zoom(), cx=W/2, cy=H*0.46;
+    const R=Math.min(W*0.36, H*0.34);
+    // the atom: an outline that stays the same size as we zoom into it
+    x.strokeStyle='rgba(180,124,240,.65)'; x.lineWidth=1.5;
+    x.beginPath(); x.arc(cx, cy, R, 0, 7); x.stroke();
+    x.fillStyle='rgba(180,124,240,.05)'; x.fill();
+    // a few electrons, for scale
+    for(let i=0;i<4;i++){
+      const a=i*1.7+0.6;
+      x.fillStyle=ELECTRON;
+      x.beginPath(); x.arc(cx+Math.cos(a)*R*0.78, cy+Math.sin(a)*R*0.78, 2.6, 0, 7); x.fill();
+    }
+    // the nucleus, at 1/100000 of the atom, magnified by the zoom
+    const nr = R/1e5 * z;
+    if(nr < 0.6){
+      x.fillStyle=DIM; mono(x,10); x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('·', cx, cy);
+      mono(x,9); x.fillStyle=DIM;
+      x.fillText('nucleus: too small to draw', cx, cy+18);
+    } else {
+      x.fillStyle=PROTON;
+      x.beginPath(); x.arc(cx, cy, Math.min(nr, R*0.9), 0, 7); x.fill();
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the outline is the atom, held at a fixed size', 8, 8);
+    x.fillText('zoom ×' + (z>=1000 ? Math.round(z/1000)+'k' : Math.round(z)), 8, 22);
+    // the comparison, spelled out at the bottom
+    mono(x,10,500); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(cmp(z).a, cx, H-42);
+    mono(x,10); x.fillStyle=A2;
+    x.fillText(cmp(z).b, cx, H-24);
+  }
+  function cmp(z){
+    if(z<10)    return { a:'atom the size of a cricket ground', b:'nucleus: a peppercorn on the pitch' };
+    if(z<300)   return { a:'atom the size of a classroom',      b:'nucleus: a speck of dust' };
+    if(z<8000)  return { a:'atom the size of your palm',        b:'nucleus: barely a pinprick' };
+    return           { a:'atom the size of a football pitch',   b:'nucleus: now visible, a marble at the centre' };
+  }
+  function upd(){
+    const z=zoom();
+    document.getElementById('emptyZV').textContent='×'+(z>=1000?Math.round(z/1000)+'k':Math.round(z));
+    document.getElementById('emptyAtom').textContent=cmp(z).a.replace('atom the size of ','');
+    document.getElementById('emptyNuc').textContent=cmp(z).b.replace('nucleus: ','');
+    document.getElementById('emptyRatio').textContent='100 000 : 1';
+    document.getElementById('emptyTxt').textContent =
+      z<10    ? 'At this scale the nucleus is far too small to draw at all. An atom 100 m across — a cricket ground — would have a nucleus the size of a grain of black pepper on the pitch.'
+      : z<8000? 'Still almost nothing there. Everything inside that outline except the very centre is empty space with a handful of electrons in it.'
+      : 'Magnified a hundred thousand times, the nucleus finally becomes visible. Every bit of the atom’s positive charge and almost all of its mass is inside that dot.';
+    const k = z<10?'far':z<8000?'mid':'near';
+    if(!seen[k]){ seen[k]=1; ev('explore');
+      if(Object.keys(seen).length>=3) complete('m4'); }
+    draw();
+  }
+  sl.addEventListener('input',upd);
+  upd(); reg('m4',draw);
+})();
+
+/* ============================================================
+   M5 — the electron that should spiral in
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('spiralCv');
+  if(!cv) return;
+  let t=0, run=false, dead=false;
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    const cx=W/2, cy=H/2, R0=Math.min(W*0.32, H*0.36);
+    const frac=Math.max(0, 1-t/3.2);
+    const r=R0*frac;
+    // the path already travelled
+    x.strokeStyle='rgba(180,124,240,.35)'; x.lineWidth=1;
+    x.beginPath();
+    for(let s=0;s<=t;s+=0.03){
+      const rr=R0*Math.max(0,1-s/3.2), a=s*7;
+      const px=cx+Math.cos(a)*rr, py=cy+Math.sin(a)*rr;
+      s===0?x.moveTo(px,py):x.lineTo(px,py);
+    }
+    x.stroke();
+    // the nucleus
+    x.fillStyle=PROTON;
+    x.beginPath(); x.arc(cx, cy, 9, 0, 7); x.fill();
+    mono(x,10,500); x.fillStyle='#2A2118'; x.textAlign='center'; x.textBaseline='middle';
+    x.fillText('+', cx, cy);
+    // the electron
+    const a=t*7;
+    const ex=cx+Math.cos(a)*r, ey=cy+Math.sin(a)*r;
+    x.fillStyle=ELECTRON;
+    x.beginPath(); x.arc(ex, ey, 6, 0, 7); x.fill();
+    // radiation leaving it
+    if(run && frac>0){
+      x.strokeStyle='rgba(242,184,76,.55)'; x.lineWidth=1;
+      for(let i=1;i<=3;i++){
+        x.beginPath(); x.arc(ex, ey, 8+i*6+(t*30)%12, 0, 7); x.stroke();
+      }
+    }
+    if(frac<=0){
+      mono(x,12,500); x.fillStyle=BAD; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('collapsed', cx, cy-R0-16);
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('an accelerating charge radiates — and a circle is all acceleration', 8, 8);
+  }
+  function nums(){
+    const frac=Math.max(0,1-t/3.2);
+    document.getElementById('spEnergy').textContent=Math.round(frac*100)+'%';
+    document.getElementById('spTime').textContent = frac<=0 ? 'about 10⁻⁸ s' : run ? 'counting down' : '—';
+  }
+  tick('m5', ()=>{
+    if(!run) return;
+    t+=0.02;
+    if(t>=3.2){
+      t=3.2; run=false;
+      if(!dead){ dead=true; ev('explore'); }
+      document.getElementById('spTxt').textContent =
+        'The electron has reached the nucleus. On this model an atom would destroy itself in about ten nanoseconds — so all matter should have vanished the instant it formed. It plainly has not, so something in the model is wrong.';
+    }
+    nums(); draw();
+  });
+  const g=document.getElementById('spGo');
+  if(g) g.onclick=()=>{ if(!run && t<3.2){ run=true; ev('explore'); } };
+  const r=document.getElementById('spReset');
+  if(r) r.onclick=()=>{ run=false; t=0; nums(); draw();
+    document.getElementById('spTxt').textContent='The electron loses energy as it goes, so its orbit shrinks. Nothing in Rutherford’s model stops this.'; };
+  nums(); draw(); reg('m5',draw);
+  auto('m5', ()=>{ t=0; run=true; });
+})();
+
+Q.pick('g5','g5check','g5s',[
+  { t:'Why atoms are stable and do not collapse',           a:1 },
+  { t:'Why most α-particles pass straight through gold',    a:0 },
+  { t:'Why an orbiting electron does not radiate its energy away', a:1 },
+  { t:'Why a few α-particles bounce almost straight back',  a:0 },
+  { t:'Why electrons are restricted to certain orbits',     a:1 },
+  { t:'That nearly all the atom’s mass is in the nucleus',  a:0 }
+], 'm5',
+   'All six decided. Rutherford’s model explains the scattering results beautifully and says nothing at all about why the atom survives its own electrons.');
+
+/* ============================================================
+   M6 — Bohr's fixed shells, and the jumps between them
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('shellCv');
+  if(!cv) return;
+  const NAME=['K','L','M','N'];
+  const ENERGY=['lowest','higher','higher still','highest here'];
+  let at=0, prev=0, flash=0;
+  const seen={};
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,260); if(!x) return;
+    const W=cv.clientWidth, H=260;
+    bg(x,W,H);
+    const cx=W/2, cy=H/2;
+    const R=Math.min(W*0.40, H*0.42);
+    const rOf = i => R*(0.30 + i*0.235);
+    // the shells
+    for(let i=0;i<4;i++){
+      x.strokeStyle = i===at ? A1 : 'rgba(142,154,192,.30)';
+      x.lineWidth = i===at ? 2 : 1;
+      x.beginPath(); x.arc(cx, cy, rOf(i), 0, 7); x.stroke();
+      mono(x,9,i===at?500:400); x.fillStyle = i===at ? A1 : DIM;
+      x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText(NAME[i]+' · n='+(i+1), cx, cy-rOf(i)-4);
+    }
+    // the forbidden gap, called out between the two innermost shells
+    x.strokeStyle='rgba(229,72,77,.30)'; x.lineWidth=1; x.setLineDash([2,3]);
+    x.beginPath(); x.arc(cx, cy, (rOf(0)+rOf(1))/2, 0, 7); x.stroke(); x.setLineDash([]);
+    mono(x,8); x.fillStyle='rgba(229,72,77,.75)'; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText('no electron here', cx+6, cy-(rOf(0)+rOf(1))/2);
+    // the nucleus
+    x.fillStyle=PROTON;
+    x.beginPath(); x.arc(cx, cy, 10, 0, 7); x.fill();
+    // the electron on its shell
+    const a=Date.now()/700;
+    const ex=cx+Math.cos(a)*rOf(at), ey=cy+Math.sin(a)*rOf(at);
+    if(flash>0){
+      x.strokeStyle = (at>prev ? 'rgba(63,208,192,' : 'rgba(242,184,76,') + (flash*0.8) + ')';
+      x.lineWidth=2;
+      x.beginPath(); x.arc(cx, cy, rOf(prev), 0, 7); x.stroke();
+      x.beginPath(); x.moveTo(cx+Math.cos(a)*rOf(prev), cy+Math.sin(a)*rOf(prev)); x.lineTo(ex, ey); x.stroke();
+    }
+    x.fillStyle=ELECTRON;
+    x.beginPath(); x.arc(ex, ey, 6.5, 0, 7); x.fill();
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('in a shell the electron does not radiate — that is the whole rule', 8, 8);
+  }
+  tick('m6', ()=>{ if(flash>0) flash=Math.max(0, flash-0.03); draw(); });
+  function go(i){
+    if(i===at){ return; }
+    prev=at; at=i; flash=1;
+    document.getElementById('shWhere').textContent=NAME[at]+' · n='+(at+1);
+    document.getElementById('shEnergy').textContent=ENERGY[at];
+    const up=at>prev;
+    document.getElementById('shJump').textContent = (up?'absorbed ':'released ')+Math.abs(at-prev)+(Math.abs(at-prev)>1?' levels':' level');
+    document.getElementById('shTxt').textContent = up
+      ? 'Moving out from '+NAME[prev]+' to '+NAME[at]+', the electron must ABSORB energy — and not just any amount, but exactly the difference between the two levels. Anything less and the jump cannot happen at all.'
+      : 'Falling in from '+NAME[prev]+' to '+NAME[at]+', the electron RELEASES exactly the difference between the two levels. This is where the light an atom emits comes from.';
+    if(!seen[i]){ seen[i]=1; ev('explore');
+      if(Object.keys(seen).length>=3) complete('m6'); }
+    draw();
+  }
+  ['shK','shL','shM','shN'].forEach((id,i)=>{
+    const b=document.getElementById(id); if(b) b.onclick=()=>go(i);
+  });
+  draw(); reg('m6',draw);
+})();
+
+/* ============================================================
+   M7 — the three subatomic particles (Table 8.1)
+   ============================================================ */
+Q.grid('g7','g7check','g7s',{
+  head:'Is this true of the particle?', mid:'m7',
+  cols:['Electron','Proton','Neutron'],
+  rows:[
+    { l:'Carries a negative charge',        a:[1,0,0] },
+    { l:'Carries a positive charge',        a:[0,1,0] },
+    { l:'Has no charge at all',             a:[0,0,1] },
+    { l:'Sits inside the nucleus',          a:[0,1,1] },
+    { l:'Counts towards the mass number',   a:[0,1,1] },
+    { l:'Its mass is small enough to ignore',a:[1,0,0] }
+  ],
+  doneMsg:'All eighteen. Electrons outside and almost massless; protons and neutrons inside, and between them all of the mass.'
+});
+
+/* ============================================================
+   M8 — symbols taken from Latin
+   ============================================================ */
+Q.match('g8a','g8b','g8s',[
+  ['Iron · ferrum',        'Fe'],
+  ['Copper · cuprum',      'Cu'],
+  ['Gold · aurum',         'Au'],
+  ['Silver · argentum',    'Ag'],
+  ['Lead · plumbum',       'Pb'],
+  ['Sodium · natrium',     'Na'],
+  ['Potassium · kalium',   'K'],
+  ['Mercury · hydrargyros','Hg'],
+  ['Tungsten · wolfram',   'W']
+], 'm8',
+   'All nine. Every one of these symbols comes from a name in Latin, Greek or German rather than English — which is exactly why they have to be learnt rather than guessed.');
+
+/* ============================================================
+   M9 — building a nucleus: Z, A and the notation
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('znCv'), sP=document.getElementById('znP'), sN=document.getElementById('znN');
+  if(!cv||!sP||!sN) return;
+  const seen={};
+  const el = z => ELEMENTS.find(e=>e.z===z);
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    const p=+sP.value, n=+sN.value, e=el(p);
+    const cx=W*0.34, cy=H*0.46;
+    // the nucleons, packed in a spiral so the cluster grows sensibly
+    const total=p+n, R=Math.min(W*0.20, H*0.26);
+    const rad=Math.max(3.2, Math.min(8, 34/Math.sqrt(total)));
+    const kinds=[]; let pi=p, ni=n;
+    while(pi>0 || ni>0){                    // interleaved, as a real nucleus is
+      if(pi>0){ kinds.push('p'); pi--; }
+      if(ni>0){ kinds.push('n'); ni--; }
+    }
+    kinds.forEach((kind,i)=>{
+      const a=i*2.399, rr=R*Math.sqrt(i/Math.max(1,total));
+      x.fillStyle = kind==='p' ? PROTON : NEUTRON;
+      x.beginPath(); x.arc(cx+Math.cos(a)*rr, cy+Math.sin(a)*rr, rad, 0, 7); x.fill();
+    });
+    // the electron shells around it, for a neutral atom
+    const cfg=configOf(p);
+    cfg.forEach((c,i)=>{
+      const r=R+22+i*17;
+      x.strokeStyle='rgba(180,124,240,.30)'; x.lineWidth=1;
+      x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke();
+      for(let k=0;k<c;k++){
+        const a=k*(2*Math.PI/c)+i*0.4;
+        x.fillStyle=ELECTRON;
+        x.beginPath(); x.arc(cx+Math.cos(a)*r, cy+Math.sin(a)*r, 2.4, 0, 7); x.fill();
+      }
+    });
+    // the notation, set properly
+    const nx=W*0.80;
+    mono(x,11,500); x.fillStyle=A1; x.textAlign='right'; x.textBaseline='middle';
+    x.fillText(String(p+n), nx-4, cy-11);
+    x.fillStyle=A2;
+    x.fillText(String(p), nx-4, cy+11);
+    sans(x,30,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText(e?e.sym:'?', nx, cy);
+    mono(x,9); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText('mass number', nx+6, cy-30);
+    x.fillStyle=A2; x.textBaseline='top';
+    x.fillText('atomic number', nx+6, cy+30);
+    // a key
+    mono(x,9); x.textAlign='left'; x.textBaseline='top';
+    x.fillStyle=PROTON;  x.fillText('● proton', 8, H-34);
+    x.fillStyle=NEUTRON; x.fillText('● neutron', 8, H-20);
+    x.fillStyle=ELECTRON;x.fillText('● electron', 74, H-20);
+  }
+  function upd(){
+    const p=+sP.value, n=+sN.value, e=el(p);
+    document.getElementById('znPV').textContent=p;
+    document.getElementById('znNV').textContent=n;
+    document.getElementById('znZ').textContent=p;
+    document.getElementById('znA').textContent=p+n;
+    document.getElementById('znName').textContent = e ? e.name : '—';
+    const common = e && n===e.n;
+    document.getElementById('znTxt').textContent =
+      !e ? 'No element has this many protons in the range this bench covers.'
+      : (p===1 && n===0) ? 'Protium: one proton, no neutrons. The commonest atom in the universe, and the only one with no neutron at all.'
+      : common ? e.name+', with '+p+' protons and '+n+' neutrons: mass number '+(p+n)+'. This is the commonest form of the element in nature.'
+      : e.name+' still — the proton count decides that and nothing else. But with '+n+' neutrons instead of the usual '+e.n+', the mass number is '+(p+n)+' rather than '+(p+e.n)+'. You have built an isotope.';
+    const k = p+'-'+(common?'common':'iso');
+    if(!seen[k]){ seen[k]=1; ev('explore');
+      if(Object.keys(seen).length>=5) complete('m9'); }
+    draw();
+  }
+  sP.addEventListener('input',upd); sN.addEventListener('input',upd);
+  upd(); reg('m9',draw);
+})();
+
+/* ============================================================
+   M10 — work the numbers
+   ============================================================ */
+Q.vgrid('g10','g10check','g10s',{
+  head:'Work out the missing number', mid:'m10',
+  cols:['Answer'],
+  options:[['0','1','5','6','7','11','12','14','16','17','20','24','30','31','35','39','79','118']],
+  rows:[
+    {l:'An atom has Z = 5 and 6 neutrons. Its mass number A is',        a:['11']},
+    {l:'A nitrogen atom has A = 14 and 7 electrons. Its neutron count is',a:['7']},
+    {l:'An atom has A = 24 and 12 protons. Its neutron count is',       a:['12']},
+    {l:'An atom has Z = 15 and 16 neutrons. Its mass number A is',      a:['31']},
+    {l:'An atom ⁷⁰X has 31 electrons. Its neutron count is',            a:['39']},
+    {l:'An atom has 79 protons and A = 197. Its electron count is',     a:['79']}
+  ],
+  doneMsg:'All six. Z fixes the element and the electron count; A minus Z gives the neutrons.'
+});
+
+/* ============================================================
+   M11 — filling the shells, element by element
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('buCv'), sl=document.getElementById('buZ');
+  if(!cv||!sl) return;
+  const seen={};
+  const NAME=['K','L','M','N'];
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,270); if(!x) return;
+    const W=cv.clientWidth, H=270;
+    bg(x,W,H);
+    const z=+sl.value, e=ELEMENTS[z-1], cfg=configOf(z);
+    const cx=W*0.40, cy=H*0.48;
+    const R=Math.min(W*0.30, H*0.34);
+    // the nucleus, labelled with the symbol
+    x.fillStyle=PROTON;
+    x.beginPath(); x.arc(cx, cy, 15, 0, 7); x.fill();
+    sans(x,12,600); x.fillStyle='#2A2118'; x.textAlign='center'; x.textBaseline='middle';
+    x.fillText(e.sym, cx, cy);
+    // the shells
+    cfg.forEach((c,i)=>{
+      const r=26+i*((R-14)/Math.max(1,cfg.length))+i*12;
+      x.strokeStyle = i===cfg.length-1 ? A1 : 'rgba(142,154,192,.32)';
+      x.lineWidth = i===cfg.length-1 ? 1.8 : 1;
+      x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke();
+      for(let k=0;k<c;k++){
+        const a=k*(2*Math.PI/c) - Math.PI/2 + i*0.35;
+        x.fillStyle=ELECTRON;
+        x.beginPath(); x.arc(cx+Math.cos(a)*r, cy+Math.sin(a)*r, 3.4, 0, 7); x.fill();
+      }
+      mono(x,9,500); x.fillStyle = i===cfg.length-1 ? A1 : DIM;
+      x.textAlign='center'; x.textBaseline='bottom';
+      x.fillText(NAME[i]+' '+c, cx, cy-r-3);
+    });
+    // the capacity bars down the right
+    const bx=W-96, by=40;
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('shell capacity', bx, by-16);
+    [[0,2],[1,8],[2,8],[3,2]].forEach((cap,i)=>{
+      const yy=by+i*30, held=cfg[i]||0, max=cap[1];
+      mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(NAME[i], bx, yy+6);
+      const w=64, h=10;
+      x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(bx+16, yy, w, h);
+      x.fillStyle = held===max ? GOOD : A1;
+      x.fillRect(bx+17, yy+1, Math.max(0,(w-2)*(held/max)), h-2);
+      mono(x,8); x.fillStyle=DIM; x.textAlign='left';
+      x.fillText(held+'/'+max, bx+16+w+5, yy+6);
+    });
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('2n² — but no outermost shell holds more than 8', 8, H-20);
+  }
+  function upd(){
+    const z=+sl.value, e=ELEMENTS[z-1], cfg=configOf(z);
+    const outer=cfg[cfg.length-1];
+    document.getElementById('buZV').textContent=z;
+    document.getElementById('buName').textContent=e.name+' · '+e.sym;
+    document.getElementById('buConfig').textContent=cfg.join(', ');
+    document.getElementById('buValence').textContent=outer+(outer===1?' electron':' electrons');
+    const full = (cfg.length===1 && outer===2) || outer===8;
+    document.getElementById('buTxt').textContent =
+      z===1 ? 'Hydrogen’s single electron goes into K, the shell nearest the nucleus and the lowest in energy.'
+      : full ? e.name+' has a complete outermost shell — '+cfg.join(', ')+'. There is nothing to gain, lose or share, which is why it barely reacts with anything. The next electron cannot squeeze in; it has to start a whole new shell.'
+      : cfg.length>1 && outer===1 ? e.name+' is '+cfg.join(', ')+'. That lone outer electron is a long way from the nucleus and easily lost, which is what makes these metals so reactive.'
+      : e.name+' is '+cfg.join(', ')+'. K filled first with 2, then L, and only once L was full could M begin — electrons never skip a shell.';
+    if(!seen[z]){ seen[z]=1; ev('explore');
+      if(Object.keys(seen).length>=8) complete('m11'); }
+    draw();
+  }
+  sl.addEventListener('input',upd);
+  const p=document.getElementById('buPrev');
+  if(p) p.onclick=()=>{ sl.value=Math.max(1,+sl.value-1); upd(); };
+  const n=document.getElementById('buNext');
+  if(n) n.onclick=()=>{ sl.value=Math.min(18,+sl.value+1); upd(); };
+  upd(); reg('m11',draw);
+  /* exposed so the harness can check every configuration against Table 8.4 */
+  window.__shells = z => configOf(z).join(',');
+})();
+
+/* ============================================================
+   M12 — what an atom does to reach an octet
+   ============================================================ */
+Q.rows('g12','g12s',[
+  {t:'Sodium · 2, 8, 1',    a:0},
+  {t:'Magnesium · 2, 8, 2', a:0},
+  {t:'Oxygen · 2, 6',       a:1},
+  {t:'Chlorine · 2, 8, 7',  a:1},
+  {t:'Neon · 2, 8',         a:2},
+  {t:'Argon · 2, 8, 8',     a:2}
+], ['Loses electrons','Gains electrons','Neither — already full'], 'm12',
+   'All six. Fewer than four in the valence shell and it is cheaper to lose them; more than four and it is cheaper to gain. A full shell does nothing at all.');
+
+/* ============================================================
+   M13 — isotopes
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('isoCv');
+  if(!cv) return;
+  const SET={
+    hyd:{ name:'Hydrogen', z:1, list:[
+      {n:0, label:'Protium', a:1,  note:'~99.98% of all hydrogen'},
+      {n:1, label:'Deuterium', a:2,note:'~0.015%'},
+      {n:2, label:'Tritium', a:3,  note:'traces only, radioactive'}
+    ]},
+    car:{ name:'Carbon', z:6, list:[
+      {n:6, label:'Carbon-12', a:12, note:'the common one'},
+      {n:7, label:'Carbon-13', a:13, note:'stable, about 1%'},
+      {n:8, label:'Carbon-14', a:14, note:'radioactive · used for dating'}
+    ]}
+  };
+  let which='hyd'; const seen={};
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,240); if(!x) return;
+    const W=cv.clientWidth, H=240;
+    bg(x,W,H);
+    const S=SET[which], n=S.list.length;
+    const cw=W/n;
+    S.list.forEach((iso,i)=>{
+      const cx=cw*(i+0.5), cy=H*0.42;
+      const R=Math.min(cw*0.32, 44);
+      // the electron shell, identical in every isotope
+      const cfg=configOf(S.z);
+      cfg.forEach((c,si)=>{
+        const r=R*(0.62+si*0.34);
+        x.strokeStyle='rgba(180,124,240,.35)'; x.lineWidth=1;
+        x.beginPath(); x.arc(cx, cy, r, 0, 7); x.stroke();
+        for(let k=0;k<c;k++){
+          const a=k*(2*Math.PI/c)-Math.PI/2;
+          x.fillStyle=ELECTRON;
+          x.beginPath(); x.arc(cx+Math.cos(a)*r, cy+Math.sin(a)*r, 2.4, 0, 7); x.fill();
+        }
+      });
+      // the nucleus, which is the only thing that differs
+      const tot=S.z+iso.n, rad=Math.max(3, Math.min(6, 17/Math.sqrt(tot)));
+      const kinds=[]; let pi=S.z, ni=iso.n;
+      while(pi>0 || ni>0){ if(pi>0){ kinds.push('p'); pi--; } if(ni>0){ kinds.push('n'); ni--; } }
+      kinds.forEach((k,j)=>{
+        const a=j*2.399, rr=rad*1.6*Math.sqrt(j/Math.max(1,tot));
+        x.fillStyle = k==='p' ? PROTON : NEUTRON;
+        x.beginPath(); x.arc(cx+Math.cos(a)*rr, cy+Math.sin(a)*rr, rad, 0, 7); x.fill();
+      });
+      mono(x,10,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+      x.fillText(iso.label, cx, cy+R+10);
+      mono(x,9); x.fillStyle=A1;
+      x.fillText(S.z+'p · '+iso.n+'n · A='+iso.a, cx, cy+R+26);
+      mono(x,8); x.fillStyle=DIM;
+      x.fillText(iso.note, cx, cy+R+40);
+    });
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('same protons, same electrons — only the neutron count changes', 8, 8);
+    mono(x,9); x.textAlign='left'; x.textBaseline='top';
+    x.fillStyle=PROTON;  x.fillText('● proton', 8, H-20);
+    x.fillStyle=NEUTRON; x.fillText('● neutron', 74, H-20);
+  }
+  function set(w){
+    which=w;
+    const S=SET[w];
+    document.getElementById('isoTxt').textContent = w==='hyd'
+      ? 'All three have one proton and one electron, so all three are hydrogen and all three behave the same chemically. Protium has no neutron at all, deuterium has one, tritium has two — and that is the entire difference between them.'
+      : 'All three have six protons and six electrons, so all three are carbon. Carbon-14 has two neutrons more than carbon-12, which makes it unstable — and that instability is precisely what makes it useful for dating things.';
+    if(!seen[w]){ seen[w]=1; ev('explore');
+      if(Object.keys(seen).length>=2) complete('m13'); }
+    draw();
+  }
+  const h=document.getElementById('isoHyd'); if(h) h.onclick=()=>set('hyd');
+  const c=document.getElementById('isoCar'); if(c) c.onclick=()=>set('car');
+  draw(); reg('m13',draw);
+})();
+
+Q.match('g13a','g13b','g13s',[
+  ['Uranium-235','Fuel in a nuclear reactor'],
+  ['Cobalt-60',  'Radiation treatment for cancer'],
+  ['Iodine-131', 'Treating goitre and thyroid disease'],
+  ['Carbon-14',  'Dating fossils and ancient artefacts']
+], 'm13',
+   'All four. Each is useful because of a nuclear property, not a chemical one — which is why an isotope can be singled out for a job its siblings cannot do.');
+
+/* ============================================================
+   M14 — simple mean against weighted mean
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('avgCv'), sl=document.getElementById('avgP');
+  if(!cv||!sl) return;
+  const seen={};
+  function draw(){
+    if(!cv.clientWidth) return;
+    const x=fit(cv,250); if(!x) return;
+    const W=cv.clientWidth, H=250;
+    bg(x,W,H);
+    const p=+sl.value, q=100-p;
+    const weighted=(35*p + 37*q)/100;
+    // a bar showing the mix of the two isotopes
+    const bx=20, by=34, bw=W-40, bh=30;
+    x.fillStyle=A1;  x.fillRect(bx, by, bw*p/100, bh);
+    x.fillStyle=A2;  x.fillRect(bx+bw*p/100, by, bw*q/100, bh);
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(bx, by, bw, bh);
+    mono(x,10,500); x.fillStyle='#2A2118'; x.textAlign='center'; x.textBaseline='middle';
+    if(p>14) x.fillText('Cl-35 · '+p+'%', bx+bw*p/200, by+bh/2);
+    if(q>14) x.fillText('Cl-37 · '+q+'%', bx+bw*p/100+bw*q/200, by+bh/2);
+    // the mass axis, from 35 to 37
+    const ax=40, aw=W-80, ay=H-62;
+    x.strokeStyle=RULE; x.lineWidth=1.5;
+    x.beginPath(); x.moveTo(ax, ay); x.lineTo(ax+aw, ay); x.stroke();
+    const pos = m => ax + (m-35)/2*aw;
+    [35,36,37].forEach(m=>{
+      x.strokeStyle='rgba(142,154,192,.4)';
+      x.beginPath(); x.moveTo(pos(m), ay-5); x.lineTo(pos(m), ay+5); x.stroke();
+      mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText(m+' u', pos(m), ay+9);
+    });
+    // the simple mean, pinned at 36
+    x.strokeStyle=DIM; x.lineWidth=1; x.setLineDash([3,3]);
+    x.beginPath(); x.moveTo(pos(36), ay-46); x.lineTo(pos(36), ay); x.stroke(); x.setLineDash([]);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText('simple mean 36', pos(36), ay-50);
+    // the weighted mean, which moves
+    x.strokeStyle=GOLD; x.lineWidth=2;
+    x.beginPath(); x.moveTo(pos(weighted), ay-28); x.lineTo(pos(weighted), ay); x.stroke();
+    x.fillStyle=GOLD;
+    x.beginPath(); x.arc(pos(weighted), ay, 5, 0, 7); x.fill();
+    mono(x,10,500); x.fillStyle=GOLD; x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText(weighted.toFixed(1)+' u', pos(weighted), ay-32);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the simple mean cannot move — it never looks at abundance', 8, 8);
+  }
+  function upd(){
+    const p=+sl.value, q=100-p, weighted=(35*p+37*q)/100;
+    document.getElementById('avgPV').textContent=p+'%';
+    document.getElementById('avgSimple').textContent='36 u';
+    document.getElementById('avgWeighted').textContent=weighted.toFixed(1)+' u';
+    document.getElementById('avgWork').textContent='35×'+p+'/100 + 37×'+q+'/100';
+    document.getElementById('avgTxt').textContent =
+      p===75 ? 'This is the real mixture: about 75% chlorine-35 and 25% chlorine-37, giving 35.5 u. No single chlorine atom weighs 35.5 u — in a million atoms you would find roughly 750 000 of one kind and 250 000 of the other.'
+      : p===50 ? 'At an even split the two means agree at 36 u. This is the only mixture for which the simple average is right, and nature does not supply it.'
+      : 'With '+p+'% chlorine-35 the weighted mean is '+weighted.toFixed(1)+' u, while the simple mean is stuck at 36 u regardless. The gap between them is exactly the information that abundance carries.';
+    const k = p===75?'real':p<50?'heavy':p>50?'light':'even';
+    if(!seen[k]){ seen[k]=1; ev('explore');
+      if(seen.real && Object.keys(seen).length>=3) complete('m14'); }
+    draw();
+  }
+  sl.addEventListener('input',upd);
+  upd(); reg('m14',draw);
+})();
+
+/* ============================================================
+   M15 — isotopes, isobars or neither
+   ============================================================ */
+Q.rows('g15','g15s',[
+  {t:'Two atoms with 17 protons each — one with 18 neutrons, one with 20', a:0},
+  {t:'Calcium-40 and argon-40',                                            a:1},
+  {t:'Protium and tritium',                                                a:0},
+  {t:'Carbon-14 and nitrogen-14',                                          a:1},
+  {t:'Sodium-23 and magnesium-24',                                         a:2},
+  {t:'Uranium-235 and uranium-238',                                        a:0}
+], ['Isotopes','Isobars','Neither'], 'm15',
+   'All six. Same atomic number means isotopes; same mass number means isobars; share neither and the pair has no special name at all.');
+
+/* ============================================================
+   M16 — the boss
+   ============================================================ */
+Q.boss([
+  { t:'Warm-up · the old idea',
+    q:'What does the Greek word atomos mean?',
+    o:['Invisible','Indivisible','Infinitely small'], a:1,
+    w:'Atomos means indivisible — the point at which cutting has to stop. Kanada’s parmanu carried the same idea in Sanskrit, arrived at independently.' },
+  { t:'Warm-up · Thomson',
+    q:'Cathode rays bend towards the positive plate of an electric field. What does that prove about them?',
+    o:['They carry negative charge','They carry positive charge','They have no charge'], a:0,
+    w:'Opposite charges attract, so a beam that swings towards the positive plate must itself be negative. That, plus its tiny mass, is how the electron was identified.' },
+  { t:'The gold foil result',
+    q:'In the gold foil experiment, what did the α-particles that passed straight through reveal?',
+    o:['That the atom has a nucleus','That the atom is mostly empty space','That electrons are negative'], a:1,
+    w:'The ones that went straight through show the atom is mostly empty. It is the rare particles that came back that revealed the nucleus — two different conclusions from two different groups of particles.' },
+  { t:'Reading the experiment',
+    q:'Why did a few α-particles bounce almost straight back?',
+    o:['They struck an electron head-on','They hit a tiny, dense, positively charged nucleus','The foil was too thick'], a:1,
+    w:'An electron is far too light to turn a heavy α-particle around, as a pebble cannot stop a lorry. Only a concentrated mass carrying a large positive charge can do it.' },
+  { t:'Rutherford’s problem',
+    q:'What could Rutherford’s model not explain?',
+    o:['Why atoms are stable','Why most α-particles pass through','Where the atom’s mass sits'], a:0,
+    w:'An orbiting electron is accelerating, so it should radiate energy and spiral into the nucleus in about 10⁻⁸ s. Atoms exist, so the model was incomplete. Bohr’s fixed shells were the fix.' },
+  { t:'Bohr',
+    q:'According to Bohr, when does an electron absorb or release energy?',
+    o:['Continuously, as it orbits','Only when it jumps between shells','Only when it leaves the atom'], a:1,
+    w:'Inside a stationary state the electron does not radiate at all. Energy moves only in the jump, and only in the exact amount separating the two levels.' },
+  { t:'Counting',
+    q:'An atom has 17 protons and 18 neutrons. What are its atomic number and mass number?',
+    o:['Z = 17, A = 35','Z = 35, A = 17','Z = 18, A = 35'], a:0,
+    w:'Z is the proton count, 17, so this is chlorine. A is protons plus neutrons, 17 + 18 = 35. This is chlorine-35, the commoner of chlorine’s two isotopes.' },
+  { t:'Shells',
+    q:'What is the electronic configuration of an atom with atomic number 16?',
+    o:['2, 8, 6','2, 6, 8','8, 8'], a:0,
+    w:'K takes 2, L takes 8, and the remaining 6 go into M. Sulfur is 2, 8, 6 — six electrons in the outermost shell, so it gains two to reach an octet and has a valency of 2.' },
+  { t:'Valency',
+    q:'Magnesium is 2, 8, 2. What is its valency?',
+    o:['2','6','8'], a:0,
+    w:'With only two electrons in the valence shell it is far cheaper to lose them than to gain six, so magnesium loses two. The number of electrons traded is the valency: 2.' },
+  { t:'Boss · isotopes and isobars',
+    q:'Calcium-40 and argon-40 have the same mass number but different atomic numbers. What are they?',
+    o:['Isotopes','Isobars','The same element'], a:1,
+    w:'Same mass number, different atomic number: isobars. Isotopes are the other way round — same atomic number, different mass number, which makes them the same element.' }
+], 'm16',
+   'Chapter 8 finished. You can trace the atom from Kanada’s parmanu to the electron cloud, explain what the gold foil experiment proved and what it could not, fill shells by the 2n² rule, read a valency off a configuration, and tell an isotope from an isobar.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
