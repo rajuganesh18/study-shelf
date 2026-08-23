@@ -21,8 +21,21 @@
     S.day = t; S.missionsToday = 0; S.perfectToday = 0; S.exploreToday = 0; S.questsPaid = {};
   }
   Object.keys(S.done).forEach(markDone);
+  BOOTED = true;                       // from here on, taps count. see engine.js
   renderHQ(); save();
   requestAnimationFrame(()=>requestAnimationFrame(redrawAll));
+})();
+
+/* "All chapters" goes back to the list this chapter sits in, not to the shelf
+   root. CH.id already carries the class and subject, as in 9-science-5, so the
+   link needs no per-chapter editing. The plain index.html in the markup stays
+   as the fallback if this never runs. */
+(function(){
+  const back = document.querySelector('.backbar');
+  if(!back) return;
+  const p = String(CH.id || '').split('-');
+  if(p.length < 2 || !p[0] || !p[1]) return;
+  back.href = 'index.html?cls=' + encodeURIComponent(p[0]) + '&sub=' + encodeURIComponent(p[1]);
 })();
 
 
