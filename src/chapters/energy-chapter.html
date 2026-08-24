@@ -1199,7 +1199,7 @@ Q.vgrid('g8','g8check','g8s',{
     t += 0.033;
     if(0.5*G*t*t >= H0){
       t=Math.sqrt(2*H0/G); run=false;
-      if(!landed){ landed=true; complete('m9'); }
+      if(!landed && !autoplaying('m9')){ landed=true; complete('m9'); }
       document.getElementById('fallTxt').textContent =
         'At the ground every joule of the '+TOT+' J is kinetic. Nothing was created and nothing lost — the potential energy was converted, one joule at a time.';
     } else {
@@ -1272,7 +1272,7 @@ Q.vgrid('g8','g8check','g8s',{
     document.getElementById('penPos').textContent = at;
     document.getElementById('penP').textContent = f>0.86?'max':f<0.16?'zero':'partial';
     document.getElementById('penK').textContent = f>0.86?'zero':f<0.16?'max':'partial';
-    if(at!=='between' && !seen[at]){ seen[at]=1;
+    if(at!=='between' && !seen[at] && !autoplaying('m10')){ seen[at]=1;
       if(Object.keys(seen).length>=3) complete('m10'); }
     document.getElementById('penTxt').textContent =
       at==='Q' ? 'At Q the bob is at its lowest and its fastest. Potential energy is at a minimum, kinetic at a maximum — the swap is complete.'

@@ -39,12 +39,23 @@ Each one was written after something got through.
   opened, because the benches call their own `sync()` at startup. The lesson
   is in the shape of the check: it asserts on what was *persisted*, not on
   what the screen shows.
-- **`reach`** — asks the question none of the others do, and found five
-  missions across two shipped chapters that could never be completed at all
-  (forces m1, m9, m12, m15 and atom m2). Every one had the same shape: the
-  bench reached its threshold, updated its note, and never called
-  `complete()`. They pass the id audit, throw no errors, award explore credit
-  normally, and look perfectly fine on screen.
+- **`reach`** — asks the question none of the others do, and has found seven
+  missions that could never be completed at all. Two distinct causes:
+
+  Five (forces m1, m9, m12, m15 and atom m2) simply never called `complete()`:
+  the bench reached its threshold, updated its explanatory note, and stopped.
+
+  Two more (energy m9 and m10) are subtler and were missed by the static scan
+  that caught the first five, because they *do* call `complete()`. Both benches
+  play themselves once on open via `auto()`. `AUTORUN` correctly withholds the
+  payout for a bench playing itself — but the bench had already consumed its
+  own one-shot progress flag (`landed`, and a `seen` set filled with all three
+  pendulum positions), so the reader's own run found nothing left to record and
+  the mission could never be earned. `autoplaying()` in the engine exists for
+  exactly this: a bench must not bank its flags while it is playing itself.
+
+  All seven pass the id audit, throw no errors, award explore credit normally,
+  and look perfectly fine on screen.
 - **`state`** — a debounced `save()` was being re-armed 30 times a second by
   a redraw loop, so chapters stopped persisting entirely. Nothing on screen
   changed; only the stored state showed it.
@@ -81,6 +92,10 @@ unreachable when it was not:
 | cell m13 | pressing two run buttons 90 ms apart, so the second aborted the first |
 | energy m7 | always parking a slider at its maximum, so a bench wanting three different heights only ever saw two |
 | exploration m1 | never touching a bench's own chip row |
+| energy m4 | probing with all thirteen missions open, so thirteen canvases at 30fps starved the six-second animation it was timing |
+| atom m3 | pressing each control once, when the gold foil wants 1500 α-particles — six volleys of the same button |
+| bonding m13 | walking two chip rows separately, when the formula depends on the cation and anion *together* |
+| bonding m13 | holding chip handles across clicks, when the bench rebuilds both rows on every pick and detaches them |
 
 A false "this can never be completed" is worse than no check at all, so when
 this probe fails, **confirm against the chapter source before believing it**.

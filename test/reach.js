@@ -54,6 +54,16 @@ async function run(){
       if (skip.has(m.id)) continue;
       tried++;
 
+      /* Probe one mission at a time. Every mission is opened at load so that
+         auto() plays each bench once, but leaving thirteen canvases animating
+         at 30fps starves the one under test: energy's simple-machine sequence
+         advances by a fixed step per frame, so a slow frame rate stretches a
+         six-second animation past any patience the probe has, and a bench that
+         a reader finishes easily is reported dead. A reader has one mission
+         open; so does this. */
+      await page.$$eval('details.m', (ns, id) => ns.forEach(n => { n.open = n.id === id; }), m.id);
+      await page.waitForTimeout(200);
+
       const isDone = () => page.evaluate(id => !!(S.done && S.done[id]), m.id);
       /* Poll rather than waiting a fixed time: the cell chapter's division
          bench takes about three seconds of animation to finish, and a fixed
@@ -87,15 +97,45 @@ async function run(){
          bench records a surface only when the coin has finished sliding on it,
          so clicking all four surface chips and then never pressing Go again
          records exactly one surface however many passes you make. */
+      /* Address a chip by row and position, never by handle. Several benches
+         rebuild their chip row from scratch on every pick — bonding's
+         criss-cross empties both boxes and recreates the buttons — so a handle
+         taken before the first click is detached from the document by the
+         second, and every later click quietly does nothing. Re-querying at the
+         moment of the click is the only thing that survives that. */
+      const tap = async (box, i) => {
+        const cs = await page.$$('#' + box + ' button');
+        if (cs[i]) await cs[i].click().catch(() => {});
+      };
       const click = async () => {
-        const chips = [];
+        const rows = [];
         for (const box of m.chipBoxes) {
-          for (const chip of await page.$$('#' + box + ' button')) chips.push(chip);
+          const n = (await page.$$('#' + box + ' button')).length;
+          if (n) rows.push({ box, n });
         }
-        if (!chips.length) return pressButtons();
-        for (const chip of chips) {
-          await chip.click().catch(() => {});
-          await page.waitForTimeout(70);
+        if (!rows.length) return pressButtons();
+
+        /* One row at a time is not enough when a bench is driven by the
+           COMBINATION of two rows. Bonding's criss-cross wants three different
+           shapes of formula, and which shape you get depends on the cation and
+           the anion together — walking one row with the other left on its first
+           entry reaches barely two. So walk the pairs when there are two rows,
+           bounded, and stop as soon as the bench pays out. */
+        const combos = [];
+        if (rows.length >= 2) {
+          for (let i = 0; i < rows[0].n; i++) {
+            for (let j = 0; j < rows[1].n; j++) {
+              combos.push([[rows[0].box, i], [rows[1].box, j]]);
+            }
+          }
+        } else {
+          for (let i = 0; i < rows[0].n; i++) combos.push([[rows[0].box, i]]);
+        }
+        for (const combo of combos.slice(0, 64)) {
+          for (const [box, i] of combo) {
+            await tap(box, i);
+            await page.waitForTimeout(60);
+          }
           if (await isDone()) return true;
           if (await pressButtons()) return true;
         }
@@ -133,6 +173,40 @@ async function run(){
         await sweepAll(pass);
         await click();
         ok = await settle(3500);
+      }
+
+      /* Repetition. Some thresholds are not reached by touching a control, but
+         by working it: the gold foil wants 1500 α-particles through the
+         Rutherford foil before it will admit the reader has seen enough, which
+         is six volleys of the same button, and the atom's "cut it in half"
+         wants thirty cuts. A pass that presses each control once calls both
+         dead. Pressing the SAME button repeatedly is safe in a way that
+         pressing the next one is not — it is what a reader does. */
+      if (!ok) {
+        for (const btn of await page.$$('#' + m.id + ' button.act')) {
+          const id = await btn.getAttribute('id');
+          if (id && UNDO.test(id)) continue;
+          for (let i = 0; i < 8 && !ok; i++) {
+            await btn.click().catch(() => {});
+            ok = await settle(700);
+          }
+          if (ok) break;
+        }
+      }
+
+      /* Last resort: press one button and just watch. Energy's simple-machine
+         bench animates a five-step sequence lasting about six seconds, and the
+         busy passes above keep pressing the next control partway through and
+         restarting it. Pressing a single control and waiting is what a reader
+         does, and it is the only way these benches ever finish. */
+      if (!ok) {
+        for (const btn of await page.$$('#' + m.id + ' button.act')) {
+          const id = await btn.getAttribute('id');
+          if (id && UNDO.test(id)) continue;
+          await btn.click().catch(() => {});
+          ok = await settle(9000);
+          if (ok) break;
+        }
       }
 
       if (ok) done++;

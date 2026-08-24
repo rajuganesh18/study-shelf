@@ -1361,6 +1361,15 @@ const REG = {}, AUTO = {}, AUTORUN = {};
 function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
 function auto(id, fn){ AUTO[id] = fn; }
 
+/* True while a bench is playing itself on first open. A bench must not bank
+   its own progress flags during that: complete() is already gated on AUTORUN
+   so nothing is paid out, but a one-shot flag consumed here can never be
+   earned again, and the mission becomes permanently uncompletable. Energy's
+   falling-body and pendulum benches both had exactly that bug — the auto-run
+   set `landed` and filled `seen`, and the reader's own run then found nothing
+   left to record. */
+function autoplaying(id){ return !!AUTORUN[id]; }
+
 function redrawAll(){
   Object.keys(REG).forEach(id=>{
     const d = document.getElementById(id);
