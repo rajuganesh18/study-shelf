@@ -331,7 +331,7 @@ input[type=range]{touch-action:pan-y}
         <input type="range" id="keV" min="0" max="40" value="10" step="1" aria-label="Velocity in metres per second">
       </div>
       <div class="readout">
-        <div class="rc"><div class="k">½ × m × v²</div><div class="v" id="keWork" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k"><span style="display:contents;text-transform:none">½ × m × v²</span></div><div class="v" id="keWork" style="font-size:12px">—</div></div>
         <div class="rc"><div class="k">Kinetic energy</div><div class="v" id="keOut">50000 J</div></div>
         <div class="rc"><div class="k">Double the speed</div><div class="v" id="keDbl">×4</div></div>
       </div>
@@ -1385,6 +1385,15 @@ const REG = {}, AUTO = {}, AUTORUN = {};
 function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
 function auto(id, fn){ AUTO[id] = fn; }
 
+/* True while a bench is playing itself on first open. A bench must not bank
+   its own progress flags during that: complete() is already gated on AUTORUN
+   so nothing is paid out, but a one-shot flag consumed here can never be
+   earned again, and the mission becomes permanently uncompletable. Energy's
+   falling-body and pendulum benches both had exactly that bug — the auto-run
+   set `landed` and filled `seen`, and the reader's own run then found nothing
+   left to record. */
+function autoplaying(id){ return !!AUTORUN[id]; }
+
 function redrawAll(){
   Object.keys(REG).forEach(id=>{
     const d = document.getElementById(id);
@@ -2017,7 +2026,7 @@ Q.vgrid('g8','g8check','g8s',{
     t += 0.033;
     if(0.5*G*t*t >= H0){
       t=Math.sqrt(2*H0/G); run=false;
-      if(!landed){ landed=true; complete('m9'); }
+      if(!landed && !autoplaying('m9')){ landed=true; complete('m9'); }
       document.getElementById('fallTxt').textContent =
         'At the ground every joule of the '+TOT+' J is kinetic. Nothing was created and nothing lost — the potential energy was converted, one joule at a time.';
     } else {
@@ -2090,7 +2099,7 @@ Q.vgrid('g8','g8check','g8s',{
     document.getElementById('penPos').textContent = at;
     document.getElementById('penP').textContent = f>0.86?'max':f<0.16?'zero':'partial';
     document.getElementById('penK').textContent = f>0.86?'zero':f<0.16?'max':'partial';
-    if(at!=='between' && !seen[at]){ seen[at]=1;
+    if(at!=='between' && !seen[at] && !autoplaying('m10')){ seen[at]=1;
       if(Object.keys(seen).length>=3) complete('m10'); }
     document.getElementById('penTxt').textContent =
       at==='Q' ? 'At Q the bob is at its lowest and its fastest. Potential energy is at a minimum, kinetic at a maximum — the swap is complete.'
@@ -2603,6 +2612,23 @@ Q.boss([
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
     navigator.serviceWorker.register('service-worker.js').catch(function(){});
+  });
+  /* A new worker takes over as soon as it activates, but the page already on
+     screen keeps the old cached copy until the next navigation — so a reader
+     who updates the app sees the previous version and has to leave and come
+     back. Reload once when control changes.
+
+     Two guards, both load-bearing. If there was no controller when this page
+     loaded, this is the first install claiming the page, not an update — the
+     content is already current and reloading would make every first visit
+     flicker. And `reloading` stops a worker that keeps claiming from looping
+     the page forever. */
+  var hadController = !!navigator.serviceWorker.controller;
+  var reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    if(!hadController || reloading) return;
+    reloading = true;
+    location.reload();
   });
 }
 </script>

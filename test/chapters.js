@@ -1,0 +1,27 @@
+/* The one list. Adding a chapter means editing this file and nothing else —
+   before this existed, a new chapter had to be added to four separate
+   harnesses, and forgetting one meant it silently went untested. */
+module.exports = [
+  { slug:'exploration',  id:'9-science-1',  n:1,  title:'The Practice of Science' },
+  { slug:'cell',         id:'9-science-2',  n:2,  title:'The Cell' },
+  { slug:'tissues',      id:'9-science-3',  n:3,  title:'Tissues' },
+  { slug:'motion',       id:'9-science-4',  n:4,  title:'Motion',
+    /* m8 completes when seven points have been placed by clicking the
+       canvas itself, which the prodder has no way to do. */
+    skipReach:['m8'] },
+  { slug:'mixtures',     id:'9-science-5',  n:5,  title:'Mixtures' },
+  { slug:'forces',       id:'9-science-6',  n:6,  title:'Forces and Laws of Motion' },
+  { slug:'energy',       id:'9-science-7',  n:7,  title:'Work and Energy' },
+  { slug:'atom',         id:'9-science-8',  n:8,  title:'Journey Inside the Atom' },
+  { slug:'bonding',      id:'9-science-9',  n:9,  title:'Atomic Foundations of Matter' },
+  { slug:'sound',        id:'9-science-10', n:10, title:'Sound Waves' },
+  { slug:'reproduction', id:'9-science-11', n:11, title:'Reproduction' },
+  { slug:'diversity',    id:'9-science-12', n:12, title:'Diversity and Classification',
+    /* m6 is the dichotomous key: completing it needs three organisms carried
+       through a chain of yes/no questions, which the generic prodder cannot
+       do. test/chapters/diversity.js drives it properly instead. */
+    skipReach:['m6'] },
+  { slug:'earth-system', id:'9-science-13', n:13, title:'Earth as a System' }
+];
+
+module.exports.file = c => c.slug + '-chapter.html';

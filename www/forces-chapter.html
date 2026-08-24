@@ -1292,6 +1292,15 @@ const REG = {}, AUTO = {}, AUTORUN = {};
 function reg(id, fn){ (REG[id] = REG[id] || []).push(fn); }
 function auto(id, fn){ AUTO[id] = fn; }
 
+/* True while a bench is playing itself on first open. A bench must not bank
+   its own progress flags during that: complete() is already gated on AUTORUN
+   so nothing is paid out, but a one-shot flag consumed here can never be
+   earned again, and the mission becomes permanently uncompletable. Energy's
+   falling-body and pendulum benches both had exactly that bug — the auto-run
+   set `landed` and filled `seen`, and the reader's own run then found nothing
+   left to record. */
+function autoplaying(id){ return !!AUTORUN[id]; }
+
 function redrawAll(){
   Object.keys(REG).forEach(id=>{
     const d = document.getElementById(id);
@@ -1414,6 +1423,7 @@ function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
       if(!seen[m]) seen[m]=1;
       if(Object.keys(seen).length>=3){
         document.getElementById('fTxt').textContent='A force can start motion, change direction, or change shape. All three effects demonstrated.';
+        complete('m1');
       }
     }
     draw();
@@ -1792,6 +1802,7 @@ Q.match('g8a','g8b','g8s',[
       seen[i]=1; ev('explore','graph-'+i);
       if(Object.keys(seen).length>=3){
         document.getElementById('graphTxt').textContent='At rest and constant velocity both have zero net force. Only the accelerating object has a net force acting on it.';
+        complete('m9');
       }
       draw();
     };
@@ -1988,6 +1999,7 @@ Q.vgrid('g11','g11check','g11s',{
     if(t>3)   seenLong=true;
     if(seenShort && seenLong){
       document.getElementById('catchTxt').textContent='Short stopping time → huge force. Long stopping time → gentle force. That is why fielders pull their hands back.';
+      complete('m12');
     }
     draw();
   }
@@ -2125,6 +2137,7 @@ Q.match('g14a','g14b','g14s',[
       seen[i]=1; ev('explore','eq-'+i);
       if(Object.keys(seen).length>=3){
         document.getElementById('eqTxt').textContent='The forces are always equal (third law). The accelerations differ because the masses differ (second law). Both laws working together.';
+        complete('m15');
       }
       upd();
     };
@@ -2293,6 +2306,23 @@ Q.boss([
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
     navigator.serviceWorker.register('service-worker.js').catch(function(){});
+  });
+  /* A new worker takes over as soon as it activates, but the page already on
+     screen keeps the old cached copy until the next navigation — so a reader
+     who updates the app sees the previous version and has to leave and come
+     back. Reload once when control changes.
+
+     Two guards, both load-bearing. If there was no controller when this page
+     loaded, this is the first install claiming the page, not an update — the
+     content is already current and reloading would make every first visit
+     flicker. And `reloading` stops a worker that keeps claiming from looping
+     the page forever. */
+  var hadController = !!navigator.serviceWorker.controller;
+  var reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    if(!hadController || reloading) return;
+    reloading = true;
+    location.reload();
   });
 }
 </script>

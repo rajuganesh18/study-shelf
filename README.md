@@ -67,7 +67,28 @@ No Android Studio needed.
 > but service workers are disabled on `file://`, so it will not be offline-
 > installable. Use the server above for anything real.
 
-## 2 · Build the Android APK
+## 2 · Run the tests
+
+```bash
+npm install          # once, for Playwright
+npm run build
+npm test
+```
+
+The suite starts its own static server, so nothing needs to be running first.
+`npm test -- verify` runs a single stage; `npm run test:list` shows them all.
+
+Each check exists because something got through: a chapter whose script died
+on load from a wrong argument count, chapters paying out a daily quest the
+moment they opened, a debounced save re-armed 30 times a second so progress
+stopped persisting at all, and five missions across two chapters that could
+never be completed. `test/README.md` has the details, and the rule that keeps
+the science honest — expected values come from the textbook, never read off
+the running page.
+
+**Adding a chapter?** Edit `test/chapters.js` and nothing else.
+
+## 3 · Build the Android APK
 
 **See `RELEASE.md` for the full path to a Play-uploadable AAB**, including the
 target-API-36 deadline, keystore setup and the 12-tester rule. Quick version:
@@ -76,7 +97,7 @@ Needs Node 18+, a JDK 17, and Android Studio (or just the SDK + Gradle).
 
 ```bash
 cd study-shelf
-bash scripts/fetch-fonts.sh     # once — see §4
+bash scripts/fetch-fonts.sh     # once — see §5
 npm install
 npm run build                   # src/ → www/
 npx cap add android             # generates android/ ; run once
@@ -107,7 +128,7 @@ cd android && ./gradlew bundleRelease
 *New → Image Asset*, choose that PNG, set the background to `#0A0E1B`.
 That generates every mipmap density and the adaptive-icon layers.
 
-## 3 · Where progress lives
+## 4 · Where progress lives
 
 `www` shares one storage adapter (top of every HTML file). It picks the best
 backend available and everything above it is unchanged:
@@ -137,7 +158,7 @@ The shelf's **Progress & data** panel shows the live backend and can export
 all of it to JSON, import it back, or reset. Export before switching phones —
 there is no account and no server, by design.
 
-## 4 · Fonts
+## 5 · Fonts
 
 The design system uses Anton, IBM Plex Sans and IBM Plex Mono. Nothing is
 fetched from a CDN at runtime, because an app that needs the network is not
@@ -149,7 +170,7 @@ Skip it and the app still works — the CSS falls back to system faces and the
 service worker tolerates the missing files. The display type just will not
 look the way it was designed.
 
-## 5 · Adding a chapter
+## 6 · Adding a chapter
 
 Everything is driven by `CATALOG`, near the top of the `<script>` in
 `src/index.html`. Give a chapter a `file` and an `id` and it becomes playable;
@@ -176,10 +197,15 @@ const CH = { id, key, total, stages, paint }
 the chapter's progress. `CH.key` is where its own state lives and must start
 `ch` + the chapter number, so `Store.owns` picks it up.
 
-Finally add the file to `ASSETS` in `www/service-worker.js`, bump `VERSION`
-there so old caches are dropped, and run `npm run build`.
+Note the order: `CH` is declared **between** the storage and engine includes.
+The engine reads `CH.total` as it loads, so putting the include first fails with
+`Cannot access 'CH' before initialization`.
 
-## 6 · What is and is not built
+Finally add the file to `ASSETS` in `www/service-worker.js`, bump `VERSION`
+there so old caches are dropped, add a row to `test/chapters.js`, and run
+`npm run build && npm test`.
+
+## 7 · What is and is not built
 
 5 of 86 catalogued chapters are playable: Class 9 Science chapters 1, 2, 3,
 4 and 5. Everything else is catalogued and listed but marked *Coming soon*.

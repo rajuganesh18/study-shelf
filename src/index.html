@@ -174,10 +174,10 @@ const CATALOG = [
         {n:7,  t:'Work, Energy and Simple Machines',                  id:'9-science-7', file:'energy-chapter.html'},
         {n:8,  t:'Journey Inside the Atom',                           id:'9-science-8', file:'atom-chapter.html'},
         {n:9,  t:'Atomic Foundations of Matter',                     id:'9-science-9', file:'bonding-chapter.html'},
-        {n:10, t:'Sound Waves: Characteristics and Applications'},
-        {n:11, t:'Reproduction: How Life Continues'},
-        {n:12, t:'Patterns in Life: Diversity and Classification'},
-        {n:13, t:'Earth as a System: Energy, Matter and Life'}
+        {n:10, t:'Sound Waves: Characteristics and Applications',        id:'9-science-10', file:'sound-chapter.html'},
+        {n:11, t:'Reproduction: How Life Continues',                    id:'9-science-11', file:'reproduction-chapter.html'},
+        {n:12, t:'Patterns in Life: Diversity and Classification',       id:'9-science-12', file:'diversity-chapter.html'},
+        {n:13, t:'Earth as a System: Energy, Matter and Life',           id:'9-science-13', file:'earth-system-chapter.html'}
       ]}]
     },
     {
@@ -605,6 +605,23 @@ window.addEventListener('pageshow', e => { if(e.persisted) refresh(); });
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
     navigator.serviceWorker.register('service-worker.js').catch(function(){});
+  });
+  /* A new worker takes over as soon as it activates, but the page already on
+     screen keeps the old cached copy until the next navigation — so a reader
+     who updates the app sees the previous version and has to leave and come
+     back. Reload once when control changes.
+
+     Two guards, both load-bearing. If there was no controller when this page
+     loaded, this is the first install claiming the page, not an update — the
+     content is already current and reloading would make every first visit
+     flicker. And `reloading` stops a worker that keeps claiming from looping
+     the page forever. */
+  var hadController = !!navigator.serviceWorker.controller;
+  var reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    if(!hadController || reloading) return;
+    reloading = true;
+    location.reload();
   });
 }
 </script>
