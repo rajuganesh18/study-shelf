@@ -62,4 +62,21 @@ if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
     navigator.serviceWorker.register('service-worker.js').catch(function(){});
   });
+  /* A new worker takes over as soon as it activates, but the page already on
+     screen keeps the old cached copy until the next navigation — so a reader
+     who updates the app sees the previous version and has to leave and come
+     back. Reload once when control changes.
+
+     Two guards, both load-bearing. If there was no controller when this page
+     loaded, this is the first install claiming the page, not an update — the
+     content is already current and reloading would make every first visit
+     flicker. And `reloading` stops a worker that keeps claiming from looping
+     the page forever. */
+  var hadController = !!navigator.serviceWorker.controller;
+  var reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', function(){
+    if(!hadController || reloading) return;
+    reloading = true;
+    location.reload();
+  });
 }

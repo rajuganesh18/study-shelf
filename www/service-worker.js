@@ -1,5 +1,5 @@
 /* Offline cache. Bump VERSION whenever www/ changes. */
-const VERSION = 'shelf-v20260823j';
+const VERSION = 'shelf-v20260824a';
 const ASSETS = [
   "index.html",
   "exploration-chapter.html",

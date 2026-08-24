@@ -4,3 +4,8 @@ ios/
 *.keystore
 *.jks
 www/fonts/*.woff2
+
+# editor and OS cruft
+.idea/
+.vscode/
+.DS_Store
