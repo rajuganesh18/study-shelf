@@ -21,7 +21,17 @@ module.exports = [
        through a chain of yes/no questions, which the generic prodder cannot
        do. test/chapters/diversity.js drives it properly instead. */
     skipReach:['m6'] },
-  { slug:'earth-system', id:'9-science-13', n:13, title:'Earth as a System' }
+  { slug:'earth-system', id:'9-science-13', n:13, title:'Earth as a System' },
+
+  /* Maths. A different subject, so a different chapter-list page — verify's
+     back-link check reads cls and sub straight out of the id. */
+  { slug:'coordinates',  id:'9-maths-1',   n:1,  title:'Orienting Yourself: The Use of Coordinates',
+    /* m2 is aiming, not prodding: the pin has to land on one of nine named
+       corners of Reiaan's room and be placed there, three times. The prodder
+       parks a slider at its minimum, maximum and middle and nowhere else, so it
+       can reach two of the nine by luck and never a third.
+       test/chapters/coordinates.js drives it to each corner properly. */
+    skipReach:['m2'] }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';

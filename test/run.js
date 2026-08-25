@@ -21,7 +21,8 @@ const STAGES = [
   { name:'sound',        browser:true,  run:require('./chapters/sound') },
   { name:'reproduction', browser:true,  run:require('./chapters/reproduction') },
   { name:'diversity',    browser:true,  run:require('./chapters/diversity') },
-  { name:'earth-system', browser:true,  run:require('./chapters/earth-system') }
+  { name:'earth-system', browser:true,  run:require('./chapters/earth-system') },
+  { name:'coordinates',  browser:true,  run:require('./chapters/coordinates') }
 ];
 
 (async () => {

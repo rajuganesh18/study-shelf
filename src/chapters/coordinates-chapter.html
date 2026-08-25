@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>The Use of Coordinates — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: the Maths violet from the shelf, and graph-paper green ---------- */
+:root{ --a1:#B98BF5; --a2:#48C78E; --badge-bg:#F3ECFC; }
+/*@include shared/chrome.css*/
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Maths · Chapter 1</div>
+  <h1>Orienting Yourself<br><span>The use of coordinates</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96" aria-label="Chapter progress badge: a blank sheet becoming a coordinate plane"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Why anyone needed coordinates</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="40" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>Grid thinking is old</b><i>Section 1.1 · where the idea came from</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>The Cartesian plane carries one European name, but the thinking behind it was assembled over thousands of years and across several civilisations. Put these in the order they happened.</p>
+    <div class="panel">
+      <div class="chips" id="g1"></div>
+      <div class="score" id="g1s"></div>
+    </div>
+    <p>The first systematic use of grids happened on a massive urban scale in the <b>Sindhu–Sarasvatī Civilisation</b>, where city streets ran North–South and East–West at uniform distances of about 10 metres. That is a coordinate system in practice: a merchant could find a warehouse by counting North–South and East–West units from the city centre.</p>
+    <p><b>Baudhāyana</b> used East–West and North–South lines for his geometric constructions, developing the Baudhāyana–Pythagoras Theorem — the very result this chapter uses to measure distance. <b>Ujjayinī</b> was the point marking the central longitude meridian from which all other locations were measured, later entering Arabic geography as ‘Arin’.</p>
+    <div class="curio">
+      <h5>Why zero and the negatives mattered</h5>
+      <div class="note">Brahmagupta (c. 628 CE) formalised zero and negative numbers as algebraic entities. In a modern coordinate system the origin <i>is</i> zero and the negative axes represent values less than zero. Without that work the four-quadrant plane could not exist — you will take three of its quadrants away in Mission 4 and see what is left.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="45" data-coin="24">
+  <summary><span class="mno">02</span><span class="mt"><b>Reiaan's room</b><i>Section 1.2 · Fig. 1.3 · settling in</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Reiaan has moved to a new city and cannot see. His sister Shalini laid a rectangular grid of pins and threads over a sketch of his room, at a scale of <b>1 cm : 1 foot</b>, so he could feel where things are with his fingers. Drive the pin to a feature and place it.</p>
+    <div class="panel">
+      <canvas id="rmCv" height="290" aria-label="Plan of Reiaan's room on a coordinate grid, with a movable pin"></canvas>
+      <div class="knob">
+        <label>x — feet from the left wall <b id="rmXV">0</b></label>
+        <input type="range" id="rmX" min="0" max="12" value="0" aria-label="x coordinate in feet">
+      </div>
+      <div class="knob">
+        <label>y — feet from the x-axis <b id="rmYV">0</b></label>
+        <input type="range" id="rmY" min="0" max="10" value="0" aria-label="y coordinate in feet">
+      </div>
+      <div class="row">
+        <button class="act" id="rmPlace">Place the pin</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Pin at</div><div class="v" id="rmAt" style="font-size:12px">(0, 0)</div></div>
+        <div class="rc"><div class="k">Found</div><div class="v" id="rmFound" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Placed</div><div class="v" id="rmN" style="font-size:12px">0 of 3</div></div>
+      </div>
+      <div class="note" id="rmTxt" style="margin-top:12px;min-height:96px">O (0, 0) is the corner where the left wall meets the bottom wall. Find three named corners and place the pin on each.</div>
+    </div>
+    <p>Notice what the plan cannot tell you. It shows the <i>floor</i> only, so the windows have no place on it — they are up the walls, and this map has no third number for height. A coordinate system can only describe the dimensions it was built with.</p>
+  </div>
+</details>
+
+<div class="sec">Part 2 · The 2-D Cartesian plane</div>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="40" data-coin="20">
+  <summary><span class="mno">03</span><span class="mt"><b>Points that sit on an axis</b><i>Section 1.3 · Fig. 1.2</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Two lines at right angles. The horizontal one is the <b>x-axis</b>, the vertical one the <b>y-axis</b>, and where they cross is the <b>origin</b> O, whose coordinates are (0, 0). Distances right of O or up from O are positive; left or down are negative.</p>
+    <div class="panel">
+      <canvas id="axCv" height="260" aria-label="A point sliding along the x-axis or the y-axis"></canvas>
+      <div class="row">
+        <button class="act" id="axSwap">Move along: x-axis</button>
+      </div>
+      <div class="knob">
+        <label>Distance from O <b id="axDV">0</b></label>
+        <input type="range" id="axD" min="-70" max="70" value="0" aria-label="Signed distance from the origin, in tenths of a unit">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Point</div><div class="v" id="axPt" style="font-size:12px">(0, 0)</div></div>
+        <div class="rc"><div class="k">Form</div><div class="v" id="axForm" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Lies</div><div class="v" id="axSide" style="font-size:11px">at the origin</div></div>
+      </div>
+      <div class="note" id="axTxt" style="margin-top:12px;min-height:96px">A point on the x-axis has the form (x, 0). A point on the y-axis has the form (0, y). Reach all four directions.</div>
+    </div>
+    <p>The book's examples sit exactly here: B = (4.5, 0) is 4.5 units right of O on the x-axis, E = (−2.9, 0) is left of it, H = (0, 4) is 4 units above O on the y-axis, and G = (0, −4.5) is below it.</p>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="45" data-coin="24">
+  <summary><span class="mno">04</span><span class="mt"><b>Take the negatives away</b><i>End-of-chapter Q5</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Brahmagupta's negative numbers are not decoration. Switch them off and watch how much of the plane stops existing — and how many of the book's own points become unreachable.</p>
+    <div class="panel">
+      <canvas id="negCv" height="270" aria-label="The coordinate plane with and without negative numbers"></canvas>
+      <div class="row">
+        <button class="act" id="negTog">Negatives: on</button>
+        <button class="act" id="negNext">Try the next point</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Testing</div><div class="v" id="negPt" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Reachable</div><div class="v" id="negOk" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Plane left</div><div class="v" id="negArea" style="font-size:11px">all of it</div></div>
+      </div>
+      <div class="note" id="negTxt" style="margin-top:12px;min-height:96px">With negatives switched off, only one quadrant survives. Step through the points and see which ones you lose.</div>
+    </div>
+    <p>Without negative numbers a coordinate system can still locate things — but only things in one quarter of the plane, and only if you are willing to move the origin to the far corner of whatever you are describing. That is exactly what Reiaan's room plan does, and why it works there and not in general.</p>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="50" data-coin="26">
+  <summary><span class="mno">05</span><span class="mt"><b>The four quadrants</b><i>Section 1.3 · Fig. 1.4</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>The axes divide the plane into four parts, numbered anticlockwise from the top right. Drive a point around and watch the signs — and the two perpendicular distances that <i>are</i> the coordinates.</p>
+    <div class="panel">
+      <canvas id="qdCv" height="290" aria-label="A point moving around the four quadrants of the coordinate plane"></canvas>
+      <div class="knob">
+        <label>x <b id="qdXV">3</b></label>
+        <input type="range" id="qdX" min="-8" max="8" value="3" aria-label="x coordinate">
+      </div>
+      <div class="knob">
+        <label>y <b id="qdYV">4</b></label>
+        <input type="range" id="qdY" min="-8" max="8" value="4" aria-label="y coordinate">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Point</div><div class="v" id="qdPt" style="font-size:12px">(3, 4)</div></div>
+        <div class="rc"><div class="k">Signs</div><div class="v" id="qdSign" style="font-size:12px">(+, +)</div></div>
+        <div class="rc"><div class="k">Region</div><div class="v" id="qdReg" style="font-size:11px">Quadrant I</div></div>
+      </div>
+      <div class="note" id="qdTxt" style="margin-top:12px;min-height:110px">Visit all four quadrants, and land on an axis too.</div>
+    </div>
+    <p>Here is the definition the picture is teaching: <b>x is the perpendicular distance of the point from the y-axis</b>, measured along the x-axis, and <b>y is the perpendicular distance from the x-axis</b>, measured along the y-axis. The dashed lines in the drawing are those two distances.</p>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="35" data-coin="18">
+  <summary><span class="mno">06</span><span class="mt"><b>Where does each point live?</b><i>Section 1.3 · the sign rules</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Every point below is from the chapter. Say which region it belongs to.</p>
+    <div class="panel">
+      <div id="g6"></div>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>Two of these are traps worth naming. A point with a zero in it is <i>on</i> an axis, not in a quadrant — the axes are the boundaries between quadrants and belong to none of them. And (0, 0) is the origin, on both axes at once.</p>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="40" data-coin="20">
+  <summary><span class="mno">07</span><span class="mt"><b>Is (x, y) ever (y, x)?</b><i>Think and Reflect, page 7</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>The order of the two numbers is the whole point of the notation. Put P at (x, y) and Q at (y, x) at the same time, and find out when — if ever — they land on top of each other.</p>
+    <div class="panel">
+      <canvas id="swCv" height="280" aria-label="Point P at x comma y and point Q at y comma x, with the mirror line"></canvas>
+      <div class="knob">
+        <label>x <b id="swXV">2</b></label>
+        <input type="range" id="swX" min="-7" max="7" value="2" aria-label="x coordinate">
+      </div>
+      <div class="knob">
+        <label>y <b id="swYV">5</b></label>
+        <input type="range" id="swY" min="-7" max="7" value="5" aria-label="y coordinate">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">P (x, y)</div><div class="v" id="swP" style="font-size:12px">(2, 5)</div></div>
+        <div class="rc"><div class="k">Q (y, x)</div><div class="v" id="swQ" style="font-size:12px">(5, 2)</div></div>
+        <div class="rc"><div class="k">Same point?</div><div class="v" id="swSame" style="font-size:11px">no</div></div>
+      </div>
+      <div class="note" id="swTxt" style="margin-top:12px;min-height:96px">Find a setting where P and Q coincide, and one where they do not.</div>
+    </div>
+    <p>So the claim in the book holds both ways: if x ≠ y then (x, y) ≠ (y, x), and (x, y) = (y, x) <b>if and only if</b> x = y. The points where they coincide are exactly the points on the dashed mirror line, where the two coordinates are equal.</p>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Distance between two points</div>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="40" data-coin="20">
+  <summary><span class="mno">08</span><span class="mt"><b>Distance along a line</b><i>Section 1.4 · segments parallel to an axis</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Start with the easy case. When two points share the same y, the segment joining them is parallel to the x-axis, and the distance is just the difference of the x-coordinates — taken positively, whichever way round you subtract.</p>
+    <div class="panel">
+      <canvas id="lnCv" height="250" aria-label="Two points on a horizontal line, with the distance between them"></canvas>
+      <div class="knob">
+        <label>x₁ <b id="lnAV">2</b></label>
+        <input type="range" id="lnA" min="-8" max="8" value="2" aria-label="First x coordinate">
+      </div>
+      <div class="knob">
+        <label>x₂ <b id="lnBV">7</b></label>
+        <input type="range" id="lnB" min="-8" max="8" value="7" aria-label="Second x coordinate">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">x₂ − x₁</div><div class="v" id="lnDiff" style="font-size:12px">5</div></div>
+        <div class="rc"><div class="k">x₁ − x₂</div><div class="v" id="lnDiff2" style="font-size:12px">−5</div></div>
+        <div class="rc"><div class="k">Distance</div><div class="v" id="lnDist" style="font-size:12px">5</div></div>
+      </div>
+      <div class="note" id="lnTxt" style="margin-top:12px;min-height:96px">Make the difference negative, then positive, then zero. The distance never goes below zero.</div>
+    </div>
+    <p>The distance between (x₁, y) and (x₂, y) is the <b>absolute value</b> |x₂ − x₁|. The same argument along the other axis gives |y₂ − y₁| for (x, y₁) and (x, y₂). Direction is a matter of which one you subtract from which; distance is not.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="55" data-coin="30">
+  <summary><span class="mno">09</span><span class="mt"><b>The triangle hiding under every segment</b><i>Section 1.4 · Fig. 1.7 · triangle ADM</i></span><span class="mstat">55 XP</span></summary>
+  <div class="body">
+    <p>Now the segment that is parallel to neither axis. Drop a perpendicular from one point and run a horizontal from the other: a right-angled triangle appears, its legs are the two differences you already know how to find, and Baudhāyana's theorem does the rest.</p>
+    <div class="panel">
+      <canvas id="trCv" height="300" aria-label="Two points with the right triangle between them and the hypotenuse measured"></canvas>
+      <div class="knob">
+        <label>x₁ <b id="trX1V">3</b></label>
+        <input type="range" id="trX1" min="-8" max="9" value="3" aria-label="x of the first point">
+      </div>
+      <div class="knob">
+        <label>y₁ <b id="trY1V">4</b></label>
+        <input type="range" id="trY1" min="-6" max="8" value="4" aria-label="y of the first point">
+      </div>
+      <div class="knob">
+        <label>x₂ <b id="trX2V">7</b></label>
+        <input type="range" id="trX2" min="-8" max="9" value="7" aria-label="x of the second point">
+      </div>
+      <div class="knob">
+        <label>y₂ <b id="trY2V">1</b></label>
+        <input type="range" id="trY2" min="-6" max="8" value="1" aria-label="y of the second point">
+      </div>
+      <div class="row">
+        <button class="act" id="trAD">Side AD</button>
+        <button class="act" id="trDM">Side DM</button>
+        <button class="act" id="trMA">Side MA</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">x₂ − x₁</div><div class="v" id="trDx" style="font-size:12px">4</div></div>
+        <div class="rc"><div class="k">y₂ − y₁</div><div class="v" id="trDy" style="font-size:12px">−3</div></div>
+        <div class="rc"><div class="k">Distance</div><div class="v" id="trD" style="font-size:12px">5</div></div>
+      </div>
+      <div class="note" id="trTxt" style="margin-top:12px;min-height:110px">Reproduce all three sides of the book's triangle ADM: AD, DM and MA.</div>
+    </div>
+    <p>In general, the distance between (x₁, y₁) and (x₂, y₂) is <b>√[(x₂ − x₁)² + (y₂ − y₁)²]</b>. It makes no difference whether the two differences come out positive or negative — they are squared, and squaring destroys the sign. That is the same fact as the absolute value in the previous mission, wearing different clothes.</p>
+    <div class="curio">
+      <h5>Why the legs are always parallel to the axes</h5>
+      <div class="note">The construction drops from A straight down and runs from there straight across to D. Those two directions are perpendicular by the definition of the axes, so the triangle is right-angled by construction — you never have to check it. This is why coordinates make geometry calculable: the right angle is built into the paper.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="45" data-coin="24">
+  <summary><span class="mno">10</span><span class="mt"><b>Work the distances out</b><i>Section 1.4 · the worked results</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Fill in the two differences and the distance for each pair. Distances are given in the surd form the book uses.</p>
+    <div class="panel">
+      <table class="tick" id="g10"></table>
+      <button class="act" id="g10check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g10s"></div>
+    </div>
+    <p>Two of these are the book's own: AD = 5 and DM = √29. The last row is the reflected pair from Fig. 1.9, and it is worth noticing that it gives the same answer as the row above it.</p>
+  </div>
+</details>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="50" data-coin="26">
+  <summary><span class="mno">11</span><span class="mt"><b>A reflection keeps every length</b><i>Section 1.4 · Fig. 1.9</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Triangle ADM has A (3, 4), D (7, 1) and M (9, 6). Flip it across an axis and watch the coordinates change sign — while the three side lengths refuse to.</p>
+    <div class="panel">
+      <canvas id="rfCv" height="290" aria-label="Triangle ADM and its mirror image, with the side lengths of both"></canvas>
+      <div class="row">
+        <button class="act" id="rfY">Reflect in the y-axis</button>
+        <button class="act" id="rfX">Reflect in the x-axis</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Mirror</div><div class="v" id="rfAxis" style="font-size:11px">none yet</div></div>
+        <div class="rc"><div class="k">Images</div><div class="v" id="rfPts" style="font-size:10.5px">—</div></div>
+        <div class="rc"><div class="k">Sides</div><div class="v" id="rfSides" style="font-size:10.5px">5, √29, √40</div></div>
+      </div>
+      <div class="note" id="rfTxt" style="margin-top:12px;min-height:110px">Reflect in each axis in turn and compare the three side lengths with the originals.</div>
+    </div>
+    <p>Reflecting in the y-axis sends (x, y) to (−x, y); reflecting in the x-axis sends it to (x, −y). Either way each difference either keeps its size or flips its sign, and the formula squares it — so <b>lengths are preserved</b>. What changes is the position and the orientation; what stays is the shape.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · What coordinates let you prove</div>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="45" data-coin="24">
+  <summary><span class="mno">12</span><span class="mt"><b>On one straight line, or not?</b><i>End-of-chapter Q6 and Q7</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Three points are <b>collinear</b> when the longest of the three distances equals the sum of the other two — because going via the middle point costs nothing extra only when the middle point is on the way. Test each set without plotting it first.</p>
+    <div class="panel">
+      <canvas id="clCv" height="280" aria-label="Three points tested for collinearity, with the three distances between them"></canvas>
+      <div class="chips" id="clPick"></div>
+      <div class="row">
+        <button class="act" id="clRun">Measure the three distances</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Short + short</div><div class="v" id="clSum" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Longest</div><div class="v" id="clLong" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Verdict</div><div class="v" id="clSay" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="clTxt" style="margin-top:12px;min-height:110px">Pick a set of three points, then measure. Test three different sets.</div>
+    </div>
+    <p>The book's first set is M (−3, −4), A (0, 0) and G (6, 8), and it asks for a method that avoids plotting. This is that method: MA = 5, AG = 10, MG = 15, and 5 + 10 = 15 exactly, so the three points lie on one line.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="45" data-coin="24">
+  <summary><span class="mno">13</span><span class="mt"><b>The midpoint is an average</b><i>End-of-chapter Q9 and Q10</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Move the two ends and watch the middle. The connection the book asks you to find is sitting in the readout — the midpoint's coordinates are the averages of the ends'.</p>
+    <div class="panel">
+      <canvas id="mdCv" height="290" aria-label="A segment with its midpoint marked, as both ends are moved"></canvas>
+      <div class="knob">
+        <label>S — x <b id="mdSXV">-3</b></label>
+        <input type="range" id="mdSX" min="-9" max="9" value="-3" aria-label="x of the first endpoint">
+      </div>
+      <div class="knob">
+        <label>S — y <b id="mdSYV">0</b></label>
+        <input type="range" id="mdSY" min="-9" max="9" value="0" aria-label="y of the first endpoint">
+      </div>
+      <div class="knob">
+        <label>T — x <b id="mdTXV">3</b></label>
+        <input type="range" id="mdTX" min="-9" max="9" value="3" aria-label="x of the second endpoint">
+      </div>
+      <div class="knob">
+        <label>T — y <b id="mdTYV">0</b></label>
+        <input type="range" id="mdTY" min="-9" max="9" value="0" aria-label="y of the second endpoint">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Midpoint</div><div class="v" id="mdM" style="font-size:12px">(0, 0)</div></div>
+        <div class="rc"><div class="k">x average</div><div class="v" id="mdMx" style="font-size:10.5px">—</div></div>
+        <div class="rc"><div class="k">y average</div><div class="v" id="mdMy" style="font-size:10.5px">—</div></div>
+      </div>
+      <div class="note" id="mdTxt" style="margin-top:12px;min-height:110px">Land the midpoint on three different points, and read the averages as you go.</div>
+    </div>
+    <p>So M = ((x₁ + x₂)/2, (y₁ + y₂)/2). Run it backwards to answer Q10: if M (−7, 1) is the midpoint of A (3, −4) and B (x, y), then (3 + x)/2 = −7 gives x = −17, and (−4 + y)/2 = 1 gives y = 6. B is (−17, 6).</p>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="35" data-coin="18">
+  <summary><span class="mno">14</span><span class="mt"><b>Is M the midpoint of ST?</b><i>End-of-chapter Q9 · the table</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The book's table, row by row. Average the two ends and compare.</p>
+    <div class="panel">
+      <div id="g14"></div>
+      <div class="score" id="g14s"></div>
+    </div>
+    <p>The third row is the one that catches people: S (0, 0) and T (0, −10) average to (0, −5), not (0, 5). A sign slip at the averaging step moves the point to the wrong side of the origin entirely.</p>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="50" data-coin="26">
+  <summary><span class="mno">15</span><span class="mt"><b>Inside the circle, on it, or outside?</b><i>End-of-chapter Q12</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>A circle is simply the set of points at one fixed distance from a centre — so the distance formula decides membership. Circle K is centred at the origin and passes through A (1, −8), B (−4, 7) and C (−7, −4). Move a test point and let the formula rule.</p>
+    <div class="panel">
+      <canvas id="ciCv" height="300" aria-label="A circle centred at the origin with a movable test point"></canvas>
+      <div class="knob">
+        <label>x <b id="ciXV">-5</b></label>
+        <input type="range" id="ciX" min="-10" max="10" value="-5" aria-label="x of the test point">
+      </div>
+      <div class="knob">
+        <label>y <b id="ciYV">6</b></label>
+        <input type="range" id="ciY" min="-10" max="10" value="6" aria-label="y of the test point">
+      </div>
+      <div class="row">
+        <button class="act" id="ciA">Jump to A (1, −8)</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">x² + y²</div><div class="v" id="ciSq" style="font-size:12px">61</div></div>
+        <div class="rc"><div class="k">Radius²</div><div class="v" id="ciR2" style="font-size:12px">65</div></div>
+        <div class="rc"><div class="k">Verdict</div><div class="v" id="ciSay" style="font-size:11px">inside</div></div>
+      </div>
+      <div class="note" id="ciTxt" style="margin-top:12px;min-height:110px">Find a point inside the circle, one exactly on it, and one outside.</div>
+    </div>
+    <p>Each of A, B and C is √65 from the origin: 1 + 64, 16 + 49 and 49 + 16 all come to 65. So the radius is <b>√65</b>, a little over 8. D (−5, 6) gives 25 + 36 = 61 &lt; 65 and lies inside; E (0, 9) gives 81 &gt; 65 and lies outside. You never have to take a square root to decide — comparing the squares is enough.</p>
+  </div>
+</details>
+
+<div class="sec">Part 5 · The boss</div>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="80" data-coin="60">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, from a street grid to a circle. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+<footer>NCERT Class 9 Maths · Ganita Manjari Part 1 · Chapter 1</footer>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- .wrap -->
+
+<script>
+/*@include shared/storage.js*/
+
+const CH = {
+  id: '9-maths-1',
+  key: 'ch01Coord',
+  total: 16,
+  stages: [
+    { at:0,   f:0.00, name:'A blank sheet',   d:'Paper, and no way to say where anything on it is. Every instruction has to be "near the thing next to the other thing".' },
+    { at:70,  f:0.15, name:'One line',        d:'A number line. One dimension, one number per point — enough for integers and fractions, not enough for a room.' },
+    { at:165, f:0.32, name:'Two axes cross',  d:'A second line at right angles to the first. Where they meet is the origin, and every point now needs exactly two numbers.' },
+    { at:285, f:0.50, name:'Negatives added', d:'Brahmagupta’s work, drawn: the axes run backwards as well as forwards, so the plane extends in all four directions.' },
+    { at:410, f:0.68, name:'Four quadrants',  d:'The axes cut the plane into four regions, each with its own pair of signs — (+,+), (−,+), (−,−), (+,−).' },
+    { at:540, f:0.85, name:'A point, located',d:'(x, y): the perpendicular distance from the y-axis, then the perpendicular distance from the x-axis. Pinpoint accuracy.' },
+    { at:670, f:1.00, name:'Distance measured',d:'Two points, the right triangle between them, and Baudhāyana’s theorem turning geometry into arithmetic.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+    x.fillStyle = '#F3ECFC'; x.fillRect(0,0,W,H);
+
+    const cx = W*0.50, cy = H*0.50, R = W*0.40, U = R/4;   // U = one graph unit
+
+    /* Graph paper, fading in from nothing. The sheet is blank at first for the
+       same reason the chapter opens with a boy who cannot see the room: without
+       a grid there is no vocabulary for "where". */
+    if(f > 0.02){
+      x.strokeStyle = 'rgba(140,110,190,' + (0.20*Math.min(1,f/0.15)) + ')';
+      x.lineWidth = 0.5;
+      for(let i=-4;i<=4;i++){
+        x.beginPath(); x.moveTo(cx+i*U, cy-R); x.lineTo(cx+i*U, cy+R); x.stroke();
+        x.beginPath(); x.moveTo(cx-R, cy+i*U); x.lineTo(cx+R, cy+i*U); x.stroke();
+      }
+    }
+
+    /* Quadrant tints arrive before the point does, so the four regions read as
+       regions rather than as empty paper. */
+    if(f >= 0.60){
+      const a = Math.min(1,(f-0.60)/0.10) * 0.13;
+      const tint = ['rgba(185,139,245,', 'rgba(72,199,142,', 'rgba(185,139,245,', 'rgba(72,199,142,'];
+      const box = [[cx,cy-R,R,R],[cx-R,cy-R,R,R],[cx-R,cy,R,R],[cx,cy,R,R]];
+      box.forEach((b,i)=>{ x.fillStyle = tint[i] + a + ')'; x.fillRect(b[0],b[1],b[2],b[3]); });
+    }
+
+    /* One axis, then two. The negatives extend each axis backwards, which is
+       drawn as the arrowhead appearing on the far end. */
+    const neg = f >= 0.46;
+    const two = f >= 0.28;
+    x.lineWidth = 1.4;
+    if(f >= 0.12){
+      arrow(x, cx - (neg?R:0), cy, cx+R, cy, '#5B4A7A', 5);
+      if(neg) arrow(x, cx, cy, cx-R, cy, '#5B4A7A', 5);
+    }
+    if(two){
+      arrow(x, cx, cy + (neg?R:0), cx, cy-R, '#5B4A7A', 5);
+      if(neg) arrow(x, cx, cy, cx, cy+R, '#5B4A7A', 5);
+    }
+
+    /* The origin only means something once both axes are there. */
+    if(two){
+      x.fillStyle = '#5B4A7A';
+      x.beginPath(); x.arc(cx, cy, 2.2, 0, 7); x.fill();
+    }
+
+    /* A located point, with the two perpendicular distances that define it. */
+    if(f >= 0.78){
+      const a = Math.min(1,(f-0.78)/0.07);
+      const ax = cx + 2*U, ay = cy - 3*U;
+      x.setLineDash([2,2]); x.strokeStyle = 'rgba(91,74,122,' + (0.55*a) + ')'; x.lineWidth = 1;
+      x.beginPath(); x.moveTo(ax, ay); x.lineTo(ax, cy); x.stroke();
+      x.beginPath(); x.moveTo(ax, ay); x.lineTo(cx, ay); x.stroke();
+      x.setLineDash([]);
+      x.fillStyle = '#B98BF5';
+      x.beginPath(); x.arc(ax, ay, 3.2, 0, 7); x.fill();
+    }
+
+    /* A second point, and the right triangle whose hypotenuse is the distance. */
+    if(f >= 0.93){
+      const a = Math.min(1,(f-0.93)/0.07);
+      const ax = cx + 2*U, ay = cy - 3*U, bx = cx - 2*U, by = cy + 1*U;
+      x.strokeStyle = 'rgba(72,199,142,' + (0.85*a) + ')'; x.lineWidth = 1.2;
+      x.beginPath(); x.moveTo(bx, by); x.lineTo(bx, ay); x.lineTo(ax, ay); x.stroke();
+      x.strokeStyle = 'rgba(72,199,142,' + a + ')'; x.lineWidth = 2;
+      x.beginPath(); x.moveTo(ax, ay); x.lineTo(bx, by); x.stroke();
+      x.fillStyle = '#48C78E';
+      x.beginPath(); x.arc(bx, by, 3.2, 0, 7); x.fill();
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ---------- canvas palette ---------- */
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#B98BF5', A2='#48C78E',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C';
+
+/* Coordinates land on halves as often as on whole numbers — (4.5, 0) and
+   (0, −4.5) are the book's own — so every readout goes through one formatter.
+   neg() also spells the sign with a real minus rather than a hyphen, so an
+   axis tick, a readout and the printed page all agree on what −5 looks like. */
+const fmt = n => Number.isInteger(n) ? String(n) : String(Math.round(n*1000)/1000);
+const neg = n => (n < 0 ? '−' : '') + fmt(Math.abs(n));
+
+/* ============================================================
+   One helper, nine benches.
+
+   Every bench in this chapter draws the same object: a patch of the plane with
+   the axes through it. Rather than nine copies of the grid code, plane() draws
+   the paper and hands back the two functions that convert graph units to
+   pixels — px(u) across, py(v) up. Everything after that is drawn in the units
+   the textbook uses, which is also the only way the chapter test can check a
+   drawing against the book.
+   ============================================================ */
+function plane(x, W, H, o){
+  o = o || {};
+  const xlo = o.xlo!==undefined ? o.xlo : -9, xhi = o.xhi!==undefined ? o.xhi : 9;
+  const ylo = o.ylo!==undefined ? o.ylo : -9, yhi = o.yhi!==undefined ? o.yhi : 9;
+  const L = o.left!==undefined ? o.left : 16, Rp = 14, T = 12, B = 16;
+  const sx = (W-L-Rp)/(xhi-xlo), sy = (H-T-B)/(yhi-ylo);
+  const px = u => L + (u-xlo)*sx;
+  const py = v => T + (yhi-v)*sy;
+  const x0 = px(0), y0 = py(0);
+
+  x.fillStyle = '#10162B'; x.fillRect(0,0,W,H);
+
+  /* unit grid */
+  x.strokeStyle = 'rgba(142,154,192,.13)'; x.lineWidth = 0.5;
+  for(let u=Math.ceil(xlo); u<=xhi; u++){
+    x.beginPath(); x.moveTo(px(u), py(yhi)); x.lineTo(px(u), py(ylo)); x.stroke();
+  }
+  for(let v=Math.ceil(ylo); v<=yhi; v++){
+    x.beginPath(); x.moveTo(px(xlo), py(v)); x.lineTo(px(xhi), py(v)); x.stroke();
+  }
+
+  /* the axes themselves, arrowed both ways when the range crosses zero */
+  const showX = ylo <= 0 && yhi >= 0, showY = xlo <= 0 && xhi >= 0;
+  if(showX){
+    arrow(x, px(xlo), y0, px(xhi), y0, 'rgba(142,154,192,.72)', 6);
+    if(xlo < 0) arrow(x, x0, y0, px(xlo), y0, 'rgba(142,154,192,.72)', 6);
+  }
+  if(showY){
+    arrow(x, x0, py(ylo), x0, py(yhi), 'rgba(142,154,192,.72)', 6);
+    if(ylo < 0) arrow(x, x0, y0, x0, py(ylo), 'rgba(142,154,192,.72)', 6);
+  }
+
+  /* numbers, thinned out so they never collide at 390px, and carrying the same
+     typographic minus the readouts and the textbook use rather than a hyphen */
+  mono(x, 8.5, 400); x.fillStyle = DIM;
+  const step = (xhi-xlo) > 14 ? 2 : 1;
+  x.textAlign = 'center'; x.textBaseline = 'top';
+  if(showX) for(let u=Math.ceil(xlo/step)*step; u<=xhi; u+=step){
+    if(u === 0) continue;
+    x.fillText(neg(u), px(u), y0+3);
+  }
+  x.textAlign = 'right'; x.textBaseline = 'middle';
+  const stepY = (yhi-ylo) > 14 ? 2 : 1;
+  if(showY) for(let v=Math.ceil(ylo/stepY)*stepY; v<=yhi; v+=stepY){
+    if(v === 0) continue;
+    x.fillText(neg(v), x0-4, py(v));
+  }
+  if(showX && showY){
+    x.textAlign = 'right'; x.textBaseline = 'top';
+    x.fillText('O', x0-3, y0+3);
+  }
+  x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  return { px, py, sx, sy, x0, y0, xlo, xhi, ylo, yhi };
+}
+
+/* A labelled dot, the shape every bench marks its points with.
+
+   The label sits on a small plate of the background colour. Without it the
+   coordinates of a point near an axis are drawn straight over that axis's own
+   tick numbers, and "(−5, 3)" laid across a dashed guide line and a "−4" tick
+   comes out as an unreadable smear — which is exactly what the first draft of
+   the quadrant bench did. */
+function dot(x, p, u, v, col, label, side){
+  const cx = p.px(u), cy = p.py(v);
+  x.fillStyle = col;
+  x.beginPath(); x.arc(cx, cy, 4, 0, 7); x.fill();
+  if(label){
+    mono(x, 9.5, 500);
+    const w = x.measureText(label).width;
+    /* 'u' sets the label above the dot rather than beside it, for the benches
+       that draw a line along the axis through the point — beside it, the label
+       lies on the very segment whose length it is reporting. */
+    const up = side === 'u';
+    const lx = up ? cx : cx + (side === 'l' ? -8 : 8);
+    const ly = up ? cy - 13 : cy - 1;
+    x.fillStyle = '#10162B';
+    x.fillRect(up ? lx - w/2 - 2 : (side === 'l' ? lx - w - 2 : lx - 2), ly - 7, w + 4, 14);
+    x.fillStyle = col;
+    x.textAlign = up ? 'center' : side === 'l' ? 'right' : 'left';
+    x.textBaseline = 'middle';
+    x.fillText(label, lx, ly);
+    x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  }
+}
+
+/* A caption line under the drawing. Kept to one line: at 390px the panel is
+   288px wide, which is 53 characters of 9px mono and not one more. */
+function cap(x, W, H, s, col){
+  mono(x, 9, 400); x.fillStyle = col || DIM;
+  x.textAlign = 'center'; x.textBaseline = 'bottom';
+  x.fillText(s, W/2, H-2);
+  x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+}
+
+/* Surd form, because the book leaves the answers as √29 and √40 rather than
+   as decimals — and a reader checking against the page needs to see the same. */
+function surd(n){
+  const r = Math.sqrt(n);
+  if(Math.abs(r - Math.round(r)) < 1e-9) return String(Math.round(r));
+  return '√' + n;
+}
+
+/* ============================================================
+   M1 · the order it happened in
+   ============================================================ */
+Q.order('g1','g1s', [
+  'Sindhu–Sarasvatī city grids',
+  'Ujjayinī, the central meridian',
+  'Ptolemy maps latitude and longitude',
+  'Āryabhaṭa replaces chords with sines',
+  'Brahmagupta formalises zero',
+  'Al-Bīrūnī computes city coordinates',
+  'Ōmar Khayyām solves algebra with geometry',
+  'Fermat and Descartes fix the plane'
+], 'm1',
+   'Right through: streets, then a meridian, then a sky, then zero, then a plane.');
+
+/* ============================================================
+   M2 · Reiaan's room
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('rmCv'); if(!cv) return;
+  const SX = document.getElementById('rmX'), SY = document.getElementById('rmY');
+  /* Fig. 1.3, in feet, with O at the corner of the left and bottom walls. */
+  const ROOM = { w:12, h:10 };
+  const WARD = { x:3, y:0, w:4, h:2 };       // 4 ft x 2 ft
+  const BED  = { x:1, y:5, w:5, h:3 };       // S1..S4
+  const SPOTS = [
+    { x:0,  y:0,  n:'O (0, 0)',  d:'The origin — where the left wall meets the bottom wall. Every other number in this room is counted from here.' },
+    { x:12, y:0,  n:'A (12, 0)', d:'The far end of the bottom wall. The room is 12 ft wide, so its x-coordinate is 12 and it sits on the x-axis.' },
+    { x:12, y:10, n:'B (12, 10)',d:'The far corner, diagonally opposite the origin. Both coordinates are at their maximum here.' },
+    { x:0,  y:10, n:'C (0, 10)', d:'Top of the left wall. It lies on the y-axis, so its x-coordinate is 0.' },
+    { x:3,  y:0,  n:'W₁ wardrobe',  d:'The left foot of the wardrobe. It is 4 ft wide and 2 ft deep, so its other bottom corner W₂ is at (7, 0).' },
+    { x:7,  y:2,  n:'W₃ wardrobe',  d:'The back-right corner of the wardrobe: 7 ft along and 2 ft in from the wall.' },
+    { x:8,  y:0,  n:'D₁ door edge', d:'One edge of the room door. The other edge R₁ is at (11.5, 0), so the door is 3.5 ft wide.' },
+    { x:1,  y:5,  n:'S₁ bed corner',d:'The near-left corner of the bed. The bed runs from here to S₃ at (6, 8).' },
+    { x:0,  y:4,  n:'B₂ bath door', d:'The top of the bathroom doorway, on the y-axis. Its other end B₁ is at (0, 1.5).' }
+  ];
+  let found = {}, at = null;
+
+  function upd(){
+    const ux = +SX.value, uy = +SY.value;
+    document.getElementById('rmXV').textContent = ux;
+    document.getElementById('rmYV').textContent = uy;
+    document.getElementById('rmAt').textContent = '(' + neg(ux) + ', ' + neg(uy) + ')';
+    at = SPOTS.find(s => s.x === ux && s.y === uy) || null;
+    document.getElementById('rmFound').textContent = at ? at.n : 'open floor';
+    draw();
+  }
+  function place(){
+    ev('explore','rmPlace');
+    if(!at){
+      document.getElementById('rmTxt').textContent =
+        'Nothing named is at (' + SX.value + ', ' + SY.value + '). That is open floor — a perfectly good location, just not one of the labelled corners. Keep going.';
+      draw(); return;
+    }
+    document.getElementById('rmTxt').textContent = at.n + ' — ' + at.d;
+    if(!found[at.n] && !autoplaying('m2')){
+      found[at.n] = 1;
+      document.getElementById('rmN').textContent = Object.keys(found).length + ' of 3';
+      if(Object.keys(found).length >= 3) complete('m2');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    /* This plan has no negatives: the room is the first quadrant and nothing
+       else, which is exactly the point Mission 4 goes on to make. */
+    const p = plane(x, W, H, { xlo:-1, xhi:13, ylo:-1, yhi:11, left:20 });
+
+    x.fillStyle = 'rgba(185,139,245,.10)';
+    x.fillRect(p.px(0), p.py(ROOM.h), ROOM.w*p.sx, ROOM.h*p.sy);
+    x.strokeStyle = A1; x.lineWidth = 1.6;
+    x.strokeRect(p.px(0), p.py(ROOM.h), ROOM.w*p.sx, ROOM.h*p.sy);
+
+    const box = (b, col, label) => {
+      x.fillStyle = col.replace('COL','.16');
+      x.fillRect(p.px(b.x), p.py(b.y+b.h), b.w*p.sx, b.h*p.sy);
+      x.strokeStyle = col.replace('COL','.75'); x.lineWidth = 1;
+      x.strokeRect(p.px(b.x), p.py(b.y+b.h), b.w*p.sx, b.h*p.sy);
+      mono(x, 8.5, 400); x.fillStyle = 'rgba(142,154,192,.85)';
+      x.textAlign = 'center'; x.textBaseline = 'middle';
+      x.fillText(label, p.px(b.x+b.w/2), p.py(b.y+b.h/2));
+      x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+    };
+    box(BED,  'rgba(72,199,142,COL)', 'bed');
+    box(WARD, 'rgba(242,184,76,COL)', 'wardrobe');
+
+    /* the two doorways, drawn on the walls they are cut into */
+    x.strokeStyle = GOLD; x.lineWidth = 3;
+    x.beginPath(); x.moveTo(p.px(8), p.py(0)); x.lineTo(p.px(11.5), p.py(0)); x.stroke();
+    x.beginPath(); x.moveTo(p.px(0), p.py(1.5)); x.lineTo(p.px(0), p.py(4)); x.stroke();
+
+    /* every named corner, so the reader can see what to aim at */
+    SPOTS.forEach(s=>{
+      x.fillStyle = found[s.n] ? GOOD : 'rgba(142,154,192,.55)';
+      x.beginPath(); x.arc(p.px(s.x), p.py(s.y), found[s.n] ? 3.4 : 2.4, 0, 7); x.fill();
+    });
+
+    /* the pin */
+    const ux = +SX.value, uy = +SY.value;
+    const cx = p.px(ux), cy = p.py(uy);
+    x.setLineDash([3,3]); x.strokeStyle = 'rgba(185,139,245,.6)'; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx, p.py(0)); x.stroke();
+    x.beginPath(); x.moveTo(cx, cy); x.lineTo(p.px(0), cy); x.stroke();
+    x.setLineDash([]);
+    dot(x, p, ux, uy, at ? GOLD : A1, '(' + neg(ux) + ', ' + neg(uy) + ')', ux > 8 ? 'l' : 'r');
+
+    cap(x, W, H, 'scale 1 cm : 1 foot · ' + Object.keys(found).length + ' of 3 found');
+  }
+  SX.oninput = ()=>{ ev('explore','rmX'); upd(); };
+  SY.oninput = ()=>{ ev('explore','rmY'); upd(); };
+  document.getElementById('rmPlace').onclick = place;
+  reg('m2', draw); upd();
+})();
+
+/* ============================================================
+   M3 · points that sit on an axis
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('axCv'); if(!cv) return;
+  const SD = document.getElementById('axD');
+  let onX = true, seen = {};
+
+  function upd(){
+    const d = (+SD.value)/10;
+    document.getElementById('axDV').textContent = neg(d);
+    const u = onX ? d : 0, v = onX ? 0 : d;
+    document.getElementById('axPt').textContent = '(' + neg(u) + ', ' + neg(v) + ')';
+    document.getElementById('axForm').textContent = onX ? '(x, 0)' : '(0, y)';
+    const where = d === 0 ? 'at the origin'
+                : onX ? (d > 0 ? 'right of O' : 'left of O')
+                      : (d > 0 ? 'above O'    : 'below O');
+    document.getElementById('axSide').textContent = where;
+    document.getElementById('axTxt').textContent = d === 0
+      ? 'At the origin both coordinates are zero: O = (0, 0). It is the one point that lies on both axes at once.'
+      : onX
+        ? 'A point on the x-axis is ' + Math.abs(d) + ' units ' + (d>0?'right of':'left of') +
+          ' O, and no distance at all from the x-axis — so its y-coordinate is 0. The book writes B = (4.5, 0) and E = (−2.9, 0) this way.'
+        : 'A point on the y-axis is ' + Math.abs(d) + ' units ' + (d>0?'above':'below') +
+          ' O, and no distance at all from the y-axis — so its x-coordinate is 0. The book writes H = (0, 4) and G = (0, −4.5) this way.';
+
+    if(d !== 0 && !autoplaying('m3')){
+      const k = (onX?'x':'y') + (d>0?'+':'-');
+      if(!seen[k]){
+        seen[k] = 1;
+        if(Object.keys(seen).length >= 4) complete('m3');
+      }
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 260, x = fit(cv, H); if(!x) return;
+    const p = plane(x, W, H, { xlo:-8, xhi:8, ylo:-8, yhi:8 });
+    const d = (+SD.value)/10, u = onX ? d : 0, v = onX ? 0 : d;
+
+    /* highlight the axis being travelled */
+    x.strokeStyle = 'rgba(185,139,245,.35)'; x.lineWidth = 4;
+    x.beginPath();
+    if(onX){ x.moveTo(p.px(-8), p.y0); x.lineTo(p.px(8), p.y0); }
+    else   { x.moveTo(p.x0, p.py(-8)); x.lineTo(p.x0, p.py(8)); }
+    x.stroke();
+
+    /* the travelled part, from O to the point */
+    x.strokeStyle = A2; x.lineWidth = 2.5;
+    x.beginPath(); x.moveTo(p.x0, p.y0); x.lineTo(p.px(u), p.py(v)); x.stroke();
+
+    /* above the dot: the travelled segment runs through the point along
+       whichever axis it is on, and a label beside it lands on that segment */
+    dot(x, p, u, v, A1, '(' + neg(u) + ', ' + neg(v) + ')', 'u');
+    const got = Object.keys(seen).length;
+    cap(x, W, H, onX ? 'on the x-axis: (x, 0) · ' + got + ' of 4 directions'
+                     : 'on the y-axis: (0, y) · ' + got + ' of 4 directions');
+  }
+  document.getElementById('axSwap').onclick = ()=>{
+    onX = !onX;
+    document.getElementById('axSwap').textContent = 'Move along: ' + (onX ? 'x-axis' : 'y-axis');
+    ev('explore','axSwap'); upd();
+  };
+  SD.oninput = ()=>{ ev('explore','axD'); upd(); };
+  reg('m3', draw); upd();
+})();
+
+/* ============================================================
+   M4 · take the negatives away
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('negCv'); if(!cv) return;
+  /* The chapter's own points, so losing them is a loss the reader recognises. */
+  const PTS = [
+    { n:'B (4.5, 0)',   x:4.5,  y:0 },
+    { n:'H (0, 4)',     x:0,    y:4 },
+    { n:'E (−2.9, 0)', x:-2.9, y:0 },
+    { n:'G (0, −4.5)', x:0,    y:-4.5 },
+    { n:'Q (−5, 3)',   x:-5,   y:3 },
+    { n:'S (3, −5)',   x:3,    y:-5 }
+  ];
+  let on = true, i = 0, tested = {}, toggled = false;
+
+  const reach = p => on || (p.x >= 0 && p.y >= 0);
+
+  function upd(){
+    const p = PTS[i];
+    document.getElementById('negPt').textContent = p.n;
+    document.getElementById('negOk').textContent = reach(p) ? 'yes' : 'no — lost';
+    document.getElementById('negArea').textContent = on ? 'all of it' : 'one quadrant';
+    document.getElementById('negTxt').textContent = on
+      ? p.n + ' is reachable. With negative numbers available every direction from O can be counted, so all four quadrants and both halves of each axis exist.'
+      : reach(p)
+        ? p.n + ' survives, because neither of its coordinates is negative. It sits in the one quadrant that a system without negatives can still describe.'
+        : p.n + ' cannot be written down at all. Counting from O you would have to go backwards, and there is no number for that — which is precisely the gap Brahmagupta closed.';
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 270, x = fit(cv, H); if(!x) return;
+    const pl = plane(x, W, H, { xlo:-8, xhi:8, ylo:-8, yhi:8 });
+
+    /* Strike out what a system without negatives cannot describe: the whole
+       left half, and the bottom of the right half. Hatching rather than a dark
+       wash — the plane is already dark, so dimming it further is invisible and
+       the mission loses the only thing it is trying to show. */
+    if(!on){
+      const dead = [[-8, 8, 8, 16], [0, 0, 8, 8]];   // [left u, top v, w, h] in units
+      dead.forEach(d=>{
+        const X = pl.px(d[0]), Y = pl.py(d[1]), W2 = d[2]*pl.sx, H2 = d[3]*pl.sy;
+        x.fillStyle = 'rgba(229,72,77,.10)';
+        x.fillRect(X, Y, W2, H2);
+        x.save(); x.beginPath(); x.rect(X, Y, W2, H2); x.clip();
+        x.strokeStyle = 'rgba(229,72,77,.20)'; x.lineWidth = 1;
+        for(let k = -H2; k < W2 + H2; k += 9){
+          x.beginPath(); x.moveTo(X + k, Y); x.lineTo(X + k + H2, Y + H2); x.stroke();
+        }
+        x.restore();
+      });
+      /* and say why the surviving quarter survives */
+      x.fillStyle = 'rgba(72,199,142,.10)';
+      x.fillRect(pl.x0, pl.py(8), 8*pl.sx, 8*pl.sy);
+      mono(x, 9.5, 500);
+      x.textAlign='center'; x.textBaseline='middle';
+      x.fillStyle = 'rgba(229,72,77,.95)';
+      x.fillText('no numbers here', pl.px(-4), pl.py(-5.5));
+      x.fillStyle = 'rgba(79,195,161,.95)';
+      x.fillText('all that is left', pl.px(4), pl.py(7));
+      x.textAlign='left'; x.textBaseline='alphabetic';
+    }
+    PTS.forEach((p,k)=>{
+      const live = reach(p);
+      dot(x, pl, p.x, p.y, k===i ? (live?A1:BAD) : (live?'rgba(142,154,192,.75)':'rgba(229,72,77,.35)'),
+          k===i ? p.n : '', p.x > 2 ? 'l' : 'r');
+    });
+    const lost = PTS.filter(p=>!reach(p)).length;
+    cap(x, W, H, on ? 'negatives on · all 6 points reachable'
+                    : 'negatives off · ' + lost + ' of 6 points lost');
+  }
+  document.getElementById('negTog').onclick = ()=>{
+    on = !on; toggled = true;
+    document.getElementById('negTog').textContent = 'Negatives: ' + (on?'on':'off');
+    ev('explore','negTog'); check(); upd();
+  };
+  document.getElementById('negNext').onclick = ()=>{
+    i = (i+1) % PTS.length;
+    ev('explore','negNext'); tested[PTS[i].n] = 1; check(); upd();
+  };
+  function check(){
+    if(autoplaying('m4')) return;
+    if(toggled && Object.keys(tested).length >= 4) complete('m4');
+  }
+  reg('m4', draw); upd();
+})();
+
+/* ============================================================
+   M5 · the four quadrants
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('qdCv'); if(!cv) return;
+  const SX = document.getElementById('qdX'), SY = document.getElementById('qdY');
+  let seen = {};
+
+  const regionOf = (u,v) => (u===0 && v===0) ? 'the origin'
+    : (u===0 || v===0) ? 'on an axis'
+    : (u>0 && v>0) ? 'I' : (u<0 && v>0) ? 'II' : (u<0 && v<0) ? 'III' : 'IV';
+
+  function upd(){
+    const u = +SX.value, v = +SY.value;
+    document.getElementById('qdXV').textContent = neg(u);
+    document.getElementById('qdYV').textContent = neg(v);
+    document.getElementById('qdPt').textContent = '(' + neg(u) + ', ' + neg(v) + ')';
+    document.getElementById('qdSign').textContent =
+      '(' + (u>0?'+':u<0?'−':'0') + ', ' + (v>0?'+':v<0?'−':'0') + ')';
+    const r = regionOf(u,v);
+    document.getElementById('qdReg').textContent = r.length > 3 ? r : 'Quadrant ' + r;
+    document.getElementById('qdTxt').textContent =
+      r === 'the origin' ? 'The origin. Both coordinates are zero, and it belongs to both axes rather than to any quadrant.'
+      : r === 'on an axis' ? 'On an axis, so not in any quadrant. The axes are the boundaries between the four regions and belong to none of them.'
+      : 'Quadrant ' + r + '. The x-coordinate ' + (u>0?'is positive, so the point is ' + u + ' units right of the y-axis'
+                                                     : 'is negative, so the point is ' + (-u) + ' units left of the y-axis')
+        + ', and the y-coordinate ' + (v>0?'is positive, so it is ' + v + ' units above the x-axis'
+                                          : 'is negative, so it is ' + (-v) + ' units below the x-axis') + '.';
+    if(!autoplaying('m5')){
+      seen[r] = 1;
+      const quads = ['I','II','III','IV'].filter(q=>seen[q]).length;
+      if(quads >= 4) complete('m5');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    const p = plane(x, W, H, { xlo:-9, xhi:9, ylo:-9, yhi:9 });
+    const u = +SX.value, v = +SY.value, r = regionOf(u,v);
+
+    /* tint the live quadrant, and label all four. The pair is the top-left
+       corner of the region in graph units, which is what fillRect wants once
+       py() has flipped the vertical direction. */
+    const quad = { 'I':[0,9], 'II':[-9,9], 'III':[-9,0], 'IV':[0,0] };
+    if(quad[r]){
+      const q = quad[r];
+      x.fillStyle = 'rgba(185,139,245,.13)';
+      x.fillRect(p.px(q[0]), p.py(q[1]), 9*p.sx, 9*p.sy);
+    }
+    mono(x, 9, 500);
+    x.textAlign='center'; x.textBaseline='middle';
+    [['I',5,5],['II',-5,5],['III',-5,-5],['IV',5,-5]].forEach(q=>{
+      x.fillStyle = (r===q[0]) ? A1 : 'rgba(142,154,192,.45)';
+      x.fillText(q[0], p.px(q[1]), p.py(q[2]));
+    });
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    /* the two perpendicular distances that ARE the coordinates */
+    x.setLineDash([3,3]); x.lineWidth = 1.2;
+    x.strokeStyle = 'rgba(72,199,142,.85)';
+    x.beginPath(); x.moveTo(p.px(u), p.py(v)); x.lineTo(p.px(u), p.y0); x.stroke();
+    x.strokeStyle = 'rgba(242,184,76,.85)';
+    x.beginPath(); x.moveTo(p.px(u), p.py(v)); x.lineTo(p.x0, p.py(v)); x.stroke();
+    x.setLineDash([]);
+
+    /* The horizontal guide runs from the point towards the y-axis, so the
+       label goes on the far side of the point from it. */
+    dot(x, p, u, v, A1, '(' + neg(u) + ', ' + neg(v) + ')', u < 0 ? 'l' : 'r');
+    const quads = ['I','II','III','IV'].filter(q=>seen[q]).length;
+    cap(x, W, H, 'green = y · gold = x · ' + quads + ' of 4 quadrants visited');
+  }
+  SX.oninput = ()=>{ ev('explore','qdX'); upd(); };
+  SY.oninput = ()=>{ ev('explore','qdY'); upd(); };
+  reg('m5', draw); upd();
+})();
+
+/* ============================================================
+   M6 · which region?
+   ============================================================ */
+Q.rows('g6','g6s', [
+  { t:'Q (−5, 3)',   a:1 },
+  { t:'S (3, −5)',   a:3 },
+  { t:'B (4.5, 0)',   a:4 },
+  { t:'G (0, −4.5)', a:4 },
+  { t:'C (−2, −1)', a:2 },
+  { t:'A (2, 1)',     a:0 }
+], ['I','II','III','IV','On an axis'], 'm6',
+   'Every one placed. The signs alone tell you the region.');
+
+/* ============================================================
+   M7 · is (x, y) ever (y, x)?
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('swCv'); if(!cv) return;
+  const SX = document.getElementById('swX'), SY = document.getElementById('swY');
+  let sawSame = false, sawDiff = false;
+
+  function upd(){
+    const u = +SX.value, v = +SY.value, same = u === v;
+    document.getElementById('swXV').textContent = neg(u);
+    document.getElementById('swYV').textContent = neg(v);
+    document.getElementById('swP').textContent = '(' + neg(u) + ', ' + neg(v) + ')';
+    document.getElementById('swQ').textContent = '(' + neg(v) + ', ' + neg(u) + ')';
+    document.getElementById('swSame').textContent = same ? 'yes' : 'no';
+    document.getElementById('swTxt').textContent = same
+      ? 'Here x = y, so swapping the two numbers changes nothing and P and Q are the same point. It sits on the dashed line, where both coordinates are equal.'
+      : 'P is ' + u + ' across and ' + v + ' up; Q is ' + v + ' across and ' + u + ' up. Different instructions, different places — which is why the order of the pair is not a detail.';
+    if(!autoplaying('m7')){
+      if(same) sawSame = true; else sawDiff = true;
+      if(sawSame && sawDiff) complete('m7');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 280, x = fit(cv, H); if(!x) return;
+    const p = plane(x, W, H, { xlo:-8, xhi:8, ylo:-8, yhi:8 });
+    const u = +SX.value, v = +SY.value, same = u === v;
+
+    /* the mirror line y = x: every point where swapping changes nothing */
+    x.setLineDash([4,4]); x.strokeStyle = 'rgba(142,154,192,.5)'; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(p.px(-8), p.py(-8)); x.lineTo(p.px(8), p.py(8)); x.stroke();
+    x.setLineDash([]);
+    mono(x, 9, 400); x.fillStyle = 'rgba(142,154,192,.7)';
+    x.fillText('y = x', p.px(5.6), p.py(6.6));
+
+    if(!same){
+      x.strokeStyle = 'rgba(72,199,142,.5)'; x.lineWidth = 1;
+      x.setLineDash([2,3]);
+      x.beginPath(); x.moveTo(p.px(u), p.py(v)); x.lineTo(p.px(v), p.py(u)); x.stroke();
+      x.setLineDash([]);
+    }
+    dot(x, p, v, u, A2, same ? '' : 'Q', 'l');
+    dot(x, p, u, v, A1, same ? 'P = Q' : 'P', 'r');
+    cap(x, W, H, same ? 'x = y, so P and Q are one point'
+                      : '(' + u + ', ' + v + ') and (' + v + ', ' + u + ') differ');
+  }
+  SX.oninput = ()=>{ ev('explore','swX'); upd(); };
+  SY.oninput = ()=>{ ev('explore','swY'); upd(); };
+  reg('m7', draw); upd();
+})();
+
+/* ============================================================
+   M8 · distance along a line
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('lnCv'); if(!cv) return;
+  const SA = document.getElementById('lnA'), SB = document.getElementById('lnB');
+  let seen = {};
+
+  function upd(){
+    const a = +SA.value, b = +SB.value, d = b - a;
+    document.getElementById('lnAV').textContent = neg(a);
+    document.getElementById('lnBV').textContent = neg(b);
+    document.getElementById('lnDiff').textContent  = neg(d);
+    document.getElementById('lnDiff2').textContent = neg(-d);
+    document.getElementById('lnDist').textContent  = fmt(Math.abs(d));
+    document.getElementById('lnTxt').textContent = d === 0
+      ? 'Both points are in the same place, so the distance is 0 — the only value the two subtractions agree on without an absolute value.'
+      : 'Subtracting one way gives ' + neg(d) + ' and the other way gives ' + neg(-d) +
+        '. They disagree about direction and agree about size, and it is the size we call distance: |x₂ − x₁| = ' + Math.abs(d) + '.';
+    if(!autoplaying('m8')){
+      seen[d === 0 ? 'zero' : d > 0 ? 'pos' : 'neg'] = 1;
+      if(Object.keys(seen).length >= 3) complete('m8');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 250, x = fit(cv, H); if(!x) return;
+    const p = plane(x, W, H, { xlo:-9, xhi:9, ylo:-4, yhi:6 });
+    const a = +SA.value, b = +SB.value, Y = 3;
+
+    /* the segment, drawn thick, with the two drops to the axis it is parallel to */
+    x.setLineDash([3,3]); x.strokeStyle = 'rgba(142,154,192,.4)'; x.lineWidth = 1;
+    [a,b].forEach(u=>{ x.beginPath(); x.moveTo(p.px(u), p.py(Y)); x.lineTo(p.px(u), p.y0); x.stroke(); });
+    x.setLineDash([]);
+    x.strokeStyle = A2; x.lineWidth = 3;
+    x.beginPath(); x.moveTo(p.px(a), p.py(Y)); x.lineTo(p.px(b), p.py(Y)); x.stroke();
+
+    dot(x, p, a, Y, A1, '(' + neg(a) + ', 3)', a <= b ? 'l' : 'r');
+    dot(x, p, b, Y, A1, '(' + neg(b) + ', 3)', a <= b ? 'r' : 'l');
+    mono(x, 10, 500); x.fillStyle = INK;
+    x.textAlign='center';
+    x.fillText('|' + neg(b-a) + '| = ' + Math.abs(b-a), p.px((a+b)/2), p.py(Y) - 12);
+    x.textAlign='left';
+    cap(x, W, H, 'the segment is parallel to the x-axis');
+  }
+  SA.oninput = ()=>{ ev('explore','lnA'); upd(); };
+  SB.oninput = ()=>{ ev('explore','lnB'); upd(); };
+  reg('m8', draw); upd();
+})();
+
+/* ============================================================
+   M9 · the right triangle under every segment
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('trCv'); if(!cv) return;
+  const S = ['trX1','trY1','trX2','trY2'].map(i=>document.getElementById(i));
+  /* Fig. 1.7: the three sides of triangle ADM, and what the book gets for each. */
+  const SIDES = [
+    { k:'AD', a:[3,4], b:[7,1], d:'5'   },
+    { k:'DM', a:[7,1], b:[9,6], d:'√29' },
+    { k:'MA', a:[9,6], b:[3,4], d:'√40' }
+  ];
+  let hit = {};
+
+  const same = (p,q) => p[0]===q[0] && p[1]===q[1];
+
+  function upd(){
+    const [x1,y1,x2,y2] = S.map(s=>+s.value);
+    ['trX1V','trY1V','trX2V','trY2V'].forEach((id,i)=>
+      document.getElementById(id).textContent = neg([x1,y1,x2,y2][i]));
+    const dx = x2-x1, dy = y2-y1, sq = dx*dx + dy*dy;
+    document.getElementById('trDx').textContent = neg(dx);
+    document.getElementById('trDy').textContent = neg(dy);
+    document.getElementById('trD').textContent  = surd(sq);
+    document.getElementById('trTxt').textContent = (dx===0 && dy===0)
+      ? 'Both points are in the same place. There is no triangle and no distance.'
+      : 'The horizontal leg is ' + Math.abs(dx) + ' and the vertical leg is ' + Math.abs(dy) +
+        '. Squaring both destroys their signs: ' + (dx*dx) + ' + ' + (dy*dy) + ' = ' + sq +
+        ', so the distance is √' + sq + ' = ' + surd(sq) + '.';
+
+    if(!autoplaying('m9')){
+      SIDES.forEach(s=>{
+        const p = [x1,y1], q = [x2,y2];
+        if((same(p,s.a) && same(q,s.b)) || (same(p,s.b) && same(q,s.a))) hit[s.k] = 1;
+      });
+      if(Object.keys(hit).length >= 3) complete('m9');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    const p = plane(x, W, H, { xlo:-9, xhi:10, ylo:-7, yhi:9 });
+    const [x1,y1,x2,y2] = S.map(s=>+s.value);
+
+    /* the two legs, always parallel to the axes — that is what makes the
+       right angle free, and the right angle is what makes the theorem apply */
+    x.setLineDash([4,3]); x.lineWidth = 1.4;
+    x.strokeStyle = 'rgba(242,184,76,.9)';
+    x.beginPath(); x.moveTo(p.px(x1), p.py(y1)); x.lineTo(p.px(x1), p.py(y2)); x.stroke();
+    x.strokeStyle = 'rgba(72,199,142,.9)';
+    x.beginPath(); x.moveTo(p.px(x1), p.py(y2)); x.lineTo(p.px(x2), p.py(y2)); x.stroke();
+    x.setLineDash([]);
+
+    /* The right-angle marker, at the corner where the two legs meet — which is
+       (x₁, y₂), not either of the points. It opens along each leg, towards the
+       far end of that leg: horizontally towards x₂, and vertically towards y₁.
+       py() flips the vertical, so travelling from the corner towards y₁ is a
+       POSITIVE screen height exactly when y₂ > y₁. */
+    if(x1 !== x2 && y1 !== y2){
+      const s = 7;
+      x.strokeStyle = 'rgba(142,154,192,.8)'; x.lineWidth = 1;
+      x.strokeRect(p.px(x1), p.py(y2), x2 > x1 ? s : -s, y2 > y1 ? s : -s);
+    }
+
+    x.strokeStyle = A1; x.lineWidth = 2.4;
+    x.beginPath(); x.moveTo(p.px(x1), p.py(y1)); x.lineTo(p.px(x2), p.py(y2)); x.stroke();
+
+    dot(x, p, x1, y1, A1, '(' + neg(x1) + ', ' + neg(y1) + ')', x1 > 4 ? 'l' : 'r');
+    dot(x, p, x2, y2, A1, '(' + neg(x2) + ', ' + neg(y2) + ')', x2 > 4 ? 'l' : 'r');
+
+    const dx = x2-x1, dy = y2-y1;
+    mono(x, 9.5, 500); x.fillStyle = INK; x.textAlign='center';
+    x.fillText(surd(dx*dx+dy*dy), p.px((x1+x2)/2) + 14, p.py((y1+y2)/2) - 8);
+    x.textAlign='left';
+    cap(x, W, H, 'gold leg |' + Math.abs(dy) + '| · green leg |' + Math.abs(dx) +
+                 '| · ' + Object.keys(hit).length + ' of 3 sides');
+  }
+  S.forEach((s,i)=>{ s.oninput = ()=>{ ev('explore', ['trX1','trY1','trX2','trY2'][i]); upd(); }; });
+  const jump = (a,b,key)=>{
+    S[0].value=a[0]; S[1].value=a[1]; S[2].value=b[0]; S[3].value=b[1];
+    ev('explore', key); upd();
+  };
+  document.getElementById('trAD').onclick = ()=>jump([3,4],[7,1],'trAD');
+  document.getElementById('trDM').onclick = ()=>jump([7,1],[9,6],'trDM');
+  document.getElementById('trMA').onclick = ()=>jump([9,6],[3,4],'trMA');
+  reg('m9', draw); upd();
+})();
+
+/* ============================================================
+   M10 · work the distances out
+   ============================================================ */
+Q.vgrid('g10','g10check','g10s',{
+  head: 'From → to',
+  cols: ['x₂ − x₁', 'y₂ − y₁', 'Distance'],
+  options: [
+    ['-6','-4','-3','2','4','6'],
+    ['-3','-2','2','3','5','6'],
+    ['5','√29','√40','√13']
+  ],
+  rows: [
+    { l:'A (3, 4) → D (7, 1)',    a:['4','-3','5'] },
+    { l:'D (7, 1) → M (9, 6)',    a:['2','5','√29'] },
+    { l:'M (9, 6) → A (3, 4)',    a:['-6','-2','√40'] },
+    { l:'A′ (−3, 4) → D′ (−7, 1)', a:['-4','-3','5'] }
+  ],
+  mid: 'm10',
+  doneMsg: 'All twelve. The last row is the reflection, and it measures the same.'
+});
+
+/* ============================================================
+   M11 · a reflection keeps every length
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('rfCv'); if(!cv) return;
+  const T = { A:[3,4], D:[7,1], M:[9,6] };
+  let axis = null, seen = {};
+
+  const image = p => axis === 'y' ? [-p[0], p[1]] : axis === 'x' ? [p[0], -p[1]] : p.slice();
+  const dist = (p,q) => surd((q[0]-p[0])*(q[0]-p[0]) + (q[1]-p[1])*(q[1]-p[1]));
+
+  function upd(){
+    const A2p = image(T.A), D2 = image(T.D), M2 = image(T.M);
+    document.getElementById('rfAxis').textContent =
+      axis === 'y' ? 'the y-axis' : axis === 'x' ? 'the x-axis' : 'none yet';
+    document.getElementById('rfPts').textContent = axis
+      ? 'A′(' + neg(A2p[0]) + ',' + neg(A2p[1]) + ') D′(' + neg(D2[0]) + ',' + neg(D2[1]) + ')'
+      : '—';
+    document.getElementById('rfSides').textContent =
+      dist(A2p,D2) + ', ' + dist(D2,M2) + ', ' + dist(M2,A2p);
+    document.getElementById('rfTxt').textContent = !axis
+      ? 'Triangle ADM has sides 5, √29 and √40. Reflect it and watch what happens to those three numbers.'
+      : axis === 'y'
+        ? 'Reflecting in the y-axis sends (x, y) to (−x, y). A (3, 4) becomes A′ (−3, 4), D (7, 1) becomes D′ (−7, 1), M (9, 6) becomes M′ (−9, 6). Each horizontal difference flips its sign — and the formula squares it, so the three lengths are unchanged.'
+        : 'Reflecting in the x-axis sends (x, y) to (x, −y). Now it is the vertical differences that flip. The triangle has moved into a different quadrant and turned over, and it is still the same size.';
+    if(axis && !autoplaying('m11')){
+      seen[axis] = 1;
+      if(Object.keys(seen).length >= 2) complete('m11');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    const p = plane(x, W, H, { xlo:-10, xhi:10, ylo:-8, yhi:8 });
+
+    const tri = (pts, col, w, lab) => {
+      x.strokeStyle = col; x.lineWidth = w;
+      x.beginPath();
+      x.moveTo(p.px(pts[0][0]), p.py(pts[0][1]));
+      for(let i=1;i<pts.length;i++) x.lineTo(p.px(pts[i][0]), p.py(pts[i][1]));
+      x.closePath(); x.stroke();
+      pts.forEach((q,i)=>dot(x, p, q[0], q[1], col, lab[i], q[0] > 0 ? 'r' : 'l'));
+    };
+
+    /* the mirror, drawn as the axis it is */
+    if(axis){
+      x.strokeStyle = 'rgba(242,184,76,.75)'; x.lineWidth = 2.5;
+      x.beginPath();
+      if(axis === 'y'){ x.moveTo(p.x0, p.py(8)); x.lineTo(p.x0, p.py(-8)); }
+      else            { x.moveTo(p.px(-10), p.y0); x.lineTo(p.px(10), p.y0); }
+      x.stroke();
+      tri([image(T.A), image(T.D), image(T.M)], A2, 2, ['A′','D′','M′']);
+    }
+    tri([T.A, T.D, T.M], A1, 2, ['A','D','M']);
+    cap(x, W, H, axis ? 'sides 5, √29, √40 — unchanged by the flip'
+                      : 'reflect it and compare the three sides');
+  }
+  document.getElementById('rfY').onclick = ()=>{ axis='y'; ev('explore','rfY'); upd(); };
+  document.getElementById('rfX').onclick = ()=>{ axis='x'; ev('explore','rfX'); upd(); };
+  reg('m11', draw); upd();
+})();
+
+/* ============================================================
+   M12 · collinear, or not?
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('clCv'); if(!cv) return;
+  const box = document.getElementById('clPick');
+  const SETS = [
+    { n:'M A G', p:[[-3,-4],[0,0],[6,8]],
+      w:'The book\'s own set. MA = 5, AG = 10 and MG = 15, and 5 + 10 = 15 exactly — so A really is on the way from M to G, and the three points are collinear.' },
+    { n:'R B C', p:[[-5,-1],[-2,-5],[4,-12]],
+      w:'Problem 7. RB = 5 and BC = √85 ≈ 9.22, which add to about 14.22, while RC = √202 ≈ 14.21. Close, but not equal — the detour through B costs something, so these three are not collinear.' },
+    { n:'P Q R', p:[[1,2],[3,6],[5,10]],
+      w:'Each step adds 2 to x and 4 to y, so the second point sits exactly halfway: PQ = QR = √20 and PR = 2√20. The sum matches, and the points are collinear.' },
+    { n:'A B C', p:[[2,1],[-1,2],[-2,-1]],
+      w:'Three corners of the square in Problem 16. Two sides and a diagonal cannot lie on one line: √10 + √10 is about 6.32, and the diagonal is only √18 ≈ 4.24.' }
+  ];
+  let i = 0, tested = {}, ran = false;
+
+  const D = (a,b) => Math.hypot(b[0]-a[0], b[1]-a[1]);
+
+  function chips(){
+    box.innerHTML = '';
+    SETS.forEach((s,k)=>{
+      const b = document.createElement('button');
+      b.className = 'chip' + (k===i ? ' on' : '');
+      b.textContent = s.n;
+      b.onclick = ()=>{ i = k; ran = false; ev('explore','clPick'); paint(); };
+      box.appendChild(b);
+    });
+  }
+  function verdict(){
+    const [a,b,c] = SETS[i].p;
+    const ds = [D(a,b), D(b,c), D(a,c)].sort((m,n)=>m-n);
+    return { sum: ds[0]+ds[1], long: ds[2], ok: Math.abs(ds[0]+ds[1]-ds[2]) < 1e-6 };
+  }
+  function run(){
+    ev('explore','clRun'); ran = true;
+    const v = verdict();
+    document.getElementById('clSum').textContent  = fmt(Math.round(v.sum*1000)/1000);
+    document.getElementById('clLong').textContent = fmt(Math.round(v.long*1000)/1000);
+    document.getElementById('clSay').textContent  = v.ok ? 'collinear' : 'not collinear';
+    document.getElementById('clTxt').textContent  = SETS[i].w;
+    if(!autoplaying('m12')){
+      tested[SETS[i].n] = 1;
+      if(Object.keys(tested).length >= 3) complete('m12');
+    }
+    paint();
+  }
+  function paint(){ chips(); draw(); }
+  function draw(){
+    const W = cv.clientWidth||320, H = 280, x = fit(cv, H); if(!x) return;
+    const P = SETS[i].p;
+    const xs = P.map(q=>q[0]), ys = P.map(q=>q[1]);
+    const pad = 3;
+    const p = plane(x, W, H, {
+      xlo: Math.min(-2, Math.min.apply(null,xs)-pad), xhi: Math.max(2, Math.max.apply(null,xs)+pad),
+      ylo: Math.min(-2, Math.min.apply(null,ys)-pad), yhi: Math.max(2, Math.max.apply(null,ys)+pad)
+    });
+    const v = verdict();
+
+    if(ran){
+      x.strokeStyle = v.ok ? GOOD : BAD; x.lineWidth = 2;
+      x.beginPath();
+      x.moveTo(p.px(P[0][0]), p.py(P[0][1]));
+      x.lineTo(p.px(P[1][0]), p.py(P[1][1]));
+      x.lineTo(p.px(P[2][0]), p.py(P[2][1]));
+      x.stroke();
+    }
+    const lab = SETS[i].n.split(' ');
+    P.forEach((q,k)=>dot(x, p, q[0], q[1], ran ? (v.ok?GOOD:BAD) : A1,
+                         lab[k] + ' (' + neg(q[0]) + ', ' + neg(q[1]) + ')', q[0] > 0 ? 'l' : 'r'));
+    cap(x, W, H, ran ? (v.ok ? 'the two short distances add to the long one'
+                             : 'going via the middle point costs extra')
+                     : 'tap "measure" to test this set');
+  }
+  document.getElementById('clRun').onclick = run;
+  reg('m12', draw); paint();
+})();
+
+/* ============================================================
+   M13 · the midpoint is an average
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('mdCv'); if(!cv) return;
+  const ids = ['mdSX','mdSY','mdTX','mdTY'];
+  const S = ids.map(i=>document.getElementById(i));
+  let mids = {}, touched = {};
+
+  function upd(){
+    const [sx,sy,tx,ty] = S.map(s=>+s.value);
+    ['mdSXV','mdSYV','mdTXV','mdTYV'].forEach((id,k)=>
+      document.getElementById(id).textContent = neg([sx,sy,tx,ty][k]));
+    const mx = (sx+tx)/2, my = (sy+ty)/2;
+    document.getElementById('mdM').textContent  = '(' + neg(mx) + ', ' + neg(my) + ')';
+    /* Written as a sum the reader would write. Concatenating a plus in front of
+       a negative gives "(5+−3)/2", which is correct and unreadable. */
+    const sum2 = (a, c) => '(' + neg(a) + (c < 0 ? ' − ' + fmt(-c) : ' + ' + fmt(c)) + ')/2';
+    document.getElementById('mdMx').textContent = sum2(sx, tx);
+    document.getElementById('mdMy').textContent = sum2(sy, ty);
+    document.getElementById('mdTxt').textContent =
+      (sx===tx && sy===ty)
+        ? 'Both ends are in the same place, so the midpoint is there too. The average of a number with itself is the number.'
+        : 'Halfway from S to T is (' + neg(mx) + ', ' + neg(my) + '). Each coordinate is the average of the two ends: ' +
+          neg(sx) + ' and ' + neg(tx) + ' average to ' + neg(mx) + ', and ' +
+          neg(sy) + ' and ' + neg(ty) + ' average to ' + neg(my) + '.';
+    if(!autoplaying('m13')){
+      mids[mx + ',' + my] = 1;
+      if(Object.keys(mids).length >= 3 && Object.keys(touched).length >= 4) complete('m13');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    const p = plane(x, W, H, { xlo:-10, xhi:10, ylo:-10, yhi:10 });
+    const [sx,sy,tx,ty] = S.map(s=>+s.value);
+    const mx = (sx+tx)/2, my = (sy+ty)/2;
+
+    x.strokeStyle = 'rgba(142,154,192,.55)'; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(p.px(sx), p.py(sy)); x.lineTo(p.px(tx), p.py(ty)); x.stroke();
+
+    /* the two halves, drawn in the accent so equal really looks equal */
+    x.strokeStyle = A2; x.lineWidth = 3;
+    x.beginPath(); x.moveTo(p.px(sx), p.py(sy)); x.lineTo(p.px(mx), p.py(my)); x.stroke();
+
+    dot(x, p, sx, sy, A1, 'S', sx > 0 ? 'l' : 'r');
+    dot(x, p, tx, ty, A1, 'T', tx > 0 ? 'l' : 'r');
+    dot(x, p, mx, my, GOLD, 'M (' + neg(mx) + ', ' + neg(my) + ')', my > 0 ? 'r' : 'l');
+    cap(x, W, H, 'M is the average of the ends · ' +
+                 Math.min(3, Object.keys(mids).length) + ' of 3 midpoints');
+  }
+  S.forEach((s,k)=>{ s.oninput = ()=>{ touched[ids[k]] = 1; ev('explore', ids[k]); upd(); }; });
+  reg('m13', draw); upd();
+})();
+
+/* ============================================================
+   M14 · is M the midpoint of ST?
+   ============================================================ */
+Q.rows('g14','g14s', [
+  { t:'S (−3, 0) · M (0, 0) · T (3, 0)',   a:0 },
+  { t:'S (2, 3) · M (3, 4) · T (4, 5)',     a:0 },
+  { t:'S (0, 0) · M (0, 5) · T (0, −10)',  a:1 },
+  { t:'S (−8, 7) · M (0, −2) · T (6, −3)', a:1 }
+], ['Yes','No'], 'm14',
+   'All four. Average the ends and compare — nothing else is needed.');
+
+/* ============================================================
+   M15 · inside the circle, on it, or outside?
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('ciCv'); if(!cv) return;
+  const SX = document.getElementById('ciX'), SY = document.getElementById('ciY');
+  const R2 = 65;                       // A (1, −8): 1 + 64. B and C give 65 too.
+  const ON = [[1,-8],[-4,7],[-7,-4]];
+  let seen = {};
+
+  function upd(){
+    const u = +SX.value, v = +SY.value, sq = u*u + v*v;
+    document.getElementById('ciXV').textContent = neg(u);
+    document.getElementById('ciYV').textContent = neg(v);
+    document.getElementById('ciSq').textContent = sq;
+    const say = sq < R2 ? 'inside' : sq > R2 ? 'outside' : 'on the circle';
+    document.getElementById('ciSay').textContent = say;
+    document.getElementById('ciTxt').textContent =
+      say === 'on the circle'
+        ? 'x² + y² = ' + sq + ', exactly the radius squared. This point is √65 from the origin, the same distance as A, B and C — so it is on circle K.'
+        : 'x² + y² = ' + (u*u) + ' + ' + (v*v) + ' = ' + sq + ', against a radius squared of 65. ' + sq +
+          (sq < R2 ? ' is less, so the point is nearer the centre than the circle is — inside.'
+                   : ' is more, so the point is further out than the circle — outside.') +
+          ' Notice that no square root was needed to decide.';
+    if(!autoplaying('m15')){
+      seen[say] = 1;
+      if(Object.keys(seen).length >= 3) complete('m15');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    const p = plane(x, W, H, { xlo:-11, xhi:11, ylo:-11, yhi:11 });
+    const u = +SX.value, v = +SY.value, sq = u*u + v*v;
+
+    x.strokeStyle = 'rgba(185,139,245,.85)'; x.lineWidth = 2;
+    x.beginPath(); x.ellipse(p.x0, p.y0, Math.sqrt(R2)*p.sx, Math.sqrt(R2)*p.sy, 0, 0, 7); x.stroke();
+
+    ON.forEach(q=>dot(x, p, q[0], q[1], 'rgba(185,139,245,.75)', ''));
+
+    x.strokeStyle = sq < R2 ? GOOD : sq > R2 ? BAD : GOLD; x.lineWidth = 1.6;
+    x.beginPath(); x.moveTo(p.x0, p.y0); x.lineTo(p.px(u), p.py(v)); x.stroke();
+    dot(x, p, u, v, sq < R2 ? GOOD : sq > R2 ? BAD : GOLD,
+        '(' + neg(u) + ', ' + neg(v) + ')', u > 2 ? 'l' : 'r');
+
+    cap(x, W, H, 'radius² = 65 · this point ' + sq + ' · ' +
+                 Object.keys(seen).length + ' of 3 verdicts');
+  }
+  SX.oninput = ()=>{ ev('explore','ciX'); upd(); };
+  SY.oninput = ()=>{ ev('explore','ciY'); upd(); };
+  document.getElementById('ciA').onclick = ()=>{
+    SX.value = 1; SY.value = -8; ev('explore','ciA'); upd();
+  };
+  reg('m15', draw); upd();
+})();
+
+/* ============================================================
+   M16 · the boss
+   ============================================================ */
+Q.boss([
+  { t:'The origin',
+    q:'What are the coordinates of the point where the two axes cross?',
+    o:['(1, 1)','(0, 0)','It has no coordinates'], a:1,
+    w:'The origin O is the point of intersection of the x-axis and the y-axis, and its coordinates are (0, 0). It is zero distance from each axis.' },
+  { t:'Points on an axis',
+    q:'A point has coordinates (0, −7). Where is it?',
+    o:['On the x-axis, left of O','On the y-axis, below O','In Quadrant III'], a:1,
+    w:'An x-coordinate of 0 means no distance from the y-axis, so the point lies on the y-axis. The negative y puts it below the origin. Points on an axis are in no quadrant at all.' },
+  { t:'Quadrants',
+    q:'In which quadrant does (−5, 3) lie?',
+    o:['Quadrant II','Quadrant III','Quadrant IV'], a:0,
+    w:'Negative x and positive y is the signature of Quadrant II — the top-left region. The quadrants are numbered anticlockwise starting from the top right.' },
+  { t:'Order matters',
+    q:'For which points is (x, y) the same point as (y, x)?',
+    o:['Never','Always','Exactly when x = y'], a:2,
+    w:'Swapping the coordinates moves the point unless there is nothing to swap. (x, y) = (y, x) if and only if x = y, which is the line through the origin at 45°.' },
+  { t:'Distance along a line',
+    q:'How far apart are (−2, 5) and (6, 5)?',
+    o:['4 units','8 units','11 units'], a:1,
+    w:'Both points have y = 5, so the segment is parallel to the x-axis and the distance is |6 − (−2)| = 8. Subtracting the other way gives −8; the distance is the absolute value.' },
+  { t:'The distance formula',
+    q:'What is the distance between A (3, 4) and D (7, 1)?',
+    o:['5 units','7 units','√7 units'], a:0,
+    w:'The legs are 7 − 3 = 4 and 1 − 4 = −3. Squaring gives 16 + 9 = 25, so the distance is √25 = 5. The sign of −3 disappears in the squaring.' },
+  { t:'Reflection',
+    q:'Triangle ADM is reflected in the y-axis. What happens to its side lengths?',
+    o:['They are unchanged','They all change sign','The horizontal ones double'], a:0,
+    w:'Reflection in the y-axis sends (x, y) to (−x, y). Each horizontal difference flips sign, and the distance formula squares it — so every length is preserved. Position and orientation change; size does not.' },
+  { t:'Collinearity',
+    q:'For three points, what shows that they lie on one straight line?',
+    o:['All three distances are equal',
+       'The two shorter distances add to the longest',
+       'Their coordinates are all positive'], a:1,
+    w:'If the middle point is on the way, travelling via it costs nothing extra: short + short = long. Any detour makes the sum strictly bigger — which is how you check M (−3, −4), A (0, 0) and G (6, 8) without plotting them.' },
+  { t:'Midpoints',
+    q:'M is the midpoint of S (2, 3) and T (4, 5). Where is M?',
+    o:['(3, 4)','(6, 8)','(2, 2)'], a:0,
+    w:'Each coordinate of the midpoint is the average of the two ends: (2 + 4)/2 = 3 and (3 + 5)/2 = 4. So M is (3, 4).' },
+  { t:'Circles',
+    q:'Circle K is centred at the origin with radius √65. Where does D (−5, 6) lie?',
+    o:['Inside it','On it','Outside it'], a:0,
+    w:'D is √(25 + 36) = √61 from the origin, and 61 < 65, so D is nearer the centre than the circle is — inside. Comparing the squares settles it without taking a single square root.' }
+], 'm16',
+   'Chapter cleared. Two perpendicular lines, an origin, and the sign of a number: that is the whole apparatus, and it turns every question about position into arithmetic.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
