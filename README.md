@@ -20,6 +20,7 @@ study-shelf/
 │   │   ├── shell.css         safe-area insets alone (the shelf's share)
 │   │   ├── storage.js        the storage adapter
 │   │   ├── engine.js         XP, quests, missions, the reusable games
+│   │   ├── plane.js          the coordinate plane, for the maths chapters
 │   │   └── boot.js           chapter start-up and the streak
 │   └── chapters/             one file per chapter: config, markup, interactives
 └── www/                      what ships — generated, plain static files
@@ -27,7 +28,7 @@ study-shelf/
     ├── exploration-chapter.html    ⎫
     ├── cell-chapter.html           ⎬ one per playable chapter
     ├── …                           ⎭
-    ├── coordinates-chapter.html
+    ├── linear-chapter.html
     ├── manifest.webmanifest
     ├── service-worker.js
     ├── icons/                192, 512, maskable, 1024
@@ -188,9 +189,14 @@ chapter accent colours, and the `<script>` is
 /*@include shared/storage.js*/     the storage adapter
 const CH = { id, key, total, stages, paint }
 /*@include shared/engine.js*/      XP, quests, missions, the reusable games
+/*@include shared/plane.js*/       optional: a coordinate plane to draw on
    … the chapter's own interactives, then reg()/auto() for its canvases …
 /*@include shared/boot.js*/        start-up and the streak
 ```
+
+`plane.js` is only for chapters that draw on axes — both Maths chapters do.
+It uses `fit()`, `arrow()` and `mono()` from the engine, so it has to come
+after that include, and it owns no accents: pass your own colours in.
 
 `CH.id` must match the catalog `id` — that is the join the shelf uses to find
 the chapter's progress. `CH.key` is where its own state lives and must start
@@ -206,10 +212,10 @@ there so old caches are dropped, add a row to `test/chapters.js`, and run
 
 ## 7 · What is and is not built
 
-14 of 86 catalogued chapters are playable: the whole of Class 9 Science
-(*Exploration*, chapters 1–13) and Class 9 Maths chapter 1 (*Ganita Manjari
-Part 1*, coordinates). Everything else is catalogued and listed but marked
-*Coming soon*.
+15 of 86 catalogued chapters are playable: the whole of Class 9 Science
+(*Exploration*, chapters 1–13) and the first two chapters of Class 9 Maths
+(*Ganita Manjari Part 1* — coordinates, and linear polynomials). Everything
+else is catalogued and listed but marked *Coming soon*.
 
 Chapter lists were sourced in August 2026. Class 9 uses the new NCF-SE 2023
 books (*Exploration*, *Ganita Manjari*); NCERT's advisory of 17 March 2026

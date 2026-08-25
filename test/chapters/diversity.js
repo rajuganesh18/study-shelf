@@ -73,13 +73,37 @@ const BOOK = {
   if (!done) fail('classified ' + tested.size + ' organisms and m6 never completed');
   else console.log('   mission completes after three kingdoms are reached');
 
-  // a wrong answer must be corrected rather than silently accepted
-  await page.click('#keyNew');
-  const org2 = await txt('keyOrg');
-  const row2 = BOOK[org2];
-  await page.click(row2[0] ? '#keyNo' : '#keyYes');       // deliberately wrong
-  if (!/Not quite/.test(await txt('keyTxt'))) fail('a wrong first answer was not flagged');
-  else console.log('   a wrong answer is flagged and the true one given');
+  /* A wrong answer must be corrected rather than silently accepted — and that
+     has to hold however many questions the organism needs.
+
+     Monera is placed by one question, so for Bacterium and Cyanobacteria a
+     wrong first answer is also the LAST answer, and the bench used to skip
+     straight to the kingdom with no correction: it tested "finished" before it
+     tested "wrong". Drawing at random found that roughly one run in seven, so
+     this drives both cases deliberately instead of hoping for them. */
+  const wrongFirst = async () => {
+    const org = await txt('keyOrg');
+    await page.click(BOOK[org][0] ? '#keyNo' : '#keyYes');
+    await page.waitForTimeout(20);
+    return { org, note: await txt('keyTxt') };
+  };
+  const oneQuestion = new Set(['Bacterium', 'Cyanobacteria']);
+  const covered = new Set();
+  const before = bad;
+  for (let i = 0; i < 200 && covered.size < 2; i++) {
+    await page.click('#keyNew');
+    await page.waitForTimeout(15);
+    const here = await txt('keyOrg');
+    const kind = oneQuestion.has(here) ? 'short' : 'long';
+    if (covered.has(kind)) continue;
+    const { org, note } = await wrongFirst();
+    if (!/Not quite/.test(note)) {
+      fail('a wrong first answer for ' + org + ' was not flagged: "' + note + '"');
+    }
+    covered.add(kind);
+  }
+  if (covered.size < 2) fail('never drew both a one-question and a multi-question organism');
+  else if (bad === before) console.log('   a wrong answer is flagged and corrected, even when it is the last one needed');
 
   if (errs.length) fail('console errors: ' + errs.slice(0, 3).join(' | '));
   await b.close();

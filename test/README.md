@@ -61,9 +61,27 @@ Each one was written after something got through.
   changed; only the stored state showed it.
 - **`quests`** — one slider drag produced 21 explore events, so five of eight
   chapters finished a three-control quest by touching one control.
-- **`test/chapters/*`** — the physics and the biology. The tables come from
-  the textbook, not from the page, so a bench that disagrees with the book
-  fails rather than agreeing with itself.
+- **`test/chapters/*`** — the physics, the biology and the maths. The tables
+  come from the textbook, not from the page, so a bench that disagrees with the
+  book fails rather than agreeing with itself.
+
+## A note on tests that only sometimes fail
+
+The dichotomous key in chapter 12 failed about one run in seven, on the check
+that a wrong answer is corrected rather than silently accepted. It would have
+been easy to call that a flake and re-run.
+
+It was a real bug. `answer()` marks the run finished as soon as the last needed
+question is answered, and the note chose its wording by testing *finished*
+before testing *wrong*. Monera is reached in a single question, so for
+Bacterium and Cyanobacteria a wrong first answer was also the last answer: the
+reader was handed the kingdom with no hint they had the question backwards. Two
+organisms in fourteen, drawn at random — hence one run in seven.
+
+The lesson is in the fix to the test, not just to the chapter: it now drives a
+one-question organism and a multi-question one **deliberately**, instead of
+hoping the random draw covers both. **A test that fails intermittently is
+usually a test that samples something the suite should be choosing on purpose.**
 
 ## Writing a new chapter test
 
