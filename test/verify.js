@@ -73,7 +73,10 @@ async function run(){
     await page.close2();
   }
 
-  // the shelf honours the params a chapter hands back
+  /* The shelf honours the params a chapter hands back. Count against the
+     chapters of THIS subject, not the whole list — a Maths chapter is playable
+     but does not appear on the Science page. */
+  const science = CHAPTERS.filter(c => c.id.startsWith('9-science-'));
   const page = await open(b, 'index.html?cls=9&sub=science', { wait: 700 });
   r.head('index.html?cls=9&sub=science');
   if (page.errs.length) r.fail('console errors: ' + page.errs.join(' | '));
@@ -82,7 +85,7 @@ async function run(){
   const head = await page.textContent('.shead h2').catch(() => null);
   const tab  = (await page.textContent('.tab.on')).trim();
   if (head !== 'Science') r.fail('landed on "' + head + '", expected the Science chapter list');
-  if (live !== CHAPTERS.length) r.fail(live + ' playable chapters, expected ' + CHAPTERS.length);
+  if (live !== science.length) r.fail(live + ' playable Science chapters, expected ' + science.length);
   if (tab !== 'Class 9') r.fail('active tab is ' + tab);
   r.note('heading=' + head + ' rows=' + rows + ' playable=' + live + ' tab=' + tab);
 
@@ -104,6 +107,29 @@ async function run(){
   const back = await page.textContent('.shead h2').catch(() => null);
   if (back !== 'Science') r.fail('round trip landed on "' + back + '", expected the Science list');
   r.note('round trip shelf → science → ch6 → back: ' + back);
+
+  /* The same round trip through a second subject. Everything above would still
+     pass if the shelf only ever worked for Science — the back link is built
+     from the chapter's own id, and until Maths arrived nothing proved that the
+     subject half of that id was being honoured rather than assumed. */
+  for (const sub of ['maths']) {
+    const chs = CHAPTERS.filter(c => c.id.startsWith('9-' + sub + '-'));
+    if (!chs.length) continue;
+    await page.goto(BASE + 'index.html');
+    await page.waitForTimeout(500);
+    await page.click('.sub[data-sub="' + sub + '"]');
+    await page.waitForTimeout(300);
+    const heading = await page.textContent('.shead h2').catch(() => null);
+    const playable = await page.$$eval('.chaps a.chap.live', n => n.length);
+    if (playable !== chs.length) r.fail(sub + ': ' + playable + ' playable, expected ' + chs.length);
+    await page.click('a.chap.live[href="' + CHAPTERS.file(chs[0]) + '"]');
+    await page.waitForTimeout(1000);
+    await page.click('.backbar');
+    await page.waitForTimeout(800);
+    const home = await page.textContent('.shead h2').catch(() => null);
+    if (home !== heading) r.fail(sub + ': back link landed on "' + home + '", expected "' + heading + '"');
+    r.note('round trip shelf → ' + sub + ' → ch1 → back: ' + home + ' (' + playable + ' playable)');
+  }
 
   // junk params must not throw or strand the reader
   await page.goto(BASE + 'index.html?cls=99&sub=nope');

@@ -24,11 +24,10 @@ study-shelf/
 │   └── chapters/             one file per chapter: config, markup, interactives
 └── www/                      what ships — generated, plain static files
     ├── index.html
-    ├── exploration-chapter.html
-    ├── cell-chapter.html
-    ├── tissues-chapter.html
-    ├── motion-chapter.html
-    ├── mixtures-chapter.html
+    ├── exploration-chapter.html    ⎫
+    ├── cell-chapter.html           ⎬ one per playable chapter
+    ├── …                           ⎭
+    ├── coordinates-chapter.html
     ├── manifest.webmanifest
     ├── service-worker.js
     ├── icons/                192, 512, maskable, 1024
@@ -81,7 +80,7 @@ The suite starts its own static server, so nothing needs to be running first.
 Each check exists because something got through: a chapter whose script died
 on load from a wrong argument count, chapters paying out a daily quest the
 moment they opened, a debounced save re-armed 30 times a second so progress
-stopped persisting at all, and five missions across two chapters that could
+stopped persisting at all, and seven missions across three chapters that could
 never be completed. `test/README.md` has the details, and the rule that keeps
 the science honest — expected values come from the textbook, never read off
 the running page.
@@ -207,8 +206,10 @@ there so old caches are dropped, add a row to `test/chapters.js`, and run
 
 ## 7 · What is and is not built
 
-5 of 86 catalogued chapters are playable: Class 9 Science chapters 1, 2, 3,
-4 and 5. Everything else is catalogued and listed but marked *Coming soon*.
+14 of 86 catalogued chapters are playable: the whole of Class 9 Science
+(*Exploration*, chapters 1–13) and Class 9 Maths chapter 1 (*Ganita Manjari
+Part 1*, coordinates). Everything else is catalogued and listed but marked
+*Coming soon*.
 
 Chapter lists were sourced in August 2026. Class 9 uses the new NCF-SE 2023
 books (*Exploration*, *Ganita Manjari*); NCERT's advisory of 17 March 2026

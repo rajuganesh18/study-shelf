@@ -44,7 +44,12 @@ async function run(){
   const r = reporter('reach');
   const b = await browser();
 
+  /* A full sweep is minutes of animation waiting. When you are working on one
+     chapter, SHELF_ONLY=coordinates probes just that one. */
+  const only = (process.env.SHELF_ONLY || '').split(',').filter(Boolean);
+
   for (const c of CHAPTERS) {
+    if (only.length && !only.includes(c.slug)) continue;
     const page = await open(b, CHAPTERS.file(c), { missions: true });
     const benches = await benchesOf(page);
     const skip = new Set(c.skipReach || []);
