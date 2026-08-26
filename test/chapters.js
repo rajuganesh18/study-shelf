@@ -31,7 +31,9 @@ module.exports = [
        parks a slider at its minimum, maximum and middle and nowhere else, so it
        can reach two of the nine by luck and never a third.
        test/chapters/coordinates.js drives it to each corner properly. */
-    skipReach:['m2'] }
+    skipReach:['m2'] },
+  { slug:'linear',       id:'9-maths-2',   n:2,  title:'Introduction to Linear Polynomials' },
+  { slug:'numbers',      id:'9-maths-3',   n:3,  title:'The World of Numbers' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';

@@ -931,11 +931,20 @@ Q.order('g5','g5s',
     document.getElementById('keyOrg').textContent = org ? org.n : '—';
     document.getElementById('keyStep').textContent = String(path.length);
     document.getElementById('keyResult').textContent = done ? org.k : '—';
+    /* A wrong answer has to be corrected even when it was the last one needed.
+       Bacterium and Cyanobacteria are placed by a single question, so for them
+       a wrong first answer ends the run in the same breath — and because done
+       was tested before wrongAt, the reader used to be handed the kingdom with
+       no hint that they had got the question backwards. */
+    const bad = path.findIndex(p => !p.ok);
+    const correction = i =>
+      QS[i].q + ' For ' + org.n + ' the answer is ' + (org[QS[i].f] ? 'yes' : 'no') + '.';
     document.getElementById('keyTxt').textContent =
       !org ? 'Tap “Another organism” to be handed one, then answer the questions.'
-      : done ? org.k + '. ' + org.note
-      : wrongAt >= 0 ? 'Not quite. ' + QS[wrongAt].q + ' For ' + org.n + ' the answer is ' +
-          (org[QS[wrongAt].f] ? 'yes' : 'no') + '. Try the next question.'
+      : done ? (bad < 0
+          ? org.k + '. ' + org.note
+          : 'Not quite. ' + correction(bad) + ' The key still reaches ' + org.k + '. ' + org.note)
+      : wrongAt >= 0 ? 'Not quite. ' + correction(wrongAt) + ' Try the next question.'
       : QS[step].q;
     draw();
   }

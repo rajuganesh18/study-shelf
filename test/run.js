@@ -22,7 +22,9 @@ const STAGES = [
   { name:'reproduction', browser:true,  run:require('./chapters/reproduction') },
   { name:'diversity',    browser:true,  run:require('./chapters/diversity') },
   { name:'earth-system', browser:true,  run:require('./chapters/earth-system') },
-  { name:'coordinates',  browser:true,  run:require('./chapters/coordinates') }
+  { name:'coordinates',  browser:true,  run:require('./chapters/coordinates') },
+  { name:'linear',       browser:true,  run:require('./chapters/linear') },
+  { name:'numbers',      browser:true,  run:require('./chapters/numbers') }
 ];
 
 (async () => {

@@ -136,13 +136,21 @@ async function run(){
         } else {
           for (let i = 0; i < rows[0].n; i++) combos.push([[rows[0].box, i]]);
         }
+        /* A chip often selects a case that a button then WORKS THROUGH, rather
+           than one that completes on a single press. Chapter 3's repeating
+           decimals need five presses of "Next step" to reach a fraction, and
+           two different cases carried that far, so pressing each button once
+           per chip reaches the end of nothing. Press them repeatedly, and stop
+           the moment the bench pays out. */
         for (const combo of combos.slice(0, 64)) {
           for (const [box, i] of combo) {
             await tap(box, i);
             await page.waitForTimeout(60);
           }
           if (await isDone()) return true;
-          if (await pressButtons()) return true;
+          for (let round = 0; round < 5; round++) {
+            if (await pressButtons()) return true;
+          }
         }
         return false;
       };
