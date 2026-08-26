@@ -28,7 +28,7 @@ study-shelf/
     ├── exploration-chapter.html    ⎫
     ├── cell-chapter.html           ⎬ one per playable chapter
     ├── …                           ⎭
-    ├── linear-chapter.html
+    ├── numbers-chapter.html
     ├── manifest.webmanifest
     ├── service-worker.js
     ├── icons/                192, 512, maskable, 1024
@@ -212,10 +212,10 @@ there so old caches are dropped, add a row to `test/chapters.js`, and run
 
 ## 7 · What is and is not built
 
-15 of 86 catalogued chapters are playable: the whole of Class 9 Science
-(*Exploration*, chapters 1–13) and the first two chapters of Class 9 Maths
-(*Ganita Manjari Part 1* — coordinates, and linear polynomials). Everything
-else is catalogued and listed but marked *Coming soon*.
+16 of 86 catalogued chapters are playable: the whole of Class 9 Science
+(*Exploration*, chapters 1–13) and the first three chapters of Class 9 Maths
+(*Ganita Manjari Part 1* — coordinates, linear polynomials, and the world of
+numbers). Everything else is catalogued and listed but marked *Coming soon*.
 
 Chapter lists were sourced in August 2026. Class 9 uses the new NCF-SE 2023
 books (*Exploration*, *Ganita Manjari*); NCERT's advisory of 17 March 2026
