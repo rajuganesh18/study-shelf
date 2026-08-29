@@ -24,7 +24,8 @@ const STAGES = [
   { name:'earth-system', browser:true,  run:require('./chapters/earth-system') },
   { name:'coordinates',  browser:true,  run:require('./chapters/coordinates') },
   { name:'linear',       browser:true,  run:require('./chapters/linear') },
-  { name:'numbers',      browser:true,  run:require('./chapters/numbers') }
+  { name:'numbers',      browser:true,  run:require('./chapters/numbers') },
+  { name:'identities',   browser:true,  run:require('./chapters/identities') }
 ];
 
 (async () => {

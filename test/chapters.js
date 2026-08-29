@@ -33,7 +33,8 @@ module.exports = [
        test/chapters/coordinates.js drives it to each corner properly. */
     skipReach:['m2'] },
   { slug:'linear',       id:'9-maths-2',   n:2,  title:'Introduction to Linear Polynomials' },
-  { slug:'numbers',      id:'9-maths-3',   n:3,  title:'The World of Numbers' }
+  { slug:'numbers',      id:'9-maths-3',   n:3,  title:'The World of Numbers' },
+  { slug:'identities',   id:'9-maths-4',   n:4,  title:'Exploring Algebraic Identities' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';
