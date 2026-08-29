@@ -21,7 +21,7 @@ silently went untested.
 | Stage | Asks |
 |---|---|
 | `audit-ids` | Does every `getElementById` resolve, and does every `Q.*` call pass the right number of ids? Static, so it reaches branches a click-through never does. |
-| `verify` | Does each chapter load clean, award nothing for being opened, draw every mission, still count real input, and link back to its own chapter list? Then the shelf's navigation. |
+| `verify` | Does each chapter load clean, award nothing for being opened, draw every mission, keep every control on a 390px screen, still count real input, and link back to its own chapter list? Then the shelf's navigation. |
 | `reach` | Can each bench actually be completed? |
 | `state` | Does an old save migrate without losing XP, are outcomes recorded, does a finished mission still persist? |
 | `quests` | Does "try 3 interactive controls" mean three distinct controls rather than three events from one drag? |
@@ -56,6 +56,17 @@ Each one was written after something got through.
 
   All seven pass the id audit, throw no errors, award explore credit normally,
   and look perfectly fine on screen.
+- **`verify`, off-screen controls** — `.qrow` was a non-wrapping flex row and
+  chips do not shrink, so a mission offering six kingdoms showed three and put
+  the other three past the right edge of a 390px screen. One of the hidden ones
+  was *None of them*, the answer the mission's entire closing paragraph is
+  about. Four chapters were affected. Nothing caught it for months because both
+  `reach` and the chapter tests click chips by DOM index, and an invisible
+  button clicks perfectly well — the check has to measure geometry, not
+  behaviour. Squeezing the columns instead only moves the damage inside a
+  `<select>`, where "8 and 16" renders as "8 and 1", a different answer; so
+  value tables keep the width their options need and scroll, and say so.
+  Content inside a horizontal scroller is reachable and does not fail.
 - **`state`** — a debounced `save()` was being re-armed 30 times a second by
   a redraw loop, so chapters stopped persisting entirely. Nothing on screen
   changed; only the stored state showed it.

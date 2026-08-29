@@ -107,13 +107,34 @@ select{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--pla
 .score{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:10px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .match{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.qrow{display:flex;gap:8px;align-items:center;margin-bottom:9px;font-size:13.5px}
-.qrow>span.t{flex:1}
+/* wrap, because chips do not shrink: a long choice used to push the last one
+   off the panel entirely rather than move to a second line */
+.qrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;
+      padding-bottom:9px;margin-bottom:9px;border-bottom:1px solid var(--rule)}
+.qrow:last-child{border-bottom:0}
+.qrow>span.t{flex:1 1 120px;min-width:0}
 table.tick{width:100%;border-collapse:collapse;font-size:13px}
 table.tick th,table.tick td{border:1px solid var(--rule);padding:7px 6px;text-align:center}
 table.tick th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:400}
 table.tick td.lbl{text-align:left;font-size:12.5px}
 table.tick td.c{cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:15px;user-select:none}
+/* A select is as wide as its widest option, and a table sizes to its content,
+   so an answer table of them used to push its last column clean off a 390px
+   screen. Squeezing the columns instead only moves the damage inside the
+   select, where "8 and 16" reads as "8 and 1" — a different answer. So the
+   table keeps the width its content needs and scrolls sideways for the last
+   few pixels. Q.vgrid marks its tables and wraps them. */
+.xscroll{overflow-x:auto;overscroll-behavior-x:contain;position:relative}
+/* a table that scrolls has to say so, or the reader never learns the last
+   column is there */
+.xscroll.more{padding-bottom:6px}
+.xscroll.more::after{content:"swipe \2192";position:sticky;left:0;display:block;
+  font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);text-align:right;padding-top:5px}
+table.tick.vals{min-width:100%;width:auto}
+table.tick.vals td.lbl{min-width:118px}
+table.tick.vals td{padding:7px 4px}
+table.tick.vals select{font-size:11.5px;padding:7px 5px}
 td.c.yes{color:var(--good)}td.c.no{color:var(--bad)}
 td.c.err{background:rgba(229,72,77,.18)}
 .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(80px);background:var(--plate2);border:1px solid var(--gold);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:13px;padding:11px 18px;border-radius:30px;opacity:0;transition:.35s;z-index:9;pointer-events:none;white-space:nowrap}
@@ -1190,6 +1211,15 @@ const Q = {
     const tbl = document.getElementById(tableId), sc = document.getElementById(scoreId);
     if(!tbl) return;
     const cols = cfg.cols, ROWS = cfg.rows, nc = cols.length;
+    /* see table.tick.vals in base.css: the table keeps the width its options
+       need and scrolls inside this wrapper rather than clipping them */
+    tbl.classList.add('vals');
+    if(!tbl.parentElement.classList.contains('xscroll')){
+      const wrap = document.createElement('div');
+      wrap.className = 'xscroll';
+      tbl.parentElement.insertBefore(wrap, tbl);
+      wrap.appendChild(tbl);
+    }
     let cells = 0;
     let html = '<tr><th style="text-align:left">' + cfg.head + '</th>';
     cols.forEach(c=>html += '<th>' + c + '</th>');
@@ -1208,6 +1238,11 @@ const Q = {
       html += '</tr>';
     });
     tbl.innerHTML = html;
+    const scroller = tbl.parentElement;
+    /* a hint is worth showing for a column the reader would otherwise miss, not
+   for the last few pixels of a border */
+    const hint = ()=> scroller.classList.toggle('more', tbl.scrollWidth > scroller.clientWidth + 24);
+    hint(); addEventListener('resize', hint);
     document.getElementById(checkId).onclick = ()=>{
       let right = 0, filled = 0;
       const got = [];
@@ -1928,7 +1963,7 @@ const deg = n => Math.round(n) + '°';
     }
     const kind = kindOf(A, B, C);
     document.getElementById('ccKind').textContent = kind;
-    document.getElementById('ccO').textContent = '(' + fmt(Math.round(O[0]*10)/10) + ', ' + fmt(Math.round(O[1]*10)/10) + ')';
+    document.getElementById('ccO').textContent = '(' + neg(Math.round(O[0]*10)/10) + ', ' + neg(Math.round(O[1]*10)/10) + ')';
     const where = kind === 'right-angled' ? 'on the hypotenuse'
                 : kind === 'obtuse-angled' ? 'outside the triangle' : 'inside the triangle';
     document.getElementById('ccWhere').textContent = where;
@@ -1957,7 +1992,11 @@ const deg = n => Math.round(n) + '°';
       const r = Math.hypot(A[0]-O[0], A[1]-O[1]);
       x.strokeStyle = 'rgba(124,134,240,.55)'; x.lineWidth = 1.4;
       x.beginPath(); x.arc(px(O[0]), py(O[1]), r*u, 0, 7); x.stroke();
-      /* the two perpendicular bisectors that found it */
+      /* The two perpendicular bisectors that found it. They run well past the
+         circle on purpose — that is how you see them cross — so they are
+         clipped short of the caption rather than drawn through it. */
+      x.save();
+      x.beginPath(); x.rect(0, 0, W, H-16); x.clip();
       [[A,B],[A,C]].forEach(pr=>{
         const mx = (pr[0][0]+pr[1][0])/2, my = (pr[0][1]+pr[1][1])/2;
         const dx = pr[1][0]-pr[0][0], dy = pr[1][1]-pr[0][1];
@@ -1969,6 +2008,7 @@ const deg = n => Math.round(n) + '°';
         x.lineTo(px(mx + nx2*14), py(my + ny2*14));
         x.stroke(); x.setLineDash([]);
       });
+      x.restore();
     }
 
     /* the triangle */
@@ -1977,12 +2017,16 @@ const deg = n => Math.round(n) + '°';
     [A, B, C].forEach((p,i)=>{ const q = P(p); i ? x.lineTo(q[0], q[1]) : x.moveTo(q[0], q[1]); });
     x.closePath(); x.stroke();
 
-    [[A,'A'],[B,'B'],[C,'C']].forEach(pr=>{
+    /* labels sit outside the triangle: A is the left vertex, so its label goes
+       left, or it lands on the edge it is naming a corner of */
+    [[A,'A',-1],[B,'B',1],[C,'C',1]].forEach(pr=>{
       const q = P(pr[0]);
       x.fillStyle = A2;
       x.beginPath(); x.arc(q[0], q[1], 4.5, 0, 7); x.fill();
       mono(x, 9.5, 600); x.fillStyle = A2;
-      x.fillText(pr[1], q[0] + 7, q[1] - 6);
+      x.textAlign = pr[2] < 0 ? 'right' : 'left';
+      x.fillText(pr[1], q[0] + pr[2]*8, q[1] - 6);
+      x.textAlign = 'left';
     });
     if(O){
       const q = P(O);
@@ -2006,12 +2050,12 @@ const deg = n => Math.round(n) + '°';
    M6 · where does the centre sit?
    ============================================================ */
 Q.rows('g6','g6s', [
-  { t:'All three angles less than 90°',        a:0 },
-  { t:'One angle exactly 90°',                  a:1 },
-  { t:'One angle greater than 90°',             a:2 },
-  { t:'A 3-4-5 triangle',                       a:1 },
-  { t:'An equilateral triangle',                a:0 }
-], ['Inside','On the hypotenuse','Outside'], 'm6',
+  { t:'All angles under 90°',    a:0 },
+  { t:'One angle exactly 90°',   a:1 },
+  { t:'One angle over 90°',      a:2 },
+  { t:'A 3-4-5 triangle',        a:1 },
+  { t:'An equilateral triangle', a:0 }
+], ['Inside','On an edge','Outside'], 'm6',
    'All five. The largest angle decides where the centre lands.');
 
 /* ============================================================

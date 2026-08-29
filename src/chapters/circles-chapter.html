@@ -963,7 +963,7 @@ const deg = n => Math.round(n) + '°';
     }
     const kind = kindOf(A, B, C);
     document.getElementById('ccKind').textContent = kind;
-    document.getElementById('ccO').textContent = '(' + fmt(Math.round(O[0]*10)/10) + ', ' + fmt(Math.round(O[1]*10)/10) + ')';
+    document.getElementById('ccO').textContent = '(' + neg(Math.round(O[0]*10)/10) + ', ' + neg(Math.round(O[1]*10)/10) + ')';
     const where = kind === 'right-angled' ? 'on the hypotenuse'
                 : kind === 'obtuse-angled' ? 'outside the triangle' : 'inside the triangle';
     document.getElementById('ccWhere').textContent = where;
@@ -992,7 +992,11 @@ const deg = n => Math.round(n) + '°';
       const r = Math.hypot(A[0]-O[0], A[1]-O[1]);
       x.strokeStyle = 'rgba(124,134,240,.55)'; x.lineWidth = 1.4;
       x.beginPath(); x.arc(px(O[0]), py(O[1]), r*u, 0, 7); x.stroke();
-      /* the two perpendicular bisectors that found it */
+      /* The two perpendicular bisectors that found it. They run well past the
+         circle on purpose — that is how you see them cross — so they are
+         clipped short of the caption rather than drawn through it. */
+      x.save();
+      x.beginPath(); x.rect(0, 0, W, H-16); x.clip();
       [[A,B],[A,C]].forEach(pr=>{
         const mx = (pr[0][0]+pr[1][0])/2, my = (pr[0][1]+pr[1][1])/2;
         const dx = pr[1][0]-pr[0][0], dy = pr[1][1]-pr[0][1];
@@ -1004,6 +1008,7 @@ const deg = n => Math.round(n) + '°';
         x.lineTo(px(mx + nx2*14), py(my + ny2*14));
         x.stroke(); x.setLineDash([]);
       });
+      x.restore();
     }
 
     /* the triangle */
@@ -1012,12 +1017,16 @@ const deg = n => Math.round(n) + '°';
     [A, B, C].forEach((p,i)=>{ const q = P(p); i ? x.lineTo(q[0], q[1]) : x.moveTo(q[0], q[1]); });
     x.closePath(); x.stroke();
 
-    [[A,'A'],[B,'B'],[C,'C']].forEach(pr=>{
+    /* labels sit outside the triangle: A is the left vertex, so its label goes
+       left, or it lands on the edge it is naming a corner of */
+    [[A,'A',-1],[B,'B',1],[C,'C',1]].forEach(pr=>{
       const q = P(pr[0]);
       x.fillStyle = A2;
       x.beginPath(); x.arc(q[0], q[1], 4.5, 0, 7); x.fill();
       mono(x, 9.5, 600); x.fillStyle = A2;
-      x.fillText(pr[1], q[0] + 7, q[1] - 6);
+      x.textAlign = pr[2] < 0 ? 'right' : 'left';
+      x.fillText(pr[1], q[0] + pr[2]*8, q[1] - 6);
+      x.textAlign = 'left';
     });
     if(O){
       const q = P(O);
@@ -1041,12 +1050,12 @@ const deg = n => Math.round(n) + '°';
    M6 · where does the centre sit?
    ============================================================ */
 Q.rows('g6','g6s', [
-  { t:'All three angles less than 90°',        a:0 },
-  { t:'One angle exactly 90°',                  a:1 },
-  { t:'One angle greater than 90°',             a:2 },
-  { t:'A 3-4-5 triangle',                       a:1 },
-  { t:'An equilateral triangle',                a:0 }
-], ['Inside','On the hypotenuse','Outside'], 'm6',
+  { t:'All angles under 90°',    a:0 },
+  { t:'One angle exactly 90°',   a:1 },
+  { t:'One angle over 90°',      a:2 },
+  { t:'A 3-4-5 triangle',        a:1 },
+  { t:'An equilateral triangle', a:0 }
+], ['Inside','On an edge','Outside'], 'm6',
    'All five. The largest angle decides where the centre lands.');
 
 /* ============================================================

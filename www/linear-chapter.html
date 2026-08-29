@@ -107,13 +107,34 @@ select{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--pla
 .score{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:10px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .match{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.qrow{display:flex;gap:8px;align-items:center;margin-bottom:9px;font-size:13.5px}
-.qrow>span.t{flex:1}
+/* wrap, because chips do not shrink: a long choice used to push the last one
+   off the panel entirely rather than move to a second line */
+.qrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;
+      padding-bottom:9px;margin-bottom:9px;border-bottom:1px solid var(--rule)}
+.qrow:last-child{border-bottom:0}
+.qrow>span.t{flex:1 1 120px;min-width:0}
 table.tick{width:100%;border-collapse:collapse;font-size:13px}
 table.tick th,table.tick td{border:1px solid var(--rule);padding:7px 6px;text-align:center}
 table.tick th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:400}
 table.tick td.lbl{text-align:left;font-size:12.5px}
 table.tick td.c{cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:15px;user-select:none}
+/* A select is as wide as its widest option, and a table sizes to its content,
+   so an answer table of them used to push its last column clean off a 390px
+   screen. Squeezing the columns instead only moves the damage inside the
+   select, where "8 and 16" reads as "8 and 1" — a different answer. So the
+   table keeps the width its content needs and scrolls sideways for the last
+   few pixels. Q.vgrid marks its tables and wraps them. */
+.xscroll{overflow-x:auto;overscroll-behavior-x:contain;position:relative}
+/* a table that scrolls has to say so, or the reader never learns the last
+   column is there */
+.xscroll.more{padding-bottom:6px}
+.xscroll.more::after{content:"swipe \2192";position:sticky;left:0;display:block;
+  font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);text-align:right;padding-top:5px}
+table.tick.vals{min-width:100%;width:auto}
+table.tick.vals td.lbl{min-width:118px}
+table.tick.vals td{padding:7px 4px}
+table.tick.vals select{font-size:11.5px;padding:7px 5px}
 td.c.yes{color:var(--good)}td.c.no{color:var(--bad)}
 td.c.err{background:rgba(229,72,77,.18)}
 .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(80px);background:var(--plate2);border:1px solid var(--gold);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:13px;padding:11px 18px;border-radius:30px;opacity:0;transition:.35s;z-index:9;pointer-events:none;white-space:nowrap}
@@ -1165,6 +1186,15 @@ const Q = {
     const tbl = document.getElementById(tableId), sc = document.getElementById(scoreId);
     if(!tbl) return;
     const cols = cfg.cols, ROWS = cfg.rows, nc = cols.length;
+    /* see table.tick.vals in base.css: the table keeps the width its options
+       need and scrolls inside this wrapper rather than clipping them */
+    tbl.classList.add('vals');
+    if(!tbl.parentElement.classList.contains('xscroll')){
+      const wrap = document.createElement('div');
+      wrap.className = 'xscroll';
+      tbl.parentElement.insertBefore(wrap, tbl);
+      wrap.appendChild(tbl);
+    }
     let cells = 0;
     let html = '<tr><th style="text-align:left">' + cfg.head + '</th>';
     cols.forEach(c=>html += '<th>' + c + '</th>');
@@ -1183,6 +1213,11 @@ const Q = {
       html += '</tr>';
     });
     tbl.innerHTML = html;
+    const scroller = tbl.parentElement;
+    /* a hint is worth showing for a column the reader would otherwise miss, not
+   for the last few pixels of a border */
+    const hint = ()=> scroller.classList.toggle('more', tbl.scrollWidth > scroller.clientWidth + 24);
+    hint(); addEventListener('resize', hint);
     document.getElementById(checkId).onclick = ()=>{
       let right = 0, filled = 0;
       const got = [];
@@ -1955,13 +1990,13 @@ Q.vgrid('g8','g8check','g8s',{
   cols: ['Equation', 'Answer'],
   options: [
     ['2x + 10 = 64', '5x = 300', '2x + 3 = 24', '2(3x + 3) = 24', '5x − 2x = 63', 'x + 4x = 300'],
-    ['27 and 37', '42 and 105', '60 ft and 240 ft', '3 cm and 9 cm', '8 and 16']
+    ['27 and 37', '42 and 105', '60 and 240 ft', '3 and 9 cm', '8 and 16']
   ],
   rows: [
     { l:'Two numbers add to 64; one is 10 more than the other', a:['2x + 10 = 64', '27 and 37'] },
-    { l:'A 300 ft fence cut so the longer piece is 4× the shorter', a:['x + 4x = 300', '60 ft and 240 ft'] },
+    { l:'A 300 ft fence cut so the longer piece is 4× the shorter', a:['x + 4x = 300', '60 and 240 ft'] },
     { l:'Two integers differ by 63 and are in the ratio 2 : 5', a:['5x − 2x = 63', '42 and 105'] },
-    { l:'A rectangle, length 3 more than twice the width, perimeter 24 cm', a:['2(3x + 3) = 24', '3 cm and 9 cm'] }
+    { l:'A rectangle, length 3 more than twice the width, perimeter 24 cm', a:['2(3x + 3) = 24', '3 and 9 cm'] }
   ],
   mid: 'm8',
   doneMsg: 'All eight. Name the unknown, write the sentence down, and it is linear.'

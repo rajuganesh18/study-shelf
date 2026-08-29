@@ -52,6 +52,31 @@ async function run(){
     const zero = await page.$$eval('details.m[open] canvas',
       ns => ns.filter(n => !n.width || !n.height).map(n => n.id));
     if (zero.length) r.fail('zero-sized canvases: ' + zero.join(', '));
+
+    /* Nothing the reader has to tap may sit off the side of the screen.
+       .qrow was a non-wrapping flex row and its chips do not shrink, so a
+       mission offering six kingdoms showed three of them and hid the rest —
+       including "None of them", which the mission's whole closing paragraph
+       is about. Neither reach nor the chapter tests noticed, because both
+       click chips by DOM index and an invisible button clicks perfectly
+       well. Measured against the viewport, at the width the app is designed
+       for. */
+    const off = await page.$$eval('details.m[open] button, details.m[open] select, details.m[open] input',
+      ns => ns.filter(n => {
+        const b = n.getBoundingClientRect();
+        if (!b.width && !b.height) return false;            // deliberately hidden
+        if (b.right <= window.innerWidth + 0.5 && b.left >= -0.5) return false;
+        /* content inside a horizontal scroller is reachable, not lost */
+        for (let p = n.parentElement; p; p = p.parentElement) {
+          const ox = getComputedStyle(p).overflowX;
+          if (ox === 'auto' || ox === 'scroll') {
+            const pb = p.getBoundingClientRect();
+            if (pb.right <= window.innerWidth + 0.5 && pb.left >= -0.5) return false;
+          }
+        }
+        return true;
+      }).map(n => (n.textContent || n.id || n.tagName).trim().slice(0, 24)));
+    if (off.length) r.fail('controls off the side of a 390px screen: ' + off.slice(0, 6).join(' / '));
     if (page.errs.length) r.fail('errors after opening every mission: ' + page.errs.slice(0, 3).join(' | '));
 
     // a real interaction must still count
