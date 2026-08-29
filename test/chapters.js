@@ -35,7 +35,8 @@ module.exports = [
   { slug:'linear',       id:'9-maths-2',   n:2,  title:'Introduction to Linear Polynomials' },
   { slug:'numbers',      id:'9-maths-3',   n:3,  title:'The World of Numbers' },
   { slug:'identities',   id:'9-maths-4',   n:4,  title:'Exploring Algebraic Identities' },
-  { slug:'circles',      id:'9-maths-5',   n:5,  title:"I'm Up and Down, and Round and Round" }
+  { slug:'circles',      id:'9-maths-5',   n:5,  title:"I'm Up and Down, and Round and Round" },
+  { slug:'perimeter',    id:'9-maths-6',   n:6,  title:'Measuring Space: Perimeter and Area' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';

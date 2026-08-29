@@ -572,71 +572,7 @@ const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#7C86F0', A2='#4ECDC4',
 
 /*@include shared/plane.js*/
 
-/* ============================================================
-   One helper, ten benches.
-
-   Every mission in this chapter draws a circle and puts things on it, so
-   circ() draws the outline and hands back the one function the benches
-   actually need: pt(deg), the point at that many degrees round the rim.
-   Degrees run anticlockwise from the right, the way they are written in the
-   book, and pt() flips the screen's y for you so nothing has to think about it.
-   ============================================================ */
-function circ(x, W, H, o){
-  o = o || {};
-  const cx = o.cx !== undefined ? o.cx : W/2;
-  const cy = o.cy !== undefined ? o.cy : H*0.46;
-  const R  = o.R  !== undefined ? o.R  : Math.min(W, H*1.2)*0.30;
-  x.fillStyle = PLANE_BG; if(!o.keep) x.fillRect(0,0,W,H);
-  x.strokeStyle = o.col || 'rgba(142,154,192,.75)';
-  x.lineWidth = o.w || 1.6;
-  x.beginPath(); x.arc(cx, cy, R, 0, 7); x.stroke();
-  const pt = d => [cx + R*Math.cos(d*Math.PI/180), cy - R*Math.sin(d*Math.PI/180)];
-  return { cx, cy, R, pt };
-}
-
-/* The centre, drawn as the book draws it: a dot with its name beside it. */
-function centre(x, c, label){
-  x.fillStyle = A1;
-  x.beginPath(); x.arc(c.cx, c.cy, 3.4, 0, 7); x.fill();
-  if(label !== ''){
-    mono(x, 9, 500); x.fillStyle = A1;
-    x.fillText(label || 'O', c.cx + 6, c.cy + 12);
-  }
-}
-
-/* A labelled point on the rim, its label pushed outwards so it never sits on
-   the circle it belongs to. */
-function rim(x, c, deg, col, label){
-  const [px, py] = c.pt(deg);
-  x.fillStyle = col;
-  x.beginPath(); x.arc(px, py, 4, 0, 7); x.fill();
-  if(label){
-    const ux = Math.cos(deg*Math.PI/180), uy = -Math.sin(deg*Math.PI/180);
-    mono(x, 9.5, 600); x.fillStyle = col;
-    x.textAlign = ux > 0.25 ? 'left' : ux < -0.25 ? 'right' : 'center';
-    x.textBaseline = uy > 0.25 ? 'top' : uy < -0.25 ? 'bottom' : 'middle';
-    x.fillText(label, px + ux*9, py + uy*9);
-    x.textAlign = 'left'; x.textBaseline = 'alphabetic';
-  }
-  return [px, py];
-}
-
-/* An angle arc at a vertex, with its size written on it — the single most
-   repeated drawing job in the chapter. */
-function angleArc(x, vx, vy, a1, a2, r, col, label){
-  let s = a1*Math.PI/180, e = a2*Math.PI/180;
-  x.strokeStyle = col; x.lineWidth = 1.6;
-  x.beginPath(); x.arc(vx, vy, r, -e, -s); x.stroke();
-  if(label){
-    const mid = (a1 + a2)/2;
-    mono(x, 9, 600); x.fillStyle = col;
-    x.textAlign='center'; x.textBaseline='middle';
-    x.fillText(label, vx + (r+11)*Math.cos(mid*Math.PI/180), vy - (r+11)*Math.sin(mid*Math.PI/180));
-    x.textAlign='left'; x.textBaseline='alphabetic';
-  }
-}
-
-const deg = n => Math.round(n) + '°';
+/*@include shared/circle.js*/
 
 /* ============================================================
    M1 · everything at one distance
@@ -688,7 +624,7 @@ const deg = n => Math.round(n) + '°';
     mono(x, 9.5, 600); x.fillStyle = col;
     x.fillText('P', px + 8, py - 6);
 
-    centre(x, c, 'O');
+    centre(x, c, A1, 'O');
     mono(x, 9, 500); x.fillStyle = DIM;
     x.fillText('radius = ' + RAD, 14, 20);
     cap(x, W, H, Object.keys(seen).length + ' of 3: inside, on, outside');
@@ -767,7 +703,7 @@ const deg = n => Math.round(n) + '°';
       x.fillStyle = 'rgba(124,134,240,.22)';
       x.beginPath(); x.arc(c.cx, c.cy, 12, 0, 7); x.fill();
     }
-    centre(x, c, 'O');
+    centre(x, c, A1, 'O');
     cap(x, W, H, kind ? kind.toLowerCase() + ' — lit' : 'tap a word to light it up');
   }
   reg('m2', draw); upd();
@@ -832,7 +768,7 @@ const deg = n => Math.round(n) + '°';
       x.arc(c.cx, c.cy, c.R, -(fa+180)*Math.PI/180, -fa*Math.PI/180);
       x.closePath(); x.fill();
     }
-    centre(x, c, 'O');
+    centre(x, c, A1, 'O');
     cap(x, W, H, folded ? 'the two halves coincide exactly'
                         : 'rotate, then fold along a diameter');
   }
@@ -1111,7 +1047,7 @@ Q.rows('g6','g6s', [
     }
     pair(AT, a, A2, 'A', 'B', 24);
     pair(p,  b, A1, 'D', 'E', 36);
-    centre(x, c, 'O');
+    centre(x, c, A1, 'O');
 
     mono(x, 9, 500); x.fillStyle = DIM;
     x.fillText('radius = ' + RAD, 12, 18);
@@ -1200,7 +1136,7 @@ Q.rows('g6','g6s', [
 
     rim(x, c, p + s/2, A2, 'A');
     rim(x, c, p - s/2, A2, 'B');
-    centre(x, c, 'O');
+    centre(x, c, A1, 'O');
     cap(x, W, H, Object.keys(seen).length + ' of 5 placings · ∠OMA stays 90°');
   }
   SS.oninput = ()=>{ ev('explore','pmS'); upd(); };
@@ -1312,7 +1248,7 @@ Q.rows('g6','g6s', [
         x.textAlign='left';
       }
     }
-    centre(x, { cx, cy }, 'O');
+    centre(x, { cx, cy }, A1, 'O');
     cap(x, W, H, Object.keys(seen).length + ' of 4: diameter, chord, point, miss');
   }
   SR.oninput = ()=>{ ev('explore','cdR'); upd(); };
@@ -1388,7 +1324,7 @@ Q.vgrid('g10','g10check','g10s', {
 
     rim(x, c, a1, A1, 'B');
     rim(x, c, a2, A1, 'A');
-    centre(x, c, 'O');
+    centre(x, c, A1, 'O');
     cap(x, W, H, Object.keys(seen).length + ' of 3: minor, major, semicircle');
   }
   SS.oninput = ()=>{ ev('explore','arS'); upd(); };
@@ -1458,7 +1394,7 @@ Q.vgrid('g10','g10check','g10s', {
     x.beginPath(); x.arc(P[0], P[1], 4.5, 0, 7); x.fill();
     mono(x, 9.5, 600); x.fillStyle = A2;
     x.fillText('P', P[0] + 8, P[1] - 6);
-    centre(x, c, 'O');
+    centre(x, c, A1, 'O');
     cap(x, W, H, Object.keys(seen).length + ' of 5 places for P · ' + deg(s/2) + ' every time');
   }
   SS.oninput = ()=>{ ev('explore','dbS'); upd(); };
@@ -1530,7 +1466,7 @@ Q.vgrid('g10','g10check','g10s', {
     rim(x, c, 180, A1, 'A');
     rim(x, c, 0,   A1, 'B');
     rim(x, c, p,   A2, 'D');
-    centre(x, c, 'O');
+    centre(x, c, A1, 'O');
     mono(x, 9, 500); x.fillStyle = DIM;
     x.fillText('AB is a diameter', 12, 18);
     cap(x, W, H, Object.keys(seen).length + ' of 5 positions · always a right angle');
@@ -1604,7 +1540,7 @@ Q.vgrid('g10','g10check','g10s', {
     });
 
     [0, g.b, g.c, g.d].forEach((d,i)=> rim(x, c, d, i % 2 ? GOLD : A1, NM[i]));
-    centre(x, c, '');
+    centre(x, c, A1, '');
     cap(x, W, H, 'A+C = ' + deg(g.A + g.C) + ' · B+D = ' + deg(g.B + g.D));
   }
   SB.oninput = ()=>{ ev('explore','cyB'); upd(); };

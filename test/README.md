@@ -133,6 +133,12 @@ reason: motion m8 needs seven points placed by clicking a canvas, chapter 12's
 dichotomous key needs three organisms carried through a chain of yes/no
 questions, and coordinates m2 asks for nine *named* corners of a room, which is
 aiming rather than prodding. Each has a chapter test that drives it properly.
-Prefer teaching the probe over adding a skip — the circles chapter's twelve
-benches all completed on the first sweep, which is what a probe that has been
-taught properly looks like.
+Prefer teaching the probe over adding a skip — the circles and perimeter
+chapters' twenty-five benches between them all completed on the first sweep,
+which is what a probe that has been taught properly looks like.
+
+One design rule falls out of this and is worth stating: **do not gate a mission
+on an exact slider value.** `reach` sweeps a slider in about forty steps from
+its minimum, so it lands on 10, 19, 28 … and never on 90 or 180. Chapter 6's
+arc bench wants exactly those three angles, so it offers them as buttons —
+which is better for a reader with a thumb as well.
