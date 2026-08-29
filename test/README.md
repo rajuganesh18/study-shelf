@@ -117,8 +117,11 @@ unreachable when it was not:
 
 A false "this can never be completed" is worse than no check at all, so when
 this probe fails, **confirm against the chapter source before believing it**.
-Two genuine limits remain, listed as `skipReach` in `chapters.js` with the
-reason: motion m8 needs seven points placed by clicking a canvas, and chapter
-12's dichotomous key needs three organisms carried through a chain of yes/no
-questions (`test/chapters/diversity.js` covers that one properly). Prefer
-teaching the probe over adding a skip.
+Three genuine limits remain, listed as `skipReach` in `chapters.js` with the
+reason: motion m8 needs seven points placed by clicking a canvas, chapter 12's
+dichotomous key needs three organisms carried through a chain of yes/no
+questions, and coordinates m2 asks for nine *named* corners of a room, which is
+aiming rather than prodding. Each has a chapter test that drives it properly.
+Prefer teaching the probe over adding a skip — the circles chapter's twelve
+benches all completed on the first sweep, which is what a probe that has been
+taught properly looks like.

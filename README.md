@@ -28,7 +28,7 @@ study-shelf/
     ├── exploration-chapter.html    ⎫
     ├── cell-chapter.html           ⎬ one per playable chapter
     ├── …                           ⎭
-    ├── identities-chapter.html
+    ├── circles-chapter.html
     ├── manifest.webmanifest
     ├── service-worker.js
     ├── icons/                192, 512, maskable, 1024
@@ -194,7 +194,7 @@ const CH = { id, key, total, stages, paint }
 /*@include shared/boot.js*/        start-up and the streak
 ```
 
-`plane.js` is only for chapters that draw on axes — both Maths chapters do.
+`plane.js` is only for chapters that draw on axes, which most Maths ones do.
 It uses `fit()`, `arrow()` and `mono()` from the engine, so it has to come
 after that include, and it owns no accents: pass your own colours in.
 
@@ -212,11 +212,11 @@ there so old caches are dropped, add a row to `test/chapters.js`, and run
 
 ## 7 · What is and is not built
 
-17 of 86 catalogued chapters are playable: the whole of Class 9 Science
-(*Exploration*, chapters 1–13) and the first four chapters of Class 9 Maths
+18 of 86 catalogued chapters are playable: the whole of Class 9 Science
+(*Exploration*, chapters 1–13) and the first five chapters of Class 9 Maths
 (*Ganita Manjari Part 1* — coordinates, linear polynomials, the world of
-numbers, and algebraic identities). Everything else is catalogued and listed
-but marked *Coming soon*.
+numbers, algebraic identities, and circles). Everything else is catalogued and
+listed but marked *Coming soon*.
 
 Chapter lists were sourced in August 2026. Class 9 uses the new NCF-SE 2023
 books (*Exploration*, *Ganita Manjari*); NCERT's advisory of 17 March 2026

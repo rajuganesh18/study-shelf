@@ -34,7 +34,8 @@ module.exports = [
     skipReach:['m2'] },
   { slug:'linear',       id:'9-maths-2',   n:2,  title:'Introduction to Linear Polynomials' },
   { slug:'numbers',      id:'9-maths-3',   n:3,  title:'The World of Numbers' },
-  { slug:'identities',   id:'9-maths-4',   n:4,  title:'Exploring Algebraic Identities' }
+  { slug:'identities',   id:'9-maths-4',   n:4,  title:'Exploring Algebraic Identities' },
+  { slug:'circles',      id:'9-maths-5',   n:5,  title:"I'm Up and Down, and Round and Round" }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';

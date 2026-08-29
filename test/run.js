@@ -25,7 +25,8 @@ const STAGES = [
   { name:'coordinates',  browser:true,  run:require('./chapters/coordinates') },
   { name:'linear',       browser:true,  run:require('./chapters/linear') },
   { name:'numbers',      browser:true,  run:require('./chapters/numbers') },
-  { name:'identities',   browser:true,  run:require('./chapters/identities') }
+  { name:'identities',   browser:true,  run:require('./chapters/identities') },
+  { name:'circles',      browser:true,  run:require('./chapters/circles') }
 ];
 
 (async () => {
