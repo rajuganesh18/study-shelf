@@ -27,7 +27,8 @@ const STAGES = [
   { name:'numbers',      browser:true,  run:require('./chapters/numbers') },
   { name:'identities',   browser:true,  run:require('./chapters/identities') },
   { name:'circles',      browser:true,  run:require('./chapters/circles') },
-  { name:'perimeter',    browser:true,  run:require('./chapters/perimeter') }
+  { name:'perimeter',    browser:true,  run:require('./chapters/perimeter') },
+  { name:'probability',  browser:true,  run:require('./chapters/probability') }
 ];
 
 (async () => {

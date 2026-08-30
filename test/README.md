@@ -94,6 +94,23 @@ one-question organism and a multi-question one **deliberately**, instead of
 hoping the random draw covers both. **A test that fails intermittently is
 usually a test that samples something the suite should be choosing on purpose.**
 
+## Testing a chapter that is genuinely random
+
+Chapter 7's benches roll real dice, so its test cannot assert what they will
+say. It splits the difference: every **theoretical** value is asserted exactly,
+as a reduced fraction, because those are the answers being taught and nothing
+about them is uncertain; every **experimental** value is asserted only through
+invariants (a count never exceeds its opportunities, the stated gap matches the
+stated probability) and through convergence windows scaled to the evidence.
+
+The window has to be scaled, not guessed. A flat ±0.06 looks generous, and for
+6000 die rolls it is ten standard deviations — but the same number applied to a
+rate measured from the ~110 runs of three sixes that turn up in 24,000 rolls is
+1.7 sigma, which fails about one run in eleven. That was written, caught and
+fixed here before it ever ran in anger; the tolerance is now `5 × √(p(1−p)/n)`.
+**A test that fails one run in fifty is worse than no test**, because it teaches
+you to ignore it.
+
 ## Writing a new chapter test
 
 Put it in `test/chapters/<slug>.js`, export an async `run()` returning a
@@ -133,8 +150,8 @@ reason: motion m8 needs seven points placed by clicking a canvas, chapter 12's
 dichotomous key needs three organisms carried through a chain of yes/no
 questions, and coordinates m2 asks for nine *named* corners of a room, which is
 aiming rather than prodding. Each has a chapter test that drives it properly.
-Prefer teaching the probe over adding a skip — the circles and perimeter
-chapters' twenty-five benches between them all completed on the first sweep,
+Prefer teaching the probe over adding a skip — the circles, perimeter and
+probability chapters' thirty-six benches between them all completed on the first sweep,
 which is what a probe that has been taught properly looks like.
 
 One design rule falls out of this and is worth stating: **do not gate a mission
