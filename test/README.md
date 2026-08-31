@@ -150,9 +150,9 @@ reason: motion m8 needs seven points placed by clicking a canvas, chapter 12's
 dichotomous key needs three organisms carried through a chain of yes/no
 questions, and coordinates m2 asks for nine *named* corners of a room, which is
 aiming rather than prodding. Each has a chapter test that drives it properly.
-Prefer teaching the probe over adding a skip — the circles, perimeter and
-probability chapters' thirty-six benches between them all completed on the first sweep,
-which is what a probe that has been taught properly looks like.
+Prefer teaching the probe over adding a skip — the circles, perimeter,
+probability and sequences chapters' forty-eight benches between them all completed
+on the first sweep, which is what a probe that has been taught properly looks like.
 
 One design rule falls out of this and is worth stating: **do not gate a mission
 on an exact slider value.** `reach` sweeps a slider in about forty steps from

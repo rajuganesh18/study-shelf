@@ -1,0 +1,1685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Sequences and Progressions — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: the jade of a growing pattern, and a slate blue ---------- */
+:root{ --a1:#56B98F; --a2:#6C8FE8; --badge-bg:#E3F2EA; }
+/*@include shared/chrome.css*/
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Maths · Chapter 8</div>
+  <h1>Predicting What Comes Next<br><span>Sequences, progressions and the rules behind them</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96" aria-label="Chapter progress badge: scattered numbers put in order, given a rule, growing by addition along a line, then by multiplication into a curve, and finally into a fractal"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Patterns that continue</div>
+
+<!-- M1 -->
+<details class="m" id="m1" data-xp="40" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>Four sequences you already know</b><i>Section 8.1 · and the differences between their terms</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>A <b>sequence</b> is an ordered list of numbers, and each number in it is a <b>term</b>. Here are four you have met before. The quickest way to see what a sequence is doing is to look at the gaps between its terms.</p>
+    <div class="panel">
+      <canvas id="fsCv" height="156" aria-label="The terms of the chosen sequence with the differences between them marked"></canvas>
+      <div class="chips" id="fsPick"></div>
+      <div class="knob">
+        <label>Terms shown <b id="fsNV">6</b></label>
+        <input type="range" id="fsN" min="3" max="10" value="6" aria-label="How many terms to show">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">The differences</div><div class="v" id="fsDiff" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Which are</div><div class="v" id="fsSay" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">The nth term</div><div class="v" id="fsRule" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="fsTxt" style="margin-top:12px;min-height:110px">Work through all four. Two of them have a constant gap, and two do not — that difference is the whole of the rest of the chapter.</div>
+    </div>
+    <p>The natural numbers step up by 1 every time and the odd numbers by 2: their differences are <b>constant</b>. The triangular and square numbers are not so obliging — their gaps are 2, 3, 4, 5 and 3, 5, 7, 9, which are themselves sequences. Notice what those second rows are: the triangular gaps are the natural numbers, and the square gaps are the odd numbers. Sequences are made out of other sequences.</p>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="45" data-coin="24">
+  <summary><span class="mno">02</span><span class="mt"><b>Why they are called triangular and square</b><i>Section 8.1 · Figs. 8.1 and 8.2</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Both names are literal. Lay the dots out and the reason for each formula is a picture rather than an argument.</p>
+    <div class="panel">
+      <canvas id="tsCv" height="222" aria-label="A triangular array of dots beside a square array, each built up row by row"></canvas>
+      <div class="knob">
+        <label>n = <b id="tsNV">5</b></label>
+        <input type="range" id="tsN" min="1" max="9" value="5" aria-label="Which term to build">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Triangular</div><div class="v" id="tsTri" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Square</div><div class="v" id="tsSq" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Built from</div><div class="v" id="tsSay" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="tsTxt" style="margin-top:12px;min-height:110px">Watch the rows on the left and the L-shaped shells on the right. Each new layer is the next number in a sequence you already know.</div>
+    </div>
+    <p>The <i>n</i>th triangular number is a triangle of dots with rows of 1, 2, 3, … <i>n</i>, so it is <b>1 + 2 + ⋯ + <i>n</i></b>. The <i>n</i>th square number is an <i>n</i> by <i>n</i> square built from L-shaped shells of 1, 3, 5, … dots, so it is <b>1 + 3 + 5 + ⋯ + (2<i>n</i> − 1)</b>. Two very different-looking facts, and both of them are just a way of counting the same dots twice.</p>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="50" data-coin="26">
+  <summary><span class="mno">03</span><span class="mt"><b>A rule that jumps straight to any term</b><i>Section 8.2 · Examples 1 and 2</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>An <b>explicit formula</b> takes the position number <i>n</i> and hands back the term. It means you can have the 1170th term without working out the 1169 before it — and it can be read backwards, to ask whether a given number is in the sequence at all.</p>
+    <div class="panel">
+      <canvas id="exCv" height="250" aria-label="The terms produced by an explicit rule, with a target value tested against them"></canvas>
+      <div class="chips" id="exPick"></div>
+      <div class="knob">
+        <label>Position n = <b id="exNV">5</b></label>
+        <input type="range" id="exN" min="1" max="60" value="5" aria-label="Which position to evaluate">
+      </div>
+      <div class="knob">
+        <label>Test the number <b id="exTV">97</b></label>
+        <input type="range" id="exTarget" min="-40" max="620" value="97" aria-label="A number to test for membership">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">That term is</div><div class="v" id="exVal" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">The target</div><div class="v" id="exIs" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">If so, position</div><div class="v" id="exWhich" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="exTxt" style="margin-top:12px;min-height:126px">Pick a rule, then hunt for the target. A number belongs to the sequence only when solving for n gives a whole number.</div>
+    </div>
+    <p>With <i>s</i><sub><i>n</i></sub> = 5<i>n</i> − 2, asking whether 308 is a term means solving 5<i>n</i> − 2 = 308, which gives <i>n</i> = 62 — a whole number, so <b>308 is the 62nd term</b>. Asking the same of 471 gives <i>n</i> = 94.6, and there is no 94.6th position, so <b>471 is not a term at all</b>. That is the test, and it is the reason <i>n</i> has to be a natural number.</p>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Rules that look back</div>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="45" data-coin="24">
+  <summary><span class="mno">04</span><span class="mt"><b>Each term from the one before</b><i>Section 8.3 · Examples 3 and 4</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>The other way to describe a sequence is to say where it starts and how to get from one term to the next. That is a <b>recursive rule</b>, and it buys enormous power at one cost: to reach the hundredth term you have to walk all ninety-nine steps.</p>
+    <div class="panel">
+      <canvas id="rcCv" height="186" aria-label="Terms of a recursive sequence, with arrows showing which earlier terms each one is built from"></canvas>
+      <div class="chips" id="rcPick"></div>
+      <div class="knob">
+        <label>Terms computed <b id="rcNV">5</b></label>
+        <input type="range" id="rcN" min="2" max="9" value="5" aria-label="How many terms to compute">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">The sequence</div><div class="v" id="rcTerms" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Last term</div><div class="v" id="rcLast" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Looks back</div><div class="v" id="rcBack" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="rcTxt" style="margin-top:12px;min-height:126px">Try all five rules. The arrows show how far back each one has to reach — one term, two, or three.</div>
+    </div>
+    <p>Some of these grow at a speed that is hard to believe. <i>s</i><sub>1</sub> = 3 with <i>s</i><sub><i>n</i></sub> = <i>s</i><sub><i>n</i>−1</sub>(<i>s</i><sub><i>n</i>−1</sub> − 1) reaches 3, 6, 30, 870 — and its next term is 756,030. A rule can be short and still be violent.</p>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="55" data-coin="30">
+  <summary><span class="mno">05</span><span class="mt"><b>Virahāṅka counts the metres</b><i>Section 8.3 · the sequence and where it came from</i></span><span class="mstat">55 XP</span></summary>
+  <div class="body">
+    <p>In the 7th century CE Virahāṅka was not doing arithmetic. He was counting <b>Prakrit poetic metres</b>: how many ways can a line of a given length be built from <b>short</b> syllables lasting one beat and <b>long</b> syllables lasting two? Here is his actual question, laid out.</p>
+    <div class="panel">
+      <canvas id="vhCv" height="256" aria-label="Every way of filling a line of the chosen number of beats with short and long syllables"></canvas>
+      <div class="knob">
+        <label>Beats in the line <b id="vhNV">5</b></label>
+        <input type="range" id="vhN" min="1" max="7" value="5" aria-label="How many beats the line lasts">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Ways to fill it</div><div class="v" id="vhCount" style="font-size:14px">—</div></div>
+        <div class="rc"><div class="k">Made from</div><div class="v" id="vhWays" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Ratio to the last</div><div class="v" id="vhRatio" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="vhTxt" style="margin-top:12px;min-height:126px">Count the lines for 1, 2, 3, 4 and 5 beats. The answers are 1, 2, 3, 5, 8 — and the reason is in the pictures.</div>
+    </div>
+    <p>Every line either <b>starts with a short syllable</b>, leaving <i>n</i> − 1 beats to fill, or <b>starts with a long one</b>, leaving <i>n</i> − 2. There is no third option and no overlap, so the count for <i>n</i> beats is the count for <i>n</i> − 1 plus the count for <i>n</i> − 2. That is the whole proof of <b>V<sub><i>n</i></sub> = V<sub><i>n</i>−1</sub> + V<sub><i>n</i>−2</sub></b>, five centuries before Fibonacci wrote it down.</p>
+    <div class="curio">
+      <h5>The ratio nobody was looking for</h5>
+      <div class="note">Divide each term by the one before it and the answers wander in towards <b>1.618…</b>, the golden ratio — which is (1 + √5)/2, and is irrational. Virahāṅka was counting poems; Gopāla (c. 1135) and Hemachandra (c. 1150) took the sequence further; Fibonacci met it around 1200 while thinking about rabbits. None of them was chasing φ, and all of them found it.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Adding the same amount each time</div>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="40" data-coin="20">
+  <summary><span class="mno">06</span><span class="mt"><b>Which of these is an AP?</b><i>Section 8.4 · the Think and Reflect</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>An <b>arithmetic progression</b> is a sequence where the difference between consecutive terms is the <i>same</i> every time. Six sequences from this chapter — decide which qualify.</p>
+    <div class="panel">
+      <div id="g6"></div>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>The test is one thing only: subtract each term from the next and see whether you get the same number every time. A sequence can grow steadily and still fail it — 1, 4, 9, 16 climbs by 3, then 5, then 7, and the fact that <i>those</i> gaps form a pattern does not make the original an AP. Note also that a <b>negative</b> common difference is perfectly allowed: 11, 7, 3, −1 is an AP with <i>d</i> = −4.</p>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="50" data-coin="26">
+  <summary><span class="mno">07</span><span class="mt"><b>An AP is a straight line</b><i>Section 8.4.1 · Figs. 8.3 and 8.4</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Plot the position number against the term and something happens that is worth pausing over: the points fall exactly on a straight line. Every AP does this, and no other kind of sequence does.</p>
+    <div class="panel">
+      <canvas id="apCv" height="290" aria-label="The terms of an arithmetic progression plotted against their positions, lying on a straight line"></canvas>
+      <div class="knob">
+        <label>First term a = <b id="apAV">1</b></label>
+        <input type="range" id="apA" min="-10" max="12" value="1" aria-label="First term of the progression">
+      </div>
+      <div class="knob">
+        <label>Common difference d = <b id="apDV">4</b></label>
+        <input type="range" id="apD" min="-6" max="8" value="4" aria-label="Common difference">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">The nth term</div><div class="v" id="apRule" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">The 10th</div><div class="v" id="apT10" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Recursively</div><div class="v" id="apRec" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="apTxt" style="margin-top:12px;min-height:126px">Set a = 1 and d = 4 for the growing squares of Fig. 8.3. Then make d negative, and then zero.</div>
+    </div>
+    <p><b><i>t</i><sub><i>n</i></sub> = <i>a</i> + (<i>n</i> − 1)<i>d</i></b>, which multiplied out is <i>dn</i> + (<i>a</i> − <i>d</i>) — an expression with <i>n</i> to the first power and nothing else, which is exactly what makes the graph a line. The common difference <i>d</i> is the <b>slope</b>: steeper for a bigger step, downhill when <i>d</i> is negative, and flat when <i>d</i> = 0, where the sequence just repeats one number forever.</p>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="45" data-coin="24">
+  <summary><span class="mno">08</span><span class="mt"><b>The taxi fare</b><i>Section 8.4 · Example 5</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>A taxi charges a fixed booking fee plus a rate for each kilometre. The fares after 1 km, 2 km, 3 km and so on form an AP — and the two numbers you set have very different jobs in it.</p>
+    <div class="panel">
+      <canvas id="txCv" height="270" aria-label="Taxi fares by distance drawn as bars, growing by a constant amount each kilometre"></canvas>
+      <div class="knob">
+        <label>Booking fee ₹<b id="txFV">200</b></label>
+        <input type="range" id="txFee" min="0" max="400" value="200" step="20" aria-label="Fixed booking fee">
+      </div>
+      <div class="knob">
+        <label>Per kilometre ₹<b id="txRV">40</b></label>
+        <input type="range" id="txRate" min="10" max="80" value="40" step="5" aria-label="Rate per kilometre">
+      </div>
+      <div class="knob">
+        <label>Distance in km <b id="txKV">10</b></label>
+        <input type="range" id="txKm" min="1" max="20" value="10" aria-label="Distance travelled">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">First term a</div><div class="v" id="txA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">The nth fare</div><div class="v" id="txRule" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">This journey</div><div class="v" id="txFare" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="txTxt" style="margin-top:12px;min-height:126px">The booking fee lifts the whole line without tilting it. The per-kilometre rate is what tilts it.</div>
+    </div>
+    <p>With ₹200 and ₹40/km the fares run 240, 280, 320, … — an AP with <i>a</i> = 240 and <i>d</i> = 40, so the <i>n</i>th fare is 240 + (<i>n</i> − 1) × 40, which tidies to <b>200 + 40<i>n</i></b>. Ten kilometres costs ₹600. The fee is the <b>intercept</b> and the rate is the <b>slope</b>, which is the same pair of jobs they had back in chapter 2's linear polynomials — the same idea meeting you again in different clothes.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="55" data-coin="30">
+  <summary><span class="mno">09</span><span class="mt"><b>Gauss folds the sum in half</b><i>Section 8.5 · Fig. 8.5 and the Āryabhaṭīya</i></span><span class="mstat">55 XP</span></summary>
+  <div class="body">
+    <p>Adding 1 + 2 + 3 + ⋯ + 100 one number at a time takes a while. Writing the sum out twice — once forwards, once backwards — takes no time at all, and every column adds to the same thing.</p>
+    <div class="panel">
+      <canvas id="guCv" height="186" aria-label="The sum written forwards and backwards, with every column adding to the same total, forming a rectangle"></canvas>
+      <div class="knob">
+        <label>Adding up to n = <b id="guNV">6</b></label>
+        <input type="range" id="guN" min="2" max="12" value="6" aria-label="How many natural numbers to add">
+      </div>
+      <div class="row"><button class="act" id="guFold">Write it backwards underneath</button></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Every column</div><div class="v" id="guPairs" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Twice the sum</div><div class="v" id="guTwice" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">So the sum is</div><div class="v" id="guSum" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="guTxt" style="margin-top:12px;min-height:126px">Write the row backwards underneath and look down the columns. Every one of them comes to n + 1.</div>
+    </div>
+    <p>Two rows of <i>n</i> numbers, each column adding to <i>n</i> + 1, make a rectangle of <i>n</i>(<i>n</i> + 1) — which is <b>twice</b> the sum. So <b>S<sub><i>n</i></sub> = <i>n</i>(<i>n</i> + 1)/2</b>, which is also the formula for the <i>n</i>th triangular number, because they are the same thing counted the same way. Āryabhaṭa wrote this down in the <i>Āryabhaṭīya</i>, Chapter 2, Verse 19 — and gave a second recipe alongside it: take the first and last terms, average them, and multiply by how many there are.</p>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="45" data-coin="24">
+  <summary><span class="mno">10</span><span class="mt"><b>Add up every multiple in a range</b><i>Exercise Set 8.2 · End-of-chapter Q3 and Q4</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>How many two-digit numbers are divisible by 3, and what do they come to? The multiples of any number, taken in order, are an AP — so counting them and adding them are both formulas rather than chores.</p>
+    <div class="panel">
+      <canvas id="smCv" height="250" aria-label="The multiples of the chosen number within a range, marked on a line and totalled"></canvas>
+      <div class="knob">
+        <label>Multiples of <b id="smDV">3</b></label>
+        <input type="range" id="smDiv" min="1" max="12" value="3" aria-label="Which multiples to collect">
+      </div>
+      <div class="knob">
+        <label>From <b id="smLV">10</b></label>
+        <input type="range" id="smLo" min="1" max="500" value="10" aria-label="Lower end of the range">
+      </div>
+      <div class="knob">
+        <label>Up to <b id="smHV">99</b></label>
+        <input type="range" id="smHi" min="2" max="1000" value="99" aria-label="Upper end of the range">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">First and last</div><div class="v" id="smEnds" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">How many</div><div class="v" id="smCount" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">They add to</div><div class="v" id="smSum" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="smTxt" style="margin-top:12px;min-height:126px">Try multiples of 3 from 10 to 99, then 7 from 100 to 999, then 4 from 10 to 250 — and 1 from 1 to 25, which is the marbles.</div>
+    </div>
+    <p>Find the first multiple in the range and the last, and the count is <b>(last − first) ÷ <i>d</i> + 1</b>. Then Āryabhaṭa's second recipe finishes it: the sum is the average of the first and last, times how many there are. The two-digit multiples of 3 run from 12 to 99, so there are 30 of them and they add to 30 × (12 + 99)/2 = <b>1665</b>.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Multiplying by the same amount each time</div>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="40" data-coin="20">
+  <summary><span class="mno">11</span><span class="mt"><b>Find the common ratio</b><i>Section 8.6 · Examples 6 to 9</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>In a <b>geometric progression</b> each term is the one before it multiplied by a fixed number, the <b>common ratio</b>. Divide any term by its predecessor and you have it.</p>
+    <div class="panel">
+      <table class="tick" id="g11"></table>
+      <button class="act" id="g11check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g11s"></div>
+    </div>
+    <p>Two of these are worth a second look. <b>1, −1, 1, −1, …</b> is a perfectly good GP with <i>r</i> = −1 — a negative ratio makes the sequence alternate rather than grow, and it is still geometric. And a ratio <b>between 0 and 1</b>, like the 3⁄4 of 5, 15/4, 45/16, …, gives a GP that shrinks towards zero without ever arriving. Growing is not part of the definition; multiplying by a constant is.</p>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="50" data-coin="26">
+  <summary><span class="mno">12</span><span class="mt"><b>Adding against multiplying</b><i>Sections 8.4.1 and 8.6.2 · Figs. 8.4 and 8.9</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Start two sequences at the same number. Let one grow by <i>adding</i> a fixed amount and the other by <i>multiplying</i> by a fixed amount. For a few terms they keep company. Then they do not.</p>
+    <div class="panel">
+      <canvas id="cmCv" height="300" aria-label="An arithmetic progression plotted as a straight line beside a geometric progression curving away from it"></canvas>
+      <div class="knob">
+        <label>Both start at <b id="cmAV">3</b></label>
+        <input type="range" id="cmA" min="1" max="10" value="3" aria-label="The shared first term">
+      </div>
+      <div class="knob">
+        <label>The AP adds <b id="cmDV">3</b></label>
+        <input type="range" id="cmD" min="1" max="12" value="3" aria-label="Common difference of the AP">
+      </div>
+      <div class="knob">
+        <label>The GP multiplies by <b id="cmRV">2.0</b></label>
+        <input type="range" id="cmR" min="5" max="30" value="20" aria-label="Common ratio of the GP, in tenths">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">AP at n = 10</div><div class="v" id="cmAP" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">GP at n = 10</div><div class="v" id="cmGP" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">They part at</div><div class="v" id="cmGap" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="cmTxt" style="margin-top:12px;min-height:126px">Set the ratio below 1 and the GP shrinks instead. At exactly 1 it stops moving, and the AP walks away from it.</div>
+    </div>
+    <p>The AP's points lie on a line; the GP's do not, and cannot. Give the GP any ratio above 1 and it will overtake <b>any</b> AP eventually, however large that AP's common difference — not because it starts faster, but because multiplying compounds and adding does not. That single fact is why compound interest, bacterial growth and the number of triangles in a fractal all behave the way they do.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="45" data-coin="24">
+  <summary><span class="mno">13</span><span class="mt"><b>The bouncing ball</b><i>Section 8.6.2 · Example 10 and Exercise Set 8.3 Q5</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Drop a ball and it comes back up to a fixed fraction of the height it fell from. Every bounce after that does the same, so the peaks are a GP with a ratio under 1 — shrinking, but never quite reaching the floor.</p>
+    <div class="panel">
+      <canvas id="bbCv" height="290" aria-label="The peak height after each bounce, falling geometrically towards zero"></canvas>
+      <div class="knob">
+        <label>Dropped from <b id="bbHV">24</b></label>
+        <input type="range" id="bbH" min="10" max="90" value="24" aria-label="The height it is dropped from">
+      </div>
+      <div class="knob">
+        <label>Bounces back to, % <b id="bbRV">75</b></label>
+        <input type="range" id="bbR" min="30" max="90" value="75" aria-label="What fraction of the height it recovers">
+      </div>
+      <div class="knob">
+        <label>After bounce number <b id="bbNV">5</b></label>
+        <input type="range" id="bbN" min="1" max="12" value="5" aria-label="Which bounce to read off">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Peak height</div><div class="v" id="bbHt" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Below a sixth after</div><div class="v" id="bbBelow" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Distance travelled</div><div class="v" id="bbDist" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="bbTxt" style="margin-top:12px;min-height:126px">Set 24 and 75% for the book's own ball, then 80 and 60% for the exercise. Watch how many bounces each one needs.</div>
+    </div>
+    <p>From 24 feet at three-quarters, the peaks are 18, 13.5, 10.125, 7.594, 5.695, 4.271, 3.203 — and the <b>seventh</b> is the first below 4 feet, a sixth of where it started. The total distance is not just the sum of the peaks: after the first drop the ball travels each peak height <b>twice</b>, once up and once down, which is the trap in that exercise.</p>
+  </div>
+</details>
+
+<div class="sec">Part 5 · Patterns inside patterns</div>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="55" data-coin="30">
+  <summary><span class="mno">14</span><span class="mt"><b>Sierpiński's triangle</b><i>Section 8.6.1 · Fig. 8.7 and Table 1</i></span><span class="mstat">55 XP</span></summary>
+  <div class="body">
+    <p>Take a triangle. Join the midpoints of its sides and remove the middle one. Do the same to each of the three that are left, and keep going. Two sequences come out of this, and they run in opposite directions.</p>
+    <div class="panel">
+      <canvas id="siCv" height="300" aria-label="The Sierpinski triangle at the chosen stage, with the count of black triangles and the shaded area"></canvas>
+      <div class="knob">
+        <label>Stage n = <b id="siNV">3</b></label>
+        <input type="range" id="siN" min="0" max="6" value="3" aria-label="Which stage of the construction to draw">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Black triangles</div><div class="v" id="siCount" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Area left</div><div class="v" id="siArea" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Both are GPs</div><div class="v" id="siSay" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="siTxt" style="margin-top:12px;min-height:126px">Walk out to stage 6. The number of triangles multiplies by 3 each time; the area they cover multiplies by ¾.</div>
+    </div>
+    <p>Each black triangle becomes three at the next stage, so the count is <b>3<sup><i>n</i></sup></b> — a GP with <i>r</i> = 3, exploding. But each stage keeps only three of the four quarters, so the area is <b>(¾)<sup><i>n</i></sup></b> — a GP with <i>r</i> = ¾, vanishing. More and more triangles, covering less and less. At stage 20 there are over three <i>billion</i> of them, occupying about 0.3% of the paper.</p>
+    <div class="curio">
+      <h5>The same trick on a square</h5>
+      <div class="note">Exercise 8.3 question 7 does it with a square: cut it into nine, throw the middle one away, repeat. That gives <b>8<sup><i>n</i></sup></b> red squares covering <b>(8⁄9)<sup><i>n</i></sup></b> of the area — the same two-GPs-in-opposite-directions shape, with different numbers. Wacław Sierpiński (1882–1969) described both; shapes that repeat themselves at every scale are called <b>fractals</b>, and they turn up in cauliflower, coastlines, bare trees and snowflakes.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="45" data-coin="24">
+  <summary><span class="mno">15</span><span class="mt"><b>Work the progressions</b><i>End-of-chapter Q1, Q2, Q8, Q9, Q10, Q13</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Six questions where you are told something about a progression and asked for something else. Each one comes down to writing what you know as equations in <i>a</i> and <i>d</i>, or <i>a</i> and <i>r</i>.</p>
+    <div class="panel">
+      <table class="tick" id="g15"></table>
+      <button class="act" id="g15check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g15s"></div>
+    </div>
+    <p>The pattern for the AP rows is always the same. “The 11th is 38 and the 16th is 73” means <i>a</i> + 10<i>d</i> = 38 and <i>a</i> + 15<i>d</i> = 73; subtracting gives 5<i>d</i> = 35, so <i>d</i> = 7 and <i>a</i> = −32. Five steps apart, thirty-five apart in value — the common difference falls straight out of the <b>difference</b> between two facts, which is why you subtract rather than substitute.</p>
+  </div>
+</details>
+
+<div class="sec">Part 6 · The boss</div>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="80" data-coin="60">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, from the natural numbers to a fractal. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+<footer>NCERT Class 9 Maths · Ganita Manjari Part 1 · Chapter 8</footer>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- .wrap -->
+
+<script>
+/*@include shared/storage.js*/
+
+const CH = {
+  id: '9-maths-8',
+  key: 'ch08Sequences',
+  total: 16,
+  stages: [
+    { at:0,   f:0.00, name:'Numbers with no order', d:'A handful of values and nothing joining them. Nothing can be predicted, because there is nothing yet to predict from.' },
+    { at:80,  f:0.16, name:'Put them in a row', d:'A sequence: an ordered list, where each number has a position as well as a value. Now “what comes next” is a question with an answer.' },
+    { at:175, f:0.33, name:'A rule for the nth', d:'An explicit formula takes the position and hands back the term, so the 1170th is no more work than the second.' },
+    { at:300, f:0.50, name:'Adding the same each time', d:'An arithmetic progression. The gap between consecutive terms never changes, and that one constraint decides everything else.' },
+    { at:425, f:0.66, name:'Which is a straight line', d:'Plot position against term and an AP gives collinear points, every time. The common difference is the slope.' },
+    { at:555, f:0.83, name:'Multiplying instead', d:'A geometric progression bends away from any line. Multiplying compounds; adding does not, and eventually that is all that matters.' },
+    { at:715, f:1.00, name:'A pattern inside itself', d:'Sierpiński’s triangle: three times as many pieces at every stage, covering three quarters as much. Two progressions running in opposite directions.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+    x.fillStyle = '#E3F2EA'; x.fillRect(0,0,W,H);
+
+    const INK = '#1F5C46', JADE = '#3A9E77', BLUE = '#4A6FC4';
+    const A = CH.stages.map(t => t.f);
+    const on = (lo, hi) => f >= A[lo] && (hi === undefined ? true : f < A[hi]);
+
+    /* Stage 1: values with no order to them */
+    if(on(0, 1)){
+      const P = [[.24,.30],[.70,.24],[.78,.66],[.30,.72],[.52,.48],[.16,.56],[.60,.84]];
+      x.fillStyle = 'rgba(31,92,70,.75)';
+      P.forEach(p=>{ x.beginPath(); x.arc(W*p[0], H*p[1], 3.6, 0, 7); x.fill(); });
+    }
+
+    /* Stage 2: the same values, lined up and numbered */
+    if(on(1, 2)){
+      const n = 7, y = H*0.5, L = W*0.14, R = W*0.86;
+      x.strokeStyle = 'rgba(31,92,70,.35)'; x.lineWidth = 1;
+      x.beginPath(); x.moveTo(L, y); x.lineTo(R, y); x.stroke();
+      for(let k=0;k<n;k++){
+        const px = L + (R-L)*k/(n-1);
+        x.fillStyle = JADE;
+        x.beginPath(); x.arc(px, y, 3.6, 0, 7); x.fill();
+      }
+      x.font = '600 9px "IBM Plex Mono",monospace'; x.fillStyle = INK;
+      x.textAlign='center';
+      x.fillText('1', L, y + 16); x.fillText('n', R, y + 16);
+      x.textAlign='left';
+    }
+
+    /* Stage 3: a rule turning a position into a term */
+    if(on(2, 3)){
+      const y = H*0.5;
+      x.strokeStyle = INK; x.lineWidth = 1.4;
+      x.strokeRect(W*0.30, y - H*0.11, W*0.40, H*0.22);
+      x.font = '700 13px "IBM Plex Mono",monospace'; x.fillStyle = INK;
+      x.textAlign='center';
+      x.fillText('t', W*0.44, y + 5);
+      x.font = '700 9px "IBM Plex Mono",monospace';
+      x.fillText('n', W*0.50, y + 8);
+      x.font = '700 13px "IBM Plex Mono",monospace';
+      x.fillText('=?', W*0.60, y + 5);
+      x.textAlign='left';
+      x.fillStyle = JADE;
+      x.beginPath(); x.arc(W*0.16, y, 4, 0, 7); x.fill();
+      x.fillStyle = BLUE;
+      x.beginPath(); x.arc(W*0.84, y, 4, 0, 7); x.fill();
+      x.strokeStyle = 'rgba(31,92,70,.5)'; x.lineWidth = 1.2;
+      x.beginPath(); x.moveTo(W*0.21, y); x.lineTo(W*0.29, y);
+      x.moveTo(W*0.71, y); x.lineTo(W*0.79, y); x.stroke();
+    }
+
+    /* Stage 4: a growing pattern that adds the same amount each time */
+    if(on(3, 4)){
+      const cols = 5, s = W*0.11, y0 = H*0.66;
+      for(let k=0;k<cols;k++){
+        const h = (k+1)*s*0.62;
+        x.fillStyle = k % 2 ? 'rgba(74,111,196,.55)' : 'rgba(58,158,119,.65)';
+        x.fillRect(W*0.14 + k*(s+3), y0 - h, s, h);
+      }
+      x.font = '600 9px "IBM Plex Mono",monospace'; x.fillStyle = INK;
+      x.fillText('+d  +d  +d  +d', W*0.16, y0 + 16);
+    }
+
+    /* Stage 5: the same terms, plotted, lying on a line */
+    if(on(4, 5)){
+      const L = W*0.16, R = W*0.86, B = H*0.80, T = H*0.20;
+      x.strokeStyle = 'rgba(31,92,70,.35)'; x.lineWidth = 1;
+      x.beginPath(); x.moveTo(L, B); x.lineTo(R, B); x.moveTo(L, B); x.lineTo(L, T); x.stroke();
+      x.strokeStyle = JADE; x.lineWidth = 1.6;
+      x.beginPath(); x.moveTo(L, B - (B-T)*0.10); x.lineTo(R, B - (B-T)*0.92); x.stroke();
+      for(let k=0;k<5;k++){
+        const t = k/4;
+        x.fillStyle = BLUE;
+        x.beginPath(); x.arc(L + (R-L)*t, B - (B-T)*(0.10 + 0.82*t), 3.4, 0, 7); x.fill();
+      }
+    }
+
+    /* Stage 6: a curve that leaves any line behind */
+    if(on(5, 6)){
+      const L = W*0.16, R = W*0.86, B = H*0.80, T = H*0.16;
+      x.strokeStyle = 'rgba(31,92,70,.35)'; x.lineWidth = 1;
+      x.beginPath(); x.moveTo(L, B); x.lineTo(R, B); x.moveTo(L, B); x.lineTo(L, T); x.stroke();
+      x.setLineDash([3,3]); x.strokeStyle = 'rgba(74,111,196,.55)'; x.lineWidth = 1.2;
+      x.beginPath(); x.moveTo(L, B - (B-T)*0.06); x.lineTo(R, B - (B-T)*0.45); x.stroke();
+      x.setLineDash([]);
+      x.strokeStyle = JADE; x.lineWidth = 2;
+      x.beginPath();
+      for(let k=0;k<=24;k++){
+        const t = k/24, px = L + (R-L)*t, py = B - (B-T)*(Math.pow(2, t*5)/32);
+        k ? x.lineTo(px, py) : x.moveTo(px, py);
+      }
+      x.stroke();
+    }
+
+    /* Stage 7: the Sierpinski triangle, three stages deep */
+    if(on(6)){
+      const cx = W*0.5, top = H*0.16, half = W*0.38, bot = H*0.86;
+      const tri = (ax, ay, bx, by, cx2, cy2, d) => {
+        if(d === 0){
+          x.beginPath(); x.moveTo(ax, ay); x.lineTo(bx, by); x.lineTo(cx2, cy2);
+          x.closePath(); x.fillStyle = INK; x.fill();
+          return;
+        }
+        const m = (p, q) => [(p[0]+q[0])/2, (p[1]+q[1])/2];
+        const A2 = [ax,ay], B2 = [bx,by], C2 = [cx2,cy2];
+        const ab = m(A2,B2), bc = m(B2,C2), ca = m(C2,A2);
+        tri(A2[0],A2[1], ab[0],ab[1], ca[0],ca[1], d-1);
+        tri(ab[0],ab[1], B2[0],B2[1], bc[0],bc[1], d-1);
+        tri(ca[0],ca[1], bc[0],bc[1], C2[0],C2[1], d-1);
+      };
+      tri(cx, top, cx + half, bot, cx - half, bot, 3);
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ---------- chapter accents, as the canvases use them ---------- */
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#56B98F', A2='#6C8FE8',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', ROSE='#E0607F';
+
+/*@include shared/plane.js*/
+
+/* ============================================================
+   The helpers this chapter's twelve benches share.
+
+   num() is the one that matters. A chapter about sequences prints a great
+   many numbers, and 0.30000000000000004 in the middle of a list of terms
+   destroys the pattern the reader is meant to see — so every term goes
+   through here, and exact fractions stay fractions.
+   ============================================================ */
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
+function fr(n, d){
+  if(d < 0){ n = -n; d = -d; }
+  if(n === 0) return '0';
+  const g = gcd(Math.abs(n), d);
+  const num = n/g, den = d/g;
+  return den === 1 ? String(num) : num + '/' + den;
+}
+const dp = (v, k) => {
+  const p = Math.pow(10, k === undefined ? 3 : k);
+  const r = Math.round(v * p) / p;
+  if(Number.isInteger(r)) return String(r);
+  return r.toFixed(k === undefined ? 3 : k).replace(/0+$/, '').replace(/\.$/, '');
+};
+const sgn = v => (v < 0 ? '− ' : '+ ') + Math.abs(v);
+/* a superscript exponent — canvas text and mono readouts have no <sup> */
+const sup = n => String(n).replace(/\d/g, d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[+d]);
+/* a run of terms, comma separated, cut off before it overflows a readout */
+const listOf = (arr, max) => {
+  const s = arr.slice(0, max || arr.length).map(v => dp(v, 3));
+  return s.join(', ') + (arr.length > (max || arr.length) ? ', …' : '');
+};
+/* a row of dots, used by four of the benches */
+function dots(x, px, py, n, r, gap, col, perRow){
+  for(let k=0;k<n;k++){
+    const c = k % perRow, rr = Math.floor(k/perRow);
+    x.fillStyle = col;
+    x.beginPath(); x.arc(px + c*gap, py + rr*gap, r, 0, 7); x.fill();
+  }
+}
+
+/* ============================================================
+   M1 · four sequences, and the gaps between their terms
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('fsCv'); if(!cv) return;
+  const box = document.getElementById('fsPick'), SN = document.getElementById('fsN');
+  const SEQ = [
+    { n:'Natural',    f:k => k,            rule:'tₙ = n',          say:'all 1 — constant' },
+    { n:'Odd',        f:k => 2*k - 1,      rule:'tₙ = 2n − 1',     say:'all 2 — constant' },
+    { n:'Triangular', f:k => k*(k+1)/2,    rule:'tₙ = n(n+1)/2',   say:'the natural numbers' },
+    { n:'Square',     f:k => k*k,          rule:'tₙ = n²',         say:'the odd numbers' }
+  ];
+  let i = 0, seen = {};
+
+  const terms = (s, n) => Array.from({length:n}, (_,k)=> s.f(k+1));
+  const diffs = t => t.slice(1).map((v,k)=> v - t[k]);
+
+  function chips(){
+    box.innerHTML = '';
+    SEQ.forEach((s,k)=>{
+      const b = document.createElement('button');
+      b.className = 'chip' + (k===i ? ' on' : '');
+      b.textContent = s.n;
+      b.onclick = ()=>{ i = k; ev('explore','fsPick'); upd(); };
+      box.appendChild(b);
+    });
+  }
+  function upd(){
+    const s = SEQ[i], n = +SN.value, t = terms(s, n), d = diffs(t);
+    document.getElementById('fsNV').textContent = n;
+    document.getElementById('fsDiff').textContent = listOf(d, 6);
+    document.getElementById('fsSay').textContent = s.say;
+    document.getElementById('fsRule').textContent = s.rule;
+    const flat = d.every(v => v === d[0]);
+    document.getElementById('fsTxt').textContent =
+      'The ' + s.n.toLowerCase() + ' numbers are ' + listOf(t, 7) + '. Their differences are ' + listOf(d, 6) +
+      (flat ? ' — the same number every time, which is exactly what makes this an arithmetic progression.'
+            : ', which are ' + s.say + '. The gaps are not constant, so this is not an arithmetic progression — but the gaps have a pattern of their own.');
+    if(!autoplaying('m1')){
+      seen[s.n] = 1;
+      if(Object.keys(seen).length >= 4) complete('m1');
+    }
+    chips(); draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 156, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const s = SEQ[i], n = +SN.value, t = terms(s, n), d = diffs(t);
+    /* one row of terms and one row of gaps, neither of which grows downwards */
+    const L = 20, R = W - 20, y = 68;
+    const X = k => L + (R-L)*k/(n-1 || 1);
+
+    /* the terms, in a row */
+    t.forEach((v,k)=>{
+      x.fillStyle = A1;
+      x.beginPath(); x.arc(X(k), y, 5, 0, 7); x.fill();
+      mono(x, n > 7 ? 8 : 9.5, 600); x.fillStyle = A1;
+      x.textAlign='center';
+      x.fillText(String(v), X(k), y - 12);
+      mono(x, 7.5, 400); x.fillStyle = DIM;
+      x.fillText(String(k+1), X(k), y + 18);
+      x.textAlign='left';
+    });
+
+    /* the gaps, drawn as arcs between consecutive terms */
+    const flat = d.every(v => v === d[0]);
+    d.forEach((v,k)=>{
+      const x0 = X(k), x1 = X(k+1), mid = (x0+x1)/2;
+      x.strokeStyle = flat ? A2 : GOLD; x.lineWidth = 1.2;
+      x.beginPath();
+      x.moveTo(x0 + 6, y + 26);
+      x.quadraticCurveTo(mid, y + 42, x1 - 6, y + 26);
+      x.stroke();
+      mono(x, n > 7 ? 7.5 : 9, 600); x.fillStyle = flat ? A2 : GOLD;
+      x.textAlign='center';
+      x.fillText('+' + v, mid, y + 54);
+      x.textAlign='left';
+    });
+
+    mono(x, 9, 600); x.fillStyle = A1;
+    x.fillText(s.n + ' numbers · ' + s.rule, 14, 18);
+    cap(x, W, H, flat ? 'the gaps never change — this is an AP'
+                      : 'the gaps change: ' + s.say);
+  }
+  SN.oninput = ()=>{ ev('explore','fsN'); upd(); };
+  reg('m1', draw); upd();
+})();
+
+/* ============================================================
+   M2 · why they are called triangular and square
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('tsCv'); if(!cv) return;
+  const SN = document.getElementById('tsN');
+  let seen = {};
+
+  function upd(){
+    const n = +SN.value;
+    const tri = n*(n+1)/2, sq = n*n;
+    document.getElementById('tsNV').textContent = n;
+    document.getElementById('tsTri').textContent = tri + ' = 1+…+' + n;
+    document.getElementById('tsSq').textContent = sq + ' = 1+…+' + (2*n-1);
+    document.getElementById('tsSay').textContent = 'rows, and L-shells';
+    document.getElementById('tsTxt').textContent =
+      'The ' + n + 'th triangular number is ' + tri + ', because its rows hold 1, 2, … ' + n +
+      ' dots and those add to n(n+1)/2. The ' + n + 'th square number is ' + sq +
+      ', because its L-shaped shells hold 1, 3, 5, … ' + (2*n-1) + ' dots — and every square number is the sum of the odd numbers up to that point.';
+    if(!autoplaying('m2')){
+      seen[Math.round(n/2)] = 1;
+      if(Object.keys(seen).length >= 4) complete('m2');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 222, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const n = +SN.value;
+    const gap = Math.min(14, (W/2 - 44)/Math.max(n, 1));
+    const r = Math.max(2.2, gap*0.30);
+
+    /* the triangle, one colour per row */
+    const tx = W*0.26 - (n-1)*gap/2, ty = 42;
+    for(let row=0; row<n; row++){
+      const col = row % 2 ? 'rgba(86,185,143,.9)' : 'rgba(108,143,232,.9)';
+      for(let k=0; k<=row; k++){
+        x.fillStyle = col;
+        x.beginPath();
+        x.arc(tx + (k - row/2)*gap, ty + row*gap, r, 0, 7);
+        x.fill();
+      }
+    }
+    /* the square, one colour per L-shaped shell */
+    const sx = W*0.72 - (n-1)*gap/2, sy = 42;
+    for(let a=0; a<n; a++) for(let b=0; b<n; b++){
+      const shell = Math.max(a, b);
+      x.fillStyle = shell % 2 ? 'rgba(86,185,143,.9)' : 'rgba(108,143,232,.9)';
+      x.beginPath(); x.arc(sx + b*gap, sy + a*gap, r, 0, 7); x.fill();
+    }
+
+    mono(x, 9, 600); x.fillStyle = A1; x.textAlign='center';
+    x.fillText('rows 1…' + n + ' = ' + (n*(n+1)/2), W*0.26, H - 34);
+    x.fillText('shells 1,3,…' + (2*n-1) + ' = ' + (n*n), W*0.72, H - 34);
+    x.textAlign='left';
+    cap(x, W, H, 'a triangle of rows, and a square of L-shaped shells');
+  }
+  SN.oninput = ()=>{ ev('explore','tsN'); upd(); };
+  reg('m2', draw); upd();
+})();
+
+/* ============================================================
+   M3 · the explicit rule, read forwards and backwards
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('exCv'); if(!cv) return;
+  const box = document.getElementById('exPick');
+  const SN = document.getElementById('exN'), ST = document.getElementById('exTarget');
+  const RULES = [
+    { n:'2n − 1',      f:k => 2*k - 1,       inv:v => (v + 1)/2 },
+    { n:'5n − 2',      f:k => 5*k - 2,       inv:v => (v + 2)/5 },
+    { n:'3n − 7',      f:k => 3*k - 7,       inv:v => (v + 7)/3 },
+    { n:'2 − 5n',      f:k => 2 - 5*k,       inv:v => (2 - v)/5 },
+    { n:'n² − 2n + 3', f:k => k*k - 2*k + 3, inv:v => 1 + Math.sqrt(v - 2) }
+  ];
+  let i = 1, seen = {};
+
+  function chips(){
+    box.innerHTML = '';
+    RULES.forEach((r,k)=>{
+      const b = document.createElement('button');
+      b.className = 'chip' + (k===i ? ' on' : '');
+      b.textContent = r.n;
+      b.onclick = ()=>{ i = k; ev('explore','exPick'); upd(); };
+      box.appendChild(b);
+    });
+  }
+  function upd(){
+    const r = RULES[i], n = +SN.value, target = +ST.value;
+    document.getElementById('exNV').textContent = n;
+    document.getElementById('exTV').textContent = target;
+    document.getElementById('exVal').textContent = dp(r.f(n), 0);
+    /* the membership test: solve for n and demand a whole number */
+    const pos = r.inv(target);
+    const ok = Number.isFinite(pos) && pos >= 1 && Math.abs(pos - Math.round(pos)) < 1e-9
+               && r.f(Math.round(pos)) === target;
+    document.getElementById('exIs').textContent = ok ? 'yes, a term' : 'not a term';
+    document.getElementById('exWhich').textContent = ok ? 'the ' + Math.round(pos) + 'th' : '—';
+    document.getElementById('exTxt').textContent =
+      'With tₙ = ' + r.n + ', the ' + n + 'th term is ' + dp(r.f(n), 0) + '. Testing ' + target +
+      ': solving ' + r.n + ' = ' + target + ' gives n = ' + (Number.isFinite(pos) ? dp(pos, 3) : 'no solution') +
+      (ok ? ', a whole number — so ' + target + ' is the ' + Math.round(pos) + 'th term.'
+          : ', which is not a whole number at or above 1 — so ' + target + ' is not in this sequence at all.');
+    if(!autoplaying('m3')){
+      seen[r.n] = 1;
+      if(Object.keys(seen).length >= 4) complete('m3');
+    }
+    chips(); draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 250, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const r = RULES[i], n = +SN.value, target = +ST.value;
+    const show = 9;
+    const vals = Array.from({length:show}, (_,k)=> r.f(k+1));
+    const lo = Math.min(...vals, 0), hi = Math.max(...vals, 1);
+    const L = 26, R = W - 16, B = H - 44, T = 34;
+    const X = k => L + (R-L)*k/(show-1);
+    const Y = v => B - (B-T)*(v - lo)/((hi - lo) || 1);
+
+    x.strokeStyle = 'rgba(142,154,192,.3)'; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(L, B); x.lineTo(R, B); x.stroke();
+
+    /* the target, as a line the terms may or may not touch */
+    if(target >= lo && target <= hi){
+      x.setLineDash([4,3]); x.strokeStyle = GOLD; x.lineWidth = 1.2;
+      x.beginPath(); x.moveTo(L, Y(target)); x.lineTo(R, Y(target)); x.stroke();
+      x.setLineDash([]);
+      mono(x, 8.5, 600); x.fillStyle = GOLD;
+      x.fillText(String(target), L - 22, Y(target) + 3);
+    }
+
+    vals.forEach((v,k)=>{
+      const hit = v === target;
+      x.fillStyle = hit ? GOLD : (k+1 === n ? A2 : A1);
+      x.beginPath(); x.arc(X(k), Y(v), hit || k+1 === n ? 5.5 : 3.4, 0, 7); x.fill();
+      if(k+1 === n || hit){
+        mono(x, 9, 600); x.fillStyle = hit ? GOLD : A2;
+        x.textAlign='center';
+        x.fillText(String(v), X(k), Y(v) - 10);
+        x.textAlign='left';
+      }
+      mono(x, 7.5, 400); x.fillStyle = DIM; x.textAlign='center';
+      x.fillText(String(k+1), X(k), B + 13);
+      x.textAlign='left';
+    });
+
+    mono(x, 9.5, 600); x.fillStyle = A1;
+    x.fillText('tₙ = ' + r.n, 14, 18);
+    cap(x, W, H, Object.keys(seen).length + ' of 4 rules · n runs along the bottom');
+  }
+  [SN, ST].forEach(s=>{ s.oninput = ()=>{ ev('explore', s.id); upd(); }; });
+  reg('m3', draw); upd();
+})();
+
+/* ============================================================
+   M4 · a term built from the ones before it
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('rcCv'); if(!cv) return;
+  const box = document.getElementById('rcPick'), SN = document.getElementById('rcN');
+  const RULES = [
+    { n:'tₙ₋₁ + 3',        seed:[1],       back:1, f:p => p[0] + 3 },
+    { n:'2uₙ₋₁ + 3',       seed:[1],       back:1, f:p => 2*p[0] + 3 },
+    { n:'sₙ₋₁(sₙ₋₁ − 1)',  seed:[3],       back:1, f:p => p[0]*(p[0] - 1) },
+    { n:'Vₙ₋₁ + Vₙ₋₂',     seed:[1,2],     back:2, f:p => p[0] + p[1] },
+    { n:'Tₙ₋₁+Tₙ₋₂+Tₙ₋₃',  seed:[1,2,4],   back:3, f:p => p[0] + p[1] + p[2] }
+  ];
+  let i = 0, seen = {};
+
+  /* run the rule forward from its seed; p holds the previous terms, newest first */
+  const run = (r, n) => {
+    const t = r.seed.slice(0, Math.min(n, r.seed.length));
+    while(t.length < n){
+      const p = [];
+      for(let k=1;k<=r.back;k++) p.push(t[t.length - k]);
+      t.push(r.f(p));
+    }
+    return t;
+  };
+
+  function chips(){
+    box.innerHTML = '';
+    RULES.forEach((r,k)=>{
+      const b = document.createElement('button');
+      b.className = 'chip' + (k===i ? ' on' : '');
+      b.textContent = r.n;
+      b.onclick = ()=>{ i = k; ev('explore','rcPick'); upd(); };
+      box.appendChild(b);
+    });
+  }
+  function upd(){
+    const r = RULES[i], n = Math.max(+SN.value, r.seed.length), t = run(r, n);
+    document.getElementById('rcNV').textContent = +SN.value;
+    document.getElementById('rcTerms').textContent = listOf(t, 6);
+    document.getElementById('rcLast').textContent = dp(t[t.length-1], 0);
+    document.getElementById('rcBack').textContent = r.back + (r.back === 1 ? ' term' : ' terms');
+    document.getElementById('rcTxt').textContent =
+      'Starting from ' + r.seed.join(', ') + ' and applying ' + r.n + ' gives ' + listOf(t, 7) +
+      '. Each term needs the ' + (r.back === 1 ? 'one term' : r.back + ' terms') +
+      ' before it, so there is no way to reach the ' + n + 'th without computing every one on the way.';
+    if(!autoplaying('m4')){
+      seen[r.n] = 1;
+      if(Object.keys(seen).length >= 4) complete('m4');
+    }
+    chips(); draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 186, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const r = RULES[i], n = Math.max(+SN.value, r.seed.length), t = run(r, n);
+    /* y is fixed, not a fraction of H: the arcs rise a set 62px above the row
+       whatever the canvas is, and a fraction put them through the heading. */
+    const L = 24, R = W - 20, y = 98;
+    const X = k => L + (R-L)*k/((n-1) || 1);
+
+    /* an arrow from each contributing term to the one it helps make */
+    for(let k=r.seed.length; k<n; k++){
+      for(let b=1; b<=r.back; b++){
+        const from = k - b;
+        if(from < 0) continue;
+        const x0 = X(from), x1 = X(k), lift = 14 + b*12;
+        x.strokeStyle = b === 1 ? 'rgba(86,185,143,.8)' : b === 2 ? 'rgba(108,143,232,.7)' : 'rgba(242,184,76,.6)';
+        x.lineWidth = 1.1;
+        x.beginPath();
+        x.moveTo(x0, y - 9);
+        x.quadraticCurveTo((x0+x1)/2, y - 9 - lift, x1, y - 9);
+        x.stroke();
+      }
+    }
+    t.forEach((v,k)=>{
+      const seedTerm = k < r.seed.length;
+      x.fillStyle = seedTerm ? GOLD : A1;
+      x.beginPath(); x.arc(X(k), y, 5, 0, 7); x.fill();
+      mono(x, n > 7 ? 7.5 : 9, 600); x.fillStyle = seedTerm ? GOLD : A1;
+      x.textAlign='center';
+      const s = Math.abs(v) >= 100000 ? v.toExponential(1) : String(v);
+      x.fillText(s, X(k), y + 20);
+      x.textAlign='left';
+    });
+
+    mono(x, 9.5, 600); x.fillStyle = A1;
+    x.fillText('tₙ = ' + r.n, 14, 18);
+    mono(x, 8.5, 400); x.fillStyle = GOLD;
+    x.fillText('gold: the starting terms', 14, H - 34);
+    cap(x, W, H, 'each term reaches back ' + r.back + (r.back === 1 ? ' place' : ' places'));
+  }
+  SN.oninput = ()=>{ ev('explore','rcN'); upd(); };
+  reg('m4', draw); upd();
+})();
+
+/* ============================================================
+   M5 · Virahāṅka's metres, which is where the sequence came from
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('vhCv'); if(!cv) return;
+  const SN = document.getElementById('vhN');
+  let seen = {};
+
+  /* every way of writing n as an ordered sum of 1s and 2s */
+  const ways = n => {
+    if(n === 0) return [[]];
+    if(n < 0) return [];
+    return ways(n-1).map(w => [1].concat(w)).concat(ways(n-2).map(w => [2].concat(w)));
+  };
+  const V = n => n <= 0 ? (n === 0 ? 1 : 0) : ways(n).length;
+
+  function upd(){
+    const n = +SN.value, w = ways(n);
+    document.getElementById('vhNV').textContent = n;
+    document.getElementById('vhCount').textContent = w.length;
+    document.getElementById('vhWays').textContent = n === 1 ? 'one short'
+      : V(n-1) + ' + ' + V(n-2) + ' = ' + w.length;
+    document.getElementById('vhRatio').textContent = n < 2 ? '—' : dp(V(n)/V(n-1), 4);
+    document.getElementById('vhTxt').textContent = n === 1
+      ? 'One beat can only be one short syllable, so there is exactly 1 way.'
+      : 'A line of ' + n + ' beats can be filled ' + w.length + ' ways. Every one of them starts either with a short syllable — leaving ' +
+        (n-1) + ' beats, fillable ' + V(n-1) + ' ways — or with a long one, leaving ' + (n-2) + ' beats, fillable ' + V(n-2) +
+        ' ways. No line does both and none does neither, so ' + V(n-1) + ' + ' + V(n-2) + ' = ' + w.length + '.';
+    if(!autoplaying('m5')){
+      seen[n] = 1;
+      if(Object.keys(seen).length >= 4) complete('m5');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 256, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const n = +SN.value, w = ways(n);
+    const cols = w.length > 8 ? 2 : 1;
+    const rows = Math.ceil(w.length/cols);
+    const beat = Math.min(16, (W/cols - 40)/n);
+    const rowH = Math.min(22, (H - 76)/rows);
+    const bh = Math.min(11, rowH - 5);
+
+    w.forEach((line, k)=>{
+      const c = k % cols, rr = Math.floor(k/cols);
+      let px = 18 + c*(W/cols);
+      const py = 32 + rr*rowH;
+      line.forEach(s=>{
+        /* short syllables start with the first term; long ones with the second */
+        x.fillStyle = s === 1 ? 'rgba(86,185,143,.9)' : 'rgba(108,143,232,.9)';
+        x.fillRect(px, py, s*beat - 2, bh);
+        px += s*beat;
+      });
+    });
+
+    mono(x, 9, 600); x.fillStyle = A1;
+    x.fillText(w.length + ' ways to fill ' + n + ' beat' + (n === 1 ? '' : 's'), 14, 18);
+    mono(x, 8, 400);
+    x.fillStyle = A1; x.fillText('■ short (1 beat)', 14, H - 34);
+    x.fillStyle = A2; x.fillText('■ long (2 beats)', 118, H - 34);
+    cap(x, W, H, n < 2 ? 'the sequence starts 1, 2, 3, 5, 8, 13 …'
+                       : V(n-1) + ' + ' + V(n-2) + ' = ' + w.length + ' · ratio ' + dp(V(n)/V(n-1), 3));
+  }
+  SN.oninput = ()=>{ ev('explore','vhN'); upd(); };
+  reg('m5', draw); upd();
+})();
+
+/* ============================================================
+   M6 · which of these is an arithmetic progression?
+   ============================================================ */
+Q.rows('g6','g6s', [
+  { t:'2, 5, 8, 11, 14, …',      a:0 },
+  { t:'1, 4, 9, 16, 25, …',      a:1 },
+  { t:'11, 7, 3, −1, −5, …',     a:0 },
+  { t:'1, 2, 4, 8, 16, …',       a:1 },
+  { t:'1.5, 3.5, 5.5, 7.5, …',   a:0 },
+  { t:'1, 2, 3, 5, 8, 13, …',    a:1 }
+], ['An AP','Not an AP'], 'm6',
+   'All six. A constant gap is the only test — and a negative gap still counts.');
+
+/* ============================================================
+   M7 · an AP, and the straight line it plots to
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('apCv'); if(!cv) return;
+  const SA = document.getElementById('apA'), SD = document.getElementById('apD');
+  let seen = {};
+
+  function upd(){
+    const a = +SA.value, d = +SD.value;
+    document.getElementById('apAV').textContent = a;
+    document.getElementById('apDV').textContent = d;
+    /* a + (n−1)d, multiplied out, so the "n to the first power" is visible */
+    const c = a - d;
+    document.getElementById('apRule').textContent =
+      d === 0 ? String(a) : (d === 1 ? 'n' : d === -1 ? '−n' : d + 'n') + (c === 0 ? '' : ' ' + sgn(c));
+    document.getElementById('apT10').textContent = a + 9*d;
+    document.getElementById('apRec').textContent = 't₁ = ' + a + ', tₙ = tₙ₋₁ ' + sgn(d);
+    document.getElementById('apTxt').textContent =
+      'First term ' + a + ', common difference ' + d + '. The terms run ' +
+      listOf(Array.from({length:6}, (_,k)=> a + k*d)) + ' …, and the nth is ' + a + ' + (n − 1) × ' + d +
+      (d === 0 ? '. With d = 0 nothing moves: the "progression" is one number repeated, and its graph is a flat line.'
+       : d < 0 ? '. A negative common difference tilts the line downhill, and the terms fall away for ever.'
+       : '. The bigger the common difference, the steeper the line.');
+    if(!autoplaying('m7')){
+      seen['d' + Math.sign(d)] = 1;
+      seen['a' + Math.sign(a)] = 1;
+      if(Object.keys(seen).length >= 4) complete('m7');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const a = +SA.value, d = +SD.value, N = 8;
+    const vals = Array.from({length:N}, (_,k)=> a + k*d);
+    const lo = Math.min(...vals, 0), hi = Math.max(...vals, 1);
+    const L = 34, R = W - 16, B = H - 46, T = 30;
+    const X = k => L + (R-L)*k/(N-1);
+    const Y = v => B - (B-T)*(v - lo)/((hi - lo) || 1);
+
+    /* the axes, with zero marked when it is inside the frame */
+    x.strokeStyle = 'rgba(142,154,192,.3)'; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+    if(lo < 0 && hi > 0){
+      x.setLineDash([3,3]); x.strokeStyle = 'rgba(142,154,192,.4)';
+      x.beginPath(); x.moveTo(L, Y(0)); x.lineTo(R, Y(0)); x.stroke();
+      x.setLineDash([]);
+      mono(x, 8, 400); x.fillStyle = DIM; x.textAlign='right';
+      x.fillText('0', L - 4, Y(0) + 3); x.textAlign='left';
+    }
+
+    /* the line through the points, which is the whole point */
+    x.strokeStyle = 'rgba(108,143,232,.7)'; x.lineWidth = 1.6;
+    x.beginPath(); x.moveTo(X(0), Y(vals[0])); x.lineTo(X(N-1), Y(vals[N-1])); x.stroke();
+
+    vals.forEach((v,k)=>{
+      x.fillStyle = A1;
+      x.beginPath(); x.arc(X(k), Y(v), 4.5, 0, 7); x.fill();
+      mono(x, 8.5, 600); x.fillStyle = A1; x.textAlign='center';
+      x.fillText(String(v), X(k), Y(v) - 9);
+      mono(x, 7.5, 400); x.fillStyle = DIM;
+      x.fillText(String(k+1), X(k), B + 13);
+      x.textAlign='left';
+    });
+
+    mono(x, 9.5, 600); x.fillStyle = A1;
+    x.fillText('a = ' + a + ', d = ' + d, 14, 18);
+    cap(x, W, H, 'the points are collinear · d is the slope');
+  }
+  [SA, SD].forEach(s=>{ s.oninput = ()=>{ ev('explore', s.id); upd(); }; });
+  reg('m7', draw); upd();
+})();
+
+/* ============================================================
+   M8 · the taxi fare, where the fee and the rate do different jobs
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('txCv'); if(!cv) return;
+  const SF = document.getElementById('txFee'), SR = document.getElementById('txRate'),
+        SK = document.getElementById('txKm');
+  let seen = {};
+
+  function upd(){
+    const fee = +SF.value, rate = +SR.value, km = +SK.value;
+    document.getElementById('txFV').textContent = fee;
+    document.getElementById('txRV').textContent = rate;
+    document.getElementById('txKV').textContent = km;
+    document.getElementById('txA').textContent = '₹' + (fee + rate);
+    document.getElementById('txRule').textContent = '₹' + fee + ' + ' + rate + 'n';
+    document.getElementById('txFare').textContent = '₹' + (fee + rate*km);
+    document.getElementById('txTxt').textContent =
+      'A fee of ₹' + fee + ' and ₹' + rate + ' a kilometre gives fares of ' +
+      listOf([1,2,3,4].map(k => fee + rate*k)) + ' …, an AP with a = ' + (fee + rate) + ' and d = ' + rate +
+      '. So the nth fare is ' + (fee + rate) + ' + (n − 1) × ' + rate + ' = ₹' + fee + ' + ' + rate +
+      'n, and ' + km + ' km costs ₹' + (fee + rate*km) + '.';
+    if(!autoplaying('m8')){
+      seen[Math.round(km/5)] = 1;
+      if(Object.keys(seen).length >= 4) complete('m8');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 270, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const fee = +SF.value, rate = +SR.value, km = +SK.value;
+    const N = 12;
+    const top = fee + rate*N;
+    const L = 16, R = W - 14, B = H - 44, T = 34;
+    const bw = (R - L)/N - 3;
+
+    for(let k=1;k<=N;k++){
+      const v = fee + rate*k;
+      const h = (B - T)*v/(top || 1);
+      const px = L + (k-1)*((R-L)/N);
+      /* the fee is the part of every bar that never changes */
+      const fh = (B - T)*fee/(top || 1);
+      x.fillStyle = k === km ? 'rgba(86,185,143,.9)' : 'rgba(86,185,143,.35)';
+      x.fillRect(px, B - h, bw, h - fh);
+      x.fillStyle = k === km ? 'rgba(108,143,232,.9)' : 'rgba(108,143,232,.35)';
+      x.fillRect(px, B - fh, bw, fh);
+      if(k === km){
+        mono(x, 8.5, 600); x.fillStyle = A1; x.textAlign='center';
+        x.fillText('₹' + v, px + bw/2, B - h - 5);
+        x.textAlign='left';
+      }
+      mono(x, 7, 400); x.fillStyle = DIM; x.textAlign='center';
+      x.fillText(String(k), px + bw/2, B + 12);
+      x.textAlign='left';
+    }
+    x.strokeStyle = 'rgba(142,154,192,.3)'; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(L, B); x.lineTo(R, B); x.stroke();
+
+    mono(x, 8.5, 600);
+    x.fillStyle = A2; x.fillText('■ the fee, ₹' + fee + ' — never changes', 14, 16);
+    x.fillStyle = A1; x.fillText('■ ₹' + rate + ' a km — the part that grows', 14, 28);
+    cap(x, W, H, km + ' km costs ₹' + (fee + rate*km));
+  }
+  [SF, SR, SK].forEach(s=>{ s.oninput = ()=>{ ev('explore', s.id); upd(); }; });
+  reg('m8', draw); upd();
+})();
+
+/* ============================================================
+   M9 · Gauss's pairing, and Āryabhaṭa's formula
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('guCv'); if(!cv) return;
+  const SN = document.getElementById('guN');
+  let folded = false, seen = {};
+
+  function upd(){
+    const n = +SN.value;
+    document.getElementById('guNV').textContent = n;
+    document.getElementById('guPairs').textContent = 'adds to ' + (n+1);
+    document.getElementById('guTwice').textContent = n + ' × ' + (n+1) + ' = ' + n*(n+1);
+    document.getElementById('guSum').textContent = String(n*(n+1)/2);
+    document.getElementById('guTxt').textContent = !folded
+      ? 'Adding 1 + 2 + … + ' + n + ' one term at a time is honest work. Write the same sum backwards underneath it and the work disappears.'
+      : 'Two rows of ' + n + ' numbers, and every column comes to ' + (n+1) + '. That is a rectangle of ' + n + ' × ' + (n+1) +
+        ' = ' + n*(n+1) + ', which is twice the sum — so 1 + 2 + … + ' + n + ' = ' + n*(n+1)/2 + '.';
+    if(!autoplaying('m9')){
+      seen['n' + Math.round(n/4)] = 1;
+      if(folded) seen.folded = 1;
+      if(Object.keys(seen).length >= 4) complete('m9');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 186, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const n = +SN.value;
+    const cw = Math.min(26, (W - 30)/n);
+    const gx = W/2 - n*cw/2, gy = 32, ch = 22;
+
+    const cell = (px, py, v, col) => {
+      x.fillStyle = col;
+      x.fillRect(px + 1, py, cw - 2, ch);
+      mono(x, Math.min(10, cw*0.46), 600); x.fillStyle = '#10162B';
+      x.textAlign='center'; x.textBaseline='middle';
+      x.fillText(String(v), px + cw/2, py + ch/2);
+      x.textAlign='left'; x.textBaseline='alphabetic';
+    };
+    for(let k=0;k<n;k++) cell(gx + k*cw, gy, k+1, 'rgba(86,185,143,.85)');
+    if(folded){
+      for(let k=0;k<n;k++) cell(gx + k*cw, gy + ch + 4, n-k, 'rgba(108,143,232,.85)');
+      /* every column now adds to the same thing */
+      for(let k=0;k<n;k++){
+        mono(x, Math.min(9, cw*0.42), 600); x.fillStyle = GOLD;
+        x.textAlign='center';
+        x.fillText(String(n+1), gx + k*cw + cw/2, gy + 2*ch + 22);
+        x.textAlign='left';
+      }
+      x.strokeStyle = GOLD; x.lineWidth = 1.2;
+      x.strokeRect(gx, gy - 2, n*cw, 2*ch + 8);
+      mono(x, 9, 600); x.fillStyle = GOLD; x.textAlign='center';
+      x.fillText(n + ' columns, each ' + (n+1) + ' → ' + n*(n+1), W/2, gy + 2*ch + 46);
+      x.textAlign='left';
+    } else {
+      mono(x, 9, 500); x.fillStyle = DIM; x.textAlign='center';
+      x.fillText('now write it backwards underneath', W/2, gy + ch + 26);
+      x.textAlign='left';
+    }
+
+    mono(x, 9.5, 600); x.fillStyle = A1;
+    x.fillText('1 + 2 + … + ' + n + ' = ' + n*(n+1)/2, 14, 18);
+    cap(x, W, H, 'Sₙ = n(n + 1)/2 · Āryabhaṭīya, Chapter 2, Verse 19');
+  }
+  document.getElementById('guFold').onclick = ()=>{ folded = true; ev('explore','guFold'); upd(); };
+  SN.oninput = ()=>{ ev('explore','guN'); upd(); };
+  reg('m9', draw); upd();
+})();
+
+/* ============================================================
+   M10 · every multiple in a range, counted and added
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('smCv'); if(!cv) return;
+  const SD = document.getElementById('smDiv'), SL = document.getElementById('smLo'),
+        SH = document.getElementById('smHi');
+  let seen = {};
+
+  function figures(){
+    const d = +SD.value, lo = +SL.value, hi = +SH.value;
+    const first = Math.ceil(lo/d)*d, last = Math.floor(hi/d)*d;
+    const count = last >= first ? (last - first)/d + 1 : 0;
+    return { d, lo, hi, first, last, count, sum: count ? count*(first + last)/2 : 0 };
+  }
+  function upd(){
+    const g = figures();
+    document.getElementById('smDV').textContent = g.d;
+    document.getElementById('smLV').textContent = g.lo;
+    document.getElementById('smHV').textContent = g.hi;
+    document.getElementById('smEnds').textContent = g.count ? g.first + ' … ' + g.last : 'none';
+    document.getElementById('smCount').textContent = g.count;
+    document.getElementById('smSum').textContent = g.sum;
+    document.getElementById('smTxt').textContent = g.count === 0
+      ? 'There is no multiple of ' + g.d + ' between ' + g.lo + ' and ' + g.hi + ' — check the two ends of the range.'
+      : (g.d === 1 ? 'Every whole number from ' + g.first + ' to ' + g.last +
+          ' — which is the marble question, and Gauss\'s sum again with a running start. ' : '') +
+        'The multiples of ' + g.d + ' from ' + g.lo + ' to ' + g.hi + ' run ' + g.first + ' to ' + g.last +
+        '. That is (' + g.last + ' − ' + g.first + ') ÷ ' + g.d + ' + 1 = ' + g.count +
+        ' of them, and they add to ' + g.count + ' × (' + g.first + ' + ' + g.last + ')/2 = ' + g.sum +
+        ' — the average of the two ends, times how many there are.';
+    if(!autoplaying('m10')){
+      seen[g.d] = 1;
+      if(Object.keys(seen).length >= 4) complete('m10');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 176, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const g = figures();
+    /* the line never grows downwards, so y is fixed and H is only as tall as the
+       three rows it actually carries */
+    const L = 20, R = W - 20, y = 84;
+    const span = Math.max(1, g.hi - g.lo);
+    const X = v => L + (R-L)*(v - g.lo)/span;
+
+    x.strokeStyle = 'rgba(142,154,192,.45)'; x.lineWidth = 1.4;
+    x.beginPath(); x.moveTo(L, y); x.lineTo(R, y); x.stroke();
+    mono(x, 8.5, 500); x.fillStyle = DIM;
+    x.textAlign='left';  x.fillText(String(g.lo), L, y + 20);
+    x.textAlign='right'; x.fillText(String(g.hi), R, y + 20);
+    x.textAlign='left';
+
+    /* every multiple gets a tick; with many of them the ticks merge into a band,
+       which is itself the point — they are evenly spaced */
+    if(g.count){
+      const step = Math.max(1, Math.ceil(g.count/220));
+      for(let k=0;k<g.count;k+=step){
+        const v = g.first + k*g.d;
+        x.strokeStyle = 'rgba(86,185,143,.75)'; x.lineWidth = 1;
+        x.beginPath(); x.moveTo(X(v), y - 9); x.lineTo(X(v), y + 9); x.stroke();
+      }
+      [[g.first,'first'],[g.last,'last']].forEach(pr=>{
+        x.fillStyle = GOLD;
+        x.beginPath(); x.arc(X(pr[0]), y, 4.5, 0, 7); x.fill();
+        mono(x, 9, 600); x.fillStyle = GOLD; x.textAlign='center';
+        x.fillText(String(pr[0]), X(pr[0]), y - 16);
+        x.textAlign='left';
+      });
+      /* the pairing that gives the sum */
+      mono(x, 9, 600); x.fillStyle = A2; x.textAlign='center';
+      x.fillText(g.count + ' × (' + g.first + ' + ' + g.last + ')/2 = ' + g.sum, W/2, y + 52);
+      x.textAlign='left';
+    } else {
+      mono(x, 10, 600); x.fillStyle = BAD; x.textAlign='center';
+      x.fillText('no multiples of ' + g.d + ' in this range', W/2, y + 40);
+      x.textAlign='left';
+    }
+
+    mono(x, 9.5, 600); x.fillStyle = A1;
+    x.fillText('multiples of ' + g.d + ' · ' + g.count + ' of them', 14, 18);
+    cap(x, W, H, 'evenly spaced, so they are an AP');
+  }
+  [SD, SL, SH].forEach(s=>{ s.oninput = ()=>{ ev('explore', s.id); upd(); }; });
+  reg('m10', draw); upd();
+})();
+
+/* ============================================================
+   M11 · the common ratio of a GP
+   ============================================================ */
+Q.vgrid('g11','g11check','g11s', {
+  head: 'The sequence',
+  cols: ['Common ratio'],
+  options: [
+    ['−2','−1','−1/2','1/2','2/3','3/4','2','3','4','5']
+  ],
+  rows: [
+    { l:'1, 2, 4, 8, 16, …',            a:['2'] },
+    { l:'1, 3, 9, 27, 81, …',           a:['3'] },
+    { l:'1, −1, 1, −1, …',              a:['−1'] },
+    { l:'5, 15/4, 45/16, 135/64, …',    a:['3/4'] },
+    { l:'4, 8/3, 16/9, 32/27, …',       a:['2/3'] },
+    { l:'3, −3/2, 3/4, −3/8, …',        a:['−1/2'] }
+  ],
+  mid: 'm11',
+  doneMsg: 'All six. A negative ratio alternates; a ratio under 1 shrinks. Both are still GPs.'
+});
+
+/* ============================================================
+   M12 · adding against multiplying
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('cmCv'); if(!cv) return;
+  const SA = document.getElementById('cmA'), SD = document.getElementById('cmD'),
+        SR = document.getElementById('cmR');
+  const N = 10;
+  let seen = {};
+
+  const ap = (a, d, k) => a + (k-1)*d;
+  const gp = (a, r, k) => a*Math.pow(r, k-1);
+
+  function upd(){
+    const a = +SA.value, d = +SD.value, r = +SR.value/10;
+    document.getElementById('cmAV').textContent = a;
+    document.getElementById('cmDV').textContent = d;
+    document.getElementById('cmRV').textContent = r.toFixed(1);
+    document.getElementById('cmAP').textContent = dp(ap(a, d, N), 0);
+    document.getElementById('cmGP').textContent = dp(gp(a, r, N), 2);
+    /* the first position at which the GP has overtaken the AP for good */
+    let part = 0;
+    for(let k=2;k<=40;k++) if(gp(a, r, k) > ap(a, d, k)){ part = k; break; }
+    document.getElementById('cmGap').textContent = r <= 1 ? 'never — it shrinks'
+      : part ? 'n = ' + part : 'beyond n = 40';
+    document.getElementById('cmTxt').textContent =
+      'Both start at ' + a + '. The AP adds ' + d + ' each step and reaches ' + dp(ap(a,d,N),0) + ' by the 10th term; the GP multiplies by ' +
+      r.toFixed(1) + ' and reaches ' + dp(gp(a,r,N),2) + '. ' +
+      (r < 1 ? 'With a ratio below 1 the GP shrinks towards zero while the AP marches on, so they part in the other direction.'
+       : r === 1 ? 'At a ratio of exactly 1 the GP never moves at all — every term is ' + a + ' — and the AP simply walks away from it.'
+       : 'Multiplying compounds and adding does not, so the GP wins eventually however big d is — here from n = ' + (part || '>40') + ' onwards.');
+    if(!autoplaying('m12')){
+      seen['r' + (r < 1 ? 'lo' : r === 1 ? 'one' : 'hi')] = 1;
+      seen['d' + Math.round(d/4)] = 1;
+      if(Object.keys(seen).length >= 4) complete('m12');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const a = +SA.value, d = +SD.value, r = +SR.value/10;
+    const apV = Array.from({length:N}, (_,k)=> ap(a, d, k+1));
+    const gpV = Array.from({length:N}, (_,k)=> gp(a, r, k+1));
+    /* the frame is sized to the AP, so a runaway GP visibly leaves it */
+    const hi = Math.max(...apV, a) * 1.25, lo = 0;
+    /* T clears the two legend rows: at 28 the axis started inside them */
+    const L = 36, R = W - 16, B = H - 44, T = 38;
+    const X = k => L + (R-L)*k/(N-1);
+    const Y = v => B - (B-T)*(v - lo)/((hi - lo) || 1);
+
+    x.strokeStyle = 'rgba(142,154,192,.3)'; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+
+    x.save();
+    /* +5 on the right so the final marker is not sliced in half by the frame */
+    x.beginPath(); x.rect(L, T - 6, R - L + 5, B - T + 6); x.clip();
+
+    /* the AP: a straight line */
+    x.strokeStyle = A2; x.lineWidth = 1.8;
+    x.beginPath();
+    apV.forEach((v,k)=>{ k ? x.lineTo(X(k), Y(v)) : x.moveTo(X(k), Y(v)); });
+    x.stroke();
+    apV.forEach((v,k)=>{
+      x.fillStyle = A2;
+      x.beginPath(); x.arc(X(k), Y(v), 3.2, 0, 7); x.fill();
+    });
+
+    /* the GP: a curve, drawn even where it leaves the frame */
+    x.strokeStyle = A1; x.lineWidth = 2.2;
+    x.beginPath();
+    gpV.forEach((v,k)=>{ k ? x.lineTo(X(k), Y(v)) : x.moveTo(X(k), Y(v)); });
+    x.stroke();
+    gpV.forEach((v,k)=>{
+      if(Y(v) < T - 6) return;
+      x.fillStyle = A1;
+      x.beginPath(); x.arc(X(k), Y(v), 3.6, 0, 7); x.fill();
+    });
+    x.restore();
+
+    /* where the GP has left the top of the frame, say so rather than pretend */
+    const off = gpV.filter(v => v > hi).length;
+    if(off){
+      mono(x, 9, 600); x.fillStyle = A1; x.textAlign='right';
+      x.fillText('↑ off the top: ' + dp(gpV[N-1], 0), R, T + 4);
+      x.textAlign='left';
+    }
+
+    mono(x, 8.5, 600);
+    x.fillStyle = A2; x.fillText('■ AP: +' + d + ' each step', 14, 16);
+    x.fillStyle = A1; x.fillText('■ GP: ×' + r.toFixed(1) + ' each step', 14, 28);
+    mono(x, 7.5, 400); x.fillStyle = DIM; x.textAlign='center';
+    for(let k=0;k<N;k++) x.fillText(String(k+1), X(k), B + 13);
+    x.textAlign='left';
+    cap(x, W, H, 'at n = 10: ' + dp(ap(a,d,N),0) + ' against ' + dp(gp(a,r,N),1));
+  }
+  [SA, SD, SR].forEach(s=>{ s.oninput = ()=>{ ev('explore', s.id); upd(); }; });
+  reg('m12', draw); upd();
+})();
+
+/* ============================================================
+   M13 · the bouncing ball
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('bbCv'); if(!cv) return;
+  const SH = document.getElementById('bbH'), SR = document.getElementById('bbR'),
+        SN = document.getElementById('bbN');
+  let seen = {};
+
+  const peak = (h, r, k) => h*Math.pow(r, k);
+  /* total path length by the time it hits the ground for the (k+1)th time:
+     the first drop, then every peak travelled twice */
+  const dist = (h, r, k) => {
+    let t = h;
+    for(let j=1;j<=k;j++) t += 2*peak(h, r, j);
+    return t;
+  };
+
+  function upd(){
+    const h = +SH.value, r = +SR.value/100, n = +SN.value;
+    document.getElementById('bbHV').textContent = h;
+    document.getElementById('bbRV').textContent = +SR.value;
+    document.getElementById('bbNV').textContent = n;
+    document.getElementById('bbHt').textContent = dp(peak(h, r, n), 3);
+    const need = Math.ceil(Math.log(1/6)/Math.log(r) - 1e-9);
+    document.getElementById('bbBelow').textContent = need + (need === 1 ? ' bounce' : ' bounces');
+    document.getElementById('bbDist').textContent = dp(dist(h, r, n), 2);
+    document.getElementById('bbTxt').textContent =
+      'Dropped from ' + h + ' and rebounding to ' + (+SR.value) + '%, the peaks are ' +
+      listOf([1,2,3,4,5].map(k => peak(h, r, k)), 5) + ' … — a GP with ratio ' + dp(r, 2) +
+      '. After ' + n + ' bounce' + (n === 1 ? '' : 's') + ' the peak is ' + dp(peak(h, r, n), 3) +
+      ', and the ball has travelled ' + dp(dist(h, r, n), 2) + ' in all: the first drop of ' + h +
+      ', then every peak counted twice, once up and once down.';
+    if(!autoplaying('m13')){
+      seen['n' + Math.round(n/3)] = 1;
+      seen['r' + Math.round(+SR.value/20)] = 1;
+      if(Object.keys(seen).length >= 4) complete('m13');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const h = +SH.value, r = +SR.value/100, n = +SN.value;
+    const N = 9;
+    const L = 30, R = W - 14, B = H - 44, T = 30;
+    const X = k => L + (R-L)*k/N;
+    const Y = v => B - (B-T)*v/h;
+
+    x.strokeStyle = 'rgba(142,154,192,.35)'; x.lineWidth = 1;
+    x.beginPath(); x.moveTo(L, B); x.lineTo(R, B); x.stroke();
+
+    /* a sixth of the drop height: the line the book asks about */
+    x.setLineDash([4,3]); x.strokeStyle = GOLD; x.lineWidth = 1.2;
+    x.beginPath(); x.moveTo(L, Y(h/6)); x.lineTo(R, Y(h/6)); x.stroke();
+    x.setLineDash([]);
+    mono(x, 8, 600); x.fillStyle = GOLD; x.textAlign='right';
+    x.fillText('h/6', L - 3, Y(h/6) + 3); x.textAlign='left';
+
+    /* the arc of each bounce, and its peak */
+    let px = X(0);
+    x.strokeStyle = 'rgba(86,185,143,.75)'; x.lineWidth = 1.6;
+    x.beginPath(); x.moveTo(px, Y(h)); x.lineTo(X(0.5), B); x.stroke();
+    for(let k=1;k<=N;k++){
+      const p = peak(h, r, k);
+      const x0 = X(k - 0.5), x1 = X(k + 0.5), mid = X(k);
+      x.strokeStyle = k === n ? A1 : 'rgba(86,185,143,.4)';
+      x.lineWidth = k === n ? 2.2 : 1.4;
+      x.beginPath();
+      x.moveTo(x0, B);
+      x.quadraticCurveTo(mid, B - (B - Y(p))*2, x1, B);
+      x.stroke();
+      if(k === n){
+        x.fillStyle = A1;
+        x.beginPath(); x.arc(mid, Y(p), 4.5, 0, 7); x.fill();
+        mono(x, 9, 600); x.fillStyle = A1; x.textAlign='center';
+        x.fillText(dp(p, 2), mid, Y(p) - 8);
+        x.textAlign='left';
+      }
+      mono(x, 7.5, 400); x.fillStyle = DIM; x.textAlign='center';
+      x.fillText(String(k), mid, B + 13);
+      x.textAlign='left';
+    }
+
+    mono(x, 9.5, 600); x.fillStyle = A1;
+    x.fillText('dropped from ' + h + ', rebound ' + (+SR.value) + '%', 14, 18);
+    cap(x, W, H, 'below h/6 after ' + Math.ceil(Math.log(1/6)/Math.log(r) - 1e-9) + ' bounces');
+  }
+  [SH, SR, SN].forEach(s=>{ s.oninput = ()=>{ ev('explore', s.id); upd(); }; });
+  reg('m13', draw); upd();
+})();
+
+/* ============================================================
+   M14 · Sierpiński's triangle: two GPs pulling opposite ways
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('siCv'); if(!cv) return;
+  const SN = document.getElementById('siN');
+  let seen = {};
+
+  function upd(){
+    const n = +SN.value;
+    document.getElementById('siNV').textContent = n;
+    document.getElementById('siCount').textContent = Math.pow(3, n) + ' = 3' + sup(n);
+    document.getElementById('siArea').textContent = dp(Math.pow(0.75, n), 4) + ' = (¾)' + sup(n);
+    document.getElementById('siSay').textContent = '×3 and ×¾';
+    document.getElementById('siTxt').textContent =
+      'At stage ' + n + ' there are ' + Math.pow(3, n) + ' black triangles covering ' + dp(Math.pow(0.75, n)*100, 2) +
+      '% of the original. Each stage replaces every triangle with three, so the count is a GP with ratio 3; and each stage keeps three of the four quarters, so the area is a GP with ratio ¾. ' +
+      (n >= 5 ? 'Already the pieces are countless and the ink is nearly gone.' : 'Keep going and watch the two numbers head in opposite directions.');
+    if(!autoplaying('m14')){
+      seen[n] = 1;
+      if(Object.keys(seen).length >= 4) complete('m14');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const n = +SN.value;
+    /* Cap the triangle's *height*, not its side — capping the side left a third
+       of the canvas empty below it, because an equilateral is only 0.866 as tall
+       as it is wide. */
+    const top = 32, side = Math.min(W - 44, (H - top - 22) * 2/Math.sqrt(3));
+    const cx = W/2, bot = top + side*Math.sqrt(3)/2;
+    const A = [cx, top], B = [cx + side/2, bot], C = [cx - side/2, bot];
+
+    const mid = (p, q) => [(p[0]+q[0])/2, (p[1]+q[1])/2];
+    (function tri(a, b, c, d){
+      if(d === 0){
+        x.beginPath(); x.moveTo(a[0],a[1]); x.lineTo(b[0],b[1]); x.lineTo(c[0],c[1]);
+        x.closePath();
+        x.fillStyle = 'rgba(86,185,143,.9)'; x.fill();
+        return;
+      }
+      tri(a, mid(a,b), mid(a,c), d-1);
+      tri(mid(a,b), b, mid(b,c), d-1);
+      tri(mid(a,c), mid(b,c), c, d-1);
+    })(A, B, C, n);
+
+    mono(x, 9.5, 600); x.fillStyle = A1;
+    x.fillText('stage ' + n + ' · ' + Math.pow(3, n) + ' triangles', 14, 17);
+    mono(x, 8.5, 600); x.fillStyle = A2; x.textAlign='right';
+    x.fillText('area ' + dp(Math.pow(0.75, n)*100, 2) + '%', W - 14, 17);
+    x.textAlign='left';
+    cap(x, W, H, '3' + sup(n) + ' pieces covering (¾)' + sup(n) + ' of the paper');
+  }
+  SN.oninput = ()=>{ ev('explore','siN'); upd(); };
+  reg('m14', draw); upd();
+})();
+
+/* ============================================================
+   M15 · the end-of-chapter progressions
+   ============================================================ */
+Q.vgrid('g15','g15check','g15s', {
+  head: 'What you are told',
+  cols: ['The answer'],
+  options: [
+    ['−13','−32','4','9th','12th','16','44','45','178','2, 6, 18','3, 6, 12']
+  ],
+  rows: [
+    { l:'AP: the 11th is 38 and the 16th is 73. The 31st is',      a:['178'] },
+    { l:'AP: the 3rd is 16, the 7th beats the 5th by 12. a is',    a:['4'] },
+    { l:'AP: 4th + 8th = 24 and 6th + 10th = 44. a is',            a:['−13'] },
+    { l:'GP 2, 8, 32, … 131072 is which term?',                    a:['9th'] },
+    { l:'GP: first three sum to 26, their squares to 364',         a:['2, 6, 18'] },
+    { l:'Smallest n with 1 + 2 + … + n above 1000',                a:['45'] }
+  ],
+  mid: 'm15',
+  doneMsg: 'All six. Two facts about an AP always give you d by subtraction.'
+});
+
+/* ============================================================
+   M16 · the boss
+   ============================================================ */
+Q.boss([
+  { t:'Warm-up', q:'A sequence is…',
+    o:['an ordered list of numbers','any collection of numbers','a rule with no numbers','a number written many ways'],
+    a:0, w:'Order is the whole point: each term has a position as well as a value, and that is what lets you ask what comes next.' },
+  { t:'Warm-up', q:'In the AP 1, 4, 7, 10, 13, … the common difference is',
+    o:['1','3','4','7'],
+    a:1, w:'Subtract each term from the next: 4 − 1 = 3, 7 − 4 = 3, and so on. The same gap every time is what makes it an AP.' },
+  { t:'Warm-up', q:'Which of these is a geometric progression?',
+    o:['1, 4, 9, 16, …','2, 6, 18, 54, …','1, 3, 6, 10, …','1, 2, 4, 7, …'],
+    a:1, w:'Each term is three times the one before, so r = 3. The others grow by changing amounts, and changing amounts are neither an AP nor a GP.' },
+  { t:'Getting going', q:'For tₙ = 5n − 3, the 10th term is',
+    o:['35','42','47','50'],
+    a:2, w:'5 × 10 − 3 = 47. That is what an explicit rule is for: no need to compute the nine terms before it.' },
+  { t:'Getting going', q:'Is 471 a term of the sequence sₙ = 5n − 2?',
+    o:['Yes, the 94th','Yes, the 95th','No — solving gives n = 94.6','There is no way to tell'],
+    a:2, w:'5n − 2 = 471 gives n = 94.6, and there is no 94.6th position. A number belongs to a sequence only when solving for n gives a whole number.' },
+  { t:'Getting going', q:'1 + 2 + 3 + ⋯ + 100 =',
+    o:['5000','5050','5100','10100'],
+    a:1, w:'n(n+1)/2 with n = 100 gives 100 × 101 / 2 = 5050. Write the sum backwards underneath and every column comes to 101.' },
+  { t:'Harder', q:'In the AP 21, 18, 15, … which term is −81?',
+    o:['the 33rd','the 34th','the 35th','−81 is not a term'],
+    a:2, w:'a = 21 and d = −3, so 21 − 3(n − 1) = −81 gives 3(n − 1) = 102 and n = 35. A negative common difference is still a common difference.' },
+  { t:'Harder', q:'In the Sierpiński triangle, the number of black triangles at stage n is',
+    o:['3n','n³','3ⁿ','n(n+1)/2'],
+    a:2, w:'Every triangle becomes three at the next stage, so the count multiplies by 3 each time: 1, 3, 9, 27, … = 3ⁿ. Meanwhile the area they cover is (¾)ⁿ, which shrinks.' },
+  { t:'Boss', q:'A ball dropped from 24 ft rebounds to ¾ of its height each time. After how many bounces is its peak below 4 ft?',
+    o:['5','6','7','8'],
+    a:2, w:'The peaks are 18, 13.5, 10.125, 7.594, 5.695, 4.271, 3.203. The sixth is still above 4 ft; the seventh is the first below it.' },
+  { t:'Boss', q:'Virahāṅka found the sequence 1, 2, 3, 5, 8, 13, … in the 7th century by',
+    o:['studying rabbit populations','counting Prakrit metres of short and long syllables','measuring spirals in shells','dividing a line in golden proportion'],
+    a:1, w:'A line of n beats starts either with a short syllable, leaving n − 1, or a long one, leaving n − 2 — so the counts add. Fibonacci met the same sequence, with rabbits, some five centuries later.' }
+], 'm16', 'From the natural numbers to a fractal. Ganita Manjari Part 1, complete.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>

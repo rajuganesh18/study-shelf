@@ -37,7 +37,8 @@ module.exports = [
   { slug:'identities',   id:'9-maths-4',   n:4,  title:'Exploring Algebraic Identities' },
   { slug:'circles',      id:'9-maths-5',   n:5,  title:"I'm Up and Down, and Round and Round" },
   { slug:'perimeter',    id:'9-maths-6',   n:6,  title:'Measuring Space: Perimeter and Area' },
-  { slug:'probability',  id:'9-maths-7',   n:7,  title:'The Mathematics of Maybe: Introduction to Probability' }
+  { slug:'probability',  id:'9-maths-7',   n:7,  title:'The Mathematics of Maybe: Introduction to Probability' },
+  { slug:'sequences',    id:'9-maths-8',   n:8,  title:'Predicting What Comes Next: Exploring Sequences and Progressions' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';
