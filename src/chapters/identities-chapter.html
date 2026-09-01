@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Algebraic Identities — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: the Maths violet, and the amber of a tile ---------- */
+:root{ --a1:#8E6BE0; --a2:#F2A93F; --badge-bg:#EDE8FA; }
+/*@include shared/chrome.css*/
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Maths · Chapter 4</div>
+  <h1>Algebraic Identities<br><span>Rules you can see, in areas and volumes</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96" aria-label="Chapter progress badge: a square cut into the pieces of an identity, and finally a cube"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Seeing an identity</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="40" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>The answer is always 2</b><i>Section 4.1 · Example 1</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Take any three consecutive square numbers. Add the smallest and the largest, then subtract twice the middle one. Try it with several starting points before reading on.</p>
+    <div class="panel">
+      <canvas id="cnCv" height="250" aria-label="Three consecutive squares, added and subtracted to give two every time"></canvas>
+      <div class="knob">
+        <label>Middle number n <b id="cnNV">2</b></label>
+        <input type="range" id="cnN" min="2" max="20" value="2" aria-label="The middle number n">
+      </div>
+      <div class="row">
+        <button class="act" id="cnAlg">Show why</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">The three squares</div><div class="v" id="cnSq" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Smallest + largest</div><div class="v" id="cnSum" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Minus 2 × middle</div><div class="v" id="cnRes" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="cnTxt" style="margin-top:12px;min-height:110px">1, 4, 9 gives 1 + 9 − 8 = 2. Try 9, 16, 25. Try 25, 36, 49. Then ask why it never changes.</div>
+    </div>
+    <p>Write the three numbers as <b>n − 1</b>, <b>n</b> and <b>n + 1</b>. Their squares add as (n − 1)² + (n + 1)² = n² − 2n + 1 + n² + 2n + 1 = <b>2n² + 2</b>, and subtracting 2n² leaves <b>2</b> — with no n in it at all. That is why the starting point never matters, and it is the first thing in this chapter that an identity explains rather than merely describes.</p>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="55" data-coin="30">
+  <summary><span class="mno">02</span><span class="mt"><b>The square of side a + b</b><i>Section 4.2 · Fig. 4.2</i></span><span class="mstat">55 XP</span></summary>
+  <div class="body">
+    <p>Take a line of length a and add a length b to it. Build the square on that line, and cut it where the two lengths meet. Four pieces fall out, and their areas are the identity.</p>
+    <div class="panel">
+      <canvas id="sqCv" height="300" aria-label="A square of side a plus b, partitioned into a squared, two ab rectangles and b squared"></canvas>
+      <div class="knob">
+        <label>a <b id="sqAV">4</b></label>
+        <input type="range" id="sqA" min="1" max="9" value="4" aria-label="Length a">
+      </div>
+      <div class="knob">
+        <label>b <b id="sqBV">2</b></label>
+        <input type="range" id="sqB" min="1" max="9" value="2" aria-label="Length b">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">(a + b)²</div><div class="v" id="sqWhole" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">a² + 2ab + b²</div><div class="v" id="sqParts" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Equal?</div><div class="v" id="sqEq" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="sqTxt" style="margin-top:12px;min-height:110px">The outer square and the four pieces are the same area, whatever a and b you choose.</div>
+    </div>
+    <p>The outer square has area <b>(a + b)²</b>. Inside it sit a square of area <b>a²</b>, a square of area <b>b²</b>, and two rectangles of area <b>ab</b> each. Nothing is left over and nothing overlaps, so <b>(a + b)² = a² + 2ab + b²</b> — proved by a picture, for every pair of lengths.</p>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="35" data-coin="18">
+  <summary><span class="mno">03</span><span class="mt"><b>But lengths are only part of the story</b><i>Section 4.2 · Example 2</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The picture proves the identity for lengths, and a length cannot be negative. So does the rule survive when a and b are negative, or fractions? Work both sides out and compare.</p>
+    <div class="panel">
+      <table class="tick" id="g3"></table>
+      <button class="act" id="g3check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g3s"></div>
+    </div>
+    <p>It survives every time, and the reason is not the picture — it is the <b>distributive property</b>: (a + b)² = (a + b)(a + b) = a(a + b) + b(a + b) = a² + ab + ba + b² = a² + 2ab + b². That argument never mentions length, so it holds for every number there is.</p>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="35" data-coin="18">
+  <summary><span class="mno">04</span><span class="mt"><b>Identity, or just an equation?</b><i>Section 4.2 · the definition</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>An <b>identity</b> is true for every value of its variables. An <b>equation</b> may only be true for some. Sort these.</p>
+    <div class="panel">
+      <div id="g4"></div>
+      <div class="score" id="g4s"></div>
+    </div>
+    <p>x² − 1 = 24 is true only when x = 5 or x = −5, so it is an equation you can solve. (x + y)² = x² + 2xy + y² is true no matter what you put in, so there is nothing to solve — it is a rule you can use. Every identity is an equation; almost no equation is an identity.</p>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Using the two square identities</div>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="40" data-coin="20">
+  <summary><span class="mno">05</span><span class="mt"><b>Which is bigger?</b><i>Section 4.2 · Think and Reflect</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>(a + b)² and a² + b² are not the same thing. Which is larger depends on one term only — find it.</p>
+    <div class="panel">
+      <canvas id="cmCv" height="270" aria-label="The square on a plus b against the two separate squares on a and b"></canvas>
+      <div class="knob">
+        <label>a <b id="cmAV">3</b></label>
+        <input type="range" id="cmA" min="-6" max="6" value="3" aria-label="Value of a">
+      </div>
+      <div class="knob">
+        <label>b <b id="cmBV">2</b></label>
+        <input type="range" id="cmB" min="-6" max="6" value="2" aria-label="Value of b">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">(a + b)²</div><div class="v" id="cmL" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">a² + b²</div><div class="v" id="cmR" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">The difference</div><div class="v" id="cmD" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="cmTxt" style="margin-top:12px;min-height:110px">Find a case where the left is bigger, one where the right is, and one where they are equal.</div>
+    </div>
+    <p>The gap between them is exactly <b>2ab</b>, so the sign of ab decides everything. If a and b have the same sign then 2ab is positive and (a + b)² is the larger; if their signs differ, 2ab is negative and a² + b² wins; and they are <b>equal precisely when ab = 0</b>, which means at least one of them is zero.</p>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="40" data-coin="20">
+  <summary><span class="mno">06</span><span class="mt"><b>Expand with the identity</b><i>Exercise Set 4.1 · Example 3</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Every one of these is (a + b)² in disguise. Name a and b, then write the three terms.</p>
+    <div class="panel">
+      <table class="tick" id="g6"></table>
+      <button class="act" id="g6check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>The book's own case is (5x + 2y)², where a = 5x and b = 2y, giving (5x)² + 2(5x)(2y) + (2y)² = 25x² + 20xy + 4y². The identity does not care that a and b are themselves expressions — that is exactly what makes it worth having.</p>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="50" data-coin="26">
+  <summary><span class="mno">07</span><span class="mt"><b>The square with a bite taken out</b><i>Section 4.3 · Fig. 4.3</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Replace b by −b in the first identity and you get <b>(a − b)² = a² − 2ab + b²</b>. Here is the same result as a picture: start from the big square of side a and take pieces away.</p>
+    <div class="panel">
+      <canvas id="dfCv" height="300" aria-label="A square of side a with two rectangles removed, leaving the square on a minus b"></canvas>
+      <div class="knob">
+        <label>a <b id="dfAV">7</b></label>
+        <input type="range" id="dfA" min="2" max="10" value="7" aria-label="Length a">
+      </div>
+      <div class="knob">
+        <label>b <b id="dfBV">3</b></label>
+        <input type="range" id="dfB" min="1" max="9" value="3" aria-label="Length b">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">(a − b)²</div><div class="v" id="dfWhole" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">a² − 2ab + b²</div><div class="v" id="dfParts" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">What was removed</div><div class="v" id="dfCut" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="dfTxt" style="margin-top:12px;min-height:110px">Take the rectangle ab off the side and b(a − b) off the bottom. What is left is the little square.</div>
+    </div>
+    <p>The big square is a². Remove a rectangle of area <b>ab</b> and another of area <b>b(a − b)</b>, and the pale square of side (a − b) is what remains: a² − ab − b(a − b) = a² − ab − ba + b² = <b>a² − 2ab + b²</b>. The two removed pieces overlap in nothing, which is why nothing has to be added back.</p>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="45" data-coin="24">
+  <summary><span class="mno">08</span><span class="mt"><b>Squaring numbers in your head</b><i>Examples 4, 8 and 9</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Identities are not only for algebra. Split an awkward number into a round part and a small part, and the squaring becomes three easy pieces.</p>
+    <div class="panel">
+      <canvas id="hdCv" height="270" aria-label="An awkward number split into a round part and a remainder, and squared piece by piece"></canvas>
+      <div class="chips" id="hdPick"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Written as</div><div class="v" id="hdSplit" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">The pieces</div><div class="v" id="hdWork" style="font-size:10.5px">—</div></div>
+        <div class="rc"><div class="k">Answer</div><div class="v" id="hdAns" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" id="hdTxt" style="margin-top:12px;min-height:110px">Work through one that adds, one that subtracts, and the three-part one.</div>
+    </div>
+    <p>43² is <b>(40 + 3)²</b> = 1600 + 240 + 9 = 1849. 29² is easier as <b>(30 − 1)²</b> = 900 − 60 + 1 = 841. And 119² needs the three-term identity: <b>(100 + 10 + 9)²</b> = 10000 + 100 + 81 + 2000 + 1800 + 180 = 14161. Choosing the right split is the whole skill.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="40" data-coin="20">
+  <summary><span class="mno">09</span><span class="mt"><b>Run the identity backwards</b><i>Examples 5 to 7 · Exercise Set 4.2</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Read a² + 2ab + b² from right to left and it becomes a way of <b>factoring</b>. Spot the two squares, check the middle term is twice their roots multiplied, and the factors fall out.</p>
+    <div class="panel">
+      <table class="tick" id="g9"></table>
+      <button class="act" id="g9check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g9s"></div>
+    </div>
+    <p>The check that matters is the middle term. In 36x² + 12x + 1 the outer terms are (6x)² and 1², and 2 × 6x × 1 = 12x — which matches, so it really is (6x + 1)². If the middle term had been anything else, no amount of wanting would make it a perfect square.</p>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="50" data-coin="26">
+  <summary><span class="mno">10</span><span class="mt"><b>Three terms, nine pieces</b><i>Section 4.4 · Fig. 4.4</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>What if the side is a + b + c? Cut the square along both directions and count what falls out.</p>
+    <div class="panel">
+      <canvas id="thCv" height="300" aria-label="A square of side a plus b plus c, partitioned into nine pieces"></canvas>
+      <div class="knob">
+        <label>a <b id="thAV">4</b></label>
+        <input type="range" id="thA" min="1" max="7" value="4" aria-label="Length a">
+      </div>
+      <div class="knob">
+        <label>b <b id="thBV">3</b></label>
+        <input type="range" id="thB" min="1" max="7" value="3" aria-label="Length b">
+      </div>
+      <div class="knob">
+        <label>c <b id="thCV">2</b></label>
+        <input type="range" id="thC" min="1" max="7" value="2" aria-label="Length c">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">(a + b + c)²</div><div class="v" id="thWhole" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Three squares</div><div class="v" id="thSq" style="font-size:10.5px">—</div></div>
+        <div class="rc"><div class="k">Six rectangles</div><div class="v" id="thRect" style="font-size:10.5px">—</div></div>
+      </div>
+      <div class="note" id="thTxt" style="margin-top:12px;min-height:110px">Nine pieces: three squares on the diagonal, and six rectangles in matching pairs.</div>
+    </div>
+    <p>Along the diagonal sit the squares <b>a²</b>, <b>b²</b> and <b>c²</b>. Off it sit six rectangles in three matching pairs — two of area ab, two of bc, two of ca. So <b>(a + b + c)² = a² + b² + c² + 2ab + 2bc + 2ca</b>. The book gets there by algebra, putting d = b + c in the two-term identity; the picture says the same thing at a glance.</p>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Algebra tiles, and splitting the middle term</div>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="50" data-coin="26">
+  <summary><span class="mno">11</span><span class="mt"><b>Laying out algebra tiles</b><i>Section 4.5 · Fig. 4.7</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>One big tile of area x², some thin tiles of area x, and some unit squares. Arrange them into a rectangle and its two side lengths are the factors.</p>
+    <div class="panel">
+      <canvas id="tlCv" height="300" aria-label="Algebra tiles arranged into a rectangle whose sides are the two factors"></canvas>
+      <div class="knob">
+        <label>First factor · x + <b id="tlPV">3</b></label>
+        <input type="range" id="tlP" min="1" max="7" value="3" aria-label="Constant in the first factor">
+      </div>
+      <div class="knob">
+        <label>Second factor · x + <b id="tlQV">4</b></label>
+        <input type="range" id="tlQ" min="1" max="7" value="4" aria-label="Constant in the second factor">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">The rectangle</div><div class="v" id="tlRect" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Tiles used</div><div class="v" id="tlTiles" style="font-size:10.5px">—</div></div>
+        <div class="rc"><div class="k">Its area</div><div class="v" id="tlArea" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="tlTxt" style="margin-top:12px;min-height:110px">Build the book's rectangle, x + 3 by x + 4, then try others.</div>
+    </div>
+    <p>The x-tiles split into two groups: <b>3</b> stacked beside the x² tile and <b>4</b> laid beneath it, which is why the 7x in x² + 7x + 12 appears as 3x + 4x. The 12 unit tiles fill the corner in a 3 by 4 array — and 3 × 4 = 12 is not a coincidence, it is the identity <b>(x + a)(x + b) = x² + (a + b)x + ab</b> made out of cardboard.</p>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="45" data-coin="24">
+  <summary><span class="mno">12</span><span class="mt"><b>Splitting the middle term</b><i>Section 4.6 · Examples 10 to 12</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Without tiles, factoring x² + bx + c means finding two numbers that <b>add to b</b> and <b>multiply to c</b>. Both conditions at once, or neither counts.</p>
+    <div class="panel">
+      <canvas id="spCv" height="235" aria-label="Two candidate numbers tested against their sum and their product"></canvas>
+      <div class="chips" id="spPick"></div>
+      <div class="chips" id="spPairs"></div>
+      <div class="knob">
+        <label>First number <b id="spUV">1</b></label>
+        <input type="range" id="spU" min="-15" max="15" value="1" aria-label="First candidate number">
+      </div>
+      <div class="knob">
+        <label>Second number <b id="spVV">1</b></label>
+        <input type="range" id="spV" min="-15" max="15" value="1" aria-label="Second candidate number">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Their sum</div><div class="v" id="spSum" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Their product</div><div class="v" id="spProd" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Verdict</div><div class="v" id="spSay" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="spTxt" style="margin-top:12px;min-height:110px">Solve three of these. Both conditions have to hold together.</div>
+    </div>
+    <p>For x² + 11x + 30 the book tries a = 2, b = 15 and a = 3, b = 10: both multiply to 30, and neither adds to 11. Only <b>5 and 6</b> satisfy both, so 11x splits as 5x + 6x and the factors are (x + 5)(x + 6). When the middle term is negative but the constant positive — x² − 5x + 6 — both numbers must be negative: −2 and −3.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="35" data-coin="18">
+  <summary><span class="mno">13</span><span class="mt"><b>Fill in the factors</b><i>Exercise Set 4.4 · Q1</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Complete each factorisation.</p>
+    <div class="panel">
+      <table class="tick" id="g13"></table>
+      <button class="act" id="g13check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g13s"></div>
+    </div>
+    <p>The last two have a coefficient in front of x², so the split has to account for it: in 6x² + 7x + 2 you need two numbers multiplying to 6 × 2 = 12 and adding to 7 — that is 3 and 4 — giving 6x² + 3x + 4x + 2 and then (2x + 1)(3x + 2). Always multiply out to check; it takes seconds and catches every sign slip.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Into the third dimension</div>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="55" data-coin="30">
+  <summary><span class="mno">14</span><span class="mt"><b>The cube of a + b</b><i>Section 4.7 · Figs. 4.9 and 4.10</i></span><span class="mstat">55 XP</span></summary>
+  <div class="body">
+    <p>A square of side a + b split into four pieces. What does a <b>cube</b> of edge a + b split into? Cut it in all three directions and count.</p>
+    <div class="panel">
+      <canvas id="cbCv" height="332" aria-label="A cube of edge a plus b, cut in three directions into eight smaller boxes"></canvas>
+      <div class="knob">
+        <label>a <b id="cbAV">3</b></label>
+        <input type="range" id="cbA" min="1" max="6" value="3" aria-label="Length a">
+      </div>
+      <div class="knob">
+        <label>b <b id="cbBV">2</b></label>
+        <input type="range" id="cbB" min="1" max="6" value="2" aria-label="Length b">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">(a + b)³</div><div class="v" id="cbWhole" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">The eight pieces</div><div class="v" id="cbParts" style="font-size:10.5px">—</div></div>
+        <div class="rc"><div class="k">Equal?</div><div class="v" id="cbEq" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="cbTxt" style="margin-top:12px;min-height:110px">Eight boxes: two cubes and six cuboids, which group into four terms.</div>
+    </div>
+    <p>Two of the eight are cubes, of volume <b>a³</b> and <b>b³</b>. Of the remaining six, three measure a × a × b and three measure a × b × b, so they total <b>3a²b</b> and <b>3ab²</b>. Hence <b>(a + b)³ = a³ + 3a²b + 3ab² + b³</b>. Replacing b by −b flips the sign of every term with an odd number of b's, giving <b>(a − b)³ = a³ − 3a²b + 3ab² − b³</b>, with the signs alternating.</p>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="45" data-coin="24">
+  <summary><span class="mno">15</span><span class="mt"><b>Cancelling a common factor</b><i>Section 4.8 · Example 16</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>A rational expression simplifies only when the top and the bottom share a factor — and you cannot see a shared factor until both are factored. Work through it step by step.</p>
+    <div class="panel">
+      <canvas id="rtCv" height="290" aria-label="A rational expression factored top and bottom, then cancelled"></canvas>
+      <div class="chips" id="rtPick"></div>
+      <div class="row">
+        <button class="act" id="rtStep">Next step</button>
+        <button class="act" id="rtReset">Start over</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Step</div><div class="v" id="rtStepN" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Working</div><div class="v" id="rtWork" style="font-size:10.5px">—</div></div>
+        <div class="rc"><div class="k">Simplified</div><div class="v" id="rtDone" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="rtTxt" style="margin-top:12px;min-height:110px">Carry two of these all the way to a cancelled answer.</div>
+    </div>
+    <p>The book's case is (x² − 7x + 12) over (5x² + 5x − 100). The top factors as (x − 3)(x − 4). The bottom has a common factor of 5, leaving 5(x² + x − 20) = 5(x − 4)(x + 5). The shared <b>(x − 4)</b> cancels — and it is allowed to, precisely because we were told the denominator is not zero — leaving <b>(x − 3) / 5(x + 5)</b>.</p>
+  </div>
+</details>
+
+<div class="sec">Part 5 · The boss</div>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="80" data-coin="60">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, from a cut square to a cancelled fraction. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+<footer>NCERT Class 9 Maths · Ganita Manjari Part 1 · Chapter 4</footer>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- .wrap -->
+
+<script>
+/*@include shared/storage.js*/
+
+const CH = {
+  id: '9-maths-4',
+  key: 'ch04Identities',
+  total: 16,
+  stages: [
+    { at:0,   f:0.00, name:'A plain square', d:'A square, and no reason yet to cut it. Its side is a + b, but nothing on the page says what that buys you.' },
+    { at:70,  f:0.15, name:'The side is cut', d:'Mark the side where a ends and b begins. One tick, and the picture is about to become an argument.' },
+    { at:165, f:0.32, name:'Four pieces',    d:'The cuts run right across. A square on a, a square on b, and two rectangles that are the same size as each other.' },
+    { at:285, f:0.50, name:'Areas named',    d:'a², ab, ab, b². Read the pieces off the picture and (a + b)² = a² + 2ab + b² is simply what you see.' },
+    { at:410, f:0.68, name:'A bite taken',   d:'The same square with two rectangles removed, which is (a − b)² — the second identity, drawn rather than derived.' },
+    { at:540, f:0.85, name:'Three terms',    d:'A side of a + b + c cuts into nine: three squares down the diagonal and six rectangles in matching pairs.' },
+    { at:670, f:1.00, name:'And a cube',     d:'Up a dimension. An edge of a + b splits into eight boxes — two cubes and six cuboids — giving a³ + 3a²b + 3ab² + b³.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+    x.fillStyle = '#EDE8FA'; x.fillRect(0,0,W,H);
+
+    const P = W*0.16, S2 = W*0.68;          // the square's origin and side
+    const aFrac = 0.62;                      // where a ends along the side
+    const ax = P + S2*aFrac;
+
+    /* Stages 6 and 7 leave the two-term square behind for their own figures. */
+    const threeTerm = f >= 0.78 && f < 0.93;
+    const cube = f >= 0.93;
+
+    if(!threeTerm && !cube){
+      /* the square itself */
+      x.fillStyle = 'rgba(142,107,224,.10)';
+      x.fillRect(P, P, S2, S2);
+      x.strokeStyle = '#5B4A7A'; x.lineWidth = 1.4;
+      x.strokeRect(P, P, S2, S2);
+
+      /* The cut is a at the top-left and b at the bottom-right, the way Fig. 4.2
+         draws it and the way mission 2's bench draws it. Getting that the wrong
+         way round put a² in the wrong corner of the badge while every other
+         picture in the chapter had it in the right one. */
+      const cy = P + S2*aFrac;
+      if(f >= 0.12){
+        const a = Math.min(1,(f-0.12)/0.05);
+        x.strokeStyle = 'rgba(242,169,63,' + a + ')'; x.lineWidth = 2;
+        x.beginPath(); x.moveTo(ax, P-4); x.lineTo(ax, P+4); x.stroke();
+        x.beginPath(); x.moveTo(P-4, cy); x.lineTo(P+4, cy); x.stroke();
+      }
+      const bite = f >= 0.60;
+      if(f >= 0.26 && !bite){
+        const a = Math.min(1,(f-0.26)/0.06);
+        /* a² top-left, ab top-right, ab bottom-left, b² bottom-right */
+        x.fillStyle = 'rgba(242,169,63,' + (0.30*a) + ')';
+        x.fillRect(P, P, ax-P, cy-P);
+        x.fillStyle = 'rgba(142,107,224,' + (0.30*a) + ')';
+        x.fillRect(ax, P, P+S2-ax, cy-P);
+        x.fillRect(P, cy, ax-P, P+S2-cy);
+        x.fillStyle = 'rgba(224,96,127,' + (0.30*a) + ')';
+        x.fillRect(ax, cy, P+S2-ax, P+S2-cy);
+        x.strokeStyle = 'rgba(91,74,122,' + (0.85*a) + ')'; x.lineWidth = 1.2;
+        x.beginPath(); x.moveTo(ax, P); x.lineTo(ax, P+S2); x.stroke();
+        x.beginPath(); x.moveTo(P, cy); x.lineTo(P+S2, cy); x.stroke();
+      }
+      /* the names, which is the moment the picture becomes the identity */
+      if(f >= 0.44 && !bite){
+        const a = Math.min(1,(f-0.44)/0.05);
+        mono(x, 8.5, 600); x.fillStyle = 'rgba(91,74,122,' + a + ')';
+        x.textAlign='center'; x.textBaseline='middle';
+        x.fillText('a²',  (P+ax)/2,     (P+cy)/2);
+        x.fillText('ab',  (ax+P+S2)/2,  (P+cy)/2);
+        x.fillText('ab',  (P+ax)/2,     (cy+P+S2)/2);
+        x.fillText('b²',  (ax+P+S2)/2,  (cy+P+S2)/2);
+        x.textAlign='left'; x.textBaseline='alphabetic';
+      }
+      /* The bite is Fig. 4.3, which is a DIFFERENT square: side a, not a + b.
+         So the whole outline becomes the a-square, a strip of width b comes off
+         the right and another off the bottom, and what is left in the corner is
+         the square on a − b. Labelling the leftover of the a + b square as
+         (a − b)² — as a first draft did — is simply a different quantity. */
+      if(bite){
+        const a = Math.min(1,(f-0.60)/0.06);
+        const dx = P + S2*aFrac;
+        x.fillStyle = 'rgba(240,238,230,' + (0.20*a) + ')';
+        x.fillRect(P, P, dx-P, dx-P);
+        x.fillStyle = 'rgba(224,96,127,' + (0.30*a) + ')';
+        x.fillRect(dx, P, P+S2-dx, S2);
+        x.fillStyle = 'rgba(242,169,63,' + (0.30*a) + ')';
+        x.fillRect(P, dx, dx-P, P+S2-dx);
+        x.strokeStyle = 'rgba(91,74,122,' + (0.85*a) + ')'; x.lineWidth = 1.1;
+        x.strokeRect(P, P, dx-P, dx-P);
+        x.beginPath(); x.moveTo(dx, P); x.lineTo(dx, P+S2); x.stroke();
+        x.beginPath(); x.moveTo(P, dx); x.lineTo(dx, dx); x.stroke();
+        mono(x, 7.5, 600); x.fillStyle = 'rgba(91,74,122,' + a + ')';
+        x.textAlign='center'; x.textBaseline='middle';
+        x.fillText('(a−b)²', (P+dx)/2, (P+dx)/2);
+        x.textAlign='left'; x.textBaseline='alphabetic';
+      }
+    }
+
+    /* nine pieces */
+    if(threeTerm){
+      const a = Math.min(1,(f-0.78)/0.05);
+      const cuts = [0, 0.44, 0.76, 1];
+      const tint = ['rgba(142,107,224,', 'rgba(242,169,63,', 'rgba(224,96,127,'];
+      for(let r=0;r<3;r++) for(let c=0;c<3;c++){
+        const gx = P + S2*cuts[c], gy = P + S2*cuts[r];
+        const gw = S2*(cuts[c+1]-cuts[c]), gh = S2*(cuts[r+1]-cuts[r]);
+        x.fillStyle = tint[r===c ? r : (r+c)%3] + (r===c ? 0.42*a : 0.20*a) + ')';
+        x.fillRect(gx, gy, gw, gh);
+        x.strokeStyle = 'rgba(91,74,122,' + (0.7*a) + ')'; x.lineWidth = 0.9;
+        x.strokeRect(gx, gy, gw, gh);
+      }
+    }
+
+    /* and a cube: an isometric box with the three cuts showing on its faces */
+    if(cube){
+      const a = Math.min(1,(f-0.93)/0.07);
+      const cx = W*0.50, cy = H*0.56, s = W*0.30, t = 0.62;   // t = where a ends
+      const iso = (X,Y,Z) => [ cx + (X-Z)*s*0.86, cy + (X+Z)*s*0.5 - Y*s ];
+      const face = (pts, col) => {
+        x.beginPath();
+        pts.forEach((p,i)=> i ? x.lineTo(p[0],p[1]) : x.moveTo(p[0],p[1]));
+        x.closePath(); x.fillStyle = col; x.fill();
+        x.strokeStyle = 'rgba(91,74,122,' + (0.8*a) + ')'; x.lineWidth = 1; x.stroke();
+      };
+      /* top, left and right faces of the whole cube */
+      face([iso(0,1,0), iso(1,1,0), iso(1,1,1), iso(0,1,1)], 'rgba(142,107,224,' + (0.34*a) + ')');
+      face([iso(0,0,1), iso(1,0,1), iso(1,1,1), iso(0,1,1)], 'rgba(242,169,63,' + (0.26*a) + ')');
+      face([iso(1,0,0), iso(1,0,1), iso(1,1,1), iso(1,1,0)], 'rgba(224,96,127,' + (0.24*a) + ')');
+      /* the cuts, drawn on each visible face */
+      x.strokeStyle = 'rgba(91,74,122,' + (0.75*a) + ')'; x.lineWidth = 1;
+      [[iso(t,1,0), iso(t,1,1)], [iso(0,1,t), iso(1,1,t)],
+       [iso(0,t,1), iso(1,t,1)], [iso(t,0,1), iso(t,1,1)],
+       [iso(1,t,0), iso(1,t,1)], [iso(1,0,t), iso(1,1,t)]].forEach(seg=>{
+        x.beginPath(); x.moveTo(seg[0][0], seg[0][1]); x.lineTo(seg[1][0], seg[1][1]); x.stroke();
+      });
+      mono(x, 8, 600); x.fillStyle = 'rgba(91,74,122,' + a + ')';
+      x.textAlign='center';
+      x.fillText('(a+b)³', cx, H*0.94);
+      x.textAlign='left';
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ---------- chapter accents, as the canvases use them ---------- */
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#8E6BE0', A2='#F2A93F',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', ROSE='#E0607F';
+
+/*@include shared/plane.js*/
+
+/* ============================================================
+   One helper, four benches.
+
+   Sections 4.2, 4.3 and 4.4 are all the same move: draw a square, cut it, and
+   read the identity off the areas. tile() draws one piece — filled, outlined
+   and labelled with both its algebra and its number — so the benches differ
+   only in where they put the cuts.
+   ============================================================ */
+function tile(x, X, Y, w, h, col, label, value){
+  if(w <= 0 || h <= 0) return;
+  x.fillStyle = col.replace('C', '.28');
+  x.fillRect(X, Y, w, h);
+  x.strokeStyle = col.replace('C', '.9'); x.lineWidth = 1.2;
+  x.strokeRect(X, Y, w, h);
+  if(label && w > 22 && h > 16){
+    mono(x, Math.min(11, Math.max(8, w/5)), 600);
+    x.fillStyle = col.replace('C', '1');
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.fillText(label, X + w/2, Y + h/2 - (value && h > 30 ? 6 : 0));
+    if(value && h > 30){
+      mono(x, 8.5, 400); x.fillStyle = 'rgba(240,238,230,.75)';
+      x.fillText(value, X + w/2, Y + h/2 + 8);
+    }
+    x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+  }
+}
+
+/* An expression's terms, printed the way the book prints them. */
+const term = (c, sym) => c === 0 ? '' : (c === 1 ? sym : c === -1 ? '−' + sym : neg(c) + sym);
+
+/* ============================================================
+   M1 · the answer is always 2
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('cnCv'); if(!cv) return;
+  const SN = document.getElementById('cnN');
+  let seen = {}, algebra = false;
+
+  function upd(){
+    const n = +SN.value;
+    const lo = (n-1)*(n-1), mid = n*n, hi = (n+1)*(n+1);
+    document.getElementById('cnNV').textContent = n;
+    document.getElementById('cnSq').textContent = lo + ', ' + mid + ', ' + hi;
+    document.getElementById('cnSum').textContent = lo + ' + ' + hi + ' = ' + (lo+hi);
+    document.getElementById('cnRes').textContent = (lo+hi) + ' − ' + (2*mid) + ' = ' + (lo+hi-2*mid);
+    document.getElementById('cnTxt').textContent = algebra
+      ? 'Call the three numbers n − 1, n and n + 1. Then (n − 1)² + (n + 1)² = n² − 2n + 1 + n² + 2n + 1 = 2n² + 2. The −2n and +2n cancel. Subtracting 2n² leaves 2, and there is no n left in the answer — which is exactly why the starting point never mattered.'
+      : 'With n = ' + n + ': the squares are ' + lo + ', ' + mid + ' and ' + hi + '. Adding the outer two gives ' +
+        (lo+hi) + ', and taking away twice the middle gives ' + (lo+hi) + ' − ' + (2*mid) + ' = ' + (lo+hi-2*mid) +
+        '. Try another n before asking why.';
+    if(!autoplaying('m1')){
+      seen[n] = 1;
+      if(algebra && Object.keys(seen).length >= 4) complete('m1');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 250, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const n = +SN.value;
+    const lo = (n-1)*(n-1), mid = n*n, hi = (n+1)*(n+1);
+
+    /* the three squares, drawn as squares, to scale against each other */
+    const big = Math.max(lo, mid, hi);
+    const maxSide = Math.min((W-70)/3, 78);
+    const side = v => maxSide * Math.sqrt(v/big);
+    [[n-1, lo, A1], [n, mid, A2], [n+1, hi, ROSE]].forEach((t,k)=>{
+      const s = side(t[1]);
+      const X = 24 + k*((W-48)/3), base = 128;
+      tile(x, X + ((W-48)/3 - s)/2 - 8, base - s, s, s,
+           t[2] === A1 ? 'rgba(142,107,224,C)' : t[2] === A2 ? 'rgba(242,169,63,C)' : 'rgba(224,96,127,C)',
+           String(t[0]) + '²', String(t[1]));
+    });
+
+    mono(x, 10, 600); x.fillStyle = INK; x.textAlign='center';
+    x.fillText(lo + ' + ' + hi + ' − 2×' + mid + '  =  ' + (lo+hi-2*mid), W/2, 168);
+    if(algebra){
+      mono(x, 9.5, 500); x.fillStyle = A2;
+      x.fillText('(n−1)² + (n+1)² − 2n²  =  2n² + 2 − 2n²  =  2', W/2, 190);
+    }
+    mono(x, 9, 400); x.fillStyle = DIM;
+    x.fillText(Object.keys(seen).length + ' value' + (Object.keys(seen).length===1?'':'s') +
+               ' tried' + (algebra ? '' : ' · then tap "show why"'), W/2, 214);
+    x.textAlign='left';
+    cap(x, W, H, 'the result never moves off 2');
+  }
+  SN.oninput = ()=>{ ev('explore','cnN'); upd(); };
+  document.getElementById('cnAlg').onclick = ()=>{ algebra = true; ev('explore','cnAlg'); upd(); };
+  reg('m1', draw); upd();
+})();
+
+/* ============================================================
+   M2 · the square of side a + b
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('sqCv'); if(!cv) return;
+  const SA = document.getElementById('sqA'), SB = document.getElementById('sqB');
+  let seen = {};
+
+  function upd(){
+    const a = +SA.value, b = +SB.value;
+    const whole = (a+b)*(a+b), parts = a*a + 2*a*b + b*b;
+    document.getElementById('sqAV').textContent = a;
+    document.getElementById('sqBV').textContent = b;
+    document.getElementById('sqWhole').textContent = '(' + a + '+' + b + ')² = ' + whole;
+    document.getElementById('sqParts').textContent = (a*a) + ' + ' + (2*a*b) + ' + ' + (b*b) + ' = ' + parts;
+    document.getElementById('sqEq').textContent = whole === parts ? 'yes, always' : 'no';
+    document.getElementById('sqTxt').textContent =
+      'The outer square is ' + (a+b) + ' by ' + (a+b) + ', so its area is ' + whole +
+      '. Inside: a square of ' + (a*a) + ', two rectangles of ' + (a*b) + ' each, and a square of ' + (b*b) +
+      '. Together ' + (a*a) + ' + ' + (a*b) + ' + ' + (a*b) + ' + ' + (b*b) + ' = ' + parts +
+      '. Nothing overlaps and nothing is left out, so the two must agree.';
+    if(!autoplaying('m2')){
+      seen[a + ',' + b] = 1;
+      if(Object.keys(seen).length >= 3) complete('m2');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const a = +SA.value, b = +SB.value, tot = a + b;
+
+    const pad = 34, S2 = Math.min(W - pad - 20, H - pad - 46);
+    const u = S2 / tot, X0 = pad, Y0 = 22;
+    const aw = a*u, bw = b*u;
+
+    /* Fig. 4.2: a² top-left, ab top-right, ab bottom-left, b² bottom-right */
+    tile(x, X0,      Y0,      aw, aw, 'rgba(242,169,63,C)',  'a²', String(a*a));
+    tile(x, X0+aw,   Y0,      bw, aw, 'rgba(142,107,224,C)', 'ab', String(a*b));
+    tile(x, X0,      Y0+aw,   aw, bw, 'rgba(142,107,224,C)', 'ab', String(a*b));
+    tile(x, X0+aw,   Y0+aw,   bw, bw, 'rgba(224,96,127,C)',  'b²', String(b*b));
+
+    /* the side, marked a then b, which is where the whole argument starts */
+    mono(x, 9, 500);
+    x.fillStyle = A2; x.textAlign='center';
+    x.fillText('a = ' + a, X0 + aw/2, Y0 - 7);
+    x.fillStyle = ROSE;
+    x.fillText('b = ' + b, X0 + aw + bw/2, Y0 - 7);
+    x.textAlign='right'; x.fillStyle = A2;
+    x.fillText('a', X0 - 6, Y0 + aw/2);
+    x.fillStyle = ROSE;
+    x.fillText('b', X0 - 6, Y0 + aw + bw/2);
+    x.textAlign='left';
+
+    mono(x, 10.5, 600); x.fillStyle = INK; x.textAlign='center';
+    x.fillText('(' + a + ' + ' + b + ')² = ' + (a*a) + ' + 2×' + (a*b) + ' + ' + (b*b) + ' = ' + (tot*tot),
+               W/2, Y0 + S2 + 22);
+    x.textAlign='left';
+    cap(x, W, H, 'outer square ' + (tot*tot) + ' · four pieces ' + (a*a + 2*a*b + b*b));
+  }
+  SA.oninput = ()=>{ ev('explore','sqA'); upd(); };
+  SB.oninput = ()=>{ ev('explore','sqB'); upd(); };
+  reg('m2', draw); upd();
+})();
+
+/* ============================================================
+   M3 · negatives and fractions
+   ============================================================ */
+Q.vgrid('g3','g3check','g3s',{
+  head: 'a and b',
+  cols: ['(a + b)²', 'a² + 2ab + b²'],
+  options: [
+    ['25', '144', '1/144', '4'],
+    ['25', '144', '1/144', '4']
+  ],
+  rows: [
+    { l:'a = −2, b = −3',   a:['25', '25'] },
+    { l:'a = 10, b = 2',     a:['144', '144'] },
+    { l:'a = −2/3, b = 3/4', a:['1/144', '1/144'] }
+  ],
+  mid: 'm3',
+  doneMsg: 'Both columns agree every time — negatives and fractions included.'
+});
+
+/* ============================================================
+   M4 · identity, or just an equation?
+   ============================================================ */
+Q.rows('g4','g4s', [
+  { t:'x² − 1 = 24',                  a:1 },
+  { t:'(x + y)² = x² + 2xy + y²',     a:0 },
+  { t:'2x + 3 = 7',                    a:1 },
+  { t:'(a + b)(a − b) = a² − b²',     a:0 },
+  { t:'x² = 4',                        a:1 },
+  { t:'(a − b)² = a² − 2ab + b²',     a:0 }
+], ['Identity','Equation'], 'm4',
+   'All six. An identity has nothing to solve; an equation does.');
+
+/* ============================================================
+   M5 · which is bigger?
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('cmCv'); if(!cv) return;
+  const SA = document.getElementById('cmA'), SB = document.getElementById('cmB');
+  let seen = {};
+
+  function upd(){
+    const a = +SA.value, b = +SB.value;
+    const L = (a+b)*(a+b), R = a*a + b*b, d = L - R;
+    document.getElementById('cmAV').textContent = neg(a);
+    document.getElementById('cmBV').textContent = neg(b);
+    document.getElementById('cmL').textContent = L;
+    document.getElementById('cmR').textContent = R;
+    document.getElementById('cmD').textContent = '2ab = ' + neg(d);
+    document.getElementById('cmTxt').textContent = d === 0
+      ? 'They are equal, and 2ab = 0. That happens exactly when a or b is zero — the only way the two rectangles in the picture can vanish.'
+      : d > 0
+        ? '(a + b)² is larger by ' + d + ', which is 2ab. a and b have the same sign here, so their product is positive and the two rectangles add area.'
+        : 'a² + b² is larger by ' + (-d) + '. Here a and b have opposite signs, so 2ab is negative and (a + b)² falls short.';
+    if(!autoplaying('m5')){
+      seen[d === 0 ? 'equal' : d > 0 ? 'left' : 'right'] = 1;
+      if(Object.keys(seen).length >= 3) complete('m5');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 270, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const a = +SA.value, b = +SB.value;
+    const L = (a+b)*(a+b), R = a*a + b*b;
+
+    /* two bars, because the comparison is the point and areas are hard to eye */
+    const big = Math.max(L, R, 1), X0 = 26, BW = W - 90;
+    const bar = (y, v, col, label) => {
+      const w = BW * (v/big);
+      x.fillStyle = col.replace('C','.30'); x.fillRect(X0, y, w, 30);
+      x.strokeStyle = col.replace('C','.9'); x.lineWidth = 1.2; x.strokeRect(X0, y, w, 30);
+      mono(x, 9.5, 500); x.fillStyle = col.replace('C','1');
+      x.fillText(label, X0, y - 6);
+      mono(x, 11, 600); x.fillStyle = INK;
+      x.fillText(String(v), X0 + w + 8, y + 20);
+    };
+    bar(58, L, 'rgba(142,107,224,C)', '(a + b)²');
+    bar(126, R, 'rgba(242,169,63,C)', 'a² + b²');
+
+    mono(x, 10.5, 600);
+    x.fillStyle = L > R ? A1 : L < R ? A2 : GOOD;
+    x.textAlign='center';
+    x.fillText(L > R ? '(a + b)²  >  a² + b²' : L < R ? '(a + b)²  <  a² + b²' : '(a + b)²  =  a² + b²', W/2, 30);
+    mono(x, 9.5, 500); x.fillStyle = DIM;
+    x.fillText('the gap is 2ab = ' + neg(L - R), W/2, 190);
+    mono(x, 9, 400);
+    x.fillStyle = (a>0&&b>0)||(a<0&&b<0) ? GOOD : (a===0||b===0) ? DIM : ROSE;
+    x.fillText(a === 0 || b === 0 ? 'one of them is zero'
+             : (a>0) === (b>0) ? 'same sign, so ab is positive'
+                               : 'opposite signs, so ab is negative', W/2, 208);
+    x.textAlign='left';
+    cap(x, W, H, Object.keys(seen).length + ' of 3 cases found');
+  }
+  SA.oninput = ()=>{ ev('explore','cmA'); upd(); };
+  SB.oninput = ()=>{ ev('explore','cmB'); upd(); };
+  reg('m5', draw); upd();
+})();
+
+/* ============================================================
+   M6 · expand with the identity
+   ============================================================ */
+Q.vgrid('g6','g6check','g6s',{
+  head: 'Expand',
+  cols: ['First term', 'Middle term', 'Last term'],
+  options: [
+    ['25x²', '49x²', '4y²', '16y²'],
+    ['20xy', '56xy', '10xy', '28xy'],
+    ['4y²', '16y²', '25x²', '9y²']
+  ],
+  rows: [
+    { l:'(5x + 2y)²', a:['25x²', '20xy', '4y²'] },
+    { l:'(7x + 4y)²', a:['49x²', '56xy', '16y²'] }
+  ],
+  mid: 'm6',
+  doneMsg: 'Both expanded. The middle term is always twice the product of the two.'
+});
+
+/* ============================================================
+   M7 · the square with a bite taken out
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('dfCv'); if(!cv) return;
+  const SA = document.getElementById('dfA'), SB = document.getElementById('dfB');
+  let seen = {};
+
+  function upd(){
+    if(+SB.value >= +SA.value) SB.value = +SA.value - 1;
+    SB.max = Math.max(1, +SA.value - 1);
+    const a = +SA.value, b = +SB.value, d = a - b;
+    document.getElementById('dfAV').textContent = a;
+    document.getElementById('dfBV').textContent = b;
+    document.getElementById('dfWhole').textContent = '(' + a + '−' + b + ')² = ' + (d*d);
+    document.getElementById('dfParts').textContent = (a*a) + ' − ' + (2*a*b) + ' + ' + (b*b) + ' = ' + (a*a - 2*a*b + b*b);
+    document.getElementById('dfCut').textContent = 'ab = ' + (a*b) + ', b(a−b) = ' + (b*d);
+    document.getElementById('dfTxt').textContent =
+      'The big square is ' + a + ' by ' + a + ', area ' + (a*a) + '. Take off the rectangle ab = ' + (a*b) +
+      ' down the right-hand side, and the rectangle b(a−b) = ' + (b*d) + ' along the bottom. What is left is ' +
+      (a*a) + ' − ' + (a*b) + ' − ' + (b*d) + ' = ' + (d*d) + ', which is the square of side ' + d + '.';
+    if(!autoplaying('m7')){
+      seen[a + ',' + b] = 1;
+      if(Object.keys(seen).length >= 3) complete('m7');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const a = +SA.value, b = +SB.value, d = a - b;
+
+    const pad = 34, S2 = Math.min(W - pad - 20, H - pad - 46);
+    const u = S2 / a, X0 = pad, Y0 = 22;
+    const dw = d*u, bw = b*u;
+
+    /* Fig. 4.3: (a−b)² top-left, b(a−b) below it, ab down the whole right side */
+    tile(x, X0,     Y0,      dw, dw, 'rgba(240,238,230,C)', '(a−b)²', String(d*d));
+    tile(x, X0,     Y0+dw,   dw, bw, 'rgba(242,169,63,C)',  'b(a−b)', String(b*d));
+    tile(x, X0+dw,  Y0,      bw, S2, 'rgba(224,96,127,C)',  'ab',      String(a*b));
+
+    mono(x, 9, 500);
+    x.fillStyle = DIM; x.textAlign='center';
+    x.fillText('a − b = ' + d, X0 + dw/2, Y0 - 7);
+    x.fillStyle = ROSE;
+    x.fillText('b = ' + b, X0 + dw + bw/2, Y0 - 7);
+    x.textAlign='right'; x.fillStyle = DIM;
+    x.fillText('a = ' + a, X0 - 6, Y0 + S2/2);
+    x.textAlign='left';
+
+    mono(x, 10.5, 600); x.fillStyle = INK; x.textAlign='center';
+    x.fillText((a*a) + ' − ' + (a*b) + ' − ' + (b*d) + ' = ' + (d*d), W/2, Y0 + S2 + 22);
+    x.textAlign='left';
+    cap(x, W, H, 'a² − 2ab + b² = ' + (a*a - 2*a*b + b*b));
+  }
+  SA.oninput = ()=>{ ev('explore','dfA'); upd(); };
+  SB.oninput = ()=>{ ev('explore','dfB'); upd(); };
+  reg('m7', draw); upd();
+})();
+
+/* ============================================================
+   M8 · squaring numbers in your head
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('hdCv'); if(!cv) return;
+  const box = document.getElementById('hdPick');
+  /* Examples 4, 8 and 9, plus two from the exercise sets. */
+  const CASES = [
+    { n:43,  parts:[40, 3],       kind:'plus'  },
+    { n:64,  parts:[60, 4],       kind:'plus'  },
+    { n:29,  parts:[30, -1],      kind:'minus' },
+    { n:79,  parts:[80, -1],      kind:'minus' },
+    { n:119, parts:[100, 10, 9],  kind:'three' }
+  ];
+  let i = 0, seen = {};
+
+  function chips(){
+    box.innerHTML = '';
+    CASES.forEach((c,k)=>{
+      const b = document.createElement('button');
+      b.className = 'chip' + (k===i ? ' on' : '');
+      b.textContent = c.n + '²';
+      b.onclick = ()=>{ i = k; ev('explore','hdPick'); upd(); };
+      box.appendChild(b);
+    });
+  }
+  function pieces(c){
+    const p = c.parts, out = [];
+    p.forEach(v => out.push({ t: neg(v) + '²', v: v*v }));
+    for(let j=0;j<p.length;j++) for(let k=j+1;k<p.length;k++){
+      out.push({ t:'2×' + neg(p[j]) + '×' + neg(p[k]), v: 2*p[j]*p[k] });
+    }
+    return out;
+  }
+  function upd(){
+    const c = CASES[i], ps = pieces(c);
+    const total = ps.reduce((s,p)=>s+p.v, 0);
+    document.getElementById('hdSplit').textContent =
+      '(' + c.parts.map(v => neg(v)).join(' + ').replace(/\+ −/g, '− ') + ')²';
+    document.getElementById('hdWork').textContent = ps.map(p=>neg(p.v)).join(' + ').replace(/\+ −/g, '− ');
+    document.getElementById('hdAns').textContent = total;
+    document.getElementById('hdTxt').textContent =
+      c.kind === 'three'
+        ? c.n + ' splits into three parts, so this needs (a + b + c)² — three squares and three double products, six terms in all, adding to ' + total + '.'
+        : c.kind === 'minus'
+          ? c.n + ' is one short of a round number, so (' + c.parts[0] + ' − ' + (-c.parts[1]) +
+            ')² is the easier route: ' + (c.parts[0]*c.parts[0]) + ' − ' + (-2*c.parts[0]*c.parts[1]) +
+            ' + ' + (c.parts[1]*c.parts[1]) + ' = ' + total + '.'
+          : c.n + ' splits as ' + c.parts[0] + ' + ' + c.parts[1] + ', so (a + b)² gives ' +
+            (c.parts[0]*c.parts[0]) + ' + ' + (2*c.parts[0]*c.parts[1]) + ' + ' + (c.parts[1]*c.parts[1]) +
+            ' = ' + total + ' — three easy pieces instead of one long multiplication.';
+    if(!autoplaying('m8')){
+      seen[c.kind] = 1;
+      if(Object.keys(seen).length >= 3) complete('m8');
+    }
+    chips(); draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 270, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const c = CASES[i], ps = pieces(c);
+    const total = ps.reduce((s,p)=>s+p.v, 0);
+
+    mono(x, 15, 600); x.fillStyle = INK; x.textAlign='center';
+    x.fillText(c.n + '²', W/2, 30);
+    mono(x, 11, 500); x.fillStyle = A2;
+    x.fillText('= (' + c.parts.map(v=>neg(v)).join(' + ').replace(/\+ −/g,'− ') + ')²', W/2, 52);
+    x.textAlign='left';
+
+    /* each piece as its own bar, widths in proportion to the numbers */
+    const big = Math.max.apply(null, ps.map(p=>Math.abs(p.v)));
+    ps.forEach((p,k)=>{
+      const y = 72 + k*26, w = (W-120) * (Math.abs(p.v)/big);
+      const col = p.v < 0 ? 'rgba(224,96,127,C)' : k < c.parts.length ? 'rgba(142,107,224,C)' : 'rgba(242,169,63,C)';
+      x.fillStyle = col.replace('C','.28'); x.fillRect(56, y, w, 18);
+      x.strokeStyle = col.replace('C','.85'); x.lineWidth = 1; x.strokeRect(56, y, w, 18);
+      mono(x, 8.5, 400); x.fillStyle = DIM; x.textAlign='right';
+      x.fillText(p.t, 50, y + 13);
+      mono(x, 9.5, 600); x.fillStyle = INK; x.textAlign='left';
+      x.fillText(neg(p.v), 60 + w + 6, y + 13);
+    });
+    mono(x, 12, 600); x.fillStyle = GOOD; x.textAlign='center';
+    x.fillText('= ' + total, W/2, 72 + ps.length*26 + 14);
+    x.textAlign='left';
+    cap(x, W, H, Object.keys(seen).length + ' of 3 kinds of split tried');
+  }
+  reg('m8', draw); upd();
+})();
+
+/* ============================================================
+   M9 · run the identity backwards
+   ============================================================ */
+Q.vgrid('g9','g9check','g9s',{
+  head: 'Factor',
+  cols: ['a', 'b', 'Factors as'],
+  options: [
+    ['x', '6x', '3x', '4y'],
+    ['2', '1', '4y', '3'],
+    ['(x + 2)²', '(6x + 1)²', '(3x + 4y)²', '(4y − 3)²']
+  ],
+  rows: [
+    { l:'x² + 4x + 4',          a:['x',  '2', '(x + 2)²'] },
+    { l:'36x² + 12x + 1',       a:['6x', '1', '(6x + 1)²'] },
+    { l:'9x² + 24xy + 16y²',    a:['3x', '4y', '(3x + 4y)²'] },
+    { l:'16y² − 24y + 9',       a:['4y', '3', '(4y − 3)²'] }
+  ],
+  mid: 'm9',
+  doneMsg: 'All four. Two squares at the ends, and the middle term proves it.'
+});
+
+/* ============================================================
+   M10 · three terms, nine pieces
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('thCv'); if(!cv) return;
+  const SA = document.getElementById('thA'), SB = document.getElementById('thB'), SC = document.getElementById('thC');
+  let seen = {};
+
+  function upd(){
+    const a = +SA.value, b = +SB.value, c = +SC.value, t = a+b+c;
+    document.getElementById('thAV').textContent = a;
+    document.getElementById('thBV').textContent = b;
+    document.getElementById('thCV').textContent = c;
+    document.getElementById('thWhole').textContent = '(' + t + ')² = ' + (t*t);
+    document.getElementById('thSq').textContent = (a*a) + ' + ' + (b*b) + ' + ' + (c*c) + ' = ' + (a*a+b*b+c*c);
+    document.getElementById('thRect').textContent =
+      '2×' + (a*b) + ' + 2×' + (b*c) + ' + 2×' + (c*a) + ' = ' + (2*(a*b+b*c+c*a));
+    document.getElementById('thTxt').textContent =
+      'Side ' + a + ' + ' + b + ' + ' + c + ' = ' + t + ', so the whole square is ' + (t*t) +
+      '. The three squares on the diagonal come to ' + (a*a+b*b+c*c) + ', and the six rectangles to ' +
+      (2*(a*b+b*c+c*a)) + '. Together that is ' + (a*a+b*b+c*c + 2*(a*b+b*c+c*a)) +
+      ' — the same number, as it has to be.';
+    if(!autoplaying('m10')){
+      seen[a + ',' + b + ',' + c] = 1;
+      if(Object.keys(seen).length >= 3) complete('m10');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const a = +SA.value, b = +SB.value, c = +SC.value, t = a+b+c;
+
+    const pad = 30, S2 = Math.min(W - pad - 18, H - pad - 46);
+    const u = S2 / t, X0 = pad, Y0 = 20;
+    const L = [a, b, c], off = [0, a, a+b];
+    const NAME = ['a','b','c'], COL = ['rgba(242,169,63,C)', 'rgba(142,107,224,C)', 'rgba(224,96,127,C)'];
+
+    for(let r=0;r<3;r++) for(let cc=0;cc<3;cc++){
+      const gx = X0 + off[cc]*u, gy = Y0 + off[r]*u;
+      const gw = L[cc]*u, gh = L[r]*u;
+      const label = r === cc ? NAME[r] + '²' : NAME[Math.min(r,cc)] + NAME[Math.max(r,cc)];
+      tile(x, gx, gy, gw, gh, r === cc ? COL[r] : 'rgba(142,154,192,C)', label, String(L[r]*L[cc]));
+    }
+    mono(x, 9, 500); x.textAlign='center';
+    for(let k=0;k<3;k++){
+      x.fillStyle = [A2, A1, ROSE][k];
+      x.fillText(NAME[k] + '=' + L[k], X0 + (off[k] + L[k]/2)*u, Y0 - 6);
+    }
+    x.textAlign='left';
+    mono(x, 10, 600); x.fillStyle = INK; x.textAlign='center';
+    x.fillText((t*t) + '  =  ' + (a*a+b*b+c*c) + '  +  ' + (2*(a*b+b*c+c*a)), W/2, Y0 + S2 + 20);
+    x.textAlign='left';
+    cap(x, W, H, 'three squares, six rectangles in matching pairs');
+  }
+  [SA, SB, SC].forEach((s,k)=>{ s.oninput = ()=>{ ev('explore', ['thA','thB','thC'][k]); upd(); }; });
+  reg('m10', draw); upd();
+})();
+
+/* ============================================================
+   M11 · laying out algebra tiles
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('tlCv'); if(!cv) return;
+  const SP = document.getElementById('tlP'), SQ = document.getElementById('tlQ');
+  let seen = {}, sawBook = false;
+
+  function upd(){
+    const p = +SP.value, q = +SQ.value;
+    document.getElementById('tlPV').textContent = p;
+    document.getElementById('tlQV').textContent = q;
+    document.getElementById('tlRect').textContent = '(x + ' + p + ')(x + ' + q + ')';
+    document.getElementById('tlTiles').textContent = '1 x² · ' + (p+q) + ' x · ' + (p*q) + ' unit';
+    document.getElementById('tlArea').textContent = 'x² + ' + (p+q) + 'x + ' + (p*q);
+    document.getElementById('tlTxt').textContent =
+      'The x-tiles split into ' + p + ' beside the big tile and ' + q + ' beneath it, which is why the middle term is ' +
+      p + 'x + ' + q + 'x = ' + (p+q) + 'x. The unit tiles fill the corner in a ' + p + ' by ' + q +
+      ' array, so there are ' + (p*q) + ' of them. Reading the sides of the finished rectangle gives the factors back.';
+    if(!autoplaying('m11')){
+      seen[p + ',' + q] = 1;
+      if((p === 3 && q === 4) || (p === 4 && q === 3)) sawBook = true;
+      if(sawBook && Object.keys(seen).length >= 3) complete('m11');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const p = +SP.value, q = +SQ.value;
+
+    /* x is drawn longer than 1, the way the book's tiles are cut, so the
+       arrangement reads as a rectangle rather than as a grid of equal squares */
+    const XU = 3.2;
+    const wUnits = XU + p, hUnits = XU + q;
+    /* the left margin has to hold the vertical side label, which is written
+       out in full as "x + 4" rather than abbreviated */
+    const pad = 48, avail = Math.min(W - pad - 22, H - pad - 52);
+    const u = avail / Math.max(wUnits, hUnits);
+    const X0 = pad, Y0 = 20, xs = XU*u;
+
+    /* the x² tile */
+    tile(x, X0, Y0, xs, xs, 'rgba(242,169,63,C)', 'x²', '');
+    /* p x-tiles standing to its right */
+    for(let i=0;i<p;i++) tile(x, X0 + xs + i*u, Y0, u, xs, 'rgba(142,107,224,C)', 'x', '');
+    /* q x-tiles lying beneath it */
+    for(let j=0;j<q;j++) tile(x, X0, Y0 + xs + j*u, xs, u, 'rgba(142,107,224,C)', 'x', '');
+    /* the unit tiles filling the corner */
+    for(let i=0;i<p;i++) for(let j=0;j<q;j++)
+      tile(x, X0 + xs + i*u, Y0 + xs + j*u, u, u, 'rgba(224,96,127,C)', '', '');
+
+    const RW = xs + p*u, RH = xs + q*u;
+    mono(x, 9.5, 500); x.textAlign='center';
+    x.fillStyle = A1; x.fillText('x + ' + p, X0 + RW/2, Y0 - 6);
+    x.textAlign='right';
+    x.fillText('x + ' + q, X0 - 6, Y0 + RH/2);
+    x.textAlign='left';
+
+    mono(x, 10.5, 600); x.fillStyle = INK; x.textAlign='center';
+    x.fillText('(x + ' + p + ')(x + ' + q + ') = x² + ' + (p+q) + 'x + ' + (p*q), W/2, Y0 + RH + 22);
+    x.textAlign='left';
+    cap(x, W, H, '1 x² tile · ' + (p+q) + ' x-tiles · ' + (p*q) + ' unit tiles');
+  }
+  SP.oninput = ()=>{ ev('explore','tlP'); upd(); };
+  SQ.oninput = ()=>{ ev('explore','tlQ'); upd(); };
+  reg('m11', draw); upd();
+})();
+
+/* ============================================================
+   M12 · splitting the middle term
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('spCv'); if(!cv) return;
+  const box = document.getElementById('spPick');
+  const SU = document.getElementById('spU'), SV = document.getElementById('spV');
+  /* Examples 10, 11 and 12, and the one Example 16 needs. */
+  const CASES = [
+    { n:'x² + 7x + 12',  b:7,  c:12, ans:[3,4] },
+    { n:'x² + 11x + 30', b:11, c:30, ans:[5,6] },
+    { n:'x² − 5x + 6',   b:-5, c:6,  ans:[-2,-3] },
+    { n:'x² − 7x + 12',  b:-7, c:12, ans:[-3,-4] }
+  ];
+  let i = 0, solved = {};
+
+  function chips(){
+    box.innerHTML = '';
+    CASES.forEach((c,k)=>{
+      const el = document.createElement('button');
+      el.className = 'chip' + (k===i ? ' on' : '');
+      el.textContent = c.n;
+      el.onclick = ()=>{ i = k; ev('explore','spPick'); upd(); };
+      box.appendChild(el);
+    });
+  }
+  function upd(){
+    const c = CASES[i], u = +SU.value, v = +SV.value;
+    const sum = u + v, prod = u * v;
+    document.getElementById('spUV').textContent = neg(u);
+    document.getElementById('spVV').textContent = neg(v);
+    document.getElementById('spSum').textContent = neg(sum) + (sum === c.b ? '  ✓' : '');
+    document.getElementById('spProd').textContent = neg(prod) + (prod === c.c ? '  ✓' : '');
+    const ok = sum === c.b && prod === c.c;
+    document.getElementById('spSay').textContent = ok ? 'both — these are the two'
+      : sum === c.b ? 'sum right, product wrong'
+      : prod === c.c ? 'product right, sum wrong'
+      : 'neither yet';
+    document.getElementById('spTxt').textContent = ok
+      ? 'Both conditions hold, so ' + c.b + 'x splits as ' + neg(u) + 'x + ' + neg(v) + 'x and ' + c.n +
+        ' factors as (x ' + (u<0?'− '+(-u):'+ '+u) + ')(x ' + (v<0?'− '+(-v):'+ '+v) + ').'
+      : prod === c.c
+        ? neg(u) + ' × ' + neg(v) + ' = ' + neg(prod) + ' is right, but they add to ' + neg(sum) + ' and you need ' +
+          neg(c.b) + '. Getting the product right is the easy half — the book tries 2 and 15, then 3 and 10, before finding the pair that does both.'
+        : 'You need two numbers that add to ' + neg(c.b) + ' AND multiply to ' + neg(c.c) +
+          '. At the moment they add to ' + neg(sum) + ' and multiply to ' + neg(prod) + '.';
+    if(ok && !autoplaying('m12')){
+      solved[c.n] = 1;
+      if(Object.keys(solved).length >= 3) complete('m12');
+    }
+    chips(); pairs(); draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 235, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const c = CASES[i], u = +SU.value, v = +SV.value;
+    const sum = u + v, prod = u * v;
+    const sOk = sum === c.b, pOk = prod === c.c;
+
+    mono(x, 13, 600); x.fillStyle = INK; x.textAlign='center';
+    x.fillText(c.n, W/2, 30);
+    x.textAlign='left';
+
+    /* the two conditions, each as its own row that goes green when satisfied */
+    const row = (y, label, got, want, ok) => {
+      x.fillStyle = ok ? 'rgba(79,195,161,.14)' : 'rgba(142,154,192,.07)';
+      x.fillRect(20, y, W-40, 44);
+      x.strokeStyle = ok ? GOOD : 'rgba(142,154,192,.35)'; x.lineWidth = 1.2;
+      x.strokeRect(20, y, W-40, 44);
+      mono(x, 9, 400); x.fillStyle = DIM;
+      x.fillText(label, 32, y + 17);
+      mono(x, 13, 600); x.fillStyle = ok ? GOOD : ROSE;
+      x.fillText(neg(got), 32, y + 36);
+      mono(x, 9.5, 400); x.fillStyle = DIM; x.textAlign='right';
+      x.fillText('needs ' + neg(want), W-32, y + 36);
+      x.textAlign='left';
+    };
+    row(52,  'the two numbers must ADD to', sum,  c.b, sOk);
+    row(108, 'and MULTIPLY to',              prod, c.c, pOk);
+
+    /* the split, once both hold */
+    if(sOk && pOk){
+      mono(x, 11, 600); x.fillStyle = GOOD; x.textAlign='center';
+      x.fillText('x² ' + (c.b<0?'− ':'+ ') + Math.abs(c.b) + 'x + ' + c.c + '  =  (x ' +
+                 (u<0?'− '+(-u):'+ '+u) + ')(x ' + (v<0?'− '+(-v):'+ '+v) + ')', W/2, 180);
+      x.textAlign='left';
+    } else {
+      mono(x, 10, 400); x.fillStyle = DIM; x.textAlign='center';
+      x.fillText('both rows must be green at the same time', W/2, 180);
+      x.textAlign='left';
+    }
+    /* Which pairs to try is listed below the canvas as buttons, deliberately
+       without marking the right one: seeing which pair also ADDS correctly is
+       the whole exercise, and colouring it green would answer the question. */
+    mono(x, 9, 400); x.fillStyle = DIM; x.textAlign='center';
+    x.fillText('try the factor pairs of ' + neg(c.c) + ' below', W/2, 208);
+    x.textAlign='left';
+    cap(x, W, H, Object.keys(solved).length + ' of 3 solved');
+  }
+  /* Every pair of whole numbers multiplying to c, positive and negative both,
+     as buttons that set the two sliders. Reading a pair off the list is what a
+     reader does anyway; making it a control means the check that it also adds
+     correctly is one tap away rather than two slider drags. */
+  function pairs(){
+    const box2 = document.getElementById('spPairs'); if(!box2) return;
+    const c = CASES[i];
+    box2.innerHTML = '';
+    const seenKeys = {};
+    for(let d=1; d<=Math.abs(c.c); d++){
+      if(c.c % d !== 0) continue;
+      [[d, c.c/d], [-d, -c.c/d]].forEach(pr=>{
+        if(pr[0]*pr[1] !== c.c) return;
+        const key = [pr[0],pr[1]].sort((m,n)=>m-n).join(',');
+        if(seenKeys[key]) return;
+        seenKeys[key] = 1;
+        if(Math.abs(pr[0]) > 15 || Math.abs(pr[1]) > 15) return;
+        const el = document.createElement('button');
+        el.className = 'chip';
+        el.textContent = neg(pr[0]) + ', ' + neg(pr[1]);
+        el.onclick = ()=>{
+          SU.value = pr[0]; SV.value = pr[1];
+          ev('explore','spPairs'); upd();
+        };
+        box2.appendChild(el);
+      });
+    }
+  }
+  SU.oninput = ()=>{ ev('explore','spU'); upd(); };
+  SV.oninput = ()=>{ ev('explore','spV'); upd(); };
+  reg('m12', draw); upd();
+})();
+
+/* ============================================================
+   M13 · fill in the factors
+   ============================================================ */
+Q.vgrid('g13','g13check','g13s',{
+  head: 'Complete',
+  cols: ['First factor', 'Second factor'],
+  options: [
+    ['(s − 3)', '(s − 8)', '(2x + 1)', '(2x − 3)', '(3x − 7)'],
+    ['(s − 8)', '(s − 3)', '(3x + 2)', '(5x + 2)', '(x + 1)']
+  ],
+  rows: [
+    { l:'s² − 11s + 24',   a:['(s − 3)',  '(s − 8)'] },
+    { l:'6x² + 7x + 2',    a:['(2x + 1)', '(3x + 2)'] },
+    { l:'10x² − 11x − 6',  a:['(2x − 3)', '(5x + 2)'] },
+    { l:'3x² − 4x − 7',    a:['(3x − 7)', '(x + 1)'] }
+  ],
+  mid: 'm13',
+  doneMsg: 'All four. Multiply each pair back out and the middle term proves it.'
+});
+
+/* ============================================================
+   M14 · the cube of a + b
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('cbCv'); if(!cv) return;
+  const SA = document.getElementById('cbA'), SB = document.getElementById('cbB');
+  let seen = {};
+
+  function upd(){
+    const a = +SA.value, b = +SB.value;
+    const whole = Math.pow(a+b, 3);
+    const parts = a*a*a + 3*a*a*b + 3*a*b*b + b*b*b;
+    document.getElementById('cbAV').textContent = a;
+    document.getElementById('cbBV').textContent = b;
+    document.getElementById('cbWhole').textContent = '(' + a + '+' + b + ')³ = ' + whole;
+    document.getElementById('cbParts').textContent =
+      (a*a*a) + ' + ' + (3*a*a*b) + ' + ' + (3*a*b*b) + ' + ' + (b*b*b) + ' = ' + parts;
+    document.getElementById('cbEq').textContent = whole === parts ? 'yes, always' : 'no';
+    document.getElementById('cbTxt').textContent =
+      'The whole cube is ' + (a+b) + '³ = ' + whole + '. Cutting at ' + a + ' along all three edges gives eight boxes: one ' +
+      a + '×' + a + '×' + a + ' = ' + (a*a*a) + ', three of ' + a + '×' + a + '×' + b + ' = ' + (a*a*b) +
+      ' each, three of ' + a + '×' + b + '×' + b + ' = ' + (a*b*b) + ' each, and one ' + b + '³ = ' + (b*b*b) +
+      '. They come to ' + parts + '.';
+    if(!autoplaying('m14')){
+      seen[a + ',' + b] = 1;
+      if(Object.keys(seen).length >= 3) complete('m14');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 332, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const a = +SA.value, b = +SB.value, t = a + b, f = a/t;
+
+    /* An isometric cube. Only three faces are visible, so the cuts are drawn on
+       those three — which is enough to see that the split runs all the way
+       through in all three directions. */
+    /* The isometric cube spans cy ± s vertically. Sized and placed so that
+       range clears the legend below it — at 130 with s = 84 it reached y = 214
+       and the legend started at 196, so the volumes were printed across the
+       cube's own front face. */
+    const cx = W*0.5, cy = 122, s = Math.min(W*0.27, 74);
+    const iso = (X,Y,Z) => [ cx + (X-Z)*s*0.86, cy + (X+Z)*s*0.50 - Y*s ];
+    const face = (pts, col, alpha) => {
+      x.beginPath();
+      pts.forEach((p,i)=> i ? x.lineTo(p[0],p[1]) : x.moveTo(p[0],p[1]));
+      x.closePath();
+      x.fillStyle = col.replace('C', alpha); x.fill();
+      x.strokeStyle = col.replace('C', '.9'); x.lineWidth = 1.2; x.stroke();
+    };
+    face([iso(0,1,0), iso(1,1,0), iso(1,1,1), iso(0,1,1)], 'rgba(142,107,224,C)', '.30');   // top
+    face([iso(0,0,1), iso(1,0,1), iso(1,1,1), iso(0,1,1)], 'rgba(242,169,63,C)',  '.24');   // front-left
+    face([iso(1,0,0), iso(1,0,1), iso(1,1,1), iso(1,1,0)], 'rgba(224,96,127,C)',  '.22');   // front-right
+
+    /* the a-cube corner, filled solid so the a³ piece is identifiable */
+    face([iso(0,1,1-f), iso(f,1,1-f), iso(f,1,1), iso(0,1,1)], 'rgba(142,107,224,C)', '.55');
+    face([iso(0,1-f,1), iso(f,1-f,1), iso(f,1,1), iso(0,1,1)], 'rgba(242,169,63,C)',  '.50');
+
+    x.strokeStyle = 'rgba(240,238,230,.55)'; x.lineWidth = 1;
+    [[iso(f,1,0), iso(f,1,1)], [iso(0,1,1-f), iso(1,1,1-f)],
+     [iso(0,1-f,1), iso(1,1-f,1)], [iso(f,0,1), iso(f,1,1)],
+     [iso(1,1-f,0), iso(1,1-f,1)], [iso(1,0,1-f), iso(1,1,1-f)]].forEach(seg=>{
+      x.beginPath(); x.moveTo(seg[0][0], seg[0][1]); x.lineTo(seg[1][0], seg[1][1]); x.stroke();
+    });
+
+    mono(x, 9, 500); x.fillStyle = DIM; x.textAlign='center';
+    x.fillText('edge ' + a + ' + ' + b + ' = ' + t, cx, 24);
+    x.textAlign='left';
+
+    /* the four groups, with counts and volumes */
+    const rows = [
+      ['a³',    1, a*a*a,   'rgba(142,107,224,C)'],
+      ['a²b',   3, a*a*b,   'rgba(242,169,63,C)'],
+      ['ab²',   3, a*b*b,   'rgba(224,96,127,C)'],
+      ['b³',    1, b*b*b,   'rgba(142,154,192,C)']
+    ];
+    rows.forEach((r,k)=>{
+      const y = 216 + k*24;
+      x.fillStyle = r[3].replace('C','.28'); x.fillRect(24, y-12, 16, 16);
+      x.strokeStyle = r[3].replace('C','.9'); x.lineWidth = 1; x.strokeRect(24, y-12, 16, 16);
+      mono(x, 9.5, 600); x.fillStyle = INK;
+      x.fillText((r[1] === 1 ? '' : r[1] + ' × ') + r[0], 48, y);
+      mono(x, 9, 400); x.fillStyle = DIM;
+      x.fillText('= ' + (r[1]*r[2]), 118, y);
+      mono(x, 8.5, 400); x.fillStyle = 'rgba(142,154,192,.7)';
+      x.fillText(r[1] === 1 ? 'one cube' : 'three cuboids', 170, y);
+    });
+    cap(x, W, H, '(a+b)³ = a³ + 3a²b + 3ab² + b³');
+  }
+  SA.oninput = ()=>{ ev('explore','cbA'); upd(); };
+  SB.oninput = ()=>{ ev('explore','cbB'); upd(); };
+  reg('m14', draw); upd();
+})();
+
+/* ============================================================
+   M15 · cancelling a common factor
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('rtCv'); if(!cv) return;
+  const box = document.getElementById('rtPick');
+  /* Example 16, and two from Exercise Set 4.5 and the end-of-chapter set. */
+  const CASES = [
+    { n:'Example 16',
+      top:'x² − 7x + 12', bot:'5x² + 5x − 100',
+      steps:[
+        'x² − 7x + 12 = (x − 3)(x − 4)',
+        '5x² + 5x − 100 = 5(x² + x − 20)',
+        '5(x² + x − 20) = 5(x − 4)(x + 5)',
+        'the (x − 4) cancels, top and bottom'
+      ],
+      out:'(x − 3) / 5(x + 5)' },
+    { n:'4x² + 4x + 1',
+      top:'4x² + 4x + 1', bot:'4x² − 1',
+      steps:[
+        '4x² + 4x + 1 = (2x + 1)²',
+        '4x² − 1 = (2x + 1)(2x − 1)',
+        'both share the factor (2x + 1)',
+        'one (2x + 1) cancels from each'
+      ],
+      out:'(2x + 1) / (2x − 1)' },
+    { n:'p⁴ − 16',
+      top:'p⁴ − 16', bot:'p² − 4p + 4',
+      steps:[
+        'p⁴ − 16 = (p² − 4)(p² + 4)',
+        'p² − 4 = (p − 2)(p + 2), so the top is (p−2)(p+2)(p²+4)',
+        'p² − 4p + 4 = (p − 2)²',
+        'one (p − 2) cancels, leaving one below'
+      ],
+      out:'(p + 2)(p² + 4) / (p − 2)' }
+  ];
+  let i = 0, at = 0, finished = {};
+
+  function chips(){
+    box.innerHTML = '';
+    CASES.forEach((c,k)=>{
+      const b = document.createElement('button');
+      b.className = 'chip' + (k===i ? ' on' : '');
+      b.textContent = c.n;
+      b.onclick = ()=>{ i = k; at = 0; ev('explore','rtPick'); upd(); };
+      box.appendChild(b);
+    });
+  }
+  function upd(){
+    const c = CASES[i], last = c.steps.length - 1;
+    document.getElementById('rtStepN').textContent = (at+1) + ' of ' + c.steps.length;
+    document.getElementById('rtWork').textContent = c.steps[at];
+    document.getElementById('rtDone').textContent = at === last ? c.out : '—';
+    document.getElementById('rtTxt').textContent = at === last
+      ? 'Simplified to ' + c.out + '. The cancelling is only allowed because we were told the denominator is not zero — without that promise, dividing by a factor that might vanish is not a legal move.'
+      : 'A common factor cannot be seen until both top and bottom are factored, which is why every one of these starts with factoring rather than cancelling.';
+    if(at === last && !autoplaying('m15')){
+      finished[c.n] = 1;
+      if(Object.keys(finished).length >= 2) complete('m15');
+    }
+    chips(); draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const c = CASES[i], last = c.steps.length - 1;
+
+    /* the expression as a fraction, drawn as one */
+    mono(x, 11, 600); x.fillStyle = INK; x.textAlign='center';
+    x.fillText(c.top, W/2, 28);
+    x.strokeStyle = 'rgba(240,238,230,.75)'; x.lineWidth = 1.4;
+    const barW = Math.max(x.measureText(c.top).width, x.measureText(c.bot).width) / 2 + 10;
+    x.beginPath(); x.moveTo(W/2 - barW, 36); x.lineTo(W/2 + barW, 36); x.stroke();
+    x.fillText(c.bot, W/2, 52);
+    x.textAlign='left';
+
+    c.steps.forEach((s,k)=>{
+      const y = 82 + k*38, live = k === at, past = k <= at;
+      if(live){ x.fillStyle = 'rgba(142,107,224,.13)'; x.fillRect(14, y-16, W-28, 32); }
+      mono(x, 8.5, 400);
+      x.fillStyle = past ? (live ? A1 : 'rgba(142,154,192,.6)') : 'rgba(142,154,192,.28)';
+      x.fillText('step ' + (k+1), 20, y - 4);
+      mono(x, 10, live ? 600 : 400);
+      x.fillStyle = past ? (live ? INK : 'rgba(142,154,192,.8)') : 'rgba(142,154,192,.25)';
+      x.fillText(s, 20, y + 11);
+    });
+
+    if(at === last){
+      mono(x, 12, 600); x.fillStyle = GOOD; x.textAlign='center';
+      x.fillText('= ' + c.out, W/2, 82 + c.steps.length*38 + 10);
+      x.textAlign='left';
+    }
+    cap(x, W, H, Object.keys(finished).length + ' of 2 carried through');
+  }
+  document.getElementById('rtStep').onclick = ()=>{
+    at = Math.min(CASES[i].steps.length-1, at+1); ev('explore','rtStep'); upd();
+  };
+  document.getElementById('rtReset').onclick = ()=>{ at = 0; ev('explore','rtReset'); upd(); };
+  reg('m15', draw); upd();
+})();
+
+/* ============================================================
+   M16 · the boss
+   ============================================================ */
+Q.boss([
+  { t:'Reading a picture',
+    q:'A square of side a + b is cut at the join. What are the four pieces?',
+    o:['a², b², and two rectangles of ab',
+       'a², b², and two rectangles of a + b',
+       'Four equal squares'], a:0,
+    w:'The cut runs right across in both directions, giving a square on a, a square on b, and two rectangles measuring a by b. Their areas add to a² + 2ab + b², which is the identity.' },
+  { t:'Identity or equation',
+    q:'Which of these is an identity?',
+    o:['x² − 1 = 24', '2x + 3 = 7', '(a + b)(a − b) = a² − b²'], a:2,
+    w:'An identity holds for every value of its variables. The first two are true only for particular x; the third is true whatever a and b are, so it is a rule rather than a puzzle.' },
+  { t:'Comparing',
+    q:'When is (a + b)² equal to a² + b²?',
+    o:['Never', 'Exactly when ab = 0', 'Always'], a:1,
+    w:'The two differ by 2ab, so they agree precisely when ab = 0 — that is, when at least one of a and b is zero. Otherwise the sign of ab decides which is bigger.' },
+  { t:'Expanding',
+    q:'What is the middle term of (5x + 2y)²?',
+    o:['10xy', '20xy', '7xy'], a:1,
+    w:'The middle term is 2ab with a = 5x and b = 2y, giving 2 × 5x × 2y = 20xy. The full expansion is 25x² + 20xy + 4y².' },
+  { t:'Mental arithmetic',
+    q:'Using an identity, what is 29²?',
+    o:['841', '861', '831'], a:0,
+    w:'29 is one less than 30, so (30 − 1)² = 900 − 60 + 1 = 841. Choosing the split that lands on a round number is the whole trick.' },
+  { t:'Factoring',
+    q:'Factor 36x² + 12x + 1.',
+    o:['(6x + 1)²', '(6x + 1)(6x − 1)', '(36x + 1)²'], a:0,
+    w:'The outer terms are (6x)² and 1², and the middle term 2 × 6x × 1 = 12x matches — so it is a perfect square, (6x + 1)². Checking the middle term is what rules out the alternatives.' },
+  { t:'Three terms',
+    q:'How many terms does (a + b + c)² have when fully expanded?',
+    o:['Three', 'Six', 'Nine'], a:1,
+    w:'Three squares — a², b², c² — and three doubled products — 2ab, 2bc, 2ca — makes six. The picture has nine pieces, but the six off-diagonal rectangles pair up into three terms.' },
+  { t:'Splitting the middle term',
+    q:'To factor x² + 11x + 30, which pair of numbers works?',
+    o:['2 and 15', '3 and 10', '5 and 6'], a:2,
+    w:'All three pairs multiply to 30, but only 5 + 6 = 11. Both conditions have to hold at once, which is exactly why the first two fail.' },
+  { t:'Cubes',
+    q:'What is the expansion of (a + b)³?',
+    o:['a³ + b³',
+       'a³ + 3a²b + 3ab² + b³',
+       'a³ + 2a²b + 2ab² + b³'], a:1,
+    w:'Cutting a cube of edge a + b in all three directions gives eight boxes: two cubes, a³ and b³, plus three cuboids of a²b and three of ab². Hence a³ + 3a²b + 3ab² + b³.' },
+  { t:'Simplifying',
+    q:'Why may (x − 4) be cancelled from the top and bottom of a fraction?',
+    o:['Because it appears in both',
+       'Because it appears in both and is known not to be zero',
+       'Because cancelling is always allowed'], a:1,
+    w:'A shared factor can only be divided out if it is not zero — and Example 16 says so explicitly by assuming the denominator is non-zero. Cancelling a factor that might vanish is not a legal step.' }
+], 'm16',
+   'Chapter cleared. Cut a square, name the pieces, and an identity is just a picture you can read in both directions — forwards to expand, backwards to factor.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>

@@ -107,13 +107,34 @@ select{font-family:"IBM Plex Mono",monospace;font-size:13px;background:var(--pla
 .score{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--dim);margin-top:10px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .match{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.qrow{display:flex;gap:8px;align-items:center;margin-bottom:9px;font-size:13.5px}
-.qrow>span.t{flex:1}
+/* wrap, because chips do not shrink: a long choice used to push the last one
+   off the panel entirely rather than move to a second line */
+.qrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px;
+      padding-bottom:9px;margin-bottom:9px;border-bottom:1px solid var(--rule)}
+.qrow:last-child{border-bottom:0}
+.qrow>span.t{flex:1 1 120px;min-width:0}
 table.tick{width:100%;border-collapse:collapse;font-size:13px}
 table.tick th,table.tick td{border:1px solid var(--rule);padding:7px 6px;text-align:center}
 table.tick th{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);font-weight:400}
 table.tick td.lbl{text-align:left;font-size:12.5px}
 table.tick td.c{cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:15px;user-select:none}
+/* A select is as wide as its widest option, and a table sizes to its content,
+   so an answer table of them used to push its last column clean off a 390px
+   screen. Squeezing the columns instead only moves the damage inside the
+   select, where "8 and 16" reads as "8 and 1" — a different answer. So the
+   table keeps the width its content needs and scrolls sideways for the last
+   few pixels. Q.vgrid marks its tables and wraps them. */
+.xscroll{overflow-x:auto;overscroll-behavior-x:contain;position:relative}
+/* a table that scrolls has to say so, or the reader never learns the last
+   column is there */
+.xscroll.more{padding-bottom:6px}
+.xscroll.more::after{content:"swipe \2192";position:sticky;left:0;display:block;
+  font-family:"IBM Plex Mono",monospace;font-size:9px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--dim);text-align:right;padding-top:5px}
+table.tick.vals{min-width:100%;width:auto}
+table.tick.vals td.lbl{min-width:118px}
+table.tick.vals td{padding:7px 4px}
+table.tick.vals select{font-size:11.5px;padding:7px 5px}
 td.c.yes{color:var(--good)}td.c.no{color:var(--bad)}
 td.c.err{background:rgba(229,72,77,.18)}
 .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(80px);background:var(--plate2);border:1px solid var(--gold);color:var(--gold);font-family:"IBM Plex Mono",monospace;font-size:13px;padding:11px 18px;border-radius:30px;opacity:0;transition:.35s;z-index:9;pointer-events:none;white-space:nowrap}
@@ -394,11 +415,11 @@ const CATALOG = [
         {n:1, t:'Orienting Yourself: The Use of Coordinates', id:'9-maths-1', file:'coordinates-chapter.html'},
         {n:2, t:'Introduction to Linear Polynomials', id:'9-maths-2', file:'linear-chapter.html'},
         {n:3, t:'The World of Numbers', id:'9-maths-3', file:'numbers-chapter.html'},
-        {n:4, t:'Exploring Algebraic Identities'},
-        {n:5, t:"I'm Up and Down, and Round and Round"},
-        {n:6, t:'Measuring Space: Perimeter and Area'},
-        {n:7, t:'The Mathematics of Maybe: Introduction to Probability'},
-        {n:8, t:'Predicting What Comes Next: Exploring Sequences and Progressions'}
+        {n:4, t:'Exploring Algebraic Identities', id:'9-maths-4', file:'identities-chapter.html'},
+        {n:5, t:"I'm Up and Down, and Round and Round", id:'9-maths-5', file:'circles-chapter.html'},
+        {n:6, t:'Measuring Space: Perimeter and Area', id:'9-maths-6', file:'perimeter-chapter.html'},
+        {n:7, t:'The Mathematics of Maybe: Introduction to Probability', id:'9-maths-7', file:'probability-chapter.html'},
+        {n:8, t:'Predicting What Comes Next: Exploring Sequences and Progressions', id:'9-maths-8', file:'sequences-chapter.html'}
       ]}]
     },
     {

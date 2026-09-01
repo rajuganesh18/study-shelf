@@ -21,7 +21,7 @@ silently went untested.
 | Stage | Asks |
 |---|---|
 | `audit-ids` | Does every `getElementById` resolve, and does every `Q.*` call pass the right number of ids? Static, so it reaches branches a click-through never does. |
-| `verify` | Does each chapter load clean, award nothing for being opened, draw every mission, still count real input, and link back to its own chapter list? Then the shelf's navigation. |
+| `verify` | Does each chapter load clean, award nothing for being opened, draw every mission, keep every control on a 390px screen, still count real input, and link back to its own chapter list? Then the shelf's navigation. |
 | `reach` | Can each bench actually be completed? |
 | `state` | Does an old save migrate without losing XP, are outcomes recorded, does a finished mission still persist? |
 | `quests` | Does "try 3 interactive controls" mean three distinct controls rather than three events from one drag? |
@@ -56,6 +56,17 @@ Each one was written after something got through.
 
   All seven pass the id audit, throw no errors, award explore credit normally,
   and look perfectly fine on screen.
+- **`verify`, off-screen controls** — `.qrow` was a non-wrapping flex row and
+  chips do not shrink, so a mission offering six kingdoms showed three and put
+  the other three past the right edge of a 390px screen. One of the hidden ones
+  was *None of them*, the answer the mission's entire closing paragraph is
+  about. Four chapters were affected. Nothing caught it for months because both
+  `reach` and the chapter tests click chips by DOM index, and an invisible
+  button clicks perfectly well — the check has to measure geometry, not
+  behaviour. Squeezing the columns instead only moves the damage inside a
+  `<select>`, where "8 and 16" renders as "8 and 1", a different answer; so
+  value tables keep the width their options need and scroll, and say so.
+  Content inside a horizontal scroller is reachable and does not fail.
 - **`state`** — a debounced `save()` was being re-armed 30 times a second by
   a redraw loop, so chapters stopped persisting entirely. Nothing on screen
   changed; only the stored state showed it.
@@ -82,6 +93,23 @@ The lesson is in the fix to the test, not just to the chapter: it now drives a
 one-question organism and a multi-question one **deliberately**, instead of
 hoping the random draw covers both. **A test that fails intermittently is
 usually a test that samples something the suite should be choosing on purpose.**
+
+## Testing a chapter that is genuinely random
+
+Chapter 7's benches roll real dice, so its test cannot assert what they will
+say. It splits the difference: every **theoretical** value is asserted exactly,
+as a reduced fraction, because those are the answers being taught and nothing
+about them is uncertain; every **experimental** value is asserted only through
+invariants (a count never exceeds its opportunities, the stated gap matches the
+stated probability) and through convergence windows scaled to the evidence.
+
+The window has to be scaled, not guessed. A flat ±0.06 looks generous, and for
+6000 die rolls it is ten standard deviations — but the same number applied to a
+rate measured from the ~110 runs of three sixes that turn up in 24,000 rolls is
+1.7 sigma, which fails about one run in eleven. That was written, caught and
+fixed here before it ever ran in anger; the tolerance is now `5 × √(p(1−p)/n)`.
+**A test that fails one run in fifty is worse than no test**, because it teaches
+you to ignore it.
 
 ## Writing a new chapter test
 
@@ -117,8 +145,17 @@ unreachable when it was not:
 
 A false "this can never be completed" is worse than no check at all, so when
 this probe fails, **confirm against the chapter source before believing it**.
-Two genuine limits remain, listed as `skipReach` in `chapters.js` with the
-reason: motion m8 needs seven points placed by clicking a canvas, and chapter
-12's dichotomous key needs three organisms carried through a chain of yes/no
-questions (`test/chapters/diversity.js` covers that one properly). Prefer
-teaching the probe over adding a skip.
+Three genuine limits remain, listed as `skipReach` in `chapters.js` with the
+reason: motion m8 needs seven points placed by clicking a canvas, chapter 12's
+dichotomous key needs three organisms carried through a chain of yes/no
+questions, and coordinates m2 asks for nine *named* corners of a room, which is
+aiming rather than prodding. Each has a chapter test that drives it properly.
+Prefer teaching the probe over adding a skip — the circles, perimeter,
+probability and sequences chapters' forty-eight benches between them all completed
+on the first sweep, which is what a probe that has been taught properly looks like.
+
+One design rule falls out of this and is worth stating: **do not gate a mission
+on an exact slider value.** `reach` sweeps a slider in about forty steps from
+its minimum, so it lands on 10, 19, 28 … and never on 90 or 180. Chapter 6's
+arc bench wants exactly those three angles, so it offers them as buttons —
+which is better for a reader with a thumb as well.

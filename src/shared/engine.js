@@ -411,6 +411,15 @@ const Q = {
     const tbl = document.getElementById(tableId), sc = document.getElementById(scoreId);
     if(!tbl) return;
     const cols = cfg.cols, ROWS = cfg.rows, nc = cols.length;
+    /* see table.tick.vals in base.css: the table keeps the width its options
+       need and scrolls inside this wrapper rather than clipping them */
+    tbl.classList.add('vals');
+    if(!tbl.parentElement.classList.contains('xscroll')){
+      const wrap = document.createElement('div');
+      wrap.className = 'xscroll';
+      tbl.parentElement.insertBefore(wrap, tbl);
+      wrap.appendChild(tbl);
+    }
     let cells = 0;
     let html = '<tr><th style="text-align:left">' + cfg.head + '</th>';
     cols.forEach(c=>html += '<th>' + c + '</th>');
@@ -429,6 +438,11 @@ const Q = {
       html += '</tr>';
     });
     tbl.innerHTML = html;
+    const scroller = tbl.parentElement;
+    /* a hint is worth showing for a column the reader would otherwise miss, not
+   for the last few pixels of a border */
+    const hint = ()=> scroller.classList.toggle('more', tbl.scrollWidth > scroller.clientWidth + 24);
+    hint(); addEventListener('resize', hint);
     document.getElementById(checkId).onclick = ()=>{
       let right = 0, filled = 0;
       const got = [];

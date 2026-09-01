@@ -1,0 +1,1612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Circles — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: periwinkle, and the teal of an arc ---------- */
+:root{ --a1:#7C86F0; --a2:#4ECDC4; --badge-bg:#E9EBFB; }
+/*@include shared/chrome.css*/
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Maths · Chapter 5</div>
+  <h1>Round and Round<br><span>Circles, chords and the angles they make</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96" aria-label="Chapter progress badge: scattered points becoming a circle, then acquiring chords, arcs and a cyclic quadrilateral"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · What a circle is</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="40" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>Everything at one distance</b><i>Section 5.1 · the definition</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Humans noticed circles in raindrops, tree rings and the moon long before anyone defined one. The definition turns the observation around: a <b>circle</b> is the set of all points on a plane at a given distance from a given point. Move a point about and watch which side of that definition it falls on.</p>
+    <div class="panel">
+      <canvas id="lcCv" height="290" aria-label="A point moving around a centre, on, inside or outside the circle of a given radius"></canvas>
+      <div class="knob">
+        <label>Direction <b id="lcTV">40°</b></label>
+        <input type="range" id="lcT" min="0" max="359" value="40" aria-label="Direction from the centre, in degrees">
+      </div>
+      <div class="knob">
+        <label>Distance from O <b id="lcDV">5</b></label>
+        <input type="range" id="lcD" min="0" max="10" value="5" aria-label="Distance from the centre">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Radius</div><div class="v" id="lcR" style="font-size:12px">5</div></div>
+        <div class="rc"><div class="k">This point is</div><div class="v" id="lcAt" style="font-size:12px">5 away</div></div>
+        <div class="rc"><div class="k">Which puts it</div><div class="v" id="lcSay" style="font-size:11px">on the circle</div></div>
+      </div>
+      <div class="note" id="lcTxt" style="margin-top:12px;min-height:96px">Find the inside, the outside, and the circle itself. Direction never decides it — only distance does.</div>
+    </div>
+    <p>Notice that the direction slider changes nothing about the verdict. That is the whole content of the definition: <b>every</b> point at exactly the radius is on the circle, whichever way it lies from the centre, and no point at any other distance is. The set of points satisfying a condition like this is called a <b>locus</b>.</p>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="40" data-coin="20">
+  <summary><span class="mno">02</span><span class="mt"><b>Naming the parts</b><i>Section 5.1 · Fig. 5.3</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>A handful of words, each with a precise meaning. Tap each one to see it drawn.</p>
+    <div class="panel">
+      <canvas id="ptCv" height="280" aria-label="A circle with its radius, chord, diameter and arc highlighted in turn"></canvas>
+      <div class="chips" id="ptPick"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Part</div><div class="v" id="ptName" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Means</div><div class="v" id="ptDef" style="font-size:10.5px">—</div></div>
+        <div class="rc"><div class="k">Seen</div><div class="v" id="ptN" style="font-size:12px">0 of 5</div></div>
+      </div>
+      <div class="note" id="ptTxt" style="margin-top:12px;min-height:110px">Five words: centre, radius, chord, diameter, arc. Tap each in turn.</div>
+    </div>
+    <p>Two of these catch people out. A <b>diameter</b> is not merely the longest distance across — it is a <i>chord that passes through the centre</i>, which is why it is the longest chord there is. And an <b>arc</b> is a piece of the circle itself, the curved part, not the straight line joining its ends.</p>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="45" data-coin="24">
+  <summary><span class="mno">03</span><span class="mt"><b>Turn it, fold it, nothing changes</b><i>Section 5.2 · symmetries</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Look at a wheel touching the ground. Look again later. Is it the same point of the wheel touching down? There is no way to tell — and that is exactly what makes a circle special.</p>
+    <div class="panel">
+      <canvas id="syCv" height="290" aria-label="A circle rotated and reflected, landing on itself every time"></canvas>
+      <div class="knob">
+        <label>Rotate by <b id="syTV">0°</b></label>
+        <input type="range" id="syT" min="0" max="360" value="0" aria-label="Rotation angle in degrees">
+      </div>
+      <div class="knob">
+        <label>Fold line at <b id="syFV">0°</b></label>
+        <input type="range" id="syF" min="0" max="179" value="0" aria-label="Angle of the fold line">
+      </div>
+      <div class="row">
+        <button class="act" id="syFold">Fold along it</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">After rotating</div><div class="v" id="syRot" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">The fold line</div><div class="v" id="syLine" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Passes through O?</div><div class="v" id="syThru" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="syTxt" style="margin-top:12px;min-height:110px">Rotate through any angle at all, then fold. Both leave the circle exactly where it was.</div>
+    </div>
+    <p>A circle has <b>complete rotational symmetry</b> — turn it by <i>any</i> angle about its centre and it lands on itself. It also has a line of reflection symmetry through every diameter, and infinitely many of them. That second fact is Amina's trick for finding a lost centre: fold the paper circle twice so the boundary meets itself, and the two creases cross at the centre, because every fold line is a diameter.</p>
+    <div class="curio">
+      <h5>The longest chord, and the shortest</h5>
+      <div class="note">In a circle of radius 5 the longest chord is the <b>diameter</b>, 10 units. There is no shortest chord: push a chord away from the centre and it keeps shrinking, right down to a single point where it meets the circle — but a point is not a chord, so no smallest one exists.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 2 · How many circles?</div>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="50" data-coin="26">
+  <summary><span class="mno">04</span><span class="mt"><b>Circles through two points</b><i>Section 5.3 · Fig. 5.4</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Fix two points A and B. How many circles pass through both? Slide the centre and count.</p>
+    <div class="panel">
+      <canvas id="twCv" height="300" aria-label="Circles of many sizes through two fixed points, their centres on the perpendicular bisector"></canvas>
+      <div class="knob">
+        <label>Centre along the bisector <b id="twKV">0</b></label>
+        <input type="range" id="twK" min="-8" max="8" value="0" aria-label="Position of the centre along the perpendicular bisector">
+      </div>
+      <div class="row">
+        <button class="act" id="twKeep">Leave this one drawn</button>
+        <button class="act" id="twClear">Clear them</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Radius</div><div class="v" id="twR" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Smallest possible</div><div class="v" id="twMin" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Circles drawn</div><div class="v" id="twN" style="font-size:12px">0</div></div>
+      </div>
+      <div class="note" id="twTxt" style="margin-top:12px;min-height:110px">Every centre on the dashed line gives a circle through both points. Keep several.</div>
+    </div>
+    <p>Any point equidistant from A and B can be the centre, and the set of such points is exactly the <b>perpendicular bisector</b> of AB. So there are <b>infinitely many</b> circles through two points, and their centres all lie on that one line. The smallest is the one with AB as a <b>diameter</b> — radius half of AB — and moving away from AB in either direction makes the circle larger and its arc through A and B flatter.</p>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="55" data-coin="30">
+  <summary><span class="mno">05</span><span class="mt"><b>Three points, exactly one circle</b><i>Theorem 1 · Figs. 5.5 to 5.7</i></span><span class="mstat">55 XP</span></summary>
+  <div class="body">
+    <p>Two points allow infinitely many circles. A third pins it down — as long as the three do not lie on a straight line. Move C and watch the circumcentre move with it.</p>
+    <div class="panel">
+      <canvas id="ccCv" height="310" aria-label="A triangle with its two perpendicular bisectors meeting at the circumcentre, and the circumcircle"></canvas>
+      <div class="knob">
+        <label>C across <b id="ccXV">0</b></label>
+        <input type="range" id="ccX" min="-9" max="9" value="0" aria-label="x position of point C">
+      </div>
+      <div class="knob">
+        <label>C up <b id="ccYV">5</b></label>
+        <input type="range" id="ccY" min="-6" max="8" value="5" aria-label="y position of point C">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">The triangle is</div><div class="v" id="ccKind" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Circumcentre O</div><div class="v" id="ccO" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Lies</div><div class="v" id="ccWhere" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="ccTxt" style="margin-top:12px;min-height:110px">Find an acute triangle, a right-angled one, and an obtuse one. Then try putting C on the line AB.</div>
+    </div>
+    <p>Because OA = OB, the centre must lie on the perpendicular bisector of AB; because OA = OC, it must lie on the bisector of AC as well. Two lines that are not parallel meet at exactly one point, so there is exactly <b>one</b> circumcentre and exactly one circumcircle. Put C on the line through A and B and the two bisectors become parallel, they never meet, and no circle passes through all three.</p>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="35" data-coin="18">
+  <summary><span class="mno">06</span><span class="mt"><b>Where does the centre sit?</b><i>Section 5.3 · Figs. 5.5 to 5.7</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>For each triangle, say where its circumcentre lies.</p>
+    <div class="panel">
+      <div id="g6"></div>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>The right-angled case is the memorable one: the circumcentre lands exactly on the <b>midpoint of the hypotenuse</b>. That is the same fact as the corollary later in this chapter — the angle in a semicircle is 90° — seen from the other end.</p>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Chords, angles and distances</div>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="45" data-coin="24">
+  <summary><span class="mno">07</span><span class="mt"><b>Equal chords, equal angles</b><i>Theorems 2 and 3 · Figs. 5.9 to 5.11</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Tie a thread between two points on a wheel and pull it tight — that is a chord. Rotate the wheel and the thread becomes a different chord of the same length. Does the angle it makes at the centre change?</p>
+    <div class="panel">
+      <canvas id="eqCv" height="300" aria-label="Two chords of a circle, their lengths and the angles they subtend at the centre"></canvas>
+      <div class="knob">
+        <label>Chord AB spans <b id="eqAV">80°</b></label>
+        <input type="range" id="eqA" min="10" max="170" value="80" aria-label="Central angle of the first chord">
+      </div>
+      <div class="knob">
+        <label>Chord DE spans <b id="eqBV">80°</b></label>
+        <input type="range" id="eqB" min="10" max="170" value="80" aria-label="Central angle of the second chord">
+      </div>
+      <div class="knob">
+        <label>Turn DE round to <b id="eqPV">250°</b></label>
+        <input type="range" id="eqP" min="200" max="340" value="250" aria-label="Where the second chord sits on the circle">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Length AB</div><div class="v" id="eqLenA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Length DE</div><div class="v" id="eqLenB" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Verdict</div><div class="v" id="eqSay" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="eqTxt" style="margin-top:12px;min-height:110px">Make the two angles equal, then unequal. Watch what the lengths do — and where the chords sit never matters.</div>
+    </div>
+    <p>Both directions are true, and both are proved by triangle congruence. <b>Theorem 2:</b> equal chords subtend equal angles at the centre — the two triangles have three matching sides (two radii and the chord), so they are congruent by SSS and the angles between the radii match. <b>Theorem 3</b> is the converse: equal angles at the centre give equal chords, this time by SAS.</p>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="50" data-coin="26">
+  <summary><span class="mno">08</span><span class="mt"><b>Straight to the midpoint</b><i>Theorems 4 and 5 · Fig. 5.12</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Join the centre to the middle of a chord. The segment you have drawn is always at right angles to the chord — no matter which chord you pick.</p>
+    <div class="panel">
+      <canvas id="pmCv" height="300" aria-label="The segment from the centre to the midpoint of a chord, meeting it at a right angle"></canvas>
+      <div class="knob">
+        <label>Chord spans <b id="pmSV">100°</b></label>
+        <input type="range" id="pmS" min="20" max="175" value="100" aria-label="Central angle of the chord">
+      </div>
+      <div class="knob">
+        <label>Sitting at <b id="pmPV">90°</b></label>
+        <input type="range" id="pmP" min="0" max="359" value="90" aria-label="Where the chord sits on the circle">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Angle at M</div><div class="v" id="pmAng" style="font-size:12px">90°</div></div>
+        <div class="rc"><div class="k">AM and MB</div><div class="v" id="pmHalf" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Distance OM</div><div class="v" id="pmDist" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="pmTxt" style="margin-top:12px;min-height:110px">Move the chord anywhere at all. The angle at M does not budge off 90°.</div>
+    </div>
+    <p>Triangle OAB is <b>isosceles</b>, because OA and OB are both radii. M is the midpoint, so AM = MB, and triangles OMA and OMB are congruent by SSS. That makes ∠OMA = ∠OMB — and since they sit on a straight line and add to 180°, each must be <b>90°</b>. Read backwards (Theorem 5) it says the perpendicular dropped from the centre to a chord always bisects it.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="50" data-coin="26">
+  <summary><span class="mno">09</span><span class="mt"><b>How far, how long</b><i>Theorems 6 to 8 · Exercise Set 5.5</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>A chord's length and its distance from the centre are locked together by the Baudhāyana–Pythagoras theorem. Move the chord in and out and watch them trade off.</p>
+    <div class="panel">
+      <canvas id="cdCv" height="300" aria-label="A chord at a variable distance from the centre, with the right triangle relating radius, distance and half-chord"></canvas>
+      <div class="knob">
+        <label>Radius r <b id="cdRV">13</b></label>
+        <input type="range" id="cdR" min="5" max="16" value="13" aria-label="Radius of the circle">
+      </div>
+      <div class="knob">
+        <label>Distance d from the centre <b id="cdDV">5</b></label>
+        <input type="range" id="cdD" min="0" max="16" value="5" aria-label="Perpendicular distance from the centre to the chord">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Half-chord</div><div class="v" id="cdHalf" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Chord length</div><div class="v" id="cdLen" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">r² − d²</div><div class="v" id="cdSq" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="cdTxt" style="margin-top:12px;min-height:110px">Set r = 13 and d = 5. Then push the chord out to the very edge, and pull it right onto the centre.</div>
+    </div>
+    <p>The radius, the distance and half the chord form a right-angled triangle, so d² + (half-chord)² = r², giving the chord length as <b>2√(r² − d²)</b>. That single formula carries three of the chapter's theorems: chords the same distance out are the same length (Theorems 6 and 7), and pushing a chord further out makes it shorter (Theorem 8). At d = 0 the chord is a <b>diameter</b>, the longest there is; at d = r it has shrunk to a single point.</p>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="40" data-coin="20">
+  <summary><span class="mno">10</span><span class="mt"><b>Work the chord numbers</b><i>Exercise Set 5.5 · End-of-chapter Q1, Q3, Q4, Q9</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Each row gives you two of the three quantities. Find the third.</p>
+    <div class="panel">
+      <table class="tick" id="g10"></table>
+      <button class="act" id="g10check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g10s"></div>
+    </div>
+    <p>Every one is the same right triangle read a different way round: <b>r² = d² + (chord/2)²</b>. Knowing any two of r, d and the chord gives you the third, and it is worth being able to run it in all three directions rather than memorising three formulas.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Arcs and the angles they subtend</div>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="40" data-coin="20">
+  <summary><span class="mno">11</span><span class="mt"><b>Major arc, minor arc</b><i>Section 5.7 · Figs. 5.17 and 5.18</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Two points on a circle cut it into two arcs. There are always two ways round, and the chapter needs you to be clear about which one you mean.</p>
+    <div class="panel">
+      <canvas id="arCv" height="290" aria-label="Two points on a circle dividing it into a minor arc and a major arc"></canvas>
+      <div class="knob">
+        <label>The two points sit apart by <b id="arSV">90°</b></label>
+        <input type="range" id="arS" min="10" max="350" value="90" aria-label="Angular separation of the two points">
+      </div>
+      <div class="row">
+        <button class="act" id="arSwap">Following: the minor arc</button>
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">This arc sweeps</div><div class="v" id="arAng" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Which makes it</div><div class="v" id="arKind" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">The other one</div><div class="v" id="arOther" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="arTxt" style="margin-top:12px;min-height:110px">Follow each arc in turn, and find the setting where neither is bigger than the other.</div>
+    </div>
+    <p>The <b>angle subtended by an arc at the centre</b> is the angle you sweep as you travel along <i>that</i> arc from one end to the other. The minor arc always sweeps less than 180° and the major arc more, and the two together always come to 360°. When the two points are exactly opposite the chord is a diameter, both arcs sweep 180°, and neither is major nor minor — they are semicircles.</p>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="55" data-coin="30">
+  <summary><span class="mno">12</span><span class="mt"><b>The centre sees double</b><i>Theorem 9 · Figs. 5.20 to 5.23</i></span><span class="mstat">55 XP</span></summary>
+  <div class="body">
+    <p>Fix an arc. Look at the angle it makes at the centre, and the angle it makes at a point out on the circle. Then move that point anywhere you like along the far side.</p>
+    <div class="panel">
+      <canvas id="dbCv" height="310" aria-label="An arc subtending an angle at the centre and half that angle at a point on the circle"></canvas>
+      <div class="knob">
+        <label>The arc sweeps <b id="dbSV">100°</b></label>
+        <input type="range" id="dbS" min="20" max="300" value="100" aria-label="Angle the arc subtends at the centre">
+      </div>
+      <div class="knob">
+        <label>Point P sits at <b id="dbPV">0</b></label>
+        <input type="range" id="dbP" min="0" max="100" value="50" aria-label="Position of P along the far arc">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">At the centre</div><div class="v" id="dbCen" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">At the point P</div><div class="v" id="dbPt" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Ratio</div><div class="v" id="dbRatio" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="dbTxt" style="margin-top:12px;min-height:110px">Slide P right along the arc. The angle at the centre is fixed — but so is the angle at P.</div>
+    </div>
+    <p>This is the most surprising result in the chapter. <b>The angle an arc subtends at the centre is exactly twice the angle it subtends at any point on the circle outside that arc</b> — and because the centre's angle does not move, neither does the point's, wherever on the far arc you put it. Every point out there sees the arc at the same angle. That single fact is what the rest of the chapter is built on.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="45" data-coin="24">
+  <summary><span class="mno">13</span><span class="mt"><b>The angle in a semicircle</b><i>Corollary · Fig. 5.24</i></span><span class="mstat">45 XP</span></summary>
+  <div class="body">
+    <p>Take the arc to be exactly half the circle — so the chord is a diameter. What does every point on the other half see?</p>
+    <div class="panel">
+      <canvas id="smCv" height="290" aria-label="A triangle on a diameter, with the angle at the third vertex always ninety degrees"></canvas>
+      <div class="knob">
+        <label>Point D at <b id="smPV">120°</b></label>
+        <input type="range" id="smP" min="8" max="172" value="120" aria-label="Position of D on the semicircle">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Angle at the centre</div><div class="v" id="smCen" style="font-size:12px">180°</div></div>
+        <div class="rc"><div class="k">Angle ADB</div><div class="v" id="smAng" style="font-size:12px">90°</div></div>
+        <div class="rc"><div class="k">Positions tried</div><div class="v" id="smN" style="font-size:12px">0</div></div>
+      </div>
+      <div class="note" id="smTxt" style="margin-top:12px;min-height:110px">Move D anywhere along the upper half. The angle at D refuses to change.</div>
+    </div>
+    <p>The arc from A to B not containing D is half the circle, so it subtends a <b>straight angle</b> of 180° at the centre. By the theorem before, the angle at D is half of that: <b>90°</b>, always. A <b>corollary</b> is a fact that follows immediately from a result already proved, and this is the chapter's cleanest example of one.</p>
+  </div>
+</details>
+
+<div class="sec">Part 5 · Four points on one circle</div>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="50" data-coin="26">
+  <summary><span class="mno">14</span><span class="mt"><b>Opposite angles of a cyclic 4-gon</b><i>Theorems 10 and 11 · Fig. 5.28</i></span><span class="mstat">50 XP</span></summary>
+  <div class="body">
+    <p>Put four points on a circle and join them up in order. The quadrilateral you get is called <b>cyclic</b>, and its angles are not free to be anything they like.</p>
+    <div class="panel">
+      <canvas id="cyCv" height="310" aria-label="A quadrilateral inscribed in a circle, with its opposite angles measured"></canvas>
+      <div class="knob">
+        <label>B at <b id="cyBV">70°</b></label>
+        <input type="range" id="cyB" min="20" max="110" value="70" aria-label="Position of vertex B">
+      </div>
+      <div class="knob">
+        <label>C at <b id="cyCV">170°</b></label>
+        <input type="range" id="cyC" min="130" max="230" value="170" aria-label="Position of vertex C">
+      </div>
+      <div class="knob">
+        <label>D at <b id="cyDV">280°</b></label>
+        <input type="range" id="cyD" min="250" max="340" value="280" aria-label="Position of vertex D">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">∠A + ∠C</div><div class="v" id="cyAC" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">∠B + ∠D</div><div class="v" id="cyBD" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Each pair</div><div class="v" id="cySay" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" id="cyTxt" style="margin-top:12px;min-height:110px">Move the vertices anywhere on the circle. Both sums stay pinned at 180°.</div>
+    </div>
+    <p>∠A is half the angle that arc BCD subtends at the centre, and ∠C is half the angle that arc BAD subtends. Between them those two arcs make the <b>whole</b> circle, 360°, so the two angles come to half of that: <b>180°</b>. The converse is Theorem 12 — if two opposite angles of a quadrilateral add to 180°, its four vertices must lie on a circle.</p>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="40" data-coin="20">
+  <summary><span class="mno">15</span><span class="mt"><b>Find the missing angle</b><i>End-of-chapter Q2, Q6, Q7, Q8</i></span><span class="mstat">40 XP</span></summary>
+  <div class="body">
+    <p>Six angle problems, each solved by one of the results above.</p>
+    <div class="panel">
+      <table class="tick" id="g15"></table>
+      <button class="act" id="g15check" style="margin-top:12px">Check the table</button>
+      <div class="score" id="g15s"></div>
+    </div>
+    <p>The fourth row needs a little algebra: opposite angles of a cyclic quadrilateral add to 180°, so (2x + 10) + (3x − 20) = 180 gives 5x − 10 = 180 and <b>x = 38</b>. Then ∠P = 86° and ∠R = 94°, which do indeed add to 180°.</p>
+  </div>
+</details>
+
+<div class="sec">Part 6 · The boss</div>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="80" data-coin="60">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, from a raindrop to a cyclic quadrilateral. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+<footer>NCERT Class 9 Maths · Ganita Manjari Part 1 · Chapter 5</footer>
+
+<div class="toast" id="toast"></div>
+
+</div><!-- .wrap -->
+
+<script>
+/*@include shared/storage.js*/
+
+const CH = {
+  id: '9-maths-5',
+  key: 'ch05Circles',
+  total: 16,
+  stages: [
+    { at:0,   f:0.00, name:'Scattered points', d:'Dots on a plane with nothing in common. No centre, no shape, no reason for any of them to be where they are.' },
+    { at:75,  f:0.15, name:'All at one distance', d:'Pin one point and keep only what sits a fixed distance from it. A circle is what is left — the locus of that one condition.' },
+    { at:170, f:0.32, name:'Centre and radius', d:'The pinned point is the centre; the fixed distance is the radius. Two words, and the whole figure is specified.' },
+    { at:290, f:0.50, name:'A chord', d:'Join any two points on the circle. The longest chord you can draw is the one that passes through the centre — the diameter.' },
+    { at:420, f:0.68, name:'The perpendicular', d:'From the centre to the middle of a chord is always a right angle, and that one fact ties a chord’s length to its distance from the centre.' },
+    { at:550, f:0.85, name:'An arc, and its angle', d:'Two points cut the circle into two arcs. The angle an arc makes at the centre is exactly twice the angle it makes out on the rim.' },
+    { at:690, f:1.00, name:'Four on one circle', d:'A quadrilateral whose corners all lie on the circle. Its opposite angles are locked together, always adding to 180°.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+    x.fillStyle = '#E9EBFB'; x.fillRect(0,0,W,H);
+
+    const cx = W*0.50, cy = H*0.52, R = W*0.34;
+    const P = d => [cx + R*Math.cos(d*Math.PI/180), cy - R*Math.sin(d*Math.PI/180)];
+
+    /* Stage 1: dots that have nothing to do with each other, drifting in
+       towards the circle as the definition takes hold. */
+    if(f < 0.26){
+      const settled = Math.min(1, Math.max(0, (f-0.06)/0.14));
+      const SEED = [[0.22,0.30],[0.74,0.22],[0.83,0.66],[0.30,0.78],[0.58,0.44],
+                    [0.14,0.58],[0.62,0.86],[0.44,0.16]];
+      x.fillStyle = 'rgba(91,74,122,.8)';
+      SEED.forEach((s,i)=>{
+        const rx = W*s[0], ry = H*s[1];
+        const [tx, ty] = P(i*45 + 12);
+        x.beginPath();
+        x.arc(rx + (tx-rx)*settled, ry + (ty-ry)*settled, 2.6, 0, 7);
+        x.fill();
+      });
+    }
+
+    /* the circle itself, once the points have found their distance */
+    if(f >= 0.12){
+      const a = Math.min(1,(f-0.12)/0.06);
+      x.strokeStyle = 'rgba(91,74,122,' + (0.85*a) + ')'; x.lineWidth = 1.6;
+      x.beginPath(); x.arc(cx, cy, R, 0, 7); x.stroke();
+    }
+
+    /* centre and one radius */
+    if(f >= 0.26){
+      const a = Math.min(1,(f-0.26)/0.05);
+      x.fillStyle = 'rgba(124,134,240,' + a + ')';
+      x.beginPath(); x.arc(cx, cy, 3, 0, 7); x.fill();
+      x.strokeStyle = 'rgba(124,134,240,' + (0.8*a) + ')'; x.lineWidth = 1.3;
+      const [rx, ry] = P(28);
+      x.beginPath(); x.moveTo(cx, cy); x.lineTo(rx, ry); x.stroke();
+    }
+
+    /* a chord, and later the perpendicular from the centre to its midpoint */
+    if(f >= 0.44 && f < 0.78){
+      const a = Math.min(1,(f-0.44)/0.05);
+      const [ax, ay] = P(150), [bx, by] = P(30);
+      x.strokeStyle = 'rgba(78,205,196,' + a + ')'; x.lineWidth = 2;
+      x.beginPath(); x.moveTo(ax, ay); x.lineTo(bx, by); x.stroke();
+      if(f >= 0.60){
+        const b = Math.min(1,(f-0.60)/0.05);
+        const mx = (ax+bx)/2, my = (ay+by)/2;
+        x.strokeStyle = 'rgba(124,134,240,' + b + ')'; x.lineWidth = 1.3;
+        x.beginPath(); x.moveTo(cx, cy); x.lineTo(mx, my); x.stroke();
+        /* the right-angle square at the midpoint */
+        const s = 5, ux = (bx-ax)/Math.hypot(bx-ax, by-ay), uy = (by-ay)/Math.hypot(bx-ax, by-ay);
+        const vx = (mx-cx)/Math.hypot(mx-cx, my-cy), vy = (my-cy)/Math.hypot(mx-cx, my-cy);
+        x.strokeStyle = 'rgba(91,74,122,' + b + ')'; x.lineWidth = 1;
+        x.beginPath();
+        x.moveTo(mx - ux*s - vx*s, my - uy*s - vy*s);
+        x.lineTo(mx - ux*s, my - uy*s);
+        x.lineTo(mx, my);
+        x.stroke();
+      }
+    }
+
+    /* an arc, its angle at the centre and the half-angle out on the rim */
+    if(f >= 0.78 && f < 0.93){
+      const a = Math.min(1,(f-0.78)/0.05);
+      const A = 200, B = 340;
+      const [ax, ay] = P(A), [bx, by] = P(B);
+      x.strokeStyle = 'rgba(78,205,196,' + a + ')'; x.lineWidth = 3.4;
+      x.beginPath();
+      x.arc(cx, cy, R, -B*Math.PI/180, -A*Math.PI/180); x.stroke();
+      x.strokeStyle = 'rgba(124,134,240,' + a + ')'; x.lineWidth = 1.3;
+      x.beginPath(); x.moveTo(ax, ay); x.lineTo(cx, cy); x.lineTo(bx, by); x.stroke();
+      const [px2, py2] = P(90);
+      x.strokeStyle = 'rgba(91,74,122,' + (0.6*a) + ')'; x.lineWidth = 1;
+      x.beginPath(); x.moveTo(ax, ay); x.lineTo(px2, py2); x.lineTo(bx, by); x.stroke();
+      x.fillStyle = 'rgba(124,134,240,' + a + ')';
+      x.beginPath(); x.arc(px2, py2, 2.6, 0, 7); x.fill();
+    }
+
+    /* four points on the circle, joined in order */
+    if(f >= 0.93){
+      const a = Math.min(1,(f-0.93)/0.07);
+      const V = [65, 160, 235, 330].map(P);
+      x.fillStyle = 'rgba(78,205,196,' + (0.16*a) + ')';
+      x.beginPath();
+      V.forEach((v,i)=> i ? x.lineTo(v[0], v[1]) : x.moveTo(v[0], v[1]));
+      x.closePath(); x.fill();
+      x.strokeStyle = 'rgba(78,205,196,' + a + ')'; x.lineWidth = 1.8; x.stroke();
+      x.fillStyle = 'rgba(124,134,240,' + a + ')';
+      V.forEach(v=>{ x.beginPath(); x.arc(v[0], v[1], 2.8, 0, 7); x.fill(); });
+      mono(x, 7.5, 600); x.fillStyle = 'rgba(91,74,122,' + a + ')';
+      x.textAlign='center';
+      x.fillText('180°', cx, cy + 3);
+      x.textAlign='left';
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ---------- chapter accents, as the canvases use them ---------- */
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#7C86F0', A2='#4ECDC4',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', ROSE='#E0607F';
+
+/*@include shared/plane.js*/
+
+/*@include shared/circle.js*/
+
+/* ============================================================
+   M1 · everything at one distance
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('lcCv'); if(!cv) return;
+  const ST = document.getElementById('lcT'), SD = document.getElementById('lcD');
+  const RAD = 5;
+  let seen = {};
+
+  function upd(){
+    const t = +ST.value, d = +SD.value;
+    document.getElementById('lcTV').textContent = deg(t);
+    document.getElementById('lcDV').textContent = d;
+    document.getElementById('lcR').textContent = RAD;
+    document.getElementById('lcAt').textContent = d + ' away';
+    const where = d === RAD ? 'on the circle' : d < RAD ? 'inside it' : 'outside it';
+    document.getElementById('lcSay').textContent = where;
+    document.getElementById('lcTxt').textContent = d === RAD
+      ? 'Exactly ' + RAD + ' from the centre, so this point is on the circle — and it would be on the circle at any direction you like, because direction was never part of the condition.'
+      : 'This point is ' + d + ' from the centre, and the radius is ' + RAD + ', so it is ' + where +
+        '. Swing the direction slider all the way round: the verdict never changes, because the definition only ever mentions distance.';
+    if(!autoplaying('m1')){
+      seen[where] = 1;
+      if(Object.keys(seen).length >= 3) complete('m1');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.48, R: Math.min(W*0.31, 92) });
+    const t = +ST.value, d = +SD.value;
+    const unit = c.R / RAD;
+
+    /* the radius, drawn as the standard against which the point is judged */
+    x.setLineDash([3,3]);
+    x.strokeStyle = 'rgba(142,154,192,.55)'; x.lineWidth = 1;
+    const [rx, ry] = c.pt(t);
+    x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(rx, ry); x.stroke();
+    x.setLineDash([]);
+
+    const px = c.cx + d*unit*Math.cos(t*Math.PI/180);
+    const py = c.cy - d*unit*Math.sin(t*Math.PI/180);
+    const col = d === RAD ? A2 : d < RAD ? GOLD : ROSE;
+    x.strokeStyle = col; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(px, py); x.stroke();
+    x.fillStyle = col;
+    x.beginPath(); x.arc(px, py, 5, 0, 7); x.fill();
+    mono(x, 9.5, 600); x.fillStyle = col;
+    x.fillText('P', px + 8, py - 6);
+
+    centre(x, c, A1, 'O');
+    mono(x, 9, 500); x.fillStyle = DIM;
+    x.fillText('radius = ' + RAD, 14, 20);
+    cap(x, W, H, Object.keys(seen).length + ' of 3: inside, on, outside');
+  }
+  ST.oninput = ()=>{ ev('explore','lcT'); upd(); };
+  SD.oninput = ()=>{ ev('explore','lcD'); upd(); };
+  reg('m1', draw); upd();
+})();
+
+/* ============================================================
+   M2 · naming the parts
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('ptCv'); if(!cv) return;
+  const box = document.getElementById('ptPick');
+  const PARTS = [
+    { n:'Centre',   d:'the fixed point every point of the circle is equidistant from' },
+    { n:'Radius',   d:'a segment from the centre to any point on the circle' },
+    { n:'Chord',    d:'a segment joining any two points on the circle' },
+    { n:'Diameter', d:'a chord through the centre — the longest chord there is' },
+    { n:'Arc',      d:'a connected piece of the circle itself, between two points' }
+  ];
+  let i = -1, seen = {};
+
+  function chips(){
+    box.innerHTML = '';
+    PARTS.forEach((p,k)=>{
+      const b = document.createElement('button');
+      b.className = 'chip' + (k===i ? ' on' : '');
+      b.textContent = p.n;
+      b.onclick = ()=>{ i = k; ev('explore','ptPick'); upd(); };
+      box.appendChild(b);
+    });
+  }
+  function upd(){
+    const p = i >= 0 ? PARTS[i] : null;
+    document.getElementById('ptName').textContent = p ? p.n : '—';
+    document.getElementById('ptDef').textContent = p ? p.d : '—';
+    document.getElementById('ptN').textContent = Object.keys(seen).length + ' of 5';
+    document.getElementById('ptTxt').textContent = p
+      ? p.n + ': ' + p.d + '.'
+      : 'Five words: centre, radius, chord, diameter, arc. Tap each in turn.';
+    if(p && !autoplaying('m2')){
+      seen[p.n] = 1;
+      if(Object.keys(seen).length >= 5) complete('m2');
+    }
+    chips(); draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 280, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.46, R: Math.min(W*0.30, 88) });
+    const kind = i >= 0 ? PARTS[i].n : '';
+
+    const dim = 'rgba(142,154,192,.30)';
+    /* every part is always drawn; the chosen one is lit */
+    x.strokeStyle = kind === 'Radius' ? A1 : dim;
+    x.lineWidth = kind === 'Radius' ? 2.4 : 1;
+    const [rx, ry] = c.pt(55);
+    x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(rx, ry); x.stroke();
+
+    x.strokeStyle = kind === 'Chord' ? A2 : dim;
+    x.lineWidth = kind === 'Chord' ? 2.4 : 1;
+    const [bx, by] = c.pt(155), [dx2, dy2] = c.pt(20);
+    x.beginPath(); x.moveTo(bx, by); x.lineTo(dx2, dy2); x.stroke();
+
+    x.strokeStyle = kind === 'Diameter' ? GOLD : dim;
+    x.lineWidth = kind === 'Diameter' ? 2.4 : 1;
+    const [e1x, e1y] = c.pt(205), [e2x, e2y] = c.pt(25);
+    x.beginPath(); x.moveTo(e1x, e1y); x.lineTo(e2x, e2y); x.stroke();
+
+    x.strokeStyle = kind === 'Arc' ? ROSE : dim;
+    x.lineWidth = kind === 'Arc' ? 4 : 1.4;
+    x.beginPath(); x.arc(c.cx, c.cy, c.R, -125*Math.PI/180, -70*Math.PI/180); x.stroke();
+
+    if(kind === 'Centre'){
+      x.fillStyle = 'rgba(124,134,240,.22)';
+      x.beginPath(); x.arc(c.cx, c.cy, 12, 0, 7); x.fill();
+    }
+    centre(x, c, A1, 'O');
+    cap(x, W, H, kind ? kind.toLowerCase() + ' — lit' : 'tap a word to light it up');
+  }
+  reg('m2', draw); upd();
+})();
+
+/* ============================================================
+   M3 · turn it, fold it, nothing changes
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('syCv'); if(!cv) return;
+  const ST = document.getElementById('syT'), SF = document.getElementById('syF');
+  let seen = {}, folded = false;
+
+  function upd(){
+    const t = +ST.value, fa = +SF.value;
+    document.getElementById('syTV').textContent = deg(t);
+    document.getElementById('syFV').textContent = deg(fa);
+    document.getElementById('syRot').textContent = t === 0 || t === 360 ? 'back where it started' : 'looks identical';
+    document.getElementById('syLine').textContent = 'a diameter';
+    document.getElementById('syThru').textContent = 'yes, always';
+    document.getElementById('syTxt').textContent = folded
+      ? 'Folded along a line through the centre, the two halves land exactly on top of each other. Every such line is a diameter, and a circle has infinitely many of them — which is Amina\'s trick: fold twice, and the creases cross at the centre.'
+      : t === 0
+        ? 'Unrotated. Turn the wheel by any angle at all and look again — you will not be able to tell that anything moved.'
+        : 'Rotated by ' + deg(t) + ', and the circle is exactly where it was. Only the marker shows that anything happened. A circle has complete rotational symmetry: every angle works, not just a special few.';
+    if(!autoplaying('m3')){
+      if(t !== 0) seen.rot = 1;
+      if(folded) seen.fold = 1;
+      if(seen.rot && seen.fold) complete('m3');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.46, R: Math.min(W*0.30, 88) });
+    const t = +ST.value, fa = +SF.value;
+
+    /* spokes, so a rotation is visible at all — the circle alone would not show it */
+    x.strokeStyle = 'rgba(124,134,240,.5)'; x.lineWidth = 1;
+    for(let k=0;k<8;k++){
+      const [sx, sy] = c.pt(t + k*45);
+      x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(sx, sy); x.stroke();
+    }
+    /* one marked spoke, which is the only way to tell it moved */
+    const [mx, my] = c.pt(t);
+    x.strokeStyle = A2; x.lineWidth = 2.6;
+    x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(mx, my); x.stroke();
+    x.fillStyle = A2;
+    x.beginPath(); x.arc(mx, my, 4.5, 0, 7); x.fill();
+
+    /* the fold line, always a diameter */
+    const [f1x, f1y] = c.pt(fa), [f2x, f2y] = c.pt(fa + 180);
+    x.setLineDash([5,4]);
+    x.strokeStyle = folded ? GOLD : 'rgba(242,184,76,.55)';
+    x.lineWidth = folded ? 2.2 : 1.4;
+    x.beginPath(); x.moveTo(f1x, f1y); x.lineTo(f2x, f2y); x.stroke();
+    x.setLineDash([]);
+    if(folded){
+      /* the half that folded over, shaded */
+      x.fillStyle = 'rgba(242,184,76,.16)';
+      x.beginPath();
+      x.arc(c.cx, c.cy, c.R, -(fa+180)*Math.PI/180, -fa*Math.PI/180);
+      x.closePath(); x.fill();
+    }
+    centre(x, c, A1, 'O');
+    cap(x, W, H, folded ? 'the two halves coincide exactly'
+                        : 'rotate, then fold along a diameter');
+  }
+  ST.oninput = ()=>{ ev('explore','syT'); upd(); };
+  SF.oninput = ()=>{ ev('explore','syF'); upd(); };
+  document.getElementById('syFold').onclick = ()=>{ folded = true; ev('explore','syFold'); upd(); };
+  reg('m3', draw); upd();
+})();
+
+/* ============================================================
+   M4 · circles through two points
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('twCv'); if(!cv) return;
+  const SK = document.getElementById('twK');
+  const HALF = 4;                     // A and B are 8 units apart
+  let kept = [], seen = {};
+
+  const radius = k => Math.sqrt(HALF*HALF + k*k);
+
+  function upd(){
+    const k = +SK.value, r = radius(k);
+    document.getElementById('twKV').textContent = neg(k);
+    document.getElementById('twR').textContent = fmt(Math.round(r*100)/100);
+    document.getElementById('twMin').textContent = HALF + ', with AB as diameter';
+    document.getElementById('twN').textContent = kept.length;
+    document.getElementById('twTxt').textContent = k === 0
+      ? 'The centre is on AB itself, exactly halfway. That is the smallest circle through the two points, with AB as its diameter and radius ' + HALF + '.'
+      : 'The centre is ' + Math.abs(k) + ' ' + (k > 0 ? 'above' : 'below') + ' AB, and the radius has grown to ' +
+        fmt(Math.round(r*100)/100) + '. It is still equidistant from A and B, so the circle still passes through both — and the arc between them is flatter than before.';
+    if(!autoplaying('m4')){
+      seen[k] = 1;
+      if(kept.length >= 3) complete('m4');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const k = +SK.value;
+
+    const cx = W/2, cy = H*0.52, u = Math.min((W-40)/20, (H-60)/20);
+    const px = v => cx + v*u, py = v => cy - v*u;
+
+    /* the perpendicular bisector, which is the locus of every possible centre */
+    x.setLineDash([5,4]); x.strokeStyle = 'rgba(242,184,76,.75)'; x.lineWidth = 1.3;
+    x.beginPath(); x.moveTo(cx, py(9)); x.lineTo(cx, py(-9)); x.stroke();
+    x.setLineDash([]);
+    mono(x, 8.5, 400); x.fillStyle = GOLD;
+    x.fillText('every centre lies here', cx + 6, py(8.4));
+
+    /* the circles kept so far */
+    kept.forEach(kk=>{
+      x.strokeStyle = 'rgba(124,134,240,.35)'; x.lineWidth = 1;
+      x.beginPath(); x.arc(cx, py(kk), radius(kk)*u, 0, 7); x.stroke();
+    });
+    /* the live one */
+    x.strokeStyle = A1; x.lineWidth = 2;
+    x.beginPath(); x.arc(cx, py(k), radius(k)*u, 0, 7); x.stroke();
+    x.fillStyle = A1;
+    x.beginPath(); x.arc(cx, py(k), 3.6, 0, 7); x.fill();
+
+    /* A and B, which never move */
+    [[-HALF,'A'], [HALF,'B']].forEach(p=>{
+      x.fillStyle = A2;
+      x.beginPath(); x.arc(px(p[0]), cy, 4.5, 0, 7); x.fill();
+      mono(x, 9.5, 600); x.fillStyle = A2;
+      x.fillText(p[1], px(p[0]) + (p[0] < 0 ? -14 : 8), cy + 14);
+    });
+    x.strokeStyle = 'rgba(78,205,196,.5)'; x.lineWidth = 1.2;
+    x.beginPath(); x.moveTo(px(-HALF), cy); x.lineTo(px(HALF), cy); x.stroke();
+
+    cap(x, W, H, kept.length + ' kept · every one passes through A and B');
+  }
+  SK.oninput = ()=>{ ev('explore','twK'); upd(); };
+  document.getElementById('twKeep').onclick = ()=>{
+    const k = +SK.value;
+    if(kept.indexOf(k) < 0) kept.push(k);
+    ev('explore','twKeep'); upd();
+  };
+  document.getElementById('twClear').onclick = ()=>{ kept = []; ev('explore','twClear'); upd(); };
+  reg('m4', draw); upd();
+})();
+
+/* ============================================================
+   M5 · three points, exactly one circle
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('ccCv'); if(!cv) return;
+  const SX = document.getElementById('ccX'), SY = document.getElementById('ccY');
+  const A = [-5, -2], B = [5, -2];
+  let seen = {};
+
+  /* The circumcentre, from the two perpendicular bisectors. Returns null when
+     the three points are collinear — which is the case the chapter cares about,
+     not an error to be swallowed. */
+  function circum(a, b, c){
+    const d = 2*(a[0]*(b[1]-c[1]) + b[0]*(c[1]-a[1]) + c[0]*(a[1]-b[1]));
+    if(Math.abs(d) < 1e-9) return null;
+    const ux = ((a[0]*a[0]+a[1]*a[1])*(b[1]-c[1]) + (b[0]*b[0]+b[1]*b[1])*(c[1]-a[1]) +
+                (c[0]*c[0]+c[1]*c[1])*(a[1]-b[1])) / d;
+    const uy = ((a[0]*a[0]+a[1]*a[1])*(c[0]-b[0]) + (b[0]*b[0]+b[1]*b[1])*(a[0]-c[0]) +
+                (c[0]*c[0]+c[1]*c[1])*(b[0]-a[0])) / d;
+    return [ux, uy];
+  }
+  function kindOf(a, b, c){
+    const s = [
+      (b[0]-c[0])**2 + (b[1]-c[1])**2,
+      (a[0]-c[0])**2 + (a[1]-c[1])**2,
+      (a[0]-b[0])**2 + (a[1]-b[1])**2
+    ].sort((m,n)=>m-n);
+    if(Math.abs(s[2] - s[0] - s[1]) < 1e-9) return 'right-angled';
+    return s[2] > s[0] + s[1] ? 'obtuse-angled' : 'acute-angled';
+  }
+
+  function upd(){
+    const C = [+SX.value, +SY.value];
+    document.getElementById('ccXV').textContent = neg(C[0]);
+    document.getElementById('ccYV').textContent = neg(C[1]);
+    const O = circum(A, B, C);
+    if(!O){
+      document.getElementById('ccKind').textContent = 'not a triangle';
+      document.getElementById('ccO').textContent = 'there is none';
+      document.getElementById('ccWhere').textContent = '—';
+      document.getElementById('ccTxt').textContent =
+        'C is on the line through A and B, so the three points are collinear. The two perpendicular bisectors are parallel and never meet, which means there is no centre — and no circle passes through all three.';
+      draw(); return;
+    }
+    const kind = kindOf(A, B, C);
+    document.getElementById('ccKind').textContent = kind;
+    document.getElementById('ccO').textContent = '(' + neg(Math.round(O[0]*10)/10) + ', ' + neg(Math.round(O[1]*10)/10) + ')';
+    const where = kind === 'right-angled' ? 'on the hypotenuse'
+                : kind === 'obtuse-angled' ? 'outside the triangle' : 'inside the triangle';
+    document.getElementById('ccWhere').textContent = where;
+    document.getElementById('ccTxt').textContent =
+      'The triangle is ' + kind + ', and its circumcentre lies ' + where + '. ' +
+      (kind === 'right-angled'
+        ? 'For a right-angled triangle the centre lands exactly on the midpoint of the hypotenuse — which is the same fact as "the angle in a semicircle is 90°", read backwards.'
+        : 'Wherever it sits, it is the one point equidistant from all three vertices, so there is exactly one circle through them.');
+    if(!autoplaying('m5')){
+      seen[kind] = 1;
+      if(Object.keys(seen).length >= 3) complete('m5');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 310, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const C = [+SX.value, +SY.value];
+    const O = circum(A, B, C);
+
+    const cx = W/2, cy = H*0.56, u = Math.min((W-30)/22, (H-56)/22);
+    const px = v => cx + v*u, py = v => cy - v*u;
+    const P = p => [px(p[0]), py(p[1])];
+
+    if(O){
+      const r = Math.hypot(A[0]-O[0], A[1]-O[1]);
+      x.strokeStyle = 'rgba(124,134,240,.55)'; x.lineWidth = 1.4;
+      x.beginPath(); x.arc(px(O[0]), py(O[1]), r*u, 0, 7); x.stroke();
+      /* The two perpendicular bisectors that found it. They run well past the
+         circle on purpose — that is how you see them cross — so they are
+         clipped short of the caption rather than drawn through it. */
+      x.save();
+      x.beginPath(); x.rect(0, 0, W, H-16); x.clip();
+      [[A,B],[A,C]].forEach(pr=>{
+        const mx = (pr[0][0]+pr[1][0])/2, my = (pr[0][1]+pr[1][1])/2;
+        const dx = pr[1][0]-pr[0][0], dy = pr[1][1]-pr[0][1];
+        const L = Math.hypot(dx, dy) || 1;
+        const nx2 = -dy/L, ny2 = dx/L;
+        x.setLineDash([4,3]); x.strokeStyle = 'rgba(242,184,76,.6)'; x.lineWidth = 1;
+        x.beginPath();
+        x.moveTo(px(mx - nx2*14), py(my - ny2*14));
+        x.lineTo(px(mx + nx2*14), py(my + ny2*14));
+        x.stroke(); x.setLineDash([]);
+      });
+      x.restore();
+    }
+
+    /* the triangle */
+    x.strokeStyle = A2; x.lineWidth = 2;
+    x.beginPath();
+    [A, B, C].forEach((p,i)=>{ const q = P(p); i ? x.lineTo(q[0], q[1]) : x.moveTo(q[0], q[1]); });
+    x.closePath(); x.stroke();
+
+    /* labels sit outside the triangle: A is the left vertex, so its label goes
+       left, or it lands on the edge it is naming a corner of */
+    [[A,'A',-1],[B,'B',1],[C,'C',1]].forEach(pr=>{
+      const q = P(pr[0]);
+      x.fillStyle = A2;
+      x.beginPath(); x.arc(q[0], q[1], 4.5, 0, 7); x.fill();
+      mono(x, 9.5, 600); x.fillStyle = A2;
+      x.textAlign = pr[2] < 0 ? 'right' : 'left';
+      x.fillText(pr[1], q[0] + pr[2]*8, q[1] - 6);
+      x.textAlign = 'left';
+    });
+    if(O){
+      const q = P(O);
+      x.fillStyle = A1;
+      x.beginPath(); x.arc(q[0], q[1], 5, 0, 7); x.fill();
+      mono(x, 9.5, 600); x.fillStyle = A1;
+      x.fillText('O', q[0] + 7, q[1] + 13);
+    } else {
+      mono(x, 10, 600); x.fillStyle = ROSE; x.textAlign='center';
+      x.fillText('collinear — no circle', W/2, 22);
+      x.textAlign='left';
+    }
+    cap(x, W, H, Object.keys(seen).length + ' of 3 kinds of triangle');
+  }
+  SX.oninput = ()=>{ ev('explore','ccX'); upd(); };
+  SY.oninput = ()=>{ ev('explore','ccY'); upd(); };
+  reg('m5', draw); upd();
+})();
+
+/* ============================================================
+   M6 · where does the centre sit?
+   ============================================================ */
+Q.rows('g6','g6s', [
+  { t:'All angles under 90°',    a:0 },
+  { t:'One angle exactly 90°',   a:1 },
+  { t:'One angle over 90°',      a:2 },
+  { t:'A 3-4-5 triangle',        a:1 },
+  { t:'An equilateral triangle', a:0 }
+], ['Inside','On an edge','Outside'], 'm6',
+   'All five. The largest angle decides where the centre lands.');
+
+/* ============================================================
+   M7 · equal chords, equal angles
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('eqCv'); if(!cv) return;
+  const SA = document.getElementById('eqA'), SB = document.getElementById('eqB'),
+        SP = document.getElementById('eqP');
+  const RAD = 10, AT = 90;                 /* AB never moves; DE does */
+  const chord = a => 2*RAD*Math.sin(a*Math.PI/360);
+  let seen = {};
+
+  function upd(){
+    const a = +SA.value, b = +SB.value, p = +SP.value;
+    document.getElementById('eqAV').textContent = deg(a);
+    document.getElementById('eqBV').textContent = deg(b);
+    document.getElementById('eqPV').textContent = deg(p);
+    const la = chord(a), lb = chord(b);
+    document.getElementById('eqLenA').textContent = fmt(Math.round(la*100)/100);
+    document.getElementById('eqLenB').textContent = fmt(Math.round(lb*100)/100);
+    const same = a === b;
+    document.getElementById('eqSay').textContent = same ? 'equal' : (la > lb ? 'AB is longer' : 'DE is longer');
+    document.getElementById('eqTxt').textContent = same
+      ? 'Both chords span ' + deg(a) + ' at the centre, and both are ' + fmt(Math.round(la*100)/100) +
+        ' long. Now turn DE right round the circle — the length follows the angle and nothing else, so it never changes.'
+      : 'AB spans ' + deg(a) + ' and DE spans ' + deg(b) + ', so they are ' + fmt(Math.round(la*100)/100) +
+        ' and ' + fmt(Math.round(lb*100)/100) + ' long. The wider angle always carries the longer chord.';
+    if(!autoplaying('m7')){
+      seen[same ? 'equal' : 'unequal'] = 1;
+      if(p !== 250) seen.turned = 1;
+      if(Object.keys(seen).length >= 3) complete('m7');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.47, R: Math.min(W*0.30, 92) });
+    const a = +SA.value, b = +SB.value, p = +SP.value;
+
+    function pair(mid, span, col, n1, n2, arcR){
+      const d1 = mid + span/2, d2 = mid - span/2;
+      x.strokeStyle = 'rgba(142,154,192,.35)'; x.lineWidth = 1;
+      [d1, d2].forEach(d=>{
+        const q = c.pt(d);
+        x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(q[0], q[1]); x.stroke();
+      });
+      const q1 = c.pt(d1), q2 = c.pt(d2);
+      x.strokeStyle = col; x.lineWidth = 2.6;
+      x.beginPath(); x.moveTo(q1[0], q1[1]); x.lineTo(q2[0], q2[1]); x.stroke();
+      angleArc(x, c.cx, c.cy, d2, d1, arcR, col, deg(span));
+      rim(x, c, d1, col, n1); rim(x, c, d2, col, n2);
+    }
+    pair(AT, a, A2, 'A', 'B', 24);
+    pair(p,  b, A1, 'D', 'E', 36);
+    centre(x, c, A1, 'O');
+
+    mono(x, 9, 500); x.fillStyle = DIM;
+    x.fillText('radius = ' + RAD, 12, 18);
+    cap(x, W, H, a === b ? 'same angle, same length — wherever DE sits'
+                         : 'different angles, different lengths');
+  }
+  SA.oninput = ()=>{ ev('explore','eqA'); upd(); };
+  SB.oninput = ()=>{ ev('explore','eqB'); upd(); };
+  SP.oninput = ()=>{ ev('explore','eqP'); upd(); };
+  reg('m7', draw); upd();
+})();
+
+/* ============================================================
+   M8 · the centre, the midpoint, and the right angle between them
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('pmCv'); if(!cv) return;
+  const SS = document.getElementById('pmS'), SP = document.getElementById('pmP');
+  const RAD = 10;
+  let seen = {};
+
+  function upd(){
+    const s = +SS.value, p = +SP.value;
+    document.getElementById('pmSV').textContent = deg(s);
+    document.getElementById('pmPV').textContent = deg(p);
+    const half = RAD*Math.sin(s*Math.PI/360), om = RAD*Math.cos(s*Math.PI/360);
+    const h = fmt(Math.round(half*100)/100);
+    document.getElementById('pmAng').textContent = '90°';
+    document.getElementById('pmHalf').textContent = h + ' each';
+    document.getElementById('pmDist').textContent = fmt(Math.round(om*100)/100);
+    document.getElementById('pmTxt').textContent =
+      'This chord spans ' + deg(s) + ' and sits at ' + deg(p) + '. M splits it into ' + h + ' and ' + h +
+      ', and OM is ' + fmt(Math.round(om*100)/100) + ' long. Move it wherever you like: the two halves stay equal and the angle at M stays 90°.';
+    if(!autoplaying('m8')){
+      seen[Math.round(p/60) + '|' + Math.round(s/40)] = 1;
+      if(Object.keys(seen).length >= 5) complete('m8');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.47, R: Math.min(W*0.30, 92) });
+    const s = +SS.value, p = +SP.value;
+    const A = c.pt(p + s/2), B = c.pt(p - s/2);
+    const M = [(A[0]+B[0])/2, (A[1]+B[1])/2];
+
+    /* the two radii, so the isosceles triangle the proof uses is visible */
+    x.strokeStyle = 'rgba(142,154,192,.4)'; x.lineWidth = 1;
+    [A, B].forEach(q=>{ x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(q[0], q[1]); x.stroke(); });
+
+    x.strokeStyle = A2; x.lineWidth = 2.6;
+    x.beginPath(); x.moveTo(A[0], A[1]); x.lineTo(B[0], B[1]); x.stroke();
+
+    x.strokeStyle = A1; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(M[0], M[1]); x.stroke();
+
+    /* one tick on each half, the standard way of saying "these are equal" */
+    const L = Math.hypot(B[0]-A[0], B[1]-A[1]) || 1;
+    const ux = (B[0]-A[0])/L, uy = (B[1]-A[1])/L;
+    const nx = -uy, ny = ux;
+    [-L/4, L/4].forEach(t=>{
+      const mx = M[0] + ux*t, my = M[1] + uy*t;
+      x.strokeStyle = A2; x.lineWidth = 1.4;
+      x.beginPath(); x.moveTo(mx - nx*4, my - ny*4); x.lineTo(mx + nx*4, my + ny*4); x.stroke();
+    });
+
+    /* the right angle at M, drawn as a square between the chord and OM */
+    const vL = Math.hypot(c.cx-M[0], c.cy-M[1]) || 1;
+    const vx = (c.cx-M[0])/vL, vy = (c.cy-M[1])/vL;
+    const k = 9;
+    x.strokeStyle = GOLD; x.lineWidth = 1.4;
+    x.beginPath();
+    x.moveTo(M[0] + ux*k, M[1] + uy*k);
+    x.lineTo(M[0] + ux*k + vx*k, M[1] + uy*k + vy*k);
+    x.lineTo(M[0] + vx*k, M[1] + vy*k);
+    x.stroke();
+
+    x.fillStyle = A1;
+    x.beginPath(); x.arc(M[0], M[1], 3.6, 0, 7); x.fill();
+    /* the label goes on the far side of the chord from O, and away from the
+       right-angle square, so neither sits on top of the other */
+    mono(x, 9.5, 600); x.fillStyle = A1;
+    x.textAlign = 'center'; x.textBaseline = 'middle';
+    x.fillText('M', M[0] - ux*13 - vx*11, M[1] - uy*13 - vy*11);
+    x.textAlign = 'left'; x.textBaseline = 'alphabetic';
+
+    rim(x, c, p + s/2, A2, 'A');
+    rim(x, c, p - s/2, A2, 'B');
+    centre(x, c, A1, 'O');
+    cap(x, W, H, Object.keys(seen).length + ' of 5 placings · ∠OMA stays 90°');
+  }
+  SS.oninput = ()=>{ ev('explore','pmS'); upd(); };
+  SP.oninput = ()=>{ ev('explore','pmP'); upd(); };
+  reg('m8', draw); upd();
+})();
+
+/* ============================================================
+   M9 · chord length against distance from the centre
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('cdCv'); if(!cv) return;
+  const SR = document.getElementById('cdR'), SD = document.getElementById('cdD');
+  let seen = {};
+
+  function state(){
+    const r = +SR.value, d = +SD.value;
+    return d > r ? 'miss' : d === r ? 'point' : d === 0 ? 'diameter' : 'chord';
+  }
+  function upd(){
+    const r = +SR.value, d = +SD.value, st = state();
+    document.getElementById('cdRV').textContent = r;
+    document.getElementById('cdDV').textContent = d;
+    const sq = r*r - d*d;
+    document.getElementById('cdSq').textContent = r + '² − ' + d + '² = ' + sq;
+    if(st === 'miss'){
+      document.getElementById('cdHalf').textContent = 'none';
+      document.getElementById('cdLen').textContent = 'no chord';
+      document.getElementById('cdTxt').textContent =
+        'The line is ' + d + ' from the centre but the radius is only ' + r +
+        ', so it misses the circle entirely. r² − d² has gone negative, and there is nothing to take the square root of.';
+    } else {
+      const half = Math.sqrt(sq);
+      const show = v => fmt(Math.round(v*1000)/1000);
+      const L = show(2*half);
+      document.getElementById('cdHalf').textContent = show(half);
+      document.getElementById('cdLen').textContent = L;
+      document.getElementById('cdTxt').textContent =
+        st === 'diameter'
+          ? 'At d = 0 the chord runs straight through the centre. It is ' + L +
+            ' long, which is 2r — no chord of this circle can ever be longer.'
+        : st === 'point'
+          ? 'At d = r there is nothing left: r² − d² is 0, so the line touches the circle at a single point and there are no two ends to join.'
+        : 'Half the chord is √(' + r + '² − ' + d + '²) = √' + sq + ', so the whole chord is 2√' + sq + ' = ' + L +
+          '. Push it further out and it gets shorter; pull it in and it grows.';
+    }
+    if(!autoplaying('m9')){
+      seen[st] = 1;
+      if(Object.keys(seen).length >= 4) complete('m9');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 300, x = fit(cv, H); if(!x) return;
+    x.fillStyle = PLANE_BG; x.fillRect(0,0,W,H);
+    const r = +SR.value, d = +SD.value, st = state();
+    const u = Math.min((W-70)/34, (H-70)/34);      /* fixed scale: 16 is the largest r */
+    const cx = W/2, cy = H*0.48;
+
+    x.strokeStyle = 'rgba(142,154,192,.75)'; x.lineWidth = 1.6;
+    x.beginPath(); x.arc(cx, cy, r*u, 0, 7); x.stroke();
+
+    const my = cy - d*u;
+    if(st === 'miss'){
+      x.setLineDash([4,4]); x.strokeStyle = ROSE; x.lineWidth = 1.6;
+      x.beginPath(); x.moveTo(14, my); x.lineTo(W-14, my); x.stroke();
+      x.setLineDash([]);
+      mono(x, 9.5, 600); x.fillStyle = ROSE; x.textAlign='center';
+      x.fillText('the line misses the circle', W/2, my - 9);
+      x.textAlign='left';
+    } else {
+      const half = Math.sqrt(r*r - d*d);
+      const ax = cx - half*u, bx = cx + half*u;
+      x.strokeStyle = A2; x.lineWidth = 2.6;
+      x.beginPath(); x.moveTo(ax, my); x.lineTo(bx, my); x.stroke();
+      /* the right triangle O–M–B that the whole mission is about */
+      x.strokeStyle = A1; x.lineWidth = 1.8;
+      x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx, my); x.stroke();
+      x.strokeStyle = GOLD; x.lineWidth = 1.6;
+      x.beginPath(); x.moveTo(cx, cy); x.lineTo(bx, my); x.stroke();
+
+      if(d > 0 && half > 0.4){
+        x.strokeStyle = 'rgba(142,154,192,.8)'; x.lineWidth = 1.2;
+        x.beginPath();
+        x.moveTo(cx + 8, my); x.lineTo(cx + 8, my + 8); x.lineTo(cx, my + 8);
+        x.stroke();
+      }
+      x.fillStyle = A2;
+      [[ax,'A'],[bx,'B']].forEach(p=>{
+        x.beginPath(); x.arc(p[0], my, 4, 0, 7); x.fill();
+        mono(x, 9.5, 600); x.fillStyle = A2;
+        x.fillText(p[1], p[0] + (p[0] < cx ? -14 : 8), my - 8);
+      });
+      mono(x, 9, 600);
+      if(d > 0){
+        x.fillStyle = A1; x.textAlign='right';
+        x.fillText('d = ' + d, cx - 5, (cy + my)/2 + 3);
+        x.textAlign='left';
+      }
+      /* the radius label is pushed off its own line, on the outside of the
+         triangle, so the stroke does not run through the text */
+      const hl = Math.hypot(bx - cx, my - cy) || 1;
+      x.fillStyle = GOLD; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('r = ' + r, (cx + bx)/2 + ((cy - my)/hl)*12, (cy + my)/2 + ((bx - cx)/hl)*12);
+      x.textAlign='left'; x.textBaseline='alphabetic';
+      if(half > 0.4){
+        x.fillStyle = A2; x.textAlign='center';
+        x.fillText(fmt(Math.round(half*100)/100), (cx + bx)/2, my - 8);
+        x.textAlign='left';
+      }
+    }
+    centre(x, { cx, cy }, A1, 'O');
+    cap(x, W, H, Object.keys(seen).length + ' of 4: diameter, chord, point, miss');
+  }
+  SR.oninput = ()=>{ ev('explore','cdR'); upd(); };
+  SD.oninput = ()=>{ ev('explore','cdD'); upd(); };
+  reg('m9', draw); upd();
+})();
+
+/* ============================================================
+   M10 · the same right triangle, read three ways
+   ============================================================ */
+Q.vgrid('g10','g10check','g10s', {
+  head: 'Find the missing one',
+  cols: ['r', 'd', 'Chord'],
+  options: [
+    ['5','7','8','10','12','13','15','17'],
+    ['3','4','5','6','8','9','12'],
+    ['12','16','20','24','26','30','2√13','2√11']
+  ],
+  rows: [
+    { l:'1 · the chord',   given:[13, 5, null],    a:[null, null, '24'] },
+    { l:'2 · the distance', given:[13, null, 24],  a:[null, '5', null] },
+    { l:'3 · the chord',   given:[15, 9, null],    a:[null, null, '24'] },
+    { l:'4 · the radius',  given:[null, 6, 16],    a:['10', null, null] },
+    { l:'5 · the chord',   given:[7, 6, null],     a:[null, null, '2√13'] }
+  ],
+  mid: 'm10',
+  doneMsg: 'All five. One triangle, three directions.'
+});
+
+/* ============================================================
+   M11 · the two arcs between two points
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('arCv'); if(!cv) return;
+  const SS = document.getElementById('arS'), BT = document.getElementById('arSwap');
+  let other = false, seen = {};
+
+  const sweep = ()=>{ const s = +SS.value; return other ? 360 - s : s; };
+  const kindOf = v => v === 180 ? 'a semicircle' : v < 180 ? 'minor arc' : 'major arc';
+
+  function upd(){
+    const s = +SS.value, v = sweep(), k = kindOf(v);
+    document.getElementById('arSV').textContent = deg(s);
+    document.getElementById('arAng').textContent = deg(v);
+    document.getElementById('arKind').textContent = k;
+    document.getElementById('arOther').textContent = deg(360 - v) + ', ' + kindOf(360 - v);
+    BT.textContent = 'Following: ' + (k === 'a semicircle' ? 'a semicircle' : 'the ' + k);
+    document.getElementById('arTxt').textContent = v === 180
+      ? 'A and B are exactly opposite, so AB is a diameter and each arc sweeps 180°. Neither is bigger, so neither is major or minor — both are semicircles.'
+      : 'The arc you are following sweeps ' + deg(v) + ' at the centre, which makes it the ' + k +
+        '. The other way round sweeps ' + deg(360 - v) + ', and the two always come to 360°.';
+    if(!autoplaying('m11')){
+      seen[k] = 1;
+      if(Object.keys(seen).length >= 3) complete('m11');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.47, R: Math.min(W*0.30, 90), col:'rgba(142,154,192,.28)' });
+    const s = +SS.value;
+    const a1 = 90 - s/2, a2 = 90 + s/2;      /* the s-arc runs over the top */
+
+    /* the arc being followed, drawn thick; the other one stays faint */
+    const lo = other ? a2 : a1, hi = other ? a1 + 360 : a2;
+    x.strokeStyle = A2; x.lineWidth = 4.5;
+    x.beginPath(); x.arc(c.cx, c.cy, c.R, -hi*Math.PI/180, -lo*Math.PI/180); x.stroke();
+
+    x.setLineDash([4,3]); x.strokeStyle = 'rgba(124,134,240,.7)'; x.lineWidth = 1.2;
+    [a1, a2].forEach(d=>{ const q = c.pt(d); x.beginPath(); x.moveTo(c.cx, c.cy); x.lineTo(q[0], q[1]); x.stroke(); });
+    x.setLineDash([]);
+    angleArc(x, c.cx, c.cy, lo, hi, 30, A2, deg(sweep()));
+
+    rim(x, c, a1, A1, 'B');
+    rim(x, c, a2, A1, 'A');
+    centre(x, c, A1, 'O');
+    cap(x, W, H, Object.keys(seen).length + ' of 3: minor, major, semicircle');
+  }
+  SS.oninput = ()=>{ ev('explore','arS'); upd(); };
+  BT.onclick  = ()=>{ other = !other; ev('explore','arSwap'); upd(); };
+  reg('m11', draw); upd();
+})();
+
+/* ============================================================
+   M12 · the centre sees an arc at twice the angle anyone else does
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('dbCv'); if(!cv) return;
+  const SS = document.getElementById('dbS'), SP = document.getElementById('dbP');
+  let seen = {};
+
+  /* A and B straddle the bottom of the circle, so the arc they cut off down
+     there subtends s at the centre and P has the whole top to roam over. */
+  const ends = s => [270 - s/2, 270 + s/2];
+  function pAng(){
+    const s = +SS.value, t = +SP.value;
+    return ends(s)[1] + (0.06 + 0.88*t/100)*(360 - s);
+  }
+
+  function upd(){
+    const s = +SS.value, t = +SP.value;
+    document.getElementById('dbSV').textContent = deg(s);
+    document.getElementById('dbPV').textContent = deg(((pAng() % 360) + 360) % 360);
+    document.getElementById('dbCen').textContent = deg(s);
+    document.getElementById('dbPt').textContent = deg(s/2);
+    document.getElementById('dbRatio').textContent = 'exactly 2 : 1';
+    document.getElementById('dbTxt').textContent =
+      'Arc AB subtends ' + deg(s) + ' at the centre and ' + deg(s/2) + ' at P. Slide P anywhere along the top — ' +
+      'it is a different triangle every time, but the angle at P does not move off ' + deg(s/2) + '.';
+    if(!autoplaying('m12')){
+      seen[Math.round(t/20)] = 1;
+      if(Object.keys(seen).length >= 5) complete('m12');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 310, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.48, R: Math.min(W*0.29, 88), col:'rgba(142,154,192,.3)' });
+    const s = +SS.value;
+    const [b, a] = ends(s);
+    const P = c.pt(pAng()), A = c.pt(a), B = c.pt(b);
+
+    /* the arc itself */
+    x.strokeStyle = ROSE; x.lineWidth = 4;
+    x.beginPath(); x.arc(c.cx, c.cy, c.R, -a*Math.PI/180, -b*Math.PI/180); x.stroke();
+
+    x.strokeStyle = A1; x.lineWidth = 1.8;
+    x.beginPath(); x.moveTo(A[0], A[1]); x.lineTo(c.cx, c.cy); x.lineTo(B[0], B[1]); x.stroke();
+    x.strokeStyle = A2; x.lineWidth = 1.8;
+    x.beginPath(); x.moveTo(A[0], A[1]); x.lineTo(P[0], P[1]); x.lineTo(B[0], B[1]); x.stroke();
+
+    angleArc(x, c.cx, c.cy, b, a, 24, A1, deg(s));
+    /* the angle at P, measured between PA and PB as they actually leave P */
+    const ang = q => Math.atan2(P[1] - q[1], q[0] - P[0]) * 180/Math.PI;
+    let u1 = ang(A), u2 = ang(B);
+    if(u2 < u1) u2 += 360;
+    if(u2 - u1 > 180){ const t2 = u1; u1 = u2 - 360; u2 = t2; }
+    angleArc(x, P[0], P[1], u1, u2, 20, A2, deg(s/2));
+
+    rim(x, c, a, A1, 'A');
+    rim(x, c, b, A1, 'B');
+    x.fillStyle = A2;
+    x.beginPath(); x.arc(P[0], P[1], 4.5, 0, 7); x.fill();
+    mono(x, 9.5, 600); x.fillStyle = A2;
+    x.fillText('P', P[0] + 8, P[1] - 6);
+    centre(x, c, A1, 'O');
+    cap(x, W, H, Object.keys(seen).length + ' of 5 places for P · ' + deg(s/2) + ' every time');
+  }
+  SS.oninput = ()=>{ ev('explore','dbS'); upd(); };
+  SP.oninput = ()=>{ ev('explore','dbP'); upd(); };
+  reg('m12', draw); upd();
+})();
+
+/* ============================================================
+   M13 · the angle in a semicircle
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('smCv'); if(!cv) return;
+  const SP = document.getElementById('smP');
+  let seen = {};
+
+  function upd(){
+    const p = +SP.value;
+    document.getElementById('smPV').textContent = deg(p);
+    document.getElementById('smCen').textContent = '180°';
+    /* measured off the drawing, not asserted — if the geometry were wrong
+       this readout would say so */
+    const A = [-1, 0], B = [1, 0], D = [Math.cos(p*Math.PI/180), Math.sin(p*Math.PI/180)];
+    const v1 = [A[0]-D[0], A[1]-D[1]], v2 = [B[0]-D[0], B[1]-D[1]];
+    const cosA = (v1[0]*v2[0] + v1[1]*v2[1]) / (Math.hypot(v1[0],v1[1])*Math.hypot(v2[0],v2[1]));
+    const measured = Math.acos(Math.max(-1, Math.min(1, cosA)))*180/Math.PI;
+    document.getElementById('smAng').textContent = deg(measured);
+    if(!autoplaying('m13')) seen[Math.round(p/30)] = 1;
+    document.getElementById('smN').textContent = Object.keys(seen).length;
+    document.getElementById('smTxt').textContent =
+      'D sits at ' + deg(p) + ' and ∠ADB measures ' + deg(measured) + '. AB is a diameter, so the arc from A to B ' +
+      'away from D is half the circle — 180° at the centre, and half of that at D. ' +
+      Object.keys(seen).length + ' of 5 positions tried.';
+    if(!autoplaying('m13') && Object.keys(seen).length >= 5) complete('m13');
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 290, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.55, R: Math.min(W*0.31, 94), col:'rgba(142,154,192,.3)' });
+    const p = +SP.value;
+    const A = c.pt(180), B = c.pt(0), D = c.pt(p);
+
+    /* The arc that is doing the subtending is the one AWAY from D, so that is
+       the one drawn in colour. Highlighting D's own half instead would put the
+       picture and the 180° readout at odds. */
+    x.strokeStyle = 'rgba(224,96,127,.7)'; x.lineWidth = 3.6;
+    x.beginPath(); x.arc(c.cx, c.cy, c.R, 0, Math.PI); x.stroke();
+    mono(x, 9, 500); x.fillStyle = ROSE; x.textAlign='center';
+    x.fillText('this arc: 180° at O', c.cx, c.cy + c.R*0.55);
+    x.textAlign='left';
+
+    x.strokeStyle = A1; x.lineWidth = 2.4;
+    x.beginPath(); x.moveTo(A[0], A[1]); x.lineTo(B[0], B[1]); x.stroke();
+    x.strokeStyle = A2; x.lineWidth = 2;
+    x.beginPath(); x.moveTo(A[0], A[1]); x.lineTo(D[0], D[1]); x.lineTo(B[0], B[1]); x.stroke();
+
+    /* the right angle at D, squared off against the two sides */
+    const un = q => { const L = Math.hypot(q[0]-D[0], q[1]-D[1])||1; return [(q[0]-D[0])/L, (q[1]-D[1])/L]; };
+    const ua = un(A), ub = un(B), k = 10;
+    x.strokeStyle = GOLD; x.lineWidth = 1.5;
+    x.beginPath();
+    x.moveTo(D[0] + ua[0]*k, D[1] + ua[1]*k);
+    x.lineTo(D[0] + (ua[0]+ub[0])*k, D[1] + (ua[1]+ub[1])*k);
+    x.lineTo(D[0] + ub[0]*k, D[1] + ub[1]*k);
+    x.stroke();
+    mono(x, 9, 600); x.fillStyle = GOLD; x.textAlign='center';
+    x.fillText('90°', D[0] + (ua[0]+ub[0])*20, D[1] + (ua[1]+ub[1])*20 + 3);
+    x.textAlign='left';
+
+    rim(x, c, 180, A1, 'A');
+    rim(x, c, 0,   A1, 'B');
+    rim(x, c, p,   A2, 'D');
+    centre(x, c, A1, 'O');
+    mono(x, 9, 500); x.fillStyle = DIM;
+    x.fillText('AB is a diameter', 12, 18);
+    cap(x, W, H, Object.keys(seen).length + ' of 5 positions · always a right angle');
+  }
+  SP.oninput = ()=>{ ev('explore','smP'); upd(); };
+  reg('m13', draw); upd();
+})();
+
+/* ============================================================
+   M14 · a quadrilateral with all four corners on the circle
+   ============================================================ */
+(function(){
+  const cv = document.getElementById('cyCv'); if(!cv) return;
+  const SB = document.getElementById('cyB'), SC = document.getElementById('cyC'),
+        SD = document.getElementById('cyD');
+  let seen = {};
+
+  /* A is pinned at 0°, and the sliders are ranged so B, C and D can never
+     overtake one another — the four corners stay in order round the circle,
+     which is what makes ABCD a quadrilateral rather than a crossed figure. */
+  function angles(){
+    const b = +SB.value, cc = +SC.value, d = +SD.value;
+    return {
+      b, c: cc, d,
+      A: (d - b)/2,           /* half the arc BCD */
+      B: (360 - cc)/2,        /* half the arc CDA */
+      C: (360 - d + b)/2,     /* half the arc DAB */
+      D: cc/2                 /* half the arc ABC */
+    };
+  }
+  function upd(){
+    const g = angles();
+    document.getElementById('cyBV').textContent = deg(g.b);
+    document.getElementById('cyCV').textContent = deg(g.c);
+    document.getElementById('cyDV').textContent = deg(g.d);
+    document.getElementById('cyAC').textContent = deg(g.A) + ' + ' + deg(g.C);
+    document.getElementById('cyBD').textContent = deg(g.B) + ' + ' + deg(g.D);
+    document.getElementById('cySay').textContent = 'adds to ' + deg(g.A + g.C);
+    document.getElementById('cyTxt').textContent =
+      '∠A is ' + deg(g.A) + ' and ∠C is ' + deg(g.C) + '; ∠B is ' + deg(g.B) + ' and ∠D is ' + deg(g.D) +
+      '. Each opposite pair covers the two arcs that make up the whole circle, so each pair is half of 360° — 180°, whatever you do to the corners.';
+    if(!autoplaying('m14')){
+      seen['B' + Math.round(g.b/30)] = 1;
+      seen['C' + Math.round(g.c/30)] = 1;
+      seen['D' + Math.round(g.d/30)] = 1;
+      if(Object.keys(seen).length >= 6) complete('m14');
+    }
+    draw();
+  }
+  function draw(){
+    const W = cv.clientWidth||320, H = 310, x = fit(cv, H); if(!x) return;
+    const c = circ(x, W, H, { cy: H*0.47, R: Math.min(W*0.29, 88), col:'rgba(142,154,192,.35)' });
+    const g = angles();
+    const V = [0, g.b, g.c, g.d].map(d=>c.pt(d));
+    const NM = ['A','B','C','D'], VAL = [g.A, g.B, g.C, g.D];
+
+    x.fillStyle = 'rgba(78,205,196,.10)';
+    x.beginPath(); V.forEach((v,i)=> i ? x.lineTo(v[0], v[1]) : x.moveTo(v[0], v[1]));
+    x.closePath(); x.fill();
+    x.strokeStyle = A2; x.lineWidth = 2.2; x.stroke();
+
+    /* an angle arc inside each corner, opening towards the other two vertices */
+    V.forEach((v,i)=>{
+      const prev = V[(i+3)%4], next = V[(i+1)%4];
+      const a1 = Math.atan2(v[1]-prev[1], prev[0]-v[0])*180/Math.PI;
+      const a2 = Math.atan2(v[1]-next[1], next[0]-v[0])*180/Math.PI;
+      let lo = a1, hi = a2;
+      if(hi < lo) hi += 360;
+      if(hi - lo > 180){ const t = lo; lo = hi - 360; hi = t; }
+      angleArc(x, v[0], v[1], lo, hi, 17, i % 2 ? GOLD : A1, deg(VAL[i]));
+    });
+
+    [0, g.b, g.c, g.d].forEach((d,i)=> rim(x, c, d, i % 2 ? GOLD : A1, NM[i]));
+    centre(x, c, A1, '');
+    cap(x, W, H, 'A+C = ' + deg(g.A + g.C) + ' · B+D = ' + deg(g.B + g.D));
+  }
+  SB.oninput = ()=>{ ev('explore','cyB'); upd(); };
+  SC.oninput = ()=>{ ev('explore','cyC'); upd(); };
+  SD.oninput = ()=>{ ev('explore','cyD'); upd(); };
+  reg('m14', draw); upd();
+})();
+
+/* ============================================================
+   M15 · the angle problems from the end of the chapter
+   ============================================================ */
+Q.vgrid('g15','g15check','g15s', {
+  head: 'Problem',
+  cols: ['Answer'],
+  options: [
+    ['35°','38','70°','75°','80°','86°','94°','100°','105°','110°','140°']
+  ],
+  rows: [
+    { l:'An arc subtends 70° at the centre. At a point on the circle?', a:['35°'] },
+    { l:'Cyclic ABCD with ∠A = 75°. Then ∠C is',                        a:['105°'] },
+    { l:'Cyclic ABCD with ∠B = 110°. Then ∠D is',                       a:['70°'] },
+    { l:'Cyclic PQRS, ∠P = 2x + 10, ∠R = 3x − 20. Then x is',           a:['38'] },
+    { l:'…so ∠P measures',                                              a:['86°'] },
+    { l:'Fig. 5.26: ∠D = 100°, so x is',                                a:['80°'] }
+  ],
+  mid: 'm15',
+  doneMsg: 'All six. Every one came from an angle at the centre.'
+});
+
+/* ============================================================
+   M16 · the boss
+   ============================================================ */
+Q.boss([
+  { t:'Warm-up', q:'A circle is the set of all points in a plane that are…',
+    o:['at the same distance from a fixed point','on a straight line','the same distance apart','at the same angle to a fixed line'],
+    a:0, w:'Only distance from the centre matters. Direction never enters the definition, which is why the figure comes out round.' },
+  { t:'Warm-up', q:'Which is the longest chord a circle has?',
+    o:['A radius','A diameter','The minor arc','A chord near the rim'],
+    a:1, w:'A chord is 2√(r² − d²), which is largest when d = 0 — a chord through the centre, of length 2r.' },
+  { t:'Warm-up', q:'A connected piece of the circle itself, between two points, is called…',
+    o:['a chord','an arc','a radius','a diameter'],
+    a:1, w:'A chord is the straight segment; the arc is the curved way round. Two points always give two arcs.' },
+  { t:'Getting going', q:'How many circles pass through three points that are not in a straight line?',
+    o:['None','Exactly one','Exactly two','Infinitely many'],
+    a:1, w:'The perpendicular bisectors of two of the sides cross at exactly one point — the circumcentre — and that fixes the circle.' },
+  { t:'Getting going', q:'Two chords of a circle subtend equal angles at the centre. What follows?',
+    o:['They are equal in length','They are parallel','They are perpendicular','They are both diameters'],
+    a:0, w:'Theorem 3. The two triangles have two radii and the angle between them in common, so they are congruent by SAS.' },
+  { t:'Getting going', q:'You join the centre of a circle to the midpoint of a chord. The angle there is…',
+    o:['30°','45°','60°','90°'],
+    a:3, w:'Theorem 4. Triangle OAB is isosceles, so the two halves are congruent and the two equal angles on a straight line must each be 90°.' },
+  { t:'Harder', q:'A chord of a circle of radius 13 cm is 5 cm from the centre. How long is it?',
+    o:['10 cm','12 cm','24 cm','26 cm'],
+    a:2, w:'Half the chord is √(169 − 25) = √144 = 12, so the chord is 24 cm.' },
+  { t:'Harder', q:'An arc subtends 70° at the centre. What does it subtend at a point on the remaining part of the circle?',
+    o:['35°','70°','110°','140°'],
+    a:0, w:'Theorem 9: the centre sees an arc at twice the angle any point on the far side of it does. Half of 70° is 35°.' },
+  { t:'Boss', q:'AB is a diameter and D is any other point on the circle. What is ∠ADB?',
+    o:['45°','60°','90°','180°'],
+    a:2, w:'The arc AB not containing D is half the circle, so it subtends 180° at the centre and half of that — 90° — at D. Always.' },
+  { t:'Boss', q:'In a cyclic quadrilateral PQRS, ∠P = 2x + 10 and ∠R = 3x − 20. What is x?',
+    o:['30','34','38','42'],
+    a:2, w:'Opposite angles add to 180°, so (2x + 10) + (3x − 20) = 180, giving 5x − 10 = 180 and x = 38 — the angles are 86° and 94°.' }
+], 'm16', 'Twelve theorems, and you have them all.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>

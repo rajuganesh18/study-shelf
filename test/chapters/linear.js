@@ -132,9 +132,9 @@ async function run(){
     ],
     g8: [                                   // Example 6 and Exercise Set 2.2
       ['2x + 10 = 64', '27 and 37'],
-      ['x + 4x = 300', '60 ft and 240 ft'],
+      ['x + 4x = 300', '60 and 240 ft'],
       ['5x − 2x = 63', '42 and 105'],
-      ['2(3x + 3) = 24', '3 cm and 9 cm']
+      ['2(3x + 3) = 24', '3 and 9 cm']
     ],
     g10: [                                  // 2n − 1, forwards and backwards
       ['2×15 − 1', '29'],
