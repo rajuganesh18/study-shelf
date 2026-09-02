@@ -29,7 +29,8 @@ const STAGES = [
   { name:'circles',      browser:true,  run:require('./chapters/circles') },
   { name:'perimeter',    browser:true,  run:require('./chapters/perimeter') },
   { name:'probability',  browser:true,  run:require('./chapters/probability') },
-  { name:'sequences',    browser:true,  run:require('./chapters/sequences') }
+  { name:'sequences',    browser:true,  run:require('./chapters/sequences') },
+  { name:'society',      browser:true,  run:require('./chapters/society') }
 ];
 
 (async () => {

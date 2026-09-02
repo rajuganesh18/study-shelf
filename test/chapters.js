@@ -38,7 +38,11 @@ module.exports = [
   { slug:'circles',      id:'9-maths-5',   n:5,  title:"I'm Up and Down, and Round and Round" },
   { slug:'perimeter',    id:'9-maths-6',   n:6,  title:'Measuring Space: Perimeter and Area' },
   { slug:'probability',  id:'9-maths-7',   n:7,  title:'The Mathematics of Maybe: Introduction to Probability' },
-  { slug:'sequences',    id:'9-maths-8',   n:8,  title:'Predicting What Comes Next: Exploring Sequences and Progressions' }
+  { slug:'sequences',    id:'9-maths-8',   n:8,  title:'Predicting What Comes Next: Exploring Sequences and Progressions' },
+
+  /* Social Science. One integrated book — Understanding Society: India and
+     Beyond — rather than the four separate ones Class 10 still uses. */
+  { slug:'society',      id:'9-social-1',  n:1,  title:'Understanding Social Science' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';
