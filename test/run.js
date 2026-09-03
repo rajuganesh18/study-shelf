@@ -30,7 +30,8 @@ const STAGES = [
   { name:'perimeter',    browser:true,  run:require('./chapters/perimeter') },
   { name:'probability',  browser:true,  run:require('./chapters/probability') },
   { name:'sequences',    browser:true,  run:require('./chapters/sequences') },
-  { name:'society',      browser:true,  run:require('./chapters/society') }
+  { name:'society',      browser:true,  run:require('./chapters/society') },
+  { name:'landforms',    browser:true,  run:require('./chapters/landforms') }
 ];
 
 (async () => {

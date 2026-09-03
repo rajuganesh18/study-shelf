@@ -42,7 +42,8 @@ module.exports = [
 
   /* Social Science. One integrated book — Understanding Society: India and
      Beyond — rather than the four separate ones Class 10 still uses. */
-  { slug:'society',      id:'9-social-1',  n:1,  title:'Understanding Social Science' }
+  { slug:'society',      id:'9-social-1',  n:1,  title:'Understanding Social Science' },
+  { slug:'landforms',    id:'9-social-2',  n:2,  title:'Shaping of the Earth’s Surface' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';
