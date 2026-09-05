@@ -36,7 +36,9 @@ show you, which is the only reason they are on a screen.
 
 WHAT IS INSIDE
 • Class 9 Science, from the new NCERT Exploration textbook
-• 12 to 16 missions per chapter, each with something to do
+• Class 9 Maths, from Ganita Manjari Part 1
+• Class 9 Social Science, from Understanding Society: India and Beyond
+• 13 to 16 missions per chapter, each with something to do
 • A chapter boss: ten questions drawn from the book's own end-of-chapter
   exercises, with an explanation after every answer
 • XP, coins and a daily streak, so coming back tomorrow is worth something
@@ -55,10 +57,10 @@ not after. Nothing is collected and nothing is transmitted. Progress is saved on
 the device and can be exported to a file if you change phones.
 
 CURRENTLY AVAILABLE
-Class 9 Science: Chapter 1 Exploration, Chapter 3 Tissues in Action, and
-Chapter 4 Describing Motion Around Us. The full Class 9 and Class 10 catalogue
-for Science, Maths and Social Science is listed in the app, with more chapters
-being added.
+All 13 chapters of Class 9 Science and all 8 chapters of Class 9 Maths, Part 1.
+Class 9 Social Science has its first two chapters, with the rest on the way. The
+full Class 9 and Class 10 catalogue is listed in the app, and every chapter that
+is not built yet is marked Coming soon rather than hidden.
 
 Study Shelf is an independent study aid. It is not endorsed by or affiliated
 with NCERT or CBSE.
