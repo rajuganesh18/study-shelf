@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Atmosphere and Climate — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: the blue of the sky the whole chapter looks up into, and the green the monsoon leaves behind ---------- */
+:root{ --a1:#43A8E0; --a2:#8ED17A; --badge-bg:#E4EFF7; }
+/*@include shared/chrome.css*/
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Social Science · Chapter 3</div>
+  <h1>Atmosphere<br><span>and Climate</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · The blanket of air</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="35" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>What the air is made of</b><i>Fig. 3.2 · composition of the atmosphere</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Here is the air around you as a hundred squares. Two gases take ninety-nine of them. Tap each gas to find its own — and look closely at the one square that is left.</p>
+    <div class="panel">
+      <canvas id="airCv" height="235"></canvas>
+      <div class="chips" id="airOpts" style="margin-top:10px"></div>
+      <div class="note" style="margin-top:11px" id="airTxt">—</div>
+    </div>
+    <p>The Earth's atmosphere is a mixture of gases. <b>Nitrogen and oxygen</b> are the two primary and most abundant, and both are essential to life. Carbon dioxide, argon, helium, neon, krypton, xenon, ozone and hydrogen are also present, but in far smaller quantities.</p>
+    <p>Besides these the atmosphere carries <b>water vapour and tiny dust particles</b>. The amount of water vapour varies, generally between 0.1 and 0.4 per cent, and it plays a significant role in cloud formation and precipitation. The composition of the atmosphere also varies with altitude.</p>
+    <div class="curio">
+      <h5>Think about it</h5>
+      <div class="note">The atmosphere is pulled down around the Earth by gravity. It shields us from harmful radiation coming from the Sun, including ultraviolet, and it regulates the Earth's temperature by trapping some of the Sun's energy instead of letting it all escape to space. Can you imagine what would happen if there were no atmosphere at all?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="35" data-coin="20">
+  <summary><span class="mno">02</span><span class="mt"><b>Straight up through five layers</b><i>Fig. 3.3 · structure of the atmosphere</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Climb from the ground to the edge of space. The layers are marked out by one thing only: what the temperature does as you rise.</p>
+    <div class="panel">
+      <canvas id="layCv" height="245"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="layS">Altitude <b><span id="laySV">0</span> km</b></label>
+        <input id="layS" type="range" min="0" max="1000" step="5" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Layer</div><div class="v" id="layA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Temperature</div><div class="v" id="layB" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">What is here</div><div class="v" id="layC" style="font-size:11.5px">—</div></div>
+      </div>
+    </div>
+    <p>The layers are defined by changes in <b>temperature and density</b> with increasing altitude. The density of air is highest near the Earth's surface and decreases with height. Each boundary has its own name: the <b>tropopause</b> between troposphere and stratosphere, the <b>stratopause</b> below the mesosphere, and the <b>mesopause</b> above it.</p>
+    <p>The <b>troposphere</b> averages about 12 km and holds the air we breathe, most of the water vapour and the clouds — nearly all weather happens here. The <b>stratosphere</b> reaches 50 km, is free of cloud and weather disturbance, and carries the ozone layer. The <b>mesosphere</b> reaches 80 km, where most meteorites burn up. The <b>thermosphere</b> runs from 80 to 700 km, reflects radio waves, contains the ionosphere and hosts the auroras. Above it the <b>exosphere</b> is so thin that helium and hydrogen simply float away into space.</p>
+    <div class="curio">
+      <h5>Don't miss out</h5>
+      <div class="note">Temperature decreases with altitude only in the troposphere and the mesosphere. In the stratosphere and the thermosphere it rises — in the thermosphere very rapidly indeed, because the gas molecules there absorb the Sun's X-rays and short-wave ultraviolet.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="30" data-coin="15">
+  <summary><span class="mno">03</span><span class="mt"><b>Which layer does this happen in?</b><i>One clue each, and no repeats</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Every one of these belongs to exactly one layer. Work out which from what you have just climbed through.</p>
+    <div class="panel">
+      <div id="g3"></div>
+      <div class="score" id="g3s"></div>
+    </div>
+    <p>The word <i>aurora</i> comes from Latin, meaning dawn or morning light, and is named after the Roman goddess of dawn. The <b>solar wind</b> — charged particles emitted by the Sun — is directed towards the magnetic poles on reaching the Earth's atmosphere, and as those particles meet different atmospheric gases each gas glows with its own colour. The display is called the <b>Aurora Borealis</b> in the Northern Hemisphere and the <b>Aurora Australis</b> in the Southern.</p>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="25" data-coin="10">
+  <summary><span class="mno">04</span><span class="mt"><b>Weather, or climate?</b><i>A day, against thirty years</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>They are not the same word for the same thing. One is what today is doing; the other is what a place is like. Mark each statement.</p>
+    <div class="panel">
+      <div id="g4"></div>
+      <div class="score" id="g4s"></div>
+    </div>
+    <p><b>Weather</b> refers to the hour-to-hour and day-to-day conditions of the atmosphere, and it can vary significantly from one day to the next. <b>Climate</b> is the sum total of weather conditions and variations over a large area for an extended period — usually thirty years or more.</p>
+    <p>The elements that shape both are the same five: <b>temperature, humidity, precipitation, atmospheric pressure and wind</b>. Temperature is governed largely by <b>insolation</b>, the incoming solar energy the Earth intercepts, which decreases from the equator towards the poles — and so the temperature does too.</p>
+    <div class="curio">
+      <h5>A word to know</h5>
+      <div class="note">Humidity is the presence of water vapour in the air. As air gets warmer its capacity to hold water vapour increases, so humidity rises — which is why on a humid day clothes take longer to dry and sweat evaporates slowly, leaving you uncomfortable. Precipitation happens when part of the atmosphere becomes saturated with water vapour, which condenses and falls under gravity: drizzle, rain, snow, sleet and hail.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Pressure, and the wind it makes</div>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="35" data-coin="20">
+  <summary><span class="mno">05</span><span class="mt"><b>High pressure, low pressure</b><i>Where every wind comes from</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Warm the ground and the air above it does one thing; cool it and the air does the opposite. Everything else in this chapter follows from that.</p>
+    <div class="panel">
+      <canvas id="presCv" height="225"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="presS">Ground temperature <b><span id="presSV">25</span> °C</b></label>
+        <input id="presS" type="range" min="0" max="45" step="1" value="25">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">The air is</div><div class="v" id="presA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Surface pressure</div><div class="v" id="presB" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Sky</div><div class="v" id="presC" style="font-size:12px">—</div></div>
+      </div>
+    </div>
+    <p>The pressure exerted by the weight of air on the Earth's surface is called <b>air pressure</b>. It is highest at sea level and falls rapidly with altitude. Horizontally, it is decided by temperature: where it is hot the air heats, expands and rises, creating a <b>low-pressure</b> area, which brings cloudy skies and wet weather. Where it is cold the air is heavy and sinks, creating a <b>high-pressure</b> area, which brings clear and sunny skies.</p>
+    <p><b>Air always moves from high-pressure areas to low-pressure areas</b>, and that movement is wind. Winds are named after the direction they blow <i>from</i> — a wind blowing from the west is a westerly.</p>
+    <div class="curio">
+      <h5>Don't miss out</h5>
+      <div class="note">The air above us presses on our bodies with real force, and yet we never feel it. That is because air presses on us from every side at once, and our bodies exert an equal counter-pressure outward — the two cancel.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="30" data-coin="15">
+  <summary><span class="mno">06</span><span class="mt"><b>Sea breeze and land breeze</b><i>Fig. 3.8 · the same rule, twice a day</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Land and sea do not heat or cool at the same rate, and the coast feels the difference every single day. Switch between noon and midnight.</p>
+    <div class="panel">
+      <canvas id="brzCv" height="205"></canvas>
+      <div class="chips" id="brzOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Which is warmer</div><div class="v" id="brzA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">The wind blows</div><div class="v" id="brzB" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="brzTxt">—</div>
+    </div>
+    <p>The <b>sea breeze</b> is a local wind that blows from sea to land during the day, especially in the afternoon, when the land becomes relatively warmer than the sea. That forms a low-pressure region over the land, so the wind starts blowing in off the water.</p>
+    <p>The <b>land breeze</b> blows from land to sea at night, because land cools faster than sea. Since the difference in temperature and pressure between sea and land is small at night, the land breeze is the weaker of the two. Together they are essential in creating the moderate climatic conditions of coastal regions.</p>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="30" data-coin="15">
+  <summary><span class="mno">07</span><span class="mt"><b>Reading the wind without an instrument</b><i>Table 3.1 · speeds and their effects</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>You do not need an anemometer to estimate wind speed. You need smoke, a few leaves, an umbrella and somewhere safe to stand.</p>
+    <div class="panel">
+      <canvas id="wndCv" height="215"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="wndS">Category <b><span id="wndSV">Calm</span></b></label>
+        <input id="wndS" type="range" min="0" max="3" step="1" value="0">
+      </div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Wind speed</div><div class="v" id="wndA">—</div></div>
+        <div class="rc"><div class="k">Common effects</div><div class="v" id="wndB" style="font-size:11.5px">—</div></div>
+      </div>
+    </div>
+    <p>Wind is simply the movement of air from a high-pressure area to a low-pressure area, and it can be gentle or strong. You can watch it blow dry leaves down a pavement, lift dust — or uproot trees in a storm.</p>
+    <div class="curio">
+      <h5>Let's explore</h5>
+      <div class="note">Table 3.1 gives only four of the categories. Find out the others that sit between them — the moderate breeze, the gale, the hurricane — along with their speeds and their common effects, and share what you find in class.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 3 · India's seasons, and the monsoon</div>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="25" data-coin="10">
+  <summary><span class="mno">08</span><span class="mt"><b>The four seasons the IMD counts</b><i>Put the year in order</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>The climate of India is broadly a <b>tropical monsoon</b> climate. The Indian Meteorological Department divides the year into four seasons — tap them in the order they arrive.</p>
+    <div class="panel">
+      <div class="chips" id="g8"></div>
+      <div class="score" id="g8s"></div>
+    </div>
+    <p><b>Winter</b> generally lasts from December to early April; December and January are coldest, averaging 10–15 °C in the north-west and rising towards the equator to 20–25 °C in mainland India's south-east. <b>Summer or pre-monsoon</b> spans April to June, or into July in the north-west: April is hottest in the west and south, May in the north, and most of inland India averages 32–40 °C.</p>
+    <p>The <b>monsoon or advancing monsoon</b> generally runs June to September, dominated by the humid south-west summer monsoon that sweeps across the country in late May or early June. The <b>post-monsoon or retreating monsoon</b> lasts October to December, and in north-western India October and November are usually cloudless. The Himalayan states, being more temperate, experience two additional seasons: autumn and spring.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="30" data-coin="15">
+  <summary><span class="mno">09</span><span class="mt"><b>The six ṛtus</b><i>Table 3.2 · the traditional Indian year</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Traditionally India counts six seasons, each about two months long, based on dividing the twelve months astronomically into six parts. Match each to where it falls in the Gregorian year.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a ṛtu, then tap its months.</div>
+      <div class="match"><div id="g9a"></div><div id="g9b"></div></div>
+      <div class="score" id="g9s"></div>
+    </div>
+    <p>The traditional Indian calendar reflects these seasons in the arrangement of its months — Chaitra and Vaiśhākha for Vasanta, Śhrāvaṇa and Bhādrapada for Varṣhā, and so on. These seasons and their duration may vary across different parts of the country.</p>
+    <div class="curio">
+      <h5>Think about it</h5>
+      <div class="note">Hindustani classical music associates certain rāgas with specific seasons. Find out with your elders and teachers which rāgas are connected to each of the six. And note that Kauṭilya's Arthaśhāstra already contains records of scientific measurements of rainfall, used in managing the country's revenue and its relief efforts.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="35" data-coin="20">
+  <summary><span class="mno">10</span><span class="mt"><b>The monsoon engine</b><i>Why the wind reverses twice a year</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Land and sea again — but this time over a whole subcontinent and a whole year. Run through the months and watch the wind turn right around.</p>
+    <div class="panel">
+      <canvas id="monCv" height="235"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="monS">Month <b><span id="monSV">January</span></b></label>
+        <input id="monS" type="range" min="0" max="11" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Warmer</div><div class="v" id="monA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Wind</div><div class="v" id="monB" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Rain</div><div class="v" id="monC" style="font-size:11.5px">—</div></div>
+      </div>
+    </div>
+    <p>The word comes from the Arabic <i>mausim</i>, meaning season: Arab traders named the seasonal reversal of the wind system, and the sailors who reached India in ancient times were among the first to notice it, since they travelled at the mercy of the winds. A <b>monsoon</b> is a seasonal reversal in wind direction during a year.</p>
+    <p>The <b>south-west or summer monsoon</b> blows from sea to land across the Indian Ocean, the Arabian Sea and the Bay of Bengal between June and September. It is caused by the unequal heating of land and sea: in summer the landmass of India heats faster than the surrounding oceans, creating low pressure over the subcontinent while the cooler Indian Ocean holds high pressure. Winds move from high to low, so moist air blows in off the ocean and brings rain — most of the country's rainfall for the whole year.</p>
+    <p>The <b>north-east or winter monsoon</b> runs from October to February. Now the land cools faster than the oceans, so high pressure sits over the land and low over the seas, and cold dry winds blow from land to sea. They bring no rain to most of India — but where they cross the Bay of Bengal they pick up moisture and rain on the eastern coast, especially <b>Tamil Nadu, Andhra Pradesh and parts of Karnataka</b>.</p>
+    <div class="curio">
+      <h5>Don't miss out</h5>
+      <div class="note">Because crops depended on the rains, Indians worked out ways to predict them. The Kṛiṣhiparāśhara based its main technique on the positions of the Moon and the Sun; Varāhamihira's Bṛihatsaṁhitā used the lunar mansions, or nakṣhatras — 27 equal divisions of the sky along the Moon's path, one for roughly each night of its circuit. A great many farming practices in India still rest on these methods. Kālidāsa, in the Meghadūtam of about the 5th century CE, even gives the date the monsoon breaks over central India and traces the path its clouds take.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="35" data-coin="20">
+  <summary><span class="mno">11</span><span class="mt"><b>When the monsoon reaches you</b><i>Figs. 3.10 and 3.11 · advance and retreat</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The rain does not arrive everywhere at once. Drag the date from late May to late October and watch it cross the country and then back out again.</p>
+    <div class="panel">
+      <canvas id="advCv" height="265"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="advS">Date <b><span id="advSV">20 May</span></b></label>
+        <input id="advS" type="range" min="0" max="150" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Phase</div><div class="v" id="advA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Under monsoon</div><div class="v" id="advB">—</div></div>
+        <div class="rc"><div class="k">Just now</div><div class="v" id="advC" style="font-size:11.5px">—</div></div>
+      </div>
+    </div>
+    <p>Monsoon rain begins to recede from north India at the beginning of October, and South India typically receives more rainfall during that time. The whole cycle takes about seven weeks to cover the country and another four to leave it.</p>
+    <p>Monsoon plays a vital role in the lives of people in India. Most of the country's agriculture depends on it, as farmers rely on the rain for sowing and growing. A good monsoon ensures sufficient food production and water in rivers, reservoirs and wells. It also affects daily life, transport, festivals and employment, especially in rural areas. <b>Excessive rainfall can cause floods, while a weak monsoon can lead to drought</b> — so the monsoon shapes the economy, the lifestyle and the livelihoods of the country.</p>
+    <div class="curio">
+      <h5>Don't miss out</h5>
+      <div class="note">Under the National Monsoon Mission, the Ministry of Earth Sciences has developed state-of-the-art weather and climate prediction models, with the object of improving monsoon prediction for India over every time frame. Mission Mausam aims to make the nation Weather Ready and Climate Smart, with timely and precise observation, modelling and forecasting for agriculture, disaster management and rural development.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 4 · A climate that is changing</div>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="30" data-coin="15">
+  <summary><span class="mno">12</span><span class="mt"><b>Cause, effect, or something we can do</b><i>Sorting out climate change</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Climate change gets discussed as one undifferentiated worry. It is actually three separate lists. Put each item on the right one.</p>
+    <div class="panel">
+      <div id="g12"></div>
+      <div class="score" id="g12s"></div>
+    </div>
+    <p>Climate change refers to long-term changes in weather patterns — temperature, rainfall and wind — caused mainly by human activities: the burning of fossil fuels, deforestation, and industrial pollution that releases gases such as carbon dioxide. These raise the level of <b>greenhouse gases</b> — carbon dioxide, methane, nitrous oxide and water vapour — which trap heat and lift global temperatures.</p>
+    <p>The results are already visible: more frequent floods and droughts, melting glaciers, rising sea levels and loss of biodiversity. It threatens ecosystems, and it reaches human health, agriculture and livelihoods, with a heavy impact on almost every section of the population, women and children included. Tackling it takes collective effort — reducing carbon footprints, using renewable energy, protecting forests and adopting sustainable lifestyles.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="35" data-coin="20">
+  <summary><span class="mno">13</span><span class="mt"><b>My carbon footprint</b><i>Let's explore · the book's own audit</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Four questions about an ordinary day of yours. Answer each honestly — nobody else sees it — then score yourself and pick two things to change.</p>
+    <div class="panel">
+      <canvas id="ftCv" height="180"></canvas>
+      <div class="note" style="margin:12px 0 6px">A · Transport</div>
+      <div class="chips" id="ftA"></div>
+      <div class="note" style="margin:12px 0 6px">B · Electricity</div>
+      <div class="chips" id="ftB"></div>
+      <div class="note" style="margin:12px 0 6px">C · Water</div>
+      <div class="chips" id="ftC"></div>
+      <div class="note" style="margin:12px 0 6px">D · Waste and plastics</div>
+      <div class="chips" id="ftD"></div>
+      <div class="row"><button class="act" id="ftScore">Score my footprint</button></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Total score</div><div class="v" id="ftOut">—</div></div>
+        <div class="rc"><div class="k">Biggest single gain</div><div class="v" id="ftBest" style="font-size:11.5px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="ftTxt">—</div>
+    </div>
+    <p>A <b>carbon footprint</b> is the total amount of greenhouse gases released into the atmosphere as a result of human activities — energy use, transportation, and the production of goods and services. Low-impact choices score 1 point, medium 2, high 3 and very high 4, so a lower total is the better one.</p>
+    <p>The point of the exercise is the last step, not the number. Think of two simple changes you could make to reduce your score, and write them down as a climate action pledge. Every small step counts.</p>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="30" data-coin="15">
+  <summary><span class="mno">14</span><span class="mt"><b>Punjab 2025: what actually caused it</b><i>A case study, split in two</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>In 2025 Punjab flooded badly. The chapter separates what nature did from what people had done first. Sort each cause.</p>
+    <div class="panel">
+      <div id="g14"></div>
+      <div class="score" id="g14s"></div>
+    </div>
+    <p>In 2025 Punjab experienced severe floods after very heavy monsoon rain and the consecutive swelling of the <b>Satluj, Beas and Ravi</b>. Villages, farmland, houses and infrastructure such as roads and bridges were damaged across large parts of the state. Even as water receded in places and relief operations ran, the overall impact was devastating: heavy economic losses, social disruption and environmental damage.</p>
+    <p>Many people lost their lives, and thousands had to leave home for relief camps. Large areas of farmland went under water and crops such as paddy were severely damaged. Poultry and dairy farms were destroyed and many animals sickened or died. Roads, bridges, border fences and public buildings were damaged, and murky standing water spread waterborne disease and sanitation problems.</p>
+    <div class="curio">
+      <h5>Classroom discussion</h5>
+      <div class="note">To what extent did natural factors cause these floods compared with human activities? Could better planning have reduced the damage, and how? What are the National Disaster Management Authority's guidelines for flood management? And what part can students and young people play in disaster preparedness?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="35" data-coin="20">
+  <summary><span class="mno">15</span><span class="mt"><b>Ten stations, ten climates</b><i>Table 3.3 · draw the graphs the book asks for</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Question 7 asks you to turn the table into temperature and rainfall graphs so the differences show up at a glance. Here they are drawn for you — tap a station and read it.</p>
+    <div class="panel">
+      <canvas id="staCv" height="235"></canvas>
+      <div class="chips" id="staOpts" style="margin-top:10px"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Annual rainfall</div><div class="v" id="staA">—</div></div>
+        <div class="rc"><div class="k">Wettest month</div><div class="v" id="staB" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Yearly range</div><div class="v" id="staC" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="staTxt">—</div>
+    </div>
+    <p>Compare Shillong with Kolkata, and Delhi with Jodhpur, and the reason for the difference is relief and distance from the sea. Look at Thiruvananthapuram and you find an equable climate — the sea will not let it get very hot or very cold. Look at Chennai and the rain arrives only once the monsoon has finished almost everywhere else, because it depends on the retreating north-east monsoon crossing the Bay of Bengal. Look at Leh and there is barely any rain at all.</p>
+    <p>Despite all these differences, one thing runs through every station on the list: the year is organised around the monsoon. That is the framework that lends climatic unity to the whole country.</p>
+    <div class="curio">
+      <h5>Let's analyse</h5>
+      <div class="note">Temperature and rainfall figures here are the representational ones printed in Table 3.3. Try re-arranging the ten stations by their distance from the equator, and see which pairs have the most extreme climates and which are shaped by the retreating monsoon.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="90" data-coin="70">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">90 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, drawn from this chapter's own figures, tables and sidebars. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+
+<footer>NCERT Class 9 Social Science · Chapter 3</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*@include shared/storage.js*/
+
+/* ============================================================
+   Chapter 3 — Atmosphere and Climate
+   Understanding Society: India and Beyond, Grade 9 Part 1
+
+   Progress metaphor: the climb the chapter itself makes. XP
+   carries you up through the column of air — cloud, then the
+   ozone band and a plane above the weather, then the height
+   where meteors burn, then the aurora — with the kinked
+   temperature profile of Fig. 3.3 drawn up the side.
+   ============================================================ */
+const CH = {
+  id: '9-social-3',
+  key: 'ch03Atmos',
+  total: 16,
+  stages: [
+    { at:0,   f:0.05, name:'Ground level',    d:'A blanket of air you cannot see and never stop breathing.' },
+    { at:75,  f:0.20, name:'In the weather',  d:'Cloud, rain and hail — nearly all of it in the lowest 12 km.' },
+    { at:160, f:0.36, name:'Above the cloud', d:'Smooth air, and a layer of ozone taking the ultraviolet.' },
+    { at:250, f:0.52, name:'Where meteors burn', d:'Cold and thin: the last thing most space rock ever meets.' },
+    { at:345, f:0.68, name:'Into the aurora', d:'Solar wind meets gas, and each gas glows its own colour.' },
+    { at:450, f:0.85, name:'Reading the season', d:'Pressure, wind and monsoon — the machine that sets the year.' },
+    { at:565, f:1.00, name:'Climate smart',   d:'What the air does to us, and what we are doing to it.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+
+    // the column of air: pale at the ground, black at the top, darkening as you climb
+    const g = H-12;
+    for(let i=0;i<g;i++){
+      const u = i/g;                       // 0 at the top of the badge, 1 at the ground
+      const k = Math.min(1, (1-u)*1.15);
+      x.fillStyle = 'rgb(' + Math.round(228-190*k) + ',' + Math.round(239-196*k) + ',' + Math.round(247-190*k) + ')';
+      x.fillRect(0, i, W, 1);
+    }
+    // the ground, and a hill to stand the whole thing on
+    x.fillStyle = '#6E8A5E'; x.fillRect(0, g, W, H-g);
+    x.beginPath(); x.moveTo(0,g); x.lineTo(22,g-9); x.lineTo(44,g); x.closePath(); x.fill();
+
+    /* A gentler squash than the mission canvas uses. A square root still
+       packs cloud, plane and meteors into the bottom quarter of a 96px badge,
+       where they read as one smudge; this spreads them out. */
+    const hy = km => g - Math.pow(Math.min(1, km/1000), 0.35) * (g-8);
+
+    if(f > 0.12){                                     // cloud, in the troposphere
+      x.fillStyle = 'rgba(255,255,255,.92)';
+      [[26,7],[40,6],[54,5.5]].forEach(c=>{ x.beginPath(); x.arc(c[0], hy(7), c[1], 0, 7); x.fill(); });
+    }
+    if(f > 0.30){                                     // a plane, above the weather
+      x.strokeStyle = '#33455E'; x.lineWidth = 1.8;
+      const py = hy(26);
+      x.beginPath(); x.moveTo(54,py); x.lineTo(72,py); x.moveTo(62,py); x.lineTo(57,py-5);
+      x.moveTo(62,py); x.lineTo(57,py+5); x.stroke();
+    }
+    if(f > 0.46){                                     // meteors burning in the mesosphere
+      x.strokeStyle = '#F2B84C'; x.lineWidth = 1.8; x.lineCap = 'round';
+      [[18,0],[38,6]].forEach(m=>{
+        const my = hy(65)+m[1];
+        x.beginPath(); x.moveTo(m[0], my); x.lineTo(m[0]+9, my+7); x.stroke();
+      });
+      x.lineCap = 'butt';
+    }
+    if(f > 0.62){                                     // the aurora, in the thermosphere
+      x.strokeStyle = 'rgba(142,209,122,.9)'; x.lineWidth = 3.4;
+      x.beginPath();
+      for(let i=0;i<=16;i++){
+        const px = 6 + i*(W-12)/16, py = hy(300) + Math.sin(i*0.55)*6;
+        i ? x.lineTo(px,py) : x.moveTo(px,py);
+      }
+      x.stroke();
+    }
+    if(f > 0.80){                                     // and out at the top, stars and a satellite
+      x.fillStyle = '#FFFFFF';
+      [[14,10],[34,6],[58,13],[78,8],[88,20]].forEach(s=>{
+        x.beginPath(); x.arc(s[0], s[1], 1.1, 0, 7); x.fill();
+      });
+      x.fillStyle = '#C9D6E4'; x.fillRect(66, hy(760), 7, 5);
+      x.fillStyle = '#43A8E0'; x.fillRect(62, hy(760)+1, 3, 3); x.fillRect(74, hy(760)+1, 3, 3);
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ============================================================
+   Chapter 3 interactives
+   Bespoke canvases: a hundred squares of air (M1) · the climb
+   through five layers (M2) · high and low pressure (M5) · the
+   two breezes (M6) · the wind table (M7) · the monsoon engine
+   (M10) · advance and retreat over India (M11) · the carbon
+   audit (M13) · ten climographs (M15)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#43A8E0', A2='#8ED17A',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', BG='#10141F',
+      LAND='#7A6248', SEA='#2C6B86', CLOUD='rgba(226,235,243,.92)';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* Centred label that shrinks rather than overflowing its column. */
+function fitText(x, s, cx, y, max){
+  let size = 9.5;
+  mono(x, size, 500);
+  while(x.measureText(s).width > max && size > 6){ size -= 0.5; mono(x, size, 500); }
+  x.textAlign = 'center'; x.fillText(s, cx, y);
+}
+
+/* ============================================================
+   M1 — a hundred squares of air
+   Ninety-nine squares for two gases, and one square left over.
+   The magnifier on that last square is the whole point: carbon
+   dioxide is four hundredths of one per cent and still runs the
+   last section of this chapter.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('airCv'), box=document.getElementById('airOpts');
+  const G=[
+    {k:'n2',  t:'Nitrogen',      pct:78,   col:'#3E6E9E',
+     note:'Nitrogen, 78 per cent — 78 of the hundred squares. The most abundant gas in the air, and essential to life.'},
+    {k:'o2',  t:'Oxygen',        pct:21,   col:'#4FC3A1',
+     note:'Oxygen, 21 per cent — 21 squares. Together with nitrogen it accounts for 99 of the 100.'},
+    {k:'ar',  t:'Argon',         pct:0.93, col:'#B98BF5',
+     note:'Argon, 0.93 per cent. Almost the whole of the single square that nitrogen and oxygen left over.'},
+    {k:'co2', t:'Carbon dioxide',pct:0.04, col:'#E2574A',
+     note:'Carbon dioxide, 0.04 per cent — four hundredths of one square. Look how small it is, and then remember that the last part of this chapter is about it.'},
+    {k:'oth', t:'Everything else',pct:0.03,col:'#F2B84C',
+     note:'Helium, neon, krypton, xenon, ozone and hydrogen together: 0.03 per cent. Small, and ozone among them is what stops the ultraviolet.'}
+  ];
+  let sel=null; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=235, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('dry air, as 100 squares', 10, 8);
+
+    // the hundred squares
+    const gx=10, gy=28, cell=Math.min(15, (W-120)/10);
+    for(let i=0;i<100;i++){
+      const r=Math.floor(i/10), c=i%10;
+      const g = i<78 ? G[0] : i<99 ? G[1] : G[2];
+      const isRest = i>=99;
+      const mine = isRest ? ['ar','co2','oth'].indexOf(sel)>=0 : sel===g.k;
+      /* Unselected squares keep their own colour at low opacity. Painting them
+         flat grey wiped out the 78-to-21 picture the grid exists to show. */
+      x.globalAlpha = (!sel || mine) ? 1 : 0.38;
+      x.fillStyle = isRest ? '#6B5B8E' : g.col;
+      x.fillRect(gx+c*cell+1, gy+r*cell+1, cell-2, cell-2);
+      x.globalAlpha = 1;
+    }
+    // and the magnifier on the hundredth
+    const lastX=gx+9*cell, lastY=gy+9*cell;
+    const mx=gx+10*cell+26, my=gy+38, mw=W-mx-12, mh=64;
+    x.strokeStyle=GOLD; x.lineWidth=1.4;
+    x.strokeRect(lastX+1, lastY+1, cell-2, cell-2);
+    x.beginPath(); x.moveTo(lastX+cell, lastY); x.lineTo(mx, my+mh); x.moveTo(lastX+cell, lastY+cell); x.lineTo(mx, my);
+    x.stroke();
+    x.strokeStyle=GOLD; x.strokeRect(mx, my, mw, mh);
+    // that one square, split into the trace gases
+    let at=0;
+    [['ar',0.93],['co2',0.04],['oth',0.03]].forEach(t=>{
+      const gg=G.find(v=>v.k===t[0]), frac=t[1]/1.00;
+      const wpx=mw*frac;
+      x.globalAlpha = (!sel || sel===t[0]) ? 1 : 0.38;
+      x.fillStyle = gg.col;
+      x.fillRect(mx+at+1, my+1, Math.max(1.5,wpx-1), mh-2);
+      x.globalAlpha = 1;
+      at += wpx;
+    });
+    mono(x,9); x.fillStyle=GOLD; x.textAlign='right'; x.textBaseline='bottom';
+    x.fillText('that square, ×100', W-10, my-4);
+
+    // water vapour is not in the pie at all, and that is worth saying
+    const wy=gy+10*cell+14;
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, wy-8); x.lineTo(W-10, wy-8); x.stroke();
+    x.fillStyle=A1; x.beginPath(); x.arc(16, wy+5, 4, 0, 7); x.fill();
+    mono(x,9.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('water vapour 0.1–0.4% · varies · plus dust', 26, wy);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+  }
+  if(cv){
+    G.forEach(g=>{
+      const b=document.createElement('button');
+      b.className='chip'; b.textContent=g.t;
+      b.onclick=()=>{
+        sel=g.k; seen[g.k]=1;
+        [...box.children].forEach(c=>c.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','air-'+g.k);
+        document.getElementById('airTxt').textContent=g.note;
+        if(Object.keys(seen).length>=4) complete('m1');
+        draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('airTxt').textContent='Tap a gas to pick out its squares. Four of the five finishes the mission.';
+  }
+  reg('m1',draw);
+})();
+
+/* ============================================================
+   M2 — the climb through five layers
+   Altitudes are squashed by a square root, or the troposphere —
+   12 km out of 1000 — would be a single pixel at the bottom.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('layCv'), sS=document.getElementById('layS');
+  const L=[
+    {to:12,   n:'Troposphere',  t:'Falls with height', d:false, f:'clouds, weather', fc:'#DCE8F2',
+     w:'The air we breathe, most of the water vapour, and the clouds. Nearly all weather — rain, fog, hail — happens here. Average height about 12 km.'},
+    {to:50,   n:'Stratosphere', t:'Rises with height', d:true, f:'ozone · aeroplanes', fc:'#9AD3EA',
+     w:'Free of cloud and weather disturbance, which is why aeroplanes fly here. It carries the ozone layer that filters the Sun’s ultraviolet.'},
+    {to:80,   n:'Mesosphere',   t:'Falls with height', d:false, f:'meteors burn', fc:'#F2B84C',
+     w:'Cold and thin. Most meteorites entering from space burn up in this layer.'},
+    {to:700,  n:'Thermosphere', t:'Rises very rapidly', d:true, f:'aurora · radio', fc:'#8ED17A',
+     w:'Gas molecules absorb the Sun’s X-rays and short-wave ultraviolet. It reflects radio waves back to Earth, contains the ionosphere, and hosts the auroras.'},
+    {to:1000, n:'Exosphere',    t:'Barely means anything here', d:true, f:'gases escape', fc:'#C9D6E4',
+     w:'The uppermost layer, with air so thin that light gases like helium and hydrogen float off into space, because gravity is too weak to hold them.'}
+  ];
+  const PAUSE=[[12,'tropopause'],[50,'stratopause'],[80,'mesopause']];
+  const seen={};
+  function layerAt(a){ for(const l of L) if(a <= l.to) return l; return L[L.length-1]; }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=245, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, a=+sS.value;
+    const g=H-22, top=28;
+    const hy = km => g - Math.sqrt(Math.min(1, km/1000)) * (g-top);
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('0 to 1000 km, with the low layers stretched', 10, 8);
+
+    const colw=W-96;
+    const COL=['#274A66','#2E6382','#243C5A','#3A2E5E','#1A1E30'];
+    const mid={};
+    let from=0;
+    L.forEach((l,i)=>{
+      const y1=hy(l.to), y0=hy(from);
+      mid[l.n]=(y0+y1)/2;
+      x.fillStyle=COL[i]; x.fillRect(10, y1, colw, y0-y1);
+      x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(10, y1, colw, y0-y1);
+      from=l.to;
+    });
+    /* The marker goes down BEFORE the text. Drawn afterwards it ruled a line
+       straight through whichever layer name it happened to cross. */
+    const my=hy(a);
+    x.strokeStyle='rgba(67,168,224,.85)'; x.lineWidth=2;
+    x.beginPath(); x.moveTo(6, my); x.lineTo(10+colw, my); x.stroke();
+    x.fillStyle=A1; x.beginPath(); x.arc(10+colw, my, 4.5, 0, 7); x.fill();
+
+    /* Name on the left of the band, what lives there on the right, so the two
+       never sit on top of each other however thin the band is. */
+    L.forEach(l=>{
+      const y=mid[l.n], here=layerAt(a)===l;
+      mono(x,9.5,500); x.fillStyle= here ? '#FFFFFF' : 'rgba(240,238,230,.72)';
+      x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(l.n, 16, y);
+      x.fillStyle= here ? l.fc : 'rgba(240,238,230,.42)';
+      x.beginPath(); x.arc(10+colw-9, y, 2.6, 0, 7); x.fill();
+      mono(x,8.5); x.textAlign='right';
+      x.fillText(l.f, 10+colw-16, y);
+    });
+
+    // the pauses between them
+    PAUSE.forEach(p=>{
+      x.strokeStyle='rgba(240,238,230,.5)'; x.lineWidth=1; x.setLineDash([3,3]);
+      x.beginPath(); x.moveTo(10, hy(p[0])); x.lineTo(10+colw, hy(p[0])); x.stroke(); x.setLineDash([]);
+    });
+
+    // the altitude scale down the side
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='middle';
+    [0,12,50,80,300,700,1000].forEach(k=>{
+      x.fillText(k+'', 10+colw+6, hy(k));
+      x.strokeStyle=RULE; x.lineWidth=1;
+      x.beginPath(); x.moveTo(10+colw, hy(k)); x.lineTo(10+colw+4, hy(k)); x.stroke();
+    });
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    const l=layerAt(a);
+    document.getElementById('laySV').textContent=a;
+    document.getElementById('layA').textContent=l.n;
+    document.getElementById('layB').textContent=l.t;
+    document.getElementById('layC').textContent=l.w;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[layerAt(+sS.value).n]=1; ev('explore','layS');
+      if(Object.keys(seen).length>=4) complete('m2');
+      draw();
+    };
+  }
+  reg('m2',draw);
+})();
+
+/* ============================================================
+   M3 — which layer does this happen in
+   ============================================================ */
+Q.rows('g3','g3s',[
+  {t:'Rain, fog and hail — nearly all the weather there is',   a:0},
+  {t:'Aeroplanes cruise here, above the cloud and the bumps',  a:1},
+  {t:'The ozone layer, filtering out ultraviolet',             a:1},
+  {t:'Meteorites from space burn up',                          a:2},
+  {t:'Radio waves are reflected back towards the Earth',       a:3},
+  {t:'The auroras, and the ionosphere',                        a:3},
+  {t:'Helium and hydrogen drift off into space',               a:4}
+], ['Troposphere','Stratosphere','Mesosphere','Thermosphere','Exosphere'], 'm3',
+   'All seven. Each layer earns its name from what the temperature does, and each one ends up doing a different job.');
+
+/* ============================================================
+   M4 — weather against climate
+   ============================================================ */
+Q.rows('g4','g4s',[
+  {t:'It is 34 °C and humid in Chennai this afternoon',                a:0},
+  {t:'Thiruvananthapuram is warm and even all year round',             a:1},
+  {t:'A thunderstorm is forecast for tonight',                         a:0},
+  {t:'India as a whole has a tropical monsoon climate',                a:1},
+  {t:'The wind has picked up since lunchtime',                         a:0},
+  {t:'Leh receives very little precipitation in any month of the year', a:1}
+], ['Weather','Climate'], 'm4',
+   'All six. Weather is hours and days; climate is the average of them over a large area and thirty years or more.');
+
+/* ============================================================
+   M5 — high pressure, low pressure
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('presCv'), sS=document.getElementById('presS');
+  const seen={};
+  function bandOf(t){ return t<=15 ? 'cold' : t<=32 ? 'mild' : 'hot'; }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=225, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, t=+sS.value, b=bandOf(t);
+    const g=H-30, cx=W/2, ARROW_TOP=96;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('a column of air over warm or cold ground', 10, 8);
+
+    // the ground, tinted by how warm it is
+    const warm=(t-0)/45;
+    x.fillStyle='rgb(' + Math.round(70+120*warm) + ',' + Math.round(90-20*warm) + ',' + Math.round(80-30*warm) + ')';
+    x.fillRect(0, g, W, H-g);
+
+    // the air column, rising or sinking
+    const up = b==='hot', down = b==='cold';
+    const n=5;
+    for(let i=0;i<n;i++){
+      const px=28+i*((W-56)/(n-1));
+      if(up)        arrow(x, px, g-44, px, ARROW_TOP, 'rgba(226,87,74,.85)', 6);
+      else if(down) arrow(x, px, ARROW_TOP, px, g-44, 'rgba(67,168,224,.85)', 6);
+      else {
+        x.strokeStyle='rgba(142,154,192,.55)'; x.lineWidth=1.6;
+        x.beginPath(); x.moveTo(px, ARROW_TOP+8); x.lineTo(px, g-48); x.stroke();
+      }
+    }
+    // cloud where the air is rising, clear sky where it is sinking
+    if(up){
+      x.fillStyle=CLOUD;
+      [[cx-46,42,13],[cx-18,36,17],[cx+16,41,14],[cx+44,44,11]].forEach(c=>{
+        x.beginPath(); x.arc(c[0], c[1], c[2], 0, 7); x.fill();
+      });
+      x.strokeStyle=A1; x.lineWidth=1.8;
+      for(let i=0;i<7;i++){
+        const px=cx-52+i*18, py=60+((i*7)%10);
+        x.beginPath(); x.moveTo(px,py); x.lineTo(px-3, py+11); x.stroke();
+      }
+    } else if(down){
+      x.fillStyle=GOLD;
+      x.beginPath(); x.arc(W-44, 46, 12, 0, 7); x.fill();
+      x.strokeStyle=GOLD; x.lineWidth=1.6;
+      for(let i=0;i<8;i++){
+        const a=i*Math.PI/4;
+        x.beginPath();
+        x.moveTo(W-44+Math.cos(a)*17, 46+Math.sin(a)*17);
+        x.lineTo(W-44+Math.cos(a)*23, 46+Math.sin(a)*23);
+        x.stroke();
+      }
+    }
+    /* The pressure letter sits on the ground with its caption beside it, not
+       under it — under it was the ground, and on top of it were the arrows. */
+    const L = up ? 'L' : down ? 'H' : '·';
+    x.fillStyle = up ? BAD : down ? A1 : DIM;
+    sans(x, 26, 600); x.textAlign='right'; x.textBaseline='middle';
+    x.fillText(L, cx-8, g-18);
+    mono(x,10,500); x.fillStyle = up ? BAD : down ? A1 : DIM;
+    x.textAlign='left';
+    x.fillText(up ? 'low pressure' : down ? 'high pressure' : 'no strong pressure either way', cx-2, g-18);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('presSV').textContent=t;
+    const A=document.getElementById('presA'), B=document.getElementById('presB'), C=document.getElementById('presC');
+    if(up){   A.textContent='Heating, expanding and rising'; B.textContent='Low'; B.style.color=BAD;
+              C.textContent='Cloudy and wet'; }
+    else if(down){ A.textContent='Cold, heavy and sinking'; B.textContent='High'; B.style.color=A1;
+              C.textContent='Clear and sunny'; }
+    else {    A.textContent='Neither rising nor sinking much'; B.textContent='Middling'; B.style.color=INK;
+              C.textContent='Could go either way'; }
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[bandOf(+sS.value)]=1; ev('explore','presS');
+      if(Object.keys(seen).length>=3) complete('m5');
+      draw();
+    };
+  }
+  reg('m5',draw);
+})();
+
+/* ============================================================
+   M6 — the two breezes
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('brzCv'), box=document.getElementById('brzOpts');
+  const B={
+    day:{ t:'Daytime', warm:'The land — it heats faster than the sea', dir:'From sea to land: a sea breeze',
+      note:'By afternoon the land is much warmer than the sea, so a low-pressure region forms over the land and the wind blows in off the water. The temperature difference is large, so the sea breeze is the stronger of the two.' },
+    night:{ t:'Night', warm:'The sea — the land cools faster after dark', dir:'From land to sea: a land breeze',
+      note:'At night the land cools faster than the sea, so the pressure gradient reverses and the wind blows out to sea. The difference in temperature and pressure is small, so the land breeze is weak.' }
+  };
+  let sel='day'; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=205, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, day=sel==='day', shore=W*0.46, g=H-58;
+    bg(x,W,H);
+    // sky, warm by day and deep by night
+    x.fillStyle = day ? '#1B3450' : '#0D1526'; x.fillRect(0,0,W,g);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(day ? 'afternoon on the coast' : 'the same coast at night', 10, 8);
+    // sun or moon
+    if(day){ x.fillStyle=GOLD; x.beginPath(); x.arc(W-34, 32, 11, 0, 7); x.fill(); }
+    else {
+      x.fillStyle='#D8E2EE'; x.beginPath(); x.arc(W-34, 32, 10, 0, 7); x.fill();
+      x.fillStyle= '#0D1526'; x.beginPath(); x.arc(W-39, 28, 9, 0, 7); x.fill();
+    }
+    // land on the left, sea on the right
+    x.fillStyle=LAND; x.fillRect(0, g, shore, H-g);
+    x.beginPath(); x.moveTo(0,g); x.lineTo(shore*0.5, g-14); x.lineTo(shore, g); x.closePath(); x.fill();
+    x.fillStyle=SEA; x.fillRect(shore, g, W-shore, H-g);
+    x.strokeStyle='rgba(147,205,229,.6)'; x.lineWidth=1.4;
+    for(let i=0;i<2;i++){
+      x.beginPath();
+      for(let k=0;k<=14;k++){
+        const px=shore+k*((W-shore)/14), py=g+12+i*13+Math.sin(k*0.8+i)*2.4;
+        k?x.lineTo(px,py):x.moveTo(px,py);
+      }
+      x.stroke();
+    }
+    // which side is warmer, marked plainly
+    mono(x,9.5,500); x.textAlign='center'; x.textBaseline='top';
+    x.fillStyle = day ? BAD : A1;  x.fillText(day?'warmer':'cooler', shore/2, g+22);
+    x.fillStyle = day ? A1 : BAD;  x.fillText(day?'cooler':'warmer', shore+(W-shore)/2, g+22);
+    // the circulation: up over the warm side, across, down over the cool side
+    const warmX = day ? shore*0.5 : shore+(W-shore)*0.5;
+    const coolX = day ? shore+(W-shore)*0.5 : shore*0.5;
+    const topY = 62;
+    arrow(x, warmX, g-20, warmX, topY, 'rgba(226,87,74,.85)', 6);
+    arrow(x, warmX, topY, coolX, topY, 'rgba(240,238,230,.7)', 6);
+    arrow(x, coolX, topY, coolX, g-20, 'rgba(67,168,224,.85)', 6);
+    // the surface wind, which is the breeze people actually feel
+    arrow(x, coolX, g-8, warmX, g-8, A2, 8);
+    mono(x,10,500); x.fillStyle=A2; x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText(day ? 'sea breeze' : 'land breeze', (warmX+coolX)/2, g-12);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('brzA').textContent=B[sel].warm;
+    document.getElementById('brzB').textContent=B[sel].dir;
+    document.getElementById('brzTxt').textContent=B[sel].note;
+  }
+  if(cv){
+    ['day','night'].forEach(k=>{
+      const b=document.createElement('button');
+      b.className='chip'+(k==='day'?' on':''); b.textContent=B[k].t;
+      b.onclick=()=>{
+        sel=k; seen[k]=1;
+        [...box.children].forEach(c=>c.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','brz-'+k);
+        if(Object.keys(seen).length>=2){ ev('perfect'); complete('m6'); }
+        draw();
+      };
+      box.appendChild(b);
+    });
+  }
+  reg('m6',draw);
+})();
+
+/* ============================================================
+   M7 — reading the wind
+   Four positions, not a continuous scale: Table 3.1 gives four
+   named categories and nothing in between, and inventing the
+   gaps would be inventing data.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('wndCv'), sS=document.getElementById('wndS');
+  const T=[
+    {n:'Calm',          s:'0–1 km/h',     e:'Calm, smoke rises vertically.'},
+    {n:'Light breeze',  s:'6–11 km/h',    e:'Wind can be felt on the face. Leaves rustle. An ordinary vane moves by winds.'},
+    {n:'Strong breeze', s:'39–49 km/h',   e:'Large branches sway in the wind. Umbrellas are difficult to use.'},
+    {n:'Storm',         s:'103–117 km/h', e:'It is very rarely experienced. Usually accompanied by widespread damage.'}
+  ];
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=215, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value, g=H-26;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(T[i].n, 10, 8);
+    x.fillStyle='#2C3A28'; x.fillRect(0, g, W, H-g);
+
+    const lean=[0, 0.12, 0.5, 1.05][i];        // how far the wind bends things over
+    // a chimney, and what its smoke does
+    x.fillStyle='#6E5238'; x.fillRect(16, g-34, 14, 34);
+    x.strokeStyle='rgba(200,208,224,.75)'; x.lineWidth=3; x.lineCap='round';
+    x.beginPath();
+    for(let k=0;k<=12;k++){
+      const u=k/12, px=23+u*u*70*lean, py=g-38-u*54;
+      k?x.lineTo(px,py):x.moveTo(px,py);
+    }
+    x.stroke(); x.lineCap='butt';
+
+    // a tree, bent by the same wind
+    const tx=W*0.46;
+    x.strokeStyle='#8E6B49'; x.lineWidth=5;
+    x.beginPath(); x.moveTo(tx, g);
+    x.quadraticCurveTo(tx+16*lean, g-30, tx+34*lean, g-52); x.stroke();
+    x.fillStyle= i>=2 ? '#4C7A3E' : '#5F8A4A';
+    x.beginPath(); x.arc(tx+34*lean, g-56, 17, 0, 7); x.fill();
+    // leaves come off it as the wind gets up
+    if(i>=1){
+      x.fillStyle='#8ED17A';
+      for(let k=0;k<i*3;k++){
+        const px=tx+40*lean+k*13, py=g-60+((k*17)%34);
+        x.beginPath(); x.ellipse(px, py, 3.4, 2, 0.6, 0, 7); x.fill();
+      }
+    }
+    // an umbrella, which survives up to a point
+    const ux=W-52;
+    x.strokeStyle=INK; x.lineWidth=2;
+    x.beginPath(); x.moveTo(ux, g); x.lineTo(ux+10*lean, g-30); x.stroke();
+    x.fillStyle= i>=3 ? BAD : i>=2 ? GOLD : A1;
+    x.beginPath();
+    if(i>=2){                                   // inverted, then gone
+      x.arc(ux+10*lean, g-30, 17, 0, Math.PI);
+    } else {
+      x.arc(ux+10*lean, g-30, 17, Math.PI, 0);
+    }
+    x.fill();
+    // wind streaks, thicker with speed
+    x.strokeStyle='rgba(67,168,224,'+(0.15+i*0.22).toFixed(2)+')';
+    x.lineWidth=1+i*0.5;
+    for(let k=0;k<i*3;k++){
+      const py=40+k*13;
+      x.beginPath(); x.moveTo(8, py); x.lineTo(8+30+i*16, py); x.stroke();
+    }
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('wndSV').textContent=T[i].n;
+    document.getElementById('wndA').textContent=T[i].s;
+    document.getElementById('wndB').textContent=T[i].e;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','wndS');
+      if(Object.keys(seen).length>=3) complete('m7');
+      draw();
+    };
+  }
+  reg('m7',draw);
+})();
+
+/* ============================================================
+   M8 — the IMD's four seasons, in order
+   ============================================================ */
+Q.order('g8','g8s',
+  ['Winter · December to early April',
+   'Summer or pre-monsoon · April to June',
+   'Monsoon, advancing · June to September',
+   'Post-monsoon, retreating · October to December'],
+  'm8', 'That is the IMD year. The Himalayan states, being more temperate, add autumn and spring to it.');
+
+/* ============================================================
+   M9 — the six ṛtus
+   ============================================================ */
+Q.match('g9a','g9b','g9s',[
+  ['Vasanta',  'Chaitra–Vaiśhākha · March–April'],
+  ['Grīṣhma',  'Jyeṣhṭha–Āṣhāḍha · May–June'],
+  ['Varṣhā',   'Śhrāvaṇa–Bhādrapada · July–August'],
+  ['Śharad',   'Āśhvina–Kārtika · September–October'],
+  ['Hemanta',  'Mārgaśhīrṣha–Pauṣha · November–December'],
+  ['Śhiśhira', 'Māgha–Phālguna · January–February']
+], 'm9', 'All six, two months each, running from spring round to the cold — the twelve months divided astronomically into six.');
+
+/* ============================================================
+   M10 — the monsoon engine
+   One cross-section, twelve months. The wind arrow is the whole
+   argument: it turns right round between June and December.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('monCv'), sS=document.getElementById('monS');
+  const MN=['January','February','March','April','May','June',
+            'July','August','September','October','November','December'];
+  /* land and sea temperature through the year, and what follows. The land
+     swings hard between seasons; the sea barely moves, which is the point. */
+  const LANDT=[19,22,27,32,35,34,30,29,29,27,23,20];
+  const SEAT =[26,26,27,28,29,29,28,28,28,28,27,26];
+  const seen={};
+  function phaseOf(m){
+    if(m>=5 && m<=8) return 'sw';         // June–September
+    if(m>=9 || m<=1) return 'ne';         // October–February
+    return 'mid';
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=235, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, m=+sS.value, ph=phaseOf(m);
+    const g=H-67, shore=W*0.52, WIND_Y=104, LETTER_Y=130;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('land on the left, ocean on the right', 10, 8);
+
+    x.fillStyle='#16233A'; x.fillRect(0,24,W,g-24);
+    // the subcontinent, and the ocean beside it
+    x.fillStyle=LAND; x.fillRect(0, g, shore, H-g);
+    x.beginPath(); x.moveTo(0,g); x.lineTo(shore*0.34, g-26); x.lineTo(shore*0.62, g-10); x.lineTo(shore, g);
+    x.closePath(); x.fill();
+    x.fillStyle=SEA; x.fillRect(shore, g, W-shore, 34);
+    mono(x,9); x.fillStyle='rgba(240,238,230,.7)'; x.textAlign='center'; x.textBaseline='top';
+    x.fillText('land', shore/2, g+21);
+    x.fillText('ocean', shore+(W-shore)/2, g+21);
+
+    // the two temperatures, printed where they belong
+    mono(x,10,500);
+    x.fillStyle = LANDT[m] >= SEAT[m] ? BAD : A1;
+    x.fillText(LANDT[m].toFixed(0)+'°C', shore/2, g+6);
+    x.fillStyle = SEAT[m] > LANDT[m] ? BAD : A1;
+    x.fillText(SEAT[m].toFixed(0)+'°C', shore+(W-shore)/2, g+6);
+
+    // pressure over each, from which side is warmer
+    const landLow = LANDT[m] > SEAT[m];
+    sans(x,26,600); x.textAlign='center'; x.textBaseline='middle';
+    x.fillStyle = landLow ? BAD : A1;
+    x.fillText(landLow ? 'L' : 'H', shore*0.42, LETTER_Y);
+    x.fillStyle = landLow ? A1 : BAD;
+    x.fillText(landLow ? 'H' : 'L', shore+(W-shore)*0.52, LETTER_Y);
+
+    // the wind, blowing from the high towards the low, with its name above it
+    if(landLow) arrow(x, W-20, WIND_Y, 22, WIND_Y, A2, 9);
+    else        arrow(x, 22, WIND_Y, W-20, WIND_Y, '#C9D6E4', 9);
+    mono(x,9.5,500); x.fillStyle = landLow ? A2 : '#C9D6E4';
+    x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText(landLow ? 'south-west · sea to land' : 'north-east · land to sea', W/2, WIND_Y-9);
+
+    // rain where the wind is wet
+    if(ph==='sw'){
+      x.fillStyle=CLOUD;
+      [[shore*0.30,40,14],[shore*0.62,34,17],[shore*0.92,40,13]].forEach(c=>{
+        x.beginPath(); x.arc(c[0], c[1], c[2], 0, 7); x.fill();
+      });
+      x.strokeStyle=A1; x.lineWidth=1.8;
+      for(let i=0;i<10;i++){
+        const px=10+i*(shore/10), py=56+((i*9)%12);
+        x.beginPath(); x.moveTo(px,py); x.lineTo(px-3, py+11); x.stroke();
+      }
+    } else if(ph==='ne'){
+      /* the dry land wind picks up moisture crossing the Bay of Bengal, which
+         is why the south-east coast gets its rain in the winter half */
+      x.fillStyle=CLOUD;
+      x.beginPath(); x.arc(shore*0.18, 40, 12, 0, 7); x.fill();
+      x.strokeStyle=A1; x.lineWidth=1.8;
+      for(let i=0;i<3;i++){
+        const px=shore*0.10+i*11, py=54+((i*7)%8);
+        x.beginPath(); x.moveTo(px,py); x.lineTo(px-3, py+10); x.stroke();
+      }
+      mono(x,9,500); x.fillStyle=A1; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('after crossing the Bay', 8, 70);
+    }
+
+    // the year as a strip, each month labelled over its own cell
+    const sy=H-24, cw=(W-20)/12;
+    for(let i=0;i<12;i++){
+      const px=10+i*cw, p=phaseOf(i);
+      x.fillStyle = i===m ? A1 : p==='sw' ? 'rgba(142,209,122,.5)' : p==='ne' ? 'rgba(201,214,228,.35)' : 'rgba(120,132,168,.25)';
+      x.fillRect(px, sy, cw-2, 9);
+      mono(x,8,500); x.fillStyle = i===m ? A1 : DIM;
+      x.textAlign='center'; x.textBaseline='top';
+      x.fillText(MN[i][0], px+cw/2-1, sy+11);
+    }
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('monSV').textContent=MN[m];
+    document.getElementById('monA').textContent = landLow ? 'The land, by ' + (LANDT[m]-SEAT[m]) + ' °C' : 'The ocean, by ' + (SEAT[m]-LANDT[m]) + ' °C';
+    document.getElementById('monB').textContent = landLow ? 'Sea to land — south-west' : 'Land to sea — north-east';
+    document.getElementById('monC').textContent =
+      ph==='sw' ? 'Heavy, over most of the country' :
+      ph==='ne' ? 'Dry, except the south-east coast where the wind crosses the Bay of Bengal' :
+                  'Little — the reversal has not finished';
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[phaseOf(+sS.value)]=1; ev('explore','monS');
+      if(Object.keys(seen).length>=3) complete('m10');
+      draw();
+    };
+  }
+  reg('m10',draw);
+})();
+
+/* ============================================================
+   M11 — advance and retreat over India
+   The outline is schematic. The dates are the normal dates of
+   Figs. 3.10 and 3.11, and every cell of the map takes its own
+   date by inverse-distance weighting from the named stations,
+   so the front sweeps the way the isochrones do.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('advCv'), sS=document.getElementById('advS');
+  /* x west→east, y north→south, both 0..1 */
+  const OUT=[[0.30,0.02],[0.42,0.10],[0.55,0.16],[0.86,0.20],[0.80,0.34],[0.68,0.30],
+             [0.66,0.48],[0.62,0.62],[0.47,0.96],[0.40,0.78],[0.33,0.60],[0.22,0.46],
+             [0.10,0.36],[0.12,0.26],[0.24,0.12]];
+  /* station, x, y, onset day, withdrawal day — days counted from 20 May */
+  const P=[
+    {n:'Leh',      x:0.32, y:0.06, on:49,  off:120},
+    {n:'Delhi',    x:0.30, y:0.20, on:40,  off:128},
+    {n:'Jaisalmer',x:0.14, y:0.28, on:49,  off:120},
+    {n:'Shillong', x:0.76, y:0.26, on:16,  off:143},
+    {n:'Kolkata',  x:0.66, y:0.34, on:21,  off:143},
+    {n:'Mumbai',   x:0.24, y:0.52, on:21,  off:138},
+    {n:'Nagpur',   x:0.44, y:0.46, on:26,  off:138},
+    {n:'Chennai',  x:0.55, y:0.72, on:16,  off:148},
+    {n:'Bengaluru',x:0.46, y:0.74, on:16,  off:148},
+    {n:'Thiruvananthapuram', x:0.42, y:0.90, on:12, off:148}
+  ];
+  const seen={};
+  function dateOf(d){
+    const M=[['May',20,31],['Jun',1,30],['Jul',1,31],['Aug',1,31],['Sep',1,30],['Oct',1,31]];
+    let x=d;
+    for(const [n,start,len] of M){
+      const count = len-start+1;
+      if(x < count) return (start+x)+' ' + n;
+      x -= count;
+    }
+    return '20 Oct';
+  }
+  /* Inverse-distance weighting over the ten stations, so a point between
+     Mumbai and Delhi gets a date between theirs rather than one or the other. */
+  function field(px, py, key){
+    let num=0, den=0;
+    for(const s of P){
+      const d2 = (px-s.x)*(px-s.x) + (py-s.y)*(py-s.y) + 0.0008;
+      const w = 1/(d2*d2);
+      num += w*s[key]; den += w;
+    }
+    return num/den;
+  }
+  function phaseOf(d){
+    return d < 49 ? 'Advancing' : d < 120 ? 'Covering the country' : d < 149 ? 'Retreating' : 'Withdrawn';
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=265, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, d=+sS.value;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('schematic · normal dates, Figs. 3.10–3.11', 10, 8);
+
+    const ox=W/2-88, oy=28, sx=176, sy=H-oy-16;
+    const NX=u=>ox+u*sx, NY=v=>oy+v*sy;
+    function path(){
+      x.beginPath();
+      OUT.forEach((p,i)=>{ const px=NX(p[0]), py=NY(p[1]); i?x.lineTo(px,py):x.moveTo(px,py); });
+      x.closePath();
+    }
+    // the country, filled cell by cell with whether the monsoon is over it yet
+    x.save(); path(); x.clip();
+    const cell=6;
+    for(let gx=0; gx<sx; gx+=cell){
+      for(let gy=0; gy<sy; gy+=cell){
+        const u=gx/sx, v=gy/sy;
+        const on=field(u,v,'on'), off=field(u,v,'off');
+        let col;
+        if(d < on)       col = 'rgba(150,130,96,.55)';                  // dry, waiting
+        else if(d < off) col = 'rgba(78,168,110,.85)';                  // under monsoon
+        else             col = 'rgba(190,168,120,.55)';                 // withdrawn
+        if(Math.abs(d-on) < 2.5 || Math.abs(d-off) < 2.5) col = A1;     // the front itself
+        x.fillStyle=col;
+        x.fillRect(ox+gx, oy+gy, cell, cell);
+      }
+    }
+    x.restore();
+    path(); x.strokeStyle='#C9D6E4'; x.lineWidth=1.6; x.stroke();
+
+    // the stations, lit as the rain reaches them
+    let latest=null;
+    P.forEach(s=>{
+      const wet = d>=s.on && d<s.off;
+      x.fillStyle = wet ? '#FFFFFF' : 'rgba(240,238,230,.42)';
+      x.beginPath(); x.arc(NX(s.x), NY(s.y), wet?3.6:2.4, 0, 7); x.fill();
+      if(d>=s.on && d<s.on+4) latest = s.n + ' · monsoon arrives';
+      if(d>=s.off && d<s.off+4) latest = s.n + ' · monsoon withdraws';
+    });
+    // name a couple of anchors so the shape is readable
+    mono(x,8.5); x.fillStyle='rgba(240,238,230,.75)'; x.textBaseline='middle';
+    x.textAlign='right'; x.fillText('Delhi', NX(0.30)-6, NY(0.20));
+    x.textAlign='left';  x.fillText('Kolkata', NX(0.66)+6, NY(0.34));
+    x.textAlign='right'; x.fillText('Mumbai', NX(0.24)-6, NY(0.52));
+    x.textAlign='center'; x.textBaseline='top';
+    x.fillText('Kerala', NX(0.42), NY(0.90)+6);
+
+    // a key, because three fills need naming
+    const ky=H-14;
+    [['waiting','rgba(150,130,96,.75)'],['under monsoon','rgba(78,168,110,.9)'],['withdrawn','rgba(190,168,120,.75)']]
+      .forEach((k,i)=>{
+        const px=10+i*((W-20)/3);
+        x.fillStyle=k[1]; x.fillRect(px, ky-7, 9, 9);
+        mono(x,8.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='middle';
+        x.fillText(k[0], px+13, ky-2);
+      });
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    const wet = P.filter(s=> d>=s.on && d<s.off).length;
+    document.getElementById('advSV').textContent=dateOf(d);
+    document.getElementById('advA').textContent=phaseOf(d);
+    document.getElementById('advB').textContent=wet + ' of 10';
+    document.getElementById('advC').textContent = latest ||
+      (d<12 ? 'Still out over the ocean' :
+       d<49 ? 'Sweeping north and west' :
+       d<120 ? 'The whole country is under it' :
+       d<149 ? 'Pulling back towards the south-east' : 'Gone for the year');
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[phaseOf(+sS.value)]=1; ev('explore','advS');
+      if(Object.keys(seen).length>=3) complete('m11');
+      draw();
+    };
+  }
+  reg('m11',draw);
+})();
+
+/* ============================================================
+   M12 — cause, effect, or response
+   ============================================================ */
+Q.rows('g12','g12s',[
+  {t:'Burning fossil fuels for energy and transport',      a:0},
+  {t:'Deforestation and industrial pollution',             a:0},
+  {t:'Glaciers melting and sea levels rising',             a:1},
+  {t:'More frequent floods and droughts',                  a:1},
+  {t:'Loss of biodiversity',                               a:1},
+  {t:'Switching to renewable energy',                      a:2},
+  {t:'Protecting forests, and reducing carbon footprints', a:2}
+], ['Cause','Effect','What we can do'], 'm12',
+   'All seven. The causes are almost all human, which is the uncomfortable half — and also the hopeful half, because it means the third column exists.');
+
+/* ============================================================
+   M13 — the carbon footprint audit
+   Four categories, one answer each, scored exactly the way the
+   chapter scores it: low 1, medium 2, high 3, very high 4.
+   ============================================================ */
+(function(){
+  const CAT=[
+    {id:'ftA', k:'A', n:'Transport', o:[
+      {t:'I walk or cycle', p:1},
+      {t:'Public transport or carpool', p:2},
+      {t:'Private car, even short trips', p:3},
+      {t:'Flights more than twice a year', p:4}]},
+    {id:'ftB', k:'B', n:'Electricity', o:[
+      {t:'Always switch things off', p:1},
+      {t:'Sometimes forget', p:2},
+      {t:'Often leave things on', p:3}]},
+    {id:'ftC', k:'C', n:'Water', o:[
+      {t:'One bucket, used carefully', p:1},
+      {t:'Sometimes waste it', p:2},
+      {t:'Rarely think about it', p:3}]},
+    {id:'ftD', k:'D', n:'Waste and plastics', o:[
+      {t:'Reuse, recycle, no single-use', p:1},
+      {t:'Sometimes use disposables', p:2},
+      {t:'Throw away, do not recycle', p:3}]}
+  ];
+  const pick={};
+  let scored=false;
+  const cv=document.getElementById('ftCv');
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=180, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('four choices, and what each one weighs', 10, 8);
+    // one bar per category, its length the points chosen
+    const top=32, rowh=(H-top-26)/4;
+    CAT.forEach((c,i)=>{
+      const y=top+i*rowh, p=pick[c.id];
+      mono(x,10,500); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(c.k, 10, y+rowh/2);
+      const bx=26, bw=W-36;
+      x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(bx, y+4, bw, rowh-10);
+      if(p){
+        const frac=p/4;
+        x.fillStyle = p<=1 ? GOOD : p===2 ? GOLD : BAD;
+        x.fillRect(bx+1, y+5, (bw-2)*frac, rowh-12);
+        mono(x,9.5,500); x.fillStyle=BG; x.textAlign='left';
+        x.fillText(p + (p===1?' point':' points'), bx+7, y+rowh/2);
+      } else {
+        mono(x,9.5); x.fillStyle=DIM; x.textAlign='left';
+        x.fillText('not answered', bx+7, y+rowh/2);
+      }
+    });
+    // the total, against the best and worst possible
+    const total=CAT.reduce((s,c)=>s+(pick[c.id]||0),0);
+    const answered=CAT.filter(c=>pick[c.id]).length;
+    const ty=H-16;
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText('best possible 4', 10, ty);
+    x.textAlign='right'; x.fillText('worst 13', W-10, ty);
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(84, ty); x.lineTo(W-58, ty); x.stroke();
+    if(answered===4){
+      const u=(total-4)/9;
+      x.fillStyle = total<=6 ? GOOD : total<=9 ? GOLD : BAD;
+      x.beginPath(); x.arc(84+(W-142)*u, ty, 5, 0, 7); x.fill();
+    }
+    x.textAlign='left'; x.textBaseline='alphabetic';
+  }
+  function refresh(){
+    const total=CAT.reduce((s,c)=>s+(pick[c.id]||0),0);
+    const answered=CAT.filter(c=>pick[c.id]).length;
+    document.getElementById('ftOut').textContent = scored ? total + ' / 13' : answered + ' of 4 answered';
+    // the category where a change would buy the most
+    let best=null;
+    CAT.forEach(c=>{ const p=pick[c.id]; if(p && (!best || p-1 > best.gain)) best={n:c.n, gain:p-1}; });
+    document.getElementById('ftBest').textContent =
+      scored && best && best.gain>0 ? best.n + ', worth ' + best.gain + ' point' + (best.gain>1?'s':'') :
+      scored ? 'Nothing left — every answer is already the low-impact one' : '—';
+    draw();
+  }
+  CAT.forEach(c=>{
+    const box=document.getElementById(c.id);
+    if(!box) return;
+    c.o.forEach(o=>{
+      const b=document.createElement('button');
+      b.className='chip'; b.textContent=o.t;
+      b.onclick=()=>{
+        pick[c.id]=o.p;
+        [...box.children].forEach(k=>k.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','ft-'+c.id);
+        refresh();
+      };
+      box.appendChild(b);
+    });
+  });
+  const btn=document.getElementById('ftScore');
+  if(btn) btn.onclick=()=>{
+    const answered=CAT.filter(c=>pick[c.id]).length;
+    const total=CAT.reduce((s,c)=>s+(pick[c.id]||0),0);
+    const txt=document.getElementById('ftTxt');
+    if(answered < 4){
+      txt.textContent = 'Answer all four sections first — ' + answered + ' of 4 done so far.';
+      refresh(); return;
+    }
+    scored=true;
+    txt.textContent = total<=6
+      ? 'A total of ' + total + '. That is a light footprint. The pledge still matters: name two things you will keep doing even when it is inconvenient.'
+      : total<=9
+      ? 'A total of ' + total + '. Middling, which is where most people land. Now write down two simple changes that would bring it down.'
+      : 'A total of ' + total + '. High, and worth taking seriously. Pick the two heaviest lines above and write down one change for each.';
+    ev('perfect'); complete('m13');
+    refresh();
+  };
+  reg('m13',draw);
+})();
+
+/* ============================================================
+   M14 — Punjab 2025, natural against human-made
+   ============================================================ */
+Q.rows('g14','g14s',[
+  {t:'Very heavy monsoon rain, intensified by western disturbances', a:0},
+  {t:'Rain falling in Himachal Pradesh and Jammu & Kashmir as well', a:0},
+  {t:'The Satluj, Beas, Ravi and Ghaggar already running high',      a:0},
+  {t:'Weak and old river embankments — the dhūsī bāndh',             a:1},
+  {t:'Houses and farms built too close to the rivers',               a:1},
+  {t:'Silt collected in rivers and dams, cutting how much they hold', a:1},
+  {t:'Flood warnings that came late or were unclear',                a:1}
+], ['Natural','Human-made'], 'm14',
+   'All seven. The rain was natural; almost everything that turned heavy rain into a disaster was not.');
+
+/* ============================================================
+   M15 — ten stations, ten climates
+   Figures are the representational ones printed in Table 3.3,
+   reproduced as they stand.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('staCv'), box=document.getElementById('staOpts');
+  const MN=['J','F','M','A','M','J','J','A','S','O','N','D'];
+  const S=[
+    {n:'Bengaluru', lat:'12°58′N', alt:909, ann:88.9,
+     t:[20.5,22.7,25.2,27.1,26.7,24.2,23.0,23.0,23.1,22.9,18.9,20.2],
+     r:[0.7,0.9,1.1,4.5,10.7,7.1,11.1,13.7,16.4,15.3,6.1,1.3],
+     w:'909 m up, which is why a station this close to the equator stays mild all year.'},
+    {n:'Mumbai', lat:'19°N', alt:11, ann:183.4,
+     t:[24.4,24.4,26.7,28.3,30.0,28.9,27.2,27.2,27.2,27.8,27.2,25.0],
+     r:[0.2,0.2,0,0,1.8,50.6,61.0,36.9,26.9,4.8,1.0,0],
+     w:'Almost the entire year’s rain falls in four months. On the west coast the south-west monsoon arrives first and hits hardest.'},
+    {n:'Kolkata', lat:'22°34′N', alt:6, ann:162.5,
+     t:[19.6,22.0,27.1,30.1,30.4,29.9,28.9,28.7,28.9,27.6,23.4,19.7],
+     r:[1.2,2.8,3.4,5.1,13.4,29.0,33.1,33.4,25.3,12.7,2.7,0.4],
+     w:'Heavy monsoon rain from the Bay of Bengal branch, and a real winter — 19.6 °C in January against 30.4 in May.'},
+    {n:'Delhi', lat:'29°N', alt:219, ann:67.0,
+     t:[14.4,16.7,23.3,30.0,33.3,33.3,30.0,29.4,28.9,25.6,19.4,15.6],
+     r:[2.5,1.5,1.3,1.0,1.8,7.4,19.3,17.8,11.9,1.3,0.2,1.0],
+     w:'Far inland and far north: a 19 °C swing between January and June, and rain only when the monsoon finally arrives at the end of June.'},
+    {n:'Jodhpur', lat:'26°18′N', alt:224, ann:36.6,
+     t:[16.8,19.2,26.6,29.8,33.3,33.9,31.3,29.0,20.1,27.0,20.1,14.9],
+     r:[0.5,0.6,0.3,0.3,1.0,3.1,10.8,13.1,5.7,0.8,0.2,0.2],
+     w:'Delhi gets nearly twice Jodhpur’s rain, because Jodhpur sits out in the Thar where the monsoon arrives last and weakest.'},
+    {n:'Chennai', lat:'13°4′N', alt:7, ann:128.6,
+     t:[24.5,25.7,27.7,30.4,33.0,32.5,31.0,30.2,29.8,28.0,25.9,24.7],
+     r:[4.6,1.3,1.3,1.8,3.8,4.5,8.7,11.3,11.9,30.6,35.0,13.9],
+     w:'The wettest months are October and November — after the monsoon is over almost everywhere else. Chennai lives on the retreating north-east monsoon crossing the Bay of Bengal.'},
+    {n:'Nagpur', lat:'21°9′N', alt:312, ann:124.2,
+     t:[21.5,23.9,28.3,32.7,35.5,32.0,27.7,27.3,27.9,26.7,23.1,20.7],
+     r:[1.1,2.3,1.7,1.6,2.1,22.2,37.6,28.6,18.5,5.5,2.0,1.0],
+     w:'Dead centre of the country: the hottest May of any station here at 35.5 °C, then the monsoon breaks and the temperature drops eight degrees.'},
+    {n:'Shillong', lat:'24°34′N', alt:1461, ann:225.3,
+     t:[9.8,11.3,15.9,18.5,19.2,20.5,21.1,20.9,20.0,17.2,13.3,10.4],
+     r:[1.4,2.9,5.6,14.6,29.5,47.6,35.9,34.3,30.2,18.8,3.8,0.6],
+     w:'More rain than Kolkata although it is further from the sea — because at 1461 m the hills force the monsoon air to rise, and rising air rains.'},
+    {n:'Thiruvananthapuram', lat:'8°29′N', alt:61, ann:181.2,
+     t:[26.7,27.3,28.3,28.7,28.6,26.6,26.2,26.2,26.5,26.7,26.6,26.5],
+     r:[2.3,2.1,3.7,10.6,20.8,35.6,22.3,14.6,13.8,27.3,20.6,7.5],
+     w:'An equable climate: the whole year sits between 26.2 and 28.7 °C. The sea is right there and will not let it get very hot or very cold.'},
+    {n:'Leh', lat:'34°N', alt:3506, ann:8.5,
+     t:[-8.5,-7.2,-0.6,6.1,10.0,14.4,17.2,16.1,12.2,6.1,0.0,-5.6],
+     r:[1.0,0.8,0.8,0.5,0.5,0.5,1.3,1.3,0.8,0.5,0,0.5],
+     w:'8.5 cm for the entire year, spread thinly across it. Leh sits behind the Himalaya at 3506 m, in its rain shadow — and it is the only station here that goes below freezing.'}
+  ];
+  let sel=0; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=235, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=S[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(s.n, 10, 8);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='right';
+    x.fillText(s.lat + ' · ' + s.alt.toLocaleString('en-IN') + ' m', W-10, 9);
+
+    const L=30, R=W-30, T=34, B=H-30;
+    /* Fixed scales across every station, or the graphs cannot be compared:
+       rainfall 0–65 cm and temperature −10 to 40 °C cover the whole table. */
+    const RMAX=65, TMIN=-10, TMAX=40;
+    const bw=(R-L)/12;
+    const ry = v => B - (v/RMAX)*(B-T);
+    const ty = v => B - ((v-TMIN)/(TMAX-TMIN))*(B-T);
+
+    // axes
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(L,T); x.lineTo(L,B); x.lineTo(R,B); x.moveTo(R,T); x.lineTo(R,B); x.stroke();
+    mono(x,8); x.fillStyle=A1; x.textAlign='right'; x.textBaseline='middle';
+    [0,20,40,60].forEach(v=>{ x.fillText(v+'', L-4, ry(v)); });
+    x.fillStyle=BAD; x.textAlign='left';
+    [-10,0,10,20,30,40].forEach(v=>{ x.fillText(v+'', R+4, ty(v)); });
+    // the freezing line, which only Leh crosses
+    if(TMIN < 0){
+      x.strokeStyle='rgba(142,154,192,.35)'; x.setLineDash([3,3]); x.lineWidth=1;
+      x.beginPath(); x.moveTo(L, ty(0)); x.lineTo(R, ty(0)); x.stroke(); x.setLineDash([]);
+    }
+    // rainfall bars
+    s.r.forEach((v,i)=>{
+      const h=B-ry(v);
+      x.fillStyle = v>=20 ? A1 : 'rgba(67,168,224,.45)';
+      x.fillRect(L+i*bw+2, ry(v), bw-4, h);
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText(MN[i], L+i*bw+bw/2, B+4);
+    });
+    // temperature line on top
+    x.strokeStyle=BAD; x.lineWidth=2;
+    x.beginPath();
+    s.t.forEach((v,i)=>{ const px=L+i*bw+bw/2, py=ty(v); i?x.lineTo(px,py):x.moveTo(px,py); });
+    x.stroke();
+    s.t.forEach((v,i)=>{ x.fillStyle=BAD; x.beginPath(); x.arc(L+i*bw+bw/2, ty(v), 2, 0, 7); x.fill(); });
+
+    mono(x,8.5); x.textBaseline='top';
+    x.fillStyle=A1; x.textAlign='left';  x.fillText('rain, cm', L, T-11);
+    x.fillStyle=BAD; x.textAlign='right'; x.fillText('temp, °C', R, T-11);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    let wi=0; s.r.forEach((v,i)=>{ if(v > s.r[wi]) wi=i; });
+    const hi=Math.max.apply(null, s.t), lo=Math.min.apply(null, s.t);
+    document.getElementById('staA').textContent=s.ann.toFixed(1)+' cm';
+    document.getElementById('staB').textContent=['January','February','March','April','May','June','July','August','September','October','November','December'][wi] + ' · ' + s.r[wi].toFixed(1) + ' cm';
+    document.getElementById('staC').textContent=(hi-lo).toFixed(1)+' °C';
+    document.getElementById('staTxt').textContent=s.w;
+  }
+  if(cv){
+    S.forEach((s,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=s.n;
+      b.onclick=()=>{
+        sel=i; seen[i]=1;
+        [...box.children].forEach(c=>c.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','sta-'+i);
+        if(Object.keys(seen).length>=4) complete('m15');
+        draw();
+      };
+      box.appendChild(b);
+    });
+  }
+  reg('m15',draw);
+})();
+
+/* ============================================================
+   M16 — chapter boss
+   ============================================================ */
+Q.boss([
+  { t:'Recall · 1 of 10',
+    q:'Which two gases make up 99 per cent of the atmosphere?',
+    o:['Nitrogen and oxygen','Carbon dioxide and argon','Oxygen and water vapour'], a:0,
+    w:'Nitrogen is 78 per cent and oxygen 21. Argon is 0.93, carbon dioxide only 0.04, and water vapour — which varies between 0.1 and 0.4 per cent — is not counted in that figure at all.' },
+  { t:'Recall · 2 of 10',
+    q:'In which layer does nearly all weather happen?',
+    o:['The stratosphere','The troposphere','The thermosphere'], a:1,
+    w:'The troposphere averages about 12 km and holds the air we breathe, most of the water vapour and the clouds. Rainfall, fog and hail all belong to it.' },
+  { t:'Recall · 3 of 10',
+    q:'Where does the word “monsoon” come from?',
+    o:['The Arabic mausim, meaning season','The Sanskrit varṣhā, meaning rain','A Portuguese word for wind'], a:0,
+    w:'Arab traders named the seasonal reversal of the wind system. The sailors who reached India in ancient times were among the first to notice it, since they travelled at the mercy of the winds.' },
+  { t:'Understanding · 4 of 10',
+    q:'Why do aeroplanes cruise in the stratosphere?',
+    o:['Because the air there is denser and lifts better',
+       'Because it is free of cloud and weather disturbance',
+       'Because that is where the auroras are'], a:1,
+    w:'The stratosphere reaches 50 km, is clear of the weather, and carries the ozone layer that filters the Sun’s ultraviolet.' },
+  { t:'Understanding · 5 of 10',
+    q:'The ground gets very hot on a summer afternoon. What follows?',
+    o:['The air sinks, pressure rises, and the sky clears',
+       'The air rises, pressure falls, and cloud and rain become likely',
+       'Nothing — temperature and pressure are unrelated'], a:1,
+    w:'Hot air expands and rises, leaving low pressure at the surface, and low pressure goes with cloudy skies and wet weather. Cold air sinks and gives high pressure, clear and sunny.' },
+  { t:'Understanding · 6 of 10',
+    q:'Which way does a sea breeze blow, and when?',
+    o:['From sea to land, during the day','From land to sea, during the day','From sea to land, at night'], a:0,
+    w:'By afternoon the land is warmer than the sea, so low pressure forms over the land and the wind blows in off the water. At night it reverses into the weaker land breeze.' },
+  { t:'Application · 7 of 10',
+    q:'Why does the south-west monsoon blow from sea to land in June?',
+    o:['Because the Earth’s rotation reverses in summer',
+       'Because the land heats faster than the ocean, making low pressure over the land',
+       'Because the ocean is warmer than the land in summer'], a:1,
+    w:'Unequal heating is the whole mechanism. In summer the landmass heats faster than the surrounding oceans, so low pressure forms over the subcontinent while the cooler ocean holds high pressure — and wind always moves from high to low.' },
+  { t:'Application · 8 of 10',
+    q:'Chennai gets most of its rain in October and November. Why?',
+    o:['The south-west monsoon reaches it last',
+       'The retreating north-east monsoon picks up moisture crossing the Bay of Bengal',
+       'It lies in the rain shadow of the Western Ghats all summer'], a:1,
+    w:'The winter monsoon blows from land to sea and is dry — except where it crosses the Bay of Bengal, which is why Tamil Nadu, Andhra Pradesh and parts of Karnataka get rain when the rest of the country has finished.' },
+  { t:'Reasoning · 9 of 10',
+    q:'Shillong is further from the sea than Kolkata but gets more rain. Why?',
+    o:['It is at 1461 m, so the hills force monsoon air to rise, and rising air rains',
+       'It is closer to the equator',
+       'It receives both monsoons equally'], a:0,
+    w:'Relief is what separates the two. Air pushed up over high ground cools and drops its moisture, which is why Shillong records 225.3 cm against Kolkata’s 162.5.' },
+  { t:'Challenge · 10 of 10',
+    q:'The Punjab floods of 2025 were made much worse by human factors. Which of these is one of them?',
+    o:['Heavy monsoon rain intensified by western disturbances',
+       'Rain falling in Himachal Pradesh and Jammu & Kashmir',
+       'Silt collected in rivers and dams, cutting how much water they could hold'], a:2,
+    w:'The rain was natural. Weak and old embankments, houses and farms built too close to the rivers, silted-up rivers and dams, and late or unclear warnings were not — and they are what turned heavy rain into a disaster.' }
+], 'm16', 'What the air is made of and how it is layered, weather against climate, the pressure rule that makes every wind, the monsoon that organises the Indian year, and what a changing climate is already doing.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
