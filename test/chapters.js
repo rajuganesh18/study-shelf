@@ -49,7 +49,14 @@ module.exports = [
        answer required in each before it will score. The generic prodder walks
        at most two rows, so it can never fill in C and D.
        test/chapters/atmosphere.js answers all four properly instead. */
-    skipReach:['m13'] }
+    skipReach:['m13'] },
+  { slug:'civilisation', id:'9-social-4',  n:4,  title:'Early Humans and Beginning of Civilisation',
+    /* m12 is the Harappan balance: three loads have to be matched EXACTLY by
+       summing stone weights, so 13 means tapping 8, 4 and 1 and nothing else.
+       The generic prodder taps one chip at a time and can only ever land on a
+       weight that happens to equal the load — never on a sum.
+       test/chapters/civilisation.js weighs all three properly instead. */
+    skipReach:['m12'] }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';

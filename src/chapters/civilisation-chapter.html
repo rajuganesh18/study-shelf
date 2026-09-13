@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Early Humans and Civilisation — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: fired clay, and the green of old bronze ---------- */
+:root{ --a1:#D98C3E; --a2:#7FB8A4; --badge-bg:#EDE2D2; }
+/*@include shared/chrome.css*/
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Social Science · Chapter 4</div>
+  <h1>Early Humans<br><span>and Civilisation</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Before anyone could write</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="35" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>Three million years</b><i>Fig. 4.3 · before writing, and after</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Drag along the whole of human history. The top bar is drawn to true scale; the bar below it is the same span, stretched so that the crowded end is visible at all.</p>
+    <div class="panel">
+      <canvas id="hisCv" height="235"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="hisS">You are at <b><span id="hisSV">—</span></b></label>
+        <input id="hisS" type="range" min="0" max="1000" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Period</div><div class="v" id="hisA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Dating</div><div class="v" id="hisB" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">What is happening</div><div class="v" id="hisC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p><b>More than 99 per cent</b> of human history falls before writing — roughly three million years ago to five thousand years ago. Everything we know about it comes from <b>artefacts</b>: the tools, implements and other objects people made, used and threw away. It is generally hard to recover what those people thought, and the dating of events and cultures is only approximate.</p>
+    <p><b>Less than 1 per cent</b> of human history is the part after writing: the last five thousand years, our own century included. Here both material remains <i>and</i> written documents survive. Literature gives us names, events, and social, political and cultural life, and dating becomes relatively accurate, because documents record the date of a coronation or a war.</p>
+    <div class="curio">
+      <h5>Why study any of it?</h5>
+      <div class="note">Because it is the record of two evolutions at once. <b>Biological evolution</b> is the slow physical and genetic change from the australopithecines — <i>australis</i>, southern, and <i>pithecus</i>, primate — to <i>Homo sapiens</i>. <b>Cultural evolution</b> is how humans adapted to the Quaternary Period, the last 26 lakh years, by inventing tools, techniques and technologies to use whatever the climate left them.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="35" data-coin="20">
+  <summary><span class="mno">02</span><span class="mt"><b>Three scripts, and one still unread</b><i>Figs. 4.1, 4.2 and 4.25</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Writing did not appear everywhere at once, and not all of it can be read today. Tap each script.</p>
+    <div class="panel">
+      <canvas id="scrCv" height="215"></canvas>
+      <div class="chips" id="scrOpts" style="margin-top:10px"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Where</div><div class="v" id="scrA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">When</div><div class="v" id="scrB" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">Can we read it?</div><div class="v" id="scrC" style="font-size:12px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="scrTxt">—</div>
+    </div>
+    <p>One of the earliest known writing systems belongs to the <b>Sindhu–Sarasvatī</b> civilisation, also called the Indus Valley or Harappan civilisation. Writings and engravings on seals and pottery show that the Harappans used a <b>pictographic script</b>. It has not yet been deciphered, so the <b>Sindhu lipi</b> is still unread.</p>
+    <p>The <b>cuneiform</b> script of the Sumerians in Mesopotamia and the <b>hieroglyphic</b> script of ancient Egypt flourished around the same time, and both have been deciphered. They mark the beginning of the historical period, about 5000 years ago. From about <b>400 BCE</b> a script called <b>Brahmi</b> was used in parts of southern India and in the Ganga valley, later formalised by the Emperor Aśhoka in the 3rd century BCE and by Iron Age people across southern India.</p>
+    <div class="curio">
+      <h5>Let's explore</h5>
+      <div class="note">Look at a Harappan seal and ask why the script resists us. The inscriptions are very short — a handful of signs each — there is no bilingual text like the Rosetta Stone to cross-check against, and we do not know what language is being written. Find out what attempts have been made to decipher it.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="30" data-coin="15">
+  <summary><span class="mno">03</span><span class="mt"><b>Before writing, or after?</b><i>Fig. 4.3 · the comparison in the chapter</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Each of these belongs to one side of the invention of writing. Mark them.</p>
+    <div class="panel">
+      <div id="g3"></div>
+      <div class="score" id="g3s"></div>
+    </div>
+    <p>Writing does not change what happened. It changes what can be found out about it afterwards — and that is why the same table divides <i>sources</i>, <i>lives of the people</i> and <i>measurement of time</i> along the same line.</p>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Who our ancestors were</div>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="35" data-coin="20">
+  <summary><span class="mno">04</span><span class="mt"><b>Four skulls, in order</b><i>Fig. 4.6 · watch the face straighten</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The chapter asks you to look at four skulls and notice what changes. Tap each one — all four finish the mission.</p>
+    <div class="panel">
+      <canvas id="skuCv" height="250"></canvas>
+      <div class="chips" id="skuOpts" style="margin-top:10px"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Where</div><div class="v" id="skuA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">When</div><div class="v" id="skuB" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">Tools</div><div class="v" id="skuC" style="font-size:11.5px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="skuTxt">—</div>
+    </div>
+    <p>Two things move together across the four. The <b>braincase grows</b>, and the <b>face stops jutting forward</b> — by <i>Homo sapiens</i> it sits almost directly under the forehead. The heavy brow ridge that shades <i>Homo erectus</i> is gone by then too.</p>
+    <p>All of these are <b>hominins</b>: modern humans together with our early human-like ancestors. We know <i>Homo habilis</i> — handy man — from the Olduvai Gorge in Tanzania and Kenya. Its successor <i>Homo erectus</i>, an upright, bipedal ancestor and the inventor of the handaxe and the cleaver, was among the first to migrate out of Africa. Every one of them made tools; only <i>Homo sapiens</i> went on to develop complex technologies.</p>
+    <div class="curio">
+      <h5>How we know any of this</h5>
+      <div class="note">Archaeologists dig at early human sites for tools, bones and other objects left behind, and then <b>make and use similar tools themselves</b> to work out how they were held, what they cut and how long they lasted. A <b>fossil</b> is what remains when a body is buried under layers of earth and slowly turns to stone over thousands or millions of years.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="35" data-coin="20">
+  <summary><span class="mno">05</span><span class="mt"><b>Out of Africa, twice</b><i>Fig. 4.4 · the dispersals</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Our earliest ancestors evolved and lived in Africa. Slide forward and watch them leave — and then watch it happen a second time, with a different species.</p>
+    <div class="panel">
+      <canvas id="migCv" height="225"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="migS">When <b><span id="migSV">—</span></b></label>
+        <input id="migS" type="range" min="0" max="4" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Who</div><div class="v" id="migA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">How far they are</div><div class="v" id="migB" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">What we find</div><div class="v" id="migC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>Africa, Asia and Europe together hold the earliest human settlements, and are what we call the <b>Old World</b>. <i>Homo erectus</i> was the first hominin to exit Africa, and its handaxes and cleavers turn up across Asia and Europe — which is exactly how we know the tools originated in Africa and spread outwards, between <b>2 and 0.5 million years ago</b>.</p>
+    <p>A second major movement out of Africa took place around <b>125,000 years ago</b>. That one was ours: early <i>Homo sapiens</i>, who had evolved in Africa about 300,000 years ago and are now spread over the whole earth. Between 50,000 and 12,000 years ago they reached Australia and the Americas as well.</p>
+    <div class="curio">
+      <h5>Think about it</h5>
+      <div class="note">Why leave at all? Consider what the map shows: the Sahara and Arabia were <b>wetter during interglacials</b>, so the deserts that look like a wall today were sometimes a corridor. Climate opened and shut the doors, and food moved with it.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="30" data-coin="15">
+  <summary><span class="mno">06</span><span class="mt"><b>Which ancestor?</b><i>One clue each, from Fig. 4.6</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Seven clues. Each one points to exactly one of the four.</p>
+    <div class="panel">
+      <div id="g6"></div>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>It was around <b>3.3 million years ago</b> that one of these ancestors made the earliest stone tools — the moment usually taken as the start of human, rather than animal, behaviour, since no animal has the cognitive ability to make one. That is why human beings came to be called <b>hominins</b>, or tool makers.</p>
+    <div class="curio">
+      <h5>Extra-corporal limbs</h5>
+      <div class="note">Tools are sometimes called <b>extra-corporal limbs</b> — limbs outside the body. They worked as extensions of the human body, letting people do things their hands alone could not. People made them, used them, and discarded them when they wore out; the discarded ones were buried in the upper layers of the earth, which is where archaeologists find them.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 3 · The ages named after their tools</div>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="30" data-coin="15">
+  <summary><span class="mno">07</span><span class="mt"><b>Six ages, in order</b><i>Fig. 4.7 · periods in early human history</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Early human history is divided by technology, not by kings. Tap them oldest first.</p>
+    <div class="panel">
+      <div class="chips" id="g7"></div>
+      <div class="score" id="g7s"></div>
+    </div>
+    <p><b>Palaeolithic</b> — hunting and gathering, with simple stone tools. <b>Mesolithic</b> — microlithic, tiny stone tools; a transitional phase between hunting–gathering and agriculture. <b>Neolithic</b> — the shift to agriculture and settled life, with domesticated animals and polished stone tools. <b>Chalcolithic</b> — copper used alongside stone, and the first metallurgy. <b>Bronze Age</b> — copper mixed with tin, and with it trade, towns and the early civilisations. <b>Iron Age</b> — iron smelting, stronger tools and weapons, more advanced societies.</p>
+    <div class="curio">
+      <h5>Think about it</h5>
+      <div class="note">The move to farming is called the <b>Neolithic Revolution</b> rather than the Neolithic change. Why a revolution, when it took thousands of years? Because of what it overturned: what people ate, where they slept, how many of them there could be, and who owned what.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="35" data-coin="20">
+  <summary><span class="mno">08</span><span class="mt"><b>The toolkit sharpens</b><i>Figs. 4.9 to 4.13 · India's stone tools</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Six stages of one long argument between a hand and a stone. Slide through them.</p>
+    <div class="panel">
+      <canvas id="tooCv" height="240"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="tooS">Stage <b><span id="tooSV">—</span></b></label>
+        <input id="tooS" type="range" min="0" max="5" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Period</div><div class="v" id="tooA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">Tools</div><div class="v" id="tooB" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">What they were for</div><div class="v" id="tooC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>In the Indian subcontinent the oldest human settlement dates back about <b>2 million years</b>. <b>Attirampakkam</b> in Tamil Nadu is dated to about 1.5–1.7 million years ago and <b>Isampur</b> in Karnataka to 1.2 million years ago. Animal fossils and large cutting tools — handaxes and cleavers — were found there, along with scrapers and choppers of quartzite and limestone, used to chop meat, dig out tubers, scrape skin and cleave bone for the protein-rich marrow inside.</p>
+    <p>Later came the <b>bow and arrow</b>, and parallel-sided blade and microblade tools made from glassy rock, which is very sharp when freshly struck. With them came symbolic communication: painted cave and rock-shelter walls, pigment on the body, and the first beads of stone, bone and shell. A <b>burin</b>, or engraver, was used to cut symbols into bone and shell such as ostrich eggs, and microblades were fixed into a handle to be used.</p>
+    <div class="curio">
+      <h5>Bhimbetka</h5>
+      <div class="note">Around <b>12,000 years ago</b> the climate warmed. Forests and grasslands spread into land that had been under ice, offering small game, fish and edible wild grains — and the world saw its first population explosion. Fishing became the mainstay. The World Heritage Site of <b>Bhimbetka</b> in Madhya Pradesh has hundreds of painted rock shelters with Mesolithic and earlier occupation.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="35" data-coin="20">
+  <summary><span class="mno">09</span><span class="mt"><b>Three columns, filled in</b><i>The chapter's own exercise 6</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The end of the chapter asks you to build this table yourself. Tick every column a line belongs to. One of the six belongs to more than one.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap once for a tick, twice for a cross. All eighteen boxes must be filled before it will mark.</div>
+      <table class="tick" id="g9"></table>
+      <div class="row"><button class="act" id="g9check">Check my answers</button></div>
+      <div class="score" id="g9s"></div>
+    </div>
+    <p>Read the three columns across and you are reading three different relationships with food: <b>take it</b> where it grows, <b>catch it</b> in a warmer and richer landscape, then <b>grow it</b> yourself and stay beside it. The last line is the one that catches people out — the Mesolithic is still a hunting and gathering world, only a warmer and better-stocked one.</p>
+    <p>Art belongs to the first two as well. The Upper Palaeolithic decorated cave walls, used pigment on the body and made the first beads of stone, bone and shell; in the Mesolithic that activity flourished, and Bhimbetka's hundreds of painted rock shelters are the result. Neolithic decoration moves onto the pottery.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · The Neolithic Revolution</div>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="35" data-coin="20">
+  <summary><span class="mno">10</span><span class="mt"><b>How a village happens</b><i>Fig. 4.14 · the five stages</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Fig. 4.14 gives the same five stages for every region of the world. Slide through them and watch one place go from a camp to a landscape.</p>
+    <div class="panel">
+      <canvas id="agrCv" height="268"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="agrS">Stage <b><span id="agrSV">—</span></b></label>
+        <input id="agrS" type="range" min="0" max="4" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Stage</div><div class="v" id="agrA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">What changes</div><div class="v" id="agrB" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">What a digger finds</div><div class="v" id="agrC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>As hunter–gatherers grew familiar with the seasons and with what each one offered, there was a gradual shift to producing food instead of finding it. The hallmark of the revolution was <b>domestication</b>: selected animals and plants brought under human control, and new breeds developed by cultivation and husbandry.</p>
+    <p>Hunter–gatherers made tools to <i>procure</i> food. Neolithic farmers made tools to <b>produce and process</b> it, and developed earthenware pottery in a variety of shapes and sizes. They drew on many raw materials and established the first village settlements — which is the foundation the urban revolution was later built on.</p>
+    <div class="curio">
+      <h5>Not everywhere at once</h5>
+      <div class="note">Fig. 4.14 makes one point above all others: this transition <b>did not happen at the same time everywhere</b>. Each region reached each stage in its own century, with its own crop — millets in India, rice on the Ganga plains, pearl millet in West Africa, wheat and barley in West Asia, millets in north China and rice on the Yangtze.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="30" data-coin="15">
+  <summary><span class="mno">11</span><span class="mt"><b>Mehrgarh, 7000 BCE</b><i>Fig. 4.16 · the oldest Neolithic site</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Pick everything the chapter actually reports from Mehrgarh. Some of these belong to other sites entirely.</p>
+    <div class="panel">
+      <div class="chips" id="g11"></div>
+      <button class="act" id="g11check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g11s"></div>
+    </div>
+    <p>In the northwest, <b>Mehrgarh</b> on the Bolan river — in present-day Pakistan — is the oldest Neolithic site and the earliest agricultural village in the subcontinent, dating to about <b>7000 BCE</b>. Its people built handmade sun-dried brick houses and granaries, buried their dead in graves, and made ornaments from semi-precious stones such as lapis lazuli and carnelian, and from shell.</p>
+    <p>They cultivated <b>wheat and barley</b> and raised sheep, goats and Indian cattle — the zebu humped bull in particular. They were also the first to make <b>copper objects</b>, entering the metal age and becoming Chalcolithic people by about <b>4000 BCE</b>. That is the foundation the Bronze Age Sindhu–Sarasvatī civilisation was built on. By 2500 BCE most of the subcontinent was occupied by Neolithic farming communities, herding cattle, sheep and goats and growing cereals, millets and pulses.</p>
+    <div class="curio">
+      <h5>Sanganakallu</h5>
+      <div class="note">Not every Neolithic site sits on a river plain. <b>Sanganakallu</b> in Karnataka, dating to about 2000 BCE, sits on top of a granite hill — and in parts of the country these Neolithic communities were living alongside, and trading with, contemporary Chalcolithic cultures.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 5 · Four rivers, four civilisations</div>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="35" data-coin="20">
+  <summary><span class="mno">12</span><span class="mt"><b>The Harappan balance</b><i>Fig. 4.20 · 1, 2, 4, 8, 16 …</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>A trader has a load to weigh. Tap stone weights into the right-hand pan until the beam sits level. Balance three loads to finish.</p>
+    <div class="panel">
+      <canvas id="wtCv" height="192"></canvas>
+      <div class="chips" id="wtOpts" style="margin-top:10px"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">The load</div><div class="v" id="wtA">—</div></div>
+        <div class="rc"><div class="k">On the pan</div><div class="v" id="wtB">—</div></div>
+        <div class="rc"><div class="k">Balanced</div><div class="v" id="wtC">0 of 3</div></div>
+      </div>
+      <div class="row"><button class="act" id="wtNew" style="margin-top:12px">Next load</button></div>
+      <div class="note" style="margin-top:11px" id="wtTxt">—</div>
+    </div>
+    <p>The Harappans had their own standard systems of weight and measurement — which is what their meticulously planned settlements and their efficient interregional trade both depended on. For small units they followed a <b>binary multiple</b>: 1, 2, 4, 8, 16 and so on. For larger denominations they used <b>multiples of ten</b>. Cubical stone weights of exactly this kind have been reported from several sites.</p>
+    <div class="curio">
+      <h5>Think about it</h5>
+      <div class="note">Every whole number up to 31 can be made from 1, 2, 4, 8 and 16, and in exactly one way — try it. Now imagine long-distance trade between Harappa, Lothal and the Persian Gulf if each town had weighed by a different standard. What would a merchant have had to carry, and how would any price have been agreed?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="30" data-coin="15">
+  <summary><span class="mno">13</span><span class="mt"><b>The Harappan timeline</b><i>Fig. 4.18 · village to city and back</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Six stages, from a Neolithic village to the last Harappan sites. Tap them oldest first.</p>
+    <div class="panel">
+      <div class="chips" id="g13"></div>
+      <div class="score" id="g13s"></div>
+    </div>
+    <p>Copper tools in the fertile alluvial plains of the Indus and the Ghaggar–Sarasvatī raised productivity and prosperity, and with it came large-scale pottery production in strongly regional styles. Those regional styles, visible in the early Chalcolithic sites from <b>4000 BCE</b> onwards, evolved into the standard features of the civilisation by about 2500 BCE. Some radio-carbon dates put the pre-Harappan phase at sites in the dried Sarasvatī belt — <b>Bhirrana</b> and <b>Kunal</b> — between 7000 and 5500 BCE.</p>
+    <p>Because these sites show cultural continuity, the stage before the cities is called <b>Early Harappan</b>. Pottery traditions, semi-precious stone beads, shell bangles, terracotta objects and copper working all carry through. So, probably, do the perimeter wall around a settlement, the use of seals, and even the script itself: graffiti on pottery and a few seals with geometric and simple animal motifs from Harappa, Rehman Dheri and Kunal look very much like forerunners of it.</p>
+    <div class="curio">
+      <h5>A tradition nearly 5,000 years old</h5>
+      <div class="note">The Early Harappans ploughed the field at <b>Kalibangan</b> in two directions at once — horizontal furrows crossing vertical ones. That is a field carrying two crops in the same year, exactly like the seasonal <b>Rabi and Kharif</b> cultivation practised in India today.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="35" data-coin="20">
+  <summary><span class="mno">14</span><span class="mt"><b>Four rivers, four answers</b><i>The Bronze Age civilisations</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Four civilisations, all on river plains, all at roughly the same time, all inventing what they needed. Tap each one.</p>
+    <div class="panel">
+      <canvas id="civCv" height="230"></canvas>
+      <div class="chips" id="civOpts" style="margin-top:10px"></div>
+      <div class="readout">
+        <div class="rc"><div class="k">Rivers</div><div class="v" id="civA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">Script</div><div class="v" id="civB" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">Known for</div><div class="v" id="civC" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="civTxt">—</div>
+    </div>
+    <p>Four early world civilisations emerged in river plains: the <b>Harappan</b> along the Sindhu and Sarasvatī, the <b>Mesopotamian</b> around the Euphrates and Tigris in West Asia, the <b>Egyptian</b> along the Nile, and the <b>Chinese</b> in the Huang He basin of northern China. Mesopotamia and the Indus–Ghaggar-Sarasvatī valleys are geographically close, and that proximity gave them strong contact and trade. Egypt and China show little tangible evidence of direct contact with the Sindhu–Sarasvatī civilisation.</p>
+    <p>The cuneiform tablets of the Akkadian king <b>Sargon</b> mention trade with <b>Dilmun, Magan and Meluhha</b>. Meluhha is generally identified with the Sindhu–Sarasvatī civilisation; Dilmun and Magan are today's Bahrain and the Oman peninsula. With the Harappans they traded semi-precious stone beads, ivory, timber, gold dust and probably copper.</p>
+    <div class="curio">
+      <h5>Don't miss out</h5>
+      <div class="note">While the Sumerians were building canals, the Early Harappans in the Baluchistan foothills were building check dams across small streams, called <b>gabarbands</b>. A far more evolved form of the same skill is the water harvesting system at <b>Dholavira</b> in Kachchh, where two streams were dammed and diverted into a chain of deep tanks — some cut into the bedrock — to hold the water inside the city boundary. The huge dockyard at <b>Lothal</b>, built entirely of burnt bricks, is the other marvel.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="30" data-coin="15">
+  <summary><span class="mno">15</span><span class="mt"><b>Whose invention is this?</b><i>Eight things, four civilisations</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Every one of these belongs to exactly one of the four. Sort them.</p>
+    <div class="panel">
+      <div id="g15"></div>
+      <div class="score" id="g15s"></div>
+    </div>
+    <p>Mesopotamia's four city-based civilisations followed one another in turn. The <b>Sumerians</b> came first, at Ur and other cities in southern Mesopotamia — the first to build dams and canals for irrigation, and the first to use mud brick and burnt brick. The <b>Akkadians</b> overshadowed them in <b>2334 BCE</b> and built the world's first dynastic empire. The <b>Assyrians</b> took supremacy around <b>2154 BCE</b> from Assur in the north and lasted till the early 1700s BCE. The <b>Babylonians</b> rose in central Mesopotamia from <b>1900 BCE</b>, and with <b>Hammurabi</b> from 1792 BCE came the Code of Hammurabi, a compilation of rules for civil and social conduct that later legal systems were modelled on.</p>
+    <div class="curio">
+      <h5>The ziggurat</h5>
+      <div class="note">Each Sumerian city built a grand stepped temple for its chief god — a <b>ziggurat</b>, a tower-like pyramid of several floors with the main temple on top — and the city grew around it. Agriculture, trade and the transport of goods were all tied to temple authority, entry to the sacred top was restricted to high priests and priestesses who were probably part of the ruling class, and because the ziggurat also served as the city's treasury, the surrounding wall had only one entrance.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="90" data-coin="70">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">90 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, drawn from this chapter's own figures, timelines and sidebars. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+
+<footer>NCERT Class 9 Social Science · Chapter 4</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*@include shared/storage.js*/
+
+/* ============================================================
+   Chapter 4 — Early Humans and Beginning of Civilisation
+   Understanding Society: India and Beyond, Grade 9 Part 1
+
+   Progress metaphor: one riverbank, watched for three million
+   years. XP piles things onto it in the order the chapter piles
+   them onto history — a struck flake, a fire under a painted
+   cliff, a hut beside a sown field, a kiln and its pots, a
+   walled city, and finally a clay tablet with marks on it.
+   ============================================================ */
+const CH = {
+  id: '9-social-4',
+  key: 'ch04Civil',
+  total: 16,
+  stages: [
+    { at:0,   f:0.05, name:'An empty bank',   d:'A river, a bank, and nobody yet who can make a tool.' },
+    { at:75,  f:0.20, name:'The first flake', d:'One stone struck with another, 3.3 million years ago.' },
+    { at:160, f:0.36, name:'Fire and paint',  d:'Hunter–gatherers, rock shelters, and the first pictures.' },
+    { at:250, f:0.52, name:'Seed and herd',   d:'A sown field, penned animals, and a house nobody leaves.' },
+    { at:345, f:0.68, name:'Kiln and copper', d:'Pottery by the hundred, and metal coaxed out of rock.' },
+    { at:450, f:0.85, name:'A walled city',   d:'Streets, granaries, standard weights, and a wall round it.' },
+    { at:565, f:1.00, name:'Writing',         d:'Marks pressed into clay, and history starts keeping records.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+
+    // sky, graded from dusty gold at the horizon to clear above
+    for(let i=0;i<H;i++){
+      const u = i/H;
+      x.fillStyle = 'rgb(' + Math.round(214+28*u) + ',' + Math.round(198+28*u) + ',' + Math.round(172+22*u) + ')';
+      x.fillRect(0, i, W, 1);
+    }
+    const gy = 60;                                  // the top of the bank
+    const ry = 78;                                  // the top of the water
+
+    /* Ninety-six pixels will not hold six objects side by side, so the city is
+       a silhouette on the horizon BEHIND the village rather than another thing
+       standing next to it — which is also what actually happened. */
+    if(f > 0.80){
+      x.fillStyle = '#B8A07E';
+      x.fillRect(40, 40, 52, 6);                                  // the wall
+      for(let px=40; px<90; px+=8) x.fillRect(px, 34, 5, 6);      // its battlements
+      x.fillStyle = '#A88A63';
+      [[56,26,28,12],[60,18,20,8],[64,12,12,6]].forEach(t=>x.fillRect(t[0], t[1], t[2], t[3]));
+    }
+
+    // the cliff the shelters are cut into, on the left
+    x.fillStyle = '#A88763';
+    x.beginPath(); x.moveTo(0,gy); x.lineTo(0,12); x.lineTo(13,8); x.lineTo(24,26); x.lineTo(27,gy);
+    x.closePath(); x.fill();
+    // the bank, and the river below it
+    x.fillStyle = '#9C8358'; x.fillRect(0, gy, W, ry-gy);
+    x.fillStyle = '#3F7E92'; x.fillRect(0, ry, W, H-ry);
+    x.strokeStyle = 'rgba(255,255,255,.35)'; x.lineWidth = 1;
+    for(let i=0;i<3;i++){
+      const wy = ry + 4 + i*5;
+      x.beginPath();
+      for(let px=0;px<=W;px+=6) px ? x.lineTo(px, wy+Math.sin(px*0.3+i)*1.2) : x.moveTo(px, wy);
+      x.stroke();
+    }
+
+    if(f > 0.12){                                   // a struck flake, on the bank
+      x.fillStyle = '#5D5348';
+      x.beginPath(); x.moveTo(34,gy+11); x.lineTo(43,gy+6); x.lineTo(47,gy+14); x.lineTo(37,gy+16);
+      x.closePath(); x.fill();
+    }
+    if(f > 0.30){                                   // fire, and hands on the cliff
+      x.fillStyle = '#E0663A';
+      x.beginPath(); x.moveTo(8,gy); x.lineTo(13,gy-13); x.lineTo(18,gy); x.closePath(); x.fill();
+      x.fillStyle = 'rgba(120,44,32,.8)';
+      [[5,22],[11,28],[18,20]].forEach(h=>{ x.beginPath(); x.arc(h[0], h[1], 2.4, 0, 7); x.fill(); });
+    }
+    if(f > 0.46){                                   // a hut, and a sown field beside it
+      x.fillStyle = '#8A6A46';
+      x.beginPath(); x.moveTo(23,gy-8); x.lineTo(30,gy-19); x.lineTo(37,gy-8); x.closePath(); x.fill();
+      x.fillRect(25, gy-8, 10, 8);
+      x.strokeStyle = '#6E8A4E'; x.lineWidth = 1.4;
+      for(let i=0;i<5;i++){ const px=41+i*4; x.beginPath(); x.moveTo(px,gy); x.lineTo(px,gy-9); x.stroke(); }
+    }
+    if(f > 0.62){                                   // a kiln, and a pot beside it
+      x.fillStyle = '#7A5540';
+      x.beginPath(); x.arc(68, gy, 7, Math.PI, 0); x.fill();
+      x.fillStyle = '#C4703C';
+      x.beginPath(); x.arc(84, gy-1, 5, Math.PI, 0); x.fill();
+      x.fillRect(80, gy-3, 8, 2);
+    }
+    if(f > 0.94){                                   // and a tablet, with wedges on it
+      x.fillStyle = '#D9C7A4'; x.fillRect(62, gy+3, 24, 14);
+      x.strokeStyle = '#6A5640'; x.lineWidth = 1;
+      x.strokeRect(62, gy+3, 24, 14);
+      x.fillStyle = '#6A5640';
+      for(let r=0;r<2;r++) for(let c=0;c<4;c++){
+        x.beginPath();
+        x.moveTo(65+c*5, gy+7+r*5); x.lineTo(68+c*5, gy+8.5+r*5); x.lineTo(65+c*5, gy+10+r*5);
+        x.closePath(); x.fill();
+      }
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ============================================================
+   Chapter 4 interactives
+   Bespoke canvases: three million years on one line (M1) · the
+   three scripts (M2) · four skulls (M4) · out of Africa (M5) ·
+   the toolkit (M8) · how a village happens (M10) · the Harappan
+   balance (M12) · four rivers (M14)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#D98C3E', A2='#7FB8A4',
+      GOOD='#4FC3A1', BAD='#E5484D', BG='#10141F',
+      STONE='#8C8478', STONE2='#5F5A50', CLAY='#C08A56', EARTH='#7A6248',
+      WATER='#2C6B86', GREEN='#6E8A4E';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* Centred label that shrinks rather than overflowing its column. */
+function fitText(x, s, cx, y, max){
+  let size = 9.5;
+  mono(x, size, 500);
+  while(x.measureText(s).width > max && size > 6){ size -= 0.5; mono(x, size, 500); }
+  x.textAlign = 'center'; x.fillText(s, cx, y);
+}
+
+/* Western grouping, deliberately: the numbers on this page are dates in a
+   world textbook, and 3,300,000 is easier to read against "3.3 million" than
+   the lakh grouping would be. */
+const comma = n => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+/* ============================================================
+   M1 — three million years, twice over
+   The whole mission is the mismatch between the two bars. The
+   top one is honest and therefore useless; the bottom one is a
+   cube-root stretch of the same span, which is the only way the
+   last twelve thousand years are visible at all.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('hisCv'), sS=document.getElementById('hisS');
+  const SPAN=3300000, WRITING=5000;
+  const M=[
+    {y:3300000, c:'3.3 mya', w:'The earliest stone tools are struck. Making one is the behaviour that separates a hominin from an animal.'},
+    {y:2600000, c:'2.6 mya', w:'The Quaternary Period begins — the last 26 lakh years, our own century included.'},
+    {y:2000000, c:'2 mya',   w:'Homo erectus walks out of Africa with handaxes and cleavers. The oldest settlement in the Indian subcontinent is about this old.'},
+    {y:1700000, c:'1.7 mya', w:'Attirampakkam in Tamil Nadu, dated to about 1.5–1.7 million years ago.'},
+    {y:1200000, c:'1.2 mya', w:'Isampur in Karnataka.'},
+    {y:300000,  c:'300 kya', w:'Homo sapiens evolves in Africa.'},
+    {y:125000,  c:'125 kya', w:'The second great movement out of Africa — and this time it is us.'},
+    {y:40000,   c:'40 kya',  w:'Homo neanderthalensis is gone from Europe and Southwest Asia.'},
+    {y:12000,   c:'12 kya',  w:'The climate warms. Forest and grassland spread over the ice, fishing becomes the mainstay, and human numbers explode for the first time.'},
+    {y:9000,    c:'7000 BCE',w:'Mehrgarh on the Bolan river: the oldest Neolithic site and the earliest farming village in the subcontinent.'},
+    {y:5200,    c:'3200 BCE',w:'The Sumerians begin to write. Everything to the right of this mark is the historical period.'},
+    {y:4600,    c:'2600 BCE',w:'The Mature Harappan cities.'},
+    {y:2400,    c:'400 BCE', w:'Brahmi is in use in southern India and the Ganga valley; Aśhoka formalises it in the 3rd century BCE.'}
+  ];
+  const seen={};
+  const yearsAt = v => Math.round(SPAN * Math.pow(1 - v/1000, 3));
+  function mileAt(y){
+    /* the most recent milestone that has already happened at this moment */
+    let m = M[0];
+    for(const k of M) if(k.y >= y) m = k;
+    return m;
+  }
+  function label(y){
+    if(y >= 1000000) return (Math.round(y/10000)/100) + ' million years ago';
+    if(y >= 1000)    return comma(Math.round(y/100)*100) + ' years ago';
+    if(y > 0)        return y + ' years ago';
+    return 'the present day';
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=235, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, v=+sS.value, y=yearsAt(v), after = y <= WRITING;
+    const L=12, R=W-12, span=R-L;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the same 3.3 million years, drawn twice', 10, 8);
+
+    // --- bar one: true scale. The sliver on the right is the whole point.
+    const trueX = yy => L + span*(1 - yy/SPAN);
+    x.fillStyle='#4A4032'; x.fillRect(L, 28, span, 16);
+    const wx = trueX(WRITING);
+    x.fillStyle=A1; x.fillRect(Math.min(wx, R-2), 28, Math.max(2, R-wx), 16);
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(L, 28, span, 16);
+    mono(x,8.5); x.fillStyle='rgba(240,238,230,.75)'; x.textAlign='left';
+    x.fillText('before writing — more than 99%', L+4, 32);
+    x.strokeStyle=A1; x.lineWidth=1;
+    x.beginPath(); x.moveTo(R-1, 46); x.lineTo(R-1, 54); x.lineTo(R-64, 54); x.stroke();
+    x.fillStyle=A1; x.textAlign='right'; x.textBaseline='top';
+    x.fillText('all of written history', R, 56);
+
+    // --- bar two: the same span, cube-root stretched
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 76); x.lineTo(W-10, 76); x.stroke();
+    mono(x,9.5,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('stretched, so the recent end is visible', 10, 82);
+
+    const sx = yy => L + span*(1 - Math.cbrt(Math.max(0,yy)/SPAN));
+    const bTop=110, bH=20;
+    x.fillStyle='#4A4032'; x.fillRect(L, bTop, span, bH);
+    x.fillStyle=A1;       x.fillRect(sx(WRITING), bTop, R-sx(WRITING), bH);
+    x.strokeStyle=RULE;   x.strokeRect(L, bTop, span, bH);
+
+    /* Every milestone gets a tick inside the bar. The ends are labelled INSIDE
+       the bar too: on a 296px canvas the stretched axis puts 12 kya, 3200 BCE
+       and "now" within eleven pixels of each other, so labelling them below the
+       bar printed all three on top of one another. */
+    M.forEach(m=>{
+      const px=sx(m.y);
+      x.strokeStyle='rgba(240,238,230,.5)'; x.lineWidth=1;
+      x.beginPath();
+      x.moveTo(px, bTop);      x.lineTo(px, bTop+6);
+      x.moveTo(px, bTop+bH-6); x.lineTo(px, bTop+bH);
+      x.stroke();
+    });
+    mono(x,8); x.textBaseline='middle';
+    x.fillStyle='rgba(240,238,230,.72)'; x.textAlign='left';
+    x.fillText('3.3 mya', L+4, bTop+bH/2);
+    x.fillStyle='#2B2419'; x.textAlign='right';   // this end of the bar is orange
+    x.fillText('now', R-4, bTop+bH/2);
+
+    // the one boundary the chapter cares about, called out above the bar
+    const wsx=sx(WRITING);
+    x.strokeStyle=A1; x.lineWidth=1.4; x.setLineDash([3,3]);
+    x.beginPath(); x.moveTo(wsx, bTop-14); x.lineTo(wsx, bTop); x.stroke();
+    x.setLineDash([]);
+    mono(x,8); x.fillStyle=A1; x.textAlign='right'; x.textBaseline='bottom';
+    x.fillText('writing \u2192', wsx-3, bTop-4);
+
+    // the marker, labelled below the bar where nothing else sits
+    const mx=sx(y), cur=mileAt(y);
+    x.strokeStyle=A2; x.lineWidth=2;
+    x.beginPath(); x.moveTo(mx, bTop); x.lineTo(mx, bTop+bH+6); x.stroke();
+    x.fillStyle=A2; x.beginPath(); x.arc(mx, bTop+bH+8, 4, 0, 7); x.fill();
+    mono(x,9,500); x.fillStyle=A2; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(cur.c, Math.min(W-26, Math.max(26, mx)), bTop+bH+14);
+
+    // --- what a historian has to work with, here
+    const py=164, ph=52, half=(span-10)/2;
+    [[L, 'Artefacts', true], [L+half+10, 'Documents', after]].forEach(p=>{
+      x.fillStyle = p[2] ? 'rgba(217,140,62,.18)' : 'rgba(142,154,192,.08)';
+      x.fillRect(p[0], py, half, ph);
+      x.strokeStyle = p[2] ? A1 : RULE; x.lineWidth=1;
+      x.strokeRect(p[0], py, half, ph);
+      mono(x,9.5,500); x.fillStyle = p[2] ? INK : 'rgba(142,154,192,.55)';
+      x.textAlign='center'; x.textBaseline='top';
+      x.fillText(p[1], p[0]+half/2, py+7);
+    });
+    // a handaxe in the first box, a tablet in the second
+    const ax=L+half/2, ay=py+32;
+    x.fillStyle = STONE;
+    x.beginPath(); x.moveTo(ax, ay-11); x.lineTo(ax+7, ay+1); x.lineTo(ax, ay+11); x.lineTo(ax-7, ay+1);
+    x.closePath(); x.fill();
+    const tx=L+half+10+half/2;
+    x.fillStyle = after ? '#D9C7A4' : 'rgba(217,199,164,.22)';
+    x.fillRect(tx-12, ay-10, 24, 20);
+    x.fillStyle = after ? '#6A5640' : 'rgba(106,86,64,.3)';
+    for(let r=0;r<3;r++) for(let c=0;c<3;c++){
+      x.beginPath();
+      x.moveTo(tx-8+c*7, ay-6+r*6); x.lineTo(tx-5+c*7, ay-4.5+r*6); x.lineTo(tx-8+c*7, ay-3+r*6);
+      x.closePath(); x.fill();
+    }
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(after ? 'both, from here on' : 'artefacts alone, for 99 per cent of it', W/2, py+ph+6);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('hisSV').textContent = label(y);
+    document.getElementById('hisA').textContent = after ? 'After writing' : 'Before writing';
+    document.getElementById('hisB').textContent = after ? 'Relatively accurate' : 'Approximate only';
+    document.getElementById('hisC').textContent = cur.w;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[mileAt(yearsAt(+sS.value)).c]=1; ev('explore','hisS');
+      if(Object.keys(seen).length>=4) complete('m1');
+      draw();
+    };
+  }
+  reg('m1',draw);
+})();
+
+/* ============================================================
+   M2 — three scripts, and one still unread
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('scrCv'), box=document.getElementById('scrOpts');
+  const S4=[
+    {k:'sindhu', t:'Sindhu lipi', where:'Sindhu–Sarasvatī cities', when:'Mature Harappan, about 2600 BCE',
+     read:'Not yet', ok:false,
+     w:'Pictographic signs on seals and pottery. The inscriptions are very short, there is no bilingual text to check them against, and the language behind them is unknown — so we can read the Harappans’ objects but not their words.'},
+    {k:'cunei',  t:'Cuneiform',   where:'Sumer, in Mesopotamia', when:'From about 3200 BCE',
+     read:'Yes', ok:true,
+     w:'Hundreds of marks pressed into the damp surface of a clay tablet with a sharp wedge-shaped reed — cuneus is Latin for wedge. By 3000 BCE it was used all over Mesopotamia by city-states that spoke quite different languages, and scribes held a status close to that of priests.'},
+    {k:'hiero',  t:'Hieroglyphic',where:'Ancient Egypt', when:'Flourished alongside the Harappans',
+     read:'Yes — since 1822', ok:true,
+     w:'Pierre Bouchard, a French army engineer repairing a fort in 1799, found a giant black stone covered in writing. The Rosetta Stone carried the same text in three scripts, one of them Greek — a bilingual dictionary for a lost language — and in 1822 Jean-François Champollion finally deciphered it.'},
+    {k:'brahmi', t:'Brahmi',      where:'Southern India and the Ganga valley', when:'From about 400 BCE',
+     read:'Yes', ok:true,
+     w:'Later formalised by the Emperor Aśhoka in the 3rd century BCE, and used by contemporary Iron Age people all over southern India. The railing around the stupa at Sanchi carries Brahmi inscriptions.'}
+  ];
+  let sel=0; const seen={};
+  function glyphs(x, cx, cy, kind){
+    x.fillStyle='#4A3E2E';
+    if(kind==='sindhu'){
+      // a row of pictographic signs: a fish, a jar, some strokes
+      x.strokeStyle='#4A3E2E'; x.lineWidth=1.6;
+      x.beginPath(); x.moveTo(cx-30,cy); x.lineTo(cx-22,cy-5); x.lineTo(cx-22,cy+5); x.closePath(); x.stroke();
+      x.beginPath(); x.arc(cx-8, cy, 5, 0, 7); x.stroke();
+      x.beginPath(); x.moveTo(cx+4,cy-6); x.lineTo(cx+4,cy+6); x.moveTo(cx+9,cy-6); x.lineTo(cx+9,cy+6);
+      x.moveTo(cx+14,cy-6); x.lineTo(cx+14,cy+6); x.stroke();
+      x.beginPath(); x.rect(cx+22, cy-5, 9, 10); x.stroke();
+    } else if(kind==='cunei'){
+      /* Each sign is two or three wedges at different angles. A grid of
+         identical triangles reads as wallpaper; real cuneiform reads as text
+         because the strokes turn. */
+      const SIGN=[[[0,0,0],[0,4,1]], [[0,0,1],[5,1,0],[1,5,2]], [[0,0,2],[4,3,0]],
+                  [[0,1,0],[4,0,3],[2,5,1]], [[0,0,3],[3,3,2]]];
+      for(let r=0;r<3;r++) for(let c=0;c<5;c++){
+        const px=cx-64+c*26, py=cy-11+r*11, sign=SIGN[(r*5+c)%SIGN.length];
+        sign.forEach(wd=>{
+          const a=[0, Math.PI/2, Math.PI, -Math.PI/2][wd[2]];
+          const ox=px+wd[0], oy=py+wd[1];
+          x.save(); x.translate(ox, oy); x.rotate(a);
+          x.beginPath(); x.moveTo(0,-2); x.lineTo(6,0); x.lineTo(0,2); x.closePath(); x.fill();
+          x.restore();
+        });
+      }
+    } else if(kind==='hiero'){
+      x.strokeStyle='#4A3E2E'; x.lineWidth=1.5;
+      x.beginPath(); x.arc(cx-26, cy, 5, 0, 7); x.stroke();                    // a sun
+      x.beginPath(); x.moveTo(cx-12,cy+6); x.lineTo(cx-12,cy-6); x.lineTo(cx-5,cy-6); x.stroke();
+      x.beginPath(); x.moveTo(cx+4,cy-7); x.lineTo(cx+10,cy+7); x.lineTo(cx-2,cy+7); x.closePath(); x.stroke();
+      x.beginPath(); x.moveTo(cx+18,cy-6); x.quadraticCurveTo(cx+28,cy, cx+18,cy+6); x.stroke();
+    } else {
+      x.strokeStyle='#4A3E2E'; x.lineWidth=1.7;
+      // Brahmi-ish: an upright with a crossbar, a bowl, a hook
+      x.beginPath(); x.moveTo(cx-26,cy-7); x.lineTo(cx-26,cy+7); x.moveTo(cx-31,cy); x.lineTo(cx-21,cy); x.stroke();
+      x.beginPath(); x.arc(cx-8, cy+1, 6, Math.PI, 0, true); x.stroke();
+      x.beginPath(); x.moveTo(cx+8,cy-7); x.lineTo(cx+8,cy+3); x.quadraticCurveTo(cx+8,cy+8, cx+15,cy+7); x.stroke();
+      x.beginPath(); x.moveTo(cx+24,cy-7); x.lineTo(cx+24,cy+7); x.lineTo(cx+31,cy+7); x.stroke();
+    }
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=215, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=S4[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('what it was written on', 10, 8);
+
+    // the writing surface, drawn as the medium each script actually used
+    const px=W/2, top=34, mw=Math.min(216, W-40), mh=92;
+    x.fillStyle = s.k==='sindhu' ? '#A3714A' : s.k==='cunei' ? '#CBB48C' : s.k==='hiero' ? '#D7C49A' : '#9E9A8E';
+    if(s.k==='cunei'){
+      // a clay tablet, corners rounded off by a thumb
+      x.beginPath();
+      x.moveTo(px-mw/2+8, top); x.lineTo(px+mw/2-8, top);
+      x.quadraticCurveTo(px+mw/2, top, px+mw/2, top+8);
+      x.lineTo(px+mw/2, top+mh-8); x.quadraticCurveTo(px+mw/2, top+mh, px+mw/2-8, top+mh);
+      x.lineTo(px-mw/2+8, top+mh); x.quadraticCurveTo(px-mw/2, top+mh, px-mw/2, top+mh-8);
+      x.lineTo(px-mw/2, top+8); x.quadraticCurveTo(px-mw/2, top, px-mw/2+8, top);
+      x.fill();
+    } else {
+      x.fillRect(px-mw/2, top, mw, mh);
+    }
+    x.strokeStyle='rgba(0,0,0,.35)'; x.lineWidth=1.4;
+    x.strokeRect(px-mw/2, top, mw, mh);
+    if(s.k==='sindhu'){                       // a seal: a boss on the back, a motif, then the signs
+      x.strokeStyle='rgba(0,0,0,.3)';
+      x.strokeRect(px-mw/2+8, top+8, mw-16, mh-16);
+      x.fillStyle='#5A3E28';
+      x.beginPath(); x.ellipse(px, top+34, 26, 11, 0, 0, 7); x.fill();          // an animal, in outline
+      x.fillRect(px-26, top+40, 5, 10); x.fillRect(px+21, top+40, 5, 10);
+      x.fillRect(px+22, top+22, 14, 4);
+    }
+    if(s.k==='brahmi'){                        // a stone railing: two courses
+      x.strokeStyle='rgba(0,0,0,.25)';
+      x.beginPath(); x.moveTo(px-mw/2, top+mh/2); x.lineTo(px+mw/2, top+mh/2); x.stroke();
+    }
+    glyphs(x, px, s.k==='sindhu' ? top+72 : top+mh/2, s.k);
+
+    // can it be read?
+    const ly=top+mh+20;
+    x.fillStyle = s.ok ? 'rgba(79,195,161,.16)' : 'rgba(229,72,77,.14)';
+    x.fillRect(14, ly, W-28, 40);
+    x.strokeStyle = s.ok ? GOOD : BAD; x.lineWidth=1;
+    x.strokeRect(14, ly, W-28, 40);
+    // a tick, or a padlock
+    const ix=34, iy=ly+20;
+    if(s.ok){
+      x.strokeStyle=GOOD; x.lineWidth=2.4; x.lineCap='round';
+      x.beginPath(); x.moveTo(ix-7, iy); x.lineTo(ix-2, iy+6); x.lineTo(ix+8, iy-7); x.stroke();
+      x.lineCap='butt';
+    } else {
+      x.strokeStyle=BAD; x.lineWidth=2;
+      x.beginPath(); x.arc(ix, iy-3, 5, Math.PI, 0); x.stroke();
+      x.fillStyle=BAD; x.fillRect(ix-7, iy-3, 14, 11);
+    }
+    mono(x,10,500); x.fillStyle = s.ok ? GOOD : BAD; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText(s.ok ? 'deciphered — we can read it' : 'not deciphered — we cannot read it', 52, iy);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('scrA').textContent=s.where;
+    document.getElementById('scrB').textContent=s.when;
+    document.getElementById('scrC').textContent=s.read;
+    document.getElementById('scrTxt').textContent=s.w;
+  }
+  if(cv){
+    S4.forEach((s,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=s.t;
+      b.onclick=()=>{
+        sel=i; seen[s.k]=1;
+        [...box.children].forEach(c=>c.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','scr-'+s.k);
+        if(Object.keys(seen).length>=3) complete('m2');
+        draw();
+      };
+      box.appendChild(b);
+    });
+  }
+  reg('m2',draw);
+})();
+
+/* ============================================================
+   M3 — Fig. 4.3, sorted
+   ============================================================ */
+Q.rows('g3','g3s',[
+  {t:'More than 99 per cent of human history',                          a:0},
+  {t:'Tools, implements and other artefacts are the main source',       a:0},
+  {t:'It is generally hard to recover what people thought',             a:0},
+  {t:'Dating of events and cultures is only approximate',               a:0},
+  {t:'The last 5000 years, the present included',                       a:1},
+  {t:'Both material remains and written documents survive',             a:1},
+  {t:'Literature gives names, events, and social and political life',   a:1},
+  {t:'Dating becomes relatively accurate, because documents give dates', a:1}
+], ['Before writing','After writing'], 'm3',
+   'All eight. Writing does not change what happened — it changes how much of it can be recovered afterwards.');
+
+/* ============================================================
+   M4 — four skulls
+   The braincase grows and the face swings back under it. Both
+   are driven off two numbers per species, so the sequence is a
+   genuine morph rather than four unrelated drawings.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('skuCv'), box=document.getElementById('skuOpts');
+  const K=[
+    {k:'hab', letter:'a', t:'Homo habilis', dome:0.10, brow:0.45, snout:1.00,
+     where:'Olduvai Gorge — Tanzania and Kenya', when:'2–6 million years ago', tools:'Chopper stone tools',
+     w:'“Handy man”. Known from the Olduvai Gorge, and never found outside Africa. The braincase is the smallest of the four and the face juts furthest forward.'},
+    {k:'ere', letter:'b', t:'Homo erectus', dome:0.45, brow:1.00, snout:0.72,
+     where:'The Eastern African Rift Valley', when:'2 million years ago', tools:'Handaxes and cleavers',
+     w:'Upright, or bipedal — which is what the name means — and the first hominin to leave Africa. Its handaxes and cleavers turn up right across Asia and Europe, which is how we know the tools began in Africa and travelled.'},
+    {k:'nea', letter:'c', t:'Homo neanderthalensis', dome:0.85, brow:0.95, snout:0.42,
+     where:'Europe and Southwest Asia', when:'Until about 40,000 years ago', tools:'Middle Palaeolithic flake tools',
+     w:'A large braincase — as large as ours — but still a heavy brow ridge above the eyes and a face that projects. Gone from Europe and Southwest Asia by about 40,000 years ago.'},
+    {k:'sap', letter:'d', t:'Homo sapiens', dome:1.00, brow:0.12, snout:0.10,
+     where:'Africa first, then the whole earth', when:'From about 300,000 years ago', tools:'Blades, microblades, burins — and everything since',
+     w:'The only human species living on earth today. High forehead, almost no brow ridge, and a face tucked in under the braincase instead of thrust in front of it.'}
+  ];
+  let sel=3; const seen={};
+  /* A closed curve through a list of control points. An ellipse with a wedge on
+     it does not read as a skull at any size; a rounded outline that carries a
+     braincase, a brow, a muzzle and a jaw does. */
+  function through(x, pts){
+    const n=pts.length, mid=(a,b)=>[(a[0]+b[0])/2, (a[1]+b[1])/2];
+    const m0=mid(pts[n-1], pts[0]);
+    x.beginPath(); x.moveTo(m0[0], m0[1]);
+    for(let i=0;i<n;i++){
+      const cur=pts[i], nxt=pts[(i+1)%n], m=mid(cur,nxt);
+      x.quadraticCurveTo(cur[0], cur[1], m[0], m[1]);
+    }
+    x.closePath();
+  }
+  function skull(x, cx, by, s, sp, lit){
+    /* Origin at the ear hole, +x forward, in units of s. Two numbers do the
+       work: dome raises and squares off the braincase, snout pushes the whole
+       face out in front of it. */
+    const d=sp.dome, sn=sp.snout;
+    const P = a => a.map(p => [cx + p[0]*s, by + p[1]*s]);
+    const outline = P([
+      [-1.00,  0.14],                      // behind the ear, low on the occiput
+      [-1.16, -0.34],
+      [-0.96, -0.92 - d*0.22],
+      [-0.44, -1.16 - d*0.30],             // the top of the head
+      [ 0.10, -1.16 - d*0.34],
+      [ 0.30 + d*0.30, -0.86 - d*0.34],    // the forehead: back and low, or up and forward
+      [ 0.56 + sn*0.12, -0.52],            // the brow
+      [ 0.52 + sn*0.16, -0.38],            // the root of the nose
+      [ 0.62 + sn*0.44, -0.10],            // the nasal opening
+      [ 0.60 + sn*0.52,  0.24],            // the front of the upper jaw
+      [ 0.48 + sn*0.56,  0.62],            // the chin
+      [ 0.04,  0.80],                      // under the jaw
+      [-0.46,  0.62],                      // the angle of the jaw
+      [-0.86,  0.40]
+    ]);
+    x.fillStyle = lit ? '#E8DCC4' : 'rgba(232,220,196,.40)';
+    x.strokeStyle = lit ? '#3A3228' : 'rgba(58,50,40,.42)';
+    x.lineWidth = lit ? 1.5 : 1;
+    through(x, outline); x.fill(); x.stroke();
+
+    // the brow ridge, heaviest on erectus and the neanderthals
+    if(sp.brow > 0.2){
+      x.fillStyle = lit ? '#CBB894' : 'rgba(203,184,148,.4)';
+      x.beginPath();
+      x.ellipse(cx + (0.40 + sn*0.08)*s, by - 0.52*s, 0.22*s, (0.05 + sp.brow*0.07)*s, -0.12, 0, 7);
+      x.fill();
+    }
+    // eye socket, nasal opening, and the line of the teeth
+    x.fillStyle = lit ? '#584E40' : 'rgba(88,78,64,.38)';
+    x.beginPath(); x.ellipse(cx + (0.34 + sn*0.10)*s, by - 0.34*s, 0.16*s, 0.15*s, 0, 0, 7); x.fill();
+    x.beginPath();
+    x.moveTo(cx + (0.50 + sn*0.34)*s, by - 0.16*s);
+    x.lineTo(cx + (0.58 + sn*0.40)*s, by + 0.02*s);
+    x.lineTo(cx + (0.46 + sn*0.34)*s, by + 0.04*s);
+    x.closePath(); x.fill();
+    x.strokeStyle = lit ? 'rgba(88,78,64,.85)' : 'rgba(88,78,64,.32)';
+    x.lineWidth = 1;
+    x.beginPath();
+    x.moveTo(cx + 0.08*s, by + 0.30*s); x.lineTo(cx + (0.58 + sn*0.50)*s, by + 0.22*s);
+    x.stroke();
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=250, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=K[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('habilis → erectus → neanderthalensis → sapiens', 10, 8);
+
+    // the row of four
+    const rowY=68, cell=(W-20)/4;
+    K.forEach((k,i)=>{
+      const cx=10+cell*i+cell/2;
+      if(i===sel){
+        x.fillStyle='rgba(217,140,62,.15)';
+        x.fillRect(10+cell*i+2, 30, cell-4, 62);
+        x.strokeStyle=A1; x.lineWidth=1; x.strokeRect(10+cell*i+2, 30, cell-4, 62);
+      }
+      skull(x, cx-3, rowY, Math.min(22, cell*0.34), k, i===sel);
+      mono(x,9,500); x.fillStyle = i===sel ? A1 : DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText(k.letter, cx, 96);
+    });
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 112); x.lineTo(W-10, 112); x.stroke();
+    sans(x,12.5,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(s.letter + '.  ' + s.t, 12, 118);
+
+    /* The selected one, large, with the two things that change called out on
+       the right. Both labels sit BELOW the title line — drawn level with it,
+       the leader for the braincase ruled straight through the species name. */
+    const bx=W*0.34, byy=198, big=40;
+    skull(x, bx, byy, big, s, true);
+    x.strokeStyle=A2; x.lineWidth=1.1; x.setLineDash([3,3]);
+    x.beginPath(); x.moveTo(bx-0.17*big, byy-(1.16+0.34*s.dome)*big); x.lineTo(W-16, 150); x.stroke();
+    x.beginPath(); x.moveTo(bx+(0.60+s.snout*0.52)*big, byy+0.24*big); x.lineTo(W-16, 206); x.stroke();
+    x.setLineDash([]);
+    mono(x,9,500); x.fillStyle=A2; x.textAlign='right'; x.textBaseline='top';
+    x.fillText('braincase', W-14, 152);
+    x.fillText('the face', W-14, 208);
+    mono(x,9); x.fillStyle=DIM;
+    x.fillText(['smallest','larger','as large as ours','largest'][sel], W-14, 165);
+    x.fillText(['juts furthest','juts a long way','juts some way','barely juts'][sel], W-14, 221);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('skuA').textContent=s.where;
+    document.getElementById('skuB').textContent=s.when;
+    document.getElementById('skuC').textContent=s.tools;
+    document.getElementById('skuTxt').textContent=s.w;
+  }
+  if(cv){
+    K.forEach((k,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===3?' on':''); b.textContent=k.t;
+      b.onclick=()=>{
+        sel=i; seen[k.k]=1;
+        [...box.children].forEach(c=>c.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','sku-'+k.k);
+        if(Object.keys(seen).length>=4) complete('m4');
+        draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('skuTxt').textContent='Tap each of the four. All four finishes the mission.';
+  }
+  reg('m4',draw);
+})();
+
+/* ============================================================
+   M5 — out of Africa, twice
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('migCv'), sS=document.getElementById('migS');
+  const P=[
+    {when:'2 million years ago', who:'Homo erectus',
+     far:'Leaving Africa for the first time',
+     find:'Handaxes and cleavers, first made in Africa, begin to appear beyond it.',
+     routes:['exit']},
+    {when:'2 to 0.5 million years ago', who:'Homo erectus',
+     far:'Across Asia and into Europe',
+     find:'The same handaxes and cleavers turn up right across Asia and Europe — which is how the dispersal is traced at all.',
+     routes:['exit','eur','asia']},
+    {when:'300,000 years ago', who:'Homo sapiens — newly evolved',
+     far:'Still in Africa',
+     find:'We evolve in Africa, while Homo erectus is already spread across the Old World and Homo neanderthalensis holds Europe and Southwest Asia.',
+     routes:['exit','eur','asia'], star:true},
+    {when:'125,000 years ago', who:'Homo sapiens',
+     far:'Out of Africa — the second great wave',
+     find:'The second major movement out of Africa, and this one is ours.',
+     routes:['exit','eur','asia','exit2'], star:true},
+    {when:'50,000 to 12,000 years ago', who:'Homo sapiens',
+     far:'Australia and the Americas as well',
+     find:'Blades, microblades, burins, beads and painted shelters travel with us. By the end of it Homo sapiens is on every continent except Antarctica.',
+     routes:['exit','eur','asia','exit2','aus','ame'], star:true}
+  ];
+  const seen={};
+  function blob(x, pts, W, fill){
+    x.fillStyle=fill; x.beginPath();
+    pts.forEach((p,i)=> i ? x.lineTo(p[0]*W, p[1]) : x.moveTo(p[0]*W, p[1]));
+    x.closePath(); x.fill();
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=225, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value, p=P[i];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the Old World, and beyond it', 10, 8);
+
+    const LANDDIM='#3A4A44', LANDLIT='#5E7A6C';
+    // the Americas
+    blob(x, [[0.03,40],[0.14,28],[0.20,52],[0.14,86],[0.19,120],[0.16,190],[0.08,196],[0.06,130],[0.02,84]], W, LANDDIM);
+    // Europe
+    blob(x, [[0.35,40],[0.51,34],[0.54,62],[0.47,82],[0.36,72]], W, LANDDIM);
+    // Asia
+    blob(x, [[0.53,36],[0.90,30],[0.93,72],[0.80,110],[0.64,104],[0.55,78]], W, LANDDIM);
+    // Africa
+    blob(x, [[0.38,88],[0.53,84],[0.55,118],[0.49,176],[0.42,172],[0.36,120]], W, LANDLIT);
+    // Australia
+    blob(x, [[0.77,150],[0.97,146],[0.98,180],[0.79,184]], W, LANDDIM);
+
+    mono(x,8.5); x.fillStyle='rgba(240,238,230,.8)'; x.textAlign='center'; x.textBaseline='middle';
+    x.fillText('AFRICA', 0.455*W, 128);
+    x.fillStyle='rgba(240,238,230,.55)';
+    x.fillText('ASIA', 0.73*W, 60); x.fillText('EUROPE', 0.435*W, 50);
+    x.fillText('AUSTRALIA', 0.875*W, 166); x.fillText('AMERICAS', 0.115*W, 110);
+
+    // the routes, in the order the chapter gives them
+    const on = k => p.routes.indexOf(k) >= 0;
+    const OLD='rgba(217,140,62,.9)', NEW='rgba(127,184,164,.95)';
+    if(on('exit'))  arrow(x, 0.46*W, 104, 0.545*W, 74, OLD, 6);
+    if(on('eur'))   arrow(x, 0.55*W, 74, 0.46*W, 64, OLD, 6);
+    if(on('asia'))  arrow(x, 0.57*W, 68, 0.80*W, 62, OLD, 6);
+    if(on('exit2')) arrow(x, 0.44*W, 100, 0.53*W, 66, NEW, 6);
+    if(on('aus')){
+      x.strokeStyle=NEW; x.lineWidth=2;
+      x.beginPath(); x.moveTo(0.80*W, 80); x.quadraticCurveTo(0.90*W, 118, 0.86*W, 146); x.stroke();
+      arrow(x, 0.865*W, 138, 0.86*W, 148, NEW, 6);
+    }
+    if(on('ame')){
+      x.strokeStyle=NEW; x.lineWidth=2;
+      x.beginPath(); x.moveTo(0.86*W, 36); x.quadraticCurveTo(0.50*W, 14, 0.16*W, 40); x.stroke();
+      arrow(x, 0.20*W, 36, 0.15*W, 44, NEW, 6);
+    }
+    if(p.star){                                   // sapiens has evolved, in Africa
+      x.fillStyle=NEW;
+      const sx0=0.455*W, sy0=148;
+      x.beginPath();
+      for(let k=0;k<10;k++){
+        const r = k%2 ? 3.2 : 7.2, a = -Math.PI/2 + k*Math.PI/5;
+        const px=sx0+Math.cos(a)*r, py=sy0+Math.sin(a)*r;
+        k ? x.lineTo(px,py) : x.moveTo(px,py);
+      }
+      x.closePath(); x.fill();
+      mono(x,8); x.fillStyle=NEW; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('Homo sapiens', sx0, sy0+9);
+    }
+
+    // a legend, so the two colours are not a guess
+    mono(x,8.5); x.textAlign='left'; x.textBaseline='middle';
+    x.fillStyle=OLD; x.fillRect(12, 202, 14, 3);
+    x.fillText('Homo erectus', 30, 204);
+    x.fillStyle=NEW; x.fillRect(0.52*W, 202, 14, 3);
+    x.fillText('Homo sapiens', 0.52*W+18, 204);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('migSV').textContent=p.when;
+    document.getElementById('migA').textContent=p.who;
+    document.getElementById('migB').textContent=p.far;
+    document.getElementById('migC').textContent=p.find;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','migS');
+      if(Object.keys(seen).length>=3) complete('m5');
+      draw();
+    };
+  }
+  reg('m5',draw);
+})();
+
+/* ============================================================
+   M6 — which ancestor?
+   ============================================================ */
+Q.rows('g6','g6s',[
+  {t:'Chopper tools, in the Olduvai Gorge',                       a:0},
+  {t:'The first hominin to walk out of Africa',                   a:1},
+  {t:'Handaxes and cleavers, found from Africa to Europe and Asia', a:1},
+  {t:'Middle Palaeolithic flake tools in Europe and Southwest Asia', a:2},
+  {t:'Gone by about 40,000 years ago',                            a:2},
+  {t:'Cave paintings, beads, and blades of glassy rock',          a:3},
+  {t:'The only human species alive on earth today',               a:3}
+], ['habilis','erectus','neanderthalensis','sapiens'], 'm6',
+   'All seven. Every one of them made tools; only the last of them went on to complex technologies.');
+
+/* ============================================================
+   M7 — the six ages
+   ============================================================ */
+Q.order('g7','g7s',
+  ['Palaeolithic','Mesolithic','Neolithic','Chalcolithic','Bronze Age','Iron Age'],
+  'm7',
+  'That is Fig. 4.7. Each name is a technology — and the Neolithic Revolution sits between the third and the fourth.');
+
+/* ============================================================
+   M8 — the toolkit sharpens
+   Each tool is drawn from a rough flaked outline plus a few
+   scars, so the shapes stay a family rather than a set of
+   clip-art icons.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('tooCv'), sS=document.getElementById('tooS');
+  const T=[
+    {n:'Chopper', period:'Earliest Palaeolithic',
+     tools:'Chopper', kinds:['chopper'],
+     w:'A pebble with a few flakes knocked off one edge — the earliest stone tools of all, made from about 3.3 million years ago. Homo habilis made these.'},
+    {n:'Handaxe and cleaver', period:'Lower Palaeolithic',
+     tools:'Handaxes, cleavers, scrapers, choppers', kinds:['handaxe','cleaver','scraper'],
+     w:'Attirampakkam (1.5–1.7 mya) and Isampur (1.2 mya): large cutting tools of quartzite and limestone, used to chop meat, dig out tubers, scrape animal skin, and cleave bone for the protein-rich marrow.'},
+    {n:'Scraper, borer, point', period:'Middle Palaeolithic',
+     tools:'Scrapers, borers, points', kinds:['scraper','borer','point'],
+     w:'Smaller tools, and a clear gain in hunting: a projectile tipped with a sharp stone point does what a thrown rock cannot.'},
+    {n:'Blade and burin', period:'Upper Palaeolithic',
+     tools:'Parallel-sided blades, microblades, burins', kinds:['blade','microblade','burin'],
+     w:'Struck from glassy rock, very sharp when freshly made. With them come the bow and arrow, beads of stone, bone and shell, engraving with a burin, painted cave walls and pigment on the body.'},
+    {n:'Hafted microliths', period:'Mesolithic',
+     tools:'Microliths set into a handle, bone points', kinds:['hafted','bonepoint'],
+     w:'Tiny stone tools fixed into a handle. Small game, and above all fishing — marine and freshwater alike — was the mainstay of the subsistence economy.'},
+    {n:'Polished stone', period:'Neolithic',
+     tools:'Ground and polished stone axes, querns', kinds:['polished','quern'],
+     w:'The first tools made to produce and process food rather than to procure it — and a whole new industry, earthenware pottery, alongside them.'}
+  ];
+  const seen={};
+  function scars(x, pts, n){
+    x.strokeStyle='rgba(0,0,0,.28)'; x.lineWidth=1;
+    for(let i=0;i<n;i++){
+      const a=pts[i%pts.length];
+      x.beginPath(); x.arc(a[0], a[1], 4+i%3, 0.4, 2.6); x.stroke();
+    }
+  }
+  function tool(x, kind, cx, cy, s){
+    x.fillStyle=STONE; x.strokeStyle=STONE2; x.lineWidth=1.4;
+    const poly = pts => { x.beginPath(); pts.forEach((p,i)=> i ? x.lineTo(cx+p[0]*s, cy+p[1]*s) : x.moveTo(cx+p[0]*s, cy+p[1]*s)); x.closePath(); x.fill(); x.stroke(); };
+    if(kind==='chopper'){
+      poly([[-1,-0.5],[0.2,-1],[1,-0.1],[0.85,0.8],[-0.3,1],[-1,0.4]]);
+      x.strokeStyle='rgba(0,0,0,.35)';
+      x.beginPath(); x.moveTo(cx+0.2*s, cy-1*s); x.lineTo(cx+1*s, cy-0.1*s); x.stroke();
+      scars(x, [[cx+0.4*s, cy-0.4*s]], 2);
+    } else if(kind==='handaxe'){
+      poly([[0,-1.25],[0.62,-0.2],[0.52,0.8],[0,1.2],[-0.52,0.8],[-0.62,-0.2]]);
+      scars(x, [[cx-0.2*s, cy-0.2*s],[cx+0.22*s, cy+0.25*s]], 3);
+    } else if(kind==='cleaver'){
+      poly([[-0.55,-1.1],[0.55,-0.9],[0.62,0.75],[-0.2,1.15],[-0.6,0.5]]);
+      x.strokeStyle='rgba(0,0,0,.35)'; x.lineWidth=1.6;
+      x.beginPath(); x.moveTo(cx-0.2*s, cy+1.15*s); x.lineTo(cx+0.62*s, cy+0.75*s); x.stroke();
+    } else if(kind==='scraper'){
+      /* A D: a straight back where it was struck off the core, and a working
+         edge retouched into a curve. The scallops ARE the retouch — drawn as a
+         separate arc on top, they just ruled a dark line over the tool. */
+      const pts=[[-0.85,0.62]];
+      for(let a=Math.PI;a<=Math.PI*2.001;a+=Math.PI/9){
+        const scal = 1 + 0.06*Math.sin(a*9);
+        pts.push([Math.cos(a)*0.85*scal, 0.62 + Math.sin(a)*1.25*scal]);
+      }
+      poly(pts);
+      x.strokeStyle='rgba(0,0,0,.3)'; x.lineWidth=1;
+      x.beginPath(); x.moveTo(cx-0.85*s, cy+0.62*s); x.lineTo(cx+0.85*s, cy+0.62*s); x.stroke();
+    } else if(kind==='borer'){
+      // a squat flake with a long narrow bit projecting from it — the bit is
+      // the tool, and it has to be visibly thinner than the body to read
+      poly([[-0.70,0.75],[-0.62,-0.15],[-0.16,-0.35],[-0.10,-1.45],[0.06,-1.45],
+            [0.14,-0.32],[0.62,-0.10],[0.72,0.75]]);
+    } else if(kind==='point'){
+      poly([[0,-1.35],[0.42,0.5],[0,0.85],[-0.42,0.5]]);
+    } else if(kind==='blade'){
+      poly([[-0.22,-1.35],[0.24,-1.2],[0.3,1.2],[-0.18,1.35]]);
+      x.strokeStyle='rgba(0,0,0,.3)';
+      x.beginPath(); x.moveTo(cx+0.04*s, cy-1.2*s); x.lineTo(cx+0.06*s, cy+1.25*s); x.stroke();
+    } else if(kind==='microblade'){
+      [-0.45,0,0.45].forEach(o=>{
+        x.fillStyle=STONE; x.strokeStyle=STONE2;
+        x.beginPath();
+        x.moveTo(cx+(o-0.1)*s, cy-0.75*s); x.lineTo(cx+(o+0.12)*s, cy-0.7*s);
+        x.lineTo(cx+(o+0.14)*s, cy+0.7*s); x.lineTo(cx+(o-0.08)*s, cy+0.75*s);
+        x.closePath(); x.fill(); x.stroke();
+      });
+    } else if(kind==='burin'){
+      poly([[-0.35,-1.1],[0.35,-1.2],[0.36,0.8],[0.05,1.25],[-0.34,0.85]]);
+      x.strokeStyle=A1; x.lineWidth=2;
+      x.beginPath(); x.moveTo(cx+0.05*s, cy+1.25*s); x.lineTo(cx+0.36*s, cy+0.8*s); x.stroke();
+    } else if(kind==='hafted'){
+      x.fillStyle=EARTH; x.strokeStyle='#4E3E2C'; x.lineWidth=1.2;
+      x.beginPath(); x.rect(cx-1.3*s, cy-0.28*s, 2.6*s, 0.56*s); x.fill(); x.stroke();
+      x.fillStyle=STONE; x.strokeStyle=STONE2;
+      [-0.85,-0.3,0.25,0.8].forEach(o=>{
+        x.beginPath();
+        x.moveTo(cx+o*s, cy-0.28*s); x.lineTo(cx+(o+0.34)*s, cy-0.28*s); x.lineTo(cx+(o+0.17)*s, cy-0.95*s);
+        x.closePath(); x.fill(); x.stroke();
+      });
+    } else if(kind==='bonepoint'){
+      x.fillStyle='#E3DCC8'; x.strokeStyle='#9A927C'; x.lineWidth=1.2;
+      x.beginPath();
+      x.moveTo(cx, cy-1.3*s); x.lineTo(cx+0.24*s, cy+0.9*s); x.lineTo(cx, cy+1.25*s); x.lineTo(cx-0.24*s, cy+0.9*s);
+      x.closePath(); x.fill(); x.stroke();
+    } else if(kind==='polished'){
+      x.fillStyle='#6E7A6A'; x.strokeStyle='#46503F'; x.lineWidth=1.3;
+      x.beginPath();
+      x.moveTo(cx-0.4*s, cy-1.15*s); x.lineTo(cx+0.4*s, cy-1.15*s); x.lineTo(cx+0.72*s, cy+1.0*s);
+      x.lineTo(cx-0.72*s, cy+1.0*s);
+      x.closePath(); x.fill(); x.stroke();
+      x.strokeStyle='rgba(255,255,255,.45)'; x.lineWidth=2;
+      x.beginPath(); x.moveTo(cx-0.2*s, cy-0.85*s); x.lineTo(cx-0.42*s, cy+0.7*s); x.stroke();
+    } else {                                          // quern: a slab and its rubbing stone
+      x.fillStyle='#7C7266'; x.strokeStyle='#4F483F'; x.lineWidth=1.3;
+      x.beginPath(); x.ellipse(cx, cy+0.55*s, 1.25*s, 0.5*s, 0, 0, 7); x.fill(); x.stroke();
+      x.fillStyle='#9A8F80';
+      x.beginPath(); x.ellipse(cx, cy-0.1*s, 0.55*s, 0.33*s, 0, 0, 7); x.fill(); x.stroke();
+    }
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=240, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value, t=T[i];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('one stone, six arguments with a hand', 10, 8);
+
+    // the six stages as a strip, so the slider has somewhere to be
+    const sw=(W-20)/6;
+    T.forEach((s,k)=>{
+      x.fillStyle = k===i ? A1 : k<i ? 'rgba(217,140,62,.35)' : 'rgba(142,154,192,.18)';
+      x.fillRect(10+sw*k+1, 28, sw-2, 5);
+    });
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('older', 10, 38);
+    x.textAlign='right'; x.fillText('newer', W-10, 38);
+
+    // the tools themselves
+    const n=t.kinds.length, cy=120, cellw=(W-24)/n;
+    t.kinds.forEach((k,j)=>{
+      const cx=12+cellw*j+cellw/2;
+      tool(x, k, cx, cy, Math.min(26, cellw*0.30));
+      const NAME={chopper:'chopper',handaxe:'handaxe',cleaver:'cleaver',scraper:'scraper',
+                  borer:'borer',point:'point',blade:'blade',microblade:'microblades',
+                  burin:'burin',hafted:'hafted microliths',bonepoint:'bone point',
+                  polished:'polished axe',quern:'quern'};
+      mono(x,8.5); x.fillStyle=DIM;
+      fitText(x, NAME[k], cx, 166, cellw-6);
+    });
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 184); x.lineTo(W-10, 184); x.stroke();
+    sans(x,13,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(t.n, 12, 194);
+    mono(x,9.5); x.fillStyle=A2;
+    x.fillText(t.period, 12, 214);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('tooSV').textContent=t.n;
+    document.getElementById('tooA').textContent=t.period;
+    document.getElementById('tooB').textContent=t.tools;
+    document.getElementById('tooC').textContent=t.w;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','tooS');
+      if(Object.keys(seen).length>=4) complete('m8');
+      draw();
+    };
+  }
+  reg('m8',draw);
+})();
+
+/* ============================================================
+   M9 — the chapter's own three-column exercise
+   The Palaeolithic column is given, so what is being asked for
+   is the comparison rather than four separate recalls.
+   ============================================================ */
+/* A tick grid rather than a table of dropdowns: three columns of long option
+   strings push a select table clean off a 390px screen, and a reader who has to
+   scroll sideways to see which period they are answering for is answering
+   blind. Ticks are narrow enough that all three columns stay on screen. */
+Q.grid('g9','g9check','g9s',{
+  head:'Which period?', mid:'m9',
+  cols:['Palaeo.','Meso.','Neo.'],
+  /* Every line here has exactly one defensible answer in the printed chapter.
+     "Microliths in a handle" was the obvious sixth and is not one of them: the
+     Upper Palaeolithic section says microblades were fixed in a handle, and
+     Fig. 4.7 makes microlithic tools the Mesolithic's own marker, so a reader
+     answering correctly from either would be marked wrong by the other. */
+  rows:[
+    {l:'Handaxes and cleavers',            a:[1,0,0]},
+    {l:'Ground and polished stone tools',  a:[0,0,1]},
+    {l:'Fishing as the mainstay',          a:[0,1,0]},
+    {l:'Permanent village settlements',    a:[0,0,1]},
+    {l:'A warmer climate, and far more people', a:[0,1,0]},
+    {l:'Hunting and gathering',            a:[1,1,0]}
+  ],
+  doneMsg:'All eighteen. Take it, catch it, grow it — and the Mesolithic is still taking it, only in a warmer and better-stocked world.'
+});
+
+/* ============================================================
+   M10 — how a village happens
+   One place, five stages, each adding what the previous one
+   made possible. The order is Fig. 4.14's own list of stages.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('agrCv'), sS=document.getElementById('agrS');
+  const G=[
+    {n:'Cultivation', w:'Wild plants are sown, tended and harvested. New breeds develop under human care — the first half of what domestication means.',
+     find:'Charred grain, sickle blades, grinding stones.'},
+    {n:'Pottery', w:'Earthenware in a variety of shapes and sizes, to store, carry and cook what has been grown. A harvest you cannot store is not yet a harvest.',
+     find:'Potsherds by the thousand, and the kilns that fired them.'},
+    {n:'Sedentism', w:'People stop moving with the food and settle where it grows. These are the first village settlements — the foundation of the urban revolution later.',
+     find:'House floors, hearths, post-holes, and graves.'},
+    {n:'Livestock', w:'Selected animals are brought under human control and bred — sheep, goats and cattle. The other half of domestication.',
+     find:'Animal bones that shift in size, and in the age at which they were killed.'},
+    {n:'An agricultural landscape', w:'Not patches but fields. The whole landscape is reorganised around the crop, and the surplus it produces is what a civilisation is built on.',
+     find:'Field boundaries, furrows, granaries and canals.'}
+  ];
+  const REG=[['India','millets'],['Ganga plains','rice'],['West Africa','pearl millet'],
+             ['West Asia','wheat, barley'],['North China','millets'],['Yangtze','rice']];
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=268, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('one place, five stages', 10, 8);
+
+    /* The horizon sits high enough to leave a real foreground. Everything the
+       village owns stands ON the horizon; the field is the ground in front of
+       it, which is the only way a field grid reads as ground rather than as a
+       fence hanging in the sky. */
+    const gy=126, ry=176;
+    x.fillStyle='#2E3A44';
+    x.beginPath(); x.moveTo(0,gy); x.lineTo(0.18*W,64); x.lineTo(0.38*W,gy); x.closePath(); x.fill();
+    x.beginPath(); x.moveTo(0.56*W,gy); x.lineTo(0.76*W,74); x.lineTo(0.98*W,gy); x.closePath(); x.fill();
+    x.fillStyle='#4A4230'; x.fillRect(0, gy, W, ry-gy);
+    x.fillStyle=WATER;     x.fillRect(0, ry, W, 16);
+    x.strokeStyle='rgba(255,255,255,.25)'; x.lineWidth=1;
+    x.beginPath();
+    for(let px=0;px<=W;px+=6) px ? x.lineTo(px, ry+8+Math.sin(px*0.28)*1.4) : x.moveTo(px, ry+8);
+    x.stroke();
+
+    // stage 4 first: the field is the ground, so everything else stands on it
+    if(i>=4){
+      x.strokeStyle='rgba(110,138,78,.8)'; x.lineWidth=1;
+      for(let k=-3;k<=9;k++){                      // furrows running away to a vanishing point
+        const near=k*(W/6) - W/6;
+        x.beginPath(); x.moveTo(near, ry); x.lineTo(W*0.42 + (near-W*0.42)*0.16, gy); x.stroke();
+      }
+      [0.18,0.44,0.74].forEach(f=>{                // and the boundaries between fields
+        const yy=gy+(ry-gy)*f;
+        x.beginPath(); x.moveTo(0, yy); x.lineTo(W, yy); x.stroke();
+      });
+    }
+    if(i>=0){                                      // sown rows, in the near foreground
+      x.strokeStyle=GREEN; x.lineWidth=1.8;
+      for(let k=0;k<11;k++){
+        const px=8+k*((W-16)/11), base=ry-3-((k%2)*3);
+        x.beginPath(); x.moveTo(px, base); x.lineTo(px-1, base-11); x.stroke();
+        x.beginPath();
+        x.moveTo(px-1, base-11); x.lineTo(px-4, base-15);
+        x.moveTo(px-1, base-11); x.lineTo(px+2, base-15); x.stroke();
+      }
+    }
+    if(i>=2){                                      // huts, standing on the horizon
+      [[0.40,1],[0.52,0.8]].forEach(h=>{
+        const hx=h[0]*W, sz=24*h[1];
+        x.fillStyle='#8A6A46'; x.fillRect(hx-sz/2, gy-sz*0.62, sz, sz*0.62);
+        x.fillStyle='#6A5136';
+        x.beginPath(); x.moveTo(hx-sz*0.66, gy-sz*0.62); x.lineTo(hx, gy-sz*1.2); x.lineTo(hx+sz*0.66, gy-sz*0.62);
+        x.closePath(); x.fill();
+        x.fillStyle='#40301F'; x.fillRect(hx-sz*0.12, gy-sz*0.32, sz*0.24, sz*0.32);
+      });
+    }
+    if(i>=1){                                      // a kiln, its smoke, and two pots
+      x.fillStyle='#6E4E36';
+      x.beginPath(); x.arc(0.16*W, gy, 11, Math.PI, 0); x.fill();
+      x.fillStyle='rgba(226,235,243,.22)';
+      x.beginPath(); x.arc(0.16*W, gy-19, 2.8, 0, 7); x.arc(0.182*W, gy-26, 2, 0, 7); x.fill();
+      [[0.255,7],[0.295,5]].forEach(pt=>{
+        x.fillStyle=CLAY;
+        x.beginPath(); x.arc(pt[0]*W, gy-pt[1]+1, pt[1], Math.PI, 0); x.fill();
+        x.fillRect(pt[0]*W-pt[1]*0.7, gy-pt[1]-2, pt[1]*1.4, 3);
+      });
+    }
+    if(i>=3){                                      // a pen, and the animals in it
+      x.strokeStyle='#7A6248'; x.lineWidth=1.6;
+      x.strokeRect(0.63*W, gy-22, 0.22*W, 22);
+      [[0.67,0],[0.72,4],[0.78,1]].forEach(a=>{
+        x.fillStyle='#D8D2C4';
+        x.beginPath(); x.ellipse(a[0]*W, gy-11+a[1], 6.5, 4.2, 0, 0, 7); x.fill();
+        x.fillStyle='#9A9182';
+        x.beginPath(); x.arc(a[0]*W+6.5, gy-14+a[1], 2.8, 0, 7); x.fill();
+        x.strokeStyle='#9A9182'; x.lineWidth=1.2;
+        x.beginPath(); x.moveTo(a[0]*W-3, gy-8+a[1]); x.lineTo(a[0]*W-3, gy-2+a[1]);
+        x.moveTo(a[0]*W+3, gy-8+a[1]); x.lineTo(a[0]*W+3, gy-2+a[1]); x.stroke();
+      });
+    }
+    if(i>=4){                                      // a granary, raised off the ground
+      const gx=0.88*W;
+      x.fillStyle='#8A6A46'; x.fillRect(gx-15, gy-32, 30, 22);
+      x.fillStyle='#6A5136';
+      x.beginPath(); x.moveTo(gx-19, gy-32); x.lineTo(gx, gy-45); x.lineTo(gx+19, gy-32);
+      x.closePath(); x.fill();
+      x.fillStyle='#5E4A32'; x.fillRect(gx-11, gy-10, 4, 10); x.fillRect(gx+7, gy-10, 4, 10);
+    }
+
+    /* The six regions of Fig. 4.14, named but deliberately undated, two to a
+       row: three to a row and the longest of them printed over its neighbours. */
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 198); x.lineTo(W-10, 198); x.stroke();
+    mono(x,8); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the same five stages, at a different time in each place:', 10, 204);
+    const cw=(W-20)/2;
+    REG.forEach((r,k)=>{
+      const cx=10+cw*(k%2)+cw/2, cy=220+Math.floor(k/2)*14;
+      mono(x,8,500); x.fillStyle=A2; x.textAlign='center'; x.textBaseline='top';
+      x.fillText(r[0] + ' \u00b7 ' + r[1], cx, cy);
+    });
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    const g=G[i];
+    document.getElementById('agrSV').textContent=g.n;
+    document.getElementById('agrA').textContent=(i+1) + ' of 5 · ' + g.n;
+    document.getElementById('agrB').textContent=g.w;
+    document.getElementById('agrC').textContent=g.find;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','agrS');
+      if(Object.keys(seen).length>=4) complete('m10');
+      draw();
+    };
+  }
+  reg('m10',draw);
+})();
+
+/* ============================================================
+   M11 — Mehrgarh
+   ============================================================ */
+Q.pick('g11','g11check','g11s',[
+  {t:'Handmade sun-dried brick houses',                 a:1},
+  {t:'Granaries',                                       a:1},
+  {t:'The dead buried in graves',                       a:1},
+  {t:'Ornaments of lapis lazuli, carnelian and shell',  a:1},
+  {t:'Wheat and barley',                                a:1},
+  {t:'Sheep, goats and the zebu humped bull',           a:1},
+  {t:'The first copper objects in the subcontinent',    a:1},
+  {t:'A dockyard built entirely of burnt bricks',       a:0},
+  {t:'Cuneiform tablets',                               a:0},
+  {t:'Iron tools and weapons',                          a:0}
+], 'm11',
+   'Right. Mehrgarh on the Bolan river, about 7000 BCE — and by about 4000 BCE the first in the subcontinent to work copper. The burnt-brick dockyard is Lothal, two thousand years later.');
+
+/* ============================================================
+   M12 — the Harappan balance
+   Binary weights are not a curiosity: 1, 2, 4, 8 and 16 reach
+   every whole number up to 31, in exactly one way each, which
+   is what makes a weight set a STANDARD rather than a handful
+   of stones. The bench is the argument.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('wtCv'), box=document.getElementById('wtOpts');
+  const WTS=[1,2,4,8,16,10,20,50,100];
+  const LOADS=[13,27,35,64,116];
+  let load=0, on=[], solved={}, msg='Tap weights until the beam is level.';
+  const sum = () => on.reduce((a,b)=>a+b, 0);
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=192, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, target=LOADS[load], have=sum();
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('a cubical stone weight set, as at Harappa', 10, 8);
+
+    const cx=W/2, beamY=44, arm=Math.min(96, W/2-26);
+    // the stand, kept narrow so the pans are what the eye goes to
+    x.fillStyle='#5A5245';
+    x.beginPath(); x.moveTo(cx-10, H-30); x.lineTo(cx+10, H-30); x.lineTo(cx+4, beamY); x.lineTo(cx-4, beamY);
+    x.closePath(); x.fill();
+    x.fillRect(cx-26, H-30, 52, 6);
+
+    // tilt: the beam only leans, it never flips
+    const diff = have - target;
+    const tilt = Math.max(-0.30, Math.min(0.30, diff / Math.max(16, target) * 0.30));
+    const lx=cx-arm*Math.cos(tilt), ly=beamY-arm*Math.sin(tilt);
+    const rx=cx+arm*Math.cos(tilt), ry=beamY+arm*Math.sin(tilt);
+    x.strokeStyle='#C6BCA8'; x.lineWidth=3.4; x.lineCap='round';
+    x.beginPath(); x.moveTo(lx,ly); x.lineTo(rx,ry); x.stroke();
+    x.lineCap='butt';
+    x.fillStyle=diff===0 ? GOOD : '#C6BCA8';
+    x.beginPath(); x.arc(cx, beamY, 5, 0, 7); x.fill();
+
+    // the two pans
+    function pan(px, py, label, lit){
+      x.strokeStyle='rgba(198,188,168,.7)'; x.lineWidth=1;
+      x.beginPath(); x.moveTo(px, py); x.lineTo(px-16, py+26); x.moveTo(px, py); x.lineTo(px+16, py+26); x.stroke();
+      x.fillStyle = lit ? 'rgba(127,184,164,.35)' : 'rgba(198,188,168,.22)';
+      x.beginPath(); x.moveTo(px-22, py+26); x.lineTo(px+22, py+26); x.lineTo(px+16, py+33); x.lineTo(px-16, py+33);
+      x.closePath(); x.fill();
+      x.strokeStyle = lit ? GOOD : 'rgba(198,188,168,.7)';
+      x.beginPath(); x.moveTo(px-22, py+26); x.lineTo(px+22, py+26); x.stroke();
+      mono(x,9.5,500); x.fillStyle = lit ? GOOD : DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText(label, px, py+38);
+    }
+    pan(lx, ly, 'the load · ' + target, false);
+    pan(rx, ry, 'on the pan · ' + have, diff===0);
+
+    // the load itself: a sack in the left pan
+    x.fillStyle=EARTH;
+    x.beginPath(); x.ellipse(lx, ly+16, 15, 12, 0, 0, 7); x.fill();
+    x.fillStyle='#5E4A32'; x.fillRect(lx-5, ly+2, 10, 6);
+
+    // the chosen weights: cubes stacked in the right pan
+    const stack=on.slice(0, 8);
+    stack.forEach((wv,i)=>{
+      const col=i%3, row=Math.floor(i/3);
+      const bxp=rx-18+col*13, byp=ry+20-row*12;
+      x.fillStyle='#9A9182'; x.fillRect(bxp, byp, 11, 10);
+      x.fillStyle='#6F675B'; x.fillRect(bxp, byp, 11, 3);
+      mono(x,7); x.fillStyle='#2A2620'; x.textAlign='center'; x.textBaseline='middle';
+      x.fillText(String(wv), bxp+5.5, byp+6);
+    });
+
+    // the verdict line
+    x.textAlign='center'; x.textBaseline='top'; mono(x,10,500);
+    x.fillStyle = diff===0 ? GOOD : diff>0 ? BAD : DIM;
+    x.fillText(diff===0 ? 'level' : diff>0 ? (diff + ' too much') : (-diff + ' still to go'), cx, H-16);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('wtA').textContent=String(target);
+    document.getElementById('wtB').textContent=String(have);
+    document.getElementById('wtC').textContent=Object.keys(solved).length + ' of 3';
+    document.getElementById('wtTxt').textContent=msg;
+  }
+  function check(){
+    const target=LOADS[load];
+    if(sum()===target && !solved[target]){
+      solved[target]=1;
+      const n=Object.keys(solved).length;
+      msg = n>=3
+        ? 'Three loads balanced. Every whole number up to 31 comes out of 1, 2, 4, 8 and 16 — and out of exactly one combination of them.'
+        : 'Balanced. Tap “Next load” for another. (' + n + ' of 3.)';
+      ev('perfect');
+      if(n>=3) complete('m12');
+    }
+  }
+  if(cv){
+    WTS.forEach(wv=>{
+      const b=document.createElement('button');
+      b.className='chip'; b.textContent=String(wv);
+      b.onclick=()=>{
+        const at=on.indexOf(wv);
+        if(at>=0){ on.splice(at,1); b.classList.remove('on'); }
+        else { on.push(wv); b.classList.add('on'); }
+        ev('explore','wt-'+wv);
+        check(); draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('wtNew').onclick=()=>{
+      load=(load+1)%LOADS.length;
+      on=[]; [...box.children].forEach(c=>c.classList.remove('on'));
+      if(!msg.startsWith('Three loads')) msg='A new load. Tap weights until the beam is level.';
+      draw();
+    };
+  }
+  reg('m12',draw);
+})();
+
+/* ============================================================
+   M13 — the Harappan timeline, Fig. 4.18
+   ============================================================ */
+Q.order('g13','g13s',
+  ['Neolithic · 7000 BCE',
+   'Chalcolithic · 4500 BCE',
+   'Early Harappan · 3300 BCE',
+   'Mature Harappan · 2600 BCE',
+   'Late Harappan · 1900 BCE',
+   'The last sites · 1300–1000 BCE'],
+  'm13',
+  'That is Fig. 4.18. Mehrgarh’s Neolithic is the bottom of it — the cities did not arrive from anywhere, they grew out of the villages underneath them.');
+
+/* ============================================================
+   M14 — four rivers, four answers
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('civCv'), box=document.getElementById('civOpts');
+  const C=[
+    {k:'ss', t:'Sindhu–Sarasvatī',
+     rivers:'The Sindhu and the Sarasvatī', script:'Sindhu lipi — still undeciphered',
+     known:'Planned cities, drainage, standard weights, inscribed seals',
+     w:'Mature from 2600 BCE. Check dams called gabarbands in the Baluchistan foothills, the chain of deep water-harvesting tanks at Dholavira in Kachchh, and the huge burnt-brick dockyard at Lothal. Mesopotamian tablets call this land Meluhha, and traded with it for stone beads, ivory, timber, gold dust and probably copper.'},
+    {k:'me', t:'Mesopotamia',
+     rivers:'The Euphrates and the Tigris', script:'Cuneiform — deciphered',
+     known:'The first cities, and four city-states one after another',
+     w:'Greek for “the land in between”, today mainly Iraq and Kuwait with parts of Turkey and southwestern Iran, ringed by the fertile crescent of the Zagros and Taurus foothills. The Sumerians came first at Ur, then the Akkadians from 2334 BCE with the world’s first dynastic empire, then the Assyrians from 2154 BCE at Assur, then the Babylonians from 1900 BCE — whose Hammurabi compiled his Code from 1792 BCE.'},
+    {k:'eg', t:'Egypt',
+     rivers:'The Nile', script:'Hieroglyphic — deciphered in 1822',
+     known:'Pyramids, mummification and a 365-day calendar',
+     w:'Every summer the Nile flooded and left kemet, the black mud — which is what Egyptians called their own land. Farmers dug ditches to divert the water and reservoirs to keep it, and that collective effort is where local government came from. Pharaohs were buried under a rectangular mastaba; mastabas stacked one on another became the step pyramid at Saqqara.'},
+    {k:'ch', t:'China',
+     rivers:'The Huang He and the Yangtze', script:'Logographic — a character is a whole word',
+     known:'Oracle bones, jade, bronze and silk',
+     w:'Neolithic in both valleys by about 7000 BCE, bronze by 2000 BCE, cities by 1600 BCE. Shang 1600–1046 BCE, Zhou 1046–256 BCE, then the Iron Age Qin 221–206 BCE — which probably gave China its name — and the Han 206 BCE–220 CE. Walls went up from 680 BCE against nomadic raids and were later joined into the Great Wall; silk gave the Silk Route its name under the Han.'}
+  ];
+  let sel=0; const seen={};
+  function scene(x, W, H, k){
+    const gy=H-56, ry=H-26;
+    // ground and water are common to all four, because that is the point
+    x.fillStyle='#4A4230'; x.fillRect(0, gy, W, ry-gy);
+    x.fillStyle=WATER;     x.fillRect(0, ry, W, H-ry);
+    x.strokeStyle='rgba(255,255,255,.22)'; x.lineWidth=1;
+    x.beginPath();
+    for(let px=0;px<=W;px+=6) px ? x.lineTo(px, ry+12+Math.sin(px*0.26)*1.4) : x.moveTo(px, ry+12);
+    x.stroke();
+
+    if(k==='ss'){
+      /* Blocks of housing along a street, seen from the side: wide and low, or
+         they read as columns rather than as a city block. Courses of brick,
+         a well head on the street, and the covered drain running past. */
+      x.fillStyle='#8A7156';                                    // a second row, set back
+      [[0.10,0.20,34],[0.40,0.24,46],[0.70,0.18,38]].forEach(b=>{
+        x.fillRect(b[0]*W, gy-26-b[2], b[1]*W, b[2]);
+      });
+      [[0.03,0.26,44],[0.32,0.22,60],[0.61,0.15,38],[0.79,0.19,52]].forEach(b=>{
+        const bx=b[0]*W, bw=b[1]*W, bh=b[2];
+        x.fillStyle='#B09472'; x.fillRect(bx, gy-bh, bw, bh);
+        x.fillStyle='rgba(0,0,0,.16)';
+        for(let r=1;r*7<bh;r++) x.fillRect(bx, gy-bh+r*7, bw, 1);
+        x.fillStyle='rgba(0,0,0,.28)';                          // a doorway onto the street
+        x.fillRect(bx+bw*0.42, gy-11, 8, 11);
+      });
+      const wx=0.565*W;                                         // the well, out on the street
+      x.fillStyle='#8E7658'; x.beginPath(); x.ellipse(wx, gy-8, 11, 5, 0, 0, 7); x.fill();
+      x.fillStyle='#2B2620'; x.beginPath(); x.ellipse(wx, gy-9, 7, 3, 0, 0, 7); x.fill();
+      x.strokeStyle='#8E7658'; x.lineWidth=4;                   // the covered drain
+      x.beginPath(); x.moveTo(6, gy+6); x.lineTo(W-6, gy+6); x.stroke();
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('brick blocks, a well, a covered drain', W/2, gy+13);
+    } else if(k==='me'){
+      // a ziggurat inside a wall with one gate
+      /* Three tiers, each narrower than the one below, the temple sitting ON the
+         top tier, and the city wall drawn last so it stands in FRONT of the
+         whole thing with its single gate cut through it. */
+      const base=gy-16;
+      [0.36, 0.27, 0.18].forEach((frac,i)=>{
+        x.fillStyle='#C0A883';
+        x.fillRect(W/2 - frac*W/2, base-20*(i+1), frac*W, 20);
+        x.strokeStyle='rgba(0,0,0,.2)'; x.lineWidth=1;
+        x.strokeRect(W/2 - frac*W/2, base-20*(i+1), frac*W, 20);
+      });
+      x.fillStyle='#A88A63'; x.fillRect(W/2-0.07*W, base-74, 0.14*W, 14);
+      x.fillStyle='#8D6F52';
+      x.fillRect(0.05*W, gy-16, 0.90*W, 16);                    // the wall itself
+      for(let px=0.05*W; px<0.95*W-6; px+=13) x.fillRect(px, gy-22, 7, 6);
+      x.fillStyle=BG; x.fillRect(0.475*W, gy-13, 13, 13);       // the one entrance
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('a stepped ziggurat, and one way in', W/2, gy+13);
+    } else if(k==='eg'){
+      // the step pyramid at Saqqara, mastaba on mastaba
+      for(let i=0;i<5;i++){
+        const wdt=(0.46-0.07*i)*W, hh=15;
+        x.fillStyle = i%2 ? '#C9AC7E' : '#D4B98C';
+        x.fillRect(W/2-wdt/2, gy-hh*(i+1), wdt, hh);
+      }
+      x.fillStyle='#6E8A4E';                                     // palms on the bank
+      [[0.08,0],[0.90,3]].forEach(p=>{
+        x.fillStyle='#7A6248'; x.fillRect(p[0]*W, gy-22+p[1], 3, 22);
+        x.fillStyle='#6E8A4E';
+        for(let a=-2;a<=2;a++){
+          x.beginPath();
+          x.moveTo(p[0]*W+1.5, gy-22+p[1]);
+          x.quadraticCurveTo(p[0]*W+1.5+a*8, gy-32+p[1], p[0]*W+1.5+a*11, gy-24+p[1]);
+          x.lineTo(p[0]*W+1.5, gy-21+p[1]); x.fill();
+        }
+      });
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('mastaba on mastaba — the step pyramid', W/2, gy+13);
+    } else {
+      // a wall along a ridge, and an oracle bone
+      x.fillStyle='#2E3A44';                                     // the ridge it follows
+      x.beginPath();
+      x.moveTo(0, gy); x.lineTo(0.02*W, gy-14); x.lineTo(0.22*W, gy-46); x.lineTo(0.44*W, gy-28);
+      x.lineTo(0.66*W, gy-56); x.lineTo(0.96*W, gy-24); x.lineTo(W, gy);
+      x.closePath(); x.fill();
+      x.strokeStyle='#7E7466'; x.lineWidth=10; x.lineJoin='round';
+      x.beginPath();
+      x.moveTo(0.02*W, gy-14); x.lineTo(0.22*W, gy-46); x.lineTo(0.44*W, gy-28);
+      x.lineTo(0.66*W, gy-56); x.lineTo(0.96*W, gy-24);
+      x.stroke(); x.lineJoin='miter'; x.lineWidth=1;
+      x.fillStyle='#948A79';
+      [[0.22,-46],[0.66,-56]].forEach(t=>x.fillRect(t[0]*W-7, gy+t[1]-20, 14, 22));
+      // the bone, cracked
+      x.fillStyle='#E3DCC8';
+      x.beginPath(); x.ellipse(0.50*W, gy-92, 34, 17, 0, 0, 7); x.fill();
+      x.strokeStyle='#8A8271'; x.lineWidth=1.2;
+      [[-16,-4],[2,6],[16,-6]].forEach(c=>{
+        x.beginPath();
+        x.moveTo(0.50*W+c[0], gy-92+c[1]-8); x.lineTo(0.50*W+c[0]+3, gy-92+c[1]);
+        x.lineTo(0.50*W+c[0]-3, gy-92+c[1]+7); x.stroke();
+      });
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('a cracked oracle bone, and the wall', W/2, gy+13);
+    }
+    x.textAlign='left'; x.textBaseline='alphabetic';
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=230, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, c=C[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('four river plains, four sets of answers', 10, 8);
+    sans(x,13.5,600); x.fillStyle=INK;
+    x.fillText(c.t, 10, 22);
+    mono(x,9); x.fillStyle=A2;
+    x.fillText(c.rivers, 10, 40);                    // on its own line: side by side, the
+    scene(x, W, H, c.k);                             // longest pair ran into each other
+
+    document.getElementById('civA').textContent=c.rivers;
+    document.getElementById('civB').textContent=c.script;
+    document.getElementById('civC').textContent=c.known;
+    document.getElementById('civTxt').textContent=c.w;
+  }
+  if(cv){
+    C.forEach((c,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=c.t;
+      b.onclick=()=>{
+        sel=i; seen[c.k]=1;
+        [...box.children].forEach(q=>q.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','civ-'+c.k);
+        if(Object.keys(seen).length>=4) complete('m14');
+        draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('civTxt').textContent='Tap each of the four. All four finishes the mission.';
+  }
+  reg('m14',draw);
+})();
+
+/* ============================================================
+   M15 — whose invention is this?
+   ============================================================ */
+Q.rows('g15','g15s',[
+  {t:'Wedge marks pressed into damp clay with a cut reed',        a:1},
+  {t:'The 60-minute hour and the 360-degree circle',              a:1},
+  {t:'Bodies preserved by mummification, under stacked mastabas', a:2},
+  {t:'A year of 365 days, set by the rising of Sirius',           a:2},
+  {t:'Symbols cut into bone and shell, then heated till they cracked', a:3},
+  {t:'Jade carved into fish that ring when they are struck',      a:3},
+  {t:'Cubical stone weights running 1, 2, 4, 8, 16',              a:0},
+  {t:'Check dams called gabarbands, and the tanks of Dholavira',  a:0}
+], ['Sindhu','Mesopotamia','Egypt','China'], 'm15',
+   'All eight. Four river plains, four sets of answers to the same problem — how to feed, count and govern a city.');
+
+/* ============================================================
+   M16 — chapter boss
+   ============================================================ */
+Q.boss([
+  { t:'Recall · 1 of 10',
+    q:'How much of human history falls in the period before writing?',
+    o:['About half of it','More than 99 per cent','Less than 1 per cent'], a:1,
+    w:'Fig. 4.3 splits human history at the invention of writing: more than 99 per cent of it — roughly 3 million years ago to 5000 years ago — comes before, and less than 1 per cent after.' },
+  { t:'Recall · 2 of 10',
+    q:'Which of these early scripts has still not been deciphered?',
+    o:['The Harappan script, or Sindhu lipi','Cuneiform','Hieroglyphic'], a:0,
+    w:'Cuneiform and hieroglyphic have both been read — hieroglyphic since Champollion cracked the Rosetta Stone in 1822. The Harappan pictographic script on seals and pottery has not.' },
+  { t:'Recall · 3 of 10',
+    q:'Which hominin was the first to leave Africa?',
+    o:['Homo habilis','Homo neanderthalensis','Homo erectus'], a:2,
+    w:'Homo erectus — upright, bipedal, and the inventor of the handaxe and the cleaver. Its tools turn up across Asia and Europe, which is how the dispersal between 2 and 0.5 million years ago is traced.' },
+  { t:'Recall · 4 of 10',
+    q:'What defines the Chalcolithic?',
+    o:['Copper used alongside stone tools','Iron smelting','Polished stone tools and farming'], a:0,
+    w:'Chalcolithic means copper-and-stone: copper used together with stone tools, and the first metallurgy — extracting and shaping metal. Polished stone and farming are Neolithic; iron smelting is the Iron Age.' },
+  { t:'Understanding · 5 of 10',
+    q:'Why are early stone tools called extra-corporal limbs?',
+    o:['Because they were made from animal limb bone',
+       'Because they were strapped to the arms and legs',
+       'Because they worked as extensions of the body, doing what hands alone could not'], a:2,
+    w:'Extra-corporal means outside the body. A cleaver splits a bone for its marrow and a scraper strips a hide — jobs a hand cannot do — so the tool functions as an extra limb.' },
+  { t:'Understanding · 6 of 10',
+    q:'Why did human numbers explode about 12,000 years ago?',
+    o:['The climate warmed, and forests, grasslands, small game, fish and wild grain spread',
+       'Farming had just been invented',
+       'Metal tools had just arrived'], a:0,
+    w:'This is the start of the Mesolithic. Forests and grasslands spread into land that had been under ice, offering a far wider variety of resources — and the world saw its first-ever population explosion. Farming came later.' },
+  { t:'Application · 7 of 10',
+    q:'A site has polished stone axes, granaries, house floors and animal pens — but no metal at all. Which period?',
+    o:['Mesolithic','Chalcolithic','Neolithic'], a:2,
+    w:'Polished stone tools, permanent houses, stored grain and domesticated animals are the Neolithic signature. One piece of copper would make it Chalcolithic instead.' },
+  { t:'Application · 8 of 10',
+    q:'The Early Harappan field at Kalibangan has furrows running across it in two directions. What does that show?',
+    o:['Two crops in the same year, like Rabi and Kharif today',
+       'That the field was ploughed twice by mistake',
+       'That two villages shared one field'], a:0,
+    w:'Horizontal furrows crossing vertical ones is a field carrying double crops — a practice nearly 5,000 years old that Indian farmers still follow as the Rabi and Kharif seasons.' },
+  { t:'Reasoning · 9 of 10',
+    q:'Why did the Harappans need a standard system of weights?',
+    o:['Because their religion required it',
+       'Because interregional trade only works if both ends measure the same way',
+       'To decide how much tax each family owed'], a:1,
+    w:'Their meticulously planned settlements and their efficient long-distance trade both depended on it. Small units ran in a binary series — 1, 2, 4, 8, 16 — and larger denominations in multiples of ten.' },
+  { t:'Challenge · 10 of 10',
+    q:'Egypt’s 365-day calendar was accurate, and still slipped slowly against the seasons. Why?',
+    o:['Because the Nile flood came on a different date each year',
+       'Because they counted only 12 months of 30 days',
+       'Because the real year is about a quarter of a day longer than 365'], a:2,
+    w:'The calendar was 12 months of 30 days plus 5 extra days, set by the rising of Sirius — 365 in all. The true year is roughly a quarter of a day longer, so the civil calendar lost time and drifted away from the season it was meant to mark.' }
+], 'm16', 'Three million years of stone, one warming climate, the villages that followed it, and four river plains that each turned surplus grain into a city.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
