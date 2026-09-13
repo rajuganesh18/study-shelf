@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Understanding Social Science — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: the terracotta of a settlement built by hand, and the blue of the river it was built beside ---------- */
+:root{ --a1:#F2803C; --a2:#5FBFD0; --badge-bg:#F6EDE4; }
+/*@include shared/chrome.css*/
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Social Science · Chapter 1</div>
+  <h1>Understanding<br><span>Social Science</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/14</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · What Social Science is</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="35" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>A day already made of systems</b><i>Social Science in everyday life</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Think about a day in your life. Nothing in it arrived on its own. Tap each part of the morning and follow the chain of people and decisions standing behind it.</p>
+    <div class="panel">
+      <canvas id="dayCv" height="200"></canvas>
+      <div class="chips" id="dayOpts" style="margin-top:10px"></div>
+      <div class="note" style="margin-top:11px" id="dayTxt">—</div>
+    </div>
+    <p>You wake up in a house built with materials sourced from different places. The food you eat may come from various regions of the country. Before it reaches your plate, it has been harvested, processed, transported, bought, and sold through the efforts of many people. You travel on roads planned and maintained by public authorities. You study in a school shaped by educational policies and programmes. The electricity that you use is generated at distant power stations and delivered through a vast and complex network.</p>
+    <p>Even the simplest daily activities rely on <b>systems of governance, economic production, social cooperation, and the natural environment</b>. Human beings live in societies and depend on each other in many ways, and understanding these connections is the foundation of Social Science.</p>
+    <div class="curio">
+      <h5>Pause and ponder</h5>
+      <div class="note">Pick one object within arm's reach right now. How many different people had to do something before it could sit where it is? You will not reach the end of the list.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="25" data-coin="10">
+  <summary><span class="mno">02</span><span class="mt"><b>What kind of subject is this?</b><i>Society, not the natural world</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>In Grades 6 to 8 you met Social Science through stories of people, places and events. Now it is worth saying plainly what it is. Mark each statement.</p>
+    <div class="panel">
+      <div id="g2"></div>
+      <div class="score" id="g2s"></div>
+    </div>
+    <p>In simple words, <b>Social Science is the systematic study of human society</b>. It not only tells us what happened or where things are located, but also explains why events occur, how people live together, how environments influence life, how governments function, how economies operate, and how the past and the present together shape the world.</p>
+    <p>While subjects like Physics, Chemistry and Biology study the natural world, Social Science focuses on society, institutions, cultures and human interactions. Our lives are shaped by the environment, the institutions that govern us, the economic activities that meet our needs, and the traditions and ideas passed down through generations.</p>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="25" data-coin="10">
+  <summary><span class="mno">03</span><span class="mt"><b>A change in your locality</b><i>Let's analyse · the method, in order</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>The chapter asks you to observe your surroundings and identify a change of the past five years — in transport, housing, education, technology or the environment. Put the steps of that enquiry in the order the book sets out.</p>
+    <div class="panel">
+      <div class="chips" id="g3"></div>
+      <div class="score" id="g3s"></div>
+    </div>
+    <p>Questions like <i>why do some people live in crowded cities while others live in scattered villages?</i> or <i>why are certain regions more prone to floods?</i> show that society does not function by chance. It is shaped by history, geography, institutions, resources and human choices.</p>
+    <p>Social Science helps us explore such questions and seek answers through <b>careful observation, evidence and logical reasoning</b>. Simple observations like these help you see society as one connected story rather than a collection of separate pieces.</p>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Society through time and traditions</div>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="35" data-coin="20">
+  <summary><span class="mno">04</span><span class="mt"><b>From camp to city</b><i>How society got to be the way it is</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Society has not always been as it is today. Drag through thousands of years and watch what each new ability adds — and what it forces people to organise.</p>
+    <div class="panel">
+      <canvas id="growCv" height="180"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="growS">Stage <b><span id="growSV">Depending on nature</span></b></label>
+        <input id="growS" type="range" min="0" max="5" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">How people live</div><div class="v" id="growA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">What is new</div><div class="v" id="growB" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Now has to be organised</div><div class="v" id="growC" style="font-size:12px">—</div></div>
+      </div>
+    </div>
+    <p>Early human communities depended directly on nature for survival. With time, people learnt to grow crops, domesticate animals, build settlements, develop tools, exchange goods, and organise systems of governance. Villages developed into towns, and towns grew into cities. New ideas, inventions and cultural exchanges gradually transformed ways of life.</p>
+    <p>To understand the present, we must trace this long journey of <b>continuity and change</b> — how societies evolved, how institutions developed, and how relationships between people and the environment transformed.</p>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="30" data-coin="15">
+  <summary><span class="mno">05</span><span class="mt"><b>India's knowledge traditions</b><i>Enquiry with deep roots</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>The effort to understand society through observation, reasoning and reflection is not new, and it did not begin in Europe. Match each idea or text to what it says.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap an idea, then tap what it means.</div>
+      <div class="match"><div id="g5a"></div><div id="g5b"></div></div>
+      <div class="score" id="g5s"></div>
+    </div>
+    <p>Early thinkers valued discussion, questioning and logical reasoning. The concept of the <b>Pañchamahābhūtas</b> describes the natural world as an interconnected system in which human life is embedded, helping explain how the environment influences settlement patterns, occupations, architecture, food habits and health practices. The idea of <b>vasudhaiva kuṭumbakam</b> — the world is one family — expresses the interconnectedness of human societies across regions and cultures.</p>
+    <p>Early reflections on governance in India linked political authority with public welfare and ethical responsibility. The <b>Arthaśhāstra</b>, attributed to Kauṭilya and composed about 2,300 years ago, examined administration, economic management, taxation, and the duties of rulers toward their people. Systematic thinking about governance and the economy existed long before modern academic disciplines developed.</p>
+    <div class="curio">
+      <h5>A word to know</h5>
+      <div class="note">Pañchamahābhūtas — the five great elements of Indian philosophical traditions: earth (Pṛithvī), water (Āpaḥ), fire (Agni), air (Vāyu) and space (Ākāśha). Scholars used the idea to explain natural processes, the human body, and the relationship between living beings and the environment. Expressed in philosophical terms, it is an early attempt to understand nature as an interconnected system.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="25" data-coin="10">
+  <summary><span class="mno">06</span><span class="mt"><b>How a social scientist finds out</b><i>Evidence, not opinion</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>Modern Social Science continues an old legacy with new tools. Pick every method that actually belongs to it.</p>
+    <div class="panel">
+      <div class="chips" id="g6"></div>
+      <button class="act" id="g6check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g6s"></div>
+    </div>
+    <p>Social scientists observe people's lives, conduct interviews and surveys, examine documents, and compare different times and places. By gathering information from multiple sources, they develop explanations that are <b>supported by evidence</b>.</p>
+    <p>This way, Social Science explains both what endures and what changes, showing how the past shapes the present and how today's actions will influence the future.</p>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Four lenses on one world</div>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="30" data-coin="15">
+  <summary><span class="mno">07</span><span class="mt"><b>One drought, five kinds of damage</b><i>Why one subject is never enough</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>The rains fail over one district. Tap each consequence and watch how far a single event travels beyond the field it started in.</p>
+    <div class="panel">
+      <canvas id="droCv" height="196"></canvas>
+      <div class="chips" id="droOpts" style="margin-top:10px"></div>
+      <div class="note" style="margin-top:11px" id="droTxt">—</div>
+    </div>
+    <p>Human society is complex, and no single field of study can fully explain it. A drought affects crops (environment), farmers' incomes (economy), government relief measures (politics), migration to cities (society), and traditional ways of coping with scarcity (culture).</p>
+    <p>To understand such situations, we must examine society from different perspectives. <b>Social Science is therefore not a single subject but a group of related disciplines</b>, each focusing on a different aspect of human life. Together, they help us understand society in a comprehensive and connected way.</p>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="30" data-coin="15">
+  <summary><span class="mno">08</span><span class="mt"><b>Which discipline asks this?</b><i>The four core disciplines, and the wider family</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Each discipline asks different questions, yet all are interconnected. Match each one to the question it is built to answer.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a discipline, then tap its question.</div>
+      <div class="match"><div id="g8a"></div><div id="g8b"></div></div>
+      <div class="score" id="g8s"></div>
+    </div>
+    <p>In Grades 9–10, Social Science primarily draws from four core disciplines — <b>Geography, History, Political Science and Economics</b> — that together provide a comprehensive understanding of society.</p>
+    <p>Other disciplines such as Sociology, Philosophy, Anthropology and Psychology also form part of the broader Social Science family. These fields explore social relationships, ethical reasoning and human behaviour in greater depth, and will be developed further in higher grades.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="35" data-coin="20">
+  <summary><span class="mno">09</span><span class="mt"><b>Geography · one place, five tools</b><i>Where things are, and why there</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Here is a single district beside a river. Switch the instrument and the same place answers a different question each time.</p>
+    <div class="panel">
+      <canvas id="geoCv" height="205"></canvas>
+      <div class="chips" id="geoTools" style="margin-top:10px"></div>
+      <div class="note" style="margin-top:11px" id="geoTxt">—</div>
+    </div>
+    <p>Geography studies the location and distribution of places, objects, materials and people, as well as the relationships between human societies and their surroundings. It seeks to understand <b>where things are located, why they are found there, and how places — near or distant — affect one another over time</b>.</p>
+    <p>It views the world as a system of interdependencies, integrating spatial perspectives (location and its significance) with temporal perspectives (change over time). Drawing on both natural sciences and social sciences, Geography helps answer questions like why India has historically been a hub of global interaction, and how the Indian peninsula's long coastline made contact with Africa, Europe and Southeast Asia possible.</p>
+    <div class="curio">
+      <h5>Let's explore</h5>
+      <div class="note">With NCERT's School Bhuvan portal you can map your own village or city: bhuvan-app1.nrsc.gov.in/mhrd_ncert/ — the same kind of GIS layers as the one above, over the place you actually live in.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="35" data-coin="20">
+  <summary><span class="mno">10</span><span class="mt"><b>History · sorting the evidence</b><i>Four kinds of source</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>History writing draws on a wide range of sources. Each of these is pictured in your textbook. Sort every one into the kind of source it is.</p>
+    <div class="panel">
+      <div id="g10"></div>
+      <div class="score" id="g10s"></div>
+    </div>
+    <p>History is the study of the human past, through which societies seek to understand people's experiences, values and changes over time. One of the oldest traditions of preserving cultural memory in Bharat is the <b>itihāsa-purāṇa</b> tradition, which through stories not only shares historical information but gives cultural meaning to events and people.</p>
+    <p>Modern historiography increasingly relies on <b>empirical evidence</b>, using human genetics, carbon-14 dating, archaeology and other scientific methods to establish timelines. Literary sources include travelogues, memoirs, correspondence, genealogical records, folklore and oral traditions, and revenue documents. Material remains — monuments, excavated sites, artefacts, sculptures and paintings — are archaeological sources, and their analysis often involves laboratory testing.</p>
+    <div class="curio">
+      <h5>A word to know</h5>
+      <div class="note">Epigraphic source — texts, decrees or records inscribed on durable materials such as stone, metal plates or rock surfaces. Numismatic source — coins, currency or medals, which tell historians about the economy, chronology, rulers, trade and political boundaries through their metal content, inscriptions and symbols. Genealogical records trace family lineage, recording births, marriages and deaths.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="35" data-coin="20">
+  <summary><span class="mno">11</span><span class="mt"><b>Political Science · how far down power goes</b><i>Panchayati Raj and grassroots democracy</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>A new road is needed in a village. Climb the ladder of decision-making and see who is actually holding the power at each rung.</p>
+    <div class="panel">
+      <canvas id="panCv" height="215"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="panS">Level <b><span id="panSV">Gram Sabha</span></b></label>
+        <input id="panS" type="range" min="0" max="5" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Who is in it</div><div class="v" id="panA" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">A decision made here</div><div class="v" id="panB" style="font-size:12px">—</div></div>
+        <div class="rc"><div class="k">Distance from you</div><div class="v" id="panC" style="font-size:12px">—</div></div>
+      </div>
+    </div>
+    <p>Political Science is the study of governance, which informs us how and why power is distributed, decisions are made, and policies are implemented. It studies constitutions, governments and institutions of the State, as well as social movements, nation building, foreign policy, and the ways power is exercised, shared and regulated in society and everyday life.</p>
+    <p>In India's villages, the <b>Panchayati Raj</b> system embodies grassroots democracy by giving citizens a voice in local development planning. This shows that political power exists not only within formal institutions but also in social relationships, customs and ideas of legitimacy. To study politics, therefore, is to examine society itself — its hierarchies and its struggles for more effective and accountable governance.</p>
+    <div class="curio">
+      <h5>Threads of curiosity</h5>
+      <div class="note">The study of politics in India began early, and was not treated as a separate discipline: it was linked to dharma (moral duty), artha (economic well-being) and rājadharma (the duties of the ruler). The Vedas, Upaniṣads and Purāṇas discuss justice, authority and social order; the Mahābhārata and Śhukranīti address governance, law and ethical leadership. Power was viewed as a responsibility rather than merely a privilege.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="35" data-coin="20">
+  <summary><span class="mno">12</span><span class="mt"><b>Economics · keep it or sell it?</b><i>Limited resources, and the choice that follows</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>One family, one harvest of 12 quintals of grain, and one decision. The family eats about a quintal a month, so every quintal carried to market is a month it cannot eat — and every quintal kept back is money it does not have.</p>
+    <div class="panel">
+      <canvas id="ecoCv" height="215"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="ecoS">Share taken to market <b><span id="ecoSV">0</span>%</b></label>
+        <input id="ecoS" type="range" min="0" max="100" step="5" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Food in the house</div><div class="v" id="ecoA">—</div></div>
+        <div class="rc"><div class="k">Income earned</div><div class="v" id="ecoB">—</div></div>
+        <div class="rc"><div class="k">Verdict</div><div class="v" id="ecoC" style="font-size:12px">—</div></div>
+      </div>
+    </div>
+    <p>Economics helps us understand how individuals and societies decide how to use <b>limited resources</b> to meet their needs. It studies how goods and services are produced, exchanged and distributed, and how these processes shape everyday life — from the food we eat and the clothes we wear to the jobs people do and the services they use.</p>
+    <p>It explores decision-making by consumers, producers and governments. Consumers decide what to buy, producers determine what and how much to produce, and governments frame policies to balance goals such as growth and stability, efficiency and fairness. In this way, economics is not only about numbers and markets but also about <b>well-being, equity and justice</b>.</p>
+    <div class="curio">
+      <h5>Threads of curiosity</h5>
+      <div class="note">For centuries India was one of the world's leading economies and an important centre of trade, industry and maritime activity. Colonial rule disrupted this progress, causing widespread poverty, recurrent famines and the decline of traditional industries. Since independence the country has made significant progress in infrastructure, education and technology, poverty reduction and life expectancy — while the challenge of making growth reach every section of society remains.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Why any of this matters</div>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="25" data-coin="10">
+  <summary><span class="mno">13</span><span class="mt"><b>Why should we study Social Science?</b><i>And what it is not for</i></span><span class="mstat">25 XP</span></summary>
+  <div class="body">
+    <p>After all the observing, questioning and evidence — how does this knowledge actually help you? Pick every reason the chapter gives.</p>
+    <div class="panel">
+      <div class="chips" id="g13"></div>
+      <button class="act" id="g13check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g13s"></div>
+    </div>
+    <p>The house you live in, the water you use, the roads you travel on, the school you attend, the markets you visit, and even the digital spaces you use are part of systems created and managed by society. You also live among people who may speak different languages, follow diverse customs and practise varied occupations. Social Science explains these variations as outcomes of geographical, historical, cultural and economic factors, and that understanding builds respect and cooperation — while helping us recognise how Indian culture binds this diversity together through an underlying unity.</p>
+    <p>In a democratic society, citizens play an active role in public life. When you understand how governments function and how decisions are made, you are better prepared to participate responsibly in civic life. Social Science is not about memorising dates, maps or definitions — <b>it is about understanding people, places, society, culture and power</b>.</p>
+    <div class="curio">
+      <h5>Pause and ponder</h5>
+      <div class="note">The study of Social Science is a journey: from understanding how societies evolved, to analysing how they function today, to imagining how they can become better in the future. New technologies, expanding cities, environmental concerns, migration and global connections are reshaping how people live — and the skills you have practised in this chapter are the ones that make sense of them.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="80" data-coin="60">
+  <summary><span class="mno">14</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">80 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, drawn from this chapter's own examples, sidebars and figures. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+
+<footer>NCERT Class 9 Social Science · Chapter 1</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*@include shared/storage.js*/
+
+/* ============================================================
+   Chapter 1 — Understanding Social Science
+   Understanding Society: India and Beyond, Grade 9 Part 1
+
+   Progress metaphor: the chapter's own account of how society
+   came to be. "Villages developed into towns, and towns grew
+   into cities." XP builds a settlement beside a river — huts
+   first, then houses, then a road, an assembly hall and the
+   people who fill it — while the four core disciplines light
+   up along the top.
+   ============================================================ */
+const CH = {
+  id: '9-social-1',
+  key: 'ch01Society',
+  total: 14,
+  stages: [
+    { at:0,   f:0.05, name:'Looking around',  d:'A day in your life already runs on systems somebody built.' },
+    { at:60,  f:0.20, name:'Asking why',      d:'Society does not work by chance. Every part of it was decided.' },
+    { at:130, f:0.36, name:'Tracing the past',d:'Camps became villages, villages towns, towns cities.' },
+    { at:210, f:0.52, name:'Weighing evidence',d:'Interviews, documents, inscriptions, coins. Claims need sources.' },
+    { at:300, f:0.68, name:'Four lenses',     d:'Geography, History, Political Science and Economics on one event.' },
+    { at:390, f:0.85, name:'Connecting it up',d:'The past shapes the present, and today shapes what comes next.' },
+    { at:470, f:1.00, name:'Citizen',         d:'You can read the world around you — and take part in shaping it.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    x.fillStyle = '#F6EDE4'; x.fillRect(0,0,W,H);
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+
+    // the four core disciplines, lighting up along the top
+    const cols = ['#3E8E5A','#B8763C','#5B6FC4','#C79A2E'];
+    for(let i=0;i<4;i++){
+      x.fillStyle = f >= (i+1)/5.4 ? cols[i] : '#E3D6C6';
+      x.beginPath(); x.arc(16 + i*22, 12, 4.2, 0, 7); x.fill();
+    }
+
+    const g = H-20;
+    // the river every early settlement was built beside
+    x.strokeStyle = '#7FB6C8'; x.lineWidth = 5; x.lineCap = 'round';
+    x.beginPath();
+    for(let i=0;i<=20;i++){ const px=i/20*W, py=H-11+Math.sin(i/20*3.1)*4; i?x.lineTo(px,py):x.moveTo(px,py); }
+    x.stroke(); x.lineCap = 'butt';
+    x.fillStyle = '#D9C6AE'; x.fillRect(0,g,W,6);
+
+    // a road, once there is enough to connect
+    if(f > 0.42){
+      x.strokeStyle = '#B29A7C'; x.lineWidth = 1.6; x.setLineDash([4,4]);
+      x.beginPath(); x.moveTo(4,g-1); x.lineTo(W-4,g-1); x.stroke(); x.setLineDash([]);
+    }
+
+    // the assembly hall, once there is something to govern
+    if(f > 0.62){
+      const hx = 80, hw = 20, hh = 13;
+      x.fillStyle = '#EFE3D0'; x.fillRect(hx-hw/2, g-hh, hw, hh);
+      x.fillStyle = '#C0703C';
+      x.beginPath(); x.arc(hx, g-hh, hw*0.42, Math.PI, 0); x.fill();
+      x.fillStyle = '#C9B394';
+      for(let i=0;i<3;i++) x.fillRect(hx-hw/2+3+i*6, g-hh+3, 2, hh-3);
+    }
+
+    // huts become houses become blocks
+    const N = 7, n = Math.max(1, Math.round(f*N));
+    for(let i=0;i<n;i++){
+      const bw = 7, bx = 6 + i*9;
+      const grow = Math.min(1, Math.max(0,(f - i/N)*3));
+      const bh = 6 + grow*(6 + (i%3)*7);
+      x.fillStyle = i%3===0 ? '#C0703C' : i%3===1 ? '#A9855E' : '#8E6B49';
+      x.fillRect(bx, g-bh, bw, bh);
+      if(bh < 11){
+        x.fillStyle = '#8A6A45';
+        x.beginPath(); x.moveTo(bx-1.6,g-bh); x.lineTo(bx+bw/2,g-bh-4.5); x.lineTo(bx+bw+1.6,g-bh);
+        x.closePath(); x.fill();
+      } else {
+        x.fillStyle = 'rgba(255,241,219,.85)';
+        for(let r=0;r<Math.floor(bh/6);r++) x.fillRect(bx+2, g-bh+3+r*6, 3.4, 2.4);
+      }
+    }
+
+    /* and finally the people the whole subject is actually about — on the
+       ground strip, not against the buildings, where dark dots vanish */
+    if(f > 0.82){
+      x.fillStyle = '#4A3B2E';
+      for(let i=0;i<5;i++){ x.beginPath(); x.arc(11 + i*18, g+3, 1.9, 0, 7); x.fill(); }
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ============================================================
+   Chapter 1 interactives
+   Bespoke canvases: a morning of systems (M1) · settlement
+   growth (M4) · the drought's five ripples (M7) · one district
+   through five tools (M9) · the ladder of governance (M11) ·
+   keep it or sell it (M12)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#F2803C', A2='#5FBFD0',
+      GOOD='#4FC3A1', BAD='#E5484D', GOLD='#F2B84C', BG='#10141F';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* A label that must not run off a narrow canvas. Draws centred, and
+   drops to a smaller size rather than overflowing its column. */
+function fitText(x, s, cx, y, max){
+  let size = 9;
+  mono(x, size, 500);
+  while(x.measureText(s).width > max && size > 6){ size -= 0.5; mono(x, size, 500); }
+  x.textAlign = 'center'; x.fillText(s, cx, y);
+}
+
+/* ============================================================
+   M1 — a day already made of systems
+   Five ordinary things, each with a chain behind it. Tap four
+   and the mission pays out; the fifth is there for completeness.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('dayCv'), box=document.getElementById('dayOpts');
+  const D=[
+    {k:'house', t:'The house',   lab:'house',  note:'Built with materials sourced from different places — stone, timber, cement and wiring, each with a journey of its own behind it.'},
+    {k:'food',  t:'The food',    lab:'food',   note:'It may come from various regions of the country. Before it reached your plate it was harvested, processed, transported, bought and sold through the efforts of many people.'},
+    {k:'road',  t:'The road',    lab:'road',   note:'Planned and maintained by public authorities — decisions taken by people you will never meet, paid for out of taxes.'},
+    {k:'school',t:'The school',  lab:'school', note:'Shaped by educational policies and programmes decided far above the classroom you sit in.'},
+    {k:'power', t:'The electricity', lab:'power', note:'Generated at distant power stations and delivered through a vast and complex network that has to hold together every second of the day.'}
+  ];
+  let sel=null; const seen={};
+  function glyph(x, kind, cx, cy, on){
+    const c = on ? A1 : '#6C7BA6';
+    x.strokeStyle=c; x.fillStyle=c; x.lineWidth=2;
+    if(kind==='house'){
+      x.strokeRect(cx-9, cy-4, 18, 14);
+      x.beginPath(); x.moveTo(cx-12,cy-4); x.lineTo(cx,cy-13); x.lineTo(cx+12,cy-4); x.stroke();
+    } else if(kind==='food'){
+      x.beginPath(); x.arc(cx, cy+2, 10, 0, Math.PI); x.stroke();
+      x.beginPath(); x.moveTo(cx-12,cy+2); x.lineTo(cx+12,cy+2); x.stroke();
+      x.beginPath(); x.arc(cx, cy-3, 4, 0, 7); x.fill();
+    } else if(kind==='road'){
+      x.beginPath(); x.moveTo(cx-13,cy+10); x.lineTo(cx-4,cy-11); x.moveTo(cx+13,cy+10); x.lineTo(cx+4,cy-11); x.stroke();
+      x.lineWidth=1.6; x.setLineDash([4,4]);
+      x.beginPath(); x.moveTo(cx,cy+10); x.lineTo(cx,cy-11); x.stroke(); x.setLineDash([]);
+    } else if(kind==='school'){
+      x.strokeRect(cx-11, cy-2, 22, 12);
+      x.beginPath(); x.moveTo(cx-13,cy-2); x.lineTo(cx+13,cy-2); x.stroke();
+      x.beginPath(); x.moveTo(cx,cy-2); x.lineTo(cx,cy-12); x.stroke();
+      x.beginPath(); x.moveTo(cx,cy-12); x.lineTo(cx+8,cy-9); x.lineTo(cx,cy-6); x.closePath(); x.fill();
+    } else {
+      x.beginPath(); x.moveTo(cx-8,cy-12); x.lineTo(cx-8,cy+10); x.moveTo(cx+8,cy-12); x.lineTo(cx+8,cy+10); x.stroke();
+      x.lineWidth=1.4;
+      x.beginPath(); x.moveTo(cx-8,cy-9); x.lineTo(cx+8,cy-5); x.moveTo(cx-8,cy-4); x.lineTo(cx+8,cy); x.stroke();
+    }
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,200); if(!x) return;
+    const W=cv.clientWidth, H=200;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('a morning, and what stands behind it', 10, 10);
+    const colw = W/5, cy = 72;
+    D.forEach((d,i)=>{
+      const cx = colw*i + colw/2, on = sel===d.k;
+      if(on){
+        x.fillStyle='rgba(242,128,60,.12)';
+        x.fillRect(colw*i+2, 34, colw-4, 76);
+      }
+      glyph(x, d.k, cx, cy, on);
+      x.fillStyle = on ? A1 : DIM;
+      x.textBaseline='top';
+      fitText(x, d.lab, cx, 96, colw-6);
+      if(seen[d.k]){ x.fillStyle=GOOD; x.beginPath(); x.arc(cx, 106, 2, 0, 7); x.fill(); }
+    });
+    // the four systems every one of them rests on
+    const names=['governance','economic production','social cooperation','the environment'];
+    const by = 136;
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10,by-14); x.lineTo(W-10,by-14); x.stroke();
+    mono(x,9); x.textAlign='left'; x.textBaseline='top'; x.fillStyle=DIM;
+    x.fillText('every one of them rests on:', 10, by-8);
+    names.forEach((n,i)=>{
+      const px = 10 + (i%2)*(W/2-6), py = by + 12 + Math.floor(i/2)*16;
+      x.fillStyle = sel ? A2 : '#5E6B93';
+      x.beginPath(); x.arc(px+3, py+5, 2.6, 0, 7); x.fill();
+      x.fillStyle = sel ? INK : DIM;
+      mono(x,9.5); x.textAlign='left';
+      x.fillText(n, px+11, py);
+    });
+    x.textAlign='left';
+  }
+  function build(){
+    D.forEach(d=>{
+      const b=document.createElement('button');
+      b.className='chip'; b.textContent=d.t;
+      b.onclick=()=>{
+        sel=d.k; seen[d.k]=1;
+        [...box.children].forEach(c=>c.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','day-'+d.k);
+        document.getElementById('dayTxt').textContent=d.note;
+        if(Object.keys(seen).length>=4) complete('m1');
+        draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('dayTxt').textContent='Tap any part of the morning. Four of the five is enough to see the pattern.';
+  }
+  if(cv) build();
+  reg('m1',draw);
+})();
+
+/* ============================================================
+   M2 — what kind of subject Social Science is
+   ============================================================ */
+Q.rows('g2','g2s',[
+  {t:'Social Science is the systematic study of human society.', a:0},
+  {t:'It only tells us what happened and where things are located.', a:1},
+  {t:'Physics, Chemistry and Biology study the natural world; Social Science studies society, institutions and cultures.', a:0},
+  {t:'Society works by chance, so its patterns cannot really be explained.', a:1},
+  {t:'It seeks answers through careful observation, evidence and logical reasoning.', a:0},
+  {t:'Studying it means memorising dates, maps and definitions.', a:1}
+], ['True','False'], 'm2',
+   'All six. It explains why things happen, not only what happened — and it does so from evidence.');
+
+/* ============================================================
+   M3 — the Let's analyse enquiry, in order
+   ============================================================ */
+Q.order('g3','g3s',
+  ['Pick a change in your locality over the past five years',
+   'Describe what the situation was earlier',
+   'Record what has changed',
+   'Work out what might have caused the change',
+   'Ask how it has affected people’s lives',
+   'Prepare a short report and present it'],
+  'm3', 'That is the enquiry the chapter sets: observe, compare, explain, then report.');
+
+/* ============================================================
+   M4 — from camp to city
+   Each stage keeps everything the stages before it built. What
+   changes fastest is the last column: what now has to be
+   organised.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('growCv'), sS=document.getElementById('growS');
+  const ST=[
+    {n:'Depending on nature', a:'Small bands, moving with the seasons',
+     b:'Nothing yet — people take what nature provides', c:'Almost nothing beyond the group itself'},
+    {n:'Growing crops', a:'People stay put through a growing season',
+     b:'Fields, sowing, harvest, a store of grain', c:'Who works which field, and who the harvest belongs to'},
+    {n:'Domesticating animals', a:'Herds beside the fields',
+     b:'Milk, wool, traction, manure', c:'Grazing land, and what happens when herds and fields collide'},
+    {n:'Building settlements', a:'Permanent homes in one place',
+     b:'Houses, tools, storage, a shared water source', c:'Water, waste, defence, and who repairs what'},
+    {n:'Villages become towns', a:'More people than can all know one another',
+     b:'A market, craftspeople, exchange of goods', c:'Prices, weights, disputes, taxes'},
+    {n:'Towns become cities', a:'Strangers living densely together',
+     b:'Roads, trade with distant places, written records', c:'Governance, law, revenue — institutions, not just customs'}
+  ];
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,180); if(!x) return;
+    const W=cv.clientWidth, H=180, s=+sS.value, g=H-42;
+    bg(x,W,H);
+    // the river, always there
+    x.strokeStyle='#2E6E82'; x.lineWidth=6; x.lineCap='round';
+    x.beginPath();
+    for(let i=0;i<=24;i++){ const px=i/24*W, py=H-20+Math.sin(i/24*3.4)*6; i?x.lineTo(px,py):x.moveTo(px,py); }
+    x.stroke(); x.lineCap='butt';
+    x.fillStyle='#1E2436'; x.fillRect(0,g,W,H-g-26);
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(0,g); x.lineTo(W,g); x.stroke();
+
+    // stage 0: trees and a foraging band
+    if(s<=1){
+      x.fillStyle='#2F5B3E';
+      for(let i=0;i<4;i++){
+        const px=W*0.06+i*W*0.09;
+        x.beginPath(); x.arc(px, g-14, 8, 0, 7); x.fill();
+        x.fillRect(px-1.4, g-12, 2.8, 12);
+      }
+    }
+    // stage 1+: fields
+    if(s>=1){
+      x.strokeStyle='#6B8F3A'; x.lineWidth=1.6;
+      for(let r=0;r<4;r++){
+        for(let i=0;i<9;i++){
+          const px=8+i*10, py=g-6-r*7;
+          x.beginPath(); x.moveTo(px,py); x.lineTo(px,py-5); x.stroke();
+        }
+      }
+    }
+    // stage 2+: animals
+    if(s>=2){
+      x.fillStyle='#B9A488';
+      for(let i=0;i<3;i++){ const px=W*0.40+i*15;
+        x.fillRect(px, g-13, 10, 6);
+        x.fillRect(px+1, g-7, 1.6, 5); x.fillRect(px+7, g-7, 1.6, 5);
+        x.fillRect(px+9, g-16, 4, 4);
+      }
+    }
+    // stage 3+: huts, then houses, then blocks
+    const built = s>=3 ? (s===3?4:s===4?6:8) : 0;
+    for(let i=0;i<built;i++){
+      const bw = 14, bx = W*0.52 + i*(W*0.44/8);
+      const tall = s>=5 && i%2===0;
+      const bh = s===3 ? 12 : tall ? 34 : 20;
+      x.fillStyle = i%3===0 ? '#C0703C' : i%3===1 ? '#A9855E' : '#8E6B49';
+      x.fillRect(bx, g-bh, bw, bh);
+      if(s===3){
+        x.fillStyle='#8A6A45';
+        x.beginPath(); x.moveTo(bx-2,g-bh); x.lineTo(bx+bw/2,g-bh-7); x.lineTo(bx+bw+2,g-bh); x.closePath(); x.fill();
+      } else {
+        x.fillStyle='rgba(255,241,219,.8)';
+        for(let r=0;r<Math.floor(bh/8);r++){ x.fillRect(bx+3, g-bh+5+r*8, 3.5, 3); x.fillRect(bx+8, g-bh+5+r*8, 3.5, 3); }
+      }
+    }
+    // stage 4+: a market stall
+    if(s>=4){
+      const mx=W*0.44;
+      x.strokeStyle=A1; x.lineWidth=2;
+      x.beginPath(); x.moveTo(mx-10,g); x.lineTo(mx-10,g-12); x.lineTo(mx+10,g-12); x.lineTo(mx+10,g); x.stroke();
+      x.fillStyle=A1; x.fillRect(mx-13,g-16,26,4);
+    }
+    // stage 5: a road, and an assembly hall
+    if(s>=5){
+      x.strokeStyle='#8898C4'; x.lineWidth=2; x.setLineDash([6,5]);
+      x.beginPath(); x.moveTo(0,g+7); x.lineTo(W,g+7); x.stroke(); x.setLineDash([]);
+      const hx=W*0.30;
+      x.fillStyle='#3A4463'; x.fillRect(hx-16, g-24, 32, 24);
+      x.fillStyle=A2;
+      x.beginPath(); x.arc(hx, g-24, 13, Math.PI, 0); x.fill();
+      x.fillStyle='#8898C4';
+      for(let i=0;i<4;i++) x.fillRect(hx-13+i*8, g-20, 2.6, 20);
+    }
+
+    // the timeline strip
+    mono(x,9); x.textBaseline='top'; x.fillStyle=DIM; x.textAlign='left';
+    x.fillText('thousands of years →', 8, 8);
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10,26); x.lineTo(W-14,26); x.stroke();
+    for(let i=0;i<ST.length;i++){
+      const cxp = 10 + i*((W-24)/(ST.length-1));
+      x.fillStyle = i<=s ? A1 : RULE;
+      x.beginPath(); x.arc(cxp, 26, i===s?4.5:3, 0, 7); x.fill();
+    }
+    mono(x,11,500); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(ST[s].n, 10, 36);
+
+    document.getElementById('growSV').textContent=ST[s].n;
+    document.getElementById('growA').textContent=ST[s].a;
+    document.getElementById('growB').textContent=ST[s].b;
+    document.getElementById('growC').textContent=ST[s].c;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','growS');
+      if(Object.keys(seen).length>=4) complete('m4');
+      draw();
+    };
+  }
+  reg('m4',draw);
+})();
+
+/* ============================================================
+   M5 — India's knowledge traditions
+   ============================================================ */
+Q.match('g5a','g5b','g5s',[
+  ['Pañchamahābhūtas', 'Five great elements — nature as one connected system'],
+  ['Vasudhaiva kuṭumbakam', 'The world is one family'],
+  ['Arthaśhāstra', 'Kauṭilya on administration, taxation and a ruler’s duties'],
+  ['Itihāsa-purāṇa', 'Cultural memory and meaning carried in stories'],
+  ['Rājadharma', 'The duties a ruler owes to the people']
+], 'm5', 'All five. Systematic thinking about society is far older than the modern disciplines that study it.');
+
+/* ============================================================
+   M6 — how a social scientist finds out
+   ============================================================ */
+Q.pick('g6','g6check','g6s',[
+  {t:'Observe how people actually live',            a:1},
+  {t:'Conduct interviews and surveys',              a:1},
+  {t:'Examine documents and records',               a:1},
+  {t:'Compare different times and places',          a:1},
+  {t:'Gather information from multiple sources',    a:1},
+  {t:'Decide the answer first, then look for support', a:0},
+  {t:'Accept a claim because it is repeated often', a:0}
+], 'm6', 'Right. Explanations in Social Science have to be supported by evidence — gathered, compared and open to being checked.');
+
+/* ============================================================
+   M7 — one drought, five kinds of damage
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('droCv'), box=document.getElementById('droOpts');
+  const R=[
+    {k:'env',  t:'Environment', lab:'crops',     note:'Environment — the crops fail first. Soil dries, groundwater falls, and the land itself changes.'},
+    {k:'eco',  t:'Economy',     lab:'incomes',   note:'Economy — farmers’ incomes collapse, and everyone who sold to them or bought from them feels it next.'},
+    {k:'pol',  t:'Politics',    lab:'relief',    note:'Politics — government relief measures have to be decided, funded and delivered, and someone is answerable for them.'},
+    {k:'soc',  t:'Society',     lab:'migration', note:'Society — families migrate to cities, splitting households and reshaping both the village and the city.'},
+    {k:'cul',  t:'Culture',     lab:'coping',    note:'Culture — traditional ways of coping with scarcity are drawn on, and sometimes lost when they fail.'}
+  ];
+  let sel=null; const seen={};
+  /* A fan, not a ring. Five boxes big enough to read will not fit around a
+     centre on a 390px screen — the first draft overlapped all five and the
+     label under the field. So the drought sits on the left and the five
+     consequences stack down the right, each on its own line. */
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=196, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth;
+    const cx=44, cy=112, colx=98, rowh=30, top=30;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the rains fail over one district', 10, 8);
+
+    // the branches, drawn first so the boxes sit on top of them
+    R.forEach((r,i)=>{
+      const ry = top + i*rowh + rowh/2;
+      x.strokeStyle = sel===r.k ? A1 : RULE;
+      x.lineWidth = sel===r.k ? 2 : 1.2;
+      x.beginPath();
+      x.moveTo(cx+26, cy);
+      x.bezierCurveTo(colx-24, cy, colx-24, ry, colx-2, ry);
+      x.stroke();
+    });
+
+    // the cracked field, and a sun with nothing to stop it
+    x.fillStyle=GOLD; x.beginPath(); x.arc(cx+8, cy-52, 9, 0, 7); x.fill();
+    x.fillStyle='#5A4630';
+    x.beginPath(); x.ellipse(cx, cy, 26, 12, 0, 0, 7); x.fill();
+    x.strokeStyle='#2A1F14'; x.lineWidth=1.4;
+    [[-14,-3,-5,5],[1,-5,8,4],[-4,3,5,8],[10,-2,17,2]].forEach(c=>{
+      x.beginPath(); x.moveTo(cx+c[0],cy+c[1]); x.lineTo(cx+c[2],cy+c[3]); x.stroke();
+    });
+    mono(x,9.5,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='top';
+    x.fillText('drought', cx, cy+16);
+
+    // the five consequences, one line each
+    R.forEach((r,i)=>{
+      const ry = top + i*rowh, on = sel===r.k;
+      const bw = W - colx - 10, bh = rowh - 6;
+      x.fillStyle = on ? 'rgba(242,128,60,.16)' : '#1B2340';
+      x.strokeStyle = on ? A1 : seen[r.k] ? GOOD : RULE;
+      x.lineWidth = on ? 1.8 : 1.2;
+      x.beginPath(); x.rect(colx, ry, bw, bh); x.fill(); x.stroke();
+      mono(x,10.5,500); x.fillStyle = on ? A1 : INK;
+      x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(r.t, colx+9, ry+bh/2);
+      mono(x,9.5); x.fillStyle=DIM; x.textAlign='right';
+      x.fillText(r.lab, colx+bw-9, ry+bh/2);
+    });
+    x.textAlign='left'; x.textBaseline='alphabetic';
+  }
+  if(cv){
+    R.forEach(r=>{
+      const b=document.createElement('button');
+      b.className='chip'; b.textContent=r.t;
+      b.onclick=()=>{
+        sel=r.k; seen[r.k]=1;
+        [...box.children].forEach(c=>c.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','dro-'+r.k);
+        document.getElementById('droTxt').textContent=r.note;
+        if(Object.keys(seen).length>=5){ ev('perfect'); complete('m7'); }
+        draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('droTxt').textContent='One event, five directions. Tap all five to see how far it travels.';
+  }
+  reg('m7',draw);
+})();
+
+/* ============================================================
+   M8 — which discipline asks this?
+   ============================================================ */
+Q.match('g8a','g8b','g8s',[
+  ['Geography',        'Where is it, why there, and how do places affect each other?'],
+  ['History',          'How did societies change over time, and what do the sources say?'],
+  ['Political Science','Who governs, how is power shared, what are our rights and duties?'],
+  ['Economics',        'How are limited resources produced, distributed and used?'],
+  ['Sociology and Psychology', 'How do social relationships and human behaviour work? (higher grades)']
+], 'm8', 'All five. Different questions, one society — which is why the answers have to be put back together.');
+
+/* ============================================================
+   M9 — one district, five tools
+   The same outline every time. Only the instrument changes,
+   and with it the question the place is able to answer.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('geoCv'), box=document.getElementById('geoTools');
+  const T=[
+    {k:'sketch', t:'Sketch map',  note:'A sketch map answers "where is it?" — the settlements, the river and the road, and nothing else.'},
+    {k:'globe',  t:'Globe',       note:'A globe answers "where in the world?" — the district as one point on a sphere, which is how coastlines came to link India with Africa, Europe and Southeast Asia.'},
+    {k:'atlas',  t:'Atlas',       note:'An atlas page answers "what is the land like?" — the same outline shaded by height, from the river plain up to the hills.'},
+    {k:'gis',    t:'GIS layers',  note:'A Geographical Information System answers "what is true of each patch?" — data laid over the map, square by square, and layers that can be switched on and off.'},
+    {k:'info',   t:'Infographic', note:'An infographic answers "how does it change through the year?" — the temporal perspective, beside the spatial one.'}
+  ];
+  let sel='sketch'; const seen={};
+  const OUT=[[0.14,0.30],[0.34,0.20],[0.58,0.24],[0.78,0.38],[0.82,0.62],[0.62,0.80],[0.34,0.78],[0.16,0.58]];
+  /* The outline is written in fractions that span 0.14–0.82 across and
+     0.20–0.80 down. NX/NY stretch that span to fill the frame, so the
+     district is not a small shape adrift in a large empty box — and every
+     feature drawn on it (river, road, settlements) uses the same mapping. */
+  let NX = u => u, NY = v => v;
+  function path(x){
+    x.beginPath();
+    OUT.forEach((p,i)=>{ const px=NX(p[0]), py=NY(p[1]); i?x.lineTo(px,py):x.moveTo(px,py); });
+    x.closePath();
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=205, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth;
+    bg(x,W,H);
+    // sy leaves a strip at the foot of the frame for the GIS layer caption
+    const ox=12, oy=28, sx=W-24, sy=H-56;
+    NX = u => ox + (u-0.14)/0.68*sx;
+    NY = v => oy + (v-0.20)/0.60*sy;
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Kaveripura district · ' + (T.find(t=>t.k===sel)||T[0]).t, 10, 8);
+
+    if(sel==='globe'){
+      const cx=W/2, cy=H/2+4, r=Math.min(W*0.30, 78);
+      x.strokeStyle='#3A466B'; x.lineWidth=1.4;
+      x.beginPath(); x.arc(cx,cy,r,0,7); x.stroke();
+      /* Math.abs, not the raw cosine: past i=2 the cosine turns negative and
+         ellipse() throws on a negative radius rather than mirroring it. */
+      for(let i=1;i<4;i++){
+        const k = Math.abs(Math.cos(i*0.6));
+        x.beginPath(); x.ellipse(cx,cy,r,r*k,0,0,7); x.stroke();
+        x.beginPath(); x.ellipse(cx,cy,r*k,r,0,0,7); x.stroke();
+      }
+      x.fillStyle=A1; x.beginPath(); x.arc(cx+r*0.18, cy-r*0.12, 4.5, 0, 7); x.fill();
+      [['Africa',-1,0.35],['Europe',-0.3,-0.75],['SE Asia',1,0.30]].forEach(d=>{
+        const tx=cx+d[1]*r*0.86, ty=cy+d[2]*r*0.86;
+        arrow(x, cx+r*0.18, cy-r*0.12, tx, ty, 'rgba(95,191,208,.75)', 6);
+        x.fillStyle=A2; fitText(x, d[0], tx, ty+5, 62);
+      });
+      x.textAlign='left';
+      return;
+    }
+
+    if(sel==='info'){
+      const rain=[8,6,10,22,54,128,146,132,96,64,26,10];
+      const M=['J','F','M','A','M','J','J','A','S','O','N','D'];
+      const bx=22, by=H-34, bw=(W-40)/12, top=48;
+      x.strokeStyle=RULE; x.lineWidth=1;
+      x.beginPath(); x.moveTo(bx-6,by); x.lineTo(W-14,by); x.stroke();
+      rain.forEach((v,i)=>{
+        const h=(v/150)*(by-top);
+        x.fillStyle = v>90 ? A2 : 'rgba(95,191,208,.45)';
+        x.fillRect(bx+i*bw+1.5, by-h, bw-3, h);
+        mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+        x.fillText(M[i], bx+i*bw+bw/2, by+4);
+      });
+      mono(x,9,500); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('rainfall, mm per month', 20, 34);
+      x.fillStyle=A2; x.fillText('four months bring most of the year’s rain', 20, 48);
+      x.textAlign='left';
+      return;
+    }
+
+    // every other tool draws the same outline
+    if(sel==='atlas'){
+      const bands=[['rgba(96,150,90,.55)',1],['rgba(150,150,80,.5)',0.74],['rgba(160,120,70,.5)',0.5],['rgba(140,96,64,.55)',0.28]];
+      bands.forEach(bnd=>{
+        x.save();
+        path(x); x.clip();
+        x.fillStyle=bnd[0];
+        x.fillRect(ox, oy, sx, sy*bnd[1]);
+        x.restore();
+      });
+    } else if(sel==='gis'){
+      x.save();
+      path(x); x.clip();
+      const cell=Math.max(14, sx/16);
+      for(let gx=0; gx<sx; gx+=cell){
+        for(let gy=0; gy<sy; gy+=cell){
+          const v=(Math.sin(gx*0.07)+Math.cos(gy*0.09)+2)/4;
+          x.fillStyle='rgba(242,128,60,'+(0.10+v*0.55).toFixed(2)+')';
+          x.fillRect(ox+gx+1, oy+gy+1, cell-2, cell-2);
+        }
+      }
+      x.restore();
+      mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('layer: cropped area per square', 12, H-16);
+    } else {
+      x.save();
+      path(x); x.clip();
+      x.fillStyle='#1A2138'; x.fillRect(ox,oy,sx,sy);
+      x.restore();
+    }
+    path(x);
+    x.strokeStyle= sel==='gis' ? '#8898C4' : A1; x.lineWidth=1.8; x.stroke();
+
+    // the river and the road, on every map view
+    x.strokeStyle=A2; x.lineWidth=3;
+    x.beginPath();
+    x.moveTo(NX(0.16), NY(0.34));
+    x.bezierCurveTo(NX(0.40), NY(0.44), NX(0.46), NY(0.62), NX(0.78), NY(0.68));
+    x.stroke();
+    if(sel==='sketch'){
+      x.strokeStyle='#8898C4'; x.lineWidth=1.6; x.setLineDash([5,4]);
+      x.beginPath(); x.moveTo(NX(0.20), NY(0.70)); x.lineTo(NX(0.74), NY(0.30)); x.stroke();
+      x.setLineDash([]);
+      [['Kaveripura',0.34,0.52],['Nadikere',0.66,0.64],['Hills',0.60,0.26]].forEach(p=>{
+        x.fillStyle=A1; x.beginPath(); x.arc(NX(p[1]), NY(p[2]), 3.6, 0, 7); x.fill();
+        x.fillStyle=INK; x.textBaseline='top'; fitText(x, p[0], NX(p[1]), NY(p[2])+7, 84);
+      });
+    }
+    x.textAlign='left';
+  }
+  if(cv){
+    T.forEach(t=>{
+      const b=document.createElement('button');
+      b.className='chip'+(t.k==='sketch'?' on':''); b.textContent=t.t;
+      b.onclick=()=>{
+        sel=t.k; seen[t.k]=1;
+        [...box.children].forEach(c=>c.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','geo-'+t.k);
+        document.getElementById('geoTxt').textContent=t.note;
+        if(Object.keys(seen).length>=4) complete('m9');
+        draw();
+      };
+      box.appendChild(b);
+    });
+    document.getElementById('geoTxt').textContent='Same district, five instruments. Try at least four of them.';
+  }
+  reg('m9',draw);
+})();
+
+/* ============================================================
+   M10 — sorting the evidence
+   Every item here is one of the figures printed in the chapter.
+   ============================================================ */
+Q.rows('g10','g10s',[
+  {t:'The Sāmaveda manuscript, National Museum, New Delhi', a:0},
+  {t:'A palm-leaf manuscript of the Tirukkuṟaḷ', a:0},
+  {t:'A terracotta figurine from the Sindhu-Sarasvatī Civilisation', a:1},
+  {t:'A 12th-century CE sculpture of Viṣhṇu', a:1},
+  {t:'A Brahmi inscription on a pillar of the Gupta period', a:2},
+  {t:'Krishnadeva Raya’s Kannada inscription at Hampi', a:2},
+  {t:'A coin issued by King Samudragupta, 4th century CE', a:3},
+  {t:'A Mughal coin of Jahangir showing the sign Sagittarius', a:3}
+], ['Literary','Archaeological','Epigraphic','Numismatic'], 'm10',
+   'All eight. Manuscripts are literary, objects and monuments archaeological, writing cut into stone epigraphic, and coins numismatic.');
+
+/* ============================================================
+   M11 — how far down power goes
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('panCv'), sS=document.getElementById('panS');
+  const L=[
+    {n:'Gram Sabha',      a:'Every adult voter in the village',
+     b:'Approves the village development plan and asks where the money went', c:'You are in the room'},
+    {n:'Gram Panchayat',  a:'Elected members of the village, and a sarpanch',
+     b:'Which street gets the road, the drain, the streetlight', c:'A short walk'},
+    {n:'Panchayat Samiti',a:'Elected representatives of a block of villages',
+     b:'Which villages a link road connects, and in what order', c:'The block headquarters'},
+    {n:'Zila Parishad',   a:'Elected representatives of the whole district',
+     b:'District roads, schools and health centres', c:'The district town'},
+    {n:'State government',a:'The legislature and ministers you elect at state level',
+     b:'State highways, the school syllabus, police and land records', c:'The state capital'},
+    {n:'Union government',a:'Parliament and the Union Council of Ministers',
+     b:'National highways, the Union Budget, defence and foreign policy', c:'New Delhi'}
+  ];
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,215); if(!x) return;
+    const W=cv.clientWidth, H=215, s=+sS.value;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('a road is needed in one village — who decides?', 10, 8);
+    const top=32, rowh=(H-top-14)/L.length;
+    L.forEach((l,i)=>{
+      const y = H-14-(i+1)*rowh;
+      const on = i===s;
+      x.fillStyle = on ? 'rgba(242,128,60,.15)' : i<s ? '#161C30' : '#12172A';
+      x.fillRect(10, y+2, W-20, rowh-4);
+      x.strokeStyle = on ? A1 : RULE; x.lineWidth = on ? 1.8 : 1;
+      x.strokeRect(10, y+2, W-20, rowh-4);
+      x.fillStyle = on ? A1 : i<=s ? INK : DIM;
+      mono(x, on?11.5:10.5, on?500:400); x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(l.n, 20, y+rowh/2);
+      // how many people this body answers to, as a row of dots
+      const dots = [1,5,9,13,17,21][i];
+      for(let d=0; d<dots; d++){
+        x.fillStyle = on ? A2 : '#3A466B';
+        x.beginPath(); x.arc(W-24-d*(Math.min(7,(W*0.34)/dots)), y+rowh/2, 1.9, 0, 7); x.fill();
+      }
+    });
+    x.textBaseline='alphabetic'; x.textAlign='left';
+    document.getElementById('panSV').textContent=L[s].n;
+    document.getElementById('panA').textContent=L[s].a;
+    document.getElementById('panB').textContent=L[s].b;
+    document.getElementById('panC').textContent=L[s].c;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','panS');
+      if(Object.keys(seen).length>=4) complete('m11');
+      draw();
+    };
+  }
+  reg('m11',draw);
+})();
+
+/* ============================================================
+   M12 — keep it or sell it
+   Scarcity is not an abstraction here: the same 12 quintals
+   cannot both feed the family and pay for everything else.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('ecoCv'), sS=document.getElementById('ecoS');
+  /* One quintal a month feeds the family, so the twelve squares below are the
+     twelve quintals of the harvest — every quintal sold is a month the family
+     cannot eat. Scarcity has to be felt at the middle of the slider, not only
+     at its ends. */
+  const HARVEST=12, NEED_PER_MONTH=1, PRICE=2400;   // quintals, quintals/month, ₹ per quintal
+  const bands={};
+  function bandOf(sold){ return sold<=25 ? 'keep' : sold<=65 ? 'balance' : 'sell'; }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const x=fit(cv,215); if(!x) return;
+    const W=cv.clientWidth, H=215;
+    const pct=+sS.value, sold=HARVEST*pct/100, kept=HARVEST-sold;
+    const months=kept/NEED_PER_MONTH, income=Math.round(sold*PRICE);
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('one harvest · 12 quintals · one family', 10, 8);
+
+    // the harvest, split
+    const bx=14, by=34, bw=W-28, bh=30;
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(bx,by,bw,bh);
+    x.fillStyle='rgba(79,195,161,.35)'; x.fillRect(bx+1, by+1, (bw-2)*(kept/HARVEST), bh-2);
+    x.fillStyle='rgba(242,128,60,.35)'; x.fillRect(bx+1+(bw-2)*(kept/HARVEST), by+1, (bw-2)*(sold/HARVEST), bh-2);
+    mono(x,9,500); x.textBaseline='middle';
+    x.fillStyle=GOOD; x.textAlign='left';  x.fillText('kept ' + kept.toFixed(1) + 'q', bx+6, by+bh/2);
+    x.fillStyle=A1;   x.textAlign='right'; x.fillText('sold ' + sold.toFixed(1) + 'q', bx+bw-6, by+bh/2);
+
+    // twelve months of food, one square each
+    const my=90;
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('months the family can eat', 14, my-14);
+    const cw=(W-28)/12;
+    for(let i=0;i<12;i++){
+      const full = i < Math.floor(months), part = i === Math.floor(months) && months%1 > 0;
+      x.fillStyle = full ? GOOD : part ? 'rgba(79,195,161,.4)' : '#1B2340';
+      x.fillRect(14+i*cw+1, my, cw-2, 16);
+      x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(14+i*cw+1, my, cw-2, 16);
+    }
+
+    // what the sale buys
+    const iy=136;
+    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('what the sale pays for', 14, iy);
+    const wants=[['seed for next year',6000],['school and books',12000],['a health emergency',24000]];
+    wants.forEach((w,i)=>{
+      const y=iy+18+i*17, met=income>=w[1];
+      x.fillStyle = met ? GOOD : '#3A466B';
+      x.beginPath(); x.arc(20, y+5, 3.4, 0, 7); x.fill();
+      x.fillStyle = met ? INK : DIM;
+      mono(x,9.5); x.textAlign='left';
+      x.fillText(w[0] + '  ₹' + w[1].toLocaleString('en-IN'), 30, y);
+    });
+    x.textBaseline='alphabetic';
+
+    document.getElementById('ecoSV').textContent=pct;
+    document.getElementById('ecoA').textContent=months.toFixed(1) + ' months';
+    document.getElementById('ecoB').textContent='₹' + income.toLocaleString('en-IN');
+    const v=document.getElementById('ecoC');
+    /* Four verdicts, not three: at half the harvest sold the family is neither
+       comfortable nor destitute, and collapsing that into the same sentence as
+       selling everything hides the trade-off the mission is about. */
+    if(income === 0){ v.textContent='Fed all year — and nothing for seed, school or illness'; v.style.color=GOLD; }
+    else if(months >= 8){ v.textContent='Enough to eat, and something left to live on'; v.style.color=GOOD; }
+    else if(months >= 5){ v.textContent='Money in hand, and two or three lean months to get through'; v.style.color=GOLD; }
+    else { v.textContent='Good money, and the food runs out long before the next harvest'; v.style.color=BAD; }
+  }
+  if(sS){
+    sS.oninput=()=>{
+      bands[bandOf(+sS.value)]=1; ev('explore','ecoS');
+      if(Object.keys(bands).length>=3) complete('m12');
+      draw();
+    };
+  }
+  reg('m12',draw);
+})();
+
+/* ============================================================
+   M13 — why study Social Science
+   ============================================================ */
+Q.pick('g13','g13check','g13s',[
+  {t:'To understand how the systems around you developed and how they work', a:1},
+  {t:'To see why communities differ, and what binds that diversity together', a:1},
+  {t:'To take part responsibly in civic life, knowing how decisions are made', a:1},
+  {t:'To ask informed questions about shared challenges like public health or urban growth', a:1},
+  {t:'To connect past decisions with the choices open to us in the future', a:1},
+  {t:'To memorise dates, maps and definitions for the exam', a:0},
+  {t:'To prove that one community is better than another', a:0}
+], 'm13', 'Right. Social Science is not about memorising — it is about understanding people, places, society, culture and power.');
+
+/* ============================================================
+   M14 — chapter boss
+   Every question is anchored to something printed in the
+   chapter: a named text, a figure, a sidebar or an example.
+   ============================================================ */
+Q.boss([
+  { t:'Recall · 1 of 10',
+    q:'In simple words, what is Social Science?',
+    o:['The systematic study of human society',
+       'The study of the natural world and its laws',
+       'The study of maps and dates'], a:0,
+    w:'It explains not only what happened or where things are, but why events occur, how people live together, how governments function and how economies operate.' },
+  { t:'Recall · 2 of 10',
+    q:'Which four core disciplines does Social Science mainly draw on in Grades 9 and 10?',
+    o:['Geography, History, Political Science and Economics',
+       'History, Sociology, Anthropology and Philosophy',
+       'Physics, Chemistry, Biology and Mathematics'], a:0,
+    w:'Sociology, Philosophy, Anthropology and Psychology belong to the broader Social Science family and are developed further in higher grades.' },
+  { t:'Recall · 3 of 10',
+    q:'What does vasudhaiva kuṭumbakam mean?',
+    o:['The five great elements','The world is one family','The duties of a ruler'], a:1,
+    w:'It expresses the interconnectedness of human societies across regions and cultures — the same interdependence Social Science studies when it looks at global interactions.' },
+  { t:'Understanding · 4 of 10',
+    q:'A coin issued by King Samudragupta in the 4th century CE is which kind of source?',
+    o:['Literary','Epigraphic','Numismatic'], a:2,
+    w:'Numismatic sources are coins, currency and medals. Their metal content, inscriptions and symbols tell historians about the economy, chronology, rulers, trade and political boundaries.' },
+  { t:'Understanding · 5 of 10',
+    q:'Why can no single discipline fully explain a drought?',
+    o:['Because a drought is purely a weather event',
+       'Because it hits crops, incomes, government relief, migration and traditional ways of coping all at once',
+       'Because droughts are too rare to study'], a:1,
+    w:'Environment, economy, politics, society and culture are all involved — which is exactly why Social Science is a group of related disciplines rather than one subject.' },
+  { t:'Understanding · 6 of 10',
+    q:'What does the Arthaśhāstra, attributed to Kauṭilya, examine?',
+    o:['Administration, economic management, taxation and the duties of rulers',
+       'The five great elements of nature',
+       'The rules of Sanskrit grammar'], a:0,
+    w:'Composed about 2,300 years ago, it shows that systematic thinking about governance and the economy existed long before modern academic disciplines developed.' },
+  { t:'Application · 7 of 10',
+    q:'Which of these is a Geography question?',
+    o:['Why did this settlement grow here beside the river, and not five kilometres away?',
+       'What did the ruler’s inscription say about his conquests?',
+       'How should relief money be divided between districts?'], a:0,
+    w:'Geography asks where things are located, why they are found there, and how places — near or distant — affect one another over time.' },
+  { t:'Application · 8 of 10',
+    q:'What does the Panchayati Raj system show about political power?',
+    o:['That power sits only with the Union government',
+       'That power is exercised at the grassroots too, giving citizens a voice in local development planning',
+       'That villages have no say in how they are governed'], a:1,
+    w:'It embodies grassroots democracy. Political power exists not only within formal institutions but also in social relationships, customs and ideas of legitimacy.' },
+  { t:'Reasoning · 9 of 10',
+    q:'The chapter says economics is not only about numbers and markets. What else is it about?',
+    o:['Well-being, equity and justice',
+       'Predicting share prices',
+       'Recording the history of trade'], a:0,
+    w:'Consumers decide what to buy, producers what to make, and governments frame policies balancing growth and stability, efficiency and fairness — questions about how people live, not only about quantities.' },
+  { t:'Challenge · 10 of 10',
+    q:'How does the chapter describe the study of Social Science as a whole?',
+    o:['A list of facts to be memorised before the examination',
+       'A journey: understanding how societies evolved, analysing how they function today, imagining how they can become better',
+       'A branch of the natural sciences'], a:1,
+    w:'It prepares you not only to understand the world but to take part in shaping it — as an informed, thoughtful citizen rooted in your own cultural traditions.' }
+], 'm14', 'What Social Science is, how societies grew, India’s knowledge traditions, the four disciplines and their sources, and why any of it matters to you.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>

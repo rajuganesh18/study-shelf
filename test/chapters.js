@@ -38,7 +38,18 @@ module.exports = [
   { slug:'circles',      id:'9-maths-5',   n:5,  title:"I'm Up and Down, and Round and Round" },
   { slug:'perimeter',    id:'9-maths-6',   n:6,  title:'Measuring Space: Perimeter and Area' },
   { slug:'probability',  id:'9-maths-7',   n:7,  title:'The Mathematics of Maybe: Introduction to Probability' },
-  { slug:'sequences',    id:'9-maths-8',   n:8,  title:'Predicting What Comes Next: Exploring Sequences and Progressions' }
+  { slug:'sequences',    id:'9-maths-8',   n:8,  title:'Predicting What Comes Next: Exploring Sequences and Progressions' },
+
+  /* Social Science. One integrated book — Understanding Society: India and
+     Beyond — rather than the four separate ones Class 10 still uses. */
+  { slug:'society',      id:'9-social-1',  n:1,  title:'Understanding Social Science' },
+  { slug:'landforms',    id:'9-social-2',  n:2,  title:'Shaping of the Earth’s Surface' },
+  { slug:'atmosphere',   id:'9-social-3',  n:3,  title:'Atmosphere and Climate',
+    /* m13 is the book's carbon-footprint audit: four separate chip rows, one
+       answer required in each before it will score. The generic prodder walks
+       at most two rows, so it can never fill in C and D.
+       test/chapters/atmosphere.js answers all four properly instead. */
+    skipReach:['m13'] }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';
