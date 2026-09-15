@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Elections — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: the indelible ink, and the green of a verified vote ---------- */
+:root{ --a1:#D6336C; --a2:#3BB273; --badge-bg:#F7E9EF; }
+/*@include shared/chrome.css*/
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Social Science · Chapter 7</div>
+  <h1>Elections<br><span>and how they are run</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Why we vote at all</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="35" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>Direct, and indirect</b><i>Seven offices, and who actually does the choosing</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Representatives can be chosen through <b>direct</b> or <b>indirect</b> elections. Slide through the seven offices and watch the chain change length.</p>
+    <div class="panel">
+      <canvas id="offCv" height="212"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="offS">Office <b><span id="offSV">—</span></b></label>
+        <input id="offS" type="range" min="0" max="6" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Chosen by</div><div class="v" id="offA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Electoral system</div><div class="v" id="offB" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Detail</div><div class="v" id="offC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>In a <b>direct election</b> citizens vote directly to choose their representatives or leaders. In an <b>indirect election</b> citizens vote for representatives, who then choose the leaders. Members of the <b>Lok Sabha</b> at the central level, of the <b>Vidhan Sabha</b> at the state level, and of <b>local bodies</b> — Panchayats, municipal corporations and the rest — are elected directly, every five years. The <b>President</b>, the <b>Vice President</b> and members of the <b>Rajya Sabha</b> are elected indirectly.</p>
+    <p>Six states have a <b>bicameral</b> legislature — Andhra Pradesh, Bihar, Karnataka, Maharashtra, Telangana and Uttar Pradesh. There the Lower House is the <b>Vidhan Sabha</b> and the Upper House is the <b>Vidhan Parishad</b> (Legislative Council), made up of members elected by the Vidhan Sabha and by local bodies, and by graduates and teachers in the State — plus members the Governor nominates to represent art, science, social service, literature and co-operatives.</p>
+    <div class="curio">
+      <h5>Psephology</h5>
+      <div class="note">The scientific study of elections. From the Greek <i>psēphos</i>, meaning <b>pebble</b>, and <i>logy</i>, systematic study — because in ancient Greece pebbles were what people voted with.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="30" data-coin="15">
+  <summary><span class="mno">02</span><span class="mt"><b>Why hold one at all?</b><i>Fig. 7.1 · and three questions the chapter asks</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Pick everything the chapter says about why elections matter — and leave the three it answers with a flat no.</p>
+    <div class="panel">
+      <div class="chips" id="g2"></div>
+      <button class="act" id="g2check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g2s"></div>
+    </div>
+    <p>The chapter opens with three questions. Can a class representative elected last year simply continue this year without a fresh election? Can a government continue beyond its term without seeking the people's mandate again? Can we exercise a choice if only one party is contesting? <b>The answer to all three is no</b> — because participating in the periodic election of those who decide on our behalf is one of the most crucial elements of democracy.</p>
+    <p>Fig. 7.1 hangs four things off elections — <b>equality</b>, <b>representation</b>, <b>accountability</b> and <b>legitimacy</b> — and then leaves two boxes empty for you to fill. What else does an election secure that nothing before it could?</p>
+  </div>
+</details>
+
+<div class="sec">Part 2 · How votes become seats</div>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="35" data-coin="20">
+  <summary><span class="mno">03</span><span class="mt"><b>Three systems, three countries</b><i>Haritbhumi, Ratnadweep and Swarnalok</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The same votes, counted three different ways. Tap each system and watch who ends up governing.</p>
+    <div class="panel">
+      <canvas id="sysCv" height="252"></canvas>
+      <div class="chips" id="sysOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">How voting works</div><div class="v" id="sysA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Who forms the government</div><div class="v" id="sysB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="sysTxt">—</div>
+    </div>
+    <p>The first step in running an election is deciding <b>how votes cast are turned into seats</b> — and that is what distinguishes one electoral system from another. The framers of our Constitution discussed the two most common systems and chose the <b>plurality</b> system, better known as <b>First-Past-The-Post</b>.</p>
+    <p>India uses FPTP for the <b>Lok Sabha</b> and the <b>Vidhan Sabha</b>. Elections to the <b>Rajya Sabha</b>, and those of the <b>President</b> and <b>Vice President</b>, use <b>proportional representation</b>. So do elections to the Vidhan Parishad, by means of a <b>single transferable vote</b>.</p>
+    <div class="curio">
+      <h5>Let's explore</h5>
+      <div class="note">Different democracies use different electoral systems. In a group of five or six, pick six countries from different continents, find out which electoral system each one runs, and look up the results of its most recent election. Does the system seem to change what kind of government comes out?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="30" data-coin="15">
+  <summary><span class="mno">04</span><span class="mt"><b>Which system is this?</b><i>Seven rules, three systems</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Each of these rules belongs to exactly one of the three systems. Name it.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">All seven rows must be answered before it will mark.</div>
+      <table class="tick" id="g4"></table>
+      <div class="row"><button class="act" id="g4check">Check my answers</button></div>
+      <div class="score" id="g4s"></div>
+    </div>
+    <p>Notice what the vote shares in Fig. 7.4 do. In <b>Haritbhumi</b> a party with 40 per cent of the votes takes the whole government while 60 per cent of voters backed somebody else. In <b>Ratnadweep</b> the party that led the first round <i>loses</i> the second. In <b>Swarnalok</b> every party's share of the seats matches its share of the votes. Three arithmetics, three different countries.</p>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="35" data-coin="20">
+  <summary><span class="mno">05</span><span class="mt"><b>The single transferable vote</b><i>Fig. 7.3 · quota, elimination, transfer</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Twelve hundred valid votes and three seats to fill. Work the count one round at a time.</p>
+    <div class="panel">
+      <canvas id="stvCv" height="224"></canvas>
+      <div class="readout two">
+        <div class="rc"><div class="k">Round</div><div class="v" id="stvA">0 of 5</div></div>
+        <div class="rc"><div class="k">Seats filled</div><div class="v" id="stvB">0 of 3</div></div>
+      </div>
+      <div class="row"><button class="act" id="stvNext" style="margin-top:12px">Count the next round</button></div>
+      <div class="note" style="margin-top:11px" id="stvTxt">—</div>
+    </div>
+    <p>Fig. 7.3 gives the procedure in four steps. <b>One</b>: voters mark their preferences. <b>Two</b>: first preference votes are counted for all candidates, and those who reach the minimum votes required to win — the <b>quota</b> — are declared elected. <b>Three</b>: the candidate with the lowest votes is eliminated, and their votes are transferred to whoever is marked as <b>second preference</b> on those ballot papers. <b>Four</b>: the process continues until the required number of candidates are elected.</p>
+    <p>The quota is the whole trick. <b>Quota = (total valid votes ÷ (seats to be filled + 1)) + 1</b>. It is the smallest number of votes that only as many candidates as there are seats can possibly reach — which is why reaching it settles the matter.</p>
+    <div class="curio">
+      <h5>Where these numbers come from</h5>
+      <div class="note">The chapter prints the <i>procedure</i> and the <i>formula</i>, not a worked example. The five candidates and their votes here are an illustration built to follow those rules exactly — so the arithmetic is worth checking against the formula rather than memorising.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="35" data-coin="20">
+  <summary><span class="mno">06</span><span class="mt"><b>Where the line goes</b><i>Delimitation, and one MP for twenty-five lakh</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Thirty lakh people, two seats, and one boundary between them. Drag it and watch what each MP ends up representing.</p>
+    <div class="panel">
+      <canvas id="delCv" height="245"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="delS">Boundary <b><span id="delSV">—</span></b></label>
+        <input id="delS" type="range" min="0" max="100" step="1" value="76">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Constituency A</div><div class="v" id="delA">—</div></div>
+        <div class="rc"><div class="k">Constituency B</div><div class="v" id="delB">—</div></div>
+        <div class="rc"><div class="k">The gap</div><div class="v" id="delC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>The boundaries of your parliamentary and assembly constituencies are <b>not permanently fixed</b>. They change over time as population density shifts. Without delimitation one Member of Parliament might represent five lakh people while another represents twenty-five lakh — which defeats the whole object of equal representation.</p>
+    <p><b>Delimitation</b> is the process of determining the number of seats and fixing the territorial boundaries in each state for elections to the Lok Sabha and the Vidhan Sabha. It aims to keep the ratio of seats to population <b>as close to equal as possible</b> across all constituencies.</p>
+    <div class="curio">
+      <h5>Four commissions, and one long gap</h5>
+      <div class="note"><b>Article 82</b> of the Constitution mandates the establishment of a Delimitation Commission. India has had four — in <b>1952</b>, <b>1963</b>, <b>1973</b> and <b>2002</b>. Twenty-nine years separate the third from the fourth. Find out why, with your teacher.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 3 · The rules, and the referee</div>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="30" data-coin="15">
+  <summary><span class="mno">07</span><span class="mt"><b>Which Act covers this?</b><i>The Representation of the People Acts, 1950 and 1951</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Two Acts, one year apart, and a clean division of labour between them. Sort these eight.</p>
+    <div class="panel">
+      <div id="g7"></div>
+      <div class="score" id="g7s"></div>
+    </div>
+    <p><b>RPA 1950</b> deals mainly with the allocation of seats and the delimitation of constituencies, the preparation and revision of electoral rolls, and ensuring that every citizen of 18 and above has the right to vote without discrimination. <b>RPA 1951</b> deals with all the other aspects of the conduct of elections and with post-election disputes: it lays down rules for the nomination of candidates, election campaigns, voting procedures and the resolution of disputes. Together they secure the <b>integrity, transparency and accountability</b> of India's electoral process.</p>
+    <div class="curio">
+      <h5>And a third Act</h5>
+      <div class="note">There is also <b>The Presidential and Vice-Presidential Elections Act, 1952</b> — because the two offices elected indirectly by an electoral college needed rules of their own.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="30" data-coin="15">
+  <summary><span class="mno">08</span><span class="mt"><b>Offence, or ordinary campaigning?</b><i>What RPA 1951 lists as a corrupt practice</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Pick every one that RPA 1951 lists as an electoral offence — and leave the three that are simply how a campaign is run.</p>
+    <div class="panel">
+      <div class="chips" id="g8"></div>
+      <button class="act" id="g8check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g8s"></div>
+    </div>
+    <p>The Act names three kinds of thing. A <b>gift, offer or promise</b> made by a candidate, or with their consent, to make somebody contest, withdraw, vote, or refrain from voting. An <b>appeal to vote or refrain from voting on the basis of religion, caste, race, community or language</b>. And <b>taking assistance from government-related personnel</b> — gazetted officers, judges and magistrates, armed forces personnel, police personnel and excise officers are all barred from helping a candidate.</p>
+    <div class="curio">
+      <h5>Why that third one</h5>
+      <div class="note">The people on that list all hold state power of some kind — a magistrate's authority, a policeman's, an excise officer's. A campaign that can borrow any of it is no longer competing on equal terms with one that cannot.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="35" data-coin="20">
+  <summary><span class="mno">09</span><span class="mt"><b>What the Commission does</b><i>Four jobs, and 96.8 crore voters</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The Constitution vests the <b>superintendence, direction and control</b> of the entire election process in one body. Tap through what that actually means.</p>
+    <div class="panel">
+      <canvas id="eciCv" height="206"></canvas>
+      <div class="chips" id="eciOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">The job</div><div class="v" id="eciA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">How it works</div><div class="v" id="eciB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="eciTxt">—</div>
+    </div>
+    <p>The <b>Election Commission of India</b> is an autonomous permanent constitutional body, established on <b>25 January 1950</b>. It conducts elections to the Lok Sabha, the Rajya Sabha, the Vidhan Sabha, the Vidhan Parishad, and to the offices of President and Vice President. <b>Articles 324 to 329</b> of the Constitution provide for it and define its powers and duties.</p>
+    <p>At the state level the work is supervised by the <b>Chief Electoral Officer</b>, appointed by the ECI from among the civil servants in consultation with the State Government. District Magistrates, Sub-Divisional Magistrates and Tahsildars are assigned election duties as <b>District Election Officers</b>, <b>Returning Officers</b> and <b>Electoral Registration Officers</b>.</p>
+    <div class="curio">
+      <h5>No voter to be left behind</h5>
+      <div class="note">The ECI's inclusion work covers <b>Persons with Disabilities</b>, <b>senior citizens</b>, <b>transgender persons</b> and <b>Particularly Vulnerable Tribal Groups</b> — infrastructure accessibility and technology-assisted inclusion alike. EVMs carry <b>Braille</b>. And <b>voting from home</b>, for senior citizens above 85 and for PwDs with a benchmark disability of 40 per cent, was extended across India for the first time during the <b>2024 General Elections</b>.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="30" data-coin="15">
+  <summary><span class="mno">10</span><span class="mt"><b>Added, or deleted?</b><i>Special Intensive Revision of the electoral roll</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>A revision of the roll works in both directions at once. Sort these six.</p>
+    <div class="panel">
+      <div id="g10"></div>
+      <div class="score" id="g10s"></div>
+    </div>
+    <p>The ECI sends official <b>enumerators</b> to every household to collect data about eligible electors, and prepares a roll for each constituency, organised polling-station-wise. Only those whose names appear on the roll are allowed to vote.</p>
+    <p><b>Special Intensive Revision</b> updates, verifies and corrects those rolls, so that <b>no eligible citizen is left out and no ineligible person is included</b>. It catches the young voters who have just turned 18 and might be missed through a simple lack of awareness. It removes names on the grounds of death, change of residence, duplicate enrolment, or a voter being permanently untraceable. And before the final roll is published, the ECI gives time to raise <b>claims or objections</b> against the revised version, and settles them.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · The machinery, and the parties</div>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="35" data-coin="20">
+  <summary><span class="mno">11</span><span class="mt"><b>Seven apps, three audiences</b><i>Fig. 7.6 · the digital ecosystem</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Each of these was built for somebody in particular. Tap one and see whose lane it sits in.</p>
+    <div class="panel">
+      <canvas id="appCv" height="258"></canvas>
+      <div class="chips" id="appOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Built for</div><div class="v" id="appA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">What it does</div><div class="v" id="appB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="appTxt">—</div>
+    </div>
+    <p>India's electoral exercise is unparalleled: over <b>96.8 crore</b> eligible voters spread across diverse regions and terrains, managed autonomously by one Commission. Updating rolls, candidate nominations, regulating campaigns, law enforcement, coordination among states, security arrangements, counting, declaring results and resolving disputes — the ECI runs all of it on information and communication technologies and e-governance.</p>
+    <div class="curio">
+      <h5>Beyond the border</h5>
+      <div class="note">The <b>International Election Visitors' Programme</b> is the ECI's flagship programme for cooperation with the Election Management Bodies of other countries. It has signed Memorandums of Understanding with <b>28 EMBs</b> and three international organisations: the <b>International Foundation for Electoral Systems</b>, <b>International IDEA</b>, and the <b>United Nations</b>.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="35" data-coin="20">
+  <summary><span class="mno">12</span><span class="mt"><b>National, state, or neither?</b><i>Fig. 7.12 · the recognition thresholds</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Ten parties, ten results. Slide through them and see which threshold each one clears.</p>
+    <div class="panel">
+      <canvas id="recCv" height="188"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="recS">Party <b><span id="recSV">—</span></b></label>
+        <input id="recS" type="range" min="0" max="9" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Recognised as</div><div class="v" id="recA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">Under</div><div class="v" id="recB" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">The condition</div><div class="v" id="recC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>Only political parties <b>registered with the ECI</b> can contest elections — though independent candidates, affiliated to no party, can contest too. The ECI classifies parties as recognised <b>national</b> parties, recognised <b>state or regional</b> parties, or <b>registered-unrecognised</b> parties. National and state parties are allotted <b>election symbols</b>, and the ECI acts as a <b>quasi-judicial body</b> in disputes over recognition and symbols. It also insists that parties hold their own organisational elections periodically — inner party democracy.</p>
+    <p>Each list of conditions is an <b>any one of</b> list: a party needs to clear only one of them. A <b>Registered Unrecognised Political Party</b> is one that has not secured enough of the vote in an Assembly or General Election, or has never contested an election at all since registering.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="35" data-coin="20">
+  <summary><span class="mno">13</span><span class="mt"><b>What a party is for</b><i>Fig. 7.11 · and the two halves of a legislature</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Winning is only one of the two jobs on this diagram. Tap through it.</p>
+    <div class="panel">
+      <canvas id="parCv" height="258"></canvas>
+      <div class="chips" id="parOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">What happens here</div><div class="v" id="parA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Why it matters</div><div class="v" id="parB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="parTxt">—</div>
+    </div>
+    <p>There are often dozens of contestants for each constituency. Most belong to a political party, though some contest independently — and voters learn about candidates, their policies, their vision for development and their positions on social, economic, cultural and political issues <b>primarily through the parties</b>. Fig. 7.9 gives five reasons they are essential: they work directly at the <b>grassroots level</b>, they <b>organise public opinion</b>, they <b>campaign on specific issues</b>, they <b>enable voters to make informed decisions</b>, and they <b>offer voters meaningful choices</b>.</p>
+    <p>India has a <b>multi-party system</b>: many parties exist and compete, reflecting the country's diversity of languages, cultures, religions and regions.</p>
+    <div class="curio">
+      <h5>The era of alliances</h5>
+      <div class="note"><b>1967</b> ended the era of single-party dominated elections. In <b>1977</b>, against the backdrop of the National Emergency, several parties formed an alliance as the <b>Janata Party</b> and made the first coalition government at the national level. Since the late 1990s the major alliances have been the <b>National Democratic Alliance</b>, led by the BJP, and the <b>United Progressive Alliance</b>, led by the INC until its dissolution in 2023 and reconstitution as the Indian National Developmental Inclusive Alliance.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 5 · Where it strains</div>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="30" data-coin="15">
+  <summary><span class="mno">14</span><span class="mt"><b>Defection, and the law against it</b><i>1985, and the 52nd Amendment</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Pick everything the chapter says about defection and the law — and leave the two it does not.</p>
+    <div class="panel">
+      <div class="chips" id="g14"></div>
+      <button class="act" id="g14check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g14s"></div>
+    </div>
+    <p>Can someone leave one party and join another whenever they wish? Yes, they can. But once a person has been <b>elected on a particular party's ticket</b>, leaving that party is <b>defection</b> — abandoning or switching from the party under whose banner the candidate was elected. It may mean joining another party, or acting independently of the party's decisions, particularly when voting in the legislature.</p>
+    <p>The chapter is careful to give both readings. Understood in terms of <b>party discipline and political stability</b>, such actions are political opportunism. Read the other way, defection can be a way of <b>upholding conscience</b> or responding to changed public expectations.</p>
+    <div class="curio">
+      <h5>The whip</h5>
+      <div class="note">A party's instruction to its members on how to vote in the House. Under the Anti-Defection Law, voting against it — or voluntarily giving up party membership — can get a member <b>disqualified</b>. The <b>Speaker or Chairman</b> of the House decides what is to be done in such cases.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="35" data-coin="20">
+  <summary><span class="mno">15</span><span class="mt"><b>The road to a free and fair election</b><i>Fig. 7.13 · potholes, and what is laid over them</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Fig. 7.13 draws the challenges as potholes in a road, and leaves two of them empty for you to name. Lay the measures the chapter lists and watch the surface.</p>
+    <div class="panel">
+      <canvas id="roadCv" height="252"></canvas>
+      <div class="readout two">
+        <div class="rc"><div class="k">Measures laid</div><div class="v" id="roadA">0 of 5</div></div>
+        <div class="rc"><div class="k">Last laid</div><div class="v" id="roadB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="row"><button class="act" id="roadNext" style="margin-top:12px">Lay the next measure</button></div>
+      <div class="note" style="margin-top:11px" id="roadTxt">—</div>
+    </div>
+    <p>Conducting elections for over <b>96.8 crore</b> voters, with thousands of polling stations and hundreds of political parties, across diverse regions and socio-economic realities, is a genuinely difficult task. The chapter names three challenges — <b>misinformation</b>, <b>fake news</b> and <b>intimidation</b> — and then lists what the ECI uses against them: <b>RPA 1950 and 1951</b>, the <b>Model Code of Conduct</b>, <b>EVMs</b>, the <b>Voter Verifiable Paper Audit Trail</b>, and <b>voters' awareness campaigns</b>.</p>
+    <p>Notice that it lists the measures against the challenges <b>as a set</b>, not one against one. No single measure fixes misinformation. What the chapter claims is narrower and more honest: with <b>constant vigilance and active citizen participation</b>, elections can become more representative and the democracy more robust.</p>
+    <div class="curio">
+      <h5>The voters' pledge</h5>
+      <div class="note">Every year <b>25 January</b> is National Voters' Day. The pledge runs: "We, the citizens of India, having abiding faith in democracy, hereby pledge to uphold the democratic traditions of our country and the dignity of free, fair and peaceful elections, and to vote in every election fearlessly and without being influenced by considerations of religion, race, caste, community, language or any inducement."</div>
+    </div>
+  </div>
+</details>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="90" data-coin="70">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">90 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, drawn from this chapter's own figures, Acts and article numbers. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+
+<footer>NCERT Class 9 Social Science · Chapter 7</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*@include shared/storage.js*/
+
+/* ============================================================
+   Chapter 7 — Elections
+   Understanding Society: India and Beyond, Grade 9 Part 1
+
+   Progress metaphor: one polling day, in one constituency. XP
+   starts with a sealed, empty box and fills it — the first
+   votes, a queue down the street, the box half full, the seal
+   at close of poll, and finally a counted result and an inked
+   finger. The chapter's own arc, at the scale a single voter
+   actually experiences it.
+   ============================================================ */
+const CH = {
+  id: '9-social-7',
+  key: 'ch07Elect',
+  total: 16,
+  stages: [
+    { at:0,   f:0.05, name:'Polling opens',   d:'A sealed box, an empty roll of slips, and nobody through the door yet.' },
+    { at:75,  f:0.20, name:'The first votes', d:'One voter, then another. The box stops being a piece of furniture.' },
+    { at:160, f:0.36, name:'A queue forms',   d:'Down the steps and along the road. This is the part that photographs.' },
+    { at:250, f:0.52, name:'Half the roll',   d:'Every name on the roll is one person entitled to be here.' },
+    { at:345, f:0.68, name:'The last hour',   d:'Anyone inside the gate at closing time still gets to vote.' },
+    { at:450, f:0.85, name:'Sealed and sent', d:'The box sealed in front of the agents, and taken to the strongroom.' },
+    { at:565, f:1.00, name:'Counted',         d:'The slips counted, the result declared, and a finger inked.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+
+    x.fillStyle = '#F7E9EF'; x.fillRect(0, 0, W, H);            // the room
+    x.fillStyle = '#E8D4DC'; x.fillRect(0, 76, W, H-76);        // the floor
+
+    /* The queue, standing on the floor to the left of the box. Stacked
+       vertically instead, as it first was, three people read as a totem pole
+       rather than as a line of voters. */
+    const q = Math.min(3, Math.floor(f*4));
+    for(let i=0;i<q;i++){
+      const qx = 8 + i*8;
+      x.fillStyle = 'rgba(120,96,108,.6)';
+      x.beginPath(); x.arc(qx, 62, 3, 0, 7); x.fill();
+      x.fillRect(qx-2.5, 66, 5, 12);
+    }
+
+    // the box itself
+    x.fillStyle = '#C24E74'; x.fillRect(32, 46, 40, 32);
+    x.fillStyle = '#9B3A59'; x.fillRect(32, 42, 40, 5);         // the lid
+    x.fillStyle = '#3A1A26'; x.fillRect(44, 39, 16, 4);         // the slot
+
+    // slips accumulating behind a window in the front
+    x.fillStyle = '#7A2E45'; x.fillRect(37, 54, 30, 20);
+    const slips = Math.round(f*7);
+    for(let i=0;i<slips;i++){
+      x.fillStyle = i%2 ? '#F4E6D8' : '#EADACA';
+      x.fillRect(38, 72 - i*2.6, 28, 2);
+    }
+
+    // one slip on its way in, until the poll closes
+    if(f > 0.08 && f < 0.86){
+      x.save(); x.translate(52, 33); x.rotate(0.28);
+      x.fillStyle = '#FBF3E8'; x.fillRect(-7, -5, 14, 10);
+      x.strokeStyle = '#B08A98'; x.lineWidth = 1; x.strokeRect(-7, -5, 14, 10);
+      x.restore();
+    }
+
+    // the seal, at close of poll
+    if(f > 0.78){
+      x.strokeStyle = '#8C2F3F'; x.lineWidth = 2.4;
+      x.beginPath(); x.moveTo(30, 62); x.lineTo(74, 56); x.stroke();
+      x.fillStyle = '#8C2F3F';
+      x.beginPath(); x.arc(52, 59, 4.5, 0, 7); x.fill();
+    }
+
+    /* And the inked finger, last of all — the one image everybody in the
+       country recognises without being told what it means. */
+    if(f > 0.90){
+      const fx = 82;
+      x.fillStyle = '#E3B79A';
+      x.beginPath();
+      x.moveTo(fx-6, 74); x.lineTo(fx-6, 48);
+      x.quadraticCurveTo(fx, 42, fx+6, 48);
+      x.lineTo(fx+6, 74);
+      x.closePath(); x.fill();
+      x.fillStyle = '#3D2B4F';                                  // the indelible mark
+      x.beginPath();
+      x.moveTo(fx-6, 52); x.lineTo(fx-6, 46);
+      x.quadraticCurveTo(fx, 41, fx+6, 46);
+      x.lineTo(fx+6, 52);
+      x.closePath(); x.fill();
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ============================================================
+   Chapter 7 interactives
+   Bespoke canvases: direct and indirect (M1) · three systems
+   (M3) · the single transferable vote (M5) · delimitation (M6)
+   · what the Commission does (M9) · seven apps (M11) · the
+   recognition thresholds (M12) · what a party is for (M13) ·
+   the road to a free and fair election (M15)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#D6336C', A2='#3BB273',
+      BG='#10141F', PAPER='#E7E2D2';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* Centred label that shrinks rather than overflowing its column. */
+function fitText(x, s, cx, y, max){
+  let size = 9.5;
+  mono(x, size, 500);
+  while(x.measureText(s).width > max && size > 6){ size -= 0.5; mono(x, size, 500); }
+  x.textAlign = 'center'; x.fillText(s, cx, y);
+}
+
+/* Wrapped body text inside a canvas. Returns the y it finished on, so the
+   next block can start below whatever this one actually needed. */
+function wrap(x, s, left, top, maxw, lh){
+  const words = s.split(' ');
+  let line = '', y = top;
+  words.forEach(w=>{
+    if(x.measureText(line + w + ' ').width > maxw && line){ x.fillText(line.trim(), left, y); line = w + ' '; y += lh; }
+    else line += w + ' ';
+  });
+  if(line.trim()) x.fillText(line.trim(), left, y);
+  return y + lh;
+}
+
+/* A labelled box, used by four of the diagrams. */
+function box(x, x0, y0, w, h, label, col, on){
+  x.fillStyle = on ? (col==='a2' ? 'rgba(59,178,115,.26)' : 'rgba(214,51,108,.24)') : 'rgba(142,154,192,.07)';
+  x.fillRect(x0, y0, w, h);
+  x.strokeStyle = on ? (col==='a2' ? A2 : A1) : RULE;
+  x.lineWidth = on ? 1.8 : 1;
+  x.strokeRect(x0, y0, w, h);
+  x.fillStyle = on ? '#FFFFFF' : 'rgba(142,154,192,.62)';
+  x.textBaseline = 'top';
+  fitText(x, label, x0+w/2, y0+h/2-5, w-8);
+}
+
+/* A stick figure, for the benches that need people in them. */
+function person(x, cx, cy, s, col){
+  x.strokeStyle=col; x.fillStyle=col; x.lineWidth=Math.max(1.4, s*0.075);
+  x.beginPath(); x.arc(cx, cy-s*0.92, s*0.24, 0, 7); x.fill();
+  x.beginPath();
+  x.moveTo(cx, cy-s*0.66); x.lineTo(cx, cy+s*0.18);
+  x.moveTo(cx-s*0.32, cy-s*0.4); x.lineTo(cx+s*0.32, cy-s*0.4);
+  x.moveTo(cx, cy+s*0.18); x.lineTo(cx-s*0.26, cy+s*0.74);
+  x.moveTo(cx, cy+s*0.18); x.lineTo(cx+s*0.26, cy+s*0.74);
+  x.stroke();
+}
+
+/* ============================================================
+   M1 — direct and indirect
+   The chain is the whole distinction: one arrow from the voters
+   to the office, or two with somebody standing in the middle.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('offCv'), sS=document.getElementById('offS');
+  const O=[
+    {n:'Lok Sabha', direct:true, sys:'First-Past-The-Post',
+     w:'Members at the central level, elected directly every five years.'},
+    {n:'Vidhan Sabha', direct:true, sys:'First-Past-The-Post',
+     w:'Directly elected bodies that make laws for their respective States and some Union Territories. Elections are conducted in the same manner as those to the Lok Sabha.'},
+    {n:'Local bodies', direct:true, sys:'Not stated in this chapter',
+     w:'Panchayats, municipal corporations and the rest — elected through direct elections every five years.'},
+    {n:'Rajya Sabha', direct:false, sys:'Proportional representation',
+     w:'Not elected by the voters directly. The chapter groups it with the President and the Vice President as an indirect election.'},
+    {n:'President', direct:false, sys:'Proportional representation',
+     w:'Citizens vote for representatives, and those representatives choose the leader. The Presidential and Vice-Presidential Elections Act, 1952 governs the process.'},
+    {n:'Vice President', direct:false, sys:'Proportional representation',
+     w:'The same arrangement as the President: an office filled by people the citizens elected, rather than by the citizens themselves.'},
+    {n:'Vidhan Parishad', direct:false, sys:'Proportional representation, by single transferable vote',
+     w:'The Upper House in the six states with a bicameral legislature — Andhra Pradesh, Bihar, Karnataka, Maharashtra, Telangana and Uttar Pradesh. Its members are elected by the Vidhan Sabha and by local bodies, and by graduates and teachers in the State; the Governor nominates some more to represent art, science, social service, literature and co-operatives.'}
+  ];
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=212, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value, o=O[i];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('who does the actual choosing', 10, 8);
+
+    // the chain: one arrow, or two
+    const by=50, bh=38;
+    if(o.direct){
+      box(x, 16, by, 112, bh, 'the voters', 'a2', true);
+      arrow(x, 134, by+bh/2, 178, by+bh/2, A1, 7);
+      box(x, 184, by, W-200, bh, 'the office', 'a1', true);
+    } else {
+      box(x, 10, by, 86, bh, 'the voters', 'a2', true);
+      arrow(x, 100, by+bh/2, 124, by+bh/2, A1, 6);
+      box(x, 128, by, 64, bh, 'those they elect', 'a1', true);
+      arrow(x, 196, by+bh/2, 216, by+bh/2, A1, 6);
+      box(x, 220, by, W-230, bh, 'the office', 'a1', true);
+    }
+
+    // the banner
+    x.fillStyle = o.direct ? 'rgba(59,178,115,.22)' : 'rgba(214,51,108,.20)';
+    x.fillRect(10, 100, W-20, 24);
+    x.strokeStyle = o.direct ? A2 : A1; x.lineWidth=1;
+    x.strokeRect(10, 100, W-20, 24);
+    mono(x,10,600); x.fillStyle = o.direct ? A2 : A1;
+    x.textAlign='center'; x.textBaseline='middle';
+    x.fillText(o.direct ? 'D I R E C T' : 'I N D I R E C T', W/2, 112);
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 136); x.lineTo(W-10, 136); x.stroke();
+    sans(x,15,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    const after = wrap(x, o.n, 12, 146, W-24, 18);
+    mono(x,9,500); x.fillStyle=A2;
+    wrap(x, o.sys, 12, after + 2, W-24, 13);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('offSV').textContent=o.n;
+    document.getElementById('offA').textContent=o.direct
+      ? 'The citizens themselves, directly'
+      : 'Representatives the citizens elected';
+    document.getElementById('offB').textContent=o.sys;
+    document.getElementById('offC').textContent=o.w;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','offS');
+      if(Object.keys(seen).length>=4) complete('m1');
+      draw();
+    };
+  }
+  reg('m1',draw);
+})();
+
+/* ============================================================
+   M2 — why hold an election at all
+   ============================================================ */
+Q.pick('g2','g2check','g2s',[
+  {t:'Regular and periodic elections lie at the core of democracy',        a:1},
+  {t:'Elected representatives are accountable to the people',              a:1},
+  {t:'A government cannot continue past its term without a fresh mandate', a:1},
+  {t:'A representative elected once must still face a fresh election',     a:1},
+  {t:'Casting a vote is a constitutional right as well as a duty',         a:1},
+  {t:'Elections give every citizen an equal voice in forming a government', a:1},
+  {t:'Our vote is the principal means of holding representatives to account', a:1},
+  {t:'A representative who has done well may simply continue',             a:0},
+  {t:'One party contesting is enough for voters to exercise a choice',     a:0},
+  {t:'Holding the election is the whole of what democracy requires',       a:0}
+], 'm2',
+   'Right. The last three are the chapter’s own three questions, and it answers all of them no — a fresh election every time, a real choice on the ballot, and an electoral process that is inclusive, impartial and trustworthy rather than merely held.');
+
+/* ============================================================
+   M3 — three systems, three countries
+   Fig. 7.4 as three pictures. The vote shares are the figure's
+   own, and so are the outcomes — including the one that looks
+   wrong until you read it twice: Ratnadweep's leading party
+   after round one is not the party that governs.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('sysCv'), box2=document.getElementById('sysOpts');
+  const SY=[
+    {k:'fptp', t:'FPTP', full:'First Past The Post (FPTP)', country:'Haritbhumi', seats:'25 seats',
+     parties:[['Party A',40],['Party B',35],['Party C',25]],
+     win:'A',
+     a:'Each voter votes for one candidate in their constituency. The candidate with the most votes wins, even if the votes are less than 50% of the total polled.',
+     b:'Party A forms the government.',
+     w:'Forty per cent of the vote, and the whole government. This is the system the framers of our Constitution chose for the Lok Sabha and the Vidhan Sabha — the plurality system, in which the leading candidate wins whether or not a majority backed them.'},
+    {k:'maj', t:'Majority', full:'Majority System', country:'Ratnadweep', seats:'25 seats',
+     parties:[['Party X',45],['Party Y',40],['Party Z',15]],
+     round2:[['Party X',45],['Party Y',55]],
+     win:'Y',
+     a:'Each voter votes for one candidate. To win, a candidate must receive more than 50% of the votes. If not, the top two candidates compete again in a second round.',
+     b:'No one got 50% in Round 1. In Round 2, Party Y wins with 55% and forms the government.',
+     w:'The party that led the first round loses the second. Z’s fifteen per cent has to go somewhere in round two, and where it goes decides the election.'},
+    {k:'pr', t:'Proportional', full:'Proportional Representation (PR)', country:'Swarnalok', seats:'100 seats (nationwide list)',
+     parties:[['Party M',40],['Party N',35],['Party O',15],['Party P',10]],
+     seatsOut:[['Party M',40],['Party N',35],['Party O',15],['Party P',10]],
+     win:null,
+     a:'Voters vote for a party, not a person. Seats in the Parliament are allotted in proportion to the total votes received by each party.',
+     b:'Seats distributed — M: 40, N: 35, O: 15, P: 10. Power is shared proportionately.',
+     w:'Every share of the vote turns into the same share of the seats, so no party is wiped out by finishing second everywhere. India uses proportional representation for the Rajya Sabha and for the President and Vice President.'}
+  ];
+  let sel=0; const seen={};
+  function bars(x, W, list, top, col, suffix){
+    const rowH=24, lx=12, bx=78, bw=W-bx-46;
+    list.forEach((p,i)=>{
+      const y=top+i*rowH;
+      mono(x,9.5,500); x.fillStyle='rgba(240,238,230,.85)';
+      x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(p[0], lx, y+9);
+      x.fillStyle='rgba(142,154,192,.14)'; x.fillRect(bx, y+2, bw, 14);
+      x.fillStyle=col; x.fillRect(bx, y+2, bw*p[1]/100, 14);
+      mono(x,9,600); x.fillStyle=INK; x.textAlign='right';
+      x.fillText(p[1] + suffix, W-12, y+9);
+    });
+    return top + list.length*rowH;
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=252, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=SY[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(s.country + ' · ' + s.seats, 10, 8);
+
+    let y = bars(x, W, s.parties, 44, 'rgba(214,51,108,.8)', '%');
+    if(s.round2){
+      mono(x,8.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('round two, between the top two', 12, y+4);
+      y = bars(x, W, s.round2, y+18, 'rgba(59,178,115,.8)', '%');
+    }
+    if(s.seatsOut){
+      mono(x,8.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('seats, out of 100', 12, y+4);
+      y = y + 16;
+      const sw=(W-24)/4;
+      s.seatsOut.forEach((p,i)=>{
+        x.fillStyle='rgba(59,178,115,.75)';
+        x.fillRect(12+sw*i+3, y, sw-6, 16);
+        mono(x,9,600); x.fillStyle='#0B1218'; x.textAlign='center'; x.textBaseline='middle';
+        x.fillText(String(p[1]), 12+sw*i+sw/2, y+8);
+      });
+      y += 22;
+    }
+
+    // the outcome
+    const oy = Math.max(y+8, 196);
+    x.fillStyle='rgba(59,178,115,.16)'; x.fillRect(10, oy, W-20, 26);
+    x.strokeStyle=A2; x.lineWidth=1; x.strokeRect(10, oy, W-20, 26);
+    x.fillStyle='#FFFFFF';
+    fitText(x, s.win ? ('Party ' + s.win + ' forms the government') : 'power is shared proportionately',
+            W/2, oy+8, W-28);
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    fitText(x, s.full, W/2, oy+32, W-24);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('sysA').textContent=s.a;
+    document.getElementById('sysB').textContent=s.b;
+    document.getElementById('sysTxt').textContent=s.w;
+  }
+  if(cv){
+    SY.forEach((s,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=s.t;
+      b.onclick=()=>{
+        sel=i; seen[s.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','sys-'+s.k);
+        if(Object.keys(seen).length>=3) complete('m3');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m3',draw);
+})();
+
+/* ============================================================
+   M4 — which system is this
+   One dropdown per row rather than three tick columns: three
+   headings of this length do not fit beside a label column on
+   a 390px screen, and the third one gets cut off the edge.
+   ============================================================ */
+Q.vgrid('g4','g4check','g4s',{
+  head:'This rule belongs to…', mid:'m4',
+  cols:['The system'],
+  options:[['FPTP','Majority','PR']],
+  rows:[
+    {l:'Each voter votes for one candidate in their constituency', a:['FPTP']},
+    {l:'The winner can have less than 50% of the votes',           a:['FPTP']},
+    {l:'Used in India for the Lok Sabha and the Vidhan Sabha',     a:['FPTP']},
+    {l:'A candidate must get more than 50% to win',                a:['Majority']},
+    {l:'The top two compete again in a second round',              a:['Majority']},
+    {l:'Voters vote for a party, not a person',                    a:['PR']},
+    {l:'Seats are allotted in proportion to the votes',            a:['PR']}
+  ],
+  doneMsg:'All seven. Same votes, three arithmetics — and three different governments out the other end.'
+});
+
+/* ============================================================
+   M5 — the single transferable vote
+   The six states below are precomputed rather than simulated,
+   because every one of them has to be checkable against the
+   rules in Fig. 7.3 by hand: quota 301, elect anyone at or over
+   it, eliminate the lowest, move their ballots to the second
+   preference marked on them, and stop when the seats are full.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('stvCv'), btn=document.getElementById('stvNext');
+  const TOTAL=1200, SEATS=3, QUOTA=Math.floor(TOTAL/(SEATS+1))+1;   // 301
+  const ST=[
+    {v:{A:420,B:290,C:250,D:150,E:90}, el:[], out:[],
+     w:'Twelve hundred valid votes and three seats. The quota is 1200 ÷ (3 + 1) + 1 = ' + QUOTA + '. Press the button to count the first preferences.'},
+    {v:{A:420,B:290,C:250,D:150,E:90}, el:['A'], out:[],
+     w:'First preference votes counted. A has 420, past the quota of ' + QUOTA + ', and is declared elected. Nobody else has reached it.'},
+    {v:{A:420,B:340,C:290,D:150,E:0}, el:['A'], out:['E'],
+     w:'E has the fewest votes and is eliminated. E’s ballots move to whoever is marked second preference on them: 50 to B, 40 to C.'},
+    {v:{A:420,B:340,C:290,D:150,E:0}, el:['A','B'], out:['E'],
+     w:'Counted again. B now has 340, past the quota, and is elected. Two seats filled, one to go.'},
+    {v:{A:420,B:340,C:390,D:0,E:0}, el:['A','B'], out:['E','D'],
+     w:'D is eliminated next. 100 of D’s ballots name C as second preference; the rest name candidates who are already elected.'},
+    {v:{A:420,B:340,C:390,D:0,E:0}, el:['A','B','C'], out:['E','D'],
+     w:'C has 390 and is elected. Three seats filled, so the count stops — which is step four of Fig. 7.3: the process continues till the required number of candidates are elected.'}
+  ];
+  const NAMES=['A','B','C','D','E'];
+  let at=0;
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=224, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=ST[at];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('1200 valid votes · 3 seats', 10, 8);
+
+    // the quota, spelled out as the formula it comes from
+    x.fillStyle='rgba(59,178,115,.14)'; x.fillRect(10, 26, W-20, 34);
+    x.strokeStyle=A2; x.lineWidth=1; x.strokeRect(10, 26, W-20, 34);
+    mono(x,9); x.fillStyle='rgba(240,238,230,.8)'; x.textAlign='center'; x.textBaseline='top';
+    fitText(x, 'quota = (total valid votes ÷ (seats + 1)) + 1', W/2, 31, W-26);
+    mono(x,11,600); x.fillStyle=A2;
+    fitText(x, '= (1200 ÷ 4) + 1 = ' + QUOTA, W/2, 45, W-26);
+
+    // the bars, with the quota drawn across them
+    const top=76, rowH=26, lx=12, bx=44, bw=W-bx-52, maxV=450;
+    const qx = bx + bw*QUOTA/maxV;
+    NAMES.forEach((n,i)=>{
+      const y=top+i*rowH, val=s.v[n],
+            done = s.el.indexOf(n) >= 0, gone = s.out.indexOf(n) >= 0;
+      mono(x,10,600); x.textAlign='left'; x.textBaseline='middle';
+      x.fillStyle = done ? A2 : gone ? 'rgba(142,154,192,.45)' : INK;
+      x.fillText(n, lx, y+9);
+      x.fillStyle='rgba(142,154,192,.12)'; x.fillRect(bx, y+2, bw, 15);
+      x.fillStyle = done ? 'rgba(59,178,115,.85)' : gone ? 'rgba(142,154,192,.3)' : 'rgba(214,51,108,.8)';
+      x.fillRect(bx, y+2, bw*Math.min(val,maxV)/maxV, 15);
+      mono(x,9,500); x.textAlign='right';
+      x.fillStyle = gone ? 'rgba(142,154,192,.5)' : INK;
+      x.fillText(String(val), W-12, y+9);
+      if(done || gone){
+        // dark on the green bar: A2 lettering on an A2 fill cannot be read
+        mono(x,7.5,600); x.textAlign='left';
+        x.fillStyle = done ? '#0B1F16' : 'rgba(142,154,192,.55)';
+        x.fillText(done ? 'ELECTED' : 'OUT', bx+4, y+9);
+      }
+    });
+    // the quota line, drawn last so it sits over every bar
+    x.strokeStyle='rgba(240,238,230,.75)'; x.lineWidth=1.4; x.setLineDash([4,3]);
+    x.beginPath(); x.moveTo(qx, top); x.lineTo(qx, top+NAMES.length*rowH-6); x.stroke();
+    x.setLineDash([]);
+    mono(x,8); x.fillStyle='rgba(240,238,230,.75)'; x.textAlign='center'; x.textBaseline='top';
+    x.fillText('quota ' + QUOTA, qx, top+NAMES.length*rowH-2);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('stvA').textContent=at + ' of ' + (ST.length-1);
+    document.getElementById('stvB').textContent=s.el.length + ' of ' + SEATS;
+    document.getElementById('stvTxt').textContent=s.w;
+  }
+  if(btn){
+    btn.onclick=()=>{
+      /* Past the end it starts over. A bench whose button stops doing
+         anything reads as broken rather than as finished. */
+      at = at >= ST.length-1 ? 0 : at+1;
+      ev('explore','stv-'+at);
+      btn.textContent = at >= ST.length-1 ? 'Start the count again' : 'Count the next round';
+      if(at >= ST.length-1) complete('m5');
+      draw();
+    };
+  }
+  reg('m5',draw);
+})();
+
+/* ============================================================
+   M6 — where the line goes
+   Thirty lakh people, placed once and never moved; only the
+   boundary moves. The population is deliberately lopsided,
+   because that is the case the chapter puts: one MP for five
+   lakh and another for twenty-five.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('delCv'), sS=document.getElementById('delS');
+  /* Deterministic, not random: the same thirty dots every redraw, bunched to
+     the left by raising an even spread to a power. */
+  const DOTS=[];
+  for(let i=0;i<30;i++){
+    const t=(i+0.5)/30;
+    DOTS.push({ x:0.05 + 0.90*Math.pow(t,1.8), y:0.12 + ((i*7)%9)/9*0.76 });
+  }
+  /* The slider stops short of both edges, because a constituency with nobody
+     in it is not a constituency. Its default sits where the split is 25 and 5
+     — the chapter's own example of what delimitation exists to prevent. */
+  const at = v => 0.12 + (v/100)*0.76;          // slider to boundary fraction
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=245, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, v=+sS.value, cut=at(v);
+    const L=12, R=W-12, T=46, B=150, w=R-L;
+    const bx = L + cut*w;
+    const left = DOTS.filter(d=>d.x < cut).length, right = DOTS.length - left;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('thirty lakh people · two seats · one boundary', 10, 8);
+
+    // the two constituencies
+    x.fillStyle='rgba(214,51,108,.10)'; x.fillRect(L, T, bx-L, B-T);
+    x.fillStyle='rgba(59,178,115,.10)'; x.fillRect(bx, T, R-bx, B-T);
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(L, T, w, B-T);
+    mono(x,9,600); x.textAlign='center'; x.textBaseline='top';
+    x.fillStyle=A1; x.fillText('A', (L+bx)/2, T-16);
+    x.fillStyle=A2; x.fillText('B', (bx+R)/2, T-16);
+
+    // the people
+    DOTS.forEach(d=>{
+      x.fillStyle = d.x < cut ? 'rgba(214,51,108,.85)' : 'rgba(59,178,115,.85)';
+      x.beginPath(); x.arc(L + d.x*w, T + d.y*(B-T), 3.2, 0, 7); x.fill();
+    });
+
+    // the boundary
+    x.strokeStyle='#FFFFFF'; x.lineWidth=2;
+    x.beginPath(); x.moveTo(bx, T-6); x.lineTo(bx, B+6); x.stroke();
+
+    // one bar each, so the imbalance is a length rather than a number
+    const by=170, bh=16, mx=Math.max(left,right,1);
+    [[left,A1,'A'],[right,A2,'B']].forEach((r,i)=>{
+      const y=by+i*24;
+      mono(x,9,500); x.fillStyle=r[1]; x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(r[2], 12, y+bh/2);
+      x.fillStyle='rgba(142,154,192,.12)'; x.fillRect(28, y, W-86, bh);
+      x.fillStyle=r[1]; x.fillRect(28, y, (W-86)*r[0]/mx, bh);
+      mono(x,9,600); x.fillStyle=INK; x.textAlign='right';
+      x.fillText(r[0] + ' lakh', W-12, y+bh/2);
+    });
+
+    const gap=Math.abs(left-right);
+    mono(x,9,500); x.textAlign='center'; x.textBaseline='top';
+    x.fillStyle = gap<=2 ? A2 : A1;
+    fitText(x, gap<=2 ? 'as close to equal as possible'
+                      : 'one MP for ' + left + ' lakh, another for ' + right + ' lakh',
+            W/2, 222, W-24);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('delSV').textContent=v + '%';
+    document.getElementById('delA').textContent=left + ' lakh';
+    document.getElementById('delB').textContent=right + ' lakh';
+    document.getElementById('delC').textContent= gap<=2
+      ? 'Within two lakh — the ratio of seats to population is about as equal as it can be made.'
+      : gap + ' lakh between the two: one MP for ' + left + ' lakh, another for ' + right +
+        ' lakh. One vote in the smaller constituency counts for more than one in the larger.';
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[Math.floor(+sS.value/20)]=1; ev('explore','delS');
+      if(Object.keys(seen).length>=4) complete('m6');
+      draw();
+    };
+  }
+  reg('m6',draw);
+})();
+
+/* ============================================================
+   M7 — which Act covers this
+   The choices are the bare years. 'RPA 1950' and 'RPA 1951'
+   are wide enough together to push the second one onto its own
+   line, where it reads as the next row's option.
+   ============================================================ */
+Q.rows('g7','g7s',[
+  {t:'Allocation of seats',                          a:0},
+  {t:'Delimitation of constituencies',               a:0},
+  {t:'Preparing and revising the electoral rolls',   a:0},
+  {t:'The right to vote at 18, without discrimination', a:0},
+  {t:'Nomination of candidates',                     a:1},
+  {t:'Election campaigns',                           a:1},
+  {t:'Voting procedures',                            a:1},
+  {t:'Post-election disputes',                       a:1}
+], ['1950','1951'], 'm7',
+   'All eight. The 1950 Act builds the electorate — seats, boundaries, rolls, the right to vote. The 1951 Act runs the election itself, and cleans up afterwards.');
+
+/* ============================================================
+   M8 — offence, or ordinary campaigning
+   ============================================================ */
+Q.pick('g8','g8check','g8s',[
+  {t:'A gift or promise to make somebody vote a particular way',        a:1},
+  {t:'A gift or promise to make somebody refrain from voting',          a:1},
+  {t:'A gift or promise to make somebody contest, or withdraw',         a:1},
+  {t:'Appealing for votes on the basis of religion or caste',           a:1},
+  {t:'Appealing for votes on the basis of race, community or language', a:1},
+  {t:'Taking help for a candidate from a gazetted officer',             a:1},
+  {t:'Taking help from judges, magistrates or police personnel',        a:1},
+  {t:'Taking help from armed forces or excise officers',                a:1},
+  {t:'Publishing a manifesto setting out the party’s policies',    a:0},
+  {t:'Applying for permission for a rally through the Suvidha app',     a:0},
+  {t:'Reporting a violation through the cVIGIL app',                    a:0}
+], 'm8',
+   'Right. Eight of these are corrupt practices under RPA 1951 — inducements, appeals on the basis of who somebody is, and borrowed state authority. The last three are simply how a campaign is supposed to be run.');
+
+/* ============================================================
+   M9 — what the Commission does
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('eciCv'), box2=document.getElementById('eciOpts');
+  const F=[
+    {k:'roll', t:'The roll',
+     a:'Creates and revises the electoral roll',
+     b:'Enumerators go to every household; the roll is organised polling-station-wise',
+     w:'Only those whose names appear on the roll are allowed to vote. Special Intensive Revision updates, verifies and corrects it, so that no eligible citizen is left out and no ineligible person is included — and claims and objections against the revised roll are settled before the final one is published.'},
+    {k:'date', t:'The schedule',
+     a:'Decides the schedule and date for the election',
+     b:'When the five-year term ends, or the Legislature is dissolved early',
+     w:'For a country this large the schedule has to work around weather conditions, the agricultural cycle, school and university examination timetables, and festivals. The machinery is activated the moment the term runs out.'},
+    {k:'sym', t:'Parties and symbols',
+     a:'Registers political parties and allots election symbols',
+     b:'Only registered parties can contest; independents may contest too',
+     w:'The ECI classifies parties as recognised national, recognised state or regional, or registered-unrecognised, and allots symbols to the national and state ones. It insists that parties hold their own organisational elections — inner party democracy — and acts as a quasi-judicial body in disputes over recognition and symbols.'},
+    {k:'fair', t:'Free and fair',
+     a:'Ensures the whole process is free, fair and transparent',
+     b:'Inclusive, impartial and trustworthy — not merely held',
+     w:'If fairness is not ensured, public confidence weakens. Candidates influenced by personal favours, votes not counted accurately, voters shut out by accessibility problems — in such cases an election may be held and still lose its democratic value. The ECI’s inclusion work covers Persons with Disabilities, senior citizens, transgender persons and Particularly Vulnerable Tribal Groups.'}
+  ];
+  let sel=0; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=206, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, f=F[sel], cx=W/2;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Articles 324 to 329', 10, 8);
+
+    if(f.k==='roll'){
+      // a sheet of names, with one added and one struck out
+      x.fillStyle=PAPER; x.fillRect(cx-58, 40, 116, 120);
+      x.strokeStyle='#8C8474'; x.lineWidth=1; x.strokeRect(cx-58, 40, 116, 120);
+      mono(x,8.5,600); x.fillStyle='#2A2620'; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('ELECTORAL ROLL', cx, 47);
+      for(let i=0;i<9;i++){
+        const ly=64+i*10;
+        x.strokeStyle='rgba(42,38,32,.35)'; x.lineWidth=1;
+        x.beginPath(); x.moveTo(cx-48, ly); x.lineTo(cx+44, ly); x.stroke();
+      }
+      // one struck through, one newly written in
+      x.strokeStyle='rgba(180,40,60,.85)'; x.lineWidth=1.6;
+      x.beginPath(); x.moveTo(cx-50, 104); x.lineTo(cx+46, 102); x.stroke();
+      x.fillStyle='rgba(59,178,115,.9)'; x.fillRect(cx-50, 130, 60, 4);
+      mono(x,8); x.textAlign='left'; x.textBaseline='middle';
+      x.fillStyle='rgba(59,178,115,.95)'; x.fillText('+ just turned 18', cx+14, 132);
+      x.fillStyle='rgba(224,90,110,.95)'; x.fillText('− moved away', cx+52, 103);
+      person(x, 30, 150, 34, 'rgba(240,238,230,.5)');
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      fitText(x, 'an enumerator, at every household', 30, 158, 70);
+    } else if(f.k==='date'){
+      // a calendar with one date ringed, and the four things that move it
+      const gw=26, gh=18, x0=cx-gw*3.5, y0=54;
+      x.fillStyle=PAPER; x.fillRect(x0-6, y0-18, gw*7+12, gh*4+26);
+      x.strokeStyle='#8C8474'; x.lineWidth=1; x.strokeRect(x0-6, y0-18, gw*7+12, gh*4+26);
+      mono(x,8,600); x.fillStyle='#2A2620'; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('POLLING DAY', cx, y0-14);
+      for(let r=0;r<4;r++) for(let c=0;c<7;c++){
+        x.strokeStyle='rgba(42,38,32,.22)'; x.lineWidth=1;
+        x.strokeRect(x0+c*gw, y0+r*gh, gw, gh);
+      }
+      x.strokeStyle=A1; x.lineWidth=2.2;
+      x.beginPath(); x.arc(x0+3*gw+gw/2, y0+1*gh+gh/2, 10, 0, 7); x.stroke();
+      const FACT=['weather','the crops','exams','festivals'];
+      const fw=(W-24)/4;
+      FACT.forEach((t,i)=>{
+        x.fillStyle='rgba(59,178,115,.14)';
+        x.fillRect(12+fw*i+3, 156, fw-6, 22);
+        x.strokeStyle='rgba(59,178,115,.55)'; x.lineWidth=1;
+        x.strokeRect(12+fw*i+3, 156, fw-6, 22);
+        x.fillStyle='rgba(240,238,230,.85)';
+        fitText(x, t, 12+fw*i+fw/2, 162, fw-10);
+      });
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      fitText(x, 'all four have to be worked around', cx, 184, W-24);
+    } else if(f.k==='sym'){
+      // a ballot with symbol boxes, one of them an independent
+      x.fillStyle=PAPER; x.fillRect(cx-72, 40, 144, 128);
+      x.strokeStyle='#8C8474'; x.lineWidth=1; x.strokeRect(cx-72, 40, 144, 128);
+      for(let i=0;i<4;i++){
+        const ry=48+i*31;
+        x.strokeStyle='rgba(42,38,32,.4)'; x.lineWidth=1;
+        x.strokeRect(cx-66, ry, 132, 28);
+        x.strokeRect(cx+40, ry+5, 18, 18);              // the symbol box
+        x.strokeStyle='rgba(42,38,32,.28)';
+        x.beginPath(); x.moveTo(cx-58, ry+13); x.lineTo(cx+22, ry+13); x.stroke();
+        // a different mark in each symbol box
+        x.strokeStyle='rgba(120,40,70,.8)'; x.lineWidth=1.6;
+        if(i===0){ x.beginPath(); x.arc(cx+49, ry+14, 6, 0, 7); x.stroke(); }
+        if(i===1){ x.beginPath(); x.moveTo(cx+43, ry+20); x.lineTo(cx+49, ry+8); x.lineTo(cx+55, ry+20); x.closePath(); x.stroke(); }
+        if(i===2){ x.strokeRect(cx+43, ry+8, 12, 12); }
+        if(i===3){ x.beginPath(); x.moveTo(cx+43, ry+14); x.lineTo(cx+55, ry+14); x.moveTo(cx+49, ry+8); x.lineTo(cx+49, ry+20); x.stroke(); }
+      }
+      mono(x,8); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      fitText(x, 'a symbol for every recognised party, and for independents', cx, 176, W-24);
+    } else {
+      // the inclusion work, as three things on one floor
+      const gy=138;
+      x.fillStyle='rgba(142,154,192,.14)'; x.fillRect(0, gy, W, 2);
+      // a ramp
+      x.strokeStyle=A2; x.lineWidth=2;
+      x.beginPath(); x.moveTo(14, gy); x.lineTo(62, gy-26); x.lineTo(74, gy-26); x.stroke();
+      x.beginPath(); x.arc(40, gy-8, 7, 0, 7); x.stroke();
+      // an EVM with Braille dots
+      x.fillStyle='rgba(214,51,108,.24)'; x.fillRect(cx-22, gy-46, 44, 46);
+      x.strokeStyle=A1; x.lineWidth=1.2; x.strokeRect(cx-22, gy-46, 44, 46);
+      x.fillStyle='rgba(240,238,230,.9)';
+      for(let r=0;r<3;r++) for(let c=0;c<2;c++){
+        x.beginPath(); x.arc(cx-12+c*6, gy-36+r*10, 1.6, 0, 7); x.fill();
+      }
+      for(let r=0;r<3;r++) x.fillRect(cx+2, gy-40+r*10, 14, 4);
+      // a house, for voting from home
+      x.fillStyle='rgba(59,178,115,.25)';
+      x.beginPath(); x.moveTo(W-70, gy-30); x.lineTo(W-46, gy-52); x.lineTo(W-22, gy-30); x.closePath(); x.fill();
+      x.fillStyle='rgba(59,178,115,.18)'; x.fillRect(W-64, gy-30, 36, 30);
+      x.strokeStyle=A2; x.lineWidth=1; x.strokeRect(W-64, gy-30, 36, 30);
+      // fitText, and centres pulled in from the edges: 'voting from home' set
+      // at W-46 runs past the right-hand edge of a 296px canvas
+      x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      fitText(x, 'a ramp', 40, gy+8, 68);
+      fitText(x, 'Braille on the EVM', cx-8, gy+8, 92);
+      fitText(x, 'voting from home', W-50, gy+8, 84);
+      mono(x,8.5); x.fillStyle=A2;
+      fitText(x, 'home voting for 85+ and 40% benchmark disability, nationwide from 2024', W/2, gy+28, W-20);
+    }
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('eciA').textContent=f.a;
+    document.getElementById('eciB').textContent=f.b;
+    document.getElementById('eciTxt').textContent=f.w;
+  }
+  if(cv){
+    F.forEach((f,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=f.t;
+      b.onclick=()=>{
+        sel=i; seen[f.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','eci-'+f.k);
+        if(Object.keys(seen).length>=3) complete('m9');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m9',draw);
+})();
+
+/* ============================================================
+   M10 — added, or deleted
+   ============================================================ */
+Q.rows('g10','g10s',[
+  {t:'A citizen who has just turned 18',                   a:0},
+  {t:'An eligible voter missed through lack of awareness',  a:0},
+  {t:'A voter who has died',                               a:1},
+  {t:'A voter who has changed residence',                  a:1},
+  {t:'A name enrolled twice over',                         a:1},
+  {t:'A voter who is permanently untraceable',             a:1}
+], ['Added','Deleted'], 'm10',
+   'All six. A revision works in both directions at once — no eligible citizen left out, and no ineligible person left in.');
+
+/* ============================================================
+   M11 — seven apps, three audiences
+   The lanes come from what each app's own description says it
+   is for, which the chapter prints in full: Suvidha is
+   'exclusive to contesting candidates and political parties',
+   ERONET and Sugam are tools for running the machinery, and
+   the rest are things a voter holds in their hand.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('appCv'), box2=document.getElementById('appOpts');
+  const LANES=[
+    {k:'vot', n:'Voters',           col:'a2'},
+    {k:'can', n:'Candidates',       col:'a1'},
+    {k:'off', n:'Election officials', col:'a1'}
+  ];
+  const AP=[
+    {k:'etpbs', t:'ETPBS', lane:'vot', full:'Electronically Transmitted Postal Ballot System',
+     b:'Service voters receive and cast a postal ballot electronically',
+     w:'Developed for service voters, it lets them cast their vote on an electronically received postal ballot from wherever they are — outside the constituency they are assigned to.'},
+    {k:'helpline', t:'Voter Helpline', lane:'vot', full:'Voter Helpline App',
+     b:'Registration, transposition and verification, in one app',
+     w:'A multipurpose app for voter services. Voters can also get information related to the election, and news and updates, through it.'},
+    {k:'cvigil', t:'cVIGIL', lane:'vot', full:'cVIGIL App',
+     b:'Report a Model Code of Conduct violation within minutes',
+     w:'Voters report violations and election misconduct within minutes of witnessing them, and flying squads navigate to the spot using the auto location to take prompt action.'},
+    {k:'saksham', t:'Saksham', lane:'vot', full:'Saksham App',
+     b:'Customised services for Persons with Disabilities',
+     w:'The ECI built it to ease voter identification and registration for PwDs. It helps with registering to vote, finding a polling station, and more.'},
+    {k:'suvidha', t:'Suvidha', lane:'can', full:'Suvidha',
+     b:'Nomination forms, and permissions for meetings and rallies',
+     w:'An app exclusively for contesting candidates and political parties. Candidates get nomination-related forms and updates, apply for permissions — meetings, rallies, vehicles, loudspeakers — and check the real-time status of each request.'},
+    {k:'eronet', t:'ERONET', lane:'off', full:'ERONET',
+     b:'Form processing and the electoral roll databases',
+     w:'It brings seamless processing of forms and easy handling of the databases: efficient form-processing, simplified dashboards, role-based access, and maintenance of the E-Rolls.'},
+    {k:'sugam', t:'Sugam', lane:'off', full:'Sugam',
+     b:'The vehicles requisitioned for election work',
+     w:'A web-based application for managing vehicles diverted or requisitioned from other departments. Department details, vehicle registration numbers, driver contacts and periodical fuel allotment all go on it.'}
+  ];
+  let sel=0; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=258, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, a=AP[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Fig. 7.6 · built for three different people', 10, 8);
+
+    let y=30;
+    LANES.forEach(l=>{
+      const mine=AP.filter(p=>p.lane===l.k);
+      mono(x,8.5,500); x.fillStyle = l.col==='a2' ? A2 : A1;
+      x.textAlign='left'; x.textBaseline='top';
+      x.fillText(l.n.toUpperCase(), 12, y);
+      const tw=(W-24)/Math.max(mine.length,1), ty=y+14;
+      mine.forEach((p,i)=>{
+        box(x, 12+tw*i+2, ty, tw-4, 28, p.t, l.col, p===a);
+      });
+      y = ty + 40;
+    });
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 190); x.lineTo(W-10, 190); x.stroke();
+    sans(x,13,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    const after = wrap(x, a.full, 12, 200, W-24, 16);
+    mono(x,8.5); x.fillStyle='rgba(240,238,230,.7)';
+    wrap(x, a.b, 12, after, W-24, 12);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    const lane = LANES.find(l=>l.k===a.lane);
+    document.getElementById('appA').textContent=lane.n;
+    document.getElementById('appB').textContent=a.b;
+    document.getElementById('appTxt').textContent=a.w;
+  }
+  if(cv){
+    AP.forEach((a,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=a.t;
+      b.onclick=()=>{
+        sel=i; seen[a.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','app-'+a.k);
+        if(Object.keys(seen).length>=4) complete('m11');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m11',draw);
+})();
+
+/* ============================================================
+   M12 — national, state, or neither
+   Ten worked cases, one per condition Fig. 7.12 prints: five
+   for a state party, three for a national one, and the two
+   ways a party stays a RUPP. Each list is an 'any one of'
+   list, so one row clearing is the whole test.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('recCv'), sS=document.getElementById('recS');
+  const R=[
+    {name:'Party A', kind:'State', code:'State · condition 1',
+     tests:[['6% of the valid votes in the State Assembly election',true],
+            ['2 seats in that Legislative Assembly',true]],
+     w:'Secures not less than 6% of the valid votes polled at a general election to the Legislative Assembly of the State concerned and, in addition, wins at least two seats in that Assembly.'},
+    {name:'Party B', kind:'State', code:'State · condition 2',
+     tests:[['6% of the State’s valid votes in the Lok Sabha election',true],
+            ['1 Lok Sabha seat from that State',true]],
+     w:'Secures not less than 6% of the valid votes polled at a general election to the Lok Sabha from the State concerned, and in addition wins at least one seat in the Lok Sabha from that State.'},
+    {name:'Party C', kind:'State', code:'State · condition 3',
+     tests:[['3% of the seats in the Legislative Assembly',true],
+            ['or at least three seats — whichever is more',true]],
+     w:'Wins at least 3% of the seats at the General Election to the Legislative Assembly of the State concerned, or at least three seats in that Assembly, whichever is more.'},
+    {name:'Party D', kind:'State', code:'State · condition 4',
+     tests:[['1 Lok Sabha seat for every 25 allotted to the State',true],
+            ['or any fraction of 25 thereof',true]],
+     w:'Wins at least one seat in the Lok Sabha for every 25 seats, or any fraction thereof, allotted to the State at a General Election to the Lok Sabha from the State concerned.'},
+    {name:'Party E', kind:'State', code:'State · condition 5',
+     tests:[['8% of the valid votes polled in the State',true],
+            ['in the Lok Sabha or the Assembly election',true]],
+     w:'Secures not less than 8% of the valid votes polled in the State at a General Election to the Lok Sabha from the State, or to the Legislative Assembly of the State. This is the one condition that needs no seats at all.'},
+    {name:'Party F', kind:'National', code:'National · condition 1',
+     tests:[['6% of the valid votes in four or more states',true],
+            ['4 seats in the Lok Sabha',true]],
+     w:'Secures not less than 6% of valid votes polled in any four or more states in a General Election to the Lok Sabha or to the Legislative Assembly, and in addition wins four seats in the Lok Sabha from a single or more states.'},
+    {name:'Party G', kind:'National', code:'National · condition 2',
+     tests:[['2% of the seats in the Lok Sabha',true],
+            ['elected from at least three states',true]],
+     w:'Wins at least 2% of the seats in the Lok Sabha, and the candidates are elected from at least three states.'},
+    {name:'Party H', kind:'National', code:'National · condition 3',
+     tests:[['recognised as a State Party in four states',true],
+            ['no further condition',true]],
+     w:'It is recognised as a State Party in at least four states. A party can climb to national recognition without ever clearing a national vote share.'},
+    {name:'Party J', kind:'RUPP', code:'Registered Unrecognised',
+     tests:[['enough votes in the Assembly or General Election',false],
+            ['enough seats to qualify',false]],
+     w:'A party that has not secured enough percentage of votes in the Legislative Assembly or the General Elections. It stays registered — and so may contest — but it is not recognised, and it gets no reserved symbol.'},
+    {name:'Party K', kind:'RUPP', code:'Registered Unrecognised',
+     tests:[['has contested an election since registering',false],
+            ['any vote share at all',false]],
+     w:'A party that has never contested an election since its registration. Registration and recognition are two different things, and this is the clearest case of the difference.'}
+  ];
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=188, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value, r=R[i];
+    const nat = r.kind==='National', rupp = r.kind==='RUPP';
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Fig. 7.12 · any one condition is enough', 10, 8);
+
+    mono(x,12,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(r.name, 12, 28);
+
+    // the scorecard: what this party did, and whether it clears
+    r.tests.forEach((t,k)=>{
+      const ty=52+k*34;
+      x.fillStyle = t[1] ? 'rgba(59,178,115,.12)' : 'rgba(214,51,108,.10)';
+      x.fillRect(12, ty, W-24, 30);
+      x.strokeStyle = t[1] ? 'rgba(59,178,115,.6)' : 'rgba(214,51,108,.5)';
+      x.lineWidth=1; x.strokeRect(12, ty, W-24, 30);
+      mono(x,12,600); x.fillStyle = t[1] ? A2 : A1;
+      x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(t[1] ? '✓' : '✗', 20, ty+15);
+      x.fillStyle='rgba(240,238,230,.85)'; x.textBaseline='top';
+      mono(x,8.5);
+      wrap(x, t[0], 38, ty+6, W-58, 11);
+    });
+
+    // the verdict
+    const vy=130;
+    const col = rupp ? 'rgba(142,154,192,.5)' : nat ? A1 : A2;
+    x.fillStyle = rupp ? 'rgba(142,154,192,.12)' : nat ? 'rgba(214,51,108,.20)' : 'rgba(59,178,115,.20)';
+    x.fillRect(12, vy, W-24, 34);
+    x.strokeStyle=col; x.lineWidth=1.8; x.strokeRect(12, vy, W-24, 34);
+    mono(x,12,600); x.fillStyle = rupp ? 'rgba(240,238,230,.8)' : '#FFFFFF';
+    x.textAlign='center'; x.textBaseline='middle';
+    x.fillText(rupp ? 'NOT RECOGNISED' : nat ? 'NATIONAL PARTY' : 'STATE PARTY', W/2, vy+17);
+
+    /* The condition itself goes to the readout, not onto the canvas. Wrapped
+       here, Fig. 7.12's longest condition needs six lines and the last two
+       fall off the bottom edge. */
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    fitText(x, r.code, W/2, vy+40, W-24);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('recSV').textContent=r.name;
+    document.getElementById('recA').textContent = rupp ? 'Registered, but not recognised'
+                                                       : (r.kind + ' party');
+    document.getElementById('recB').textContent=r.code;
+    document.getElementById('recC').textContent=r.w;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','recS');
+      if(Object.keys(seen).length>=4) complete('m12');
+      draw();
+    };
+  }
+  reg('m12',draw);
+})();
+
+/* ============================================================
+   M13 — what a party is for
+   Fig. 7.11 redrawn. The two lower branches are the point: a
+   party that loses an election still has a job in the diagram.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('parCv'), box2=document.getElementById('parOpts');
+  const P=[
+    {k:'op', t:'Organise opinion',
+     a:'Political parties organise public opinion, and reach citizens directly',
+     b:'They work at the grassroots level, where issues actually start',
+     w:'How do we learn about the issues that affect citizens day to day? How do voters find out about the candidates? Voters learn about candidates, their policies, their vision for development and their positions on social, economic, cultural and political issues primarily through the political parties.'},
+    {k:'ce', t:'Contest elections',
+     a:'Plan campaigns and prepare manifestos',
+     b:'This is where promises are made in public, and can be checked later',
+     w:'Parties present their agenda, elaborate on their promises at election rallies, and debate issues of local, state, national and international concern across media platforms. Fig. 7.9 sums up the value of that: it enables voters to make informed decisions, and offers them meaningful choices.'},
+    {k:'win', t:'The winning party',
+     a:'Forms the government, and formulates and implements policies',
+     b:'Winning converts votes into the power to actually do something',
+     w:'The branch everybody watches. It is only half of Fig. 7.11, though — the diagram gives the other branch just as much to do.'},
+    {k:'opp', t:'The opposition',
+     a:'Ensures accountability, and takes part in debates and committees',
+     b:'Losing an election is not the same as having no role',
+     w:'Fig. 7.11 draws the opposition party as a branch of equal standing, with two jobs of its own: ensuring accountability, and participation in debates and committees. A legislature with no opposition is missing half its diagram.'}
+  ];
+  let sel=0; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=258, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, p=P[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Fig. 7.11 · the role of political parties', 10, 8);
+
+    /* Every row gets clear air above and below it. Butted edge to edge, as
+       these boxes first were, the diagram reads as one grid and the flow
+       between the rows disappears. */
+    const half=(W-32)/2, L=20+half/2, R2=W-20-half/2;
+    const R1Y=26, R2Y=68, R3Y=112, R4Y=152, R5Y=184, BH=26;
+    x.strokeStyle='rgba(142,154,192,.45)'; x.lineWidth=1;
+    x.beginPath();
+    x.moveTo(W*0.28, R1Y+BH); x.lineTo(W*0.28, R2Y);                 // parties -> contest
+    x.moveTo(W/2, R2Y+BH); x.lineTo(W/2, R2Y+BH+8);                  // contest -> the two
+    x.moveTo(L, R2Y+BH+8); x.lineTo(R2, R2Y+BH+8);
+    x.moveTo(L, R2Y+BH+8); x.lineTo(L, R3Y);
+    x.moveTo(R2, R2Y+BH+8); x.lineTo(R2, R3Y);
+    x.moveTo(L, R3Y+BH); x.lineTo(L, R4Y);
+    x.moveTo(R2, R3Y+BH); x.lineTo(R2, R4Y);
+    x.moveTo(L, R4Y+24); x.lineTo(L, R5Y);
+    x.moveTo(R2, R4Y+24); x.lineTo(R2, R5Y);
+    x.stroke();
+
+    box(x, 12, R1Y, W*0.50, BH, 'Political parties', 'a1', sel===0);
+    box(x, W*0.60, R1Y, W*0.40-12, BH, 'Citizens', 'a2', sel===0);
+    arrow(x, W*0.53, R1Y+BH/2, W*0.59, R1Y+BH/2, sel===0 ? A2 : 'rgba(142,154,192,.45)', 5);
+    box(x, 12, R2Y, W-24, BH, 'Contest elections', 'a1', sel===1);
+    box(x, 12, R3Y, half, BH, 'Winning party', 'a1', sel===2);
+    box(x, 20+half, R3Y, half, BH, 'Opposition party', 'a2', sel===3);
+    box(x, 12, R4Y, half, 24, 'Forms government', 'a1', sel===2);
+    box(x, 20+half, R4Y, half, 24, 'Ensures accountability', 'a2', sel===3);
+    box(x, 12, R5Y, half, 24, 'Policies', 'a1', sel===2);
+    box(x, 20+half, R5Y, half, 24, 'Debates, committees', 'a2', sel===3);
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 220); x.lineTo(W-10, 220); x.stroke();
+    sans(x,11.5); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    wrap(x, p.a, 12, 228, W-24, 15);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('parA').textContent=p.a;
+    document.getElementById('parB').textContent=p.b;
+    document.getElementById('parTxt').textContent=p.w;
+  }
+  if(cv){
+    P.forEach((p,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=p.t;
+      b.onclick=()=>{
+        sel=i; seen[p.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','par-'+p.k);
+        if(Object.keys(seen).length>=3) complete('m13');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m13',draw);
+})();
+
+/* ============================================================
+   M14 — defection, and the law against it
+   ============================================================ */
+Q.pick('g14','g14check','g14s',[
+  {t:'Defection is leaving the party under whose banner you were elected', a:1},
+  {t:'It can mean joining another party',                                  a:1},
+  {t:'It can mean acting independently of the party in the legislature',   a:1},
+  {t:'It can be read as political opportunism',                            a:1},
+  {t:'It can also be read as upholding conscience',                        a:1},
+  {t:'The Anti-Defection Law was passed in 1985',                          a:1},
+  {t:'It came through the 52nd Constitutional Amendment Act',              a:1},
+  {t:'A member who votes against the party whip can be disqualified',      a:1},
+  {t:'The Speaker or Chairman of the House decides such cases',            a:1},
+  {t:'The Election Commission decides defection cases',                    a:0},
+  {t:'Defection was made a criminal offence',                              a:0}
+], 'm14',
+   'Right. Nine of these are the chapter’s own account — including both readings of defection, which it gives in the same breath. The law disqualifies; it does not prosecute, and the decision rests with the Speaker or Chairman, not with the ECI.');
+
+/* ============================================================
+   M15 — the road to a free and fair election
+   Fig. 7.13's road, with its potholes. The measures are laid
+   over the road as a whole rather than one per pothole: the
+   chapter lists them against the challenges as a set, and
+   pairing them off one to one would be inventing a claim it
+   never makes. So every pothole shrinks together.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('roadCv'), btn=document.getElementById('roadNext');
+  const M=[
+    {t:'RPA 1950 and 1951', w:'The two Acts between them cover the rolls, the right to vote, the conduct of the campaign, and the disputes afterwards — including the list of corrupt practices.'},
+    {t:'The Model Code of Conduct', w:'The rules parties and candidates agree to run under once an election is announced. cVIGIL exists so that any voter can report a breach of it within minutes.'},
+    {t:'EVMs', w:'Electronic voting machines. The chapter lists them among the measures the ECI relies on to keep the process trustworthy.'},
+    {t:'VVPAT', w:'The Voter Verifiable Paper Audit Trail. Ishani, in the chapter’s case study, casts her vote and is then able to see the VVPAT slip — a vote you can watch being recorded.'},
+    {t:'Voters’ awareness campaigns', w:'The measure aimed at the voter rather than at the machinery. Misinformation and fake news are answered by people who can recognise them.'}
+  ];
+  /* The three Fig. 7.13 names, and the two potholes the figure leaves empty
+     for the reader to fill in. */
+  const HOLES=[
+    {t:'Misinformation', x:0.32, y:0.18, left:true},
+    {t:'Fake news',      x:0.66, y:0.46, left:false},
+    {t:'Intimidation',   x:0.30, y:0.74, left:true},
+    {t:'?',              x:0.70, y:0.88, left:false},
+    {t:'?',              x:0.58, y:0.62, left:false}
+  ];
+  let at=0;
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=252, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, laid=at, ease=1 - laid/M.length;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Fig. 7.13 \u00b7 challenges on the road', 10, 8);
+
+    /* A straight road rather than a receding one. Drawn in perspective, the
+       trapezoid read as a mountain, and the pothole labels — placed in road
+       space and then projected — landed across its edges. Here the road is a
+       band down the middle and every label sits outside it, clear of the
+       surface it is naming. */
+    const T=32, B=162, rw=W*0.40, rx=(W-rw)/2;
+    x.fillStyle='rgba(142,154,192,.13)'; x.fillRect(rx, T, rw, B-T);
+    x.strokeStyle='rgba(240,238,230,.3)'; x.lineWidth=1.4;
+    x.beginPath(); x.moveTo(rx, T); x.lineTo(rx, B); x.moveTo(rx+rw, T); x.lineTo(rx+rw, B); x.stroke();
+    x.strokeStyle='rgba(240,238,230,.3)'; x.lineWidth=2;
+    for(let k=0;k<5;k++){
+      const y0=T+8+k*26;
+      x.beginPath(); x.moveTo(W/2, y0); x.lineTo(W/2, y0+13); x.stroke();
+    }
+
+    HOLES.forEach(h=>{
+      const hx = rx + h.x*rw, hy = T + h.y*(B-T);
+      const er = 10*ease, ey = er*0.45;
+      if(er < 0.8) return;                              // paved over entirely
+      x.fillStyle='rgba(10,12,18,.92)';
+      x.beginPath(); x.ellipse(hx, hy, er, ey, 0, 0, 7); x.fill();
+      x.strokeStyle='rgba(214,51,108,.7)'; x.lineWidth=1; x.stroke();
+      if(h.t !== '?' && ease > 0.25){
+        mono(x,8.5,500); x.fillStyle='rgba(214,51,108,.95)'; x.textBaseline='middle';
+        x.textAlign = h.left ? 'right' : 'left';
+        x.fillText(h.t, h.left ? rx-8 : rx+rw+8, hy);
+      }
+    });
+
+    // what has been laid so far, one line each and all five on the canvas
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 174); x.lineTo(W-10, 174); x.stroke();
+    x.textAlign='left'; x.textBaseline='top';
+    M.forEach((m,i)=>{
+      const my=182+i*14, on=i<laid;
+      mono(x,9.5,on?600:400);
+      x.fillStyle = on ? A2 : 'rgba(142,154,192,.35)';
+      x.fillText((on ? '\u2713 ' : '\u00b7 ') + m.t, 12, my);
+    });
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('roadA').textContent=laid + ' of ' + M.length;
+    document.getElementById('roadB').textContent= laid ? M[laid-1].t : '\u2014';
+    document.getElementById('roadTxt').textContent = laid
+      ? (laid >= M.length
+          ? 'All five laid. The chapter is careful here: it lists these against the challenges as a set, not one against one, and it does not claim the road is finished. What it claims is that with constant vigilance and active citizen participation, elections can become more representative and the democracy more robust.'
+          : M[laid-1].w)
+      : 'Three challenges named, and two potholes Fig. 7.13 leaves empty for you to fill. Lay the first measure.';
+  }
+  if(btn){
+    btn.onclick=()=>{
+      at = at >= M.length ? 0 : at+1;
+      ev('explore','road-'+at);
+      btn.textContent = at >= M.length ? 'Start the road again' : 'Lay the next measure';
+      if(at >= M.length) complete('m15');
+      draw();
+    };
+  }
+  reg('m15',draw);
+})();
+
+/* ============================================================
+   M16 — chapter boss
+   ============================================================ */
+Q.boss([
+  { t:'Recall · 1 of 10',
+    q:'Which of these is filled by an indirect election?',
+    o:['The Lok Sabha','The Rajya Sabha','A Gram Panchayat'], a:1,
+    w:'The President, the Vice President and members of the Rajya Sabha are elected indirectly — citizens vote for representatives, and those representatives elect the leaders. The Lok Sabha, the Vidhan Sabha and local bodies are all directly elected, every five years.' },
+  { t:'Recall · 2 of 10',
+    q:'Which electoral system does India use for the Lok Sabha?',
+    o:['Proportional representation','First-Past-The-Post','The majority system'], a:1,
+    w:'The framers discussed the two most common systems and chose the plurality system, better known as First-Past-The-Post. It is used for the Lok Sabha and the Vidhan Sabha; proportional representation is used for the Rajya Sabha and for the President and Vice President.' },
+  { t:'Recall · 3 of 10',
+    q:'When was the Election Commission of India established?',
+    o:['26 January 1950','25 January 1950','15 August 1947'], a:1,
+    w:'25 January 1950 — which is why 25 January is National Voters’ Day. The ECI is an autonomous permanent constitutional body, and Articles 324 to 329 define its powers and duties.' },
+  { t:'Recall · 4 of 10',
+    q:'Which Act deals with the preparation and revision of electoral rolls?',
+    o:['The Representation of the People Act, 1950',
+       'The Representation of the People Act, 1951',
+       'The Presidential and Vice-Presidential Elections Act, 1952'], a:0,
+    w:'RPA 1950 covers the allocation of seats, the delimitation of constituencies, the rolls, and the right of every citizen of 18 and above to vote without discrimination. RPA 1951 covers the conduct of the election itself and post-election disputes.' },
+  { t:'Understanding · 5 of 10',
+    q:'Why does delimitation have to be done again from time to time?',
+    o:['Because new political parties register',
+       'Because population density shifts, and seats have to stay proportionate to people',
+       'Because the Constitution is amended'], a:1,
+    w:'Without it, one MP might represent five lakh people while another represents twenty-five lakh. Delimitation fixes the number of seats and the territorial boundaries so that the ratio of seats to population stays as close to equal as possible. Article 82 mandates the Commission; India has had four, in 1952, 1963, 1973 and 2002.' },
+  { t:'Understanding · 6 of 10',
+    q:'In Haritbhumi, Party A wins with 40% of the votes. How is that possible?',
+    o:['The other 60% did not vote',
+       'Under FPTP the candidate with the most votes wins, even with less than 50%',
+       'Party A was the only party contesting'], a:1,
+    w:'That is the defining feature of the plurality system. Compare Ratnadweep, where a candidate must pass 50% and the top two go to a second round — and where the party that led round one loses round two.' },
+  { t:'Application · 7 of 10',
+    q:'A voter sees campaigners breaking the Model Code of Conduct. Which app is for that?',
+    o:['cVIGIL','Suvidha','Sugam'], a:0,
+    w:'cVIGIL lets any voter report a violation within minutes of witnessing it, and flying squads navigate to the spot using the auto location. Suvidha is for contesting candidates; Sugam manages the vehicles requisitioned for election work.' },
+  { t:'Application · 8 of 10',
+    q:'A party is recognised as a State Party in four different states. What follows?',
+    o:['It stays a state party in each',
+       'It becomes a recognised National Party',
+       'It becomes a Registered Unrecognised Political Party'], a:1,
+    w:'Being recognised as a State Party in at least four states is one of the three conditions for national recognition, and a party needs to clear only one of them. It can reach national recognition without ever clearing a national vote share.' },
+  { t:'Reasoning · 9 of 10',
+    q:'An MP elected on a party ticket votes against the party whip. What can happen, and who decides?',
+    o:['Nothing; a whip carries no consequence',
+       'Disqualification from the House, decided by the Speaker or Chairman',
+       'A criminal trial, decided by a magistrate'], a:1,
+    w:'Under the Anti-Defection Law — passed in 1985 through the 52nd Constitutional Amendment Act — voluntarily giving up party membership or voting against the whip can get a member disqualified. The purpose is stability for the elected government, and the Speaker or Chairman decides.' },
+  { t:'Challenge · 10 of 10',
+    q:'1200 valid votes, 3 seats to fill. What is the single transferable vote quota?',
+    o:['400','301','600'], a:1,
+    w:'Quota = (total valid votes ÷ (seats to be filled + 1)) + 1 = (1200 ÷ 4) + 1 = 301. It is the smallest number that only three candidates can possibly reach at once — which is exactly why reaching it elects you.' }
+], 'm16', 'Direct and indirect, three ways of turning votes into seats, a quota of 301, a boundary that has to keep moving, seven apps, five recognition thresholds — and a road that is never quite finished.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
