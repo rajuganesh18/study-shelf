@@ -58,7 +58,7 @@ the device and can be exported to a file if you change phones.
 
 CURRENTLY AVAILABLE
 All 13 chapters of Class 9 Science and all 8 chapters of Class 9 Maths, Part 1.
-Class 9 Social Science has its first three chapters, with the rest on the way. The
+Class 9 Social Science has its first seven chapters, with the rest on the way. The
 full Class 9 and Class 10 catalogue is listed in the app, and every chapter that
 is not built yet is marked Coming soon rather than hidden.
 

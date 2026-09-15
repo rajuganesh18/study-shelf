@@ -49,7 +49,20 @@ module.exports = [
        answer required in each before it will score. The generic prodder walks
        at most two rows, so it can never fill in C and D.
        test/chapters/atmosphere.js answers all four properly instead. */
-    skipReach:['m13'] }
+    skipReach:['m13'] },
+  { slug:'civilisation', id:'9-social-4',  n:4,  title:'Early Humans and Beginning of Civilisation',
+    /* m12 is the Harappan balance: three loads have to be matched EXACTLY by
+       summing stone weights, so 13 means tapping 8, 4 and 1 and nothing else.
+       The generic prodder taps one chip at a time and can only ever land on a
+       weight that happens to equal the load — never on a sum.
+       test/chapters/civilisation.js weighs all three properly instead. */
+    skipReach:['m12'] },
+  /* slug 'polity' rather than 'state': test/run.js already has a stage called
+     state — the storage-persistence harness — and two stages with one name
+     makes `npm test -- state` ambiguous. */
+  { slug:'polity',       id:'9-social-5',  n:5,  title:'State and Society up to 1000 CE' },
+  { slug:'democracy',    id:'9-social-6',  n:6,  title:'Democracy' },
+  { slug:'elections',    id:'9-social-7',  n:7,  title:'Elections' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';
