@@ -56,7 +56,11 @@ module.exports = [
        The generic prodder taps one chip at a time and can only ever land on a
        weight that happens to equal the load — never on a sum.
        test/chapters/civilisation.js weighs all three properly instead. */
-    skipReach:['m12'] }
+    skipReach:['m12'] },
+  /* slug 'polity' rather than 'state': test/run.js already has a stage called
+     state — the storage-persistence harness — and two stages with one name
+     makes `npm test -- state` ambiguous. */
+  { slug:'polity',       id:'9-social-5',  n:5,  title:'State and Society up to 1000 CE' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';
