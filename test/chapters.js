@@ -60,7 +60,8 @@ module.exports = [
   /* slug 'polity' rather than 'state': test/run.js already has a stage called
      state — the storage-persistence harness — and two stages with one name
      makes `npm test -- state` ambiguous. */
-  { slug:'polity',       id:'9-social-5',  n:5,  title:'State and Society up to 1000 CE' }
+  { slug:'polity',       id:'9-social-5',  n:5,  title:'State and Society up to 1000 CE' },
+  { slug:'democracy',    id:'9-social-6',  n:6,  title:'Democracy' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';

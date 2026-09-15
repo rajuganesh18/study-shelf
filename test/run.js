@@ -34,7 +34,8 @@ const STAGES = [
   { name:'landforms',    browser:true,  run:require('./chapters/landforms') },
   { name:'atmosphere',   browser:true,  run:require('./chapters/atmosphere') },
   { name:'civilisation', browser:true,  run:require('./chapters/civilisation') },
-  { name:'polity',       browser:true,  run:require('./chapters/polity') }
+  { name:'polity',       browser:true,  run:require('./chapters/polity') },
+  { name:'democracy',    browser:true,  run:require('./chapters/democracy') }
 ];
 
 (async () => {

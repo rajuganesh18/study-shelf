@@ -1,5 +1,5 @@
 /* Offline cache. Bump VERSION whenever www/ changes. */
-const VERSION = 'shelf-v20260915a';
+const VERSION = 'shelf-v20260915b';
 const ASSETS = [
   "index.html",
   "exploration-chapter.html",
@@ -28,6 +28,7 @@ const ASSETS = [
   "atmosphere-chapter.html",
   "civilisation-chapter.html",
   "polity-chapter.html",
+  "democracy-chapter.html",
   "manifest.webmanifest",
   "icons/icon-192.png",
   "icons/icon-512.png",

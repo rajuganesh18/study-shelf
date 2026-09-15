@@ -425,7 +425,7 @@ const CATALOG = [
     {
       key:'social', name:'Social Science', book:'Understanding Society: India and Beyond', colour:'#F2803C',
       note:'Four old books replaced by one integrated volume of 16 themes.',
-      warn:'Chapters 1 to 5 are confirmed against the printed NCERT chapters. The rest of the titles are still provisional: Part 2 had not been released when this catalog was written. Check your school copy and edit CATALOG.',
+      warn:'Chapters 1 to 6 are confirmed against the printed NCERT chapters, and chapter 7 is named inside chapter 6. The rest of the titles are still provisional: Part 2 had not been released when this catalog was written. Check your school copy and edit CATALOG.',
       parts:[
         { name:'Part 1', chapters:[
           {n:1, t:'Understanding Social Science', id:'9-social-1', file:'society-chapter.html'},
@@ -433,8 +433,10 @@ const CATALOG = [
           {n:3, t:'Atmosphere and Climate', id:'9-social-3', file:'atmosphere-chapter.html'},
           {n:4, t:'Early Humans and Beginning of Civilisation', id:'9-social-4', file:'civilisation-chapter.html'},
           {n:5, t:'State and Society up to 1000 CE', id:'9-social-5', file:'polity-chapter.html'},
-          {n:6, t:'Chapter 6', pending:1},
-          {n:7, t:'Chapter 7', pending:1},
+          {n:6, t:'Democracy', id:'9-social-6', file:'democracy-chapter.html'},
+          /* Chapter 6 names its successor outright — "the next chapter on
+             'Elections'" — so this one title is the book's own, not a guess. */
+          {n:7, t:'Elections', pending:1},
           {n:8, t:'Chapter 8', pending:1},
           {n:9, t:'Chapter 9', hint:'demand, supply and everyday economics', pending:1}
         ]},
