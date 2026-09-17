@@ -36,7 +36,9 @@ const STAGES = [
   { name:'civilisation', browser:true,  run:require('./chapters/civilisation') },
   { name:'polity',       browser:true,  run:require('./chapters/polity') },
   { name:'democracy',    browser:true,  run:require('./chapters/democracy') },
-  { name:'elections',    browser:true,  run:require('./chapters/elections') }
+  { name:'elections',    browser:true,  run:require('./chapters/elections') },
+  { name:'economics',    browser:true,  run:require('./chapters/economics') },
+  { name:'prices',       browser:true,  run:require('./chapters/prices') }
 ];
 
 (async () => {
