@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>The Problem of Choice — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: barley gold, and the violet of the wheat it costs ---------- */
+:root{ --a1:#E8C547; --a2:#7A5FCB; --badge-bg:#F8F1D8; }
+/*@include shared/chrome.css*/
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Social Science · Chapter 8</div>
+  <h1>The Problem<br><span>of Choice</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Scarcity, and what it forces</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="35" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>The Production Possibility Curve</b><i>Fig. 8.3 · one field, five ways to plant it</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>A farmer has one piece of land, and limited water and labour. Slide along the five combinations the chapter prints, and watch what each extra sack of barley costs in wheat.</p>
+    <div class="panel">
+      <canvas id="ppcCv" height="250"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="ppcS">Combination <b><span id="ppcSV">—</span></b></label>
+        <input id="ppcS" type="range" min="0" max="4" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Barley</div><div class="v" id="ppcA">—</div></div>
+        <div class="rc"><div class="k">Wheat</div><div class="v" id="ppcB">—</div></div>
+        <div class="rc"><div class="k">This step cost</div><div class="v" id="ppcC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>This is the <b>Production Possibility Curve</b>: the curve showing the different combinations of goods that can be produced using all available resources. As the farmer moves from point <b>A</b> to point <b>E</b>, they produce more barley and less wheat. To grow more barley, some wheat must be sacrificed — and that sacrifice is the <b>opportunity cost</b> of growing barley.</p>
+    <p>Every point on the curve shows the <b>maximum output</b> that can be produced through the efficient use of resources, by avoiding wastage. That is what makes it useful: it turns a vague sense of "we can't have everything" into a specific list of what is actually available, which is what enterprises and governments need in order to plan.</p>
+    <div class="curio">
+      <h5>The cost is not constant</h5>
+      <div class="note">Run the slider again and watch the last readout. The first 25 kg of barley costs 10 kg of wheat. The last 25 kg costs 40. That is arithmetic straight off the chapter's own table — and it is why the line bends instead of running straight.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="30" data-coin="15">
+  <summary><span class="mno">02</span><span class="mt"><b>Unlimited wants, limited everything else</b><i>Needs, wants, resources and the cost of choosing</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Pick everything the chapter says — and leave the three it contradicts.</p>
+    <div class="panel">
+      <div class="chips" id="g2"></div>
+      <button class="act" id="g2check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g2s"></div>
+    </div>
+    <p>Some of our preferences are <b>needs</b> — essentials like food, water and shelter. Others are <b>wants</b>: gadgets, vacations, luxury items. Human wants are <b>unlimited and keep changing</b>; people may want to upgrade from a bicycle to a motorbike, and then to a car.</p>
+    <p><b>Resources</b> are the factors used for the production of goods and services. They can be natural, like water and coal, or human-made, like capital and technology — and either way they are <b>limited in quantity</b>. They can also be put to many alternative uses, so choosing one use means giving up the others. The value of what is given up is the <b>opportunity cost</b>.</p>
+    <div class="curio">
+      <h5>Let's explore</h5>
+      <div class="note">List three things your parents bought this month. Can you sort them into needs and wants? And a harder one: do you think having too many wants may create problems — for a household, and for the world the resources come out of?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="35" data-coin="20">
+  <summary><span class="mno">03</span><span class="mt"><b>Five choices, five costs</b><i>The questions the chapter opens with</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>These are not random questions. Tap each one and look at what the other branch costs.</p>
+    <div class="panel">
+      <canvas id="oppCv" height="236"></canvas>
+      <div class="chips" id="oppOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Who is choosing</div><div class="v" id="oppA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">The opportunity cost</div><div class="v" id="oppB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="oppTxt">—</div>
+    </div>
+    <p>Notice who is doing the choosing in each: a child, a school, a farmer, an enterprise, a government. The chapter's point is that the shape of the problem does not change with the size of the chooser. Limited resources, more than one use for them, and a cost attached to whichever use you pick.</p>
+    <div class="curio">
+      <h5>Is time a resource?</h5>
+      <div class="note">The chapter asks it directly: how do <i>you</i> decide to spend your time? Is time scarce? If it is, then every hour has an opportunity cost too — and you have been doing economics all along without calling it that.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 2 · What the subject actually is</div>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="30" data-coin="15">
+  <summary><span class="mno">04</span><span class="mt"><b>Eight words, precisely</b><i>The chapter's own definitions</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Economics is a subject where the everyday meaning of a word and the technical one drift apart. Pair each term with the definition the chapter gives it.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a term, then tap its definition.</div>
+      <div class="match"><div id="g4a"></div><div id="g4b"></div></div>
+      <div class="score" id="g4s"></div>
+    </div>
+    <p>The word <b>Economics</b> itself comes from the Greek <i>oikonomia</i>, made of <i>oikos</i> — usually translated as <b>household</b> — and <i>nemein</i>, best translated as <b>management</b>. Economics is, at root, household management. With limited resources and unlimited wants, not just families but nations must plan how to use what they have efficiently.</p>
+    <p>The discipline deals with how choices are made by <b>optimising the use of limited resources</b> to satisfy needs and wants, and with how different economic entities — consumers, producers, governments and financial institutions — interact in an economy: how people work and earn wages, how wealth is distributed, how prices are determined, how education and technology drive investment, how policy and trade move prices and employment.</p>
+  </div>
+</details>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="35" data-coin="20">
+  <summary><span class="mno">05</span><span class="mt"><b>What an economist actually does</b><i>Fig. 8.4 · four kinds of work</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Not one job but four. Tap each.</p>
+    <div class="panel">
+      <canvas id="ecoCv" height="212"></canvas>
+      <div class="chips" id="ecoOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">The work</div><div class="v" id="ecoA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">For whom</div><div class="v" id="ecoB" style="font-size:11.5px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="ecoTxt">—</div>
+    </div>
+    <p>Good decisions rely on <b>data and analysis, not guesswork</b>. Families allocate money between essential items — food, medicines, school supplies — non-essential items like jewellery, entertainment and restaurant meals, and savings. Governments use revenue from taxation to plan expenditure on infrastructure and welfare programmes. Enterprises study market trends and new innovations to serve customers better and maximise profits.</p>
+    <p>Economists study the available alternatives, the opportunity costs attached to each, and the potential outcomes. They work from real records: government reports such as <b>economic surveys</b>, and the <b>financial statements</b> of companies. The analysis is what turns a list of options into an understanding of the risks and opportunities in each.</p>
+    <div class="curio">
+      <h5>The Economic Survey of India</h5>
+      <div class="note">An annual document prepared by the <b>Ministry of Finance</b> and presented in Parliament <b>before the Union Budget</b>. It reviews the past year's economic performance, analyses agriculture, industry and services along with employment, inflation, education, health and infrastructure, and discusses the challenges and opportunities ahead. It is a blueprint for the Budget that follows — and it is written to be readable by citizens, not only by policymakers.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="35" data-coin="20">
+  <summary><span class="mno">06</span><span class="mt"><b>From a mismatch to three questions</b><i>Fig. 8.5 · built one step at a time</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Two facts about the world, and everything else follows from them. Build the figure.</p>
+    <div class="panel">
+      <canvas id="scaCv" height="248"></canvas>
+      <div class="readout two">
+        <div class="rc"><div class="k">Step</div><div class="v" id="scaA">0 of 5</div></div>
+        <div class="rc"><div class="k">Just added</div><div class="v" id="scaB" style="font-size:11.5px">—</div></div>
+      </div>
+      <div class="row"><button class="act" id="scaNext" style="margin-top:12px">Add the next step</button></div>
+      <div class="note" style="margin-top:11px" id="scaTxt">—</div>
+    </div>
+    <p>Any mismatch between unlimited wants and limited resources gives rise to <b>scarcity</b>, and scarcity forces <b>choices</b>. Those choices are what the three key questions of economics are about: <b>what to produce</b>, <b>how to produce</b>, and <b>for whom to produce</b>.</p>
+    <p>The rest of this chapter is the three questions, one at a time — and then the three different ways a country can organise itself to answer them.</p>
+  </div>
+</details>
+
+<div class="sec">Part 3 · The three questions</div>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="30" data-coin="15">
+  <summary><span class="mno">07</span><span class="mt"><b>What to produce: sugarcane, or millets?</b><i>Short-term gain against long-term soil</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>The chapter's own example of the first question. Name the crop each line belongs to.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">All seven rows must be answered before it will mark.</div>
+      <table class="tick" id="g7"></table>
+      <div class="row"><button class="act" id="g7check">Check my answers</button></div>
+      <div class="score" id="g7s"></div>
+    </div>
+    <p>Should farmers produce <b>water-intensive crops</b> such as sugarcane and paddy, or <b>drought-resistant crops</b> such as millets and pulses? Sugarcane yields high profits and supports industries such as sugar. Millets and pulses save water, improve soil health and promote sustainable agriculture.</p>
+    <p>So the opportunity cost of producing sugarcane is <b>the forgone gains from saved water and improved soil health</b>. That is the whole shape of the question: a trade-off between short-term economic gains and long-term sustainability, made by accounting for the opportunity cost of each alternative. Companies, governments and consumers face the same kind of trade-off.</p>
+    <div class="curio">
+      <h5>Think about it</h5>
+      <div class="note">Should the government allocate more funds to healthcare and education, or to defence and space exploration? Whichever you answer, say what the opportunity cost of your answer is — that is the part that makes it an economic argument rather than a preference.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="35" data-coin="20">
+  <summary><span class="mno">08</span><span class="mt"><b>For whom to produce: four kinds of shoe</b><i>One product, four buyers</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Shoes are a common product — but no factory makes "a shoe". Tap each kind.</p>
+    <div class="panel">
+      <canvas id="shoCv" height="232"></canvas>
+      <div class="chips" id="shoOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Made for</div><div class="v" id="shoA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">What matters in it</div><div class="v" id="shoB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="shoTxt">—</div>
+    </div>
+    <p>The question of <b>for whom to produce</b> asks about the purpose of the goods produced, how they are distributed, and who benefits. Since resources are limited and people have different needs, income levels, tastes and lifestyles, producers decide which group of consumers they want to serve.</p>
+    <p>That decision reaches all the way down into the materials. <b>Leather</b> shoes are generally aimed at office-goers and high-income customers; <b>rubber or synthetic</b> shoes at sports players, factory workers, and people who need footwear that is affordable and durable. Producers analyse what consumers like, how much money they have, and how much demand there is, before deciding what to make — which is how limited resources end up being used well rather than wasted.</p>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="35" data-coin="20">
+  <summary><span class="mno">09</span><span class="mt"><b>How to produce: workers, or machines?</b><i>Slide the mix and watch the floor change</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>After what to produce comes how. Slide between the two ends the chapter names.</p>
+    <div class="panel">
+      <canvas id="mixCv" height="246"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="mixS">Machines <b><span id="mixSV">—</span></b></label>
+        <input id="mixS" type="range" min="0" max="100" step="1" value="20">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Method</div><div class="v" id="mixA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Typical of</div><div class="v" id="mixB" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">What pushes it here</div><div class="v" id="mixC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>Producers must select the right mix of the <b>factors of production</b> — land, labour, capital and technology. Production can be <b>labour-intensive</b>, using more workers and less machinery, or <b>capital-intensive</b>, using more machines and technology and fewer workers. Agriculture and handicrafts usually rely more on labour; industries such as steel and automobile manufacturing depend more on machinery.</p>
+    <p>Which way a particular firm goes depends on the <b>cost of capital</b>, the <b>technology available</b>, and the <b>nature of the product</b> — along with the availability and relative cost of each factor, and the country's laws and regulations.</p>
+    <div class="curio">
+      <h5>The garment factory</h5>
+      <div class="note">If machines are expensive, the firm relies more on labour; if machines become affordable, it may shift to automation. Advanced technology encourages machine use; limited technology leads to manual production. Customised or designer clothes need skilled labour; mass-produced garments suit machines. Cheap and plentiful labour favours labour-intensive methods; costly or scarce labour makes machines more efficient. And labour laws or incentives for machinery can tip the whole calculation either way.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="30" data-coin="15">
+  <summary><span class="mno">10</span><span class="mt"><b>Which way does this push?</b><i>Eight conditions from the garment factory</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Each of these pushes a producer one way. Which way?</p>
+    <div class="panel">
+      <div id="g10"></div>
+      <div class="score" id="g10s"></div>
+    </div>
+    <p>Read them in pairs and the logic comes out: it is always about which factor is <b>cheap and available</b> relative to the other, and whether the product is the kind of thing a machine can make. Nothing here is a rule about what firms <i>should</i> do — they are the conditions under which one choice beats the other.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · Three ways to answer them</div>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="35" data-coin="20">
+  <summary><span class="mno">11</span><span class="mt"><b>Planned, market, mixed</b><i>Who decides, and who owns</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The system that defines how production, consumption and distribution are organised. Tap each of the three.</p>
+    <div class="panel">
+      <canvas id="sysCv" height="250"></canvas>
+      <div class="chips" id="sysOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Who decides</div><div class="v" id="sysA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">Who owns</div><div class="v" id="sysB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="sysTxt">—</div>
+    </div>
+    <p>In an economy, the answers to the three key questions depend on <b>how the resources are organised</b> and <b>who controls the decision-making</b> about them. That is what an economic system is.</p>
+    <p>In practice the three are not tidy boxes. <b>Most economies have features of mixed systems</b> — private ownership, with some degree of government regulation. Even market economies like the United States and Singapore have significant government involvement, and the chapter is explicit that governments play an important role even in the economies it lists as market ones.</p>
+    <div class="curio">
+      <h5>Let's explore</h5>
+      <div class="note">Should the government stay out of enterprise decisions completely? And can you think of a case where government action clearly <i>helped</i> an industry — or clearly harmed one? The second question is the harder one, and the more useful.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="30" data-coin="15">
+  <summary><span class="mno">12</span><span class="mt"><b>Which system is this?</b><i>Seven descriptions, three systems</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Name the system each description belongs to.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">All seven rows must be answered before it will mark.</div>
+      <table class="tick" id="g12"></table>
+      <div class="row"><button class="act" id="g12check">Check my answers</button></div>
+      <div class="score" id="g12s"></div>
+    </div>
+    <p>The examples the chapter gives: <b>planned</b> — the former Soviet Union, North Korea, Cuba. <b>Market</b> — the United States of America, Japan, Hong Kong. <b>Mixed</b> — India after 1991, China after 1978, Germany, Sweden.</p>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="35" data-coin="20">
+  <summary><span class="mno">13</span><span class="mt"><b>One tonne of steel</b><i>Fig. 8.2 · alternative uses, and what they cost each other</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The same steel, and three things it could become. Send it somewhere and see what the other two lose.</p>
+    <div class="panel">
+      <canvas id="steCv" height="238"></canvas>
+      <div class="chips" id="steOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">The steel goes to</div><div class="v" id="steA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">Given up</div><div class="v" id="steB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="steTxt">—</div>
+    </div>
+    <p>Fig. 8.2 makes one point and makes it well: a resource has <b>alternative uses</b>. Steel can go to medical equipment, to refrigerator manufacturing, or to aircraft manufacturing. It is the same steel, and there is a limited quantity of it.</p>
+    <p>That is what connects a resource to a cost. Because the uses compete, sending the steel one way is also a decision not to send it the other two. The opportunity cost is not an extra charge somebody adds on — it is simply <b>the value of the alternative you did not take</b>, and it exists whether or not anyone bothers to calculate it.</p>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="35" data-coin="20">
+  <summary><span class="mno">14</span><span class="mt"><b>India's own path</b><i>State-led, 1991, and after</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>No country sits still on this spectrum. Step through where India has been.</p>
+    <div class="panel">
+      <canvas id="indCv" height="242"></canvas>
+      <div class="readout two">
+        <div class="rc"><div class="k">Step</div><div class="v" id="indA">0 of 5</div></div>
+        <div class="rc"><div class="k">Where</div><div class="v" id="indB" style="font-size:11.5px">—</div></div>
+      </div>
+      <div class="row"><button class="act" id="indNext" style="margin-top:12px">Move forward</button></div>
+      <div class="note" style="margin-top:11px" id="indTxt">—</div>
+    </div>
+    <p>In the decades after Independence, India followed a more <b>state-led approach</b>, similar to a planned economy. The government controlled industries, allocated resources and regulated production through <b>licences and permits</b>, and key sectors such as banking, transport and heavy industries were dominated by the <b>public sector</b>.</p>
+    <p>By <b>1991</b> the country faced serious economic difficulties. The government introduced major reforms that reduced excessive regulations, encouraged private enterprise, opened the economy to global trade and investment, and increased competition. These gradually shifted India towards a <b>more market-oriented system</b> — while still retaining an important role for the government.</p>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="30" data-coin="15">
+  <summary><span class="mno">15</span><span class="mt"><b>Two sides of a mixed economy</b><i>Fig. 8.8 · which half does what</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Fig. 8.8 puts eight things around a mixed economy, five on one side and three on the other. Tick the side each belongs to.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap once for a tick, twice for a cross. All sixteen boxes must be filled before it will mark.</div>
+      <table class="tick" id="g15"></table>
+      <div class="row"><button class="act" id="g15check">Check my answers</button></div>
+      <div class="score" id="g15s"></div>
+    </div>
+    <p>A mixed economy combines features of both systems. Private individuals, enterprises <i>and</i> the government all play important roles in making economic choices, and large <b>public sector companies</b> play a very important role in the market alongside private ones.</p>
+    <p><b>Public goods</b> are the clearest case of something the market side will not supply on its own: goods and services available to all, where one person's use does not prevent another's — parks, roads, police services, street lights, basic education. Nobody can be excluded from them, which is exactly why nobody can profitably sell them.</p>
+    <div class="curio">
+      <h5>Why pure systems are rare</h5>
+      <div class="note">The chapter's own closing exercise asks you to examine this critically: why do pure economic systems rarely exist in reality, what are the limitations of each, and why is a mixed economy so often considered the more practical approach? Every answer worth giving will use the word <i>trade-off</i>.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="90" data-coin="70">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">90 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, drawn from this chapter's own figures, definitions and the table behind the curve. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+
+<footer>NCERT Class 9 Social Science · Chapter 8</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*@include shared/storage.js*/
+
+/* ============================================================
+   Chapter 8 — Building Blocks in Economics: The Problem of Choice
+   Understanding Society: India and Beyond, Grade 9 Part 1
+
+   Progress metaphor: Fig. 8.3 being drawn. XP starts with two
+   bare axes and plots the chapter's own five combinations one
+   at a time — A, then B, then C, D, E — and finally joins them
+   into the Production Possibility Curve and shades what is
+   reachable underneath it. The chapter's central figure,
+   assembled in the order a reader would build it.
+   ============================================================ */
+const CH = {
+  id: '9-social-8',
+  key: 'ch08Econ',
+  total: 16,
+  stages: [
+    { at:0,   f:0.05, name:'Two axes',     d:'Barley across, wheat up, and nothing plotted on them yet.' },
+    { at:75,  f:0.20, name:'Point A',      d:'All wheat, no barley. One end of what the land can do.' },
+    { at:160, f:0.36, name:'A and B',      d:'25 kg of barley, and the first 10 kg of wheat given up for it.' },
+    { at:250, f:0.52, name:'Halfway',      d:'Fifty and seventy: point C, and the cost is rising.' },
+    { at:345, f:0.68, name:'Four points',  d:'Point D. Seventy-five kilos of barley now costs thirty of wheat.' },
+    { at:450, f:0.85, name:'All five',     d:'Point E: all barley, no wheat. The other end of the field.' },
+    { at:565, f:1.00, name:'The curve',    d:'Joined up — every combination the land can actually reach.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+
+    x.fillStyle = '#F8F1D8'; x.fillRect(0, 0, W, H);
+
+    /* The chapter's table, mapped onto the badge. px runs barley 0..100
+       across, py runs wheat 0..100 up. */
+    const P = [[0,100],[25,90],[50,70],[75,40],[100,0]];
+    const px = b => 20 + b/100*64, py = w => 76 - w/100*60;
+
+    // the axes
+    x.strokeStyle = '#B8A66A'; x.lineWidth = 1.5;
+    x.beginPath(); x.moveTo(20, 12); x.lineTo(20, 76); x.lineTo(88, 76); x.stroke();
+    x.strokeStyle = 'rgba(184,166,106,.35)'; x.lineWidth = 1;
+    for(let k=1;k<=4;k++){
+      x.beginPath(); x.moveTo(20, py(k*25)); x.lineTo(88, py(k*25)); x.stroke();
+    }
+
+    // how many of the five points have been plotted
+    const n = Math.max(0, Math.min(5, Math.round((f-0.05)/0.16)));
+
+    // the curve, once every point is on
+    if(f > 0.88){
+      x.strokeStyle = '#C4A62E'; x.lineWidth = 2;
+      x.beginPath();
+      P.forEach((p,i)=> i ? x.lineTo(px(p[0]), py(p[1])) : x.moveTo(px(p[0]), py(p[1])));
+      x.stroke();
+      if(f > 0.97){                                   // and what it encloses
+        x.fillStyle = 'rgba(232,197,71,.30)';
+        x.beginPath();
+        x.moveTo(px(0), py(0));
+        P.forEach(p=> x.lineTo(px(p[0]), py(p[1])));
+        x.lineTo(px(100), py(0));
+        x.closePath(); x.fill();
+      }
+    }
+
+    for(let i=0;i<n;i++){
+      x.fillStyle = i === n-1 ? '#6B4FB8' : '#C4A62E';
+      x.beginPath(); x.arc(px(P[i][0]), py(P[i][1]), i === n-1 ? 4 : 3, 0, 7); x.fill();
+    }
+
+    /* Both axis names along the bottom. Set inside the plot, 'wheat' lands
+       squarely on point A, which is always the first point drawn. */
+    x.fillStyle = '#8C7B45';
+    x.font = '600 8px "IBM Plex Mono",monospace';
+    x.textBaseline = 'top';
+    x.textAlign = 'left';  x.fillText('wheat', 18, 82);
+    x.textAlign = 'right'; x.fillText('barley', 88, 82);
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ============================================================
+   Chapter 8 interactives
+   Bespoke canvases: the Production Possibility Curve (M1) ·
+   five choices (M3) · what an economist does (M5) · Fig. 8.5
+   built up (M6) · four kinds of shoe (M8) · workers or
+   machines (M9) · the three systems (M11) · one tonne of steel
+   (M13) · India's own path (M14)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#E8C547', A2='#7A5FCB',
+      BG='#10141F', PAPER='#E7E2D2';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* Centred label that shrinks rather than overflowing its column. */
+function fitText(x, s, cx, y, max){
+  let size = 9.5;
+  mono(x, size, 500);
+  while(x.measureText(s).width > max && size > 6){ size -= 0.5; mono(x, size, 500); }
+  x.textAlign = 'center'; x.fillText(s, cx, y);
+}
+
+/* Wrapped body text inside a canvas. Returns the y it finished on. */
+function wrap(x, s, left, top, maxw, lh){
+  const words = s.split(' ');
+  let line = '', y = top;
+  words.forEach(w=>{
+    if(x.measureText(line + w + ' ').width > maxw && line){ x.fillText(line.trim(), left, y); line = w + ' '; y += lh; }
+    else line += w + ' ';
+  });
+  if(line.trim()) x.fillText(line.trim(), left, y);
+  return y + lh;
+}
+
+/* A labelled box, used by five of the diagrams. */
+function box(x, x0, y0, w, h, label, col, on){
+  x.fillStyle = on ? (col==='a2' ? 'rgba(122,95,203,.28)' : 'rgba(232,197,71,.22)') : 'rgba(142,154,192,.07)';
+  x.fillRect(x0, y0, w, h);
+  x.strokeStyle = on ? (col==='a2' ? A2 : A1) : RULE;
+  x.lineWidth = on ? 1.8 : 1;
+  x.strokeRect(x0, y0, w, h);
+  x.fillStyle = on ? '#FFFFFF' : 'rgba(142,154,192,.62)';
+  x.textBaseline = 'top';
+  fitText(x, label, x0+w/2, y0+h/2-5, w-8);
+}
+
+/* A stick figure, for the benches with people on them. */
+function person(x, cx, cy, s, col){
+  x.strokeStyle=col; x.fillStyle=col; x.lineWidth=Math.max(1.4, s*0.075);
+  x.beginPath(); x.arc(cx, cy-s*0.92, s*0.24, 0, 7); x.fill();
+  x.beginPath();
+  x.moveTo(cx, cy-s*0.66); x.lineTo(cx, cy+s*0.18);
+  x.moveTo(cx-s*0.32, cy-s*0.4); x.lineTo(cx+s*0.32, cy-s*0.4);
+  x.moveTo(cx, cy+s*0.18); x.lineTo(cx-s*0.26, cy+s*0.74);
+  x.moveTo(cx, cy+s*0.18); x.lineTo(cx+s*0.26, cy+s*0.74);
+  x.stroke();
+}
+
+/* ============================================================
+   M1 — the Production Possibility Curve
+   The five combinations are the chapter's table, unaltered.
+   The opportunity cost of each step is arithmetic on that
+   table — the wheat given up divided by nothing, just the
+   difference — which is why it can be stated as a number the
+   reader can check rather than a claim to be taken on trust.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('ppcCv'), sS=document.getElementById('ppcS');
+  const P=[
+    {n:'A', b:0,   w:100},
+    {n:'B', b:25,  w:90},
+    {n:'C', b:50,  w:70},
+    {n:'D', b:75,  w:40},
+    {n:'E', b:100, w:0}
+  ];
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=250, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value, p=P[i];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Fig. 8.3 · one field, five ways to plant it', 10, 8);
+
+    // the plot
+    const L=38, R=W-14, T=36, B=186;
+    const px = b => L + b/100*(R-L), py = w => B - w/100*(B-T);
+    x.strokeStyle='rgba(142,154,192,.18)'; x.lineWidth=1;
+    for(let k=0;k<=4;k++){
+      x.beginPath(); x.moveTo(L, py(k*25)); x.lineTo(R, py(k*25)); x.stroke();
+      x.beginPath(); x.moveTo(px(k*25), T); x.lineTo(px(k*25), B); x.stroke();
+    }
+    x.strokeStyle='rgba(240,238,230,.55)'; x.lineWidth=1.4;
+    x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+
+    // axis numbers
+    mono(x,8); x.fillStyle=DIM;
+    x.textAlign='right'; x.textBaseline='middle';
+    [0,50,100].forEach(v=> x.fillText(String(v), L-5, py(v)));
+    x.textAlign='center'; x.textBaseline='top';
+    [0,50,100].forEach(v=> x.fillText(String(v), px(v), B+5));
+    mono(x,8.5,500); x.fillStyle=A2; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('↑ wheat (kg)', 12, 24);          // above the plot, clear of point A
+    x.fillStyle=A1; x.textAlign='right';
+    x.fillText('barley (kg) →', R, B+18);
+
+    // the curve through all five points, then the points themselves
+    x.strokeStyle='rgba(232,197,71,.55)'; x.lineWidth=2;
+    x.beginPath();
+    P.forEach((q,k)=> k ? x.lineTo(px(q.b), py(q.w)) : x.moveTo(px(q.b), py(q.w)));
+    x.stroke();
+    P.forEach((q,k)=>{
+      const on = k===i;
+      x.fillStyle = on ? '#FFFFFF' : 'rgba(232,197,71,.8)';
+      x.beginPath(); x.arc(px(q.b), py(q.w), on ? 5 : 3.2, 0, 7); x.fill();
+      /* Each label goes wherever there is room. Flipped inward on the right,
+         because E's label hangs off the canvas otherwise; and dropped below
+         the dot at the very top, where A would otherwise sit on the y-axis
+         caption. */
+      mono(x,9,600); x.fillStyle = on ? '#FFFFFF' : 'rgba(240,238,230,.5)';
+      const flip = q.b > 60, below = q.w >= 100;
+      x.textAlign = flip ? 'right' : 'left';
+      x.textBaseline = below ? 'top' : 'bottom';
+      x.fillText(q.n, px(q.b) + (flip ? -7 : 7), py(q.w) + (below ? 6 : -4));
+    });
+
+    // dropped lines from the chosen point to both axes
+    x.strokeStyle='rgba(255,255,255,.4)'; x.lineWidth=1; x.setLineDash([3,3]);
+    x.beginPath();
+    x.moveTo(L, py(p.w)); x.lineTo(px(p.b), py(p.w)); x.lineTo(px(p.b), B);
+    x.stroke(); x.setLineDash([]);
+
+    // and the step, spelled out under the plot
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 212); x.lineTo(W-10, 212); x.stroke();
+    const prev = i>0 ? P[i-1] : null;
+    mono(x,9.5,500); x.textAlign='left'; x.textBaseline='top';
+    if(prev){
+      x.fillStyle=A1;
+      x.fillText('+' + (p.b-prev.b) + ' kg barley', 12, 220);
+      x.fillStyle=A2; x.textAlign='right';
+      x.fillText('−' + (prev.w-p.w) + ' kg wheat', W-12, 220);
+      mono(x,8.5); x.fillStyle=DIM; x.textAlign='center';
+      fitText(x, 'the opportunity cost of this step', W/2, 236, W-24);
+    } else {
+      x.fillStyle=DIM;
+      fitText(x, 'point A: all wheat, and no barley at all', W/2, 226, W-24);
+    }
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('ppcSV').textContent=p.n;
+    document.getElementById('ppcA').textContent=p.b + ' kg';
+    document.getElementById('ppcB').textContent=p.w + ' kg';
+    document.getElementById('ppcC').textContent = prev
+      ? (prev.w-p.w) + ' kg of wheat, given up for ' + (p.b-prev.b) + ' kg of barley'
+      : 'Nothing yet — this is the starting point';
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','ppcS');
+      if(Object.keys(seen).length>=4) complete('m1');
+      draw();
+    };
+  }
+  reg('m1',draw);
+})();
+
+/* ============================================================
+   M2 — unlimited wants, limited everything else
+   ============================================================ */
+Q.pick('g2','g2check','g2s',[
+  {t:'Human wants are unlimited, and keep changing',                a:1},
+  {t:'Needs are essentials like food, water and shelter',           a:1},
+  {t:'Natural and human-made resources are both limited in quantity', a:1},
+  {t:'Resources can be put to many alternative uses',               a:1},
+  {t:'The value of what is given up is the opportunity cost',       a:1},
+  {t:'Economies, not just households, must choose how to use resources', a:1},
+  {t:'Every point on a PPC is the maximum output, with no wastage', a:1},
+  {t:'Natural resources are unlimited, unlike human-made ones',     a:0},
+  {t:'A well-made choice has no opportunity cost',                  a:0},
+  {t:'Scarcity is a problem for households but not for nations',    a:0}
+], 'm2',
+   'Right. Scarcity is not a shortage of one thing — it is the permanent gap between unlimited wants and limited resources, and it applies to a household and a nation in exactly the same way.');
+
+/* ============================================================
+   M3 — five choices, five costs
+   The chapter opens with these five questions and does not
+   answer any of them, so neither does this bench: both
+   branches stay lit, and the readout names the cost of taking
+   either one rather than picking a winner.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('oppCv'), box2=document.getElementById('oppOpts');
+  const C=[
+    {k:'pocket', t:'Pocket money', who:'A child, with pocket money',
+     q:'Spend it, or save it?',
+     opts:['Snacks now','Save for new shoes'],
+     cost:'Whichever is chosen, the value of the other is the opportunity cost.',
+     w:'The smallest version of the problem, and structurally identical to the largest. One pool of money, two uses, and no way to have both.'},
+    {k:'library', t:'The library', who:'A school library',
+     q:'Five copies, twenty students.',
+     opts:['Who reads first?','Can they share?','Buy more copies?'],
+     cost:'Reading time for the other fifteen — or the money spent on extra copies.',
+     w:'The chapter asks all three questions and leaves them open. Notice that "buy more copies" does not escape the problem; it moves the cost to whatever that money would otherwise have bought.'},
+    {k:'farmer', t:'The farmer', who:'A farmer with one field',
+     q:'Which crop, given the soil, the rainfall and market demand?',
+     opts:['One crop','Another crop'],
+     cost:'The yield and the income from the crop not planted.',
+     w:'Three constraints at once — soil, rainfall, demand — and a decision that cannot be unmade until the next season. This is the choice Fig. 8.3 turns into a curve.'},
+    {k:'firm', t:'The enterprise', who:'An enterprise, producing goods',
+     q:'More labour, or more capital?',
+     opts:['Employ more workers','Use more machines'],
+     cost:'What the money spent one way would have produced the other way.',
+     w:'The chapter comes back to this as the second key question, how to produce, with the cost of capital, the technology available and the nature of the product all pulling at the answer.'},
+    {k:'state', t:'The government', who:'A government, spending tax revenue',
+     q:'Highways, or hospitals?',
+     opts:['Build highways','Build hospitals'],
+     cost:'Everything the other would have delivered, for everyone who needed it.',
+     w:'The same arithmetic, at the scale where the opportunity cost is measured in other people’s lives rather than in pocket money. Governments use revenue from taxation to plan expenditure on infrastructure and welfare programmes — and every rupee is in both plans at once until it is spent.'}
+  ];
+  let sel=0; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=236, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, c=C[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('one pool of resources, more than one use', 10, 8);
+
+    // the question
+    sans(x,13,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    const after = wrap(x, c.q, 12, 28, W-24, 17);
+
+    // the fork: a node on the left, and the branches fanning right
+    /* The stack is laid out below the question and the node then centred on
+       it. Centring the node on the question instead put the first branch on
+       top of the question text. */
+    const nx=30, n=c.opts.length, bw=W-nx-42, bh=26, gap=10;
+    const top = after + 14, ny = top + (n*bh + (n-1)*gap)/2;
+    x.fillStyle=A1;
+    x.beginPath(); x.arc(nx, ny, 6, 0, 7); x.fill();
+    c.opts.forEach((o,i)=>{
+      const by = top + i*(bh+gap);
+      x.strokeStyle='rgba(232,197,71,.5)'; x.lineWidth=1.4;
+      x.beginPath();
+      x.moveTo(nx+7, ny); x.lineTo(nx+20, ny); x.lineTo(nx+20, by+bh/2); x.lineTo(nx+30, by+bh/2);
+      x.stroke();
+      box(x, nx+32, by, bw-20, bh, o, i%2 ? 'a2' : 'a1', true);
+    });
+
+    // and the line the chapter keeps coming back to
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 198); x.lineTo(W-10, 198); x.stroke();
+    mono(x,9,500); x.fillStyle=A2; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('whichever is taken, the other is the cost', 12, 206);
+    mono(x,8.5); x.fillStyle=DIM;
+    x.fillText(c.who, 12, 220);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('oppA').textContent=c.who;
+    document.getElementById('oppB').textContent=c.cost;
+    document.getElementById('oppTxt').textContent=c.w;
+  }
+  if(cv){
+    C.forEach((c,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=c.t;
+      b.onclick=()=>{
+        sel=i; seen[c.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','opp-'+c.k);
+        if(Object.keys(seen).length>=4) complete('m3');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m3',draw);
+})();
+
+/* ============================================================
+   M4 — eight words, precisely
+   Both columns stay short: Q.match lays them side by side, and
+   a right-hand card of twenty words leaves the left column
+   standing in twice its own height of empty space.
+   ============================================================ */
+Q.match('g4a','g4b','g4s',[
+  ['Market',
+   'Where buying and selling happen, physical or online'],
+  ['Resources',
+   'Factors used to produce goods and services'],
+  ['Opportunity cost',
+   'The value of what is given up'],
+  ['Production Possibility Curve',
+   'Combinations producible with all available resources'],
+  ['Economy',
+   'Production, distribution, trade and consumption in an area'],
+  ['Economic entities',
+   'Producers, consumers, government and enterprises'],
+  ['Public goods',
+   'Open to all; one person’s use excludes nobody'],
+  ['Data',
+   'Facts and statistics gathered for reference or analysis']
+], 'm4',
+   'All eight. Four of them — market, resources, economy, data — are words you already used before this chapter. The work was in finding out what they mean when an economist says them.');
+
+/* ============================================================
+   M5 — what an economist actually does
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('ecoCv'), box2=document.getElementById('ecoOpts');
+  const E=[
+    {k:'pol', t:'Policy-making', full:'Policy-making',
+     a:'Guiding governments on taxation or welfare spending',
+     b:'Governments', icon:'state',
+     w:'Governments use revenue from taxation to plan expenditure on infrastructure and welfare programmes. Somebody has to work out which of those plans the revenue can actually carry.'},
+    {k:'fin', t:'Finance', full:'Finance',
+     a:'Advising investors on where to invest',
+     b:'Investors', icon:'coin',
+     w:'The question is always the same one: of the alternatives available, which has the best expected outcome once its risks and its opportunity cost are counted?'},
+    {k:'res', t:'Research', full:'Research and education',
+     a:'Studying economic trends and teaching others',
+     b:'Everybody else', icon:'book',
+     w:'Economists work from real records — government reports such as economic surveys, and the financial statements of companies. Research is what turns those into an understanding of the risks and opportunities in them.'},
+    {k:'bus', t:'Consulting', full:'Business consulting',
+     a:'Helping firms plan growth or improve efficiency',
+     b:'Enterprises', icon:'chart',
+     w:'Enterprises study market trends and new innovations to serve customers better and maximise profits. Efficiency here means the chapter’s sense of it: getting the maximum output from the resources, without wastage.'}
+  ];
+  let sel=0; const seen={};
+  function glyph(x, kind, cx, cy, col){
+    x.strokeStyle=col; x.fillStyle=col; x.lineWidth=1.8;
+    if(kind==='state'){                                  // a columned building
+      x.fillRect(cx-14, cy+8, 28, 3);
+      for(let i=0;i<4;i++) x.fillRect(cx-12+i*7, cy-4, 3, 12);
+      x.beginPath(); x.moveTo(cx-16, cy-6); x.lineTo(cx, cy-14); x.lineTo(cx+16, cy-6); x.closePath(); x.fill();
+    } else if(kind==='coin'){                            // a coin, with an arrow up
+      x.beginPath(); x.arc(cx-4, cy+2, 9, 0, 7); x.stroke();
+      arrow(x, cx+4, cy+8, cx+14, cy-10, col, 5);
+    } else if(kind==='book'){                            // an open book
+      x.beginPath();
+      x.moveTo(cx-14, cy-8); x.lineTo(cx, cy-4); x.lineTo(cx+14, cy-8);
+      x.lineTo(cx+14, cy+9); x.lineTo(cx, cy+13); x.lineTo(cx-14, cy+9);
+      x.closePath(); x.stroke();
+      x.beginPath(); x.moveTo(cx, cy-4); x.lineTo(cx, cy+13); x.stroke();
+    } else {                                             // a rising bar chart
+      [6,11,16].forEach((h,i)=> x.fillRect(cx-14+i*10, cy+10-h, 7, h));
+    }
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=212, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, e=E[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Fig. 8.4 · the scope of an economist’s work', 10, 8);
+
+    // four quadrants, as the figure lays them out
+    const qw=(W-26)/2, qh=56;
+    E.forEach((q,i)=>{
+      const qx=12+(i%2)*(qw+2), qy=32+Math.floor(i/2)*(qh+8), on=i===sel;
+      x.fillStyle = on ? 'rgba(232,197,71,.16)' : 'rgba(142,154,192,.06)';
+      x.fillRect(qx, qy, qw, qh);
+      x.strokeStyle = on ? A1 : RULE; x.lineWidth = on ? 1.8 : 1;
+      x.strokeRect(qx, qy, qw, qh);
+      glyph(x, q.icon, qx+qw/2, qy+20, on ? A1 : 'rgba(142,154,192,.45)');
+      x.fillStyle = on ? INK : 'rgba(142,154,192,.6)';
+      fitText(x, q.full, qx+qw/2, qy+qh-15, qw-8);
+    });
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 162); x.lineTo(W-10, 162); x.stroke();
+    sans(x,12); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    wrap(x, e.a, 12, 170, W-24, 16);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('ecoA').textContent=e.a;
+    document.getElementById('ecoB').textContent=e.b;
+    document.getElementById('ecoTxt').textContent=e.w;
+  }
+  if(cv){
+    E.forEach((e,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=e.t;
+      b.onclick=()=>{
+        sel=i; seen[e.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','eco-'+e.k);
+        if(Object.keys(seen).length>=3) complete('m5');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m5',draw);
+})();
+
+/* ============================================================
+   M6 — from a mismatch to three questions
+   Fig. 8.5, built in the order it reads: the two facts, then
+   what they produce between them, then what that forces, then
+   the three questions one at a time.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('scaCv'), btn=document.getElementById('scaNext');
+  const ST=[
+    {n:'Two facts',
+     w:'Human wants are unlimited and keep changing. Resources — natural and human-made alike — are limited in quantity. Neither fact is going away.'},
+    {n:'Scarcity',
+     w:'Any mismatch between unlimited wants and limited resources is scarcity. Note what it is not: a shortage of one particular thing, which can be fixed. Scarcity is the permanent gap between the two.'},
+    {n:'Choices',
+     w:'Scarcity forces choices. Since resources have competing uses, individuals, enterprises and governments must decide how best to allocate them — and those decisions affect the well-being of people and society as a whole.'},
+    {n:'What to produce',
+     w:'Which goods and services, and in what quantities, should be produced to meet the needs of the economy over a given period.'},
+    {n:'How to produce',
+     w:'Which methods, resources and technologies should be used — the right mix of land, labour, capital and technology.'},
+    {n:'For whom to produce',
+     w:'The purpose of the goods and services produced, how they are distributed, and who benefits from their production.'}
+  ];
+  let at=0;
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=248, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, half=(W-32)/2;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Fig. 8.5 · what economics is asked to answer', 10, 8);
+
+    // the two facts, always present
+    box(x, 12, 28, half, 30, 'Unlimited wants', 'a2', true);
+    box(x, 20+half, 28, half, 30, 'Limited resources', 'a2', true);
+
+    // scarcity
+    if(at >= 1){
+      x.strokeStyle='rgba(142,154,192,.45)'; x.lineWidth=1;
+      x.beginPath();
+      x.moveTo(12+half/2, 58); x.lineTo(12+half/2, 68); x.lineTo(W-20-half/2, 68);
+      x.lineTo(W-20-half/2, 58); x.moveTo(W/2, 68); x.lineTo(W/2, 76);
+      x.stroke();
+      box(x, W*0.22, 76, W*0.56, 28, 'S C A R C I T Y', 'a1', true);
+    }
+    // choices
+    if(at >= 2){
+      arrow(x, W/2, 106, W/2, 118, A1, 6);
+      box(x, W*0.28, 120, W*0.44, 26, 'C H O I C E S', 'a1', true);
+    }
+    // and the three questions, one press each
+    const Q=['What to produce','How to produce','For whom to produce'];
+    if(at >= 3){
+      x.strokeStyle='rgba(232,197,71,.5)'; x.lineWidth=1;
+      x.beginPath(); x.moveTo(W/2, 146); x.lineTo(W/2, 156); x.stroke();
+    }
+    Q.forEach((q,i)=>{
+      if(at < 3+i) return;
+      box(x, 12, 158+i*28, W-24, 24, q, 'a2', true);
+    });
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    const s=ST[at];
+    document.getElementById('scaA').textContent=at + ' of ' + (ST.length-1);
+    document.getElementById('scaB').textContent=s.n;
+    document.getElementById('scaTxt').textContent=s.w;
+  }
+  if(btn){
+    btn.onclick=()=>{
+      at = at >= ST.length-1 ? 0 : at+1;
+      ev('explore','sca-'+at);
+      btn.textContent = at >= ST.length-1 ? 'Build it again' : 'Add the next step';
+      if(at >= ST.length-1) complete('m6');
+      draw();
+    };
+  }
+  reg('m6',draw);
+})();
+
+/* ============================================================
+   M7 — what to produce: sugarcane, or millets
+   'Sugarcane' and 'Millets' are shorthand for the chapter's
+   two groups — sugarcane and paddy, millets and pulses.
+   ============================================================ */
+Q.vgrid('g7','g7check','g7s',{
+  head:'True of…', mid:'m7',
+  cols:['The crop'],
+  options:[['Sugarcane','Millets']],
+  rows:[
+    {l:'Water-intensive',                   a:['Sugarcane']},
+    {l:'Drought-resistant',                 a:['Millets']},
+    {l:'Yields high profits',               a:['Sugarcane']},
+    {l:'Supports industries such as sugar', a:['Sugarcane']},
+    {l:'Saves water',                       a:['Millets']},
+    {l:'Improves soil health',              a:['Millets']},
+    {l:'Promotes sustainable agriculture',  a:['Millets']}
+  ],
+  doneMsg:'All seven. So the opportunity cost of growing sugarcane is the forgone gains from saved water and improved soil health — a short-term gain traded against a long-term one.'
+});
+
+/* ============================================================
+   M8 — for whom to produce: four kinds of shoe
+   Four side profiles from one outline, varied by the features
+   the chapter actually names: a thick moulded sole for sport,
+   a raised heel and polish for the office, an open back for a
+   slipper, plain and sturdy for school.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('shoCv'), box2=document.getElementById('shoOpts');
+  const S=[
+    {k:'school', t:'School',
+     a:'Students',
+     b:'Simple in design, durable, and affordable',
+     w:'The shoe that has to survive a year of being worn every day by somebody who is still growing, and be cheap enough to replace when they have.'},
+    {k:'office', t:'Office',
+     a:'Working professionals',
+     b:'Comfort, formal appearance and quality',
+     w:'Often made of leather or polished materials. Leather shoes are generally targeted at office-goers and high-income customers — the material follows the buyer, not the other way round.'},
+    {k:'sports', t:'Sports',
+     a:'Athletes and fitness enthusiasts',
+     b:'Grip, flexibility and support',
+     w:'Designed using special rubber soles and lightweight materials. Rubber and synthetic shoes are aimed at sports players, factory workers, and anyone who needs footwear that is affordable and durable.'},
+    {k:'casual', t:'Casual',
+     a:'Everybody, for daily use',
+     b:'Comfortable yet affordable',
+     w:'Casual shoes and slippers. The largest group of buyers and the loosest specification — which is its own kind of design problem.'}
+  ];
+  let sel=0; const seen={};
+  function shoe(x, cx, cy, kind, col){
+    const sc=1.5;
+    x.save(); x.translate(cx, cy); x.scale(sc, sc);
+    // the sole, thicker for sport
+    const soleH = kind==='sports' ? 9 : 5;
+    x.fillStyle=col;
+    x.fillRect(-34, 0, 68, soleH);
+    if(kind==='office'){                                   // a raised heel
+      x.fillRect(16, soleH, 14, 6);
+    }
+    // the upper
+    x.beginPath();
+    x.moveTo(-34, 0);
+    x.lineTo(-34, -10);
+    if(kind==='casual'){                                   // open at the back
+      x.lineTo(-6, -12); x.lineTo(2, -20); x.lineTo(14, -20); x.lineTo(20, -8); x.lineTo(34, -6);
+    } else {
+      x.lineTo(-20, -12);
+      x.lineTo(4, kind==='sports' ? -26 : -22);
+      x.lineTo(24, kind==='sports' ? -24 : -20);
+      x.lineTo(34, -4);
+    }
+    x.lineTo(34, 0);
+    x.closePath();
+    x.fillStyle = kind==='office' ? 'rgba(122,95,203,.5)' : 'rgba(232,197,71,.35)';
+    x.fill();
+    x.strokeStyle=col; x.lineWidth=1.4; x.stroke();
+    // laces, on everything but the slipper
+    if(kind!=='casual'){
+      x.strokeStyle=col; x.lineWidth=1.1;
+      for(let i=0;i<3;i++){
+        x.beginPath();
+        x.moveTo(-2+i*7, -19 + (kind==='sports'?-2:0));
+        x.lineTo(6+i*7, -13 + (kind==='sports'?-2:0));
+        x.stroke();
+      }
+    }
+    if(kind==='sports'){                                   // a stripe, and a treaded sole
+      x.strokeStyle=col; x.lineWidth=1.6;
+      x.beginPath(); x.moveTo(-24, -4); x.lineTo(2, -14); x.stroke();
+      x.lineWidth=1;
+      for(let i=0;i<8;i++){
+        x.beginPath(); x.moveTo(-32+i*8, soleH); x.lineTo(-32+i*8, soleH-4); x.stroke();
+      }
+    }
+    if(kind==='office'){                                   // a shine
+      x.strokeStyle='rgba(255,255,255,.55)'; x.lineWidth=1.2;
+      x.beginPath(); x.moveTo(-26, -6); x.lineTo(-14, -8); x.stroke();
+    }
+    x.restore();
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=232, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=S[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('one product, four buyers', 10, 8);
+
+    shoe(x, W/2, 92, s.k, A1);
+    x.fillStyle='rgba(142,154,192,.2)'; x.fillRect(W/2-58, 102, 116, 1.5);
+
+    // who it is for
+    mono(x,9,500); x.fillStyle=A2; x.textAlign='center'; x.textBaseline='top';
+    fitText(x, 'made for: ' + s.a.toLowerCase(), W/2, 120, W-24);
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 160); x.lineTo(W-10, 160); x.stroke();
+    sans(x,13,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    const after = wrap(x, s.b, 12, 168, W-24, 17);
+    mono(x,8.5); x.fillStyle=DIM;
+    x.fillText('the specification follows the buyer', 12, after + 2);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('shoA').textContent=s.a;
+    document.getElementById('shoB').textContent=s.b;
+    document.getElementById('shoTxt').textContent=s.w;
+  }
+  if(cv){
+    S.forEach((s,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=s.t;
+      b.onclick=()=>{
+        sel=i; seen[s.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','sho-'+s.k);
+        if(Object.keys(seen).length>=3) complete('m8');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m8',draw);
+})();
+
+/* ============================================================
+   M9 — how to produce: workers, or machines
+   Only the two ends carry the chapter's own terms. The middle
+   of the slider is described neutrally, because the chapter
+   names labour-intensive and capital-intensive and nothing
+   in between.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('mixCv'), sS=document.getElementById('mixS');
+  const seen={};
+  function band(v){
+    if(v <= 33) return {
+      n:'Labour-intensive',
+      b:'Agriculture and handicrafts',
+      c:'Machines are expensive, technology is limited, the product is customised, and labour is cheap and easily available.'};
+    if(v <= 66) return {
+      n:'Between the two',
+      b:'Most real production floors',
+      c:'The chapter names the two ends. Real firms sit between them, and move as the relative cost of labour and capital moves.'};
+    return {
+      n:'Capital-intensive',
+      b:'Steel and automobile manufacturing',
+      c:'Machines are affordable, technology is advanced, the product is mass-produced, and labour is costly or scarce.'};
+  }
+  function machine(x, mx, my, col){
+    x.fillStyle=col;
+    x.fillRect(mx-13, my-16, 26, 16);
+    x.fillStyle=BG; x.fillRect(mx-8, my-12, 16, 5);
+    x.fillStyle=col;
+    x.beginPath(); x.arc(mx-7, my+3, 4, 0, 7); x.fill();
+    x.beginPath(); x.arc(mx+7, my+3, 4, 0, 7); x.fill();
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=246, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, v=+sS.value, bd=band(v);
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the same output, two different floors', 10, 8);
+
+    /* Eight production units on the floor. How many are people and how many
+       are machines is the whole variable. */
+    const N=8, workers = Math.max(0, Math.min(N, Math.round(N*(100-v)/100)));
+    const gy=118, gw=(W-24)/N;
+    for(let i=0;i<N;i++){
+      const cx=12+gw*i+gw/2;
+      if(i < workers) person(x, cx, gy, 30, A2);
+      else machine(x, cx, gy, A1);
+    }
+    x.fillStyle='rgba(142,154,192,.22)'; x.fillRect(12, gy+24, W-24, 2);
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    x.fillText(workers + ' workers · ' + (N-workers) + ' machines', W/2, gy+32);
+
+    // the spectrum, with the slider's position on it
+    const sy=34, sx0=12, sx1=W-12;
+    x.fillStyle='rgba(122,95,203,.25)'; x.fillRect(sx0, sy, (sx1-sx0)/2, 14);
+    x.fillStyle='rgba(232,197,71,.25)'; x.fillRect(sx0+(sx1-sx0)/2, sy, (sx1-sx0)/2, 14);
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(sx0, sy, sx1-sx0, 14);
+    const mx = sx0 + (sx1-sx0)*v/100;
+    x.fillStyle='#FFFFFF';
+    x.beginPath(); x.moveTo(mx, sy-5); x.lineTo(mx+5, sy-12); x.lineTo(mx-5, sy-12); x.closePath(); x.fill();
+    x.fillRect(mx-1, sy, 2, 14);
+    mono(x,8); x.textBaseline='top';
+    x.fillStyle=A2; x.textAlign='left';  x.fillText('all labour', sx0, sy+18);
+    x.fillStyle=A1; x.textAlign='right'; x.fillText('all machines', sx1, sy+18);
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 178); x.lineTo(W-10, 178); x.stroke();
+    sans(x,15,600); x.fillStyle = v<=33 ? A2 : v<=66 ? INK : A1;
+    x.textAlign='left'; x.textBaseline='top';
+    const after = wrap(x, bd.n, 12, 186, W-24, 18);
+    mono(x,9); x.fillStyle=DIM;
+    wrap(x, 'typical of: ' + bd.b.toLowerCase(), 12, after + 2, W-24, 13);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('mixSV').textContent=v + '%';
+    document.getElementById('mixA').textContent=bd.n;
+    document.getElementById('mixB').textContent=bd.b;
+    document.getElementById('mixC').textContent=bd.c;
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[Math.floor(+sS.value/20)]=1; ev('explore','mixS');
+      if(Object.keys(seen).length>=4) complete('m9');
+      draw();
+    };
+  }
+  reg('m9',draw);
+})();
+
+/* ============================================================
+   M10 — which way does this push
+   Short choice labels on purpose: Q.rows wraps on the row
+   text's flex basis rather than its content, so a longer pair
+   puts the second choice on a line of its own.
+   ============================================================ */
+Q.rows('g10','g10s',[
+  {t:'Machines are expensive',              a:0},
+  {t:'Machines have become affordable',     a:1},
+  {t:'Advanced technology is available',    a:1},
+  {t:'Only limited technology is available', a:0},
+  {t:'Customised or designer clothes',      a:0},
+  {t:'Mass-produced garments',              a:1},
+  {t:'Labour is cheap and easily available', a:0},
+  {t:'Labour is costly or scarce',          a:1}
+], ['Labour','Machines'], 'm10',
+   'All eight. Read them in pairs and the rule falls out: a producer leans on whichever factor is cheaper and more available — and on whichever one the product itself can actually be made by.');
+
+/* ============================================================
+   M11 — planned, market, mixed
+   The spectrum is the argument: the three are not three boxes
+   but three positions on one axis, which is why the chapter
+   can say that most economies are mixed.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('sysCv'), box2=document.getElementById('sysOpts');
+  const SY=[
+    {k:'plan', t:'Planned', pos:0.08,
+     a:'A central planning authority of the government',
+     b:'The government, in most resources and sectors',
+     eg:'Former Soviet Union, North Korea, Cuba',
+     w:'It decides what and how much will be produced, how, and who will get to use them and at what prices. The government owns land, factories, banks and transport. With limited private ownership, enterprises follow the central authority’s targets rather than market demand, and are heavily regulated through strict permits and licences — which keeps the number of enterprises down, restricts competition, and leaves little motivation to improve quality or innovate.'},
+    {k:'mark', t:'Market', pos:0.92,
+     a:'The forces of demand and supply',
+     b:'Individuals and private companies',
+     eg:'United States of America, Japan, Hong Kong',
+     w:'What, how and how much to produce are settled mainly by demand and supply, with little government intervention. The government acts like a referee in a football match: it ensures safety and law and order, and does not control prices or production. Many producers offering similar products encourages better quality, lower prices and innovation. Even so, governments play an important role in these economies too.'},
+    {k:'mix', t:'Mixed', pos:0.5,
+     a:'Private individuals, enterprises and the government together',
+     b:'Both — private owners, and large public sector companies',
+     eg:'India (post-1991), China (post-1978), Germany, Sweden',
+     w:'It combines features of both. Private ownership coexists with some degree of government regulation, and large public sector companies play a very important role in the market. In reality most economies have features of mixed systems — even market economies like the United States and Singapore have significant government involvement.'}
+  ];
+  let sel=0; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=250, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=SY[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('who decides, and who owns', 10, 8);
+
+    // one axis, three positions on it
+    const ax=24, bxr=W-24, ay=54;
+    const grad=x.createLinearGradient(ax, 0, bxr, 0);
+    grad.addColorStop(0, 'rgba(122,95,203,.45)');
+    grad.addColorStop(1, 'rgba(232,197,71,.45)');
+    x.fillStyle=grad; x.fillRect(ax, ay, bxr-ax, 16);
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(ax, ay, bxr-ax, 16);
+    mono(x,8); x.fillStyle=DIM; x.textBaseline='top';
+    x.textAlign='left';  x.fillText('the state decides', ax, ay+21);
+    x.textAlign='right'; x.fillText('the market decides', bxr, ay+21);
+    SY.forEach(q=>{
+      const qx = ax + (bxr-ax)*q.pos, on = q===s;
+      x.fillStyle = on ? '#FFFFFF' : 'rgba(240,238,230,.4)';
+      x.beginPath(); x.arc(qx, ay+8, on ? 6 : 3.5, 0, 7); x.fill();
+      if(on){
+        mono(x,10,600); x.fillStyle='#FFFFFF'; x.textAlign='center'; x.textBaseline='bottom';
+        x.fillText(q.t, qx, ay-8);
+      }
+    });
+
+    // who decides, and who owns
+    const half=(W-32)/2;
+    box(x, 12, 96, half, 22, 'who decides', 'a2', true);
+    box(x, 20+half, 96, half, 22, 'who owns', 'a1', true);
+    sans(x,11.5); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    const e1 = wrap(x, s.a, 14, 124, half-4, 15);
+    const e2 = wrap(x, s.b, 22+half, 124, half-4, 15);
+
+    const base = Math.max(e1, e2) + 6;
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, base); x.lineTo(W-10, base); x.stroke();
+    mono(x,8.5,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('for example', 12, base+8);
+    mono(x,9.5,500); x.fillStyle=A1;
+    wrap(x, s.eg, 12, base+22, W-24, 13);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('sysA').textContent=s.a;
+    document.getElementById('sysB').textContent=s.b;
+    /* The example countries go into the note as well as onto the canvas: a
+       list that exists only as pixels cannot be read out, searched, or
+       checked. */
+    document.getElementById('sysTxt').textContent=s.w + ' Examples: ' + s.eg + '.';
+  }
+  if(cv){
+    SY.forEach((s,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=s.t;
+      b.onclick=()=>{
+        sel=i; seen[s.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','sys-'+s.k);
+        if(Object.keys(seen).length>=3) complete('m11');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m11',draw);
+})();
+
+/* ============================================================
+   M12 — which system is this
+   ============================================================ */
+Q.vgrid('g12','g12check','g12s',{
+  head:'This describes…', mid:'m12',
+  cols:['The system'],
+  options:[['Planned','Market','Mixed']],
+  rows:[
+    {l:'A central planning authority decides what is produced',   a:['Planned']},
+    {l:'The government owns land, factories, banks and transport', a:['Planned']},
+    {l:'Strict permits and licences restrict competition',        a:['Planned']},
+    {l:'Demand and supply decide, with little intervention',      a:['Market']},
+    {l:'The government acts like a referee in a football match',  a:['Market']},
+    {l:'Private ownership, with some government regulation',      a:['Mixed']},
+    {l:'India after 1991, and China after 1978',                  a:['Mixed']}
+  ],
+  doneMsg:'All seven. And the one worth holding on to is the last: almost every economy in the world is somewhere in the middle row.'
+});
+
+/* ============================================================
+   M13 — one tonne of steel
+   Fig. 8.2 names three uses and says nothing else about them,
+   so this bench says nothing else either. What it adds is the
+   consequence the chapter draws from the figure: choosing one
+   use is also a decision not to take the other two.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('steCv'), box2=document.getElementById('steOpts');
+  /* short is what fits under a 90px column on the canvas; full is the
+     chapter's own wording, which goes to the readouts. Set the full names
+     across three columns and 'Refrigerator manufacturing' shrinks to six-point
+     type while its neighbours stay at nine. */
+  const U=[
+    {k:'med', t:'Medical',       short:'Medical',        full:'Medical equipment'},
+    {k:'fri', t:'Refrigerators', short:'Refrigerators',  full:'Refrigerator manufacturing'},
+    {k:'air', t:'Aircraft',      short:'Aircraft',       full:'Aircraft manufacturing'}
+  ];
+  let sel=0; const seen={};
+  function product(x, kind, cx, cy, col, on){
+    x.strokeStyle=col; x.fillStyle=col; x.lineWidth=on ? 2 : 1.3;
+    if(kind==='med'){                                   // a cross, and a stand
+      x.fillRect(cx-4, cy-16, 8, 24);
+      x.fillRect(cx-12, cy-8, 24, 8);
+      x.fillRect(cx-10, cy+10, 20, 3);
+    } else if(kind==='fri'){                            // a fridge, with a handle
+      x.strokeRect(cx-12, cy-18, 24, 32);
+      x.beginPath(); x.moveTo(cx-12, cy-4); x.lineTo(cx+12, cy-4); x.stroke();
+      x.fillRect(cx+5, cy-14, 2.5, 7);
+      x.fillRect(cx+5, cy+1, 2.5, 9);
+    } else {                                            // a plane, from above
+      x.beginPath();
+      x.moveTo(cx, cy-18); x.lineTo(cx+4, cy-4); x.lineTo(cx+18, cy+4);
+      x.lineTo(cx+18, cy+8); x.lineTo(cx+4, cy+5); x.lineTo(cx+4, cy+12);
+      x.lineTo(cx+9, cy+16); x.lineTo(cx+9, cy+18); x.lineTo(cx, cy+15);
+      x.lineTo(cx-9, cy+18); x.lineTo(cx-9, cy+16); x.lineTo(cx-4, cy+12);
+      x.lineTo(cx-4, cy+5); x.lineTo(cx-18, cy+8); x.lineTo(cx-18, cy+4);
+      x.lineTo(cx-4, cy-4);
+      x.closePath();
+      if(on) x.fill(); else x.stroke();
+    }
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=238, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, u=U[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Fig. 8.2 · the alternative uses of steel', 10, 8);
+
+    // the steel, at the top
+    // wide enough for its own caption: at 68px the words ran out past the slab
+    const sx=W/2, sy=42;
+    x.fillStyle='rgba(232,197,71,.3)';
+    x.beginPath();
+    x.moveTo(sx-62, sy); x.lineTo(sx+54, sy); x.lineTo(sx+62, sy+18); x.lineTo(sx-54, sy+18);
+    x.closePath(); x.fill();
+    x.strokeStyle=A1; x.lineWidth=1.4; x.stroke();
+    mono(x,9,600); x.fillStyle='#FFFFFF'; x.textAlign='center'; x.textBaseline='middle';
+    x.fillText('one tonne of steel', sx, sy+9);
+
+    // three arrows, fanning to three uses
+    const cw=(W-24)/3, py=138;
+    U.forEach((q,i)=>{
+      const cx=12+cw*i+cw/2, on=q===u;
+      x.strokeStyle = on ? A1 : 'rgba(142,154,192,.25)';
+      x.lineWidth = on ? 2 : 1;
+      x.beginPath();
+      x.moveTo(sx, sy+20); x.lineTo(cx, py-34);
+      x.stroke();
+      if(on){
+        x.fillStyle=A1;
+        x.beginPath();
+        x.moveTo(cx, py-30); x.lineTo(cx-4, py-38); x.lineTo(cx+4, py-38);
+        x.closePath(); x.fill();
+      }
+      product(x, q.k, cx, py, on ? A1 : 'rgba(142,154,192,.35)', on);
+      x.fillStyle = on ? INK : 'rgba(142,154,192,.5)';
+      fitText(x, q.short, cx, py+26, cw-6);
+      if(!on){
+        // a line through what the steel did not become
+        x.strokeStyle='rgba(224,90,110,.5)'; x.lineWidth=1.4;
+        x.beginPath(); x.moveTo(cx-20, py+4); x.lineTo(cx+20, py-12); x.stroke();
+      }
+    });
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 190); x.lineTo(W-10, 190); x.stroke();
+    mono(x,9,500); x.fillStyle=A2; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('given up', 12, 198);
+    sans(x,11.5); x.fillStyle=INK;
+    wrap(x, U.filter(q=>q!==u).map(q=>q.full).join(', '), 12, 212, W-24, 15);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('steA').textContent=u.full;
+    document.getElementById('steB').textContent=U.filter(q=>q!==u).map(q=>q.full).join(', ');
+    document.getElementById('steTxt').textContent =
+      'The same steel, and a limited quantity of it. Sending it to ' + u.full.toLowerCase() +
+      ' is also a decision not to send it to the other two — and the value of those forgone uses is the opportunity cost, whether or not anybody works it out.';
+  }
+  if(cv){
+    U.forEach((u,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=u.t;
+      b.onclick=()=>{
+        sel=i; seen[u.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','ste-'+u.k);
+        if(Object.keys(seen).length>=3) complete('m13');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m13',draw);
+})();
+
+/* ============================================================
+   M14 — India's own path
+   The same axis as M11, with a marker that moves along it. The
+   chapter dates only 1991; the other steps are described in the
+   order it describes them, without dates it does not give.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('indCv'), btn=document.getElementById('indNext');
+  const ST=[
+    {n:'After Independence', pos:0.14,
+     w:'In the decades after Independence, India followed a more state-led approach, similar to a planned economy.'},
+    {n:'Control', pos:0.16,
+     w:'The government controlled industries, allocated resources, and regulated production through licences and permits.'},
+    {n:'The public sector', pos:0.18,
+     w:'Many key sectors — banking, transport, heavy industries — were dominated by the public sector.'},
+    {n:'1991', pos:0.22,
+     w:'By 1991 the country faced serious economic difficulties.'},
+    {n:'The reforms', pos:0.46,
+     w:'The government introduced major economic reforms that reduced excessive regulations, encouraged private enterprise, opened the economy to global trade and investment, and increased competition.'},
+    {n:'Where it left us', pos:0.60,
+     w:'These reforms gradually shifted India towards a more market-oriented system — while still retaining an important role for the government. Which is to say: a mixed economy.'}
+  ];
+  let at=0;
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=242, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=ST[at];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('one country, moving along the same axis', 10, 8);
+
+    // the axis from M11, so the two benches read as one picture
+    const ax=24, bxr=W-24, ay=52;
+    const grad=x.createLinearGradient(ax, 0, bxr, 0);
+    grad.addColorStop(0, 'rgba(122,95,203,.45)');
+    grad.addColorStop(1, 'rgba(232,197,71,.45)');
+    x.fillStyle=grad; x.fillRect(ax, ay, bxr-ax, 16);
+    x.strokeStyle=RULE; x.lineWidth=1; x.strokeRect(ax, ay, bxr-ax, 16);
+    mono(x,8); x.fillStyle=DIM; x.textBaseline='top';
+    x.textAlign='left';  x.fillText('planned', ax, ay+21);
+    x.textAlign='right'; x.fillText('market', bxr, ay+21);
+
+    // the trail so far, and the marker where it has reached
+    x.strokeStyle='rgba(240,238,230,.35)'; x.lineWidth=1;
+    ST.slice(0, at+1).forEach(q=>{
+      const qx = ax + (bxr-ax)*q.pos;
+      x.beginPath(); x.arc(qx, ay+8, 2.5, 0, 7); x.fillStyle='rgba(240,238,230,.4)'; x.fill();
+    });
+    const mx = ax + (bxr-ax)*s.pos;
+    x.fillStyle='#FFFFFF';
+    x.beginPath(); x.arc(mx, ay+8, 6, 0, 7); x.fill();
+    mono(x,10,600); x.textAlign='center'; x.textBaseline='bottom';
+    x.fillText(s.n, Math.max(40, Math.min(W-40, mx)), ay-8);
+
+    // the steps as a list, the reached ones lit
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 92); x.lineTo(W-10, 92); x.stroke();
+    ST.forEach((q,i)=>{
+      const qy=102+i*22, on=i<=at;
+      x.fillStyle = on ? 'rgba(232,197,71,.14)' : 'rgba(142,154,192,.05)';
+      x.fillRect(12, qy, W-24, 19);
+      x.strokeStyle = i===at ? A1 : on ? 'rgba(232,197,71,.4)' : RULE;
+      x.lineWidth = i===at ? 1.6 : 1;
+      x.strokeRect(12, qy, W-24, 19);
+      mono(x, i===at ? 9.5 : 9, i===at ? 600 : 400);
+      x.fillStyle = i===at ? '#FFFFFF' : on ? 'rgba(240,238,230,.7)' : 'rgba(142,154,192,.4)';
+      x.textAlign='left'; x.textBaseline='middle';
+      x.fillText(q.n, 20, qy+10);
+    });
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('indA').textContent=at + ' of ' + (ST.length-1);
+    document.getElementById('indB').textContent=s.n;
+    document.getElementById('indTxt').textContent=s.w;
+  }
+  if(btn){
+    btn.onclick=()=>{
+      at = at >= ST.length-1 ? 0 : at+1;
+      ev('explore','ind-'+at);
+      btn.textContent = at >= ST.length-1 ? 'Back to Independence' : 'Move forward';
+      if(at >= ST.length-1) complete('m14');
+      draw();
+    };
+  }
+  reg('m14',draw);
+})();
+
+/* ============================================================
+   M15 — two sides of a mixed economy
+   Two tick columns rather than three: two headings of this
+   length fit beside a label column on a 390px screen, and
+   three would not.
+   ============================================================ */
+Q.grid('g15','g15check','g15s',{
+  head:'Fig. 8.8 puts it on the…', mid:'m15',
+  cols:['Government','Market'],
+  rows:[
+    {l:'Welfare programmes',      a:[1,0]},
+    {l:'Fair competition rules',  a:[1,0]},
+    {l:'Consumer protection',     a:[1,0]},
+    {l:'Transparency',            a:[1,0]},
+    {l:'Public goods',            a:[1,0]},
+    {l:'Competition',             a:[0,1]},
+    {l:'Profit-making businesses', a:[0,1]},
+    {l:'Innovation',              a:[0,1]}
+  ],
+  doneMsg:'All sixteen. Five on one side, three on the other — and a mixed economy is the arrangement in which both lists are running at once.'
+});
+
+/* ============================================================
+   M16 — chapter boss
+   ============================================================ */
+Q.boss([
+  { t:'Recall · 1 of 10',
+    q:'What is opportunity cost?',
+    o:['The price printed on a good','The value of what is given up','The cost of producing one more unit'], a:1,
+    w:'When one alternative is chosen, the other options are given up, and the value of what is given up is the opportunity cost. It is not an extra charge — it exists whether or not anybody works it out.' },
+  { t:'Recall · 2 of 10',
+    q:'Where does the word ‘economics’ come from?',
+    o:['Latin economia, meaning trade',
+       'Greek oikonomia: oikos, household, and nemein, management',
+       'Greek ekonomos, meaning market'], a:1,
+    w:'Economics is, at root, household management — and the chapter’s point is that with limited resources and unlimited wants, nations have to do exactly what a household does, only larger.' },
+  { t:'Recall · 3 of 10',
+    q:'What are the three key questions of economics?',
+    o:['What to produce, how to produce, for whom to produce',
+       'What to buy, what to sell, what to save',
+       'What to tax, what to spend, what to borrow'], a:0,
+    w:'They come straight out of scarcity: unlimited wants against limited resources gives scarcity, scarcity forces choices, and those choices are exactly these three questions.' },
+  { t:'Recall · 4 of 10',
+    q:'In which system does a central planning authority make the major decisions?',
+    o:['A market economy','A mixed economy','A planned economy'], a:2,
+    w:'It decides what and how much will be produced, how, and who gets it at what prices. The government owns most resources and sectors, and strict permits and licences keep the number of enterprises down. The chapter’s examples are the former Soviet Union, North Korea and Cuba.' },
+  { t:'Understanding · 5 of 10',
+    q:'On the curve in Fig. 8.3, what happens as the farmer moves from A to E?',
+    o:['More barley and less wheat','More of both','Less of both'], a:0,
+    w:'A is 0 kg of barley and 100 of wheat; E is 100 of barley and none of wheat. To grow more barley some wheat must be sacrificed, and that sacrifice is the opportunity cost of the barley.' },
+  { t:'Understanding · 6 of 10',
+    q:'Why does the chapter say the government in a market economy acts like a referee?',
+    o:['Because it decides who wins',
+       'Because it ensures safety and law and order without controlling prices or production',
+       'Because it owns the ground'], a:1,
+    w:'A referee enforces the rules of a game they do not play. In a market economy the questions of what, how and how much to produce are settled mainly by demand and supply — though the chapter is clear that governments play an important role even there.' },
+  { t:'Application · 7 of 10',
+    q:'A student has ₹100 and must choose between a notebook now or saving for a tennis racket later. Which concept explains this?',
+    o:['Demand','Opportunity cost','Inflation'], a:1,
+    w:'One pool of money, two uses, and taking either one means giving up the other. It is the same structure as a government choosing between highways and hospitals — only the amounts differ.' },
+  { t:'Application · 8 of 10',
+    q:'A garment firm finds that machines have become much cheaper. What is likely to shift?',
+    o:['Towards capital-intensive production',
+       'Towards labour-intensive production',
+       'Nothing — the method is fixed by the product'], a:0,
+    w:'If machines are expensive the firm relies more on labour; if they become affordable it may shift to automation. The nature of the product still matters — customised clothes need skilled labour — but the relative cost of the factors is what moves the decision.' },
+  { t:'Reasoning · 9 of 10',
+    q:'What is the opportunity cost of producing sugarcane rather than millets?',
+    o:['The money spent on seed',
+       'The forgone gains from saved water and improved soil health',
+       'The profit from the sugar industry'], a:1,
+    w:'Sugarcane yields high profits and supports industries such as sugar; millets and pulses save water, improve soil health and promote sustainable agriculture. The cost of choosing the first is everything the second would have delivered — a short-term gain traded against a long-term one.' },
+  { t:'Challenge · 10 of 10',
+    q:'The farmer moves from C (50 kg barley, 70 kg wheat) to D (75 kg barley, 40 kg wheat). What does that step cost?',
+    o:['25 kg of wheat','30 kg of wheat','40 kg of wheat'], a:1,
+    w:'70 − 40 = 30 kg of wheat, given up for 25 kg more barley. And the step before it cost only 20 kg, while the step after costs 40 — each extra sack of barley costs more wheat than the last, which is why the line bends.' }
+], 'm16', 'One field with five ways to plant it, a word that means household management, three questions, three systems, and a cost attached to every single choice in the chapter.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
