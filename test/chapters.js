@@ -63,7 +63,8 @@ module.exports = [
   { slug:'polity',       id:'9-social-5',  n:5,  title:'State and Society up to 1000 CE' },
   { slug:'democracy',    id:'9-social-6',  n:6,  title:'Democracy' },
   { slug:'elections',    id:'9-social-7',  n:7,  title:'Elections' },
-  { slug:'economics',    id:'9-social-8',  n:8,  title:'Building Blocks in Economics: The Problem of Choice' }
+  { slug:'economics',    id:'9-social-8',  n:8,  title:'Building Blocks in Economics: The Problem of Choice' },
+  { slug:'prices',       id:'9-social-9',  n:9,  title:'The Price Puzzle: What Drives the Market' }
 ];
 
 module.exports.file = c => c.slug + '-chapter.html';

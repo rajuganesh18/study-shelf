@@ -216,22 +216,23 @@ there so old caches are dropped, add a row to `test/chapters.js`, and run
 
 ## 7 · What is and is not built
 
-29 of 86 catalogued chapters are playable: the whole of Class 9 Science
+30 of 86 catalogued chapters are playable: the whole of Class 9 Science
 (*Exploration*, chapters 1–13), the whole of Class 9 Maths
 (*Ganita Manjari Part 1*, chapters 1–8 — coordinates, linear polynomials, the
 world of numbers, algebraic identities, circles, perimeter and area,
 probability, and sequences and progressions), and Class 9 Social Science
-chapters 1–8 (*Understanding Society: India and Beyond Part 1* —
-Understanding Social Science, Shaping of the Earth's Surface,
-Atmosphere and Climate, Early Humans and Beginning of Civilisation,
-State and Society up to 1000 CE, Democracy, Elections, and Building
-Blocks in Economics).
+and the whole of Class 9 Social Science Part 1
+(*Understanding Society: India and Beyond*, chapters 1–9 — Understanding
+Social Science, Shaping of the Earth's Surface, Atmosphere and Climate,
+Early Humans and Beginning of Civilisation, State and Society up to
+1000 CE, Democracy, Elections, Building Blocks in Economics, and The
+Price Puzzle).
 Everything else is catalogued and listed but marked *Coming soon*.
 
 Chapter lists were sourced in August 2026. Class 9 uses the new NCF-SE 2023
 books (*Exploration*, *Ganita Manjari*); NCERT's advisory of 17 March 2026
 deferred new Class 10 and 11 books to 2027–28, so Class 10 is on the current
-books. Social Science chapters 1 to 8, and the book's title, are now confirmed
-against the printed chapters, but **chapters 9–16 remain provisional** and are
-flagged in-app — Part 2 was still unreleased. Check a real copy and edit
-`CATALOG`.
+books. All nine chapters of Social Science Part 1, and the book's title, are
+now confirmed against the printed chapters; **chapters 10–16 remain
+provisional** and are flagged in-app — Part 2 was still unreleased. Check a
+real copy and edit `CATALOG`.

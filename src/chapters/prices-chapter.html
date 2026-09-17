@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0E1B">
+<meta name="color-scheme" content="dark">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Study Shelf">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>The Price Puzzle — Class 9</title>
+<style>
+/*@include shared/base.css*/
+/* ---------- chapter accents: demand in mint, supply in amber, all the way through ---------- */
+:root{ --a1:#3DDC97; --a2:#FFB84D; --badge-bg:#E6F7EF; }
+/*@include shared/chrome.css*/
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backbar" href="index.html">&#8249;&ensp;All chapters</a>
+
+<header class="mast">
+  <div class="eyebrow">Class 9 · Social Science · Chapter 9</div>
+  <h1>The Price<br><span>Puzzle</span></h1>
+</header>
+
+<div class="hq">
+  <div class="stats">
+    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
+    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
+    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
+    <div class="stat"><div class="k">Missions</div><div class="v" id="sDone">0/16</div></div>
+  </div>
+  <div class="colony-row">
+    <canvas id="colony" width="96" height="96"></canvas>
+    <div class="colony-txt">
+      <h3 id="colName">—</h3>
+      <p id="colDesc">—</p>
+      <div class="bar"><i id="colBar"></i></div>
+    </div>
+  </div>
+  <div class="quests">
+    <h4>Today's quests</h4>
+    <div id="qList"></div>
+  </div>
+</div>
+
+<div class="sec">Part 1 · Demand</div>
+
+<!-- M1 -->
+<details class="m" id="m1" open data-xp="35" data-coin="20">
+  <summary><span class="mno">01</span><span class="mt"><b>One buyer, then three</b><i>Table 9.1 · why the market curve is flatter</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Srivalli's demand for mangoes, and then Alex's and Israt's added to it. Both curves are drawn on the same axes, which is the quickest way to see what happens when you add buyers up.</p>
+    <div class="panel">
+      <canvas id="demCv" height="258"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="demS">Price <b><span id="demSV">—</span></b></label>
+        <input id="demS" type="range" min="0" max="2" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Srivalli</div><div class="v" id="demA">—</div></div>
+        <div class="rc"><div class="k">Alex + Israt</div><div class="v" id="demB">—</div></div>
+        <div class="rc"><div class="k">Market demand</div><div class="v" id="demC">—</div></div>
+      </div>
+    </div>
+    <p><b>Demand</b> is the quantity of a product that people are <b>willing and able</b> to buy at a particular price, depending on their needs, preferences, season, trend and income. It is not just the desire to buy something — it is that desire complemented by the <b>purchasing power</b> to act on it.</p>
+    <p>The quantity one consumer wants at different prices, holding everything else constant, is <b>individual demand</b>; written out it is a <b>demand schedule</b>, and drawn it is a <b>demand curve</b>. The total quantity demanded by all potential buyers at each price is <b>market demand</b> — the sum of all the individual demands.</p>
+    <div class="curio">
+      <h5>Don't miss out</h5>
+      <div class="note">The market demand curve is <b>flatter</b> than Srivalli's. Market demand aggregates many consumers, so the same price change creates a larger total quantity response. When the price falls from ₹150 to ₹50, Srivalli's demand rises by <b>2 kg</b> — and market demand rises by <b>12 kg</b>.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M2 -->
+<details class="m" id="m2" data-xp="30" data-coin="15">
+  <summary><span class="mno">02</span><span class="mt"><b>Substitutes, or complements?</b><i>Nine pairs of related goods</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Related goods are products whose demand is interconnected: a change in the price or availability of one directly affects demand for the other. There are two kinds. Name each pair.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">All nine rows must be answered before it will mark.</div>
+      <table class="tick" id="g2"></table>
+      <div class="row"><button class="act" id="g2check">Check my answers</button></div>
+      <div class="score" id="g2s"></div>
+    </div>
+    <p><b>Substitute goods</b> can replace each other — tea and coffee. If tea's price stays the same while coffee becomes more expensive, coffee drinkers may switch to tea, increasing tea's demand. When the price of a good rises, people replace it with a relatively cheaper alternative, so a rise in the price of the substitute <b>raises</b> demand for the other good.</p>
+    <p><b>Complementary goods</b> are generally used together — smartphones and earphones, cars and petrol. If demand for printers rises, demand for cartridges may rise too, even though the cartridge price has not changed. And if movie tickets become more expensive, people may stay away from the cinema, so demand for the popcorn sold there falls with them.</p>
+  </div>
+</details>
+
+<!-- M3 -->
+<details class="m" id="m3" data-xp="35" data-coin="20">
+  <summary><span class="mno">03</span><span class="mt"><b>Five other things that move demand</b><i>When the price has not changed at all</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>When a new phone launches, the queues form even though it is <i>more</i> expensive. So price is not the only thing moving demand. Tap each of the other five.</p>
+    <div class="panel">
+      <canvas id="dtrCv" height="170"></canvas>
+      <div class="chips" id="dtrOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">What moves</div><div class="v" id="dtrA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">The chapter's example</div><div class="v" id="dtrB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="dtrTxt">—</div>
+    </div>
+    <p>Demand also depends on the <b>size and composition</b> of a nation's population. India, being the most populous nation, has domestic consumer demand that contributes to its economic growth — and the composition shapes <i>what</i> is demanded. More children means more demand for sports shoes; more working adults, for formal shoes; more elderly people, for comfortable or orthopaedic ones.</p>
+    <div class="curio">
+      <h5>Why the fourth mango is disappointing</h5>
+      <div class="note">The first mango is delicious. The second is good. By the third or fourth you are barely interested. The additional utility derived from a product <b>declines as more of it is consumed</b> — the principle of <b>diminishing marginal utility</b>. And as the utility from each successive mango falls, so does your willingness to pay for it. Which is demand falling, from the inside.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M4 -->
+<details class="m" id="m4" data-xp="30" data-coin="15">
+  <summary><span class="mno">04</span><span class="mt"><b>What demand actually means</b><i>Willingness, and the ability to act on it</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Pick everything the chapter says — and leave the three it contradicts.</p>
+    <div class="panel">
+      <div class="chips" id="g4"></div>
+      <button class="act" id="g4check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g4s"></div>
+    </div>
+    <p>The <b>Law of Demand</b> is the inverse relationship between the price of a product and the quantity demanded of it. When the price rises the quantity demanded falls; when the price falls the quantity demanded rises. That is why a demand curve slopes <b>downward</b> — and it is a useful check on any table you are handed: if quantity demanded climbs as price climbs, something has been written down the wrong way round.</p>
+    <div class="curio">
+      <h5>Purchasing power</h5>
+      <div class="note">A measure of how much one unit of a particular currency can buy at a particular time. It is the word that separates demand from wishing: a hundred people who want a mango and cannot pay for one are not demand for mangoes.</div>
+    </div>
+  </div>
+</details>
+
+<div class="sec">Part 2 · Supply</div>
+
+<!-- M5 -->
+<details class="m" id="m5" data-xp="35" data-coin="20">
+  <summary><span class="mno">05</span><span class="mt"><b>Three sellers</b><i>Table 9.2 · and the curve that climbs</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Sellers A, B and C, each offering different quantities at each price. Slide the price and watch the stack build.</p>
+    <div class="panel">
+      <canvas id="supCv" height="258"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="supS">Price <b><span id="supSV">—</span></b></label>
+        <input id="supS" type="range" min="0" max="2" step="1" value="0">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Seller A</div><div class="v" id="supA">—</div></div>
+        <div class="rc"><div class="k">B and C</div><div class="v" id="supB">—</div></div>
+        <div class="rc"><div class="k">Market supply</div><div class="v" id="supC">—</div></div>
+      </div>
+    </div>
+    <p><b>Supply</b> is the quantity of a product that sellers are <b>willing and able to offer</b> at a particular price. As the price increases, the quantity supplied increases; as it falls, the quantity supplied falls. That is the <b>Law of Supply</b>, and the reason is profit: higher prices increase profitability, which incentivises producers to raise output — and also attracts new firms into the market.</p>
+    <p>So a supply curve slopes <b>upward</b>, and a demand curve slopes downward, and everything in the second half of this chapter comes from those two facts pointing in opposite directions.</p>
+    <div class="curio">
+      <h5>Why mangoes cost more in May</h5>
+      <div class="note">At the start of mango season supply is low, which makes mangoes costly. Mid-season the supply increases and prices fall. When supply is less than demand, prices rise; when supply exceeds demand, prices fall. The season has not changed anyone's taste for mangoes — it has changed how many there are.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M6 -->
+<details class="m" id="m6" data-xp="35" data-coin="20">
+  <summary><span class="mno">06</span><span class="mt"><b>Four other things that move supply</b><i>Fig. 9.6 · and the farmer's choice</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The same shape of question as demand had, from the other side of the counter. Tap each.</p>
+    <div class="panel">
+      <canvas id="strCv" height="212"></canvas>
+      <div class="chips" id="strOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">What moves</div><div class="v" id="strA" style="font-size:11.5px">—</div></div>
+        <div class="rc"><div class="k">The chapter's example</div><div class="v" id="strB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="strTxt">—</div>
+    </div>
+    <p>Fig. 9.6 puts the first one as a decision tree. Wheat prices are low and chickpea prices are high, so the farmer faces a choice: plant wheat for the lower profit, or plant chickpeas for the higher one — and plants more chickpeas next season. The supply of one good depends on <b>the profitability of the alternatives open to the supplier</b>, which is the opportunity cost of the last chapter wearing a different hat.</p>
+    <div class="curio">
+      <h5>Let's explore</h5>
+      <div class="note">What happens to the supply of a product when the cost of inputs changes? When an alternative input is discovered? When a resource is depleted, the weather turns, or a disaster strikes? Take a few very different goods and services and work each case through in class.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M7 -->
+<details class="m" id="m7" data-xp="30" data-coin="15">
+  <summary><span class="mno">07</span><span class="mt"><b>Up, or down?</b><i>Eight things that happen to a market</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Each of these does something to supply. Which?</p>
+    <div class="panel">
+      <div id="g7"></div>
+      <div class="score" id="g7s"></div>
+    </div>
+    <p>Notice that the last one is different in kind from the rest. A change in the <b>price of the good itself</b> moves you <i>along</i> the supply curve — that is the Law of Supply. Everything else on this list moves <i>the whole curve</i>, because it changes how much sellers will offer at every price at once.</p>
+  </div>
+</details>
+
+<div class="sec">Part 3 · Where the two meet</div>
+
+<!-- M8 -->
+<details class="m" id="m8" data-xp="35" data-coin="20">
+  <summary><span class="mno">08</span><span class="mt"><b>Find the price that clears the market</b><i>Table 9.3 · excess demand, excess supply, and one price between</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Both curves on one pair of axes. Drag the price and watch the gap between them open, close and open the other way.</p>
+    <div class="panel">
+      <canvas id="eqCv" height="262"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="eqS">Price <b><span id="eqSV">—</span></b></label>
+        <input id="eqS" type="range" min="40" max="150" step="5" value="40">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Demanded</div><div class="v" id="eqA">—</div></div>
+        <div class="rc"><div class="k">Supplied</div><div class="v" id="eqB">—</div></div>
+        <div class="rc"><div class="k">Outcome</div><div class="v" id="eqC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>Every market involves a negotiation between what buyers are willing to pay and what sellers are willing to accept, so prices are determined by the <b>interaction</b> of demand and supply. At ₹100 the quantity demanded equals the quantity supplied. That point is <b>market equilibrium</b>: there is no pressure for the price to change, and the market is <b>cleared</b> — neither a shortage (excess demand) nor a surplus (excess supply).</p>
+    <div class="curio">
+      <h5>A check worth doing on any schedule</h5>
+      <div class="note">Question 12 in this chapter's exercises prints a table where the quantity demanded <i>rises</i> as the price rises, and the quantity supplied <i>falls</i>. Read against the Law of Demand and the Law of Supply, the two rows appear to have been swapped. The equilibrium it asks for — ₹30 and 15 kg — comes out the same either way, but it is worth spotting: a demand schedule that climbs with price is telling you something has gone wrong in the printing, not in economics.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M9 -->
+<details class="m" id="m9" data-xp="30" data-coin="15">
+  <summary><span class="mno">09</span><span class="mt"><b>Shortage, surplus, or cleared?</b><i>Eight situations</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Name the state of the market in each.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">All eight rows must be answered before it will mark.</div>
+      <table class="tick" id="g9"></table>
+      <div class="row"><button class="act" id="g9check">Check my answers</button></div>
+      <div class="score" id="g9s"></div>
+    </div>
+    <p>Market equilibrium is the point where the supply of goods and services equals demand — no excess supply (surplus) and no excess demand (shortage) — and prices tend to remain stable <b>unless external factors change</b>. That last clause is doing a great deal of work, and the next mission is about it.</p>
+  </div>
+</details>
+
+<!-- M10 -->
+<details class="m" id="m10" data-xp="35" data-coin="20">
+  <summary><span class="mno">10</span><span class="mt"><b>The mask market, 2020</b><i>What "equilibrium" looks like when it will not sit still</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>In theory equilibrium is an intersection point. In the real world it moves. Step through one that everybody watched happen.</p>
+    <div class="panel">
+      <canvas id="mskCv" height="254"></canvas>
+      <div class="readout two">
+        <div class="rc"><div class="k">Stage</div><div class="v" id="mskA">0 of 4</div></div>
+        <div class="rc"><div class="k">Price</div><div class="v" id="mskB">—</div></div>
+      </div>
+      <div class="row"><button class="act" id="mskNext" style="margin-top:12px">What happened next</button></div>
+      <div class="note" style="margin-top:11px" id="mskTxt">—</div>
+    </div>
+    <p>Real markets are <b>dynamic</b>. Changes in technology, wages and interest rates, and wars, political events, pandemics, weather and natural disasters all alter demand and supply. So equilibrium in the real world is <b>never stable and moves all the time</b>: the market is always in the process of adjusting to a new equilibrium, and never fully settles at the previous one.</p>
+    <div class="curio">
+      <h5>Think about it</h5>
+      <div class="note">Can you think of another real-life case where prices change frequently, and say why? And a harder one the chapter asks outright: our choices today affect future resources — fast fashion, overfishing, the overuse of groundwater. Should we weigh only short-term gains, or long-term sustainability too? What would that do to the equilibrium?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M11 -->
+<details class="m" id="m11" data-xp="35" data-coin="20">
+  <summary><span class="mno">11</span><span class="mt"><b>A hundred rooms in Goa</b><i>The same room, four prices</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>Hotels do not charge the same tariff all the time. Same hotel, same room — tap through what changes it.</p>
+    <div class="panel">
+      <canvas id="hotCv" height="278"></canvas>
+      <div class="chips" id="hotOpts" style="margin-top:10px"></div>
+      <div class="readout two">
+        <div class="rc"><div class="k">Tariff per night</div><div class="v" id="hotA">—</div></div>
+        <div class="rc"><div class="k">When</div><div class="v" id="hotB" style="font-size:11px">—</div></div>
+      </div>
+      <div class="note" style="margin-top:11px" id="hotTxt">—</div>
+    </div>
+    <p>Hotels may change the tariff several times in a day to earn maximum <b>revenue</b> — the total money a business earns from sales before any expenses are deducted. The changes depend on <b>how fast rooms are getting booked</b>, the <b>tariff charged by nearby hotels</b>, <b>festivals, conferences or events</b> in the area, <b>weather forecasts</b>, the <b>number of days left before arrival</b>, and <b>past booking trends</b>.</p>
+    <p>Not one of those six is the cost of cleaning the room. The price is not being worked out from what the room costs to provide; it is being worked out from what demand is doing, hour by hour.</p>
+  </div>
+</details>
+
+<div class="sec">Part 4 · When the government steps in</div>
+
+<!-- M12 -->
+<details class="m" id="m12" data-xp="35" data-coin="20">
+  <summary><span class="mno">12</span><span class="mt"><b>Ceiling and floor</b><i>Set a price by law, and see what follows</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>The same mango market as mission 8, with one difference: the price is now set by rule rather than by the two curves. Try it.</p>
+    <div class="panel">
+      <canvas id="capCv" height="258"></canvas>
+      <div class="knob" style="margin-top:6px">
+        <label for="capS">Controlled price <b><span id="capSV">—</span></b></label>
+        <input id="capS" type="range" min="40" max="150" step="5" value="60">
+      </div>
+      <div class="readout">
+        <div class="rc"><div class="k">Which control</div><div class="v" id="capA" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">What follows</div><div class="v" id="capB" style="font-size:11px">—</div></div>
+        <div class="rc"><div class="k">The gap</div><div class="v" id="capC" style="font-size:11px">—</div></div>
+      </div>
+    </div>
+    <p>A <b>price ceiling</b> is an imposed control setting the <b>maximum</b> a seller can charge — the government does this for essential goods like medicines, to prevent overcharging. A <b>price floor</b> is an imposed limit on how <b>low</b> a price can be charged; a minimum wage is one, set so that workers earn enough for their hard work. And the chapter adds a condition that is easy to miss: <b>for a price floor to be effective, it must be set above the market equilibrium price</b>.</p>
+    <p>The mirror of that condition is worth working out for yourself, and this bench will show it to you: a ceiling set <i>above</i> the equilibrium price changes nothing at all, because nobody was going to charge that much anyway.</p>
+    <div class="curio">
+      <h5>Wheat at twenty rupees</h5>
+      <div class="note">If the government sets a maximum price for wheat at <b>₹20</b> per kg while market forces set it at <b>₹30</b>, farmers receive less than they would in a free market. That can lead to <b>reduced production and shortages</b> — the same arithmetic this bench draws, happening to somebody's harvest.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M13 -->
+<details class="m" id="m13" data-xp="35" data-coin="20">
+  <summary><span class="mno">13</span><span class="mt"><b>The park that never got built</b><i>Why some things have to be provided</i></span><span class="mstat">35 XP</span></summary>
+  <div class="body">
+    <p>A neighbourhood needs a park. Everyone would use it. Watch what happens anyway.</p>
+    <div class="panel">
+      <canvas id="parCv" height="250"></canvas>
+      <div class="readout two">
+        <div class="rc"><div class="k">Step</div><div class="v" id="parA">0 of 5</div></div>
+        <div class="rc"><div class="k">Collected</div><div class="v" id="parB">—</div></div>
+      </div>
+      <div class="row"><button class="act" id="parNext" style="margin-top:12px">And then</button></div>
+      <div class="note" style="margin-top:11px" id="parTxt">—</div>
+    </div>
+    <p><b>Public goods</b> are goods and services provided by the government for the benefit of all citizens — roads, bridges, public parks and streetlighting for public use; national defence against external threats; sanitation and drainage to improve living conditions. They are usually <b>not provided by private companies, because they do not generate direct profit</b>.</p>
+    <div class="curio">
+      <h5>Let's explore</h5>
+      <div class="note">List two goods or services near you that the government provides — roads, streetlights, parks, police. Pick one and answer three questions about it. Who benefits from it? Why would it be difficult for a private company to provide it on its own? And what would people in your area face if the government stopped providing it tomorrow?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M14 -->
+<details class="m" id="m14" data-xp="30" data-coin="15">
+  <summary><span class="mno">14</span><span class="mt"><b>Both sides of intervening</b><i>What it is for, and what it costs</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Pick everything the chapter says about the government's role in a market — and leave the two it contradicts.</p>
+    <div class="panel">
+      <div class="chips" id="g14"></div>
+      <button class="act" id="g14check" style="margin-top:12px">Check my choices</button>
+      <div class="score" id="g14s"></div>
+    </div>
+    <p>India is the fourth-largest economy in the world, and a <b>market-based, regulated</b> economy in which prices depend on demand and supply. But markets allocate goods on <b>willingness and ability to pay</b>, and that does not always come out fairly — which is why equity matters most for vulnerable and low-income groups, and why essential goods are exactly where governments intervene.</p>
+    <p>The chapter is just as clear about the other side. Fixing prices below market levels can sap producers' motivation to supply. Licences, permits and compliance procedures fall hardest on <b>small enterprises</b> and hamper the <b>ease of doing business</b> — a small restaurant may need food safety, fire safety, pollution control and local clearances before it opens. And heavy regulation reduces the incentive to invest in new ideas or better technology, which costs long-term productivity.</p>
+    <div class="curio">
+      <h5>Sanitisers, 2020</h5>
+      <div class="note">Demand surged, there were stockouts and sharp price increases, and some shopkeepers began <b>hoarding</b> and <b>black-marketing</b>. The government declared sanitisers essential commodities under the <b>Essential Commodities Act, 1955</b>, capping the maximum retail price at <b>₹100 for a 200 ml bottle</b>. Meanwhile many companies started production, and sanitisers soon became widely available at fair prices. The chapter then asks the fair question: that control was for an emergency — should such controls be in place forever?</div>
+    </div>
+  </div>
+</details>
+
+<!-- M15 -->
+<details class="m" id="m15" data-xp="30" data-coin="15">
+  <summary><span class="mno">15</span><span class="mt"><b>Eight words, precisely</b><i>The chapter's own definitions</i></span><span class="mstat">30 XP</span></summary>
+  <div class="body">
+    <p>Pair each term with the definition the chapter gives it.</p>
+    <div class="panel">
+      <div class="note" style="margin-bottom:11px">Tap a term, then tap its definition.</div>
+      <div class="match"><div id="g15a"></div><div id="g15b"></div></div>
+      <div class="score" id="g15s"></div>
+    </div>
+    <p>Several regulators keep markets transparent: the <b>Reserve Bank of India</b> for banking, the <b>Central Consumer Protection Authority</b> for violations of consumer rights and unfair trade practices, the <b>Telecom Regulatory Authority of India</b> for telecommunications, and the <b>Securities and Exchange Board of India</b> for the securities market.</p>
+    <div class="curio">
+      <h5>Let's recall</h5>
+      <div class="note">In the chapter on Democracy you read that a democratic government is accountable to the people and expected to act in their interest. So: how should it decide <i>when</i> and <i>how much</i> to intervene in markets to protect people's welfare? And whose voices should it weigh while deciding — consumers, producers, workers, someone else? Say why.</div>
+    </div>
+  </div>
+</details>
+
+<!-- M16 -->
+<details class="m" id="m16" data-xp="90" data-coin="70">
+  <summary><span class="mno">16</span><span class="mt"><b>Chapter boss</b><i>Ten questions · beat it to finish the chapter</i></span><span class="mstat">90 XP</span></summary>
+  <div class="body">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span id="bossQn">Question 1 of 10</span><span id="bossHpTxt">Boss 100%</span>
+      </div>
+      <div class="hp"><i id="bossHp" style="width:100%;background:var(--a2)"></i></div>
+      <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--dim)">
+        <span>You</span><span id="youHpTxt">100%</span>
+      </div>
+      <div class="hp"><i id="youHp" style="width:100%;background:var(--a1)"></i></div>
+      <div class="tier" id="bossTier"></div>
+      <p id="bossQ" style="font-size:15px;margin:8px 0 12px">Ten questions, drawn from this chapter's own schedules, tables and definitions. Tap start to begin.</p>
+      <div class="opts" id="bossOpts"></div>
+      <div class="why" id="bossWhy"></div>
+      <button class="act" id="bossStart" style="margin-top:14px">Start the battle</button>
+    </div>
+  </div>
+</details>
+
+
+<footer>NCERT Class 9 Social Science · Chapter 9</footer>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/*@include shared/storage.js*/
+
+/* ============================================================
+   Chapter 9 — The Price Puzzle: What Drives the Market
+   Understanding Society: India and Beyond, Grade 9 Part 1
+
+   Progress metaphor: Fig. 9.7, drawn and then refusing to stay
+   still. XP starts with two bare axes, adds the demand curve,
+   then the supply curve, marks where they cross, drops the
+   equilibrium price and quantity onto the axes, shades the two
+   gaps either side of it — and finally shifts demand outward
+   to a second crossing, because the chapter's own conclusion
+   is that equilibrium never settles.
+   ============================================================ */
+const CH = {
+  id: '9-social-9',
+  key: 'ch09Price',
+  total: 16,
+  stages: [
+    { at:0,   f:0.05, name:'Two axes',     d:'Price up the side, quantity across the bottom, and nothing on them.' },
+    { at:75,  f:0.20, name:'Demand',       d:'Downward: the cheaper it gets, the more people buy.' },
+    { at:160, f:0.36, name:'Supply',       d:'Upward: the dearer it gets, the more sellers offer.' },
+    { at:250, f:0.52, name:'They cross',   d:'One quantity that both sides agree on, at one price.' },
+    { at:345, f:0.68, name:'The price',    d:'₹100 and 12 kg — the market cleared, with nothing left over.' },
+    { at:450, f:0.85, name:'Either side',  d:'Shortage below that price, surplus above it.' },
+    { at:565, f:1.00, name:'And it moves', d:'Demand shifts, and the whole crossing goes with it.' }
+  ],
+  paint(x, W, st, S){
+    const H = W;
+    const next = CH.stages[CH.stages.indexOf(st)+1];
+    const frac = next ? Math.min(1, Math.max(0,(S.xp-st.at)/(next.at-st.at))) : 1;
+    const f = st.f + (next ? (next.f-st.f)*frac : 0);
+
+    x.fillStyle = '#E6F7EF'; x.fillRect(0, 0, W, H);
+
+    const L = 20, R = 86, T = 14, B = 78;
+    // the axes
+    x.strokeStyle = '#6B9C86'; x.lineWidth = 1.5;
+    x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+
+    const dem = t => [L + t*(R-L), T + t*(B-T)];        // downward
+    const sup = t => [L + t*(R-L), B - t*(B-T)];        // upward
+    const line = (fn, col, w, dash) => {
+      x.strokeStyle = col; x.lineWidth = w; x.setLineDash(dash || []);
+      x.beginPath();
+      const a = fn(0.04), b = fn(0.96);
+      x.moveTo(a[0], a[1]); x.lineTo(b[0], b[1]);
+      x.stroke(); x.setLineDash([]);
+    };
+
+    // the two gaps either side of the crossing, shaded before the curves
+    if(f > 0.78){
+      const mid = (L+R)/2, my = (T+B)/2;
+      x.fillStyle = 'rgba(61,220,151,.22)';             // shortage, below the price
+      x.beginPath(); x.moveTo(mid, my); x.lineTo(R-3, B-3); x.lineTo(R-3, T+3); x.closePath(); x.fill();
+      x.fillStyle = 'rgba(255,184,77,.22)';             // surplus, above it
+      x.beginPath(); x.moveTo(mid, my); x.lineTo(L+3, T+3); x.lineTo(L+3, B-3); x.closePath(); x.fill();
+    }
+
+    if(f > 0.12) line(dem, '#2BB77C', 2.2);
+    if(f > 0.28) line(sup, '#E09A28', 2.2);
+
+    if(f > 0.44){                                        // where they cross
+      const cx = (L+R)/2, cy = (T+B)/2;
+      if(f > 0.60){                                      // dropped onto both axes
+        x.strokeStyle = 'rgba(107,156,134,.8)'; x.lineWidth = 1; x.setLineDash([3,3]);
+        x.beginPath();
+        x.moveTo(L, cy); x.lineTo(cx, cy); x.lineTo(cx, B);
+        x.stroke(); x.setLineDash([]);
+      }
+      x.fillStyle = '#1E5C43';
+      x.beginPath(); x.arc(cx, cy, 4, 0, 7); x.fill();
+    }
+
+    /* And the point of the chapter: the crossing does not stay put. Demand
+       shifts outward and drags the equilibrium up the supply curve with it. */
+    if(f > 0.94){
+      const shift = 16;
+      x.strokeStyle = '#2BB77C'; x.lineWidth = 1.6; x.setLineDash([4,3]);
+      x.beginPath();
+      x.moveTo(L + 0.04*(R-L) + shift, T + 0.04*(B-T));
+      x.lineTo(R, T + 0.96*(B-T) + shift*0.0);
+      x.stroke(); x.setLineDash([]);
+      const nx = (L+R)/2 + shift/2, ny = B - ((nx-L)/(R-L))*(B-T);
+      x.fillStyle = '#1E5C43';
+      x.beginPath(); x.arc(nx, ny, 3.2, 0, 7); x.fill();
+      x.strokeStyle = '#1E5C43'; x.lineWidth = 1.2;
+      x.beginPath(); x.moveTo((L+R)/2 + 5, (T+B)/2 - 3); x.lineTo(nx - 4, ny + 3); x.stroke();
+    }
+  }
+};
+
+/*@include shared/engine.js*/
+
+/* ============================================================
+   Chapter 9 interactives
+   Bespoke canvases: individual and market demand (M1) · what
+   else moves demand (M3) · three sellers (M5) · what else
+   moves supply (M6) · the equilibrium bench (M8) · the mask
+   market (M10) · a hundred rooms in Goa (M11) · ceiling and
+   floor (M12) · the park that never got built (M13)
+   ============================================================ */
+
+const INK='#F0EEE6', DIM='#8E9AC0', RULE='#2A3350', A1='#3DDC97', A2='#FFB84D',
+      BG='#10141F', BAD='#E5484D';
+
+function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
+
+/* Centred label that shrinks rather than overflowing its column. */
+function fitText(x, s, cx, y, max){
+  let size = 9.5;
+  mono(x, size, 500);
+  while(x.measureText(s).width > max && size > 6){ size -= 0.5; mono(x, size, 500); }
+  x.textAlign = 'center'; x.fillText(s, cx, y);
+}
+
+/* Wrapped body text inside a canvas. Returns the y it finished on. */
+function wrap(x, s, left, top, maxw, lh){
+  const words = s.split(' ');
+  let line = '', y = top;
+  words.forEach(w=>{
+    if(x.measureText(line + w + ' ').width > maxw && line){ x.fillText(line.trim(), left, y); line = w + ' '; y += lh; }
+    else line += w + ' ';
+  });
+  if(line.trim()) x.fillText(line.trim(), left, y);
+  return y + lh;
+}
+
+/* A labelled box, used by several of the diagrams. */
+function box(x, x0, y0, w, h, label, col, on){
+  x.fillStyle = on ? (col==='a2' ? 'rgba(255,184,77,.22)' : 'rgba(61,220,151,.20)') : 'rgba(142,154,192,.07)';
+  x.fillRect(x0, y0, w, h);
+  x.strokeStyle = on ? (col==='a2' ? A2 : A1) : RULE;
+  x.lineWidth = on ? 1.8 : 1;
+  x.strokeRect(x0, y0, w, h);
+  x.fillStyle = on ? '#FFFFFF' : 'rgba(142,154,192,.62)';
+  x.textBaseline = 'top';
+  fitText(x, label, x0+w/2, y0+h/2-5, w-8);
+}
+
+/* A stick figure, for the benches with people in them. */
+function person(x, cx, cy, s, col){
+  x.strokeStyle=col; x.fillStyle=col; x.lineWidth=Math.max(1.4, s*0.075);
+  x.beginPath(); x.arc(cx, cy-s*0.92, s*0.24, 0, 7); x.fill();
+  x.beginPath();
+  x.moveTo(cx, cy-s*0.66); x.lineTo(cx, cy+s*0.18);
+  x.moveTo(cx-s*0.32, cy-s*0.4); x.lineTo(cx+s*0.32, cy-s*0.4);
+  x.moveTo(cx, cy+s*0.18); x.lineTo(cx-s*0.26, cy+s*0.74);
+  x.moveTo(cx, cy+s*0.18); x.lineTo(cx+s*0.26, cy+s*0.74);
+  x.stroke();
+}
+
+/* ------------------------------------------------------------
+   The chapter's three schedules, written once and shared by
+   every bench that needs them. Changing a number here changes
+   it everywhere, which is the point: five missions draw on
+   the same printed tables.
+   ------------------------------------------------------------ */
+const DEMAND = [                                   // Table 9.1
+  {p:150, q1:1, q2:2, q3:3, qd:6},
+  {p:100, q1:2, q2:4, q3:6, qd:12},
+  {p:50,  q1:3, q2:6, q3:9, qd:18}
+];
+const SUPPLY = [                                   // Table 9.2
+  {p:50,  a:1, b:3, c:2, qs:6},
+  {p:100, a:2, b:4, c:6, qs:12},
+  {p:150, a:3, b:7, c:8, qs:18}
+];
+const MARKET = [                                   // Table 9.3
+  {p:40,  qd:38, qs:6},
+  {p:100, qd:12, qs:12},
+  {p:150, qd:8,  qs:43}
+];
+/* Reading a value between two printed rows is what the chapter itself asks
+   for — "when the points A, B and C are connected, the downward sloping line
+   DD' is called the demand curve". So the curve between the marked points is
+   the straight line joining them, and nothing is invented beyond that. */
+function between(rows, key, p){
+  if(p <= rows[0].p) return rows[0][key];
+  for(let i=1;i<rows.length;i++){
+    const a=rows[i-1], b=rows[i];
+    if(p <= b.p) return a[key] + (b[key]-a[key]) * (p-a.p) / (b.p-a.p);
+  }
+  return rows[rows.length-1][key];
+}
+const rupee = n => '₹' + Math.round(n);
+/* Anything above a thousand gets Indian grouping: ₹25,000 rather than ₹25000,
+   which is how the chapter prints its hotel tariffs. */
+const money = n => '₹' + Math.round(n).toLocaleString('en-IN');
+
+/* ============================================================
+   M1 — one buyer, then three
+   Both curves go on one pair of axes rather than side by side.
+   The chapter prints them as two separate figures and then
+   asks why the market one is flatter; drawn against the same
+   x-scale, the answer is visible without being told.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('demCv'), sS=document.getElementById('demS');
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=258, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value, r=DEMAND[i];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Table 9.1 · the same axes for both', 10, 8);
+
+    const L=40, R=W-14, T=44, B=182;
+    const px = q => L + q/20*(R-L), py = p => B - (p/175)*(B-T);
+
+    // grid and axes
+    x.strokeStyle='rgba(142,154,192,.16)'; x.lineWidth=1;
+    [50,100,150].forEach(p=>{ x.beginPath(); x.moveTo(L, py(p)); x.lineTo(R, py(p)); x.stroke(); });
+    [5,10,15,20].forEach(q=>{ x.beginPath(); x.moveTo(px(q), T); x.lineTo(px(q), B); x.stroke(); });
+    x.strokeStyle='rgba(240,238,230,.55)'; x.lineWidth=1.4;
+    x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+    /* The price the slider is on is marked by lighting its own axis tick. An
+       earlier draft labelled it on the plot instead, where it landed on top of
+       Srivalli's curve at every price. */
+    x.textAlign='right'; x.textBaseline='middle';
+    [50,100,150].forEach(p=>{
+      const on = p===r.p;
+      mono(x, on ? 9.5 : 8, on ? 600 : 400);
+      x.fillStyle = on ? '#FFFFFF' : DIM;
+      x.fillText(String(p), L-5, py(p));
+    });
+    mono(x,8); x.fillStyle=DIM;
+    x.textAlign='center'; x.textBaseline='top';
+    [0,5,10,15,20].forEach(q=> x.fillText(String(q), px(q), B+5));
+    mono(x,8.5,500); x.fillStyle=DIM; x.textAlign='left';
+    x.fillText('↑ price (₹)', 12, 26);
+    x.textAlign='right';
+    x.fillText('quantity (kg) →', R, B+18);
+
+    // the two curves
+    const curve = (key, col, wid) => {
+      x.strokeStyle=col; x.lineWidth=wid;
+      x.beginPath();
+      DEMAND.forEach((d,k)=> k ? x.lineTo(px(d[key]), py(d.p)) : x.moveTo(px(d[key]), py(d.p)));
+      x.stroke();
+      DEMAND.forEach(d=>{
+        x.fillStyle=col;
+        x.beginPath(); x.arc(px(d[key]), py(d.p), d===r ? 5 : 3, 0, 7); x.fill();
+      });
+    };
+    curve('qd', A2, 2.4);                       // market demand, flatter
+    curve('q1', A1, 2);                         // Srivalli alone, steeper
+
+    // the price the slider is on, dropped across both curves
+    x.strokeStyle='rgba(255,255,255,.45)'; x.lineWidth=1; x.setLineDash([3,3]);
+    x.beginPath(); x.moveTo(L, py(r.p)); x.lineTo(px(r.qd), py(r.p)); x.stroke();
+    x.setLineDash([]);
+
+    // legend
+    mono(x,8.5); x.textBaseline='middle'; x.textAlign='left';
+    x.strokeStyle=A1; x.lineWidth=2;
+    x.beginPath(); x.moveTo(12, 214); x.lineTo(28, 214); x.stroke();
+    x.fillStyle='rgba(240,238,230,.8)'; x.fillText('Srivalli alone', 33, 214);
+    x.strokeStyle=A2; x.lineWidth=2.4;
+    x.beginPath(); x.moveTo(W*0.54, 214); x.lineTo(W*0.54+16, 214); x.stroke();
+    x.fillStyle='rgba(240,238,230,.8)'; x.fillText('all three buyers', W*0.54+21, 214);
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    fitText(x, 'the same fall in price, six times the response', W/2, 232, W-24);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('demSV').textContent=rupee(r.p) + ' per kg';
+    document.getElementById('demA').textContent=r.q1 + ' kg';
+    document.getElementById('demB').textContent=r.q2 + ' + ' + r.q3 + ' kg';
+    document.getElementById('demC').textContent=r.qd + ' kg';
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','demS');
+      if(Object.keys(seen).length>=3) complete('m1');
+      draw();
+    };
+  }
+  reg('m1',draw);
+})();
+
+/* ============================================================
+   M2 — substitutes, or complements
+   The seven pairs of the chapter's own exercise 10, plus the
+   two it works through in the text.
+   ============================================================ */
+Q.vgrid('g2','g2check','g2s',{
+  head:'These two are…', mid:'m2',
+  cols:['Related how?'],
+  options:[['Substitutes','Complements']],
+  rows:[
+    {l:'Movie ticket and popcorn',     a:['Complements']},
+    {l:'Eraser and pencil',            a:['Complements']},
+    {l:'Laptop and computer',          a:['Substitutes']},
+    {l:'Air conditioner and cooler',   a:['Substitutes']},
+    {l:'Notebook and pen',             a:['Complements']},
+    {l:'Apple and banana',             a:['Substitutes']},
+    {l:'Mobile and earphones',         a:['Complements']},
+    {l:'Tea and coffee',               a:['Substitutes']},
+    {l:'Car and petrol',               a:['Complements']}
+  ],
+  doneMsg:'All nine. Substitutes replace each other, so a rise in one’s price raises demand for the other. Complements are used together, so a rise in one’s price drags the other’s demand down with it.'
+});
+
+/* ============================================================
+   M3 — five other things that move demand
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('dtrCv'), box2=document.getElementById('dtrOpts');
+  const D=[
+    {k:'rel', t:'Related goods', icon:'swap',
+     a:'The price of a substitute or a complement',
+     b:'Coffee gets dearer, so tea sells more',
+     w:'Substitutes replace each other: when the price of one rises, people switch to the relatively cheaper alternative, so demand for it rises. Complements go together: if movie tickets get more expensive, people stay away from the cinema and the popcorn goes unsold with them.'},
+    {k:'inc', t:'Income', icon:'coin',
+     a:'The income of the consumer',
+     b:'More income, so more or better goods',
+     w:'When household income rises, consumers can afford to buy more, or to choose higher-quality products. A rise in income generally makes people feel more confident about their ability to spend, so the quantity demanded for several goods rises even if their prices have not moved at all.'},
+    {k:'tas', t:'Taste', icon:'heart',
+     a:'The taste and preference of the buyer',
+     b:'Srivalli will not swap mangoes for oranges',
+     w:'Every consumer has specific tastes and preferences that determine their demand. Srivalli likes mangoes and cannot substitute them with oranges, even when oranges are cheaper — which is a limit on how far the substitute rule reaches.'},
+    {k:'sea', t:'Season', icon:'sun',
+     a:'The time of year, and what it brings',
+     b:'Sweaters in winter, sweets at festivals',
+     w:'Crowded bookshops at the start of a new academic session; sweet shops full during the festive season; jackets in demand in the cold. Individuals demand different products at different times of the year, and those changes depend on weather, festivals and cultural habits rather than on the price of the good.'},
+    {k:'exp', t:'Expectations', icon:'clock',
+     a:'What buyers expect the price to do next',
+     b:'Waiting for the Diwali discount',
+     w:'Future price expectations influence current demand even when current prices have not changed. Expect prices to fall and you postpone the purchase, which lowers demand today; expect them to rise and you buy immediately, which raises it. People delay buying durables before Diwali or the New Year for exactly this reason.'}
+  ];
+  let sel=0; const seen={};
+  function glyph(x, kind, cx, cy, col){
+    x.strokeStyle=col; x.fillStyle=col; x.lineWidth=1.8;
+    if(kind==='swap'){                                   // two arrows, changing places
+      arrow(x, cx-12, cy-5, cx+12, cy-5, col, 5);
+      arrow(x, cx+12, cy+6, cx-12, cy+6, col, 5);
+    } else if(kind==='coin'){
+      x.beginPath(); x.arc(cx, cy, 10, 0, 7); x.stroke();
+      mono(x,11,600); x.textAlign='center'; x.textBaseline='middle';
+      x.fillText('₹', cx, cy+1);
+    } else if(kind==='heart'){
+      x.beginPath();
+      x.moveTo(cx, cy+9);
+      x.bezierCurveTo(cx-16, cy-2, cx-8, cy-13, cx, cy-5);
+      x.bezierCurveTo(cx+8, cy-13, cx+16, cy-2, cx, cy+9);
+      x.closePath(); x.fill();
+    } else if(kind==='sun'){
+      x.beginPath(); x.arc(cx, cy, 6, 0, 7); x.fill();
+      for(let i=0;i<8;i++){
+        const a=i*Math.PI/4;
+        x.beginPath();
+        x.moveTo(cx+Math.cos(a)*9, cy+Math.sin(a)*9);
+        x.lineTo(cx+Math.cos(a)*13, cy+Math.sin(a)*13);
+        x.stroke();
+      }
+    } else {                                             // a clock
+      x.beginPath(); x.arc(cx, cy, 10, 0, 7); x.stroke();
+      x.lineWidth=1.6;
+      x.beginPath(); x.moveTo(cx, cy); x.lineTo(cx, cy-6);
+      x.moveTo(cx, cy); x.lineTo(cx+5, cy+2); x.stroke();
+    }
+  }
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=170, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, d=D[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the price has not changed — and demand has', 10, 8);
+
+    // five tiles across, the selected one lit
+    const tw=(W-24)/5, ty=32, th=58;
+    D.forEach((q,i)=>{
+      const tx=12+tw*i, on=i===sel;
+      x.fillStyle = on ? 'rgba(61,220,151,.16)' : 'rgba(142,154,192,.06)';
+      x.fillRect(tx+1, ty, tw-2, th);
+      x.strokeStyle = on ? A1 : RULE; x.lineWidth = on ? 1.8 : 1;
+      x.strokeRect(tx+1, ty, tw-2, th);
+      glyph(x, q.icon, tx+tw/2, ty+21, on ? A1 : 'rgba(142,154,192,.45)');
+      x.fillStyle = on ? INK : 'rgba(142,154,192,.6)';
+      fitText(x, q.t, tx+tw/2, ty+th-15, tw-6);
+    });
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 106); x.lineTo(W-10, 106); x.stroke();
+    sans(x,13,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    const after = wrap(x, d.a, 12, 114, W-24, 17);
+    mono(x,9); x.fillStyle=A2;
+    wrap(x, d.b, 12, after + 2, W-24, 13);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('dtrA').textContent=d.a;
+    document.getElementById('dtrB').textContent=d.b;
+    document.getElementById('dtrTxt').textContent=d.w;
+  }
+  if(cv){
+    D.forEach((d,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=d.t;
+      b.onclick=()=>{
+        sel=i; seen[d.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','dtr-'+d.k);
+        if(Object.keys(seen).length>=4) complete('m3');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m3',draw);
+})();
+
+/* ============================================================
+   M4 — what demand actually means
+   ============================================================ */
+Q.pick('g4','g4check','g4s',[
+  {t:'Demand is what people are willing AND able to buy',           a:1},
+  {t:'Wanting something you cannot pay for is not demand',          a:1},
+  {t:'When the price rises, the quantity demanded falls',           a:1},
+  {t:'Individual demand is one consumer, at different prices',      a:1},
+  {t:'Market demand is the sum of all the individual demands',      a:1},
+  {t:'The market demand curve is flatter than an individual one',   a:1},
+  {t:'The extra utility from each additional mango falls',          a:1},
+  {t:'Demand means wanting something, whether or not you can pay',  a:0},
+  {t:'When the price rises, the quantity demanded rises with it',   a:0},
+  {t:'Market demand is the average of the individual demands',      a:0}
+], 'm4',
+   'Right. The three left out are the three ways this gets misremembered: demand without the money is not demand, the relationship is inverse and not direct, and market demand is a sum — which is exactly why its curve is flatter.');
+
+/* ============================================================
+   M5 — three sellers
+   A stacked bar at each price, so the market supply is visibly
+   built out of the three individual ones, with the upward
+   curve running through the tops of the stacks.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('supCv'), sS=document.getElementById('supS');
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=258, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, i=+sS.value, r=SUPPLY[i];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Table 9.2 · A plus B plus C', 10, 8);
+
+    // three stacks, one per price
+    const T=42, B=176, bw=Math.min(52, (W-60)/3);
+    const py = q => B - q/20*(B-T);
+    const cxs = SUPPLY.map((_,k)=> 46 + k*((W-60)/3) + (W-60)/6);
+    x.strokeStyle='rgba(142,154,192,.16)'; x.lineWidth=1;
+    [5,10,15,20].forEach(q=>{ x.beginPath(); x.moveTo(34, py(q)); x.lineTo(W-10, py(q)); x.stroke(); });
+    x.strokeStyle='rgba(240,238,230,.55)'; x.lineWidth=1.4;
+    x.beginPath(); x.moveTo(34, T); x.lineTo(34, B); x.lineTo(W-10, B); x.stroke();
+    mono(x,8); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='middle';
+    [5,10,15,20].forEach(q=> x.fillText(String(q), 30, py(q)));
+    mono(x,8.5,500); x.textAlign='left'; x.textBaseline='top';
+    x.fillText('↑ quantity (kg)', 10, 24);
+
+    const PARTS=[['a','rgba(61,220,151,.9)'],['b','rgba(255,184,77,.85)'],['c','rgba(142,154,192,.7)']];
+    SUPPLY.forEach((s,k)=>{
+      const cx=cxs[k], on=k===i;
+      let base=B;
+      PARTS.forEach(p=>{
+        const h=(s[p[0]]/20)*(B-T);
+        x.fillStyle = on ? p[1] : 'rgba(142,154,192,.22)';
+        x.fillRect(cx-bw/2, base-h, bw, h-1);
+        if(on){
+          mono(x,8.5,600); x.textBaseline='middle';
+          if(h > 11){
+            x.fillStyle='#0B1218'; x.textAlign='center';
+            x.fillText(String(s[p[0]]), cx, base-h/2);
+          } else {                                    // too thin to hold a number
+            x.fillStyle=p[1]; x.textAlign='left';
+            x.fillText(String(s[p[0]]), cx+bw/2+4, base-h/2);
+          }
+        }
+        base -= h;
+      });
+      x.strokeStyle = on ? '#FFFFFF' : 'rgba(142,154,192,.35)'; x.lineWidth = on ? 1.6 : 1;
+      x.strokeRect(cx-bw/2, py(s.qs), bw, B-py(s.qs));
+      mono(x,9, on?600:400); x.fillStyle = on ? '#FFFFFF' : 'rgba(142,154,192,.6)';
+      x.textAlign='center'; x.textBaseline='top';
+      x.fillText(rupee(s.p), cx, B+6);
+      if(on){
+        mono(x,9,600); x.fillStyle=INK; x.textBaseline='bottom';
+        x.fillText(s.qs + ' kg', cx, py(s.qs)-5);
+      }
+    });
+
+    // the market supply curve through the tops of the stacks
+    x.strokeStyle='rgba(255,255,255,.5)'; x.lineWidth=1.6; x.setLineDash([4,3]);
+    x.beginPath();
+    SUPPLY.forEach((s,k)=> k ? x.lineTo(cxs[k], py(s.qs)) : x.moveTo(cxs[k], py(s.qs)));
+    x.stroke(); x.setLineDash([]);
+
+    // legend
+    mono(x,8.5); x.textBaseline='middle'; x.textAlign='left';
+    ['A','B','C'].forEach((n,k)=>{
+      const lx=14+k*((W-28)/3);
+      x.fillStyle=PARTS[k][1]; x.fillRect(lx, 208, 12, 9);
+      x.fillStyle='rgba(240,238,230,.8)'; x.fillText('seller ' + n, lx+17, 213);
+    });
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    fitText(x, 'higher price, taller stack — that is the Law of Supply', W/2, 232, W-24);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('supSV').textContent=rupee(r.p) + ' per kg';
+    document.getElementById('supA').textContent=r.a + ' kg';
+    document.getElementById('supB').textContent=r.b + ' + ' + r.c + ' kg';
+    document.getElementById('supC').textContent=r.qs + ' kg';
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[sS.value]=1; ev('explore','supS');
+      if(Object.keys(seen).length>=3) complete('m5');
+      draw();
+    };
+  }
+  reg('m5',draw);
+})();
+
+/* ============================================================
+   M6 — four other things that move supply
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('strCv'), box2=document.getElementById('strOpts');
+  const S=[
+    {k:'rel', t:'Related goods',
+     a:'The profitability of the alternatives open to the supplier',
+     b:'Low wheat price, high chickpea price',
+     w:'Fig. 9.6 as a decision tree. Wheat prices are low and chickpea prices are high, so the farmer weighs planting wheat for the lower profit against planting chickpeas for the higher one — and grows more chickpeas next season. The supply of one good depends on what else the same land, labour and season could have produced.'},
+    {k:'num', t:'Sellers',
+     a:'How many sellers there are in the market',
+     b:'More sellers, more competition, lower prices',
+     w:'If there are more sellers, competition and production rise, market supply can exceed demand, and prices fall. With fewer sellers, supply is lower than demand and prices rise. The number of people offering a thing is itself one of the things that sets its price.'},
+    {k:'tec', t:'Technology',
+     a:'What the available technology costs to run',
+     b:'Drip irrigation, weather sensors, cold storage',
+     w:'Improvement in technology reduces the cost of production, allowing producers to produce more and supply more — and the reverse holds too. Better irrigation and weather sensors can raise crop production; cold storage lets mangoes reach distant markets that would otherwise never have seen them.'},
+    {k:'exp', t:'Expectations',
+     a:'What sellers expect demand to do next',
+     b:'Potato wholesalers holding stock back',
+     w:'If producers expect a boom in demand in the near future they produce more, and supply rises. If they expect lower demand they cut production, and supply falls. Potato wholesalers expecting prices to rise in the peak season may hold back supply now, precisely so as to sell later at the higher price.'}
+  ];
+  let sel=0; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=212, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=S[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('what moves the whole supply curve', 10, 8);
+
+    if(s.k==='rel'){
+      /* Fig. 9.6's decision tree: two prices, two profits, one choice. */
+      const half=(W-32)/2;
+      box(x, 12, 30, half, 24, 'Low wheat price', 'a2', false);
+      box(x, 20+half, 30, half, 24, 'High chickpea price', 'a2', true);
+      x.strokeStyle='rgba(142,154,192,.45)'; x.lineWidth=1;
+      x.beginPath();
+      x.moveTo(12+half/2, 54); x.lineTo(12+half/2, 66);
+      x.moveTo(W-20-half/2, 54); x.lineTo(W-20-half/2, 66);
+      x.stroke();
+      box(x, 12, 66, half, 22, 'Lower profit', 'a2', false);
+      box(x, 20+half, 66, half, 22, 'Higher profit', 'a1', true);
+      x.strokeStyle='rgba(61,220,151,.5)'; x.lineWidth=1;
+      x.beginPath();
+      x.moveTo(W-20-half/2, 88); x.lineTo(W-20-half/2, 100); x.lineTo(W/2, 100); x.lineTo(W/2, 108);
+      x.stroke();
+      box(x, W*0.16, 108, W*0.68, 24, 'more chickpeas next season', 'a1', true);
+    } else {
+      // a supply curve, and the shift this determinant produces
+      const L=36, R=W-16, T=30, B=116;
+      x.strokeStyle='rgba(240,238,230,.5)'; x.lineWidth=1.2;
+      x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+      const up = s.k==='exp' ? -1 : 1;                 // expectations of a slump pull supply back
+      /* The base curve is inset by the shift at both ends, so the dashed copy
+         lands inside the axes whichever way it moves. Drawn from L+8 it ran
+         off the left of the price axis every time supply fell. */
+      const sh=22, x0=L+8+sh, x1=R-30-sh;
+      x.strokeStyle=A2; x.lineWidth=2.2;
+      x.beginPath(); x.moveTo(x0, B-6); x.lineTo(x1, T+6); x.stroke();
+      x.strokeStyle='rgba(255,184,77,.45)'; x.lineWidth=2; x.setLineDash([5,4]);
+      x.beginPath(); x.moveTo(x0+sh*up, B-6); x.lineTo(x1+sh*up, T+6); x.stroke();
+      x.setLineDash([]);
+      arrow(x, W*0.5 - 12*up, (T+B)/2, W*0.5 + 14*up, (T+B)/2, A1, 6);
+      mono(x,8.5); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+      fitText(x, up>0 ? 'more offered at every price' : 'less offered at every price', W/2, B+8, W-30);
+    }
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 142); x.lineTo(W-10, 142); x.stroke();
+    sans(x,13,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    const after = wrap(x, s.a, 12, 150, W-24, 17);
+    mono(x,9); x.fillStyle=A2;
+    wrap(x, s.b, 12, after + 2, W-24, 13);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('strA').textContent=s.a;
+    document.getElementById('strB').textContent=s.b;
+    document.getElementById('strTxt').textContent=s.w;
+  }
+  if(cv){
+    S.forEach((s,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=s.t;
+      b.onclick=()=>{
+        sel=i; seen[s.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','str-'+s.k);
+        if(Object.keys(seen).length>=3) complete('m6');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m6',draw);
+})();
+
+/* ============================================================
+   M7 — up, or down
+   Short choice labels on purpose: Q.rows wraps on the row
+   text's flex basis rather than its content, so a longer pair
+   puts the second choice on a line of its own.
+   ============================================================ */
+Q.rows('g7','g7s',[
+  {t:'Improved technology cuts the cost of production', a:0},
+  {t:'Cold storage carries mangoes to distant markets', a:0},
+  {t:'More sellers enter the market',                   a:0},
+  {t:'Fewer sellers are left in the market',            a:1},
+  {t:'Producers expect a boom in demand',               a:0},
+  {t:'Producers expect demand to fall',                 a:1},
+  {t:'Wholesalers hold potatoes back for the peak',     a:1},
+  {t:'The price of the good itself rises',              a:0}
+], ['Rises','Falls'], 'm7',
+   'All eight. Seven of them shift the whole curve. The last one — the price of the good itself — moves you along the curve instead, which is the Law of Supply rather than a change in supply.');
+
+/* ============================================================
+   M8 — find the price that clears the market
+   Table 9.3's three rows, with the curve between them read as
+   the straight line joining the printed points — which is what
+   the chapter means by connecting A, B and C. At ₹100 the two
+   quantities are both 12 kg, exactly as printed.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('eqCv'), sS=document.getElementById('eqS');
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=262, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, p=+sS.value;
+    const qd = between(MARKET, 'qd', p), qs = between(MARKET, 'qs', p);
+    const gap = qd - qs;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('Table 9.3 · mangoes, demanded and supplied', 10, 8);
+
+    const L=38, R=W-16, T=40, B=184;
+    const px = q => L + q/45*(R-L), py = pr => B - ((pr-30)/130)*(B-T);
+    x.strokeStyle='rgba(142,154,192,.16)'; x.lineWidth=1;
+    [40,100,150].forEach(v=>{ x.beginPath(); x.moveTo(L, py(v)); x.lineTo(R, py(v)); x.stroke(); });
+    [10,20,30,40].forEach(q=>{ x.beginPath(); x.moveTo(px(q), T); x.lineTo(px(q), B); x.stroke(); });
+    x.strokeStyle='rgba(240,238,230,.55)'; x.lineWidth=1.4;
+    x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+    mono(x,8); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='middle';
+    [40,100,150].forEach(v=> x.fillText(String(v), L-5, py(v)));
+    x.textAlign='center'; x.textBaseline='top';
+    [10,20,30,40].forEach(q=> x.fillText(String(q), px(q), B+5));
+    mono(x,8.5,500); x.fillStyle=DIM; x.textAlign='left';
+    x.fillText('↑ price (₹)', 12, 24);
+    x.textAlign='right'; x.fillText('quantity (kg) →', R, B+18);
+
+    // both curves, through the three printed points
+    const curve = (key, col) => {
+      x.strokeStyle=col; x.lineWidth=2.2;
+      x.beginPath();
+      MARKET.forEach((m,k)=> k ? x.lineTo(px(m[key]), py(m.p)) : x.moveTo(px(m[key]), py(m.p)));
+      x.stroke();
+      MARKET.forEach(m=>{ x.fillStyle=col; x.beginPath(); x.arc(px(m[key]), py(m.p), 3, 0, 7); x.fill(); });
+    };
+    curve('qd', A1);
+    curve('qs', A2);
+
+    // the gap at the price the slider is on
+    const y=py(p);
+    x.strokeStyle = Math.abs(gap) < 0.5 ? '#FFFFFF' : (gap > 0 ? A1 : A2);
+    x.lineWidth=2;
+    x.beginPath(); x.moveTo(px(Math.min(qd,qs)), y); x.lineTo(px(Math.max(qd,qs)), y); x.stroke();
+    [[qd,A1],[qs,A2]].forEach(m=>{
+      x.fillStyle=m[1];
+      x.beginPath(); x.arc(px(m[0]), y, 5, 0, 7); x.fill();
+      x.strokeStyle='#FFFFFF'; x.lineWidth=1.2; x.stroke();
+    });
+    x.strokeStyle='rgba(255,255,255,.35)'; x.lineWidth=1; x.setLineDash([3,3]);
+    x.beginPath(); x.moveTo(L, y); x.lineTo(px(Math.max(qd,qs)), y); x.stroke();
+    x.setLineDash([]);
+
+    // the verdict
+    const cleared = Math.abs(gap) < 0.5;
+    const state = cleared ? 'Market equilibrium' : gap > 0 ? 'Excess demand' : 'Excess supply';
+    const col = cleared ? '#FFFFFF' : gap > 0 ? A1 : A2;
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 212); x.lineTo(W-10, 212); x.stroke();
+    x.fillStyle = cleared ? 'rgba(255,255,255,.14)' : gap > 0 ? 'rgba(61,220,151,.16)' : 'rgba(255,184,77,.16)';
+    x.fillRect(10, 220, W-20, 28);
+    x.strokeStyle=col; x.lineWidth=1.4; x.strokeRect(10, 220, W-20, 28);
+    mono(x,11,600); x.fillStyle=col; x.textAlign='center'; x.textBaseline='middle';
+    x.fillText(state.toUpperCase(), W/2, 234);
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText(cleared ? 'cleared' : Math.abs(Math.round(gap)) + ' kg', 18, 234);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('eqSV').textContent=rupee(p) + ' per kg';
+    document.getElementById('eqA').textContent=Math.round(qd) + ' kg';
+    document.getElementById('eqB').textContent=Math.round(qs) + ' kg';
+    document.getElementById('eqC').textContent = cleared
+      ? 'Quantity demanded equals quantity supplied. The market is cleared — no shortage and no surplus, and no pressure on the price to move.'
+      : gap > 0
+        ? 'Qs is less than Qd: excess demand, a shortage of about ' + Math.round(gap) + ' kg. In a free market that pushes the price up.'
+        : 'Qs is greater than Qd: excess supply, a surplus of about ' + Math.abs(Math.round(gap)) + ' kg. In a free market that pushes the price down.';
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[Math.floor((+sS.value - 40)/25)]=1; ev('explore','eqS');
+      if(Object.keys(seen).length>=4) complete('m8');
+      draw();
+    };
+  }
+  reg('m8',draw);
+})();
+
+/* ============================================================
+   M9 — shortage, surplus, or cleared
+   ============================================================ */
+Q.vgrid('g9','g9check','g9s',{
+  head:'This market is in…', mid:'m9',
+  cols:['Which state?'],
+  options:[['Excess demand','Equilibrium','Excess supply']],
+  rows:[
+    {l:'₹40: 38 kg demanded, 6 kg supplied',  a:['Excess demand']},
+    {l:'₹100: 12 kg demanded, 12 kg supplied', a:['Equilibrium']},
+    {l:'₹150: 8 kg demanded, 43 kg supplied',  a:['Excess supply']},
+    {l:'Quantity supplied is less than demanded',   a:['Excess demand']},
+    {l:'Quantity supplied is more than demanded',   a:['Excess supply']},
+    {l:'The market is cleared',                     a:['Equilibrium']},
+    {l:'A shortage',                                a:['Excess demand']},
+    {l:'A surplus',                                 a:['Excess supply']}
+  ],
+  doneMsg:'All eight. Shortage and excess demand are the same thing said twice; so are surplus and excess supply. Equilibrium is the one price where neither word applies.'
+});
+
+/* ============================================================
+   M10 — the mask market, 2020
+   The curves carry the story: demand jumps right, supply is
+   slow to follow, then catches up, then demand falls back. The
+   prices are drawn as positions rather than as figures, because
+   the chapter gives the shape of what happened and no numbers
+   for it.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('mskCv'), btn=document.getElementById('mskNext');
+  const ST=[
+    {n:'Before 2020', dShift:0, sShift:0, price:'ordinary',
+     w:'An ordinary market for face masks, sitting at its equilibrium like any other.'},
+    {n:'Demand surges', dShift:1, sShift:0, price:'much higher',
+     w:'During the COVID-19 pandemic in 2020, the demand for face masks surged rapidly. The demand curve jumps to the right: at every price, far more masks are wanted than before.'},
+    {n:'Supply cannot follow', dShift:1, sShift:0, price:'much higher',
+     w:'The supply could not catch up immediately — factories take time — so the whole adjustment fell on the price, and the price of masks rose significantly.'},
+    {n:'Suppliers adjust', dShift:1, sShift:1, price:'falling',
+     w:'Over time suppliers adjusted to the increased demand. The supply curve moves right in its turn, and prices fell back from their peak.'},
+    {n:'The pandemic ends', dShift:0, sShift:1, price:'back to normal',
+     w:'Once the pandemic was over, demand reduced further, and prices reduced to pre-pandemic levels. Four moves, and not one of them a decision anybody made about what a mask ought to cost.'}
+  ];
+  let at=0;
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=254, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=ST[at];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('an equilibrium that will not sit still', 10, 8);
+
+    const L=34, R=W-16, T=36, B=166, sh=(R-L)*0.18;
+    x.strokeStyle='rgba(240,238,230,.5)'; x.lineWidth=1.3;
+    x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+    mono(x,8.5,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('↑ price', 12, 24);
+    x.textAlign='right'; x.fillText('quantity →', R, B+6);
+
+    /* Both curves are straight lines; a shift moves one bodily sideways. The
+       crossing is then solved rather than guessed, so the dot always sits
+       exactly where the two drawn lines meet. */
+    const x0 = L+10, x1 = R-26-sh;                           // room for the shift
+    const dx0 = x0, dy0 = T+8, dx1 = x1, dy1 = B-8;          // demand, downward
+    const sx0 = x0, sy0 = B-8, sx1 = x1, sy1 = T+8;          // supply, upward
+    const dOff = s.dShift*sh, sOff = s.sShift*sh;
+    const cross = (ax,ay,bx,by, cx2,cy2,dx2,dy2) => {
+      const a1=by-ay, b1=ax-bx, c1=a1*ax+b1*ay;
+      const a2=dy2-cy2, b2=cx2-dx2, c2=a2*cx2+b2*cy2;
+      const det=a1*b2-a2*b1;
+      return det ? [(b2*c1-b1*c2)/det, (a1*c2-a2*c1)/det] : null;
+    };
+    // the faint originals, once anything has moved
+    if(s.dShift || s.sShift){
+      x.strokeStyle='rgba(61,220,151,.25)'; x.lineWidth=1.4; x.setLineDash([4,3]);
+      x.beginPath(); x.moveTo(dx0, dy0); x.lineTo(dx1, dy1); x.stroke();
+      x.strokeStyle='rgba(255,184,77,.25)';
+      x.beginPath(); x.moveTo(sx0, sy0); x.lineTo(sx1, sy1); x.stroke();
+      x.setLineDash([]);
+    }
+    x.strokeStyle=A1; x.lineWidth=2.4;
+    x.beginPath(); x.moveTo(dx0+dOff, dy0); x.lineTo(dx1+dOff, dy1); x.stroke();
+    x.strokeStyle=A2; x.lineWidth=2.4;
+    x.beginPath(); x.moveTo(sx0+sOff, sy0); x.lineTo(sx1+sOff, sy1); x.stroke();
+    mono(x,9,600); x.fillStyle=A1; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText('D', dx1+dOff+4, dy1);
+    x.fillStyle=A2; x.fillText('S', sx1+sOff+4, sy1);
+
+    const e = cross(dx0+dOff, dy0, dx1+dOff, dy1, sx0+sOff, sy0, sx1+sOff, sy1);
+    if(e){
+      x.strokeStyle='rgba(255,255,255,.4)'; x.lineWidth=1; x.setLineDash([3,3]);
+      x.beginPath(); x.moveTo(L, e[1]); x.lineTo(e[0], e[1]); x.stroke();
+      x.setLineDash([]);
+      x.fillStyle='#FFFFFF';
+      x.beginPath(); x.arc(e[0], e[1], 5, 0, 7); x.fill();
+    }
+
+    // a strip of the four moves, the reached ones lit
+    const sw=(W-20)/ST.length;
+    ST.forEach((q,i)=>{
+      x.fillStyle = i<=at ? (i===at ? A1 : 'rgba(61,220,151,.4)') : 'rgba(142,154,192,.2)';
+      x.fillRect(10+sw*i+1, 182, sw-2, 4);
+    });
+    mono(x,10,600); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    x.fillText(s.n, 12, 196);
+    mono(x,9); x.fillStyle = s.price==='much higher' ? A2 : s.price==='falling' ? A1 : DIM;
+    x.textAlign='right';
+    x.fillText('price: ' + s.price, W-12, 197);
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the dot is wherever the two lines now cross', 12, 216);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('mskA').textContent=at + ' of ' + (ST.length-1);
+    document.getElementById('mskB').textContent=s.price;
+    document.getElementById('mskTxt').textContent=s.w;
+  }
+  if(btn){
+    btn.onclick=()=>{
+      at = at >= ST.length-1 ? 0 : at+1;
+      ev('explore','msk-'+at);
+      btn.textContent = at >= ST.length-1 ? 'Back to 2019' : 'What happened next';
+      if(at >= ST.length-1) complete('m10');
+      draw();
+    };
+  }
+  reg('m10',draw);
+})();
+
+/* ============================================================
+   M11 — a hundred rooms in Goa
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('hotCv'), box2=document.getElementById('hotOpts');
+  const R=[
+    {k:'off', t:'Off-season', tariff:1500, full:1500, occ:22,
+     when:'A Monday in July — an off-season weekday',
+     w:'The lowest tariff of the year, on a weekday nobody is travelling. Same hotel, same room, same bed linen.'},
+    {k:'tou', t:'Tourist weekend', tariff:8000, full:8000, occ:78,
+     when:'A Saturday in December, in the tourist season',
+     w:'More than five times the July rate. Nothing about the room has changed; what has changed is how many people want it on that particular night.'},
+    {k:'nye', t:'New Year’s Eve', tariff:25000, full:25000, occ:100,
+     when:'31 December — very high demand',
+     w:'Sixteen and a half times the off-season rate. This is the clearest case in the chapter of a price set by demand alone.'},
+    {k:'can', t:'A cancellation', tariff:4800, full:8000, occ:38, cut:true,
+     when:'A group tour cancels its booking',
+     w:'If a group tour cancels, the hotel may reduce the tariff by 40 per cent overnight, to fill the empty rooms quickly. Shown here against the tourist-season rate as an illustration — the chapter gives the 40 per cent, not the rate it is taken off.'}
+  ];
+  let sel=0; const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=278, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, r=R[sel];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('one hotel in Goa · 100 rooms', 10, 8);
+
+    // the rooms, ten by ten, filled to the occupancy of this night
+    const cell=Math.min(13, (W-24)/10), gx=(W-10*cell)/2, gy=28;
+    for(let i=0;i<100;i++){
+      const cx=gx+(i%10)*cell, cy=gy+Math.floor(i/10)*cell;
+      x.fillStyle = i < r.occ ? 'rgba(61,220,151,.75)' : 'rgba(142,154,192,.16)';
+      x.fillRect(cx+1, cy+1, cell-2, cell-2);
+    }
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.textAlign='center';
+    x.fillText(r.occ + ' of 100 rooms taken', W/2, gy+10*cell+5);
+    x.textAlign='left';
+
+    // the tariff, as a bar against the year's highest
+    const by=gy+10*cell+26, bw=W-24;
+    mono(x,8); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='bottom';
+    x.fillText('scale: ₹0 to ₹25,000', W-12, by-4);
+    x.fillStyle='rgba(142,154,192,.12)'; x.fillRect(12, by, bw, 22);
+    x.fillStyle='rgba(255,184,77,.8)'; x.fillRect(12, by, bw*r.tariff/25000, 22);
+    if(r.cut){
+      // where the rate would have been without the cut
+      x.strokeStyle='rgba(255,255,255,.5)'; x.lineWidth=1.4; x.setLineDash([3,3]);
+      x.beginPath();
+      x.moveTo(12+bw*r.full/25000, by-3); x.lineTo(12+bw*r.full/25000, by+25);
+      x.stroke(); x.setLineDash([]);
+      mono(x,8); x.fillStyle='rgba(255,255,255,.7)'; x.textAlign='left'; x.textBaseline='top';
+      x.fillText('−40% from the tourist rate', 12+bw*r.full/25000+4, by+26);
+    }
+    mono(x,12,600); x.fillStyle='#0B1218'; x.textAlign='left'; x.textBaseline='middle';
+    x.fillText(money(r.tariff), 18, by+11);
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, by+44); x.lineTo(W-10, by+44); x.stroke();
+    sans(x,12); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
+    wrap(x, r.when, 12, by+52, W-24, 16);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('hotA').textContent=money(r.tariff);
+    document.getElementById('hotB').textContent=r.when;
+    document.getElementById('hotTxt').textContent=r.w;
+  }
+  if(cv){
+    R.forEach((r,i)=>{
+      const b=document.createElement('button');
+      b.className='chip'+(i===0?' on':''); b.textContent=r.t;
+      b.onclick=()=>{
+        sel=i; seen[r.k]=1;
+        [...box2.children].forEach(n=>n.classList.remove('on'));
+        b.classList.add('on');
+        ev('explore','hot-'+r.k);
+        if(Object.keys(seen).length>=3) complete('m11');
+        draw();
+      };
+      box2.appendChild(b);
+    });
+  }
+  reg('m11',draw);
+})();
+
+/* ============================================================
+   M12 — ceiling and floor
+   The same three printed rows as M8. A control set below the
+   equilibrium is a binding ceiling and makes a shortage; one
+   set above it is a binding floor and makes a surplus; and
+   either kind set on the wrong side of ₹100 does nothing at
+   all — which is the chapter's condition on price floors,
+   worked from the other end.
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('capCv'), sS=document.getElementById('capS');
+  const EQ=100;
+  const seen={};
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=258, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, p=+sS.value;
+    const qd = between(MARKET, 'qd', p), qs = between(MARKET, 'qs', p);
+    const below = p < EQ, at = p === EQ;
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('the same market, with the price set by rule', 10, 8);
+
+    const L=38, R=W-16, T=38, B=170;
+    const px = q => L + q/45*(R-L), py = pr => B - ((pr-30)/130)*(B-T);
+    x.strokeStyle='rgba(142,154,192,.16)'; x.lineWidth=1;
+    [40,100,150].forEach(v=>{ x.beginPath(); x.moveTo(L, py(v)); x.lineTo(R, py(v)); x.stroke(); });
+    x.strokeStyle='rgba(240,238,230,.5)'; x.lineWidth=1.3;
+    x.beginPath(); x.moveTo(L, T); x.lineTo(L, B); x.lineTo(R, B); x.stroke();
+    x.textAlign='right'; x.textBaseline='middle';
+    [40,100,150].forEach(v=>{
+      const eq = v===EQ;
+      mono(x, eq ? 9.5 : 8, eq ? 600 : 400);
+      x.fillStyle = eq ? '#FFFFFF' : DIM;
+      x.fillText(String(v), L-5, py(v));
+    });
+
+    const curve = (key, col) => {
+      x.strokeStyle=col; x.lineWidth=2.2;
+      x.beginPath();
+      MARKET.forEach((m,k)=> k ? x.lineTo(px(m[key]), py(m.p)) : x.moveTo(px(m[key]), py(m.p)));
+      x.stroke();
+    };
+    curve('qd', A1);
+    curve('qs', A2);
+
+    // the equilibrium, always marked, so the control has something to be off
+    x.fillStyle='rgba(255,255,255,.85)';
+    x.beginPath(); x.arc(px(12), py(EQ), 4, 0, 7); x.fill();
+
+
+    // the controlled price, as a rule drawn across the market
+    const y=py(p);
+    x.strokeStyle = at ? 'rgba(255,255,255,.8)' : below ? A1 : A2;
+    x.lineWidth=2.4; x.setLineDash(at ? [] : [7,4]);
+    x.beginPath(); x.moveTo(L, y); x.lineTo(R, y); x.stroke();
+    x.setLineDash([]);
+    mono(x,9,600); x.fillStyle = at ? '#FFFFFF' : below ? A1 : A2;
+    x.textAlign='left'; x.textBaseline='bottom';
+    x.fillText(rupee(p), L+3, y-4);
+
+    // and the gap it opens
+    if(!at){
+      const g0=px(Math.min(qd,qs)), g1=px(Math.max(qd,qs));
+      x.strokeStyle='#FFFFFF'; x.lineWidth=3;
+      x.beginPath(); x.moveTo(g0, y); x.lineTo(g1, y); x.stroke();
+      x.lineWidth=1.6;
+      x.beginPath();
+      x.moveTo(g0, y-6); x.lineTo(g0, y+6);
+      x.moveTo(g1, y-6); x.lineTo(g1, y+6);
+      x.stroke();
+    }
+
+    const kind = at ? 'No effect' : below ? 'A binding price ceiling' : 'A binding price floor';
+    const out  = at ? 'the market clears on its own'
+                    : below ? 'shortage of ' + Math.round(qd-qs) + ' kg'
+                            : 'surplus of ' + Math.round(qs-qd) + ' kg';
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 198); x.lineTo(W-10, 198); x.stroke();
+    x.fillStyle = at ? 'rgba(255,255,255,.12)' : below ? 'rgba(61,220,151,.16)' : 'rgba(255,184,77,.16)';
+    x.fillRect(10, 204, W-20, 40);
+    x.strokeStyle = at ? '#FFFFFF' : below ? A1 : A2; x.lineWidth=1.4;
+    x.strokeRect(10, 204, W-20, 40);
+    x.fillStyle = at ? '#FFFFFF' : below ? A1 : A2;
+    x.textBaseline='middle';
+    fitText(x, kind, W/2, 217, W-28);
+    mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='middle';
+    fitText(x, out, W/2, 234, W-24);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('capSV').textContent=rupee(p);
+    document.getElementById('capA').textContent = at
+      ? 'Neither. At the equilibrium price a control changes nothing.'
+      : below
+        ? 'A price ceiling — a maximum — set below the equilibrium, so it binds.'
+        : 'A price floor — a minimum — set above the equilibrium, so it binds.';
+    document.getElementById('capB').textContent = at
+      ? 'The market clears by itself: 12 kg wanted, 12 kg offered.'
+      : below
+        ? 'Buyers want ' + Math.round(qd) + ' kg and sellers offer only ' + Math.round(qs) + ' kg. A shortage.'
+        : 'Sellers offer ' + Math.round(qs) + ' kg and buyers want only ' + Math.round(qd) + ' kg. A surplus.';
+    document.getElementById('capC').textContent = at ? 'No gap.'
+      : Math.abs(Math.round(qd-qs)) + ' kg. A ceiling set above ₹100, or a floor set below it, would leave no gap at all — which is why the chapter says a price floor is only effective above the equilibrium price.';
+  }
+  if(sS){
+    sS.oninput=()=>{
+      seen[Math.floor((+sS.value - 40)/25)]=1; ev('explore','capS');
+      if(Object.keys(seen).length>=4) complete('m12');
+      draw();
+    };
+  }
+  reg('m12',draw);
+})();
+
+/* ============================================================
+   M13 — the park that never got built
+   ============================================================ */
+(function(){
+  const cv=document.getElementById('parCv'), btn=document.getElementById('parNext');
+  const ST=[
+    {n:'A park is needed', pay:0, built:false,
+     w:'The neighbourhood needs a park. Building it is expensive, but many families would benefit from it.'},
+    {n:'The arithmetic works', pay:8, built:false,
+     w:'If each family contributed ₹5,000, the park could be built. On paper, the money is there.'},
+    {n:'One family thinks it through', pay:6, built:false,
+     w:'“If others pay, the park will be built anyway, and I can use it without paying.” Nobody can be shut out of a park, which is exactly what makes this thought available.'},
+    {n:'So does everybody else', pay:2, built:false,
+     w:'The same reasoning is open to every family, and it is not irrational for any one of them. Because of this thinking, not enough money is collected.'},
+    {n:'The park is never built', pay:2, built:false, fail:true,
+     w:'Even though everyone needs it. This is not a story about selfishness — each family did the sensible thing, and the sensible things added up to nothing.'},
+    {n:'So it is provided', pay:8, built:true,
+     w:'Goods that benefit everyone often require government provision or funding, to ensure social welfare, economic development, and equal access to essential services. Roads, bridges, parks, streetlighting, national defence, sanitation — usually not provided by private companies, because they do not generate direct profit.'}
+  ];
+  let at=0;
+  function draw(){
+    if(!cv || !cv.clientWidth) return;
+    const H=250, x=fit(cv,H); if(!x) return;
+    const W=cv.clientWidth, s=ST[at];
+    bg(x,W,H);
+    mono(x,10,500); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
+    x.fillText('eight families, and one park', 10, 8);
+
+    // the park, dashed until somebody actually builds it
+    const pw=W-24, py0=30, ph=64;
+    if(s.built){
+      x.fillStyle='rgba(61,220,151,.20)'; x.fillRect(12, py0, pw, ph);
+      x.strokeStyle=A1; x.lineWidth=1.8; x.setLineDash([]);
+      x.strokeRect(12, py0, pw, ph);
+      for(let i=0;i<4;i++){
+        const tx=30+i*(pw-36)/3;
+        x.strokeStyle=A1; x.lineWidth=2;
+        x.beginPath(); x.moveTo(tx, py0+ph-10); x.lineTo(tx, py0+ph-26); x.stroke();
+        x.fillStyle='rgba(61,220,151,.6)';
+        x.beginPath(); x.arc(tx, py0+ph-32, 9, 0, 7); x.fill();
+      }
+      mono(x,10,600); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='top';
+      x.fillText('THE PARK', W/2, py0+6);
+    } else {
+      x.strokeStyle = s.fail ? 'rgba(229,72,77,.6)' : 'rgba(142,154,192,.4)';
+      x.lineWidth=1.6; x.setLineDash([6,5]);
+      x.strokeRect(12, py0, pw, ph);
+      x.setLineDash([]);
+      mono(x,10,500); x.fillStyle = s.fail ? BAD : 'rgba(142,154,192,.6)';
+      x.textAlign='center'; x.textBaseline='middle';
+      x.fillText(s.fail ? 'NEVER BUILT' : 'not built yet', W/2, py0+ph/2);
+    }
+
+    // eight families, and whether each one has paid
+    const n=8, fw=(W-24)/n, fy=150;
+    for(let i=0;i<n;i++){
+      const cx=12+fw*i+fw/2, paid=i < s.pay;
+      person(x, cx, fy, 26, paid ? A1 : 'rgba(142,154,192,.4)');
+      x.fillStyle = paid ? A2 : 'rgba(142,154,192,.25)';
+      x.beginPath(); x.arc(cx+12, fy-10, 4, 0, 7); x.fill();
+    }
+    mono(x,8.5); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='top';
+    fitText(x, s.pay + ' of 8 families paying · ₹5,000 each', W/2, fy+24, W-24);
+
+    x.strokeStyle=RULE; x.lineWidth=1;
+    x.beginPath(); x.moveTo(10, 204); x.lineTo(W-10, 204); x.stroke();
+    mono(x,10,600); x.fillStyle = s.built ? A1 : s.fail ? BAD : INK;
+    x.textAlign='left'; x.textBaseline='top';
+    x.fillText(s.n, 12, 212);
+    mono(x,9); x.fillStyle=DIM;
+    x.fillText('collected: ' + money(s.pay*5000), 12, 230);
+    x.textAlign='left'; x.textBaseline='alphabetic';
+
+    document.getElementById('parA').textContent=at + ' of ' + (ST.length-1);
+    document.getElementById('parB').textContent=money(s.pay*5000);
+    document.getElementById('parTxt').textContent=s.w;
+  }
+  if(btn){
+    btn.onclick=()=>{
+      at = at >= ST.length-1 ? 0 : at+1;
+      ev('explore','par-'+at);
+      btn.textContent = at >= ST.length-1 ? 'Start over' : 'And then';
+      if(at >= ST.length-1) complete('m13');
+      draw();
+    };
+  }
+  reg('m13',draw);
+})();
+
+/* ============================================================
+   M14 — both sides of intervening
+   ============================================================ */
+Q.pick('g14','g14check','g14s',[
+  {t:'A price ceiling is the maximum a seller may charge',            a:1},
+  {t:'A price floor is a minimum — a minimum wage is one',       a:1},
+  {t:'A price floor only works if set above the equilibrium price',   a:1},
+  {t:'A monopoly can charge more and supply less than a competitive market', a:1},
+  {t:'Public goods are usually not provided by private companies',    a:1},
+  {t:'Fixing prices below market levels can reduce production',       a:1},
+  {t:'Compliance burdens fall hardest on small enterprises',          a:1},
+  {t:'Heavy regulation can discourage investment in better technology', a:1},
+  {t:'A price ceiling is the lowest price that may be charged',       a:0},
+  {t:'Government intervention in a market has no drawbacks',          a:0}
+], 'm14',
+   'Right. The chapter argues both halves: markets allocate by willingness and ability to pay, which needs correcting where essentials are concerned — and correction has costs of its own, in production, in compliance, and in the incentive to invest.');
+
+/* ============================================================
+   M15 — eight words, precisely
+   Both columns stay short: Q.match lays them side by side, and
+   a right-hand card of twenty words leaves the left column
+   standing in twice its own height of empty space.
+   ============================================================ */
+Q.match('g15a','g15b','g15s',[
+  ['Purchasing power',   'How much one unit of a currency can buy'],
+  ['Related goods',      'Products whose demand is interconnected'],
+  ['Market equilibrium', 'Quantity demanded equals quantity supplied'],
+  ['Price ceiling',      'The maximum a seller may charge'],
+  ['Price floor',        'The lowest price that may be charged'],
+  ['Monopoly',           'A single seller controlling the entire supply'],
+  ['Hoarding',           'Piling up goods beyond what is needed now'],
+  ['Black marketing',    'Illegal trade in banned or regulated goods']
+], 'm15',
+   'All eight. Four of them describe what a market does on its own, and four describe what is done to a market — which is the shape of the whole second half of this chapter.');
+
+/* ============================================================
+   M16 — chapter boss
+   ============================================================ */
+Q.boss([
+  { t:'Recall · 1 of 10',
+    q:'What does the Law of Demand say?',
+    o:['As price rises, quantity demanded rises',
+       'As price rises, quantity demanded falls',
+       'Quantity demanded does not depend on price'], a:1,
+    w:'An inverse relationship between the price of a product and the quantity demanded of it — which is why a demand curve slopes downward. It is also a useful check: a schedule where quantity demanded climbs with price has been written down the wrong way round.' },
+  { t:'Recall · 2 of 10',
+    q:'What does the Law of Supply say?',
+    o:['As price rises, quantity supplied rises',
+       'As price rises, quantity supplied falls',
+       'Supply depends only on the weather'], a:0,
+    w:'A direct relationship, and the reason is profit: higher prices increase profitability, which incentivises producers to raise output and also attracts new firms into the market.' },
+  { t:'Recall · 3 of 10',
+    q:'In Table 9.3, at what price does the mango market clear?',
+    o:['₹40','₹100','₹150'], a:1,
+    w:'At ₹100 the quantity demanded and the quantity supplied are both 12 kg. That is market equilibrium: no shortage, no surplus, and no pressure on the price to move.' },
+  { t:'Recall · 4 of 10',
+    q:'Tea and coffee are an example of what?',
+    o:['Complementary goods','Substitute goods','Public goods'], a:1,
+    w:'Substitutes can replace each other. If tea’s price stays the same while coffee becomes more expensive, coffee drinkers may switch to tea, increasing tea’s demand. Complements are the other kind — cars and petrol, smartphones and earphones.' },
+  { t:'Understanding · 5 of 10',
+    q:'Why is the market demand curve flatter than an individual one?',
+    o:['Because market prices are lower',
+       'Because it aggregates many consumers, so the same price change produces a larger total response',
+       'Because individual buyers are less sensitive to price'], a:1,
+    w:'When the price falls from ₹150 to ₹50, Srivalli’s demand rises by 2 kg while market demand rises by 12 kg. Same fall in price, six times the response — and that is what makes the line flatter.' },
+  { t:'Understanding · 6 of 10',
+    q:'Why does a price ceiling set below the equilibrium price cause a shortage?',
+    o:['Because sellers refuse to obey it',
+       'Because at that price buyers want more than sellers will offer',
+       'Because the government stops production'], a:1,
+    w:'Read the two curves at the controlled price: quantity demanded is above quantity supplied, and the gap is the shortage. The chapter’s wheat example is the same arithmetic — a maximum of ₹20 against a market price of ₹30 leaves farmers with less, and can reduce production.' },
+  { t:'Application · 7 of 10',
+    q:'Petrol prices double. What is likely to happen to the demand for public transport?',
+    o:['It rises','It falls','It does not change'], a:0,
+    w:'Public transport is a substitute for travelling by car, and petrol is a complement to car travel. When the price of a good rises, people replace it with a relatively cheaper alternative — so demand for the substitute rises.' },
+  { t:'Application · 8 of 10',
+    q:'The government sets a maximum price for an essential vaccine below the market price. What follows?',
+    o:['A surplus','A shortage','No effect at all'], a:1,
+    w:'A binding price ceiling. At the controlled price the quantity demanded exceeds the quantity supplied, so there is excess demand — a shortage. Had the maximum been set above the market price, it would have made no difference at all.' },
+  { t:'Reasoning · 9 of 10',
+    q:'Why did mask prices rise sharply in 2020 and then fall again?',
+    o:['Because the government fixed them twice',
+       'Demand surged and supply could not catch up immediately; suppliers adjusted over time',
+       'Because masks became cheaper to make overnight'], a:1,
+    w:'Four moves. Demand jumped, supply could not follow at once so the whole adjustment fell on price, suppliers then expanded and prices fell back, and when the pandemic ended demand dropped further and prices returned to pre-pandemic levels.' },
+  { t:'Challenge · 10 of 10',
+    q:'At ₹40, 38 kg are demanded and 6 kg supplied. What is that, and what happens next in a free market?',
+    o:['Excess supply of 32 kg; the price falls',
+       'Excess demand of 32 kg; the price rises',
+       'Equilibrium; nothing happens'], a:1,
+    w:'Quantity supplied is less than quantity demanded, so it is excess demand — a shortage of 32 kg. Buyers competing for too few mangoes push the price up, and it keeps rising until the gap closes at ₹100.' }
+], 'm16', 'Two curves pointing opposite ways, one price where they cross, a market that never sits still at it, and a government that can move the price but not the arithmetic underneath it.');
+
+/*@include shared/boot.js*/
+</script>
+</body>
+</html>
