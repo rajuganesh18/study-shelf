@@ -125,7 +125,7 @@
 
 <!-- M3 -->
 <details class="m" id="m3" data-xp="30" data-coin="15">
-  <summary><span class="mno">03</span><span class="mt"><b>The ball thrown straight up</b><i>concept lab · fill in concept lab</i></span><span class="mstat">30 XP</span></summary>
+  <summary><span class="mno">03</span><span class="mt"><b>The ball thrown straight up</b><i>Concept lab · fill in Concept lab</i></span><span class="mstat">30 XP</span></summary>
   <div class="body">
     <p>A ball is thrown straight up from your hand. It rises, stops, and falls back down into your hand again.</p>
     <div class="panel">
@@ -264,7 +264,7 @@
       <button class="opt">No — downwards must always be negative</button>
       <button class="opt" data-ok="1">Yes — you may choose either, but must not change it midway through a problem</button>
     </div>
-    <div class="why">We can choose the origin and the positive direction as per our convenience. However, once chosen, it should not be changed while solving a problem. In concept lab the origin sat at ground level; in concept lab it sat at the release point.</div>
+    <div class="why">We can choose the origin and the positive direction as per our convenience. However, once chosen, it should not be changed while solving a problem. In Concept lab the origin sat at ground level; in Concept lab it sat at the release point.</div>
     <div class="curio">
       <h5>Ready to go beyond</h5>
       <div class="note">Similar to 'velocity at an instant', 'acceleration at an instant' is known as instantaneous acceleration. In this chapter we consider only the cases where the acceleration is constant.</div>
@@ -276,7 +276,7 @@
 
 <!-- M8 -->
 <details class="m" id="m8" data-xp="35" data-coin="20">
-  <summary><span class="mno">08</span><span class="mt"><b>Plot it yourself</b><i>concept lab · concept lab</i></span><span class="mstat">35 XP</span></summary>
+  <summary><span class="mno">08</span><span class="mt"><b>Plot it yourself</b><i>Concept lab</i></span><span class="mstat">35 XP</span></summary>
   <div class="body">
     <p>Here is where a vehicle was at each second. A row of numbers is hard to feel. Put it on paper instead.</p>
     <div class="panel">
@@ -327,7 +327,7 @@
 
 <!-- M10 -->
 <details class="m" id="m10" data-xp="40" data-coin="25">
-  <summary><span class="mno">10</span><span class="mt"><b>Steepness is velocity</b><i>concept lab · slope of a position-time graph</i></span><span class="mstat">40 XP</span></summary>
+  <summary><span class="mno">10</span><span class="mt"><b>Steepness is velocity</b><i>Concept lab · slope of a position-time graph</i></span><span class="mstat">40 XP</span></summary>
   <div class="body">
     <p>Pick any two moments on the line. Drop lines from each to the axes and a triangle appears between them. Its two sides are worth something.</p>
     <div class="panel">
@@ -473,7 +473,7 @@
 
 <!-- M15 -->
 <details class="m" id="m15" data-xp="40" data-coin="25">
-  <summary><span class="mno">15</span><span class="mt"><b>From square to circle</b><i>Uniform circular motion · concept lab</i></span><span class="mstat">40 XP</span></summary>
+  <summary><span class="mno">15</span><span class="mt"><b>From square to circle</b><i>Uniform circular motion · Concept lab</i></span><span class="mstat">40 XP</span></summary>
   <div class="body">
     <p>An athlete runs a square track at a steady speed. Then a hexagon. Then a track with more and more sides. Add sides and watch the corners.</p>
     <div class="panel">
@@ -488,7 +488,7 @@
         <div class="rc"><div class="k">Accelerating?</div><div class="v" id="ciAcc" style="font-size:12.5px">—</div></div>
       </div>
       <div class="row"><button class="act" id="ciRing">Lift the ring</button></div>
-      <div class="note" style="margin-top:11px">concept lab · a marble rolls round the inside of a tape ring. Lift the ring away while it is moving and see which way it goes.</div>
+      <div class="note" style="margin-top:11px">Concept lab · a marble rolls round the inside of a tape ring. Lift the ring away while it is moving and see which way it goes.</div>
     </div>
     <p>As the number of sides increases, the athlete has to take turns more and more frequently. Finally the track approaches a circle, with each side decreasing to a point and the direction of the athlete's velocity changing continuously.</p>
     <p>When an object moves in a circular path with constant, uniform speed, its motion is called <b>uniform circular motion</b>. If the radius is R and one revolution takes time T, the average speed is 2πR/T, while the average velocity over that revolution is zero, since the displacement is zero.</p>
@@ -685,7 +685,7 @@ function paper(x, W, H, c){
 })();
 
 /* ============================================================
-   M2 — distance travelled vs displacement (concept lab)
+   M2 — distance travelled vs displacement (Concept lab)
    ============================================================ */
 (function(){
   const cv=document.getElementById('trackCv'), tS=document.getElementById('tkT');
@@ -757,7 +757,7 @@ function paper(x, W, H, c){
 })();
 
 /* ============================================================
-   M3 — ball thrown up (concept lab)
+   M3 — ball thrown up (Concept lab)
    ============================================================ */
 (function(){
   const cv=document.getElementById('ballCv');
@@ -912,7 +912,7 @@ Q.rows('g7','g7s',[
    'All five. Speed and acceleration are different questions \u2014 only a change in velocity counts.');
 
 /* ============================================================
-   M8 — plot the graph yourself (concept lab)
+   M8 — plot the graph yourself (Concept lab)
    ============================================================ */
 (function(){
   const cv=document.getElementById('plotCv');
@@ -962,7 +962,7 @@ Q.rows('g7','g7s',[
     document.getElementById('plotJoin').onclick=()=>{ joined=true; draw(); };
     document.getElementById('plotClear').onclick=()=>{ placed.length=0; joined=false; draw(); };
     document.getElementById('plotTbl').innerHTML =
-      'concept lab &middot; time&nbsp; ' + TARGET.map(p=>p[0]+' s').join(' &nbsp;') +
+      'Concept lab &middot; time&nbsp; ' + TARGET.map(p=>p[0]+' s').join(' &nbsp;') +
       '<br>position&nbsp; ' + TARGET.map(p=>p[1]+' m').join(' &nbsp;');
   }
   reg('m8',draw);
@@ -974,8 +974,8 @@ Q.rows('g7','g7s',[
 (function(){
   const cv=document.getElementById('shapeCv'), kS=document.getElementById('shT');
   const seen={};
-  const fA = t => 18*t;              // concept lab, constant velocity
-  const fB = t => (t/2)*(t/2);       // concept lab, speeding up
+  const fA = t => 18*t;              // Concept lab, constant velocity
+  const fB = t => (t/2)*(t/2);       // Concept lab, speeding up
   function draw(){
     if(!cv || !cv.clientWidth) return;
     const x=fit(cv,290); if(!x) return;
@@ -1023,7 +1023,7 @@ Q.rows('g7','g7s',[
 })();
 
 /* ============================================================
-   M10 — slope of a position-time graph (concept lab)
+   M10 — slope of a position-time graph (Concept lab)
    ============================================================ */
 (function(){
   const cv=document.getElementById('slopeCv'), aS=document.getElementById('slA'), bS=document.getElementById('slB');
@@ -1078,7 +1078,7 @@ Q.rows('g7','g7s',[
 (function(){
   const cv=document.getElementById('vtCv'), aS=document.getElementById('vtA'), bS=document.getElementById('vtB');
   const btn=document.getElementById('vtMode');
-  let mode=0;                       // 0 = speeding up (concept labb), 1 = constant (concept laba)
+  let mode=0;                       // 0 = speeding up (Concept labb), 1 = constant (Concept laba)
   const seen={}; let ivals=0;
   const M=[
     {xmax:30,ymax:15,xstep:5,ystep:2.5,f:t=>0.5*t,   acc:0.5, lab:'Velocity (m s\u207b\u00b9)'},
