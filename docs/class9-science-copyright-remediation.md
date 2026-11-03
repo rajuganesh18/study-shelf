@@ -7,6 +7,9 @@ Branch: `feature/class9-science-original-content`
 - Updated all 13 chapter HTML files to remove textbook-specific activity/table/figure/section-number labels and textbook-directed references from learner-facing copy and developer comments.
 - Replaced one position–time plotting dataset in Motion with a different illustrative sequence (18 m per second instead of 20 m per second).
 - Replaced the twelve-species demonstration dataset in Diversity with a different collection of organisms.
+- Replaced the textbook-like Reproduction egg-count graph and unsupported numerical comparisons with an original qualitative fertilisation-strategy explorer; removed unsourced survival rankings.
+- Reworked Diversity's taxonomy-rank visual to remove unsupported species-count estimates and focus on rank relationships.
+- Rechecked inline JavaScript syntax in both modified chapters.
 - Retained existing interactive mission layout, navigation and progress tracking.
 - Checked the inline JavaScript in all 13 modified chapter files for parse errors.
 
@@ -28,8 +31,8 @@ These changes are an **initial remediation pass only**. Removing textbook identi
 | 8 Atom | Check electron shell visualization, table layout, and numeric questions |
 | 9 Atomic Foundations | Replace ionic/covalent comparison examples and table presentation |
 | 10 Sound | Redesign wave and vibration illustrations with new parameter sets |
-| 11 Reproduction | Rebuild egg-count comparisons and menstrual-cycle visuals from independent sources; verify botanical diagrams |
-| 12 Diversity | Rebuild taxonomy diagrams, identification key and hierarchy figures, not just the species sample |
+| 11 Reproduction | Egg-count chart replaced; still review menstrual-cycle visuals and botanical diagrams against source PDFs |
+| 12 Diversity | Taxonomy counts removed and species sample changed; still review identification key and other figures |
 | 13 Earth as a System | Independently source albedo ranges and redesign atmospheric/ocean/cycle diagrams |
 
 ## Acceptance criteria before merging for release
