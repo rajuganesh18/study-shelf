@@ -93,18 +93,11 @@ details.data[open] summary{border-bottom:1px solid var(--rule);color:var(--a1)}
 <body>
 <div class="wrap">
 <header class="mast">
-  <div class="eyebrow">NCERT · Interactive chapters</div>
+  <div class="eyebrow">Interactive learning · Class 9</div>
   <h1>The<br><span>Study Shelf</span></h1>
 </header>
 
 
-
-<div class="tabs" id="tabs"></div>
-<div class="note" id="clsNote" style="margin:-4px 0 16px"></div>
-
-<div class="search">
-  <input id="q" type="search" placeholder="Search every chapter…" autocomplete="off" spellcheck="false">
-</div>
 
 <div id="view"></div>
 
@@ -142,7 +135,7 @@ details.data[open] summary{border-bottom:1px solid var(--rule);color:var(--a1)}
 const CATALOG = [
 {
   cls:'9', label:'Class 9',
-  note:'New NCF-SE 2023 textbooks, in use from the 2026-27 session.',
+  note:'Interactive lessons for Class 9.',
   subjects:[
     {
       key:'science', name:'Science', book:'Exploration', colour:'#4C9BE8',
@@ -304,17 +297,15 @@ let cls = '9', openSubject = null;
    subject grid. Both values are checked against the catalog before use. */
 (function(){
   const p = new URLSearchParams(location.search);
-  const c = CATALOG.find(x => x.cls === p.get('cls'));
-  if(!c) return;
-  cls = c.cls;
-  const s = c.subjects.find(x => x.key === p.get('sub'));
+  const c = CATALOG[0];
+  const s = CATALOG[0].subjects.find(x => x.key === p.get('sub'));
   if(s) openSubject = s.key;
 })();
 
 /* Keep the address bar honest as the view changes, so a reload or a share
    lands where the reader actually is. */
 function syncUrl(push = false){
-  const q = openSubject ? '?cls=' + encodeURIComponent(cls) + '&sub=' + encodeURIComponent(openSubject) : '';
+  const q = openSubject ? '?cls=9&sub=' + encodeURIComponent(openSubject) : '';
   history[push ? 'pushState' : 'replaceState'](null, '', location.pathname + q);
 }
 
@@ -426,21 +417,9 @@ function renderContinue(){
       '</div><span class="go">Open</span></a>';
 }
 
-/* ---------- class tabs ---------- */
-function renderTabs(){
-  $('tabs').innerHTML = CATALOG.map(c =>
-    '<button class="tab' + (c.cls === cls ? ' on' : '') + '" data-cls="' + c.cls + '">' + esc(c.label) + '</button>'
-  ).join('');
-  $('tabs').querySelectorAll('.tab').forEach(b => b.onclick = () => {
-    cls = b.dataset.cls; openSubject = null; syncUrl(true); render();
-  });
-  const c = CATALOG.find(x => x.cls === cls);
-  $('clsNote').textContent = c ? c.note : '';
-}
-
 /* ---------- views ---------- */
 function subjectGrid(){
-  const c = CATALOG.find(x => x.cls === cls);
+  const c = CATALOG[0];
   return '<div class="subs">' + c.subjects.map(s => {
     const st = subjectStats(s);
     return '<button class="sub" data-sub="' + s.key + '" style="--c:' + s.colour + '">' +
@@ -484,28 +463,9 @@ function row(ch, sub){
     : '<div class="chap" style="--c:' + sub.colour + '">' + inner + '</div>';
 }
 
-function searchView(term){
-  const t = term.toLowerCase();
-  const hits = ALL.filter(r =>
-    r.ch.t.toLowerCase().includes(t) ||
-    r.subject.name.toLowerCase().includes(t) ||
-    r.subject.book.toLowerCase().includes(t) ||
-    (r.ch.hint || '').toLowerCase().includes(t)
-  ).slice(0, 40);
-  if(!hits.length) return '<div class="empty">Nothing matches &ldquo;' + esc(term) + '&rdquo;.</div>';
-  return '<div class="sec">' + hits.length + ' result' + (hits.length>1?'s':'') + '</div><div class="chaps">' +
-    hits.map(r => {
-      const pre = '<span class="where">' + esc(r.clsLabel) + ' · ' + esc(r.subject.name) + '</span>';
-      return row(r.ch, r.subject).replace('<span class="ct"><b>', '<span class="ct">' + pre + '<b>');
-    }).join('') + '</div>';
-}
-
 function render(){
-  renderTabs();
-  const term = $('q').value.trim();
   const v = $('view');
-  if(term){ v.innerHTML = searchView(term); return; }
-  const c = CATALOG.find(x => x.cls === cls);
+  const c = CATALOG[0];
   const sub = openSubject && c.subjects.find(s => s.key === openSubject);
   v.innerHTML = sub ? chapterList(sub) : subjectGrid();
   if(sub){ $('backBtn').onclick = () => { openSubject = null; syncUrl(true); render(); }; }
@@ -559,7 +519,7 @@ function wireData(){
 }
 
 /* ---------- boot ---------- */
-$('q').addEventListener('input', render);
+
 
 /* Re-read every chapter summary, then paint. Anything that can have
    changed the numbers while the shelf was off-screen goes through here. */
@@ -581,9 +541,8 @@ async function refresh(){
 window.addEventListener('pageshow', e => { if(e.persisted) refresh(); });
 window.addEventListener('popstate', () => {
   const p = new URLSearchParams(location.search);
-  const c = CATALOG.find(x => x.cls === p.get('cls'));
-  cls = c ? c.cls : '9';
-  openSubject = c && c.subjects.some(s => s.key === p.get('sub')) ? p.get('sub') : null;
+  cls = '9';
+  openSubject = CATALOG[0].subjects.some(s => s.key === p.get('sub')) ? p.get('sub') : null;
   render();
 });
 
