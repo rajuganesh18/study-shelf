@@ -338,7 +338,7 @@
 
 <!-- M12 -->
 <details class="m" id="m12" data-xp="45" data-coin="24">
-  <summary><span class="mno">12</span><span class="mt"><b>How much pollen per seed</b><i>Activity 11.7 · Table 11.3</i></span><span class="mstat">45 XP</span></summary>
+  <summary><span class="mno">12</span><span class="mt"><b>How much pollen per seed</b><i>Pollen and seed numbers · data exercise</i></span><span class="mstat">45 XP</span></summary>
   <div class="body">
     <p>Wind pollination and insect pollination both work, but they pay very different prices. Compare what each releases against what each gets back.</p>
     <div class="panel">
@@ -359,7 +359,7 @@
       <div class="note" id="ratTxt" style="margin-top:12px;min-height:96px">Pick a strategy, then move through the range the studies observed.</div>
     </div>
     <div class="panel">
-      <div class="note" style="margin-bottom:11px">Work out each figure from Table 11.3.</div>
+      <div class="note" style="margin-bottom:11px">Explore how pollen quantities and seed counts can differ.</div>
       <table class="tick" id="g12"></table>
       <div class="row"><button class="act" id="g12check">Check my answers</button></div>
       <div class="score" id="g12s"></div>
@@ -464,7 +464,7 @@
       <button class="opt" data-ok="1">No — cycles run 21–35 days, so the day varies</button>
       <button class="opt">No — ovulation happens on the first day</button>
     </div>
-    <div class="why">Day 14 is the midpoint of a <i>typical</i> 28-day cycle, not a rule. Cycle length varies between people and between months for the same person, and cycles can be irregular — especially in the years just after they begin. The textbook's own figure says "typically every 21–35 days (often around 28)".</div>
+    <div class="why">Day 14 is the midpoint of a <i>typical</i> 28-day cycle, not a rule. Cycle length varies between people and between months for the same person, and cycles can be irregular — especially in the years just after they begin. Population-level educational references commonly describe "typically every 21–35 days (often around 28)".</div>
     <p>Pregnancy in humans lasts about nine months, divided into three <b>trimesters</b>. In the first, the fertilised egg develops into an embryo and the major organs begin forming; from about the ninth week it is called a <b>foetus</b>. In the second, the foetus grows stronger and its movements can usually be felt. In the third, it grows rapidly and gets ready for life outside. During childbirth, strong contractions of the uterus push the baby out through the birth canal.</p>
     <div class="curio">
       <h5>Menstruation is a sign of health</h5>
@@ -499,7 +499,7 @@
   </div>
 </details>
 
-<footer>NCERT Class 9 Science · Chapter 11</footer>
+<footer>Study Shelf · Class 9 Science · Chapter 11</footer>
 
 <div class="toast" id="toast"></div>
 
@@ -1616,7 +1616,7 @@ Q.match('g11a','g11b','g11s',[
   const cv=document.getElementById('ratCv'), sl=document.getElementById('ratS');
   if(!cv||!sl) return;
   let mode=null; const seen={};
-  /* Table 11.3, as published. */
+  /* Illustrative data exercise; verify data provenance before release. */
   const R = {
     ratWind:{   n:'Wind · maize, wheat',  pollen:[500000,1000000], seeds:[50,200] },
     ratInsect:{ n:'Insect · sunflower',   pollen:[20000,40000],    seeds:[800,1000] }
@@ -1667,7 +1667,7 @@ Q.match('g11a','g11b','g11s',[
     sans(x,16,600); x.fillStyle=A1; x.textAlign='center'; x.textBaseline='top';
     x.fillText(fmt(f.per) + ' grains per seed', W/2, 8);
     mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='bottom';
-    x.fillText('a logarithmic scale · Table 11.3', 8, H-6);
+    x.fillText('a logarithmic scale · illustrative data', 8, H-6);
   }
   const SUP='⁰¹²³⁴⁵⁶⁷⁸⁹';
   function supN(v){ return String(v).split('').map(d=>SUP[+d]).join(''); }
@@ -1695,7 +1695,7 @@ Q.match('g11a','g11b','g11s',[
 })();
 
 Q.vgrid('g12','g12check','g12s',{
-  head:'From Table 11.3', mid:'m12',
+  head:'Pollen and seed quantities', mid:'m12',
   cols:['Answer'],
   options:[['about 20 : 1','about 40 : 1','about 5,000 : 1','about 10,000 : 1',
             'Wind','Insects','More seeds','More pollen']],
