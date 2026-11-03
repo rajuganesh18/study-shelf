@@ -5,3 +5,8 @@
 .backbar:hover{border-color:var(--a1);color:var(--a1)}
 .mast{padding:20px 0 26px}
 /*@include shared/shell.css*/
+
+/* Keep learning progress, but remove game counters, level badges and quests. */
+.hq .stats .stat:nth-child(-n+3), .hq .colony-row, .hq .quests { display:none!important; }
+.hq .stats { grid-template-columns:1fr; }
+.backbar { margin-top:16px; min-height:36px; }
