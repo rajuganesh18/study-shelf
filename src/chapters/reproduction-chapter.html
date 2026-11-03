@@ -1717,59 +1717,44 @@ Q.vgrid('g12','g12check','g12s',{
   if(!cv) return;
   let pick=null, t=0; const seen={};
   /* Interactive comparison: educational estimates vary widely by species; verify primary data before publication. */
+  // Original conceptual comparison. No species-wide egg-count or survival-rate
+  // claims: these vary greatly by species, environment and parental care.
   const AN = {
-    aniFish:{   n:'Fish',   hab:'Water',      fert:'External', eggs:'100s – 1000s at a time', lo:100,  hi:1000,  surv:'Low',
-      d:'The female releases eggs into the water and the male releases sperm over them. Fertilisation happens outside both bodies. Many of the eggs are destroyed by currents or eaten, so a great many have to be laid.' },
-    aniFrog:{   n:'Frog',   hab:'Water/land', fert:'External', eggs:'5,000 – 50,000 at a time', lo:5000, hi:50000, surv:'Low',
-      d:'A frog lays up to fifty thousand eggs at a time, and the yolk in each is just enough to produce a tadpole. The tadpole then has to feed for itself. Survival of any individual egg is low, which is exactly why there are so many of them.' },
-    aniLizard:{ n:'Lizard', hab:'Land',       fert:'Internal', eggs:'2 – 20 at a time',        lo:2,    hi:20,    surv:'Moderate',
-      d:'Fertilisation happens inside the female’s body, and each egg is then laid with enough yolk to nourish the embryo all the way to hatching. Far better protected, so far fewer are needed.' },
-    aniBird:{   n:'Bird',   hab:'Water/land', fert:'Internal', eggs:'1 – 15 at a time',        lo:1,    hi:15,    surv:'Moderate to high',
-      d:'Internal fertilisation, a shelled egg with a full yolk supply, and then an extended period of feeding and care after hatching. One to fifteen eggs at a time is enough, because most of them make it.' }
+    aniFish:{n:'Fish (many species)',hab:'Aquatic',fert:'Often external',eggs:'Varies widely',surv:'Varies',
+      d:'Many fish release eggs and sperm into water, but reproductive strategies vary greatly across fish species. Avoid assuming that all fish lay similar numbers of eggs.'},
+    aniFrog:{n:'Frog (many species)',hab:'Water and land',fert:'Often external',eggs:'Varies widely',surv:'Varies',
+      d:'Many frogs deposit eggs in water. Egg numbers, development and parental care differ across species; some frogs guard eggs or carry young.'},
+    aniLizard:{n:'Lizard (many species)',hab:'Mostly terrestrial',fert:'Internal',eggs:'Species-dependent',surv:'Varies',
+      d:'Lizards use internal fertilisation. Many lay eggs, while others give birth to live young. Nesting and care differ among species.'},
+    aniBird:{n:'Bird (many species)',hab:'Terrestrial and aquatic',fert:'Internal',eggs:'Species-dependent',surv:'Varies',
+      d:'Birds reproduce through internal fertilisation and lay shelled eggs. Clutch size and care vary from one species to another.'}
   };
   function draw(){
     if(!cv.clientWidth) return;
     const x=fit(cv,260); if(!x) return;
-    const W=cv.clientWidth, H=260;
+    const W=cv.clientWidth,H=260;
     bg(x,W,H);
     const ids=['aniFish','aniFrog','aniLizard','aniBird'];
-    const bx=W*0.13, bw=W*0.74, by=H*0.26, bh=H*0.46;
-    const lg = v => Math.log10(Math.max(1,v))/5;      // 1 to 100,000
-    // eggs laid, as a log bar; survival as a filled pip row
+    const left=22, top=50, col=(W-44)/4;
     ids.forEach((id,i)=>{
-      const a=AN[id], px = bx + bw*((i+0.5)/4), on = pick===id;
-      x.globalAlpha = pick ? (on ? 1 : 0.28) : 0.85;
-      const h = lg(a.hi)*bh;
-      x.fillStyle = a.fert==='External' ? 'rgba(79,163,216,.75)' : 'rgba(199,91,184,.75)';
-      x.fillRect(px-20, by+bh-h, 40, h);
-      mono(x,9,500); x.fillStyle=INK; x.textAlign='center'; x.textBaseline='bottom';
-      x.fillText(a.hi >= 1000 ? Math.round(a.hi/1000)+'k' : String(a.hi), px, by+bh-h-3);
-      mono(x,9); x.fillStyle=DIM; x.textBaseline='top';
-      x.fillText(a.n, px, by+bh+6);
-      // survival, as filled circles out of three
-      const s = a.surv==='Low' ? 1 : a.surv==='Moderate' ? 2 : 3;
-      for(let k=0;k<3;k++){
-        x.fillStyle = k < s ? GOOD : 'rgba(142,154,192,.28)';
-        x.beginPath(); x.arc(px-10+k*10, by+bh+26, 3.4, 0, 7); x.fill();
-      }
+      const a=AN[id], cx=left+col*(i+0.5), active=pick===id;
+      const ext=a.fert.toLowerCase().includes('external');
+      x.globalAlpha=pick&&!active?0.32:1;
+      x.fillStyle=ext?'rgba(79,163,216,.18)':'rgba(199,91,184,.18)';
+      x.beginPath();x.roundRect(cx-col*.42,top,col*.84,125,12);x.fill();
+      x.strokeStyle=ext?'#4FA3D8':A1;x.lineWidth=active?3:1;
+      x.stroke();
+      mono(x,11,600);x.fillStyle=INK;x.textAlign='center';x.textBaseline='middle';
+      x.fillText(['Fish','Frog','Lizard','Bird'][i],cx,top+23);
+      mono(x,9);x.fillStyle=DIM;
+      x.fillText(ext?'often external':'internal',cx,top+54);
+      x.fillText('fertilisation',cx,top+70);
+      x.fillText('egg number',cx,top+98);
+      x.fillText('varies',cx,top+112);
       x.globalAlpha=1;
     });
-    mono(x,9); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='top';
-    x.fillText('survival →', bx-6, by+bh+21);
-    x.textAlign='right'; x.textBaseline='middle';
-    x.fillText('eggs', bx-6, by+bh*0.5);
-    mono(x,9); x.fillStyle=DIM; x.textAlign='left'; x.textBaseline='top';
-    x.fillText('eggs laid at a time, on a log scale · independent exploration', 8, 8);
-    if(pick){
-      const a=AN[pick];
-      mono(x,11,500);
-      x.fillStyle = a.fert==='External' ? '#4FA3D8' : A1;
-      x.textAlign='center'; x.textBaseline='bottom';
-      x.fillText(a.fert.toLowerCase() + ' fertilisation · ' + a.hab.toLowerCase(), W/2, H-8);
-    } else {
-      mono(x,10); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
-      x.fillText('pick an animal', W/2, H-8);
-    }
+    mono(x,10);x.fillStyle=DIM;x.textAlign='center';x.textBaseline='bottom';
+    x.fillText('Compare strategies, not unsupported egg-count rankings',W/2,H-12);
   }
   function upd(){
     const a=AN[pick];
