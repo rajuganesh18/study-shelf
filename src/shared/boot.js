@@ -53,6 +53,8 @@
   if(!back) return;
   const p = String(CH.id || '').split('-');
   if(p.length < 2 || !p[0] || !p[1]) return;
+  back.textContent = '‹ Back';
+  back.setAttribute('aria-label', 'Back to chapters');
   back.href = 'index.html?cls=' + encodeURIComponent(p[0]) + '&sub=' + encodeURIComponent(p[1]);
 })();
 
