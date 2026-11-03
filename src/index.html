@@ -97,24 +97,7 @@ details.data[open] summary{border-bottom:1px solid var(--rule);color:var(--a1)}
   <h1>The<br><span>Study Shelf</span></h1>
 </header>
 
-<div class="hq">
-  <div class="stats">
-    <div class="stat"><div class="k">XP</div><div class="v" id="sXp">0</div></div>
-    <div class="stat"><div class="k">Coins</div><div class="v" id="sCoin">0</div></div>
-    <div class="stat"><div class="k">Streak</div><div class="v" id="sStreak">0</div></div>
-    <div class="stat"><div class="k">Chapters</div><div class="v" id="sDone">0/0</div></div>
-  </div>
-  <div class="colony-row">
-    <canvas id="colony" width="96" height="96"></canvas>
-    <div class="colony-txt">
-      <h3 id="lvName">Getting started</h3>
-      <p id="lvDesc">Open any chapter marked Ready and start earning XP.</p>
-      <div class="bar"><i id="lvBar"></i></div>
-    </div>
-  </div>
-</div>
 
-<div id="contWrap"></div>
 
 <div class="tabs" id="tabs"></div>
 <div class="note" id="clsNote" style="margin:-4px 0 16px"></div>
@@ -313,7 +296,7 @@ const CATALOG = [
 const $ = id => document.getElementById(id);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
-let SUM = {}, STREAK = 0, LAST = null;
+let SUM = {};
 let cls = '9', openSubject = null;
 
 /* A chapter's "All chapters" link comes back as index.html?cls=9&sub=science,
@@ -330,9 +313,9 @@ let cls = '9', openSubject = null;
 
 /* Keep the address bar honest as the view changes, so a reload or a share
    lands where the reader actually is. */
-function syncUrl(){
+function syncUrl(push = false){
   const q = openSubject ? '?cls=' + encodeURIComponent(cls) + '&sub=' + encodeURIComponent(openSubject) : '';
-  history.replaceState(null, '', location.pathname + q);
+  history[push ? 'pushState' : 'replaceState'](null, '', location.pathname + q);
 }
 
 /* ---------- flatten the catalog once ---------- */
@@ -449,7 +432,7 @@ function renderTabs(){
     '<button class="tab' + (c.cls === cls ? ' on' : '') + '" data-cls="' + c.cls + '">' + esc(c.label) + '</button>'
   ).join('');
   $('tabs').querySelectorAll('.tab').forEach(b => b.onclick = () => {
-    cls = b.dataset.cls; openSubject = null; syncUrl(); render();
+    cls = b.dataset.cls; openSubject = null; syncUrl(true); render();
   });
   const c = CATALOG.find(x => x.cls === cls);
   $('clsNote').textContent = c ? c.note : '';
@@ -471,7 +454,7 @@ function subjectGrid(){
 }
 
 function chapterList(sub){
-  let h = '<button class="back" id="backBtn">&#8249;&ensp;All subjects</button>' +
+  let h = '<button class="back" id="backBtn">&#8249;&ensp;Back</button>' +
     '<div class="shead" style="--c:' + sub.colour + '">' +
       '<h2>' + esc(sub.name) + '</h2><div class="book">' + esc(sub.book) + '</div>' +
     '</div>';
@@ -518,15 +501,15 @@ function searchView(term){
 }
 
 function render(){
-  renderTabs(); renderHead(); renderContinue();
+  renderTabs();
   const term = $('q').value.trim();
   const v = $('view');
   if(term){ v.innerHTML = searchView(term); return; }
   const c = CATALOG.find(x => x.cls === cls);
   const sub = openSubject && c.subjects.find(s => s.key === openSubject);
   v.innerHTML = sub ? chapterList(sub) : subjectGrid();
-  if(sub){ $('backBtn').onclick = () => { openSubject = null; syncUrl(); render(); }; }
-  else v.querySelectorAll('.sub').forEach(b => b.onclick = () => { openSubject = b.dataset.sub; syncUrl(); render(); window.scrollTo(0,0); });
+  if(sub){ $('backBtn').onclick = () => { openSubject = null; syncUrl(true); render(); }; }
+  else v.querySelectorAll('.sub').forEach(b => b.onclick = () => { openSubject = b.dataset.sub; syncUrl(true); render(); window.scrollTo(0,0); });
 }
 
 /* ---------- data panel: export, import, reset ---------- */
@@ -566,7 +549,7 @@ function wireData(){
   let armed = false;
   $('dReset').onclick = async () => {
     if(!armed){ armed = true; $('dReset').textContent = 'Tap again to erase everything'; 
-      $('dMsg').textContent = 'This clears all XP, coins and streaks on this device.';
+      $('dMsg').textContent = 'This clears all saved chapter progress on this device.';
       setTimeout(()=>{ armed = false; $('dReset').textContent = 'Reset all progress'; }, 5000); return; }
     const all = await Store.keys();
     for(const k of all) if(Store.owns(k)) await Store.remove(k);
@@ -581,9 +564,6 @@ $('q').addEventListener('input', render);
 /* Re-read every chapter summary, then paint. Anything that can have
    changed the numbers while the shelf was off-screen goes through here. */
 async function refresh(){
-  const g = await Store.get('nb.streak');
-  STREAK = (g && g.streak) || 0;
-  LAST = await Store.get('nb.last');
   const next = {};
   for(const r of PLAYABLE){
     const s = await Store.get('nb.sum.' + r.ch.id);
@@ -599,6 +579,13 @@ async function refresh(){
    page from the bfcache: the script does not re-run, so re-read storage
    before rendering or the shelf shows the XP it had on the way out. */
 window.addEventListener('pageshow', e => { if(e.persisted) refresh(); });
+window.addEventListener('popstate', () => {
+  const p = new URLSearchParams(location.search);
+  const c = CATALOG.find(x => x.cls === p.get('cls'));
+  cls = c ? c.cls : '9';
+  openSubject = c && c.subjects.some(s => s.key === p.get('sub')) ? p.get('sub') : null;
+  render();
+});
 
 
 /* offline: the service worker precaches every page, icon and font */
