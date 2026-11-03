@@ -94,7 +94,7 @@ details.data[open] summary{border-bottom:1px solid var(--rule);color:var(--a1)}
 <body>
 <div class="wrap">
 <header class="mast">
-  <div class="eyebrow">Interactive learning · Class 9</div>
+  <div class="eyebrow">Interactive learning · Classes 9 &amp; 10</div>
   <h1>The<br><span>Study Shelf</span></h1>
 </header>
 
@@ -305,15 +305,16 @@ let cls = '9', openSubject = null;
    subject grid. Both values are checked against the catalog before use. */
 (function(){
   const p = new URLSearchParams(location.search);
-  const c = CATALOG[0];
-  const s = CATALOG[0].subjects.find(x => x.key === p.get('sub'));
+  const c = CATALOG.find(x => x.cls === p.get('cls')) || CATALOG[0];
+  cls = c.cls;
+  const s = c.subjects.find(x => x.key === p.get('sub'));
   if(s) openSubject = s.key;
 })();
 
 /* Keep the address bar honest as the view changes, so a reload or a share
    lands where the reader actually is. */
 function syncUrl(push = false){
-  const q = openSubject ? '?cls=9&sub=' + encodeURIComponent(openSubject) : '';
+  const q = '?cls=' + encodeURIComponent(cls) + (openSubject ? '&sub=' + encodeURIComponent(openSubject) : '');
   history[push ? 'pushState' : 'replaceState'](null, '', location.pathname + q);
 }
 
@@ -490,8 +491,17 @@ function render(){
   const sub = openSubject && c.subjects.find(s => s.key === openSubject);
   $('homeControls').hidden = !!sub;
   if(!sub){
-    // Only Class 9 is currently available; keep the class-tab area ready for future classes.
-    $('tabs').innerHTML = '<button class="tab on" type="button" aria-current="page">Class 9</button>';
+    $('tabs').innerHTML = CATALOG.map(item =>
+      '<button class="tab' + (item.cls === cls ? ' on' : '') + '" type="button" data-cls="' + item.cls + '"' +
+      (item.cls === cls ? ' aria-current="page"' : '') + '>' + esc(item.label) + '</button>'
+    ).join('');
+    $('tabs').querySelectorAll('[data-cls]').forEach(b => b.onclick = () => {
+      cls = b.dataset.cls;
+      openSubject = null;
+      $('q').value = '';
+      syncUrl(true);
+      render();
+    });
     $('clsNote').textContent = c.note || '';
   }
   const term = $('q').value.trim();
@@ -577,8 +587,9 @@ async function refresh(){
 window.addEventListener('pageshow', e => { if(e.persisted) refresh(); });
 window.addEventListener('popstate', () => {
   const p = new URLSearchParams(location.search);
-  cls = '9';
-  openSubject = CATALOG[0].subjects.some(s => s.key === p.get('sub')) ? p.get('sub') : null;
+  const selected = CATALOG.find(x => x.cls === p.get('cls')) || CATALOG[0];
+  cls = selected.cls;
+  openSubject = selected.subjects.some(s => s.key === p.get('sub')) ? p.get('sub') : null;
   render();
 });
 
