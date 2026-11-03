@@ -17,6 +17,7 @@
 :root{ --a1:#8A7CF0; --a2:#5FD0C8; --badge-bg:#EDEAF6; }
 /* ---------- shell ---------- */
 .tabs{display:flex;gap:8px;margin:24px 0 12px}
+[hidden]{display:none!important}
 .tab{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px}
 .tab.on{border-color:var(--a1);color:var(--a1)}
 
@@ -99,6 +100,13 @@ details.data[open] summary{border-bottom:1px solid var(--rule);color:var(--a1)}
 
 
 
+<div id="homeControls">
+  <div class="tabs" id="tabs"></div>
+  <div class="note" id="clsNote" style="margin:-4px 0 16px"></div>
+  <div class="search">
+    <input id="q" type="search" placeholder="Search every chapter…" autocomplete="off" spellcheck="false">
+  </div>
+</div>
 <div id="view"></div>
 
 <details class="data">
@@ -463,13 +471,40 @@ function row(ch, sub){
     : '<div class="chap" style="--c:' + sub.colour + '">' + inner + '</div>';
 }
 
+function searchView(term){
+  const t = term.toLowerCase();
+  const hits = ALL.filter(r => r.cls === cls && (
+    r.ch.t.toLowerCase().includes(t) ||
+    r.subject.name.toLowerCase().includes(t) ||
+    r.subject.book.toLowerCase().includes(t) ||
+    (r.ch.hint || '').toLowerCase().includes(t)
+  )).slice(0, 40);
+  if(!hits.length) return '<div class="empty">Nothing matches &ldquo;' + esc(term) + '&rdquo;.</div>';
+  return '<div class="sec">' + hits.length + ' result' + (hits.length>1?'s':'') + '</div><div class="chaps">' +
+    hits.map(r => row(r.ch, r.subject)).join('') + '</div>';
+}
+
 function render(){
   const v = $('view');
-  const c = CATALOG[0];
+  const c = CATALOG.find(x => x.cls === cls) || CATALOG[0];
   const sub = openSubject && c.subjects.find(s => s.key === openSubject);
-  v.innerHTML = sub ? chapterList(sub) : subjectGrid();
-  if(sub){ $('backBtn').onclick = () => { openSubject = null; syncUrl(true); render(); }; }
-  else v.querySelectorAll('.sub').forEach(b => b.onclick = () => { openSubject = b.dataset.sub; syncUrl(true); render(); window.scrollTo(0,0); });
+  $('homeControls').hidden = !!sub;
+  if(!sub){
+    // Only Class 9 is currently available; keep the class-tab area ready for future classes.
+    $('tabs').innerHTML = '<button class="tab on" type="button" aria-current="page">Class 9</button>';
+    $('clsNote').textContent = c.note || '';
+  }
+  const term = $('q').value.trim();
+  v.innerHTML = sub ? chapterList(sub) : term ? searchView(term) : subjectGrid();
+  if(sub){
+    $('backBtn').onclick = () => { openSubject = null; syncUrl(true); render(); };
+  } else {
+    v.querySelectorAll('.sub').forEach(b => b.onclick = () => {
+      openSubject = b.dataset.sub;
+      $('q').value = '';
+      syncUrl(true); render(); window.scrollTo(0,0);
+    });
+  }
 }
 
 /* ---------- data panel: export, import, reset ---------- */
@@ -519,6 +554,7 @@ function wireData(){
 }
 
 /* ---------- boot ---------- */
+$('q').addEventListener('input', render);
 
 
 /* Re-read every chapter summary, then paint. Anything that can have
