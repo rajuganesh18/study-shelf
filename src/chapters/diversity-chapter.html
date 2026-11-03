@@ -1457,17 +1457,15 @@ Q.vgrid('g13','g13check','g13s',{
   const RANK = ['Kingdom','Phylum','Class','Order','Family','Genus','Species'];
   /* independent exploration, for this interactive lesson. The counts are orders of magnitude, not census
      figures, and the readout says so. */
+  // Taxonomic rank explorer uses standard scientific names, not unsourced
+  // species-count estimates or a reproduction of a textbook figure.
   const T = {
-    hieTiger:{ n:'Tiger',
-      names:['Animalia','Chordata','Mammalia','Carnivora','Felidae','Panthera','P. tigris'],
-      cnt:  ['~1.5 million','~75,000','~6,400','~280','~41','5','1'],
-      what: ['all animals','animals with a notochord','animals with hair and mammary glands',
-             'the meat-eaters','the cats','the roaring cats','the tiger itself'] },
-    hiePea:{ n:'Pea plant',
-      names:['Plantae','Magnoliophyta','Magnoliopsida','Fabales','Fabaceae','Pisum','P. sativum'],
-      cnt:  ['~390,000','~300,000','~200,000','~20,000','~19,500','5','1'],
-      what: ['all plants','the flowering plants','the dicots','the legume order',
-             'the pea and bean family','the peas','the garden pea'] }
+    hieTiger:{n:'Tiger',names:['Animalia','Chordata','Mammalia','Carnivora','Felidae','Panthera','P. tigris'],
+      cnt:['kingdom','phylum','class','order','family','genus','species'],
+      what:['animals','animals with a notochord','mammals','carnivorans','cats','big cats','tiger']},
+    hiePea:{n:'Pea plant',names:['Plantae','Tracheophyta','Magnoliopsida','Fabales','Fabaceae','Pisum','P. sativum'],
+      cnt:['kingdom','phylum','class','order','family','genus','species'],
+      what:['plants','vascular plants','flowering dicots','legumes and relatives','legume family','peas','garden pea']}
   };
   function draw(){
     if(!cv.clientWidth) return;
@@ -1500,8 +1498,8 @@ Q.vgrid('g13','g13check','g13s',{
     mono(x,9,500); x.fillStyle=INK; x.textAlign='left'; x.textBaseline='top';
     x.fillText(t.n, 6, 8);
     mono(x,8); x.fillStyle=DIM; x.textAlign='right'; x.textBaseline='top';
-    x.fillText('roughly how many', W-6, 10);
-    x.fillText('species in the group', W-6, 22);
+    x.fillText('classification', W-6, 10);
+    x.fillText('rank', W-6, 22);
     // the scientific name, built from the last two ranks
     mono(x,9); x.fillStyle=DIM; x.textAlign='center'; x.textBaseline='bottom';
     x.fillText('genus + species, italic, capital then lower case', W/2, H-8);
@@ -1514,11 +1512,11 @@ Q.vgrid('g13','g13check','g13s',{
     document.getElementById('hieLV').textContent=(i+1)+' of 7';
     document.getElementById('hieRank').textContent=RANK[i];
     document.getElementById('hieName').textContent=t.names[i] + ' · ' + t.what[i];
-    document.getElementById('hieMembers').textContent=t.cnt[i] + ' species';
+    document.getElementById('hieMembers').textContent=t.cnt[i];
     document.getElementById('hieTxt').textContent =
-      i===0 ? 'Kingdom is the broadest rank: ' + t.cnt[0] + ' species, sharing only the handful of features the kingdom is defined by.'
+      i===0 ? 'Kingdom is a broad classification group. Move down the ranks to see increasingly specific shared characteristics.'
       : i===6 ? 'Species is the narrowest: one kind of organism, whose members are similar enough to interbreed and produce offspring. Everything the six ranks above it share, this group shares too — plus everything that makes it itself.'
-      : 'At ' + RANK[i].toLowerCase() + ' the group is ' + t.names[i] + ' — ' + t.what[i] + '. About ' + t.cnt[i] + ' species. Every step down holds fewer organisms and more shared features, and each group is entirely contained in the one above it.';
+      : 'At ' + RANK[i].toLowerCase() + ', the group is ' + t.names[i] + ' — ' + t.what[i] + '. Each lower rank is more specific than the one above.';
     seen[who]=1; seen['r'+i]=1;
     const ranks=Object.keys(seen).filter(k=>k.charAt(0)==='r').length;
     if(ranks>=4 && seen.hieTiger && seen.hiePea) complete('m15');
