@@ -80,7 +80,7 @@
 
 <!-- M2 -->
 <details class="m" id="m2" data-xp="25" data-coin="10">
-  <summary><span class="mno">02</span><span class="mt"><b>Cycling home from school</b><i>Activity 1.1 · let us model</i></span><span class="mstat">25 XP</span></summary>
+  <summary><span class="mno">02</span><span class="mt"><b>Cycling home from school</b><i>Concept lab · let us model</i></span><span class="mstat">25 XP</span></summary>
   <div class="body">
     <p>You ride a bicycle home from school and want to work out how long it will take. Decide what to keep in and what to leave out.</p>
     <div class="panel">
@@ -483,7 +483,7 @@ function bg(x,W,H){ x.clearRect(0,0,W,H); x.fillStyle=BG; x.fillRect(0,0,W,H); }
 })();
 
 /* ============================================================
-   M2 — Activity 1.1, what to keep and what to ignore
+   M2 — Concept lab, what to keep and what to ignore
    ============================================================ */
 Q.rows('g2','g2s',[
   {t:'The distance from school to your home',        a:0},
@@ -571,7 +571,7 @@ Q.match('g3a','g3b','g3s',[
         [...box.children].forEach(k=>k.classList.remove('on'));
         b.classList.add('on');
         document.getElementById('fuTxt').textContent = c[0]==='kg'
-          ? 'Kilograms per litre is the SI-consistent figure. 22,300 \u00f7 0.803 gives about 27,800 litres and the aircraft lands normally.'
+          ? 'Kilograms per litre is the SI-consistent Concept lab \u00f7 0.803 gives about 27,800 litres and the aircraft lands normally.'
           : 'Pounds per litre. The number looks bigger, so it seems like plenty of fuel \u2014 but a pound is far lighter than a kilogram, so far too few litres go in. This is the mistake the real ground crew made.';
         if(Object.keys(tried).length>=2){ ev('perfect'); complete('m4'); }
         draw();
