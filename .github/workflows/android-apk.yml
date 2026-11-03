@@ -28,7 +28,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
+      # GitHub Ubuntu runners already provide the Android SDK.
+      - name: Check Android SDK
+        run: test -d "$ANDROID_HOME" && "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --version
       - name: Install dependencies
         run: npm ci
       - name: Generate current web assets
