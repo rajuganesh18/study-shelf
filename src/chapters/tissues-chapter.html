@@ -79,7 +79,7 @@
 <details class="m" id="m2" data-xp="40" data-coin="25">
   <summary><span class="mno">02</span><span class="mt"><b>Cut the root tip</b><i>Concept lab · where growth in length comes from</i></span><span class="mstat">40 XP</span></summary>
   <div class="body">
-    <p>Two onion bulbs, two jars of water. On day 3, snip about 1 cm off the root tips of the bulb in Jar B. Then keep watching both.</p>
+    <p>Model two onion bulbs in separate jars. On day 3, imagine trimming the growing root tips of bulb B. This is a hypothetical comparison, not a record of measured results. Then keep watching both.</p>
     <div class="panel">
       <canvas id="onionCv" height="250"></canvas>
       <div class="knob" style="margin-top:6px">
@@ -468,8 +468,9 @@ Q.grid('g1','g1check','g1s',{
 (function(){
   const cv=document.getElementById('onionCv'), dS=document.getElementById('onD');
   let playing=false, pd=1, award=false, sawEnd=false;
-  const lenA = d => [0,0.3,0.8,1.7,3.0,3.8,4.7,5.8][Math.round(d)];
-  const lenB = d => d<=3 ? lenA(d) : 1.7 + 0.05*(d-3);
+  // Hypothetical growth model, not observations from an NCERT experiment.
+  const lenA = d => [0,0.4,1.0,1.9,2.8,3.6,4.3,5.1][Math.round(d)];
+  const lenB = d => d<=3 ? lenA(d) : 1.9 + 0.04*(d-3);
   function draw(){
     if(!cv || !cv.clientWidth) return;
     const x=fit(cv,250); if(!x) return;
