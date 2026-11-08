@@ -901,12 +901,14 @@ Q.vgrid('g7','g7check','g7s',{
 (function(){
   const cv=document.getElementById('solCv'), sl=document.getElementById('solT');
   if(!sl) return;
+  // Invented classroom data for practising graph interpretation. These are NOT
+  // measured solubilities of named chemicals and must not be used as reference data.
   const T=[10,20,30,40,60,80];
   const SALT=[
-    {n:'Potassium nitrate',  s:[21,32,45,62,106,167], c:'#2FB89B'},
-    {n:'Ammonium chloride',  s:[24,37,41,41,55,66],   c:'#D9A441'},
-    {n:'Potassium chloride', s:[35,35,37.4,40,46,54], c:'#7FA8E8'},
-    {n:'Sodium chloride',    s:[36,36,36.3,36.5,37,37], c:'#E0798F'}
+    {n:'Sample A (model)',s:[18,26,38,53,82,119],c:'#2FB89B'},
+    {n:'Sample B (model)',s:[22,28,35,43,59,78],c:'#D9A441'},
+    {n:'Sample C (model)',s:[30,32,34,36,40,44],c:'#7FA8E8'},
+    {n:'Sample D (model)',s:[34,34.5,35,35.5,36,36.5],c:'#E0798F'}
   ];
   let pick=0; const seen={};
   const box=document.getElementById('solPick'), chips=[];
