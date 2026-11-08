@@ -44,3 +44,18 @@ These changes are an **initial remediation pass only**. Removing textbook identi
 5. Have an Indian copyright professional review unresolved similarities.
 
 Reference: user-provided audit of `iesc101.pdf` through `iesc113.pdf`. Scientific facts and standard formulas may be retained, but expressive text, figure composition and curated exercise structure need independent treatment.
+
+## High-priority review pass — 2026-11-08
+
+Changes made on this branch:
+- **Tissues:** revised the root-tip growth chart to use a clearly identified hypothetical model and independent numerical series; updated the learner-facing description.
+- **Motion:** explicitly identified the position–time plotting sequence as an illustrative constant-speed journey.
+- **Mixtures:** replaced the four named-salt solubility curves and their textbook-like numerical series with four *fictional samples*, independently chosen practice values, and a clear warning that they are not measured chemical reference data. Other chemical examples and quiz values still require review for accuracy and provenance.
+- **Reproduction:** replaced the egg-count and implied survival-ranking chart with a qualitative comparison of reproductive strategies; removed unsupported quantitative claims.
+- **Diversity:** changed the species sample and removed unsupported species counts from the taxonomic-rank figure.
+- **Earth as a System:** identified albedo visualisation as an illustrative model and removed a categorical snow-albedo superlative. The numerical ranges still need independently documented sources.
+- **Atom:** inspected electron arrangement logic; no substantive change in this pass. Standard atomic shell capacities and scientific models are not automatically protected expression, but the particular presentation must still be compared visually.
+
+**Verification performed:** parsed inline JavaScript for all seven high-priority chapters with JavaScript's Function constructor; all passed syntax parsing. **Not performed:** Android build, Playwright or device interaction tests, rendered diagram side-by-side comparison with NCERT PDFs, full line-by-line literary similarity review, external source verification, or legal clearance.
+
+**Remaining high-priority work:** complete independent visual review of Tissues, Motion, Mixtures, Atom, Reproduction, Diversity and Earth; rewrite any still-copied diagrams, passages, activity prompts or question wording; check scientific correctness of fictionalised exercises and remaining chemical/albedo numbers; run functional and mobile regression tests. Do not merge or declare Play Store copyright readiness based solely on this pass.
